@@ -1,0 +1,22 @@
+=== 绳索: UIAA 条件 80kg, FF=1.77, L0=2m, ATC-braked ===
+{'device': 'ATC-braked', 'FF': 1.77, 'L0_m': 2.0, 'peak_kN': 8.167084010791058, 'peak_g': 9.410134973195559, 'drop_m': 2.116206470704836, 'slide_m': 2.116206470704836, 'elong_pct': 28.8103235352418, 'payout_m': 0.0, 'uiaa_ok': True, 'g_risk': '低'}
+  绷紧时速度: 期望 5.50 m/s, 仿真 5.54 m/s
+
+=== 绳索: 保护器对比 (80kg, FF=1.77, L0=2m) ===
+  ATC-braked         peak=  8.17 kN  g=   9.4  drop= 2.12m  payout= 0.00m  slide= 2.12m
+  ATC-nobrake        peak=  6.50 kN  g=   7.3  drop= 2.13m  payout= 0.05m  slide= 2.17m
+  Reverso            peak=  7.00 kN  g=   7.9  drop= 2.12m  payout= 0.03m  slide= 2.15m
+  Grigri             peak=  4.00 kN  g=   4.1  drop= 2.22m  payout= 0.20m  slide= 2.42m
+  Figure8-passive    peak=  8.17 kN  g=   9.4  drop= 2.12m  payout= 0.00m  slide= 2.12m
+
+=== 抱石: 3m / 80kg / 20cm pad ===
+  flat-flop            F=  59.71 kN  torso=  98.1g  leg=  73.9g  comp= 10.5cm  bottom=False  absorbed=102.8%  resid=0.00kJ  HIC= 1099.4
+  butt-impact          F=  36.64 kN  torso=  72.9g  leg=  73.0g  comp= 11.5cm  bottom=False  absorbed=101.8%  resid=0.00kJ  HIC=  543.4
+  feet-first-stiff     F=  42.88 kN  torso=  58.6g  leg= 118.8g  comp= 13.7cm  bottom=False  absorbed=105.4%  resid=0.00kJ  HIC=  363.1
+  controlled-drop      F=  30.18 kN  torso=  37.2g  leg=  56.2g  comp= 15.2cm  bottom=False  absorbed=107.8%  resid=0.00kJ  HIC=  224.4
+  tuck-roll            F=  28.50 kN  torso=  33.5g  leg=  63.8g  comp= 14.0cm  bottom=False  absorbed=107.4%  resid=0.00kJ  HIC=  207.0
+  head-first           F=  16.58 kN  torso=  21.6g  leg=  46.4g  comp= 13.9cm  bottom=False  absorbed=110.7%  resid=0.00kJ  HIC=  133.3
+  toe-point            F=  34.44 kN  torso=  42.9g  leg= 148.3g  comp= 15.2cm  bottom=False  absorbed=107.1%  resid=0.00kJ  HIC=  249.4
+  shoulder-first       F=  33.02 kN  torso=  40.8g  leg=  55.3g  comp= 12.5cm  bottom=False  absorbed=106.7%  resid=0.00kJ  HIC=  244.8
+  one-leg-awkward      F=  42.43 kN  torso=  55.0g  leg= 137.5g  comp= 15.5cm  bottom=False  absorbed=106.2%  resid=0.00kJ  HIC=  297.1
+  superman-late        F=  47.18 kN  torso=  62.5g  leg= 183.8g  comp= 12.9cm  bottom=False  absorbed=104.1%  resid=0.00kJ  HIC=  410.7

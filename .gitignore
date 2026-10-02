@@ -9,6 +9,10 @@ venv/
 env/
 .env
 
+# Session-local task tracking
+*_TODO.md
+OUTPUT/
+
 # JS / build artefacts
 node_modules/
 dist/
