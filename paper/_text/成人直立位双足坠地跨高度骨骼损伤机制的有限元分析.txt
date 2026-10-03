@@ -1,0 +1,546 @@
+
+===== PAGE 1 =====
+中南大学学报（医学版）
+2025, 50(11) https://xbyxb.csu.edu.cn
+J Cent South Univ (Med Sci) 2051
+DOI：10.11817/j.issn.1672-7347.2025.250450
+成人直立位双足坠地跨高度骨骼损伤机制的有限元分析
+袁红敏1，高树辉1，魏智彬2
+(1. 中国人民公安大学侦查学院，北京 100038；2. 公安部鉴定中心，北京 100038)
+[摘要] 目的：高坠的普遍性与复杂性给高坠损伤分析带来困难，目前主要依靠法医通过尸体解剖进行损伤分
+析。有限元方法(finite element method，FEM)可揭示高坠人体骨骼损伤机制及其与坠落高度的关系，为法医学高坠人
+体损伤分析、损伤机制判定及坠落场景重建提供依据。方法：以成人直立位双足坠地作为研究样例，基于FEM，采
+用全人体安全模型(total human model for safety，THUMS)，模拟从1~50 m高度向刚性地面双足坠地的过程。采用
+von Mises应力分析、Logistic回归拟合及层次聚类分析，系统研究骨骼的生物力学响应。结果：直立位高坠时人体
+应力集中区域呈纵轴轴向分布，且存在双路径传导机制。足部、胫骨两端、股骨颈及脊柱呈现“阶跃响应”，骨折风
+险在临界高度发生剧变。利用Logistic回归成功建立了腓骨两端、骨盆及颅骨的骨折风险高度预测模型。腓骨两端的
+骨折风险随高度增加最快，颅骨次之，骨盆的骨折风险增加最慢但也显著。结合层次聚类与生物力学机制分析，将
+坠落高度分为5个群集，对应3个阶段：局部耗散阶段(<7 m)、轴向传导阶段(7~16 m)和全身复合损伤阶段(>16 m)。
+结论：FEM可揭示直立位双足坠地时骨骼损伤的双路径传导机制，所建立的骨折风险高度预测模型和损伤模式-高度
+映射模型可为法医学坠落高度推断提供生物力学依据。
+[关键词] 法医损伤学；高坠；跨高度；有限元方法；骨骼生物力学
+Finite element analysis of skeletal injury mechanisms in adult
+standing positions with both feet landed on the ground
+YUAN Hongmin1, GAO Shuhui1, WEI Zhibin2
+(1. School of Investigation, People’s Public Security University of China, Beijing 100038;
+2. Institute of Forensic Science, Ministry of Public Security, Beijing 100038, China)
+ABSTRACT Objective: The prevalence and complexity of high-fall injuries pose major challenges to
+收稿日期(Date of reception)：2025-08-05
+第一作者(First author)：袁红敏，Email: reddinasour@163.com
+通信作者(Corresponding author)：高树辉，教授，Email: gaoshuhui@ppsuc.edu.cn
+基金项目(Foundation item)：中国人民公安大学刑事科学技术双一流创新研究专项(2023SYL06)；中央级公益性科研院所基本科研业务费
+专项资金项目(2023JB002)。This work was supported by the Special Project Research of Double First-Class Innovation in Criminal Science and
+Technology of People’s Public Security University of China (2023SYL06) and the Special Fund Project for Basic Scientific Research Business
+Expenses of Central Public Welfare Research Institutes China (2023JB002).
+开放获取(Open access)：本文遵循知识共享许可协议，允许第三方用户按照署名-非商业性使用-禁止演绎4.0(CC BY-NC-ND 4.0)的方式，
+在任何媒介以任何形式复制、传播本作品(https://creativecommons.org/licenses/by-nc-nd/4.0/)。
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 2 =====
+2052 中南大学学报 ( 医学版 ), 2025, 50(11) https://xbyxb.csu.edu.cn
+injury-mechanism interpretation, which currently relies largely on forensic autopsy. The
+finite element method (FEM) can elucidate biomechanical mechanisms of skeletal injury
+and quantify the relationship between fracture risk and fall height, providing evidence for
+forensic injury analysis and scene reconstruction.
+Methods: Using adult upright feet-first landing as a representative scenario, a finite
+element approach based on the total human model for safety (THUMS) was applied to
+simulate bilateral feet-first impacts onto a rigid surface from heights of 1 to 50 m. Skeletal
+biomechanical responses were systematically evaluated using von Mises stress analysis,
+Logistic regression modeling, and hierarchical clustering.
+Results: Stress concentration followed a longitudinal axial distribution along the body’s
+vertical axis, with a dual-path load-transmission mechanism identified. Step-change
+biomechanical responses were observed at the foot, tibial ends, femoral neck, and spine,
+indicating abrupt increases in fracture risk at critical heights. Logistic regression
+successfully generated fracture-risk prediction models for fibular ends, pelvis, and skull.
+The fastest height-dependent fracture-risk escalation occurred at the fibular ends, followed
+by the skull, whereas the pelvis showed the slowest but still significant risk increase.
+Hierarchical clustering combined with biomechanical-mechanism interpretation stratified
+fall heights into 5 clusters and 3 injury phases: Local energy-dissipation phase (<7 meters),
+axial conduction stage (7 to 16 meters), and systemic composite injury phase (>16 meters).
+Conclusion: FEM reveals the dual-path load-transmission mechanism of skeletal injury in
+upright feet-first landing. The established fracture-risk-height prediction models and injury-
+pattern-to-height mapping models provide biomechanical evidence for forensic inference of
+fall height.
+KEY WORDS forensic traumatology; high fall; cross-height; finite element method; skeletal biomechanics
+高坠致人体损伤分析是法医学的重要工作内容 理功能的差异限制了动物实验结论的转化[5]。
+之一，其核心在于重建损伤机制和坠落场景。根据 传统实验方法受伦理、成本及可重复性等限制，
+世界卫生组织统计，高坠是全球性的重大公共卫生 难以全面量化复杂的生物力学响应。有限元方法
+问题，每年约导致68.4万人死亡，是仅次于道路交 (finite element method，FEM)作为一种数值模拟技术
+通事故的第2大非故意伤害致死原因[1]。除普遍性外， 自20世纪60年代被引入以来，即在人体碰撞生物力
+高坠还具有复杂性，高坠事件发生突然，可靠的痕 学响应与损伤机制研究中扮演重要的辅助角色，目
+迹、物证较少，且受坠落高度、着地姿势、地面特 前已广泛应用于生物力学领域，并逐步应用于法庭
+性及个体生理差异等多种因素影响。足部着地是高 科学领域，如道路交通事故损伤分析与现场重建等。
+坠最常见的着地姿势之一[2]，因人体下肢直接承受冲 FEM通过将连续域离散为有限个单元进行计算，具
+击载荷，极易导致足部、胫骨、腓骨、股骨乃至脊 有参数化、客观化及可视化的优点，可借助参数化
+柱的严重损伤。 模型分析不同因素对损伤模式的影响，客观还原事
+传统高坠损伤研究方法主要受限于尸体实验的 件现场，运用平衡方程、几何方程和物理方程精确
+局限性、活体研究的约束性及动物模型的差异性。 模拟骨骼、软组织的力学行为，揭示应力、应变等
+Luecke等[3]指出，尸体组织生物力学性能随死后时间 集中区域及潜在骨折风险，通过图片、动画等形式
+劣化，无法真实反映活体动态响应。Ono等[4]认为， 直观展现复杂过程。此外，FEM还可降低实验成本
+致命性事故的回顾性分析给环境变量的控制和实验 并突破伦理限制，为事故重建提供可重复、可调控
+信息的获取等带来较大困难。此外，解剖结构与生 的仿真数据支持。
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 3 =====
+成人直立位双足坠地跨高度骨骼损伤机制的有限元分析 袁红敏，等 2053
+高坠损伤的法医学分析核心在于重建损伤机制 定为弹黏塑性材料[15]。该模型具备模拟碰撞中人体损
+和坠落场景[6]。FEM凭借其精准的几何建模能力、灵 伤(如骨折、脑及内脏器官损伤等)的能力，各身体部
+活的材料本构关系及动态冲击仿真优势，已成为研 位的冲击响应已通过模拟文献[16-17]中描述的冲击
+究高坠损伤，特别是颅骨、躯干及四肢骨骼损伤机 测试进行了验证，如头部的平移与旋转冲击响应
+制的重要工具。近20年来，诸多研究者利用FEM解 测试。
+释了颅骨高坠损伤的力学机制，如Franceskides等[7] 软件：高坠前、后处理软件为LS-PrePost (v4.6;
+研究得出站立高度下颅骨缺损位置对冲击点的空间 Livermore Software Technology Corporation，USA)，
+关系会显著影响应变强度；魏智彬等[8]利用FEM比 计 算 软 件 为 LS-DYNA Program Manager (R11;
+较高坠头部着地与钢管击打头部的损伤异同；Meng Livermore Software Technology Corporation，USA)。
+等[9]使用FEM揭示高速斜向冲击中滚动与滑动现象
+参数设定：地面模型为自行构建，赋予其刚性
+的内在动力学机制；Yan等[10]使用个性化有限元模型 材料属性，密度设为1.8×103 kg/m3，弹性模量设为2.07×
+证实低高度坠落即可引发骨折，并讨论撞击角度与 104 MPa，泊松比设为0.3。调整人体模型与地面的相
+跌落高度的影响结果，为婴儿虐待伤鉴别提供了新 对位置，使人体躯干垂直于地面，赋予人体模型重
+依据。此外，研究者们还使用FEM进行了四肢与躯 力加速度及初始速度，设置人体与地面的接触类型
+干高坠损伤的研究，量化了关键风险因素。Revel 为面面接触，摩擦系数设为0.5。
+等[11]验证了有限元模型在预测跌倒时桡骨骨折时的可
+靠性；Li 等[12]使用全人体安全模型(total human 1.2 实验设计
+model for safety，THUMS)研究得出坠落可导致胫骨
+基于FEM，采用THUMS行人模型，模拟1~50 m
+远端特征性压缩性骨折，但冲击不会；Mckinsey 高度范围内刚性地面上的双足坠地过程，通过von
+等[13]发现足部着地跌落可超过婴儿股骨骨折阈值；胡 Mises应力分析、Logistic回归分析及层次聚类分析，
+文虎等[14]发现躯干着地部位差异影响肋骨骨折机制。 研究骨骼的生物力学响应。
+FEM从局部模型向全身集成模型演进，推动多部位
+1.3 方法
+损伤关联性与个体化风险评估研究，计算能力的提
+. . 速度计算方法
+升与材料模型的优化将进一步增强FEM在高坠损伤 131
+忽略空气阻力等因素，根据动能定理公式计算
+机制解析和预测中的应用价值。
+人体着地速度。
+本研究使用FEM模拟不同高度下成人直立位双
+1
+mgh = mv2 (1)
+足坠地，旨在探究足部着地时人体骨骼应力集中分 2
+布规律与应力传导路径；并对1~50 m不同坠落高度
+v = 2gh (2)
+下各部位损伤结果进行Logistic回归分析，建立骨折
+如：选取g=9.8 m/s2，当坠落高度为10 m时，人
+风险与坠落高度间的预测模型，以揭示损伤机制差
+体着地速度为14 m/s。
+异；对各部位损伤结果进行层次聚类分析，并结合
+. . 骨骼损伤生物力学分析
+生物力学机制，建立损伤模式-高度映射模型，为法 132
+为从多角度研究不同高度下成人直立位双足坠
+医学坠落高度推断提供新依据。
+地的骨骼损伤机制，本研究选取了3种分析方法：
+Von Mises应力分析、Logistic回归分析和层级聚类
+1 材料与方法
+分析。
+. . . Von Mises应力分析
+1.1 材料 1321
+Von Mises应力(σ )是评估骨骼屈服与塑性变形
+实验模型：型号为 AM50 Pedestrian Model vm
+风险的关键指标，其通过第四强度理论将复杂应力
+Version 4.02的THUMS(由丰田汽车公司和丰田中央
+状态转化为等效单轴应力，计算公式为：
+研发实验室联合开发)，基于平均尺寸的成年男性模
+型，身高1.75 m，体重77 kg，呈站立姿势。该模型
+(
+σ σ
+)2
++
+(
+σ σ
+)2
++
+(
+σ σ
+)2
+σ = 1 - 2 2 - 3 3 - 1 (3)
+单元总数约为200万，各单元长度为3~5 mm，主要 vm 2
+为六面体单元。主要骨骼、厚韧带、肌肉及内脏器 其中σ 、σ 、σ 为主应力。通过提取骨骼单元节
+1 2 3
+官等采用实体单元建模，厚度小于1 mm的皮质骨、 点的σ ，可识别应力集中区域(如σ > σ 时提示
+vm vm yield
+薄韧带及膜组织等采用壳单元建模，其中骨骼被假 骨折风险)，并可视化应力时空分布，揭示高坠冲击
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 4 =====
+2054 中南大学学报 ( 医学版 ), 2025, 50(11) https://xbyxb.csu.edu.cn
+载荷下应力传导路径。 层次聚类归纳损伤的模式。此多尺度分析策略克服
+. . . Logistic回归分析 了单一方法的局限性，为法医高度学重建提供“机
+1322
+针对骨折风险P与高度h的非线性关系，建立二 制-风险-模式”三位一体生物力学证据。
+元Logistic回归模型，计算公式为：
+1 2 结 果
+P = (4)
+( )
+1 + e - β 0 +β 1 h
+其中 β 为截距，β 为高度系数。优势比 2.1 全人骨骼von Mises应力分析
+0 1
+(OR = eβ 1)量化坠落高度单位增加对骨折风险的倍增 由于高坠过程中直立位双足着地时上肢和肋骨
+效应，95%置信区间(confidence interval，CI)评估显 等损伤不显著，因此全人骨骼von Mises应力分析所
+著性(P<0.05)。该方法适用于腓骨两端、骨盆等渐进 涵盖的骨骼不包括上肢、肩胛骨、锁骨及肋骨。此
+性损伤部位的风险建模，而阶跃响应部位(如足部)因 外，分析不同坠落高度下直立位双足着地的模拟结
+数据分离需结合阈值判断(表1)。 果，发现坠落高度对应力集中分布规律与传导路径
+的影响不显著，因此选取坠落高度为25 m的成人直
+立位双足坠地模拟结果进行分析。
+表1 人体各部位骨骼的损伤阈值
+. . 应力集中分布规律
+Table 1 Injury thresholds for bones in various body 211
+模拟成人直立位双足坠地过程，骨骼von Mises
+regions of the human body
+应力云图见图1。由图1可见，全人骨骼的应力集中
+序号 部位 拉伸强度/MPa 压缩强度/MPa
+区域呈纵轴轴向分布，且除直接着地部位足部外，
+1 足部[18] 100 150
+2 胫骨骨干[19] 120 200 在远离着力点的骨盆、脊柱、颅骨等部位也存在明
+3 胫骨两端[20] 30 70 显的应力集中现象。具体而言，应力集中主要出现
+4 腓骨骨干[21] 90 160 在颅骨的枕骨大孔周围，脊柱中颈椎、胸椎、腰椎
+5 腓骨两端[20] 30 70
+的连接部位，髋臼、股骨颈、胫腓骨靠近踝关节处
+6 股骨骨干[22] 140 220
+及足弓处。
+7 股骨颈[23] 40 80
+. . 应力传导路径分析
+8 骨盆[24] 100 180 212
+将人体骨骼分成上半身和下半身，上半身部位
+9 脊柱椎体[25] 70 150
+包括颅骨、颈椎、胸椎和腰椎；下半身部位包括足
+10 颅骨[21] 80 160
+部、胫骨、腓骨、股骨和骨盆。上半身与下半身部
+位的von Mises应力结果见图2。由图2可见，人体直
+. . . 层次聚类分析 立位双足坠地后存在2条应力传导路径。坠地后
+1323
+传统按高度分段法忽略损伤组合的模式相似性。
+0.012 5 s内，足部首先产生von Mises应力响应，随
+二值化骨折数据蕴含潜在分类特征，需通过无监督 后应力向胫骨、腓骨传递，此时股骨、骨盆尚未产
+学习挖掘内在群集结构。Jaccard距离能够聚焦骨折 生显著的应力响应，表明应力尚未传递至股骨与骨
+组合的共现性，平均联结法则保证群集稳定性。 盆，但上半身部位的颅骨、颈椎已存在明显的应力
+基于Jaccard距离(d)度量不同高度下各部位骨折 响应，揭示直立位双足着地后存在2条应力传导路
+模式的相似性，计算公式为： 径。0.012 5 s后，下半身的应力自下而上传递至股
+( ) |A B| 骨、骨盆，股骨与骨盆随即产生应力响应，上半身
+d A, B = 1 ⋂ (5)
+J - |A B| 的应力也自上而下传导至胸椎、腰椎，致使胸椎和
+⋃
+其中A、B为二值化骨折向量。 腰椎产生应力响应。此外，颅骨与颈椎还存在2次响
+采用平均联结法计算类间距离，公式为： 应，即0.012 5 s前与0.012 5 s后均存在明显的应力响
+( ) 1 ( ) 应，第1次响应为颅骨与颈椎因惯性向下运动而产生
+d C, C = d a, b (6)
+avg i j |C i || C j | ∑a ∈ C i∑b ∈ C j J 的应力响应，第2次响应为足部自下而上应力传导产
+3种方法形成闭环分析链：von Mises应力揭示损 生的响应。
+伤的力学本质，Logistic回归量化损伤的高度依赖， 成人直立位足部着地初期，由于足部首先受到
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 5 =====
+成人直立位双足坠地跨高度骨骼损伤机制的有限元分析 袁红敏，等 2055
+冲击，存在明显的应力集中现象，又因为人体速度 与图3的应力云图显示出的规律一致，图4统计
+立即降为零，头部由于惯性继续向下运动，对颈椎 了不同时刻下各部位von Mises应力的最大值热图，
+产生压迫，导致颅骨与颈椎连接处在着地时也产生 可见足部、颅骨和颈椎首先出现明显的应力集中现
+应力集中现象，随后应力从足部向上传导，并从颅 象，随后应力从足部自下而上向胫骨和腓骨传导，
+骨和颈椎向下传导，2条传导路径在脊柱汇集，致使 接着向股骨和骨盆传导，颅骨中的应力向下传导至
+脊柱在后期也存在显著的应力集中现象，具体结果 胸椎和腰椎。图3与图4的结果均验证了2条传导路
+见图3。 径的存在。
+图1 成人直立位双足坠地模拟示意及坠地后骨骼von Mises应力云图(坠落高度25 m，时间0.03 s)
+Figures 1 Illustrative diagram of an adult in an erect posture landing on both feet and the von Mises stress nephogram of
+the bones after foot landing (fall height 25 meters, time 0.03 seconds)
+A: Illustrative diagram of an adult in an erect posture landing on both feet; B: Whole body; C: Cranium; D: Spine and pelvis; E:
+Femur; F: Tibia, fibula, and foot; G Foot; H: Tibia; I: Fibula.
+图2 成人直立位双足坠地后各部位von Mises应力时程曲线
+Figures 2 Time-history curves of von Mises stress in various body segments following erect bipedal landing
+A: Upper body segments; B: Lower body segments.
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 6 =====
+2056 中南大学学报 ( 医学版 ), 2025, 50(11) https://xbyxb.csu.edu.cn
+图3 不同时刻下全人骨骼von Mises应力云图
+Figures 3 Von Mises stress contours of the whole-body human skeleton at different time instants
+A: t=0; B: t=0.001 2 s; C: t=0.003 0 s; D: t=0.010 0 s; E: t=0.012 4 s; F: t=0.017 0 s; G: t=0.020 2 s; H: t=0.032 0 s.
+图4 不同时刻下各部位von Mises应力最大值热图
+Figure 4 Heat map of maximum von Mises stress at various locations at different time points
+2.2 骨骼损伤结果的Logistic回归分析 时，该部位必然骨折(应力峰值>阈值)，而腓骨两端、
+. . 损伤阈值 骨盆及颅骨的骨折临界高度则不明显。此外，在不
+221
+根据文献记载的人体各部位损伤阈值(表1)判断， 同坠落高度的模拟条件下，胫骨骨干、腓骨骨干和
+当某部位的应力值达到其阈值时，即认为该部位大 股骨骨干均未出现骨折。
+概率发生骨折。高坠属于瞬时冲击，因此选用各部 基于实验结果分析，推测骨折风险与坠落高度
+位的瞬时冲击强度，由于人体骨骼具有各向异性， 存在一定的数量关系，采用二元Logistic回归模型对
+因此将强度区分为拉伸强度和压缩强度。 各部位的实验结果进行拟合，拟合结果如图5所示。
+. . 数据预处理 由图5可知，足部、胫骨两端、股骨颈、腰椎、胸椎
+222
+不同高度下成人直立位双足坠地的结果见图5和 及颈椎的Logistic回归模型拟合结果不显著，使用二
+6。由图5和6可知，足部、胫骨两端、股骨颈、腰 元Logistic回归模型进行拟合，出现因“完全分离”
+椎、胸椎及颈椎均存在一个临界高度，其骨折风险 数据导致的过拟合。因此，无足够的统计学证据表
+与坠落高度的关系更接近“阶跃函数”，低于此高度 明坠落高度是影响这些部位骨折风险的显著预测因
+时，该部位绝对安全(应力峰值<阈值)，高于此高度 子。对于足部、胫骨、股骨颈、腰椎、胸椎及颈椎，
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 7 =====
+成人直立位双足坠地跨高度骨骼损伤机制的有限元分析 袁红敏，等 2057
+二元Logistic模型拟合失败是一个重要且具有生物力
+学意义的发现，表明这些部位是直立位双足着地时
+的主要能量吸收部位和应力传递路径，其骨折风险
+呈现明显的“阶跃”特性。
+图6 腓骨两端、骨盆、颅骨骨折风险的Logistic回归拟合
+曲线图
+Figure 6 Logistic regression fitted curves for fracture risk
+at both ends of the fibula, pelvis, and skull
+图5 不同坠落高度下各部位骨折风险图 0: No fracture; 1: Fracture.
+Figure 5 Fracture risk chart by body region at different
+falling heights
+0: No fracture; 1: Fracture.
+2.3 骨骼损伤模式聚类分析
+. . 聚类方法与数据验证
+231
+本次分析包含 50 个坠落高度(1 m, 2 m, ... ,
+. . Logistic回归分析结果
+223
+50 m)，每个坠落高度均对应人体9个部位(足部、胫
+以坠落高度为自变量，腓骨两端、骨盆及颅骨
+骨、腓骨、股骨、骨盆、腰椎、胸椎、颈椎、颅骨)
+骨折风险为因变量，进行Logistic回归拟合分析，拟
+的骨折二值化数据，构成50×9二元矩阵。案例处理
+合参数如表2所示，拟合曲线图如图6所示。
+汇总显示50例数据完整无缺失，采用平均联结法，
+由表2可知，坠落高度对腓骨两端、骨盆及颅骨
+结合Jaccard距离进行层次聚类。利用Jaccard距离适
+的骨折风险均具有统计学意义(OR=1.682，95% CI
+用于二元变量的特性，其计算忽略“双0”匹配项，
+1.06~2.558， P=0.015； OR=1.236， 95% CI 1.103~
+聚焦于骨折组合的差异性，可避免未骨折部位的干
+1.384，P<0.001；OR=1.576，95% CI 1.131~2.195，
+扰，通过平均联结法计算类间样本平均距离，可降
+P=0.007)。图6的Logistic回归分析成功建立了腓骨
+低异常值敏感性，有效反映损伤模式的结构性差异
+两端、骨盆、颅骨3个部位的骨折风险与坠落高度间
+及骨骼系统在应力传导路径上的整体关联性。
+的预测模型，模型显示腓骨两端骨折风险随高度增
+加最快，颅骨次之，骨盆骨折风险随高度增加最慢
+但也显著。
+表2 人体骨骼骨折风险与坠落高度间的Logistic回归拟合参数
+Table 2 Logistic regression fitting parameters for the relationship between human fracture risk and fall height
+部位 β SE Wald χ2 df P OR 95% CI
+腓骨两端 0.52 0.214 5.909 1 0.015 1.682 1.106~2.558
+骨盆 0.212 0.058 13.315 1 <0.001 1.236 1.103~1.384
+颅骨 0.455 0.169 7.227 1 0.007 1.576 1.131~2.195
+β：系数；SE：标准误；df：自由度；OR：比值比；CI：置信区间。
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 8 =====
+2058 中南大学学报 ( 医学版 ), 2025, 50(11) https://xbyxb.csu.edu.cn
+. . 分类结果与特征 不发生骨折，此时坠落高度较低，下肢的缓冲作用
+232
+图7为基于Jaccard距离与平均联结法的层次聚 足以承担坠落后带来的冲击；当坠落高度为7~9 m
+类分析树状图。聚类阶段表格与树状图显示，5类划 时，足部产生骨折，腓骨偶发产生骨折，表明此时
+分时类内相似度高、类间差异显著。树状图及各群 达到了一定的坠落高度，导致局部损伤，足部作为
+集核心损伤特征显示，损伤模式按能量传导路径分 初始冲击区，最先发生骨折，符合实际情况；当坠
+层：低高度(群集1、2、3，1~9 m)损伤局限于足部与 落高度为10~16 m时，除足部与颈椎骨折外，胫腓骨
+下肢；中高度(群集4，10~16 m)损伤向身体中部扩 两端及胸椎偶发骨折，表明轴向能量传导机制启动，
+散，体现了直立位双足坠地后的2条传导路径，一条 坠地后的能量从足部自下而上传导至胫腓骨并导致
+自下而上，从群集2、3的足部骨折至群集4的胫腓 其骨折，同时因身体惯性，能量从头颈部自上而下
+骨骨折；另一条自上而下，从群集3的颈椎骨折至群 传导至胸椎并导致其骨折，序列损伤反映轴向载荷
+集4的胸椎骨折；高高度(群集5，17~50 m)呈现全身 的递进传导，且印证了2条传导路径的存在；当坠落
+弥漫性损伤。 高度为17~34 m时，除上述骨折部位外，股骨颈发生
+. . 生物力学机制关联 骨折，颅骨与骨盆亦偶发骨折，此时随着坠落高度
+233
+层次聚类分析结果将1~9 m分为3个群集(1~6 m、 的增加，损伤也变得更加严重，骨盆带结构失效，
+7~8 m、9 m)，但7~8 m与9 m在生物力学意义上属 且冲击达到了颅骨损伤的阈值，导致颅骨骨折；当
+于同一阶段，均属下肢轴向传导阶段，传导机制未 坠落高度为35~50 m时，包括腰椎在内的全身各个部
+发生本质改变，因此，结合树状图与生物力学机制 位均出现骨折，即高坠落高度导致高能量全身复合
+重构损伤阶段(表3)，建立损伤模式-高度映射关系。 损伤，引起了人体骨骼系统的崩溃，且骨盆与腰椎
+如表3所示，当坠落高度为1~6 m时，人体骨骼 骨折并存。
+图7 骨骼损伤模式层次聚类图
+Figure 7 Hierarchical clustering dendrogram of skeletal injury patterns
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 9 =====
+成人直立位双足坠地跨高度骨骼损伤机制的有限元分析 袁红敏，等 2059
+表3 基于聚类分析与生物力学机制的重新聚类结果
+Table 3 Re-clustering results based on cluster analysis and biomechanical mechanisms
+群集 高度/m 核心损伤特征 生物力学机制
+1 1~6 无骨折 下肢缓冲作用主导
+2 7~9 足部骨折，腓骨偶发骨折 局部低能量损伤
+3 10~16 足部、颈椎骨折，胫腓骨两端、胸椎偶发骨折 轴向能量传导启动
+4 17~34 足部、胫腓骨、股骨颈、胸椎、颈椎骨折，颅骨、骨盆偶发骨折 骨盆带结构失效
+5 35~50 全身骨折(含骨盆、颅骨、腰椎) 高能量全身复合损伤
+3 讨 论 潜在致命损伤的重要指标。
+本研究通过FEM模拟发现的骨折风险“阶跃响
+本研究通过FEM，系统揭示了成人直立位双足 应”现象——即坠落高度低于7 m时损伤局限且轻
+坠地时骨骼的应力分布、传导路径及损伤模式与坠 微，高于7 m时足部、胫腓骨、股骨颈、脊柱及颅底
+落高度的定量关系。模拟结果显示，应力集中区域 等部位骨折风险剧增，这与临床尸检统计结果高度
+主要分布于颅骨枕骨大孔周围、胫腓骨远端、股骨 吻合。例如，Alizo等[27]的研究表明，从低于7 m高
+颈及脊柱椎体等部位，这一分布规律与法医病理学 度坠落的患者多数仅遭受轻度至中度损伤；而
+记载的足部着地高坠经典损伤特征高度吻合[2]。例 Atanasijevic等[28]对高坠死亡案例的分析则明确将7 m
+如，此类坠落中下肢轴向载荷的传导常导致足部、 界定为致命损伤的临界高度，指出超过此高度后受
+小腿及骨盆的系列骨折，而巨大的冲击力沿脊柱向 伤部位数量急剧增加，且胫腓骨、股骨、脊柱和颅
+上传导及头部的惯性运动，亦可导致颅底及脊柱的 底骨折成为典型损伤模式。这进一步支持了本有限
+压缩性骨折[2, 26]。本模型成功再现了上述完整的损伤 元模型在骨折损伤风险预测方面的潜在临床适用性。
+序列，并从生物力学角度阐明了其内在联系，证实 坠落高度是评估高坠损伤程度的良好指标[29]。基
+了FEM在模拟复杂高坠应力传导及损伤机制分析中 于层次聚类分析并结合生物力学机制，本研究将坠
+的有效性。 落高度对应的损伤模式归纳为3个阶段：局部耗散阶
+本研究发现，足部、胫骨两端、股骨颈与脊柱 段(<7 m)、轴向传导阶段(7~16 m)和全身复合损伤阶
+等主要承重及能量传导部位的骨折风险，在特定临 段(>16 m)。这一划分与部分真实案例报道相符。
+界高度附近呈现明显的“阶跃响应”，即骨折风险发 Lowenstein等[30]报道了大量7~17 m坠落案例，其主
+生急剧变化。Logistic回归分析显示，这些部位的骨 要损伤即为下肢与脊柱骨折。Buschmann等[31]和
+折数据存在因“数据分离”引起的过拟合，模型拟 Amadasi等[32]报道的从27 m及35~40 m高度坠落的案
+合无统计学意义，这恰恰反映了高能量冲击下这些 例，则呈现出包括骨盆严重破坏、下肢粉碎性骨折
+关键部位作为主要能量吸收与传递路径的生物学特 及全身多系统损伤在内的复合损伤模式，本研究所
+性——其损伤更接近于“全或无”的阈值效应。因 定义的“全身复合损伤阶段”特征与此相符。这些
+此，这些明确的骨折临界高度本身，即可为法医学 案例对比表明，从生物力学仿真数据中挖掘出的损
+推断最低坠落高度提供直接依据。 伤模式-高度映射关系具有合理性，为FEM作为辅助
+对于腓骨两端、骨盆及颅骨这3个部位，其骨折 法医工作者进行高度推断的客观、量化工具提供了
+风险与坠落高度之间存在良好的渐进式数量关系。 依据。
+Logistic回归成功建立了相应的预测模型(表2)。其 本研究基于FEM与THUMS模型，模拟了1~
+中，腓骨作为相对脆弱的非主要承重骨，其两端骨 50 m高度范围内成人直立位双足坠落过程，揭示了
+折风险随高度增加最快(OR=1.682)，表明其对较低高 足部触地时人体骨骼应力集中规律与应力传导路径，
+度的坠落冲击更为敏感。骨盆作为连接脊柱与下肢 并建立了骨折风险与坠落高度间的预测模型和损伤
+的核心稳定结构，承重能力强，其骨折风险随高度 模式-高度映射关系，得出以下结论：1)骨骼von
+增加虽显著但最为平缓(OR=1.236)，提示需要更大的 Mises应力集中区域呈轴向分布，且成人直立位双足
+冲击能量才能达到其损伤阈值。颅骨的骨折风险增 坠落后存在双路径应力传导机制；2)足部、胫骨两
+速居中(OR=1.576)，其主要损伤机制源于应力沿脊柱 端、股骨颈、脊柱椎体的骨折风险呈现“阶跃响
+向上的传导及头部的惯性冲击，而非直接接触，是 应”，腓骨两端、骨盆及颅骨的骨折风险-高度预测模
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 10 =====
+2060 中南大学学报 ( 医学版 ), 2025, 50(11) https://xbyxb.csu.edu.cn
+型已完成构建，腓骨骨折风险随坠落高度增加的速 Japan[J/OL]. PLoS One, 2025, 20(2): e0318748[2025-05-13].
+率最快，颅骨次之，骨盆最缓，揭示了非直接承力 https://doi.org/10.1371/journal.pone.0318748.
+[5] Verstappen K, Aquarius R, Klymov A, et al. Systematic
+骨的渐进性损伤机制；3)结合层次聚类结果与生物力
+evaluation of spinal cord injury animal models in the field of
+学机制将坠落高度划分为1~6 m，7~9 m，10~16 m，
+biomaterials[J]. Tissue Engineering. Part B, 2021, 28: 1169-
+17~34 m，35~50 m 5类。
+1179. https://doi.org/10.1089/ten.teb.2021.0194.
+综上所述，尽管FEM具有广泛的应用潜力，但 [6] 魏智彬, 李洋, 解鹏达, 等. 数值模拟技术在高坠案法医学分
+在实际应用中仍存在局限性，如生物组织力学特性 析中的应用[J]. 刑事技术, 2024, 49(3): 290-296. https://doi.
+研究不足、人体模型过度简化、模型验证不足等[33]。 org/10.16467/j.1008-3650.2023.0059.
+WEI Zhibin, LI Yang, XIE Pengda, et al. Review on progress
+本研究根据文献确定了较为合适的骨骼损伤阈值，
+research on numerical simulation of fall from height[J].
+但阈值稍有改变，骨骼损伤结果就会发生改变，骨
+Forensic Science and Technology, 2024, 49(3). https://doi.org/10.
+折风险-坠落高度预测模型及损伤模式-高度映射关系
+16467/j.1008-3650.2023.0059.
+等亦会随之改变。因此，需要通过生物力学试验， [7] Franceskides C, Gibson M, Zioupos P. Evaluation of bone
+确定更为精准的骨骼损伤阈值，提高模拟结果的准 excision effects on a human skull model—II: Finite element
+确性。本研究关于骨骼损伤，仅提及下肢与脊柱的 analysis[J]. Proc Inst Mech Eng H, 2020, 234(4): 346-355.
+https://doi.org/10.1177/0954411919892799.
+缓冲作用，但实际上韧带、肌肉等的主动收缩对冲
+[8] 魏智彬, 林海弘, 杨超朋, 等. 基于有限元法分析颅骨骨折的
+击载荷也具有缓冲作用，在后续研究中，应该使用
+致伤方式[J]. 刑事技术, 2023, 48(1): 102-106. https://doi.org/10.
+更为精细的人体模型，揭示人体各部分对高坠冲击
+16467/j.1008-3650.2022.0013.
+载荷的响应。本研究的模拟结果与文献中的高坠损 WEI Zhibin, LIN Haihong, YANG Chaopeng, et al. Analysis
+伤情况基本一致，如枕骨大孔处的损伤、胫腓骨两 into injury mode of skull fracture based on finite element
+端损伤等，但是缺少典型、真实的案例验证。在后 method[J]. Forensic Science and Technology, 2023, 48(1): 102-
+106. https://doi.org/10.16467/j.1008-3650.2022.0013.
+续的研究中，将朝着开发个性化有限元模型及完善
+[9] Meng S, Cernicchi A, Kleiven S, et al. High-speed helmeted
+生物力学参数研究的方向努力，使模型更加精细化，
+head impacts in motorcycling: A computational study[J].
+更能够真实展现人体承受载荷后的各部分响应。此
+Accident Analysis Prev, 2020, 134: 105297. https://doi.org/10.
+外，还可以引入多体动力学-有限元耦合方法，不仅
+1016/j.aap.2019.105297.
+可以研究瞬时冲击后的人体响应，还可以得到高坠 [10] Yan J, He J, Spear A, et al. The effect of impact angle and fall
+的整体动态过程，如坠落高度、初始速度、初始姿 height on skull fracture patterns in infants[J]. J Biomech Eng,
+2021, 143(7): 071004. https://doi.org/10.1115/1. 4050460.
+势等。
+[11] Revel M, Gardegaront M, Bermond F, et al. A credible
+作者贡献声明：袁红敏 模型搭建，实验实施，统 homogenized finite element model to predict radius fracture in
+计分析与作图，论文撰写；高树辉 研究指导，统 the case of a forward fall[J]. J Mech Behav Biomed Mater, 2022,
+131: 105206. https://doi.org/10.1016/j.jmbbm.2022.105206.
+计学分析与作图，论文撰写与修订；魏智彬 技术
+[12] Li Z, Zhang J, Wang J, et al. Preliminary study on the
+支持，研究指导。所有作者阅读并同意最终的文本。
+mechanisms of ankle injuries under falling and impact conditions
+based on the THUMS model[J]. Forensic Sci Res, 2021, 7(3):
+利益冲突声明：作者声称无任何利益冲突。
+518-527. https://doi.org/10.1080/20961790.2021.1875582.
+[13] Mckinsey K, Thompson A, Bertocci G. Investigation of femur
+参考文献 fracture potential in common pediatric falls using finite
+element analysis[J]. Comput Methods Biomech Biomed Engin,
+[1] World Health Organization. Falls[EB/OL]. (2021-04-26) [2025- 2021, 24(5): 517-526. https://doi.org/10.1080/10255842.2020.
+07-30]. https://www.who.int/news-room/fact-sheets/detail/falls/. 1837119.
+[2] DiMaio D, DiMaio JV. Forensic Pathology, Second Edition [14] 胡文虎, 邵煜, 李正东, 等. 有限元法研究高坠中躯干不同部
+[M]. Taylor: CRC Press, 2001. 位着地的肋骨骨折机制[J]. 法医学杂志, 2020, 36(2): 181-
+[3] Luecke C, Schnetzke M, Weiss C, et al. Influence of rigor 186. https://doi.org/10.12116/j.issn.1004-5619.2020.02.007.
+mortis on tendon mobility in an animal fresh cadaver model[J]. HU Wenhu, SHAO Yu, LI Zhengdong, et al. Exploring of the
+Biology, 2022, 11(10): 1381. https://doi.org/10.3390/biology11101381. mechanism of rib fracture caused by landing on different parts
+[4] Ono Y, Uzawa T, Sugiyama J, et al. Comparison of survival of the trunk after falls from height using finite element method
+outcomes and anatomically specific severe injuries following [J]. Journal of Forensic Medicine, 2020, 36(2): 181-186. https://doi.
+traffic accidents among occupants of standard and K-car org/10.12116/j.issn.1004-5619.2020.02.007.
+vehicles: A retrospective cohort study at a teaching hospital in [15] Iwamoto M, Kisanuki Y, Watanabe I, et al. Development of a
+©Journal of Central South University (Medical Science). All rights reserved.
+
+===== PAGE 11 =====
+成人直立位双足坠地跨高度骨骼损伤机制的有限元分析 袁红敏，等 2061
+finite element model of the total human model for safety https://doi.org/10.1016/j.medengphy.2006.11.001.
+(THUMS) and application to injury reconstruction[C]. Munich: [25] Kopperdahl DL, Keaveny TM. Yield strain behavior of
+Proceedings of the international IRCOBI Conference, 2002. trabecular bone[J]. J Biomech, 1998, 31(7): 601-608. https://doi.
+[16] Hardy WN, Foster CD, Mason MJ, et al. Investigation of head org/10.1016/S0021-9290(98)00057-8.
+injury mechanisms using neutral density technology and high- [26] Chonyera RLS. A retrospective descriptive analysis of fatal
+speed biplanar X-ray[J]. Stapp Car Crash J, 2001, 45: 337-368. ground level falls and falls from a height: A 5-year review[D].
+https://10.4271/2001-22-0016. Cape Town: University of Cape Town, 2022.
+[17] Kleiven S, Hardy WN. Correlation of an FE model of the [27] Alizo G, Sciarretta JD, Gibson S, et al. Fall from heights: Does
+human head with local brain motion-consequences for injury height really matter [J]. Eur J Trauma Emerg Surg, 2018, 44
+prediction[R]. Warrendale, PA: SAE International, 2002-22- (3): 441-446. https://doi.org/10.1007/s00068-017-0799-1.
+0007. https://doi.org/10.4271/2002-22-0007. [28] Atanasijevic TC, Savic SN, Nikolic SD, et al. Frequency
+[18] Begeman PC, Prasad P. Human ankle impact response in and severity of injuries in correlation with the height of fall
+dorsiflexion[J]. SAE Transactions, 1990, 99: 1694-1708. [J]. J Forensic Sci, 2005, 50(3): 608-612. https://doi.org/10.
+1520/JFS2004124.
+https://doi.org/10.4271/902308.
+[29] Casati A, Granieri S, Cimbanassi S, et al. Falls from height.
+[19] Kemper A, McNally C, Kennedy E, et al. The material
+Analysis of predictors of death in a single-center retrospective
+properties of human tibia cortical bone in tension and
+study[J]. J Clin Med, 2020, 9(10): 3175. https://doi.org/10.
+compression: implications for the tibia index[C]. Lyon:
+3390/jcm9103175.
+Proceedings of the 20th Enhanced Safety of Vehicles
+[30] Lowenstein SR, Yaron M, Carrero R, et al. Vertical trauma:
+Conference, 2007.
+Injuries to patients who fall and land on their feet[J]. Ann of
+[20] Anderson DD, Mosqueda T, Thomas T, et al. Quantifying tibial
+Emerg Med, 1989, 18(2): 161-165. https://doi.org/10.1016/S0196-
+plafond fracture severity: Absorbed energy and fragment
+0644(89)80107-6.
+displacement agree with clinical rank ordering[J]. J Orthop Res,
+[31] Buschmann C, Tsokos M. Injury pattern after a fatal feet-first
+2008, 26(8): 1046-1052. https://doi.org/10. 1002/jor.20550.
+fall from a building[J]. Forensic Sci, Med Pathol, 2011, 7(4):
+[21] Mcelhaney JH, Fogle JL, Melvin JW, et al. Mechanical
+369-370. https://doi.org/10.1007/s12024-011-9225-x.
+properties of cranial bone[J]. J Biomech, 1970, 3(5): 495-511.
+[32] Amadasi L, Amadasi A, Buschmann C, et al. Injury pattern
+https://doi.org/10.1016/0021-9290(70)90059-X.
+of feet and lower limbs in a feet-first fall from height[J].
+[22] Funk JR, Kerrigan JR, Crandall JR. Dynamic bending
+Forensic Sci Med Pathol, 2025, 21(3): 1535-1539. https://doi.
+tolerance and elastic-plastic material properties of the human
+org/10.1007/s12024-025- 00939-3.
+femur[C]. Annual Proceedings/Association for the Advancement
+[33] 袁红敏, 高树辉. 基于有限元方法的法医损伤可视化分析与
+of Automotive Medicine, 2004, 48: 215-233.
+应用探索[J]. 西安交通大学学报(医学版), 2025, 46(1): 1-11.
+[23] Lotz JC, Cheal EJ, Hayes WC. Fracture prediction for the
+https://doi.org/10.7652/jdyxb202501001.
+proximal femur using finite element models: Part I—linear
+YUAN Hongmin, GAO Shuhui. Forensic injury visualization
+analysis[J]. J Biomecha Engineer, 1991, 113(4): 353-360.
+analysis and its application using the finite element method[J].
+https://doi.org/10.1115/1.2895412.
+Journal of Xi’an Jiaotong University. Medical Sciences, 2025,
+[24] Majumder S, Roychowdhury A, Pal S. Simulation of hip
+46(1): 1-11. https://doi.org/10.7652/jdyxb202501001.
+fracture in sideways fall using a 3D finite element model of
+pelvis-femur-soft tissue complex with simplified representation
+of whole body[J]. Med Eng Phys, 2007, 29(10): 1167-1178. （责任编辑 彭敏宁）
+本文引用：袁红敏, 高树辉, 魏智彬. 成人直立位双足坠地跨高
+度骨骼损伤机制的有限元分析[J]. 中南大学学报(医学版), 2025,
+50(11): 2051-2061. DOI:10.11817/j.issn.1672-7347.2025.250450
+Cite this article as: YUAN Hongmin, GAO Shuhui, WEI Zhibin.
+Finite element analysis of skeletal injury mechanisms in adult
+standing positions with both feet landed on the ground[J]. Journal
+of Central South University. Medical Science, 2025, 50(11): 2051-
+2061. DOI:10.11817/j.issn.1672-7347.2025.250450
+©Journal of Central South University (Medical Science). All rights reserved.

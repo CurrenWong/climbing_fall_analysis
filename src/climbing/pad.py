@@ -445,7 +445,7 @@ def simulate_boulder_fall(
     on_pad: bool = True,
     g: float = G,
     dt_sample: float = 2e-4,
-    t_max: float = 2.0,
+    t_max: float | None = None,
     max_ode_step: float = 1e-4,
     rtol: float = 1e-8,
     atol: float = 1e-11,
@@ -463,6 +463,16 @@ def simulate_boulder_fall(
     """
     post = POSTURES[posture] if isinstance(posture, str) else posture
     pad = (pad or CrashPad()) if on_pad else hard_surface()
+
+    # ---- 积分时长必须覆盖整个坠落 ----------------------------------------
+    # 自由落体到接触需要 t_fall = √(2h/g)。早期版本 t_max 固定 2.0 s，
+    # 于是 **h ≥ 19.6 m 时积分在撞击前就结束**，模型静默返回
+    # peak_force = 0 kN —— 不报错、输出格式正常、数值看着像"很安全"。
+    # 这正是 阶段总结.md §3.1 那类静默失效：越高的坠落反而越"无害"。
+    # 现在自适应给足余量，并在下面守一道"撞击是否真的发生"的检查。
+    t_fall = float(np.sqrt(2.0 * height_m / g))
+    if t_max is None:
+        t_max = max(2.0, t_fall + 1.0)
 
     m = float(mass_kg)
     m_low, m_up = post.split_mass(m)
@@ -615,6 +625,15 @@ def simulate_boulder_fall(
         gap = np.where(~in_contact[i0:])[0]
         i1 = (i0 + int(gap[0])) if gap.size else t_out.size
     else:
+        # 全程未接触 —— 只可能是积分时长不够（坠落还没落地就结束了），
+        # 不能静默返回 0。见上面 t_max 的注释。
+        if height_m > 0.0:
+            raise RuntimeError(
+                f"积分结束时仍未发生接触：h={height_m:.1f} m 的自由落体耗时 "
+                f"{np.sqrt(2.0 * height_m / g):.3f} s，而积分到 t={sol.t[-1]:.3f} s。"
+                f"请增大 t_max（当前 {t_max:.3f} s）。"
+                "早期版本 t_max 固定 2.0 s，h≥19.6 m 时静默返回 peak_force=0。"
+            )
         i0, i1 = 0, 0
     i1 = max(i1, i0 + 2)
     i1 = min(i1, t_out.size)

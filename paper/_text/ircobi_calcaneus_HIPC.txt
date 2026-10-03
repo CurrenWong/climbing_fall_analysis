@@ -1,0 +1,75 @@
+IRC-19-105 IRCOBI conference 2019
+Verification of a Calcaneus Fracture Probability Curve in High-Rate Vertical Loading
+David R. Barnes, Kyle A. Ott, Don Sherman, Jonathan Rupp, Liming M. Voo, Kathryn L. Loftis,
+Constantine K. Demetropoulos
+I. INTRODUCTION
+Fracture to the calcaneus is a known consequence of high-rate vertical loading to the feet of seated
+occupants in vehicles exposed to under-body blast (UBB) [1-2]. The anatomic alignment between the point of
+contact at the floor and the leg centre of mass allows for compression of the calcaneus leading to fracture [3].
+A study of high-rate vertical loading of the human foot and leg quantified the risk of calcaneus fracture at rates
+consistent with UBB [4]. Human injury probability curves (HIPCs) for “mild” and “severe” calcaneus fracture
+were developed from heel contact forces during testing of isolated post-mortem human subject (PMHS) foot-
+leg specimens. The current study utilised high-rate loading of whole-body PMHS in seated postures to compare
+injury outcomes to those from foot-leg component testing in order to verify the ability of the HIPCs to predict
+calcaneus fracture.
+II. METHODS
+Ten whole-body male PMHS were tested in four series at three facilities: one series using the “VALTS” at
+Johns Hopkins University Applied Physics Laboratory (JHUAPL), one series using the “WHAM” sled at Wayne
+State University (WSU), and two series using a drop tower at the University of Michigan Transportation Research
+Institute (UMTRI) (Table I). Each test facility generated high-rate vertical loading to the seated subject, with floor
+peak velocity (Peak-V) and time-to-peak velocity (TTP-V) similar to those recorded in prior foot-leg component
+tests used to create calcaneus fracture HIPCs [4]. Footwear, foot position, and lower extremity joint angles were
+matched to prior foot-leg component testing. Specifically, whole-body subjects donned army combat boots and
+were positioned with feet flat on the floor plate, and ankles, knees, and hips at 90 degrees. Floor plate vertical
+acceleration and reaction forces were collected. Accelerations and rotations of the legs were measured at the
+anterior tibia and acceleration was recorded at the medial surface of the calcaneus. High speed video captured
+motion of the test fixture and specimen. Pre-test and post-test x-rays and/or Computed Tomography (CT)
+images were utilised to evaluate the presence and pattern of fracture to the feet and legs. Cases where a
+calcaneus fracture was determined to be the primary injury were classified as “mild” (Sanders Type I/II) or
+“severe” (Sanders Type III/IV) [5]. The same method for classifying calcaneus fracture was used in the prior foot-
+leg component study.
+Table I.
+Whole-body tests performed with component floor input conditions for reference.
+Floor Peak-V Floor TTP-V Seat Peak-V Seat TTP-V
+Test Facility Type No. of PMHS
+(m/s) (ms) (m/s) (ms)
+JHUAPL Whole-body 2 15.5 2.5 10.0 7.5
+WSU Whole-body 2 13.0 2.5 9.0 5.0
+UMTRI Whole-body 3 9.0 2.5 6.0 7.5
+UMTRI Whole-body 3 7.0 2.0 5.0 25.0
+Voo et al.[4] Component 19 7.0 – 16.0 1.8 – 3.5 N/A N/A
+D. R. Barnes works at SURVICE Engineering Co. in support of the U.S. Army Futures Command (email:
+david.r.barnes63.ctr@mail.mil; phone: 1-410-278-2103). K. A. Ott, L. M. Voo and C. K. Demetropoulos work at Johns
+Hopkins University Applied Physics Laboratory. D. Sherman works at Wayne State University. J.Rupp works in the
+Department of Emergency Medicine at Emory University School of Medicine. K. L. Loftis works in the Combat Capabilities
+Development Command of the U.S. Army Futures Command.
+694
+IRC-19-105 IRCOBI conference 2019
+III. INITIAL FINDINGS
+Whole-body tests resulted in five isolated severe calcaneus fractures and one isolated talus fracture.
+Evaluation of the post-test x-ray and CT images in conjunction with autopsy indicated similar fracture patterns
+between the whole-body tests and isolated foot-leg component tests used to develop the HIPCs. Heel contact
+forces and associated injury outcomes from the whole-body tests were compared with the severe calcaneus
+HIPC provided by Voo et al. (Fig. 1) [4]. Heel contact force associated with greater than 90% probability of
+severe calcaneus fracture consistently resulted in foot fracture, while heel contact forces associated with less
+than 30% probability of severe calcaneus fracture typically resulted in no fracture.
+Fig. 1. Heel contact forces from whole-body tests compared to the severe calcaneus fracture HIPC.
+IV. DISCUSSION
+High-rate vertical loading to the feet and legs of whole-body PMHS resulted in fracture patterns similar to
+those created during testing of isolated foot-leg components, suggesting that a similar compression mechanism
+for calcaneus fracture was present in the component and whole-body tests. Prevalence of calcaneus fracture
+tended to increase with increased heel contact force in both whole-body and component tests and heel contact
+force reasonably predicted severe calcaneus fracture outcomes in whole-body tests. The results of this study
+indicate that heel contact force is an effective predictor of severe calcaneus fracture under high-rate vertical
+loading. Moreover, the HIPC provided by Voo et al. has been verified as predictive of severe calcaneus fracture
+to whole-body PMHS. Verification from the current study is limited to severe calcaneus fractures arising from
+vertical loading to the sole of the foot while the ankle is at 90 degrees. Future studies should include verification
+of the mild calcaneus fracture HIPC and evaluation of these HIPCs in a variety of foot positions, and ankle and
+knee postures.
+V. REFERENCES
+[1] Loftis, K. L., Military Medicine, 2019.
+[2] Loftis, K. L., AAAM, 2013.
+[3] Danelson, K., Stapp Car Crash, 2018.
+[4] Voo, L. V., WIAMan Technical Report, 2019.
+[5] Sanders, R., Clin Ortho Related Res, 1993.
+695

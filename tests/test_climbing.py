@@ -444,3 +444,102 @@ class TestClassify:
         assert classify_hic(500) == "中"
         assert classify_hic(800) == "高"
         assert classify_hic(1500) == "极高"
+
+# ==========================================================================
+# 静默失效：积分时长不足导致"撞击前就结束"
+# ==========================================================================
+# 早期版本 ``t_max`` 固定 2.0 s，而自由落体到接触需 t = √(2h/g)：
+#   h = 20 m  ->  t = 2.019 s  >  2.0 s
+# 于是 h ≥ 19.6 m 时积分在**撞击发生之前**就结束，模型静默返回
+#   peak_force_n = 0 kN、max_compression_m = 0
+# 不抛异常、字段齐全、数值看着像"这么高反而很安全"。
+# 属于 阶段总结.md §3.1 那类静默失效：越危险的情形输出越无害。
+#
+# 现修复：t_max 自适应为 max(2.0, √(2h/g) + 1.0)；
+# 并加一道守卫 —— 全程未接触且 h>0 时直接抛 RuntimeError。
+class TestIntegrationHorizon:
+    def test_high_fall_is_not_silently_zero(self):
+        """h=25 m（自由落体 2.26 s）必须有非零峰值。"""
+        r = simulate_boulder_fall(height_m=25.0, mass_kg=77.0,
+                                  on_pad=False, posture="feet-first-stiff")
+        assert r.peak_force_n > 0.0, "25 m 坠落报 0 峰值 —— 积分时长不足"
+        assert r.max_compression_m > 0.0
+
+    def test_peak_force_monotone_across_horizon(self):
+        """跨过旧的 19.6 m 断点，峰值必须继续单调上升。"""
+        hs = [16.0, 18.0, 20.0, 22.0]
+        peaks = [
+            simulate_boulder_fall(height_m=h, mass_kg=77.0, on_pad=False,
+                                  posture="feet-first-stiff").peak_force_n
+            for h in hs
+        ]
+        for h, pk in zip(hs, peaks):
+            assert pk > 0.0, f"h={h} m 报 0 峰值"
+        diffs = np.diff(peaks)
+        assert np.all(diffs > 0.0), f"峰值未单调上升: {peaks}"
+
+    def test_insufficient_t_max_raises(self):
+        """显式给一个不够的 t_max，必须抛错而不是静默返回 0。"""
+        with pytest.raises(RuntimeError, match="仍未发生接触"):
+            simulate_boulder_fall(height_m=30.0, mass_kg=77.0, on_pad=False,
+                                  posture="feet-first-stiff", t_max=1.0)
+
+
+# ==========================================================================
+# 分部位骨骼阈值（方案 v2 · P0）
+# ==========================================================================
+class TestBoneSites:
+    def test_two_ends_weaker_than_shaft(self):
+        """[Y25] Table 1 的核心关系：骨端（松质骨）弱于骨干（皮质骨）。"""
+        from climbing.bone import MATERIAL_STRENGTH_MPA as M
+        for ends, shaft in (("tibia_ends", "tibia_shaft"),
+                            ("fibula_ends", "fibula_shaft")):
+            se, ss = M[ends], M[shaft]
+            assert se[0] < ss[0] and se[1] < ss[1], f"{ends} 应弱于 {shaft}"
+
+    def test_site_threshold_unit_conversion(self):
+        """1 MPa = 1 N/mm²，故阈值(N) = σ(MPa) × A(mm²)。"""
+        from climbing.bone import BONE_SITES
+        for s in BONE_SITES.values():
+            assert s.force_threshold_n == pytest.approx(s.sigma_mpa * s.area_mm2)
+            assert s.threshold_kn == pytest.approx(s.force_threshold_n / 1e3)
+
+    def test_mode_selects_right_strength(self):
+        """压缩模式必须选压缩强度（更大的那个）。"""
+        from climbing.bone import BONE_SITES, MATERIAL_STRENGTH_MPA as M
+        for s in BONE_SITES.values():
+            st, sc = M[s.key]
+            want = sc if s.mode == "compression" else st
+            assert s.sigma_mpa == want
+
+    def test_assess_sites_requires_impact_window(self):
+        """缺失冲击窗口信息时必须报错，不能对全程取峰值。"""
+        from climbing.bone import assess_sites
+
+        class Fake:
+            t_s = np.linspace(0, 1, 11)
+            pad_force_n = np.zeros(11)
+            accel_torso_g = np.zeros(11)
+            height_m = 3.0
+            mass_kg = 80.0
+            posture = "x"
+            meta: dict = {}
+
+        with pytest.raises(ValueError, match="impact_window_s"):
+            assess_sites(Fake())
+
+    def test_high_fall_fractures_more_than_low(self):
+        """利用率必须随高度上升（分部位评估的方向性检查）。"""
+        from climbing.bone import assess_sites
+        lo = assess_sites(simulate_boulder_fall(
+            height_m=3.0, mass_kg=77.0, on_pad=False, posture="feet-first-stiff"))
+        hi = assess_sites(simulate_boulder_fall(
+            height_m=25.0, mass_kg=77.0, on_pad=False, posture="feet-first-stiff"))
+        assert hi.worst.utilization > lo.worst.utilization
+
+    def test_no_fracture_at_low_height_on_pad(self):
+        """1 m 落在软垫上，不应有任何部位超过名义阈值。"""
+        from climbing.bone import assess_sites
+        v = assess_sites(simulate_boulder_fall(
+            height_m=1.0, mass_kg=77.0, on_pad=True, posture="controlled-drop"))
+        assert not v.fractured_sites, v.summary()
