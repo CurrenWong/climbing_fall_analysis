@@ -231,3 +231,56 @@ IndentationError: unexpected indent
 
 这套环境**没有 pip**（`.venv\Scripts\python.exe -m pip` → `No module named pip`）。
 装包用 **`D:\Program\uv\uv.exe pip install --python .venv\Scripts\python.exe <pkg>`**。
+
+---
+
+## [ERR-20261003-005] 解包字典时把「值」当成了「键」——`KeyError: '0.62'`
+
+**类型**：实现错误（首次运行即暴露）
+**严重度**：🟡 低（不静默，直接崩）
+**状态**：已修 + 已加测试
+
+### 症状
+
+`ScenarioSampler` 初始化后第一次采样崩：
+
+```
+File "src/climbing/scenarios.py", line 489, in _mass
+    _, mu, sd = MASS_MODEL[lab]
+KeyError: '0.62'
+```
+
+### 根因
+
+`MASS_MODEL` 是 `label -> (prob, mean, sd)`，我写的是：
+
+```python
+labels, p = zip(*[(v[0], v[1]) for v in MASS_MODEL.values()])
+```
+
+`zip(*pairs)` 把每对的**第一个元素**当 labels —— 也就是把 **prob 当成了
+label、mean 当成了 prob**。于是 `rng.choice` 从 `[0.62, 0.36, 0.02]`
+里抽，抽出浮点数 0.62 拿去查字典。
+
+**正确写法**：
+
+```python
+self._mass_labels = list(MASS_MODEL.keys())
+self._mass_p = np.array([v[0] for v in MASS_MODEL.values()])
+```
+
+### 教训
+
+`zip(*[...])` 做转置式的解包**读起来不显眼**，很容易把元素顺序搞错。
+当字典的 value 是元组时，直接 `list(d.keys())` + 列表推导取对应字段更清楚，
+也更容易眼检。**别为了「一行」牺牲可读性** —— 这类错误不需要测试就能避免。
+
+（对比：这个错误和 `[LRN-20261003-003]` 的载荷分配不同 ——
+那个是**静默**高估、只在特定参数点暴露；这个是立刻崩，属于"好错误"。）
+
+### 关联
+
+同批还修了 `coverage_report()` 里两处**中文引号写成了 ASCII 双引号**
+（`"踝"` 会被 Python 当成字符串边界，直接 SyntaxError）。
+写中文文案时统一用 `「」`，别用 `""`。
+

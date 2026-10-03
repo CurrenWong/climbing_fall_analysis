@@ -543,3 +543,262 @@ class TestBoneSites:
         v = assess_sites(simulate_boulder_fall(
             height_m=1.0, mass_kg=77.0, on_pad=True, posture="controlled-drop"))
         assert not v.fractured_sites, v.summary()
+
+
+# ==========================================================================
+# 场景库（方案 v2 · P1）
+# ==========================================================================
+from climbing.scenarios import (                                     # noqa: E402
+    DIMENSIONS, HEIGHT_BANDS, LANDING_TO_POSTURE, MASS_CLIP_KG, MASS_MODEL,
+    NAMED_SCENARIOS, OBSERVED_INJURY_LOCATION, OBSERVED_INJURY_TYPE,
+    SURFACE_TO_ON_PAD, WALL_HEIGHT_M, ScenarioSampler, coverage_report,
+)
+
+
+class TestScenarioTables:
+    def test_every_dimension_sums_to_one(self):
+        """抄录校验：每个维度含 unknown 的占比之和应为 1（±1%）。
+
+        回归目标：初稿把 [B25] **Table 4 的下肢列**当成全体分布抄了进来
+        （脚先 87% 而非 73%、无旋转 39% 而非 30%）。表若混了，和会明显偏离 1。
+        """
+        for key, dim in DIMENSIONS.items():
+            tot = dim.raw_total()
+            assert abs(tot - 1.0) <= 0.01, f"{key} 占比和 = {tot:.3f}"
+
+    def test_labels_unique_and_nonempty(self):
+        for key, dim in DIMENSIONS.items():
+            labels = [c.label for c in dim.cats]
+            assert len(labels) == len(set(labels)), f"{key} 有重复标签"
+            assert all(labels)
+        # 除 landing_surface 外都应有 unknown 项：Table 3 的落点表面四项
+        # 已经和为 1.00，没有 unknown 列；其余维度都有。
+        without_unknown = [k for k, d in DIMENSIONS.items()
+                           if not any(c.is_unknown for c in d.cats)]
+        assert without_unknown == ["landing_surface"], without_unknown
+
+    def test_ci_brackets_point_estimate(self):
+        for key, dim in DIMENSIONS.items():
+            for c in dim.cats:
+                if c.ci is None:
+                    continue
+                lo, hi = c.ci
+                assert lo < hi, f"{key}/{c.label} CI 反了"
+                assert lo - 0.02 <= c.prob <= hi + 0.02, \
+                    f"{key}/{c.label}: 点估计 {c.prob} 不在 CI {c.ci} 内"
+
+    def test_landing_probability_drops_unknown_and_renormalizes(self):
+        """剔除 unknown 后必须重新归一（否则采样会静默少抽）。"""
+        labels, p = DIMENSIONS["rotation"].probs(drop_unknown=True)
+        assert "unknown" not in labels
+        assert p.sum() == pytest.approx(1.0)
+        # [B25] Table 3：无旋转 30/92
+        assert dict(zip(labels, p))["without"] == pytest.approx(0.30 / 0.92, rel=1e-9)
+
+    def test_b25_table3_landing_is_73_percent_feet_first(self):
+        """口径回归：脚先落地是 73%（Table 3），不是 87%（Table 4 下肢列）。"""
+        lp = {c.label: c.prob for c in DIMENSIONS["landing_position"].cats}
+        assert lp["standing_on_feet"] + lp["on_feet_leaning"] == pytest.approx(0.73)
+
+    def test_no_rotation_is_thirty_percent(self):
+        rot = {c.label: c.prob for c in DIMENSIONS["rotation"].cats}
+        assert rot["without"] == pytest.approx(0.30)
+        assert 1 - rot["without"] - rot["unknown"] == pytest.approx(0.62, abs=0.01)
+
+
+class TestPostureMapping:
+    def test_every_landing_category_is_mapped(self):
+        """映射必须完备：每个落地类别都要能落到一个 POSTURES 姿势上。"""
+        for cat in DIMENSIONS["landing_position"].cats:
+            if cat.is_unknown:
+                continue
+            assert cat.label in LANDING_TO_POSTURE, f"{cat.label} 没有映射"
+
+    def test_mapped_postures_exist_and_weights_sum_to_one(self):
+        for lab, m in LANDING_TO_POSTURE.items():
+            tot = 0.0
+            for name, w in m.postures:
+                assert name in POSTURES, f"{lab} 指向不存在的姿势 {name}"
+                assert w > 0
+                tot += w
+            assert tot == pytest.approx(1.0), f"{lab} 权重和 {tot}"
+
+    def test_every_surface_has_on_pad_decision(self):
+        for cat in DIMENSIONS["landing_surface"].cats:
+            assert cat.label in SURFACE_TO_ON_PAD, f"{cat.label} 没有落点判定"
+
+    def test_gaps_between_pads_are_not_soft(self):
+        """垫与墙之间 / 两垫之间都是硬缝隙 —— 不能当成软垫。"""
+        assert SURFACE_TO_ON_PAD["between_pads_and_wall"] is False
+        assert SURFACE_TO_ON_PAD["between_2_pads"] is False
+        assert SURFACE_TO_ON_PAD["pads"] is True
+
+    def test_ligament_risk_flagged_only_for_tilted_landing(self):
+        """踝旋后机制只标在「在脚上且倾斜」上（[B25] 明确写的机制）。"""
+        flagged = [k for k, m in LANDING_TO_POSTURE.items() if m.ligament_risk]
+        assert flagged == ["on_feet_leaning"]
+
+    def test_height_bands_inside_wall_and_ordered(self):
+        """高度带必须互不重叠、递增，且上界不超过抱石墙高。"""
+        bounds = sorted(HEIGHT_BANDS.values(), key=lambda x: x[0])
+        for (lo, hi) in bounds:
+            assert 0 < lo < hi <= WALL_HEIGHT_M + 1e-9
+        for (_, hi_a), (lo_b, _) in zip(bounds, bounds[1:]):
+            assert hi_a == pytest.approx(lo_b), "高度带之间必须首尾相接"
+
+    def test_mass_model_probabilities_sum_to_one(self):
+        assert sum(v[0] for v in MASS_MODEL.values()) == pytest.approx(1.0)
+        for _, mu, sd in MASS_MODEL.values():
+            assert MASS_CLIP_KG[0] < mu < MASS_CLIP_KG[1]
+            assert sd > 0
+
+
+class TestScenarioSampler:
+    def test_seed_is_reproducible(self):
+        a = ScenarioSampler(seed=42).sample_many(50)
+        b = ScenarioSampler(seed=42).sample_many(50)
+        assert a == b
+        c = ScenarioSampler(seed=43).sample_many(50)
+        assert a != c
+
+    def test_samples_match_measured_distribution(self):
+        """大样本下 MC 频率应贴合 [B25] Table 3（4σ 二项带）。"""
+        n = 8000
+        rows = ScenarioSampler(seed=1234).sample_many(n)
+        for key, dim in DIMENSIONS.items():
+            labels, p = dim.probs(drop_unknown=True)
+            for lab, pr in zip(labels, p):
+                if key == "landing_surface" and lab == "bump_into_someone":
+                    continue                     # p 太小，4σ 带退化，跳过
+                hits = sum(1 for r in rows if getattr(r, key) == lab)
+                f = hits / n
+                se = float(np.sqrt(pr * (1 - pr) / n))
+                assert abs(f - pr) <= 4 * se + 0.01, \
+                    f"{key}/{lab}: MC {f:.4f} vs 实测 {pr:.4f}"
+
+    def test_unknown_never_sampled(self):
+        rows = ScenarioSampler(seed=5).sample_many(2000)
+        for r in rows:
+            for k, v in r.to_dict().items():
+                assert not v.startswith("unknown"), f"{k} 抽到了 unknown"
+
+    def test_simulation_spec_is_feedable(self):
+        s = ScenarioSampler(seed=9)
+        for _ in range(300):
+            spec = s.sample_simulation()
+            assert spec.posture in POSTURES
+            band = HEIGHT_BANDS[spec.scenario.height_band]
+            assert band[0] <= spec.height_m <= band[1]
+            assert MASS_CLIP_KG[0] <= spec.mass_kg <= MASS_CLIP_KG[1]
+            assert isinstance(spec.on_pad, bool)
+
+    def test_flags_are_consistent(self):
+        rows = ScenarioSampler(seed=77).sample_many(500)
+        for r in rows:
+            assert r.rotation_free == (r.rotation == "without")
+            assert r.foot_first == (
+                r.landing_position in ("standing_on_feet", "on_feet_leaning"))
+            assert r.upper_limb_mechanism == (
+                r.start_position == "leaning_backward")
+            assert r.on_pad == SURFACE_TO_ON_PAD[r.landing_surface]
+
+    def test_weight_exact_is_conservative(self):
+        """「结论可信」必须同时排除旋转、韧带机制、上肢机制。"""
+        s = ScenarioSampler(seed=11)
+        n = 4000
+        for _ in range(n):
+            sp = s.sample_simulation()
+            assert sp.weight_exact == (
+                sp.rotation_representable and not sp.ligament_dominant
+                and not sp.upper_limb_mechanism)
+            # 可信子集必然是无旋转的
+            if sp.weight_exact:
+                assert sp.scenario.rotation_free
+
+
+class TestCoverage:
+    def test_report_contains_key_numbers(self):
+        txt = coverage_report()
+        assert "P(无旋转) = 0.326" in txt
+        assert "与 [B25] 0.73" not in txt          # 防呆：不该出现 87%
+        assert "0.163" in txt                       # 骨折×下肢
+        assert "踝（40%" in txt or "踝（40%，" in txt
+
+    def test_observed_tables_sum_to_one(self):
+        assert sum(v[0] for v in OBSERVED_INJURY_LOCATION.values()) \
+            == pytest.approx(1.0, abs=0.01)
+        assert sum(v[0] for v in OBSERVED_INJURY_TYPE.values()) \
+            == pytest.approx(1.0, abs=0.01)
+
+    def test_ankle_is_the_top_body_part_but_unmodelled(self):
+        """[B25] 第一大部位是踝（40%），而模型部位表里没有踝。"""
+        from climbing.bone import BONE_SITES
+        assert OBSERVED_INJURY_TYPE["sprain"][0] == pytest.approx(0.36)
+        assert max(OBSERVED_INJURY_TYPE["fracture"][1]) == 0.276
+        assert not any("踝" == s.name_cn for s in BONE_SITES.values())
+
+    def test_only_one_named_scenario_is_rotation_free(self):
+        """[B25] Figure 4 的三个实测联合场景里，只有一个无旋转。"""
+        free = [ns for ns in NAMED_SCENARIOS if ns.rotation_free]
+        assert len(free) == 1
+        assert free[0].share == pytest.approx(0.17)
+        assert free[0].injury_location == "lower_limb"
+
+    def test_fracture_share_used_for_coverage_matches_table(self):
+        """覆盖度用的骨折占比必须来自 [B25] Table 1，不能手写。"""
+        frac, ci, nn = OBSERVED_INJURY_TYPE["fracture"]
+        assert frac == pytest.approx(68 / 301, abs=0.01)
+        assert nn == 68
+
+
+# ==========================================================================
+# 快速求解器预设的等价性（P1 蒙特卡洛用）
+# ==========================================================================
+# 蒙特卡洛要跑 1000 次。pad.py 的默认求解设置单次要 ~5-6 s（t_max 固定
+# max(2.0, t_fall+1.0)、max_ode_step=1e-4、rtol=1e-8），1000 次要 90 分钟。
+# P1 因此用了收紧的 t_max + 放宽的步长/容差，单次降到 ~0.26 s。
+#
+# **放宽求解精度必须有测试守住等价性**，否则就是拿"跑得快"换"算得错"：
+# 这是 阶段总结.md §3.7 那次教训（B-3 的 f_iso×12 实验）的同类风险。
+class TestFastSolverPreset:
+    @staticmethod
+    def _fast_kw(h: float) -> dict:
+        return dict(t_max=float(np.sqrt(2 * h / G)) + 0.25,
+                    max_ode_step=1e-3, rtol=1e-6, atol=1e-9)
+
+    @pytest.mark.parametrize("posture,h,on_pad", [
+        ("feet-first-stiff", 2.20, True),
+        ("one-leg-awkward", 3.35, False),
+    ])
+    def test_peak_force_and_utilisation_match_strict(self, posture, h, on_pad):
+        from climbing.bone import assess_sites
+        common = dict(height_m=h, mass_kg=75.0, posture=posture, on_pad=on_pad)
+        fast = simulate_boulder_fall(**common, **self._fast_kw(h))
+        strict = simulate_boulder_fall(**common)
+
+        assert fast.peak_force_n == pytest.approx(
+            strict.peak_force_n, rel=1e-3), "峰值力在快速预设下变了"
+
+        vf = {s.key: s.utilization for s in assess_sites(fast).sites}
+        vs = {s.key: s.utilization for s in assess_sites(strict).sites}
+        for k in vf:
+            assert vf[k] == pytest.approx(vs[k], rel=2e-3, abs=2e-4), \
+                f"{k} 的利用率在快速预设下变了"
+
+    def test_truncated_horizon_still_captures_contact(self):
+        """t_max = t_fall + 0.25 必须够到撞击，否则守卫会抛错。"""
+        r = simulate_boulder_fall(height_m=4.5, mass_kg=90.0,
+                                  posture="feet-first-stiff",
+                                  **self._fast_kw(4.5))
+        assert r.peak_force_n > 0
+        assert r.max_compression_m > 0
+
+    def test_horizon_that_misses_contact_raises(self):
+        """余量不够时守卫必须抛错 —— 不许静默给 0。"""
+        h = 4.5
+        with pytest.raises(RuntimeError, match="仍未发生接触"):
+            simulate_boulder_fall(height_m=h, mass_kg=90.0,
+                                  posture="feet-first-stiff",
+                                  t_max=float(np.sqrt(2 * h / G)) - 0.05,
+                                  max_ode_step=1e-3, rtol=1e-6, atol=1e-9)
+
