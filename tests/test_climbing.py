@@ -6,8 +6,13 @@
 
 from __future__ import annotations
 
+import pathlib
+
 import numpy as np
 import pytest
+
+#: 仓库根目录（用于校验 docs/ 与 scripts/ 之间的一致性）
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 from climbing import G
 from climbing.rope import RopeModel, simulate_rope_fall, default_rope
@@ -801,4 +806,77 @@ class TestFastSolverPreset:
                                   posture="feet-first-stiff",
                                   t_max=float(np.sqrt(2 * h / G)) - 0.05,
                                   max_ode_step=1e-3, rtol=1e-6, atol=1e-9)
+
+
+# ==========================================================================
+# ASCII 流程图与文档同步（防漂移）
+# ==========================================================================
+# docs/方案更新_v2.md 里的 ASCII 流程图是**生成**的
+# （scripts/make_ascii_flowchart.py），注入在标记块之间。
+# 这类"生成物 + 手工文档"的组合最容易漂移：改了生成器忘了重新注入，
+# 文档就永远停在旧版本，而且**没人会发现**。
+class TestAsciiFlowchart:
+    @staticmethod
+    def _mod():
+        import importlib.util
+        import pathlib
+        p = pathlib.Path(__file__).resolve().parents[1] / "scripts" / "make_ascii_flowchart.py"
+        spec = importlib.util.spec_from_file_location("_asciifc", p)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+
+    def test_render_passes_self_check(self):
+        """渲染时不得抛错（宽度/右边框对齐全在 self_check 里）。"""
+        txt = self._mod().render()
+        assert txt.startswith("```text")
+        assert txt.rstrip().endswith("```")
+
+    def test_doc_block_matches_render(self):
+        """文档里的块必须与生成器**逐字一致** —— 防止改了图忘了注入。"""
+        m = self._mod()
+        doc = (ROOT / "docs" / "方案更新_v2.md").read_text(encoding="utf-8")
+        assert m.BEGIN in doc and m.END in doc, "文档里缺 ASCII-FLOWCHART 标记块"
+        got = doc.split(m.BEGIN, 1)[1].split(m.END, 1)[0].strip()
+        assert got == m.render().strip(), (
+            "docs/方案更新_v2.md 的 ASCII 流程图与生成器不一致 —— "
+            "跑 `python scripts/make_ascii_flowchart.py` 重新注入")
+
+    def test_display_width_cjk_is_two(self):
+        m = self._mod()
+        assert m.display_width("abc") == 3
+        assert m.display_width("中文") == 4
+        assert m.display_width("a中") == 3
+
+    def test_ambiguous_width_chars_rejected(self):
+        """``·`` ``→`` ``①`` 这类 Ambiguous 字符必须被拒绝。
+
+        它们在部分等宽字体里是 2 列、部分里是 1 列 —— 混进来就
+        **只在那台机器上错位**，是最难查的一类排版 bug。
+        """
+        m = self._mod()
+        for bad in ["·", "→", "①", "ε", "σ"]:
+            with pytest.raises(ValueError, match="Ambiguous"):
+                m.check_chars(f"a{bad}b", "test")
+
+    def test_overlong_content_raises(self):
+        """内容超出框宽时必须报错，不能静默把右边框顶出去。"""
+        m = self._mod()
+        with pytest.raises(ValueError, match="超出宽度"):
+            m.pad("很长的中文内容很长的中文内容", 4)
+
+    def test_box_lines_are_equal_width(self):
+        """一个框内所有行必须等宽（右边框对齐的基础）。"""
+        m = self._mod()
+        lines = m.box("标题", ["  内容一", "  内容二"], 40)
+        assert len({m.display_width(l) for l in lines}) == 1
+
+    def test_side_by_side_pads_shorter_box(self):
+        """并排时矮的框要被补齐，行数取两者最大。"""
+        m = self._mod()
+        left = m.box("A", ["  1"], 30)
+        right = m.box("B", ["  1", "  2", "  3"], 30)
+        merged = m.merge_side_by_side(left, right, 30)
+        assert len(merged) == len(right)
+        assert len({m.display_width(l) for l in merged}) == 1
 

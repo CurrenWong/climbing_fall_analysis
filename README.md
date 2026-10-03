@@ -24,7 +24,8 @@ python scripts/smoke.py                  # 两场景冒烟测试
 python scripts/verify_rope.py            # 绳索验证（单调性/UIAA/保护器对比）
 python scripts/phase_b2_analysis.py     # 抱石 B-2 全套分析
 python scripts/visualize_b2.py           # 8 张图表
-python scripts/make_flowchart.py         # 生成仿真流程图
+python scripts/make_flowchart.py         # 生成仿真流程图（PNG）
+python scripts/make_ascii_flowchart.py   # 生成 ASCII 流程并注入 docs/方案更新_v2.md
 python scripts/validate_vs_fem.py        # 对标 [Y25] 的分部位阈值验证
 python scripts/phase_p1_montecarlo.py    # P1 场景库蒙特卡洛（N=1000，约 4.5 min）
 python -m pytest tests -q                # 97 个回归测试（约 12 min）
@@ -34,7 +35,9 @@ python -m pytest tests -q                # 97 个回归测试（约 12 min）
 `results/` 下的报告文件，图表写到 `results/figures/`。
 
 **完整流程图**（含两条建模通道的方程、三个横跨模型的约定、标定与验证环节）见
-`阶段总结.md` §2.3，或直接看 `results/figures/flowchart.png`。
+`阶段总结.md` §2.3，或直接看 `results/figures/flowchart.png`；
+**ASCII 版**（纯文本，便于终端查看与代码评审）在
+[`docs/方案更新_v2.md`](docs/方案更新_v2.md) §一之二。
 
 **掉落姿势怎么建模**：姿势不是独立仿真，而是**投影到 5 个参数**
 （质量分配 / 屈曲刚度 / 屈曲行程 / 接触面积时变曲线 / 塌陷总行程），
