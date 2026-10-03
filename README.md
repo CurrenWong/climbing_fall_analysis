@@ -19,11 +19,16 @@ pip install -e .              # 或直接装 numpy scipy matplotlib pandas
 python scripts/smoke.py                  # 两场景冒烟测试
 python scripts/verify_rope.py            # 绳索验证（单调性/UIAA/保护器对比）
 python scripts/phase_b2_analysis.py     # 抱石 B-2 全套分析
+python scripts/visualize_b2.py           # 8 张图表
+python scripts/make_flowchart.py         # 生成仿真流程图
 python -m pytest tests -q                # 60 个回归测试（约 10 min）
 ```
 
 `smoke.py` / `verify_rope.py` / `phase_b2_analysis.py` 的输出分别写到
-`results/` 下的报告文件。
+`results/` 下的报告文件，图表写到 `results/figures/`。
+
+**完整流程图**（含两条建模通道的方程、三个横跨模型的约定、标定与验证环节）见
+`阶段总结.md` §2.3，或直接看 `results/figures/flowchart.png`。
 
 ---
 
