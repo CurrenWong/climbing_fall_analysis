@@ -171,12 +171,15 @@ def _apply_spring(
         raise ValueError(f"directions 非法：{directions!r}；可选 {tuple(_DIRECTION_OFFSET)}")
 
     node_domain = model.mesh_.nodes[0]
-    n0 = int(len(nodes))
     local = np.asarray(plantar_local, dtype=np.int64)
 
     elems: list = []
     anchor_ids: list[int] = []
-    next_id = n0 + 1
+    # 用**实际最后一个节点 id** 续号（而非 ``len(nodes)``）：接触路径会在
+    # ``_apply_contact`` 里先追加一块固定薄板节点，此时 ``len(nodes)`` 与真实
+    # 最大 id 不符，沿用旧口径会与薄板节点 id 冲突（FEBio: invalid id）。
+    # 默认 spring 路径下两者相等 ⇒ 逐位不变。
+    next_id = int(node_domain.all_nodes[-1].id) + 1
     for li in local:
         p = np.asarray(nodes, dtype=np.float64)[int(li)]
         for dk in dirs:
@@ -366,30 +369,62 @@ def _apply_contact(
     pad_thickness_mm: float = 5.0,
     pad_margin_mm: float = 20.0,
     pad_ndiv: int = 4,
+    plantar_quads: np.ndarray | None = None,
+    swap_pair: bool = False,
+    hold_spring_k: float | None = None,
+    hold_anchor_offset_mm: float = 1.0,
 ) -> dict:
-    """波3 最小版跖面接触：跖面（骨 tet facet）⇄ **固定薄板**（数值刚性壁）+ Coulomb μ。
+    """波3 最小版跖面接触：跖面（骨 facet）⇄ **固定薄板**（数值刚性壁）+ Coulomb μ。
 
     recipe 逐字沿用 :mod:`climbing.coupling.pad_contact` 已验证的 NEW PENALTY 配方
     （``laugon="PENALTY"`` + ``penalty=0.1`` + ``search_radius=20`` + ``node_reloc=0``
     + ``symmetric_stiffness=0`` + ``tolerance=0.005`` + ``fric_coeff=μ``，见
     ``docs/S5_contact_udg.md`` §7、``docs/S5_QUOTABLE.md``）。
 
-    全部参数是 **opt-in kwarg**；顶层 ``apply_plantar_bc`` 只在 ``kind="contact"``
+    全部参数是 **opt-in kwarg**；顶层 :func:`apply_plantar_bc` 只在 ``kind="contact"``
     时路由到此，故默认行为逐位不变。返回的 ``dict`` 含 ``"contact"`` 键
     （pyfebio :class:`pyfebio.contact.Contact` 对象）；builder 需把它挂到 step 的
     ``<Contact>``（``st.contact = meta["contact"]``）——因为 ``apply_plantar_bc``
     只拿到 ``model``，拿不到 ``step``。
+
+    Plantar facet type（**新：5 选项**）
+
+    - **未传** ``plantar_quads``（默认 ``None``）→ 走 tri3 路径（合成网格 +
+      旧版测试保持兼容；这是波3 落地的语义）
+    - **传** ``plantar_quads``（``(K, 4)`` 0-based 局部节点索引）→ 走 quad4 路径
+      （**真实 THUMS 网格的跖面属于 CORT hex8 域**，因此正确 facet 类型是 quad4。
+      tri3 facet 挂在 hex8 域上 FEBio 报 ``invalid facets`` ⇒ 接触不承载，详见
+      ``docs/S5_contact_facet_fix.md`` §1）。
+
+    防「静默退化」：``plantar_quads`` 非空但元素行数 0 → 显式抛 ``ValueError``
+    （绝不回退到 tri3）。
     """
     from pyfebio import boundary as fbc
     from pyfebio import contact as fcontact
     from pyfebio import mesh as fmesh
 
     tris = np.asarray(plantar_tris, dtype=np.int64)
-    if tris.size == 0 or tris.ndim != 2 or tris.shape[1] != 3:
-        raise ValueError(
-            "contact BC 需要非空的 plantar 三角面 (K,3) "
-            f"（mesh['surfaces']['plantar']），得到 shape={tris.shape}"
-        )
+    if plantar_quads is None:
+        # tri3 路径（合成 / 旧版兼容路径）
+        if tris.size == 0 or tris.ndim != 2 or tris.shape[1] != 3:
+            raise ValueError(
+                "contact BC 需要非空的 plantar 三角面 (K,3) "
+                f"（mesh['surfaces']['plantar']），得到 shape={tris.shape}"
+            )
+        quads_for_surface: np.ndarray = np.empty((0, 4), dtype=np.int64)
+    else:
+        quads_for_surface = np.asarray(plantar_quads, dtype=np.int64)
+        if quads_for_surface.ndim != 2 or quads_for_surface.shape[1] != 4:
+            raise ValueError(
+                "plantar_quads 必须是 (K,4) 的 0-based 局部节点索引，"
+                f"得到 shape={quads_for_surface.shape}"
+            )
+        if len(quads_for_surface) == 0:
+            # 防静默退化：调用方明确要走 quad4，但提供的 quad4 集为空 ⇒ 抛错
+            raise ValueError(
+                "plantar_quads 为空：调用方要求走 quad4 路径但 quad4 集为空。"
+                "请检查父网格的 boundary_polys / 跖面分类；绝不静默回退到 tri3。"
+            )
     if not (np.isfinite(mu) and mu >= 0.0):
         raise ValueError(f"mu 必须有限且 >= 0，得到 {mu!r}")
     if not (np.isfinite(penalty) and penalty > 0.0):
@@ -406,10 +441,15 @@ def _apply_contact(
     if not (np.isfinite(fric) and fric >= 0.0):
         raise ValueError(f"fric_coeff 必须有限且 >= 0，得到 {fric!r}")
 
-    # --- 1. 跖面 Surface（真实 tet facet，复用 _apply_roller 的写法） -----
+    # --- 1. 跖面 Surface ---------------------------------------------------
+    # 优先 quad4（hex8 域的正确 facet 类型）；未给 plantar_quads 时走 tri3。
     surf = fmesh.Surface(name="plantar")
-    for i, tri in enumerate(tris):
-        surf.add_tri3(fmesh.Tri3Element(id=i + 1, text=",".join(map(str, _local_to_fe(tri)))))
+    if len(quads_for_surface) > 0:
+        for i, quad in enumerate(quads_for_surface):
+            surf.add_quad4(fmesh.Quad4Element(id=i + 1, text=",".join(map(str, _local_to_fe(quad)))))
+    else:
+        for i, tri in enumerate(tris):
+            surf.add_tri3(fmesh.Tri3Element(id=i + 1, text=",".join(map(str, _local_to_fe(tri)))))
     model.mesh_.add_surface(surf)
 
     # --- 2. 固定薄板（数值刚性壁） ---------------------------------------
@@ -430,8 +470,17 @@ def _apply_contact(
         pad_surf.add_quad4(fmesh.Quad4Element(id=i + 1, text=",".join(map(str, quad))))
     model.mesh_.add_surface(pad_surf)
 
+    # FEBio sliding-elastic：primary = master（通常为**刚性/更刚**面），secondary =
+    # slave（被投影的节点）。``pad_contact.py`` 的验证配方用 primary=indenter（刚），
+    # secondary=pad（软）。wave-3 用 primary=plantar（软），secondary=pad_top（刚）——
+    # 这是反向的；opt-in ``swap_pair=True`` 可切到 primary=pad_top / secondary=plantar。
+    pair_primary, pair_secondary = (
+        ("pad_top", "plantar") if swap_pair else ("plantar", "pad_top")
+    )
     model.mesh_.add_surface_pair(
-        fmesh.SurfacePair(name="plantar_pad_pair", primary="plantar", secondary="pad_top")
+        fmesh.SurfacePair(
+            name="plantar_pad_pair", primary=pair_primary, secondary=pair_secondary
+        )
     )
 
     # --- 3. contact 块（挂到 step 由 builder 完成） ----------------------
@@ -452,10 +501,30 @@ def _apply_contact(
             fric_coeff=float(fric),
         )
     )
+
+    # --- 4. 可选：弱 hold 弹簧（消掉接触未闭合前的刚体模态） -------------
+    # 力学机理：跖面接触是**单边**约束（只在压入时提供刚度），静止时切向摩擦
+    # 也为零 ⇒ 在 gap 未闭合前，骨只有接触支撑 ⇒ 切向刚度矩阵奇异 ⇒ Newton
+    # 解出 1e23 级位移而发散。加一组**很弱**的弹簧（k ≪ 骨刚度，默认 None 不启用）
+    # 可消掉刚体模态，让接触正常闭合；接触承载后弹簧力可忽略。
+    hold_meta: dict | None = None
+    if hold_spring_k is not None and float(hold_spring_k) > 0.0:
+        n_discrete = int(len(model.discrete_.discrete_materials))
+        hold_meta = _apply_spring(
+            model, nodes, plantar_local, bcs, float(hold_spring_k),
+            float(hold_anchor_offset_mm),
+            directions=("normal", "x", "z"),
+            set_name="plantar_contact_hold", mat_id=n_discrete + 1,
+        )
     return {
+        "hold_spring_k_n_per_mm": (
+            None if hold_meta is None else float(hold_spring_k)
+        ),
         "kind": "contact",
         "contact": contact_obj,
         "n_surface_tris": int(len(tris)),
+        "n_surface_quads": int(len(quads_for_surface)),
+        "plantar_facet_kind": ("quad4" if len(quads_for_surface) > 0 else "tri3"),
         "n_pad_nodes": int(len(pad_meta["node_ids"])),
         "n_pad_elems": int(pad_meta["n_elems"]),
         "wall_y_mm": float(pad_meta["wall_y_mm"]),
@@ -465,6 +534,8 @@ def _apply_contact(
         "tolerance": float(tolerance),
         "gap_mm": float(gap_mm),
         "laugon": str(laugon).upper(),
+        "pair_primary": str(pair_primary),
+        "pair_secondary": str(pair_secondary),
     }
 
 
@@ -485,6 +556,11 @@ def apply_plantar_bc(
     contact_gap_mm: float = DEFAULT_CONTACT_GAP_MM,
     contact_laugon: str = "PENALTY",
     contact_pad_e_mpa: float = 200_000.0,
+    contact_plantar_quads: np.ndarray | None = None,
+    contact_node_reloc: int = 0,
+    contact_swap_pair: bool = False,
+    contact_hold_spring_k: float | None = None,
+    contact_hold_anchor_offset_mm: float = 1.0,
 ) -> dict:
     """把跖面 BC 施加到 ``model``，BC 对象追加进 ``bcs``；返回元数据。
 
@@ -514,6 +590,13 @@ def apply_plantar_bc(
     contact_pad_e_mpa:
         仅 ``kind="contact"`` 用：对偶固定薄板的杨氏模量（MPa），默认 200 000
         （数值刚性壁）。
+    contact_plantar_quads:
+        仅 ``kind="contact"`` 用：跖面 quad4 facet ``(K,4)`` 0-based 局部节点索引
+        （opt-in，``None`` = 走原 tri3 路径）。**真实 THUMS 网格的跖面属于
+        CORT hex8 域**，因此正确 facet 类型是 ``quad4``（tri3 facet 挂在 hex8 域上
+        FEBio 报 ``invalid facets`` ⇒ 接触不承载，详见
+        ``docs/S5_contact_facet_fix.md`` §1）。由 ``thums_feb.build_thums_feb``
+        在检测到 ``elements_cort`` + ``boundary_polys`` 时自动填入。
 
     Returns
     -------
@@ -557,6 +640,11 @@ def apply_plantar_bc(
             laugon=contact_laugon, search_radius=contact_search_radius,
             tolerance=contact_tolerance, gap_mm=contact_gap_mm,
             pad_e_mpa=contact_pad_e_mpa,
+            plantar_quads=contact_plantar_quads,
+            node_reloc=int(contact_node_reloc),
+            swap_pair=bool(contact_swap_pair),
+            hold_spring_k=contact_hold_spring_k,
+            hold_anchor_offset_mm=float(contact_hold_anchor_offset_mm),
         )
         meta["n_plantar_nodes"] = int(len(local))
         return meta
