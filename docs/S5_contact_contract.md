@@ -8,6 +8,13 @@
 > ✅ **波4 已交付**（`nonvertical_s5_contact.py` + 报告 + JSON；**5 套门禁 93/19+1/11/11/13 全绿**；
 > 门禁码 G0 `PASS` / G1 `N/A_minimum_version` / G7 `RETIRED_by_contract_条6-8` 符合 §5.1）
 > **但 G2–G6 全 FAIL**（7 条 contact 行收敛 0 条）→ `docs/S5_wave4_impl.md`。
+> ✅ **波5 已交付（2026-10-06 深夜）—— 真实网格从「不收敛」到「收敛且承载」**：三缺陷（跖面 **tri3→quad4**、
+> 内向法向、FEBio 默认 `<Control>`）+ 加载路径（`PressureLoad` → **`use_rigid=True`**）全部修复；
+> **17/17 case 跑完，10 条 contact 行 CONVERGED+CARRYING**（`nohold`/`press` 对照 DIVERGED），门禁
+> **162 passed / 1 skipped**，`F_n` 口径修正为 **`施加载荷 − hold 弹簧力`**（原式在 pen0.1 时高报 1.53×）
+> → `docs/S5_wave5_matrix.md` / `results/opensim_fe/NONVERTICAL_S5_CONTACT_WAVE5_REPORT.md`。
+> ⚠️ 波5 的接触 `F_n`（含 hold 弹簧建模补充，INFERRED）与 penalty 政策仍属**未决建模决策**，
+> **尚未**进入 `S5_QUOTABLE.md` 的 QUOTABLE 行。
 > 启动口径见 §4 **条 6–8**（原「不启动」已按实测修订为「可启动但限定可信口径」）。
 
 ---
