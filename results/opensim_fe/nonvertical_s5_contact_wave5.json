@@ -1,0 +1,1978 @@
+{
+  "meta": {
+    "generated_at": "2026-10-07 00:49:38",
+    "wave": 5,
+    "partial": false,
+    "study": "S5-contact 波5：真实泡沫垫矩阵（G7 配方 + hold 弹簧 + rigid 加载路径）",
+    "plan_doc": "docs/S5_wave5_matrix.md",
+    "wave4_script": "scripts/opensim_fe/nonvertical_s5_contact.py::_solve_case (波5 扩展)",
+    "mesh": "calcaneus_r_anatframe.npz",
+    "mesh_note": "矩阵网格 = calcaneus_r_anatframe.npz（137 跖面 quad4）；proof 用 calcaneus_r_calcnframe.npz（146 跖面 quad4）。二者均 0 tri3。",
+    "units": "mm-N-MPa-s",
+    "febio": "4.13",
+    "quotable_f_n_kn": 34.4,
+    "quotable_note": "QUOTABLE F_n≈34.4 kN 是 tet4 pad / 固定 sink 路径；本矩阵是 THUMS mix-hex 网格 / 距下关节载荷路径 ⇒ 只作量级锚，不并列。"
+  },
+  "runs": [
+    {
+      "id": "g0_fixed_axial_ref",
+      "recipe_id": null,
+      "height_m": {
+        "value": 5.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "fixed",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": null,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\g0_fixed_axial_ref.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\g0_fixed_axial_ref.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 0.2359907627105713,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 0,
+        "invalid_facets": 2,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 26383.133775894516,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": null,
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": {
+        "value": 0.0,
+        "label": "measured",
+        "unit": "-"
+      },
+      "sigma_contact_avg_mpa": {
+        "value": 0.43971889626490857,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": {
+        "value": 8.932000130129797,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_contact_p95_mpa": {
+        "value": 8.932000130129797,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_mid_mpa": {
+        "value": 0.2931459308432724,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": null,
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
+      "gauge_max_mpa": {
+        "value": 186.7563689967737,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 136.9284968696667,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "at_plantar_rim": true,
+      "run_verdict": "PASS",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 0,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": false,
+        "control_dtmax_1_2400": false,
+        "control_cutback_0125": false
+      },
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false
+    },
+    {
+      "id": "h2_fixed_pad",
+      "recipe_id": null,
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "fixed",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": null,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2_fixed_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2_fixed_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 0.24542975425720215,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 0,
+        "invalid_facets": 2,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 21086.242237064915,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": null,
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": {
+        "value": 0.0,
+        "label": "measured",
+        "unit": "-"
+      },
+      "sigma_contact_avg_mpa": {
+        "value": 0.3514373706177486,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": {
+        "value": 7.138739469133686,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_contact_p95_mpa": {
+        "value": 7.138739469133686,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_mid_mpa": {
+        "value": 0.23429158041183237,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": null,
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
+      "gauge_max_mpa": {
+        "value": 149.88160099958688,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 109.81033794073676,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "at_plantar_rim": true,
+      "run_verdict": "PASS",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 0,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": false,
+        "control_dtmax_1_2400": false,
+        "control_cutback_0125": false
+      },
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false
+    },
+    {
+      "id": "h3_fixed_pad",
+      "recipe_id": null,
+      "height_m": {
+        "value": 3.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "fixed",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": null,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_fixed_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_fixed_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 0.24036574363708496,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 0,
+        "invalid_facets": 2,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 22050.632451503363,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": null,
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": {
+        "value": 0.0,
+        "label": "measured",
+        "unit": "-"
+      },
+      "sigma_contact_avg_mpa": {
+        "value": 0.36751054085838936,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": {
+        "value": 7.465233417655086,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_contact_p95_mpa": {
+        "value": 7.465233417655086,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_mid_mpa": {
+        "value": 0.24500702723892626,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": null,
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
+      "gauge_max_mpa": {
+        "value": 156.6100667254852,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 114.79347676192448,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "at_plantar_rim": true,
+      "run_verdict": "PASS",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 0,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": false,
+        "control_dtmax_1_2400": false,
+        "control_cutback_0125": false
+      },
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false
+    },
+    {
+      "id": "h3.5_fixed_pad",
+      "recipe_id": null,
+      "height_m": {
+        "value": 3.5,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "fixed",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": null,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_fixed_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_fixed_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 0.268735408782959,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 0,
+        "invalid_facets": 2,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 22913.127608075236,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": null,
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": {
+        "value": 0.0,
+        "label": "measured",
+        "unit": "-"
+      },
+      "sigma_contact_avg_mpa": {
+        "value": 0.38188546013458724,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": {
+        "value": 7.757230832222079,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_contact_p95_mpa": {
+        "value": 7.757230832222079,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_mid_mpa": {
+        "value": 0.2545903067563915,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": null,
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
+      "gauge_max_mpa": {
+        "value": 162.6185156260254,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 119.22354237964845,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "at_plantar_rim": true,
+      "run_verdict": "PASS",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 0,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": false,
+        "control_dtmax_1_2400": false,
+        "control_cutback_0125": false
+      },
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false
+    },
+    {
+      "id": "h4.5_fixed_pad",
+      "recipe_id": null,
+      "height_m": {
+        "value": 4.5,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "fixed",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": null,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_fixed_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_fixed_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 0.2401719093322754,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 0,
+        "invalid_facets": 2,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 25079.378270270812,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": null,
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": {
+        "value": 0.0,
+        "label": "measured",
+        "unit": "-"
+      },
+      "sigma_contact_avg_mpa": {
+        "value": 0.4179896378378469,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": {
+        "value": 8.490614188459434,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_contact_p95_mpa": {
+        "value": 8.490614188459434,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_mid_mpa": {
+        "value": 0.27865975855856456,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": null,
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
+      "gauge_max_mpa": {
+        "value": 177.6718147718886,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 130.28865719935612,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "at_plantar_rim": true,
+      "run_verdict": "PASS",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 0,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": false,
+        "control_dtmax_1_2400": false,
+        "control_cutback_0125": false
+      },
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false
+    },
+    {
+      "id": "h2.0_spring_k100_pad",
+      "recipe_id": null,
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "spring",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": {
+        "value": 100.0,
+        "label": "assumed",
+        "unit": "N/mm"
+      },
+      "contact_mu": null,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_spring_k100_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_spring_k100_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 0.2673776149749756,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 0,
+        "invalid_facets": 2,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 21086.242237064915,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": null,
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": {
+        "value": 0.0,
+        "label": "measured",
+        "unit": "-"
+      },
+      "sigma_contact_avg_mpa": {
+        "value": 0.3514373706177486,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": {
+        "value": 7.138739469133686,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_contact_p95_mpa": {
+        "value": 7.138739469133686,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_mid_mpa": {
+        "value": 0.23429158041183237,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": null,
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
+      "gauge_max_mpa": {
+        "value": 122.65935674794888,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 97.66092743580205,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 196,
+      "peak_centroid_mm": [
+        12.546301137990476,
+        7.467541189915366,
+        16.82985568772297
+      ],
+      "at_plantar_rim": false,
+      "run_verdict": "PASS",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 0,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": false,
+        "control_dtmax_1_2400": false,
+        "control_cutback_0125": false
+      },
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false
+    },
+    {
+      "id": "h2.0_contact_rigid_mu0_pad",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.0,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 250.084979057312,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 51,
+        "invalid_facets": 0,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 13775.96944806345,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": {
+        "value": 84344.96875,
+        "label": "unreliable_diagnostic",
+        "unit": "N"
+      },
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": {
+        "value": 0.2295994908010575,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": {
+        "value": 0.153066327200705,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": {
+        "value": 40.45384979248047,
+        "label": "measured",
+        "unit": "mm",
+        "source": "跖面越过刚性板面的最大深度（末态位移场）"
+      },
+      "plantar_drop_mm": {
+        "value": 41.772987365722656,
+        "label": "measured",
+        "unit": "mm"
+      },
+      "contact_area_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²",
+        "source": "三节点均在板面下的跖面三角形面积和"
+      },
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": {
+        "value": 110.39917401604667,
+        "label": "assumed",
+        "unit": "mm",
+        "source": "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）"
+      },
+      "carries_load": true,
+      "gauge_max_mpa": {
+        "value": 232.5872507325988,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 127.60642521177168,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 348,
+      "peak_centroid_mm": [
+        20.40461778991221,
+        -15.681517363681237,
+        -12.451385144815355
+      ],
+      "at_plantar_rim": false,
+      "run_verdict": "PASS",
+      "contact_verdict": "CONVERGED+CARRYING",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
+      "F_hold_spring_n": {
+        "value": 7310.272789001465,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
+      }
+    },
+    {
+      "id": "h2.0_contact_rigid_mu0.3_pad",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.3,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.3_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.3_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 255.1536831855774,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 29,
+        "invalid_facets": 0,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 13775.96944806345,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": {
+        "value": 84344.96875,
+        "label": "unreliable_diagnostic",
+        "unit": "N"
+      },
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": {
+        "value": 0.2295994908010575,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": {
+        "value": 0.153066327200705,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": {
+        "value": 40.45384979248047,
+        "label": "measured",
+        "unit": "mm",
+        "source": "跖面越过刚性板面的最大深度（末态位移场）"
+      },
+      "plantar_drop_mm": {
+        "value": 41.772987365722656,
+        "label": "measured",
+        "unit": "mm"
+      },
+      "contact_area_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²",
+        "source": "三节点均在板面下的跖面三角形面积和"
+      },
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": {
+        "value": 110.39917401604667,
+        "label": "assumed",
+        "unit": "mm",
+        "source": "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）"
+      },
+      "carries_load": true,
+      "gauge_max_mpa": {
+        "value": 232.58720879640546,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 127.60643502376958,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 348,
+      "peak_centroid_mm": [
+        20.40461778991221,
+        -15.681517363681237,
+        -12.451385144815355
+      ],
+      "at_plantar_rim": false,
+      "run_verdict": "PASS",
+      "contact_verdict": "CONVERGED+CARRYING",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
+      "F_hold_spring_n": {
+        "value": 7310.272789001465,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
+      }
+    },
+    {
+      "id": "h2.0_contact_rigid_mu0.6_pad",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.6,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 252.3313183784485,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 29,
+        "invalid_facets": 0,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 13775.96944806345,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": {
+        "value": 84344.96875,
+        "label": "unreliable_diagnostic",
+        "unit": "N"
+      },
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": {
+        "value": 0.2295994908010575,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": {
+        "value": 0.153066327200705,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": {
+        "value": 40.45384979248047,
+        "label": "measured",
+        "unit": "mm",
+        "source": "跖面越过刚性板面的最大深度（末态位移场）"
+      },
+      "plantar_drop_mm": {
+        "value": 41.772987365722656,
+        "label": "measured",
+        "unit": "mm"
+      },
+      "contact_area_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²",
+        "source": "三节点均在板面下的跖面三角形面积和"
+      },
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": {
+        "value": 110.39917401604667,
+        "label": "assumed",
+        "unit": "mm",
+        "source": "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）"
+      },
+      "carries_load": true,
+      "gauge_max_mpa": {
+        "value": 232.58720879640546,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 127.60643502376958,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 348,
+      "peak_centroid_mm": [
+        20.40461778991221,
+        -15.681517363681237,
+        -12.451385144815355
+      ],
+      "at_plantar_rim": false,
+      "run_verdict": "PASS",
+      "contact_verdict": "CONVERGED+CARRYING",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
+      "F_hold_spring_n": {
+        "value": 7310.272789001465,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
+      }
+    },
+    {
+      "id": "h3_contact_rigid_mu0.6_pad",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 3.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.6,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_contact_rigid_mu0.6_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_contact_rigid_mu0.6_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 247.95263361930847,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 19,
+        "invalid_facets": 0,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 14413.045762508002,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": {
+        "value": 88202.53125,
+        "label": "unreliable_diagnostic",
+        "unit": "N"
+      },
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": {
+        "value": 0.24021742937513335,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": {
+        "value": 0.16014495291675557,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": {
+        "value": 42.28546905517578,
+        "label": "measured",
+        "unit": "mm",
+        "source": "跖面越过刚性板面的最大深度（末态位移场）"
+      },
+      "plantar_drop_mm": {
+        "value": 43.64335250854492,
+        "label": "measured",
+        "unit": "mm"
+      },
+      "contact_area_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²",
+        "source": "三节点均在板面下的跖面三角形面积和"
+      },
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": {
+        "value": 115.44833744242598,
+        "label": "assumed",
+        "unit": "mm",
+        "source": "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）"
+      },
+      "carries_load": true,
+      "gauge_max_mpa": {
+        "value": 243.39868848274247,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 133.46139996455778,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 348,
+      "peak_centroid_mm": [
+        20.40461778991221,
+        -15.681517363681237,
+        -12.451385144815355
+      ],
+      "at_plantar_rim": false,
+      "run_verdict": "PASS",
+      "contact_verdict": "CONVERGED+CARRYING",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
+      "F_hold_spring_n": {
+        "value": 7637.586688995361,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
+      }
+    },
+    {
+      "id": "h3.5_contact_rigid_mu0.6_pad",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 3.5,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.6,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_contact_rigid_mu0.6_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_contact_rigid_mu0.6_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 341.2829089164734,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 27,
+        "invalid_facets": 0,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 14971.713537945841,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": {
+        "value": 91652.5078125,
+        "label": "unreliable_diagnostic",
+        "unit": "N"
+      },
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": {
+        "value": 0.24952855896576404,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": {
+        "value": 0.16635237264384267,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": {
+        "value": 43.989322662353516,
+        "label": "measured",
+        "unit": "mm",
+        "source": "跖面越过刚性板面的最大深度（末态位移场）"
+      },
+      "plantar_drop_mm": {
+        "value": 45.37950897216797,
+        "label": "measured",
+        "unit": "mm"
+      },
+      "contact_area_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²",
+        "source": "三节点均在板面下的跖面三角形面积和"
+      },
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": {
+        "value": 119.96401889044625,
+        "label": "assumed",
+        "unit": "mm",
+        "source": "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）"
+      },
+      "carries_load": true,
+      "gauge_max_mpa": {
+        "value": 252.36294178800418,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 138.39435153128247,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 348,
+      "peak_centroid_mm": [
+        20.40461778991221,
+        -15.681517363681237,
+        -12.451385144815355
+      ],
+      "at_plantar_rim": false,
+      "run_verdict": "PASS",
+      "contact_verdict": "CONVERGED+CARRYING",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
+      "F_hold_spring_n": {
+        "value": 7941.4140701293945,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
+      }
+    },
+    {
+      "id": "h4.5_contact_rigid_mu0.6_pad",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 4.5,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.6,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_contact_rigid_mu0.6_pad.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_contact_rigid_mu0.6_pad.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 356.6536183357239,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 44,
+        "invalid_facets": 0,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 16399.512051703918,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": {
+        "value": 100317.515625,
+        "label": "unreliable_diagnostic",
+        "unit": "N"
+      },
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": {
+        "value": 0.27332520086173195,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": {
+        "value": 0.18221680057448797,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": {
+        "value": 48.1198844909668,
+        "label": "measured",
+        "unit": "mm",
+        "source": "跖面越过刚性板面的最大深度（末态位移场）"
+      },
+      "plantar_drop_mm": {
+        "value": 49.59923553466797,
+        "label": "measured",
+        "unit": "mm"
+      },
+      "contact_area_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²",
+        "source": "三节点均在板面下的跖面三角形面积和"
+      },
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": {
+        "value": 131.30564539408803,
+        "label": "assumed",
+        "unit": "mm",
+        "source": "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）"
+      },
+      "carries_load": true,
+      "gauge_max_mpa": {
+        "value": 276.36583695108897,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 151.82408324998752,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 348,
+      "peak_centroid_mm": [
+        20.40461778991221,
+        -15.681517363681237,
+        -12.451385144815355
+      ],
+      "at_plantar_rim": false,
+      "run_verdict": "PASS",
+      "contact_verdict": "CONVERGED+CARRYING",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
+      "F_hold_spring_n": {
+        "value": 8679.866218566895,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
+      }
+    },
+    {
+      "id": "h2.0_fixed_hard_surface",
+      "recipe_id": null,
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "fixed",
+      "pad_scenario": "hard_surface",
+      "spring_k_N_per_mm": null,
+      "contact_mu": null,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_fixed_hard_surface.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_fixed_hard_surface.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 0.3915822505950928,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 0,
+        "invalid_facets": 2,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 26020.834635125684,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": null,
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": {
+        "value": 0.0,
+        "label": "measured",
+        "unit": "-"
+      },
+      "sigma_contact_avg_mpa": {
+        "value": 0.43368057725209475,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": {
+        "value": 8.809343890731512,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_contact_p95_mpa": {
+        "value": 8.809343890731512,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "sigma_mid_mpa": {
+        "value": 0.28912038483472985,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": null,
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
+      "gauge_max_mpa": {
+        "value": 184.2189567291724,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 135.08456526678108,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "at_plantar_rim": true,
+      "run_verdict": "PASS",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 0,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": false,
+        "control_dtmax_1_2400": false,
+        "control_cutback_0125": false
+      },
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false
+    },
+    {
+      "id": "h2.0_contact_rigid_mu0.0_hard_surface",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "hard_surface",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.0,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.0_hard_surface.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.0_hard_surface.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 439.4453458786011,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 0,
+        "invalid_facets": 0,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 25235.668300019788,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": {
+        "value": 104083.3359375,
+        "label": "unreliable_diagnostic",
+        "unit": "N"
+      },
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": {
+        "value": 0.4205944716669965,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": {
+        "value": 0.2803963144446643,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": {
+        "value": 2.3146586418151855,
+        "label": "measured",
+        "unit": "mm",
+        "source": "跖面越过刚性板面的最大深度（末态位移场）"
+      },
+      "plantar_drop_mm": {
+        "value": 4.486664772033691,
+        "label": "measured",
+        "unit": "mm"
+      },
+      "contact_area_mm2": {
+        "value": 146.2974709425647,
+        "label": "measured",
+        "unit": "mm²",
+        "source": "三节点均在板面下的跖面三角形面积和"
+      },
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": {
+        "value": 136.23473630955854,
+        "label": "assumed",
+        "unit": "mm",
+        "source": "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）"
+      },
+      "carries_load": true,
+      "gauge_max_mpa": {
+        "value": 340.2107407635871,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 248.6107118488839,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 546,
+      "peak_centroid_mm": [
+        -8.711703157388767,
+        -37.82301676543477,
+        6.83010483384853
+      ],
+      "at_plantar_rim": true,
+      "run_verdict": "PASS",
+      "contact_verdict": "CONVERGED+CARRYING",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 100.0,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
+      "F_hold_spring_n": {
+        "value": 785.166335105896,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
+      }
+    },
+    {
+      "id": "h2.0_contact_rigid_mu0.6_pad_nohold",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.6,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_nohold.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_nohold.xplt",
+      "febio_rc": 1,
+      "febio_end_t": null,
+      "wall_s": {
+        "value": 3.1435248851776123,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": null,
+        "neg_jacobians": 21,
+        "invalid_facets": 0,
+        "terminated": "ERROR"
+      },
+      "run_verdict": "FAIL",
+      "error": "IO-time (plot, dmp, data) .... : 0:00:00 (0.0099673 sec)\n\n\t   serialization ................ : 0:00:00 (0.117559 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.20771 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.192652 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.235544 sec)\n\n\t   model update ................. : 0:00:00 (0.44982 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0018977 sec)\n\n\t   time in linear solver ........ : 0:00:02 (1.86189 sec)\n\n\tTotal elapsed time .............. : 0:00:03 (3.1091 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "F_n_n": null,
+      "F_t_n": null,
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": null,
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": null,
+      "penetration_mm": null,
+      "contact_area_mm2": null,
+      "footprint_mm2": null,
+      "gauge_max_mpa": null,
+      "gauge_p95_mpa": null,
+      "peak_elem": null,
+      "peak_centroid_mm": null,
+      "at_plantar_rim": null,
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": true,
+      "contact_verdict": "DIVERGED"
+    },
+    {
+      "id": "h2.0_contact_rigid_mu0.6_pad_pen100",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.6,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_pen100.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_pen100.xplt",
+      "febio_rc": 0,
+      "febio_end_t": 1.0,
+      "wall_s": {
+        "value": 366.63695549964905,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 1.0,
+        "neg_jacobians": 0,
+        "invalid_facets": 0,
+        "terminated": "NORMAL"
+      },
+      "F_n_n": {
+        "value": 20369.294419262485,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_n_reaction_sum_n": {
+        "value": 84344.96875,
+        "label": "unreliable_diagnostic",
+        "unit": "N"
+      },
+      "F_t_n": {
+        "value": 0.0,
+        "label": "INFERRED",
+        "unit": "N"
+      },
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": {
+        "value": 0.3394882403210414,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
+      },
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": {
+        "value": 0.22632549354736095,
+        "label": "INFERRED",
+        "unit": "MPa",
+        "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
+      },
+      "penetration_mm": {
+        "value": 2.185626983642578,
+        "label": "measured",
+        "unit": "mm",
+        "source": "跖面越过刚性板面的最大深度（末态位移场）"
+      },
+      "plantar_drop_mm": {
+        "value": 4.096844673156738,
+        "label": "measured",
+        "unit": "mm"
+      },
+      "contact_area_mm2": {
+        "value": 130.46957680533265,
+        "label": "measured",
+        "unit": "mm²",
+        "source": "三节点均在板面下的跖面三角形面积和"
+      },
+      "footprint_mm2": {
+        "value": 2953.7766896014505,
+        "label": "measured",
+        "unit": "mm²"
+      },
+      "no_contact_sink_mm": {
+        "value": 110.39917401604667,
+        "label": "assumed",
+        "unit": "mm",
+        "source": "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）"
+      },
+      "carries_load": true,
+      "gauge_max_mpa": {
+        "value": 283.26616859013166,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "gauge_p95_mpa": {
+        "value": 212.0813325640953,
+        "label": "measured",
+        "unit": "MPa"
+      },
+      "peak_elem": 546,
+      "peak_centroid_mm": [
+        -8.711703157388767,
+        -37.82301676543477,
+        6.83010483384853
+      ],
+      "at_plantar_rim": true,
+      "run_verdict": "PASS",
+      "contact_verdict": "CONVERGED+CARRYING",
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 100.0,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
+      "F_hold_spring_n": {
+        "value": 716.9478178024292,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
+      }
+    },
+    {
+      "id": "h2.0_contact_rigid_mu0.6_pad_press",
+      "recipe_id": "minimum_penalty0.1_rigid_plate",
+      "height_m": {
+        "value": 2.0,
+        "label": "measured",
+        "unit": "m"
+      },
+      "plantar_bc": "contact",
+      "pad_scenario": "on_pad",
+      "spring_k_N_per_mm": null,
+      "contact_mu": 0.6,
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_press.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_press.xplt",
+      "febio_rc": 1,
+      "febio_end_t": 0.419308,
+      "wall_s": {
+        "value": 245.34545469284058,
+        "label": "measured",
+        "unit": "s"
+      },
+      "diagnostics": {
+        "end_t": 0.419308,
+        "neg_jacobians": 0,
+        "invalid_facets": 2,
+        "terminated": "ERROR"
+      },
+      "run_verdict": "FAIL",
+      "error": ")\n\n\t   IO-time (plot, dmp, data) .... : 0:00:04 (4.05658 sec)\n\n\t   serialization ................ : 0:00:04 (3.77979 sec)\n\n\t   reforming stiffness .......... : 0:00:16 (15.7527 sec)\n\n\t   evaluating stiffness ......... : 0:00:13 (13.3677 sec)\n\n\t   evaluating residual .......... : 0:00:26 (26.172 sec)\n\n\t   model update ................. : 0:00:41 (40.8993 sec)\n\n\t   QN updates ................... : 0:00:01 (1.02729 sec)\n\n\t   time in linear solver ........ : 0:02:17 (136.927 sec)\n\n\tTotal elapsed time .............. : 0:04:05 (245.261 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "F_n_n": null,
+      "F_t_n": null,
+      "friction_cone_ratio_max": null,
+      "force_balance_relative_err": null,
+      "sigma_contact_avg_mpa": null,
+      "sigma_contact_max_mpa": null,
+      "sigma_contact_p95_mpa": null,
+      "sigma_mid_mpa": null,
+      "penetration_mm": null,
+      "contact_area_mm2": null,
+      "footprint_mm2": null,
+      "gauge_max_mpa": null,
+      "gauge_p95_mpa": null,
+      "peak_elem": null,
+      "peak_centroid_mm": null,
+      "at_plantar_rim": null,
+      "deck_evidence": {
+        "present": true,
+        "plantar_quad4": 137,
+        "plantar_tri3": 0,
+        "control_time_steps_2400": true,
+        "control_dtmax_1_2400": true,
+        "control_cutback_0125": true
+      },
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": false,
+      "contact_verdict": "DIVERGED"
+    }
+  ],
+  "summary": {
+    "n_runs": 17,
+    "n_contact": 10,
+    "verdicts": {
+      "h2.0_contact_rigid_mu0_pad": "CONVERGED+CARRYING",
+      "h2.0_contact_rigid_mu0.3_pad": "CONVERGED+CARRYING",
+      "h2.0_contact_rigid_mu0.6_pad": "CONVERGED+CARRYING",
+      "h3_contact_rigid_mu0.6_pad": "CONVERGED+CARRYING",
+      "h3.5_contact_rigid_mu0.6_pad": "CONVERGED+CARRYING",
+      "h4.5_contact_rigid_mu0.6_pad": "CONVERGED+CARRYING",
+      "h2.0_contact_rigid_mu0.0_hard_surface": "CONVERGED+CARRYING",
+      "h2.0_contact_rigid_mu0.6_pad_nohold": "DIVERGED",
+      "h2.0_contact_rigid_mu0.6_pad_pen100": "CONVERGED+CARRYING",
+      "h2.0_contact_rigid_mu0.6_pad_press": "DIVERGED"
+    },
+    "hold_spring_required": true,
+    "hold_spring_evidence": {
+      "with_hold": {
+        "id": "h2.0_contact_rigid_mu0.6_pad",
+        "rc": 0,
+        "end_t": 1.0,
+        "penetration_mm": 40.45384979248047,
+        "plantar_drop_mm": 41.772987365722656,
+        "contact_area_mm2": 2953.7766896014505,
+        "carries_load": true,
+        "verdict": "CONVERGED+CARRYING"
+      },
+      "without_hold": {
+        "id": "h2.0_contact_rigid_mu0.6_pad_nohold",
+        "rc": 1,
+        "end_t": null,
+        "penetration_mm": null,
+        "plantar_drop_mm": null,
+        "contact_area_mm2": null,
+        "carries_load": null,
+        "verdict": "DIVERGED"
+      }
+    },
+    "penalty_sensitivity": {
+      "h2.0_contact_rigid_mu0.6_pad": 40.45384979248047,
+      "h2.0_contact_rigid_mu0.6_pad_nohold": null,
+      "h2.0_contact_rigid_mu0.6_pad_pen100": 2.185626983642578,
+      "h2.0_contact_rigid_mu0.6_pad_press": null
+    },
+    "penalty_sensitivity_blocks": {
+      "pen0.1": {
+        "id": "h2.0_contact_rigid_mu0.6_pad",
+        "rc": 0,
+        "end_t": 1.0,
+        "penetration_mm": 40.45384979248047,
+        "plantar_drop_mm": 41.772987365722656,
+        "contact_area_mm2": 2953.7766896014505,
+        "carries_load": true,
+        "verdict": "CONVERGED+CARRYING"
+      },
+      "pen100": {
+        "id": "h2.0_contact_rigid_mu0.6_pad_pen100",
+        "rc": 0,
+        "end_t": 1.0,
+        "penetration_mm": 2.185626983642578,
+        "plantar_drop_mm": 4.096844673156738,
+        "contact_area_mm2": 130.46957680533265,
+        "carries_load": true,
+        "verdict": "CONVERGED+CARRYING"
+      }
+    },
+    "load_path_finding": {
+      "rigid_body": {
+        "id": "h2.0_contact_rigid_mu0.6_pad",
+        "rc": 0,
+        "end_t": 1.0,
+        "penetration_mm": 40.45384979248047,
+        "plantar_drop_mm": 41.772987365722656,
+        "contact_area_mm2": 2953.7766896014505,
+        "carries_load": true,
+        "verdict": "CONVERGED+CARRYING"
+      },
+      "pressure_load": {
+        "id": "h2.0_contact_rigid_mu0.6_pad_press",
+        "rc": 1,
+        "end_t": 0.419308,
+        "penetration_mm": null,
+        "plantar_drop_mm": null,
+        "contact_area_mm2": null,
+        "carries_load": null,
+        "verdict": "DIVERGED"
+      },
+      "conclusion": "rigid-body 加载路径收敛且承载；PressureLoad 路径在接触闭合 (t≈0.42) 处 FEBio 收敛判据退化 ⇒ ERROR。波4 contact 行用 use_rigid=False，这是矩阵与 proof 的真实差异之一。"
+    },
+    "f_n_note": "F_n 标 INFERRED（静力平衡）；FEBio 4.13 本 deck 不报固定 DOF 反力，reaction-sum 仅记 unreliable_diagnostic。"
+  }
+}

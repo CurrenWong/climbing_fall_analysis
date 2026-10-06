@@ -172,3 +172,24 @@ prescribed-displacement reaction path before any 2 m `F_n` is quoted.
 `DEFAULT_PENALTY=1.0`. Every new kwarg is opt-in. Hard gates: **93 / 19+1 / 11 / 11 / 13 +
 15 new**.
 
+
+---
+
+## 9. 波5 补注（2026-10-07，APPEND-ONLY）—— `docs/S5_wave5_matrix.md`
+
+> 本节由波5追加，不改动上文任何结论。上文「contact 行全部发散」是**波4 默认 `<Control>` +
+> `use_rigid=False`** 下的实测，仍然成立。
+
+波5 把 commit `315c373` 的修复（quad4 + G7 配方 + opt-in hold 弹簧）接进真实矩阵，并发现
+一个上文未识别的**剩余阻塞**：
+
+1. 真实矩阵（`calcaneus_r_anatframe.npz`，跖面 **137 quad4 / 0 tri3**）在
+   **`use_rigid=True`（幽灵刚体加载）** + **G7 配方** + **hold k=1 N/mm** 下，
+   **7 条先前失败 contact 行全部 CONVERGED+CARRYING**（rc=0、end_t=1.0）。
+2. **hold 弹簧必需**：同一 case 去 hold ⇒ 2–3 s 内发散（接触闭合前 3 刚体模态）。
+3. **`use_rigid=False` 的 PressureLoad 路径仍发散**（接触闭合 t≈0.42 处 FEBio 收敛判据退化
+   → `Max nr of reformations reached`）。波4 矩阵 contact 行正是该路径 ⇒ 这是矩阵与 proof
+   （`use_rigid=True`）的**真实差异之一**（另一差异是 mesh 帧：proof calcnframe / 矩阵 anatframe）。
+
+产物：`results/opensim_fe/nonvertical_s5_contact_wave5.json` + `NONVERTICAL_S5_CONTACT_WAVE5_REPORT.md`。
+门禁：**93 / 19+1 / 11 / 11 / 13 / 15** 全绿（未动任何既有 `results/opensim_fe/*`）。
