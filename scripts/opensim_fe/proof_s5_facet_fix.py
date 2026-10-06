@@ -24,7 +24,7 @@ Root-cause chain found by this task (see docs/S5_contact_facet_fix.md):
     mode; the contact then carries the load.
 
   Contact load-carrying evidence : the planted-bone drop scales with the
-  contact penalty (17.34 mm / 5.03 mm / 3.48 mm for penalty 1 / 100 / 10000)
+  contact penalty (17.34 mm / 5.03 mm / 3.99 mm for penalty 1 / 100 / 10000)
   ⇒ the contact IS functional.  The default soft penalty (0.1) gives a large
   penetration (~39 mm) which made wave-4 read it as "carries nothing".
 
