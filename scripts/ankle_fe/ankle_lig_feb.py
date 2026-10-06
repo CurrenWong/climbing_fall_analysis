@@ -241,10 +241,15 @@ for dom, (key, mat) in BONE_PARTS.items():
 #        + `{j}_is_offset` + `{j}_tie_faces`。**底面脱离骨节点 ⇒ 必须 TIE=1**。
 #        其价值：底面翘曲恒 0、无翻转单元（治「~235 N 上限」）。
 CARTS = ["tibiotalar_tibia", "tibiotalar_talus"]
-# ★ A1（2026-10-06）：距下关节接入开关。默认 auto = npz 含**新格式**键
-#   （`subtalar_*_nodes`，cart_patch 输出）时才接 —— 旧格式 `_offsets` 没在
-#   本管线里验证过，不接（打提示）。SUBTALAR=0 强制关（做基线/消融对照）。
-SUBTALAR = (os.environ.get("SUBTALAR", "auto").strip() or "auto").lower()
+# ★ A1（2026-10-06）：距下关节接入开关。**默认 `0`（不接）= 可用基线**。
+#   ⚠️ 实测（2026-10-06，分支 ankle-subtalar-a1）：
+#     SUBTALAR=0      ⇒ 592.6020 N NORMAL（零回归精确复现）
+#     SUBTALAR=auto   ⇒ **t=0 崩溃**（11 负 Jacobian，首步 residual 4.93e+21）
+#   ⇒ 接入尚未收敛验证，故**默认必须关**，接入改为**显式 opt-in**（SUBTALAR=1），
+#     否则任何未显式传参的运行都会拿到崩溃的基线。
+#   A1 待办（子 agent 超时未交付）：几何预检（subtalar 两面间隙/穿透/法向）
+#   → 接触对贴合验证 → 求解收敛 → 四项验收。
+SUBTALAR = (os.environ.get("SUBTALAR", "0").strip() or "0").lower()
 _HAS_SUB = ("subtalar_talus_nodes" in cg.files
             and "subtalar_calcaneus_nodes" in cg.files)
 if SUBTALAR == "0":
