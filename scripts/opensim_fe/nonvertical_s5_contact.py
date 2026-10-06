@@ -67,6 +67,14 @@ FEBIO4_EXE = r"D:\Program\FEBioStudio\bin\febio4.exe"
 SIGMA_CONTACT_BASIS_MM2 = 60_000.0
 #: ^^^ 仅作"QUOTABLE 口径"并列基准；实测足迹面积另行给出。
 REG_TOL = 1e-6  # G0 阈值（sibling :162）
+#: 波5：无接触时骨下沉的近似轴向刚度（N/mm）——用来判定 contact 是否承载
+#: （任务书 context：21086 N / 191 N/mm ≈ 110 mm）。仅作判据量级，不引用为物理量。
+NO_CONTACT_STIFFNESS_N_PER_MM = 191.0
+#: 波5：刚性板顶面到跖面最低点的初始间隙（mm）。与
+#: ``climbing.coupling.plantar_bc.DEFAULT_CONTACT_GAP_MM`` 一致（本地常量避免顶层 import）。
+DEFAULT_CONTACT_GAP_MM = 0.5
+#: 波5：hold 弹簧默认刚度（N/mm/plantar 节点）——与 proof case 一致。
+CONTACT_HOLD_K = 1.0
 
 #: wave-3 最小版配方（NEW PENALTY 0.1，§5.1 #1；见 docs/S5_contact_udg.md §7）。
 RECIPE_ID = "minimum_penalty0.1_rigid_plate"
@@ -143,12 +151,63 @@ def _log_forensics(feb: Path) -> dict:
         return {"end_t": None, "neg_jacobians": None, "invalid_facets": None, "terminated": "?"}
     txt = log.read_text(errors="replace")
     conv = re.findall(r"converged at time\s*:\s*([0-9.eE+-]+)", txt)
+    # FEBio 4.13 打印 spaced banner（"N O R M A L   T E R M I N A T I O N"）⇒ 去空格判定。
+    norm = txt.replace(" ", "")
     return {
         "end_t": float(conv[-1]) if conv else None,
         "neg_jacobians": int(txt.lower().count("negative jacobian")),
         "invalid_facets": int(txt.count("invalid facets")),
-        "terminated": "NORMAL" if "NORMAL TERMINATION" in txt else (
-            "ERROR" if "ERROR   TERMINATION" in txt or "ERROR TERMINATION" in txt else "?"),
+        "terminated": "NORMAL" if "NORMALTERMINATION" in norm else (
+            "ERROR" if "ERRORTERMINATION" in norm else "?"),
+    }
+
+
+def _override_penalty(feb: Path, penalty: float) -> None:
+    """覆盖 emitted ``.feb`` 的 ``<penalty>``。
+
+    ``build_thums_feb`` 没有 ``penalty`` kwarg（契约 §5 的 NEW PENALTY 配方固定 0.1），
+    故与 ``proof_s5_facet_fix.py`` 同法：落盘后文本替换。若 deck 无该元素则显式抛错
+    （绝不静默按默认 0.1 跑）。
+    """
+    txt = feb.read_text(encoding="ISO-8859-1")
+    txt2, n = re.subn(r"<penalty>[^<]*</penalty>", f"<penalty>{float(penalty):g}</penalty>", txt)
+    if n == 0:
+        raise RuntimeError("emitted .feb 无 <penalty> 元素（deck 格式变了）")
+    feb.write_text(txt2, encoding="ISO-8859-1")
+
+
+def _contact_metrics(mesh: dict, disp: np.ndarray, gap_mm: float) -> dict:
+    """从末态位移算真实接触几何量（mm）。
+
+    刚性板（数值刚性壁）上表面 ``wall_y = min(plantar 原始 y) - gap``；板面是平面薄板
+    top（``plantar_bc._build_pad_floor``）。返回：
+
+    * ``plantar_drop_mm``：跖面节点的最大下沉（正 = 向下），
+    * ``penetration_mm``：跖面越过板面的最大深度（承载时被罚参数有界；不承载时趋近无接触 sink），
+    * ``contact_area_mm2``：三个节点都在板面以下的跖面三角形面积之和。
+    """
+    nodes = np.asarray(mesh["nodes"], dtype=np.float64)
+    disp = np.asarray(disp, dtype=np.float64)
+    plant = np.asarray(mesh["node_sets"]["plantar"], np.int64)
+    y0 = nodes[plant, 1]
+    y_now = y0 + disp[plant, 1]
+    wall_y = float(y0.min()) - float(gap_mm)
+    drop = float(-disp[plant, 1].min())
+    y_now_min = float(y_now.min())
+    penetration = float(max(wall_y - y_now_min, 0.0))
+
+    tris = np.asarray(mesh["surfaces"]["plantar"], dtype=np.int64)
+    tri_pts = nodes[tris]
+    tri_area = 0.5 * np.linalg.norm(
+        np.cross(tri_pts[:, 1] - tri_pts[:, 0], tri_pts[:, 2] - tri_pts[:, 0]), axis=1)
+    node_in = np.zeros(nodes.shape[0], dtype=bool)
+    node_in[plant] = (wall_y - y_now) >= -1e-9
+    contact_area = float(tri_area[node_in[tris].all(axis=1)].sum())
+    return {
+        "plantar_drop_mm": drop,
+        "penetration_mm": penetration,
+        "contact_area_mm2": contact_area,
+        "wall_y_mm": wall_y,
     }
 
 
@@ -218,8 +277,19 @@ def _axial_regression() -> dict:
 # 单个 FE 工况
 # --------------------------------------------------------------------------
 def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
-                spring_k=None, contact_mu=None, use_rigid=False) -> dict:
-    """建 deck →（注入 reaction var）→ run_febio → 后处理。失败不抛，记 FAIL 行。"""
+                spring_k=None, contact_mu=None, use_rigid=False,
+                penalty=None, contact_hold_spring_k=None,
+                g7_contact=True, load_ramp_time_s=1.0) -> dict:
+    """建 deck →（注入 reaction var）→ run_febio → 后处理。失败不抛，记 FAIL 行。
+
+    波5 扩展（仅 ``plantar_bc="contact"``）：
+
+    * ``penalty``：覆盖 emitted ``.feb`` 的 ``<penalty>``（``build_thums_feb`` 无该 kwarg）；
+    * ``contact_hold_spring_k``：opt-in 弱 hold 弹簧（Winkler，消接触闭合前的刚体模态）；
+    * ``g7_contact``：G7 配方（2400 步 + dtmax + cutback 0.125 + ramp）——真实接触必需。
+
+    ``fixed``/``spring`` 行**行为不变**（仍走 ``time_steps=1`` 默认路径，不注入 G7）。
+    """
     from climbing.coupling import fe_post
     from climbing.coupling.febio_run import FebioRunError, run_febio
 
@@ -236,8 +306,20 @@ def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
         kwargs["spring_k"] = float(spring_k)
     if contact_mu is not None:
         kwargs["contact_mu"] = float(contact_mu)
+    if plantar_bc == "contact":
+        # 波5：真实接触必须走 G7 配方（2400 步 + dtmax=1/2400 + cutback=0.125
+        # + ramp），否则 FEBio 默认 <Control>（10 步、无 ramp）在接触闭合首步发散
+        # （见 docs/S5_wave5_matrix.md §1-2、proof 证据）。
+        kwargs["analysis"] = "STATIC"
+        if g7_contact:
+            kwargs["g7_solver_recipe"] = True
+            kwargs["load_ramp_time_s"] = float(load_ramp_time_s)
+        if contact_hold_spring_k is not None and float(contact_hold_spring_k) > 0.0:
+            kwargs["contact_hold_spring_k"] = float(contact_hold_spring_k)
     T.build_thums_feb(mesh, feb, load_n=float(load_n), use_rigid=bool(use_rigid), time_steps=1,
                       plantar_bc=plantar_bc, **kwargs)
+    if plantar_bc == "contact" and penalty is not None:
+        _override_penalty(feb, float(penalty))
     _inject_reaction_plotvar(feb)
 
     row = {
@@ -248,6 +330,10 @@ def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
         "pad_scenario": pad_scenario,
         "spring_k_N_per_mm": (None if spring_k is None else _m(spring_k, "N/mm", "assumed")),
         "contact_mu": (None if contact_mu is None else float(contact_mu)),
+        "contact_penalty": (None if penalty is None else float(penalty)),
+        "contact_hold_spring_k_N_per_mm": (
+            None if contact_hold_spring_k is None else float(contact_hold_spring_k)),
+        "use_rigid": bool(use_rigid),
         "feb_path": str(feb),
         "xplt_path": str(xplt),
         "febio_rc": None,
@@ -271,6 +357,9 @@ def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
 
     if rc != 0 or not xplt.is_file():
         row["run_verdict"] = "FAIL"
+        if plantar_bc == "contact":
+            row["contact_verdict"] = "DIVERGED"
+            row["carries_load"] = None
         row["error"] = err or "FEBio rc!=0 且无 .xplt"
         for k in ("F_n_n", "F_t_n", "friction_cone_ratio_max", "force_balance_relative_err",
                   "sigma_contact_avg_mpa", "sigma_contact_max_mpa", "sigma_contact_p95_mpa",
@@ -298,6 +387,9 @@ def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
         peak_c = centroids[ipk]
     except Exception as exc:  # noqa: BLE001 - 记录后继续（该行 FAIL）
         row["run_verdict"] = "FAIL"
+        if plantar_bc == "contact":
+            row["contact_verdict"] = "DIVERGED"
+            row["carries_load"] = None
         row["error"] = f"post-stress: {exc}"
         for k in ("F_n_n", "F_t_n", "friction_cone_ratio_max", "force_balance_relative_err",
                   "sigma_contact_avg_mpa", "sigma_contact_max_mpa", "sigma_contact_p95_mpa",
@@ -306,6 +398,11 @@ def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
                   "at_plantar_rim"):
             row[k] = None
         return row
+
+    # --- 波5：真实接触几何量（末态位移场）---------------------------------
+    disp = fe_post.read_displacement(xplt, hdf5_path=h5, last=True)
+    cm = (_contact_metrics(mesh, disp, DEFAULT_CONTACT_GAP_MM)
+          if plantar_bc == "contact" else None)
 
     rf = fe_post.read_reaction_forces(xplt, hdf5_path=h5, last=False)  # (S,N,3)
     n_nodes = int(rf.shape[1])
@@ -318,19 +415,25 @@ def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
         support = plantar_local
 
     applied = float(load_n)
+    F_n_reaction_sum = None
+    F_hold = None
     if plantar_bc == "contact":
-        total = rf[:, support, :].sum(axis=1)          # (S,3)
-        f_n_s = np.abs(total[:, 1])
-        f_t_s = np.hypot(total[:, 0], total[:, 2])
-        F_n = float(f_n_s[-1])
-        F_t = float(f_t_s[-1])
-        force_balance_rel = (abs(F_n - applied) / applied) if applied else None
-        if contact_mu and contact_mu > 0:
-            mask = f_n_s > 0.01 * applied
-            ratio = (f_t_s[mask] / f_n_s[mask]) if mask.any() else np.array([0.0])
-            fcrm = float(np.max(ratio))
-        else:
-            fcrm = None
+        # ⚠️ FEBio 4.13 本 deck **不报固定 DOF 反力**（含收敛的 fixed 参考 deck 也读 ~0，
+        # 见 proof_s5_facet_fix.py:31-35 / docs/S5_wave5_matrix.md §1）。故 reaction-sum
+        # 只作诊断记录，**不作为 F_n 证据**。F_n 用静力平衡 **INFERRED**。
+        total_rf = rf[:, support, :].sum(axis=1)       # (S,3)
+        F_n_reaction_sum = float(np.abs(total_rf[:, 1])[-1])
+        # 静力平衡：F_contact + F_hold = 施加载荷 ⇒ F_contact = 施加载荷 − F_hold。
+        # hold 弹簧（Winkler，k N/mm/跖面节点，normal 方向）承载不可忽略：penalty=0.1
+        # 时跖面下沉 ~40mm ⇒ F_hold ≈ k·n_nodes·drop；忽略它会把 F_n 高报数十个百分点。
+        if (contact_hold_spring_k is not None and float(contact_hold_spring_k) > 0.0
+                and cm is not None and cm.get("plantar_drop_mm") is not None):
+            k_total = float(contact_hold_spring_k) * float(len(plantar_local))
+            F_hold = k_total * float(cm["plantar_drop_mm"])
+        F_n = applied - (F_hold if F_hold is not None else 0.0)
+        F_t = 0.0
+        force_balance_rel = None
+        fcrm = None
     else:
         # 非接触行：支撑反力 = 施加载荷（静力平衡）。gauge 复现 G0 基线已证明载荷施加正确；
         # FEBio 4.13 的 `reaction forces` 输出在本 deck 上不含干净的跖面支撑合力
@@ -342,7 +445,7 @@ def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
 
     plantar_area = _mesh_area_mm2(mesh["nodes"], mesh["surfaces"]["plantar"])
     if plantar_bc == "contact":
-        nodal_p = np.abs(rf[-1, support, 1]) / (plantar_area / max(len(support), 1))
+        nodal_p = np.zeros(1)  # 反力不可用 ⇒ 无可靠节点压力；σ 不报
     else:
         nodal_p = np.full(1, F_n / plantar_area)
     sigma_avg = F_n / SIGMA_CONTACT_BASIS_MM2
@@ -356,20 +459,42 @@ def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
         dist[name] = float(np.linalg.norm(mesh["nodes"][ns] - peak_c, axis=1).min()) if len(ns) else float("inf")
     at_rim = bool(dist["plantar"] <= GAUGE_MM)
 
+    no_sink = applied / NO_CONTACT_STIFFNESS_N_PER_MM
+    carries = (None if cm is None else bool(cm["plantar_drop_mm"] < 0.5 * no_sink))
     row.update({
-        "F_n_n": _m(F_n, "N", "measured", "support reaction resultant (last state)"),
-        "F_t_n": _m(F_t, "N", "measured"),
+        "F_n_n": _m(F_n, "N", "INFERRED",
+                    ("静力平衡：接触反力 = 施加载荷 − hold 弹簧力（FEBio 反力输出不可用）"
+                     if F_hold is not None else
+                     "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）")),
+        "F_hold_spring_n": (None if F_hold is None
+                            else _m(F_hold, "N", "INFERRED",
+                                    "hold 弹簧（Winkler）承载 = k_total × plantar_drop")),
+        "F_n_reaction_sum_n": (None if F_n_reaction_sum is None
+                               else _m(F_n_reaction_sum, "N", "unreliable_diagnostic")),
+        "F_t_n": _m(F_t, "N", "INFERRED"),
         "friction_cone_ratio_max": (None if fcrm is None else _m(fcrm, "-", "measured")),
-        "force_balance_relative_err": _m(force_balance_rel, "-", "measured"),
-        "sigma_contact_avg_mpa": _m(sigma_avg, "MPa", "measured",
+        "force_balance_relative_err": (None if force_balance_rel is None
+                                       else _m(force_balance_rel, "-", "measured")),
+        "sigma_contact_avg_mpa": _m(sigma_avg, "MPa", "INFERRED",
                                     "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"),
-        "sigma_contact_max_mpa": _m(sigma_max, "MPa", "measured", "nodal support pressure, max"),
-        "sigma_contact_p95_mpa": _m(sigma_p95, "MPa", "measured", "nodal support pressure, p95"),
-        "sigma_mid_mpa": _m(F_n / 90_000.0, "MPa", "measured",
+        "sigma_contact_max_mpa": (None if plantar_bc == "contact"
+                                  else _m(sigma_max, "MPa", "measured")),
+        "sigma_contact_p95_mpa": (None if plantar_bc == "contact"
+                                  else _m(sigma_p95, "MPa", "measured")),
+        "sigma_mid_mpa": _m(F_n / 90_000.0, "MPa", "INFERRED",
                             "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"),
-        "penetration_mm": None,
-        "contact_area_mm2": _m(plantar_area, "mm²", "measured", "support footprint proxy"),
+        "penetration_mm": (None if cm is None else _m(
+            cm["penetration_mm"], "mm", "measured",
+            "跖面越过刚性板面的最大深度（末态位移场）")),
+        "plantar_drop_mm": (None if cm is None else _m(cm["plantar_drop_mm"], "mm", "measured")),
+        "contact_area_mm2": (None if cm is None else _m(
+            cm["contact_area_mm2"], "mm²", "measured",
+            "三节点均在板面下的跖面三角形面积和")),
         "footprint_mm2": _m(plantar_area, "mm²", "measured"),
+        "no_contact_sink_mm": (None if plantar_bc != "contact"
+                               else _m(no_sink, "mm", "assumed",
+                                       "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）")),
+        "carries_load": carries,
         "gauge_max_mpa": _m(float(gauge.max()), "MPa", "measured"),
         "gauge_p95_mpa": _m(float(np.percentile(gauge, 95)), "MPa", "measured"),
         "peak_elem": ipk,
@@ -379,6 +504,13 @@ def _solve_case(mesh, *, case_id, height_m, plantar_bc, load_n, pad_scenario,
                                    and (fcrm is None or fcrm <= 1.0 + 1e-6))
                         else "FAIL"),
     })
+    if plantar_bc == "contact":
+        # 波5 contact 判定：收敛（rc=0 且 end_t=1）且承载（下沉 ≪ 无接触 sink）。
+        converged = bool(rc == 0 and forensics["end_t"] == 1.0)
+        row["run_verdict"] = "PASS" if (converged and carries) else "FAIL"
+        row["contact_verdict"] = ("CONVERGED+CARRYING" if converged and carries
+                                  else "CONVERGED+UNLOADED" if converged
+                                  else "DIVERGED")
     return row
 
 
