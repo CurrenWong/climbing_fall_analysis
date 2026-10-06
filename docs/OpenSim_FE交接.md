@@ -291,8 +291,8 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
 ⇒ **波3/波4 可以启动，但只准在可信口径内做**：引用一律以 `docs\S5_QUOTABLE.md` 的 **QUOTABLE** 行为准（绝对量 + ξ ≤ 0.25 包线），**任何 σ/σ_law 比值不得作为收敛值**。完整修订见 `S5_contact_contract.md` §4 结论条 6–8。
 
 **状态（2026-10-06 更新）**
-- ✅ **波3 已实现** —— `plantar_bc="contact"`（**opt-in，默认 `"fixed"` 逐字不变**）：`plantar_bc.py` 新增 `BC_KINDS` += `"contact"`、`_build_pad_floor()`、`_apply_contact()`；`febio_model.build_calcaneus_feb` / `thums_feb.build_thums_feb` **签名一行未动**（`plantar_bc` 参数本就存在，只捕获返回值挂 `st.contact`）；`thums_feb_run.py` 新增 `--plantar-bc {fixed,roller,roller_free,spring,contact}`。门禁 **93 / 19+1 / `test_nonvertical_s4` 11 / `test_plantar_contact` 11（新）** 全绿。实测 **FEBio 4.13 的 4.0 schema 不支持 `rigid_wall`**（`<Mesh><rigid_wall>` → `unrecognized tag`），故最小版按 §3.1 走「刚性 body」路径（全节点固定的 `hex8` 薄板）。交付报告：**`docs/S5_wave3_contact.md`**。
-- 🚧 **波4 进行中** —— 设计已 **APPROVED**（**`docs/S5_wave4_design.md`**，§5 十个开放问题全数裁决于 **§5.1**）；实现目标 `scripts/opensim_fe/nonvertical_s5_contact.py` + `NONVERTICAL_S5_CONTACT_REPORT.md` + `nonvertical_s5_contact.json`（⚠️ **不能用 `nonvertical_s5.json`**，该名已被 `nonvertical_s5_supination.py` 占用）。
+- ⚠️ **波3 能力已接通，但真实网格未验证承载（不得称「已完成」）** —— `plantar_bc="contact"`（**opt-in，默认 `"fixed"` 逐字不变**）：`plantar_bc.py` 新增 `BC_KINDS` += `"contact"`、`_build_pad_floor()`、`_apply_contact()`；`febio_model.build_calcaneus_feb` / `thums_feb.build_thums_feb` **签名一行未动**（只捕获返回值挂 `st.contact`）；`thums_feb_run.py` 新增 `--plantar-bc`。**合成网格门禁 93 / 19+1 / 11 / 11 全绿**，但 **波4 首次在真实 THUMS 皮质网格上实跑 ⇒ 7 条 contact 行收敛 0 条**：`mesh['surfaces']['plantar']` 是 **292 tri3**（hex8 的面应为 quad4）→ FEBio 判 **`292 invalid facets`** → 接触不承载 → 软罚下沉 → 反演；改真 quad4 后 `invalid facets` 归零**但首步仍 negJac**（penalty ∈ {0.1,1,10,1000}、载荷 ∈ {2,21} kN 均不收敛）⇒ **G2–G6 FAIL**。实测另证 **FEBio 4.13 的 4.0 schema 不支持 `rigid_wall`**，最小版走 §3.1「刚性 body」（全节点固定的 `hex8` 薄板）。报告：**`docs/S5_wave3_contact.md`（顶部有补注）**。
+- ✅ **波4 已交付，但 contact 行全 FAIL（真实失败）** —— `scripts/opensim_fe/nonvertical_s5_contact.py`（1005 行）+ `NONVERTICAL_S5_CONTACT_REPORT.md`（218 行）+ `nonvertical_s5_contact.json`（1387 行，11 顶层键、无 `sigma_over_sigma_law`）+ `tests/test_nonvertical_s5_contact.py`（13 例）+ `docs/S5_wave4_impl.md`。**5 套门禁全绿 93 / 19+1 / 11 / 11 / 13**；**门禁码逐条符合 §5.1**（G0 `PASS` / G1 `N/A_minimum_version` / G7 `RETIRED_by_contract_条6-8`）；**G2–G6 FAIL**。旧 `nonvertical_s5.json` 未被改动。⚠️ **在接触面问题修复前，波4 不给出任何 contact 的 `F_n`/`σ_contact`/摩擦数字**，只给失败诊断（非 contact 行 fixed/spring 收敛并给出应力）。下一步见 `docs/S5_wave4_impl.md` §4。
 
 ---
 
@@ -487,7 +487,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
   重标判据）——**超出方向 C 边界**，需另立方向后再做。
 - 🔭 **非垂直落地扩展 → `docs/非垂直落地扩展方案.md`**：把两端 1D 接口升到 3D、
   透传完整 wrench（中段 `subtalar_reaction` 已是 3D）。**S1（斜向矢量）✅ → S2（单脚）✅ →
-  S3（姿势）✅ → S4（力矩上 FE）✅ 均已实现并回归；S5（FE 脚-垫接触）核心求解器 ✅ + **波3 ✅** / **波4 🚧**（`docs/S5接触方案.md`；取数一律以 `docs/S5_QUOTABLE.md` 为准）。** 详见 `results/opensim_fe/NONVERTICAL_S*.md`。
+  S3（姿势）✅ → S4（力矩上 FE）✅ 均已实现并回归；S5（FE 脚-垫接触）核心求解器 ✅ + **波3 ⚠️ 能力已接通（真实网格未验证承载）** / **波4 ✅ 交付但 G2–G6 FAIL**（`docs/S5接触方案.md`；取数一律以 `docs/S5_QUOTABLE.md` 为准）。** 详见 `results/opensim_fe/NONVERTICAL_S*.md`。
 - 🧪 **跖面 BC 敏感性实验（已完成）→ `results/opensim_fe/PLANTAR_BC_REPORT.md`**：把跖面从
   **三向全固定**换成 **三向 Winkler 弹簧**（k≈1e3 N/mm）后，gauge **186.8 → 142.7 MPa（降 24%）**、
   峰值**离开跖面棱边**，首次骨折外推 **2.11 → 5.43 m**（**向 [Y25] 7–9 m 靠近但未到达**）。

@@ -2,9 +2,12 @@
 
 > 由主协调（Sisyphus）写于 2026-10-05。**所有参与 S5 的 subagent 必须先读本文件。**
 > 规格来源：`docs/S5接触方案.md`（权威）、`docs/非垂直落地扩展方案.md` §4/§6。
-> 状态（2026-10-06）：✅ 核心求解器已实现（93 测试）· ✅ 6 项 G7 验证完毕 ·
-> ✅ `docs/S5_QUOTABLE.md` 已定为取数唯一入口 · ✅ **波3 已实现**（`docs/S5_wave3_contact.md`，
-> 门禁 93 / 19+1 / 11 / 11）· 🚧 **波4 进行中**（设计 APPROVED → `docs/S5_wave4_design.md` §5.1）。
+> 状态（2026-10-06 晚间）：✅ 核心求解器已实现（93 测试）· ✅ 6 项 G7 验证完毕 ·
+> ✅ `docs/S5_QUOTABLE.md` 已定为取数唯一入口 · ⚠️ **波3 能力已接通但真实网格未验证承载**
+> （合成网格门禁 93/19+1/11/11 全绿；**真实 THUMS 上 `invalid facets`**，见 `docs/S5_wave3_contact.md` 顶部补注）·
+> ✅ **波4 已交付**（`nonvertical_s5_contact.py` + 报告 + JSON；**5 套门禁 93/19+1/11/11/13 全绿**；
+> 门禁码 G0 `PASS` / G1 `N/A_minimum_version` / G7 `RETIRED_by_contract_条6-8` 符合 §5.1）
+> **但 G2–G6 全 FAIL**（7 条 contact 行收敛 0 条）→ `docs/S5_wave4_impl.md`。
 > 启动口径见 §4 **条 6–8**（原「不启动」已按实测修订为「可启动但限定可信口径」）。
 
 ---

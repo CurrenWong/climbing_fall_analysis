@@ -1,5 +1,29 @@
 # S5 — 波3 (minimal plantar contact) plan & status
 
+> ### ⚠️ 2026-10-06 晚间补注 —— **本文的「通过」仅对合成网格成立；真实 THUMS 皮质网格上接触不承载**
+>
+> 波4 在**真实网格**上首次实跑，暴露了本波未覆盖到的问题（本波测试用的是合成网格）：
+>
+> | 现象 | 证据 |
+> |---|---|
+> | `mesh['surfaces']['plantar']` = **292 tri3** | CORT 是 **hex8**，其面应是 **quad4**；tri3 是四边形的对角半面 |
+> | FEBio 判 **`292 invalid facets`** | 接触面非法 ⇒ 接触**不承载任何力** |
+> | 后果 | 接触不承载 → 软罚 (`penalty=0.1`) 下沉 → 单元反演 |
+> | 修成真 quad4（340/232 quads）后 | `invalid facets` 归零，**但首个时间步仍 `negative jacobians`**；penalty ∈ {0.1,1,10,1000}、载荷 ∈ {2,21} kN、rigid-vs-pressure **均不收敛** |
+>
+> **波4 实测结果**：7 条 contact 行 **收敛 0 条**（`rc=1`）；G2/G3/G4/G5/G6 **全部 FAIL**。
+> 详见 `docs\S5_wave4_impl.md` 与 `results\opensim_fe\NONVERTICAL_S5_CONTACT_REPORT.md` §6/§9。
+>
+> **结论修正**：本波交付的是**能力通路**（`plantar_bc="contact"` 已可被调用、默认值逐字不变、
+> 门禁 93/19+1/11/11/13 全绿），**但未在真实皮质网格上验证过承载**。
+> ⇒ **不得宣称「波3 已完成」**；下一步见 `docs\S5_wave4_impl.md` §4（SPON tet4 域建接触面 /
+> 细分皮质壳 / `node_reloc=1`+分段加载）。
+>
+> **门禁码仍然有效**（波3 自身的合成网格验证）：G0/G0' PASS；G1 `N/A_minimum_version`；
+> G2–G6 属 FOAM 版 / 波4 数值集成。**波4 已把 G2–G6 实跑并判为 FAIL（真实网格）**。
+
+---
+
 > **Scope** — 波3 最小版：把跖面 BC 升级为 **刚性壁 + Coulomb μ** 的真实 FEBio 接触。
 > 按 `docs\S5接触方案.md` §3.1 + `docs\S5_contact_contract.md` §4 条 8 = 不在 G7 阻塞内。
 > **不引入垫子实体**，故**不依赖泡沫本构标定**。
@@ -115,7 +139,10 @@ pyfebio 0.3.0 **不支持** `<rigid_wall>`（核验：`pyfebio/*.py` 无 rigidwa
 
 ## 7. 报告（契约 §6）
 
-**状态：波3 最小版已实现（结构层 + 门禁全绿）。数值验收 G2–G6 属 wave4 集成，本波不判决。**
+**状态：波3 最小版已实现（结构层 + 合成网格门禁全绿）；⚠️ 但真实 THUMS 网格上未验证承载（G2–G6 由波4 实跑判 FAIL，见下）—— 不得据此宣称波3 在真实网格上可用。** 数值验收 G2–G6 属 wave4 集成，本波原本不判决。
+⚠️ **后记（2026-10-06 晚间）**：波4 在**真实 THUMS 皮质网格**上实跑，G2–G6 **全部 FAIL** ——
+`mesh['surfaces']['plantar']` 是 292 tri3（hex8 应为 quad4）→ `invalid facets` → 接触不承载。
+**本行的「已实现」仅指代码通路与合成网格验证，不构成真实网格上的可用性。** 见顶部补注。
 
 ### 7.1 改了 / 新增了哪些文件（绝对路径）
 

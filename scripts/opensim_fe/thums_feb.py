@@ -59,7 +59,7 @@ from climbing.coupling.febio_model import (
     linear_pressure_bands,
     moment_to_pressure_gradient,
 )
-from climbing.coupling.plantar_bc import apply_plantar_bc
+from climbing.coupling.plantar_bc import DEFAULT_CONTACT_MU, apply_plantar_bc
 
 __all__ = [
     "load_thums_mesh",
@@ -602,6 +602,7 @@ def build_thums_feb(
     achilles_surface: str = "achilles",
     plantar_bc: str = "fixed",
     spring_k: float = 1000.0,
+    contact_mu: float = DEFAULT_CONTACT_MU,
     subtalar_force=None,
     subtalar_moment=None,
     moment_bands: int = 6,
@@ -845,6 +846,7 @@ def build_thums_feb(
         bcs=bcs,
         kind=plantar_bc,
         spring_k=spring_k,
+        contact_mu=contact_mu,
     )
     # ``plantar_bc="contact"`` (opt-in): attach the step-level ``<Contact>`` block
     # returned by ``apply_plantar_bc``.  Default ``"fixed"`` returns no ``"contact"``
