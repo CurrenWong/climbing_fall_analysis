@@ -1,0 +1,2015 @@
+{
+  "meta": {
+    "generated_at": "2026-10-05 10:56:14",
+    "study": "Phase-S3 落地姿势（自由度③）：锁关节 + 解锁/被动刚度",
+    "plan_doc": "docs/非垂直落地扩展方案.md",
+    "units": "mm-N-MPa-s",
+    "mass_kg": 75.337,
+    "heights_m": [
+      2.0,
+      3.0,
+      3.5,
+      4.5
+    ],
+    "flex_deg_list": [
+      15.0,
+      30.0,
+      45.0,
+      60.0
+    ],
+    "commands": [
+      "python scripts/opensim_fe/nonvertical_s3_posture.py"
+    ],
+    "measured_vs_modeled": {
+      "measured": [
+        "默认（posture/passive=None）链路重跑：ground_reaction→run_dead_drop→joint_reaction",
+        "Path (a)：锁膝屈 15/30/45/60° 的关节反力（OpenSim 正动力学）",
+        "Path (b)：解锁 + 被动刚度下的关节**轨迹**（有限屈曲实测）与峰值力",
+        "改前轴向缓存 results/opensim_fe/s1_h5_opensim.json（硬门槛）"
+      ],
+      "modeled_assumed": [
+        "Path (b) 的被动刚度 / 阻尼**全部是 ASSUMED**（文献量级，非实测标定）",
+        "刚度为**线性**扭转弹簧（SpringGeneralizedForce）+ **非线性**边壁（CoordinateLimitForce）",
+        "无肌肉主动控制（dead-drop 关激活）；完全被动关节囊/韧带/肌腱弹性",
+        "锁姿势 (a) 仍为**刚性腿 + 弯曲几何**，关节不弯 → 不吸能",
+        "载荷链只到关节反力（未上 FE）；不调用 FEBio"
+      ]
+    }
+  },
+  "default_regression": {
+    "cached_file": "results\\opensim_fe\\s1_h5_opensim.json",
+    "measured_default_run": {
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "grf_peak_n": 53064.83319174116,
+      "subtalar_peak_vertical_n": 26383.133775894516,
+      "subtalar_peak_force_n": 26383.13400751009,
+      "subtalar_peak_moment_nm": 20.025092215745726
+    },
+    "cached": {
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "grf_peak_n": 53064.83319174116,
+      "subtalar_peak_vertical_n": 26383.133775894516,
+      "subtalar_peak_force_n": 26383.13400751009,
+      "subtalar_peak_moment_nm": 20.025092215745726
+    },
+    "rel_err": {
+      "impulse_ns": 0.0,
+      "impulse_rel_err": 0.0,
+      "grf_peak_n": 0.0,
+      "subtalar_peak_vertical_n": 0.0,
+      "subtalar_peak_force_n": 0.0,
+      "subtalar_peak_moment_nm": 0.0
+    },
+    "max_rel_err": 0.0,
+    "posture_zero_vs_default": {
+      "subtalar_peak_vertical_rel_diff": 0.0,
+      "subtalar_peak_force_rel_diff": 0.0,
+      "bitwise_reproduced": true
+    },
+    "symmetric_peaks_5m": {
+      "subtalar_r": {
+        "peak_force_n": 25379.568240988225,
+        "peak_vertical_n": 25354.401972520634,
+        "peak_moment_nm": 156.72234213399844,
+        "peak_force_time_s": 0.020099999999999518,
+        "subtree_mass_kg": 1.4666
+      },
+      "ankle_r": {
+        "peak_force_n": 25294.907532369176,
+        "peak_vertical_n": 25266.24913009046,
+        "peak_moment_nm": 1440.8453790727924,
+        "peak_force_time_s": 0.020099999999999518,
+        "subtree_mass_kg": 1.5666
+      },
+      "knee_r": {
+        "peak_force_n": 22402.052600627205,
+        "peak_vertical_n": 22200.3287058299,
+        "peak_moment_nm": 1592.2654243377567,
+        "peak_force_time_s": 0.020099999999999518,
+        "subtree_mass_kg": 5.2741
+      },
+      "hip_r": {
+        "peak_force_n": 15489.011629591978,
+        "peak_vertical_n": 15227.651697700654,
+        "peak_moment_nm": 989.4026231791045,
+        "peak_force_time_s": 0.020099999999999518,
+        "subtree_mass_kg": 14.661699999999998
+      },
+      "lumbar": {
+        "peak_force_n": 22168.124189005604,
+        "peak_vertical_n": 22087.579953288558,
+        "peak_moment_nm": 1633.7005459211925,
+        "peak_force_time_s": 0.020099999999999518,
+        "subtree_mass_kg": 34.2366
+      }
+    },
+    "verdict": "PASS"
+  },
+  "path_a_posture_sweep": {
+    "flex_deg_list": [
+      15.0,
+      30.0,
+      45.0,
+      60.0
+    ],
+    "heights_m": [
+      2.0,
+      3.0,
+      3.5,
+      4.5
+    ],
+    "by_height": {
+      "2": {
+        "height_m": 2.0,
+        "upright": {
+          "height_m": 2.0,
+          "pose": {
+            "knee_flexion_deg": 0.0,
+            "hip_flexion_deg": 0.0,
+            "ankle_deg": 0.0,
+            "torso_lean_deg": 0.0
+          },
+          "grf_peak_n": 42263.68493882344,
+          "impact_speed_ms": 6.2631142413339385,
+          "joint_peaks": {
+            "subtalar_r": {
+              "peak_force_n": 20310.166360782317,
+              "peak_vertical_n": 20300.53882283539,
+              "peak_moment_nm": 110.03089979044555,
+              "peak_force_time_s": 0.018699999999999575,
+              "subtree_mass_kg": 1.4666
+            },
+            "ankle_r": {
+              "peak_force_n": 20250.332979249357,
+              "peak_vertical_n": 20239.362827778637,
+              "peak_moment_nm": 1117.158839137209,
+              "peak_force_time_s": 0.018699999999999575,
+              "subtree_mass_kg": 1.5666
+            },
+            "knee_r": {
+              "peak_force_n": 18117.830665128757,
+              "peak_vertical_n": 18041.424886887,
+              "peak_moment_nm": 1145.6409310753443,
+              "peak_force_time_s": 0.018699999999999575,
+              "subtree_mass_kg": 5.2741
+            },
+            "hip_r": {
+              "peak_force_n": 12795.36586385775,
+              "peak_vertical_n": 12703.479256979836,
+              "peak_moment_nm": 726.8111227460365,
+              "peak_force_time_s": 0.018699999999999575,
+              "subtree_mass_kg": 14.661699999999998
+            },
+            "lumbar": {
+              "peak_force_n": 18782.38118721025,
+              "peak_vertical_n": 18760.95454099947,
+              "peak_moment_nm": 929.0730041784993,
+              "peak_force_time_s": 0.018699999999999575,
+              "subtree_mass_kg": 34.2366
+            }
+          }
+        },
+        "flexed_knee": {
+          "knee_15": {
+            "height_m": 2.0,
+            "pose": {
+              "knee_flexion_deg": 14.999999999999998,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 42263.68493882344,
+            "impact_speed_ms": 6.2631142413339385,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 19591.69729269825,
+                "peak_vertical_n": 19497.140667388758,
+                "peak_moment_nm": 153.96359667436272,
+                "peak_force_time_s": 0.018699999999999575,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 19482.57001818546,
+                "peak_vertical_n": 19375.118425605266,
+                "peak_moment_nm": 1307.7329500004003,
+                "peak_force_time_s": 0.018699999999999575,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 16640.93664775282,
+                "peak_vertical_n": 15886.18452969534,
+                "peak_moment_nm": 2835.913281186808,
+                "peak_force_time_s": 0.018199999999999595,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 11374.115697073212,
+                "peak_vertical_n": 10305.080161102567,
+                "peak_moment_nm": 1307.8821392878542,
+                "peak_force_time_s": 0.017539999999999622,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 15253.85018677758,
+                "peak_vertical_n": 14700.128360460638,
+                "peak_moment_nm": 2272.305874144591,
+                "peak_force_time_s": 0.01661999999999966,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_30": {
+            "height_m": 2.0,
+            "pose": {
+              "knee_flexion_deg": 29.999999999999996,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 42263.68493882344,
+            "impact_speed_ms": 6.2631142413339385,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 18224.492726096894,
+                "peak_vertical_n": 18051.875473405973,
+                "peak_moment_nm": 187.82698924388114,
+                "peak_force_time_s": 0.01833999999999959,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 18037.549750624778,
+                "peak_vertical_n": 17841.896734675833,
+                "peak_moment_nm": 1348.8000880103311,
+                "peak_force_time_s": 0.018259999999999593,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 14327.931799273447,
+                "peak_vertical_n": 12810.637470249745,
+                "peak_moment_nm": 4060.4487872170803,
+                "peak_force_time_s": 0.016939999999999646,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 9951.019588862328,
+                "peak_vertical_n": 7813.587267753122,
+                "peak_moment_nm": 1752.2663361634363,
+                "peak_force_time_s": 0.016279999999999673,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 12223.031100690463,
+                "peak_vertical_n": 11612.07898944232,
+                "peak_moment_nm": 2930.6980919371135,
+                "peak_force_time_s": 0.008899999999999974,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_45": {
+            "height_m": 2.0,
+            "pose": {
+              "knee_flexion_deg": 45.0,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 42263.68493882344,
+            "impact_speed_ms": 6.2631142413339385,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 16766.129360606163,
+                "peak_vertical_n": 16596.335785429983,
+                "peak_moment_nm": 210.3952942631407,
+                "peak_force_time_s": 0.017939999999999606,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 16500.192869987986,
+                "peak_vertical_n": 16305.902882303752,
+                "peak_moment_nm": 1242.984597384645,
+                "peak_force_time_s": 0.01785999999999961,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 12049.495354238152,
+                "peak_vertical_n": 10100.436835450593,
+                "peak_moment_nm": 4717.5313731957485,
+                "peak_force_time_s": 0.015539999999999703,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 9176.838912546378,
+                "peak_vertical_n": 7044.122417684662,
+                "peak_moment_nm": 2066.3443760390555,
+                "peak_force_time_s": 0.01639999999999967,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 12756.02292662468,
+                "peak_vertical_n": 12753.83411876656,
+                "peak_moment_nm": 3082.1592031730506,
+                "peak_force_time_s": 0.019699999999999534,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_60": {
+            "height_m": 2.0,
+            "pose": {
+              "knee_flexion_deg": 59.99999999999999,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 42263.68493882344,
+            "impact_speed_ms": 6.2631142413339385,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 15591.678622515125,
+                "peak_vertical_n": 15500.63177060597,
+                "peak_moment_nm": 266.81587567673137,
+                "peak_force_time_s": 0.01785999999999961,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 15255.680993718992,
+                "peak_vertical_n": 15148.787105064215,
+                "peak_moment_nm": 1018.4208439421877,
+                "peak_force_time_s": 0.017759999999999613,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 10445.532865589195,
+                "peak_vertical_n": 8951.329196760773,
+                "peak_moment_nm": 4885.134225401235,
+                "peak_force_time_s": 0.008799999999999978,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 10136.60099616507,
+                "peak_vertical_n": 8476.594581376623,
+                "peak_moment_nm": 2248.9614961719244,
+                "peak_force_time_s": 0.01879999999999957,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 17015.4338859387,
+                "peak_vertical_n": 15414.908429938218,
+                "peak_moment_nm": 3058.934925090508,
+                "peak_force_time_s": 0.01879999999999957,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          }
+        }
+      },
+      "3": {
+        "height_m": 3.0,
+        "upright": {
+          "height_m": 3.0,
+          "pose": {
+            "knee_flexion_deg": 0.0,
+            "hip_flexion_deg": 0.0,
+            "ankle_deg": 0.0,
+            "torso_lean_deg": 0.0
+          },
+          "grf_peak_n": 44246.60922030006,
+          "impact_speed_ms": 7.6707170460133645,
+          "joint_peaks": {
+            "subtalar_r": {
+              "peak_force_n": 21230.903979380233,
+              "peak_vertical_n": 21217.51284237489,
+              "peak_moment_nm": 120.46906056720088,
+              "peak_force_time_s": 0.019199999999999554,
+              "subtree_mass_kg": 1.4666
+            },
+            "ankle_r": {
+              "peak_force_n": 21165.664087977882,
+              "peak_vertical_n": 21150.40961129397,
+              "peak_moment_nm": 1180.5599624854651,
+              "peak_force_time_s": 0.019199999999999554,
+              "subtree_mass_kg": 1.5666
+            },
+            "knee_r": {
+              "peak_force_n": 18873.648941358748,
+              "peak_vertical_n": 18767.05467401376,
+              "peak_moment_nm": 1242.7382484973032,
+              "peak_force_time_s": 0.019199999999999554,
+              "subtree_mass_kg": 5.2741
+            },
+            "hip_r": {
+              "peak_force_n": 13238.137973528377,
+              "peak_vertical_n": 13106.359111139678,
+              "peak_moment_nm": 782.5859994687835,
+              "peak_force_time_s": 0.019199999999999554,
+              "subtree_mass_kg": 14.661699999999998
+            },
+            "lumbar": {
+              "peak_force_n": 19282.54099049938,
+              "peak_vertical_n": 19248.15552661645,
+              "peak_moment_nm": 1108.9159471316677,
+              "peak_force_time_s": 0.019199999999999554,
+              "subtree_mass_kg": 34.2366
+            }
+          }
+        },
+        "flexed_knee": {
+          "knee_15": {
+            "height_m": 3.0,
+            "pose": {
+              "knee_flexion_deg": 14.999999999999998,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 44246.60922030006,
+            "impact_speed_ms": 7.6707170460133645,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 20125.944231039604,
+                "peak_vertical_n": 20007.978541873374,
+                "peak_moment_nm": 193.21947588083046,
+                "peak_force_time_s": 0.019199999999999554,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 19986.734474580942,
+                "peak_vertical_n": 19852.796125297114,
+                "peak_moment_nm": 1394.4357992253317,
+                "peak_force_time_s": 0.019199999999999554,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 16642.39697847567,
+                "peak_vertical_n": 15791.872804789004,
+                "peak_moment_nm": 3062.015116837966,
+                "peak_force_time_s": 0.01779999999999961,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 11212.495730968005,
+                "peak_vertical_n": 10492.40537206566,
+                "peak_moment_nm": 1416.802459030818,
+                "peak_force_time_s": 0.016059999999999682,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 15845.972488687328,
+                "peak_vertical_n": 15610.109426225976,
+                "peak_moment_nm": 2558.4701159676665,
+                "peak_force_time_s": 0.00875999999999998,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_30": {
+            "height_m": 3.0,
+            "pose": {
+              "knee_flexion_deg": 29.999999999999996,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 44246.60922030006,
+            "impact_speed_ms": 7.6707170460133645,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 18333.251635081615,
+                "peak_vertical_n": 18158.191633260554,
+                "peak_moment_nm": 255.24323390999368,
+                "peak_force_time_s": 0.018239999999999593,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 18105.776667556296,
+                "peak_vertical_n": 17906.958077232746,
+                "peak_moment_nm": 1427.3216511906103,
+                "peak_force_time_s": 0.0180999999999996,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 14584.084032423003,
+                "peak_vertical_n": 13760.220964028817,
+                "peak_moment_nm": 4268.211204199827,
+                "peak_force_time_s": 0.008799999999999978,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 10961.964827771326,
+                "peak_vertical_n": 9736.062848795962,
+                "peak_moment_nm": 1891.7239885456522,
+                "peak_force_time_s": 0.008399999999999994,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 15233.764293347445,
+                "peak_vertical_n": 14484.09819264798,
+                "peak_moment_nm": 2945.165441421763,
+                "peak_force_time_s": 0.007980000000000011,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_45": {
+            "height_m": 3.0,
+            "pose": {
+              "knee_flexion_deg": 45.0,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 44246.60922030006,
+            "impact_speed_ms": 7.6707170460133645,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 16669.189751740512,
+                "peak_vertical_n": 16528.455837200567,
+                "peak_moment_nm": 306.6467498918022,
+                "peak_force_time_s": 0.017499999999999623,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 16364.457683069522,
+                "peak_vertical_n": 16198.2229951462,
+                "peak_moment_nm": 1283.7580345033857,
+                "peak_force_time_s": 0.017219999999999635,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 13872.434153099088,
+                "peak_vertical_n": 12488.060359843439,
+                "peak_moment_nm": 4762.398641564646,
+                "peak_force_time_s": 0.00826,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 10998.205318628427,
+                "peak_vertical_n": 9189.542803174578,
+                "peak_moment_nm": 2212.672929084806,
+                "peak_force_time_s": 0.00800000000000001,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 17641.117996897672,
+                "peak_vertical_n": 16566.02034141807,
+                "peak_moment_nm": 3012.95295181306,
+                "peak_force_time_s": 0.01929999999999955,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_60": {
+            "height_m": 3.0,
+            "pose": {
+              "knee_flexion_deg": 59.99999999999999,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 44246.60922030006,
+            "impact_speed_ms": 7.6707170460133645,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 15484.98618598186,
+                "peak_vertical_n": 15452.406013727135,
+                "peak_moment_nm": 379.49473660873264,
+                "peak_force_time_s": 0.01779999999999961,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 15116.323223685267,
+                "peak_vertical_n": 15050.435032183897,
+                "peak_moment_nm": 1025.9305138005157,
+                "peak_force_time_s": 0.008719999999999981,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 13024.399566376405,
+                "peak_vertical_n": 11171.277416993078,
+                "peak_moment_nm": 4853.792851290065,
+                "peak_force_time_s": 0.007900000000000015,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 12124.00169226309,
+                "peak_vertical_n": 10707.764613120991,
+                "peak_moment_nm": 2364.27822584157,
+                "peak_force_time_s": 0.01929999999999955,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 23672.458208046915,
+                "peak_vertical_n": 20750.182051245683,
+                "peak_moment_nm": 3107.620260484092,
+                "peak_force_time_s": 0.01929999999999955,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          }
+        }
+      },
+      "3.5": {
+        "height_m": 3.5,
+        "upright": {
+          "height_m": 3.5,
+          "pose": {
+            "knee_flexion_deg": 0.0,
+            "hip_flexion_deg": 0.0,
+            "ankle_deg": 0.0,
+            "torso_lean_deg": 0.0
+          },
+          "grf_peak_n": 45791.712433130626,
+          "impact_speed_ms": 8.285321357678288,
+          "joint_peaks": {
+            "subtalar_r": {
+              "peak_force_n": 21953.770522752293,
+              "peak_vertical_n": 21937.96500209612,
+              "peak_moment_nm": 127.46676197663864,
+              "peak_force_time_s": 0.019459999999999544,
+              "subtree_mass_kg": 1.4666
+            },
+            "ankle_r": {
+              "peak_force_n": 21884.79147225174,
+              "peak_vertical_n": 21866.788687151362,
+              "peak_moment_nm": 1227.4851734372112,
+              "peak_force_time_s": 0.019459999999999544,
+              "subtree_mass_kg": 1.5666
+            },
+            "knee_r": {
+              "peak_force_n": 19479.525034067905,
+              "peak_vertical_n": 19353.49344996801,
+              "peak_moment_nm": 1308.9094903691548,
+              "peak_force_time_s": 0.019459999999999544,
+              "subtree_mass_kg": 5.2741
+            },
+            "hip_r": {
+              "peak_force_n": 13611.714771253415,
+              "peak_vertical_n": 13453.84930697919,
+              "peak_moment_nm": 821.2504796275637,
+              "peak_force_time_s": 0.019459999999999544,
+              "subtree_mass_kg": 14.661699999999998
+            },
+            "lumbar": {
+              "peak_force_n": 19740.989903369464,
+              "peak_vertical_n": 19697.8648782462,
+              "peak_moment_nm": 1217.3848595548236,
+              "peak_force_time_s": 0.019439999999999544,
+              "subtree_mass_kg": 34.2366
+            }
+          }
+        },
+        "flexed_knee": {
+          "knee_15": {
+            "height_m": 3.5,
+            "pose": {
+              "knee_flexion_deg": 14.999999999999998,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 45791.712433130626,
+            "impact_speed_ms": 8.285321357678288,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 20625.384128705417,
+                "peak_vertical_n": 20494.640740034833,
+                "peak_moment_nm": 215.76797644046263,
+                "peak_force_time_s": 0.019439999999999544,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 20468.4891751746,
+                "peak_vertical_n": 20319.906429744897,
+                "peak_moment_nm": 1455.1773927737274,
+                "peak_force_time_s": 0.019439999999999544,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 16642.677656015916,
+                "peak_vertical_n": 16049.853411136106,
+                "peak_moment_nm": 3219.420515336997,
+                "peak_force_time_s": 0.018199999999999595,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 11902.342417158152,
+                "peak_vertical_n": 11417.898409546542,
+                "peak_moment_nm": 1494.1502069575497,
+                "peak_force_time_s": 0.008539999999999989,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 17248.478134727913,
+                "peak_vertical_n": 16994.658244303824,
+                "peak_moment_nm": 2710.5826883443788,
+                "peak_force_time_s": 0.008299999999999998,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_30": {
+            "height_m": 3.5,
+            "pose": {
+              "knee_flexion_deg": 29.999999999999996,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 45791.712433130626,
+            "impact_speed_ms": 8.285321357678288,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 18498.349612656875,
+                "peak_vertical_n": 18328.445587215032,
+                "peak_moment_nm": 290.0584400047964,
+                "peak_force_time_s": 0.01907999999999956,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 18222.61936628868,
+                "peak_vertical_n": 18027.921574993146,
+                "peak_moment_nm": 1481.004607660757,
+                "peak_force_time_s": 0.018899999999999566,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 15873.436438684968,
+                "peak_vertical_n": 14984.101119341904,
+                "peak_moment_nm": 4434.45621894327,
+                "peak_force_time_s": 0.008299999999999998,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 11940.399616630017,
+                "peak_vertical_n": 10608.710059909301,
+                "peak_moment_nm": 1997.9412679621425,
+                "peak_force_time_s": 0.00800000000000001,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 16599.56119288743,
+                "peak_vertical_n": 15783.055155692518,
+                "peak_moment_nm": 2936.497461961207,
+                "peak_force_time_s": 0.007660000000000018,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_45": {
+            "height_m": 3.5,
+            "pose": {
+              "knee_flexion_deg": 45.0,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 45791.712433130626,
+            "impact_speed_ms": 8.285321357678288,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 17306.624703429523,
+                "peak_vertical_n": 17135.372788664743,
+                "peak_moment_nm": 353.61453468591134,
+                "peak_force_time_s": 0.00849999999999999,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 17184.034778202993,
+                "peak_vertical_n": 16990.126117622352,
+                "peak_moment_nm": 1312.6160808134102,
+                "peak_force_time_s": 0.008459999999999992,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 15112.815620179426,
+                "peak_vertical_n": 13607.137359832985,
+                "peak_moment_nm": 4843.344205881556,
+                "peak_force_time_s": 0.007900000000000015,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 11984.48243558782,
+                "peak_vertical_n": 10061.717061381984,
+                "peak_moment_nm": 2329.602241542158,
+                "peak_force_time_s": 0.007680000000000018,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 20637.736355935813,
+                "peak_vertical_n": 18300.56193329653,
+                "peak_moment_nm": 2995.589541567861,
+                "peak_force_time_s": 0.01953999999999954,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_60": {
+            "height_m": 3.5,
+            "pose": {
+              "knee_flexion_deg": 59.99999999999999,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 45791.712433130626,
+            "impact_speed_ms": 8.285321357678288,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 16615.681666648074,
+                "peak_vertical_n": 16413.2546305726,
+                "peak_moment_nm": 432.5485540742921,
+                "peak_force_time_s": 0.008299999999999998,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 16455.481365443324,
+                "peak_vertical_n": 16226.20963479469,
+                "peak_moment_nm": 1033.4657701158899,
+                "peak_force_time_s": 0.00826,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 14192.48918758149,
+                "peak_vertical_n": 12172.55772328638,
+                "peak_moment_nm": 5283.721804727778,
+                "peak_force_time_s": 0.007600000000000018,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 13261.075358470553,
+                "peak_vertical_n": 11958.89269990846,
+                "peak_moment_nm": 2463.6737827494567,
+                "peak_force_time_s": 0.01953999999999954,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 26385.497640207548,
+                "peak_vertical_n": 23723.24598718376,
+                "peak_moment_nm": 3499.993873017884,
+                "peak_force_time_s": 0.01953999999999954,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          }
+        }
+      },
+      "4.5": {
+        "height_m": 4.5,
+        "upright": {
+          "height_m": 4.5,
+          "pose": {
+            "knee_flexion_deg": 0.0,
+            "hip_flexion_deg": 0.0,
+            "ankle_deg": 0.0,
+            "torso_lean_deg": 0.0
+          },
+          "grf_peak_n": 50191.46587894272,
+          "impact_speed_ms": 9.394671362000908,
+          "joint_peaks": {
+            "subtalar_r": {
+              "peak_force_n": 24025.541198515562,
+              "peak_vertical_n": 24004.054920272443,
+              "peak_moment_nm": 145.36537556449593,
+              "peak_force_time_s": 0.019899999999999526,
+              "subtree_mass_kg": 1.4666
+            },
+            "ankle_r": {
+              "peak_force_n": 23947.013293106877,
+              "peak_vertical_n": 23922.543911913453,
+              "peak_moment_nm": 1356.973025763976,
+              "peak_force_time_s": 0.019899999999999526,
+              "subtree_mass_kg": 1.5666
+            },
+            "knee_r": {
+              "peak_force_n": 21245.141795671138,
+              "peak_vertical_n": 21073.235306477363,
+              "peak_moment_nm": 1481.7378500272894,
+              "peak_force_time_s": 0.019899999999999526,
+              "subtree_mass_kg": 5.2741
+            },
+            "hip_r": {
+              "peak_force_n": 14743.242059705617,
+              "peak_vertical_n": 14522.986236104183,
+              "peak_moment_nm": 923.6584918871563,
+              "peak_force_time_s": 0.019899999999999526,
+              "subtree_mass_kg": 14.661699999999998
+            },
+            "lumbar": {
+              "peak_force_n": 21200.147269161545,
+              "peak_vertical_n": 21134.735904807887,
+              "peak_moment_nm": 1474.728121378838,
+              "peak_force_time_s": 0.019899999999999526,
+              "subtree_mass_kg": 34.2366
+            }
+          }
+        },
+        "flexed_knee": {
+          "knee_15": {
+            "height_m": 4.5,
+            "pose": {
+              "knee_flexion_deg": 14.999999999999998,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 50191.46587894272,
+            "impact_speed_ms": 9.394671362000908,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 22223.234605182162,
+                "peak_vertical_n": 22064.50780158688,
+                "peak_moment_nm": 265.48767717412744,
+                "peak_force_time_s": 0.019899999999999526,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 22026.203321751866,
+                "peak_vertical_n": 21845.789282710448,
+                "peak_moment_nm": 1616.4832513958154,
+                "peak_force_time_s": 0.019899999999999526,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 18858.747106772906,
+                "peak_vertical_n": 18468.600570151928,
+                "peak_moment_nm": 3636.4498328562163,
+                "peak_force_time_s": 0.008100000000000007,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 13702.996119962183,
+                "peak_vertical_n": 13150.618765419667,
+                "peak_moment_nm": 1701.8674797655428,
+                "peak_force_time_s": 0.007940000000000013,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 19869.0092378055,
+                "peak_vertical_n": 19578.431693352926,
+                "peak_moment_nm": 3049.0354056057613,
+                "peak_force_time_s": 0.007760000000000019,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_30": {
+            "height_m": 4.5,
+            "pose": {
+              "knee_flexion_deg": 29.999999999999996,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 50191.46587894272,
+            "impact_speed_ms": 9.394671362000908,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 20611.841095937263,
+                "peak_vertical_n": 20487.737394496497,
+                "peak_moment_nm": 359.16161196880955,
+                "peak_force_time_s": 0.008100000000000007,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 20511.305728706462,
+                "peak_vertical_n": 20370.657048227957,
+                "peak_moment_nm": 1621.694293671087,
+                "peak_force_time_s": 0.008060000000000008,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 18284.330545242756,
+                "peak_vertical_n": 17264.063261499163,
+                "peak_moment_nm": 4909.185003051225,
+                "peak_force_time_s": 0.007800000000000019,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 13759.672149211981,
+                "peak_vertical_n": 12225.133708987989,
+                "peak_moment_nm": 2288.0998306409547,
+                "peak_force_time_s": 0.007560000000000018,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 19129.07827083731,
+                "peak_vertical_n": 18185.64143231447,
+                "peak_moment_nm": 2909.930582143622,
+                "peak_force_time_s": 0.007300000000000017,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_45": {
+            "height_m": 4.5,
+            "pose": {
+              "knee_flexion_deg": 45.0,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 50191.46587894272,
+            "impact_speed_ms": 9.394671362000908,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 19926.19634925905,
+                "peak_vertical_n": 19729.92572020272,
+                "peak_moment_nm": 444.59078995949034,
+                "peak_force_time_s": 0.007900000000000015,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 19786.959585166045,
+                "peak_vertical_n": 19564.444894879358,
+                "peak_moment_nm": 1393.3837596050444,
+                "peak_force_time_s": 0.007900000000000015,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 17416.26884301626,
+                "peak_vertical_n": 15680.185992007377,
+                "peak_moment_nm": 5289.029104319802,
+                "peak_force_time_s": 0.007500000000000018,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 13811.514621645212,
+                "peak_vertical_n": 11618.739409477017,
+                "peak_moment_nm": 2646.8244165062692,
+                "peak_force_time_s": 0.007300000000000017,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 26012.891440329826,
+                "peak_vertical_n": 22496.93287884771,
+                "peak_moment_nm": 3405.277782668918,
+                "peak_force_time_s": 0.01999999999999952,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          },
+          "knee_60": {
+            "height_m": 4.5,
+            "pose": {
+              "knee_flexion_deg": 59.99999999999999,
+              "hip_flexion_deg": 0.0,
+              "ankle_deg": 0.0,
+              "torso_lean_deg": 0.0
+            },
+            "grf_peak_n": 50191.46587894272,
+            "impact_speed_ms": 9.394671362000908,
+            "joint_peaks": {
+              "subtalar_r": {
+                "peak_force_n": 19139.30241596773,
+                "peak_vertical_n": 18906.051430746815,
+                "peak_moment_nm": 539.5715256733233,
+                "peak_force_time_s": 0.007800000000000019,
+                "subtree_mass_kg": 1.4666
+              },
+              "ankle_r": {
+                "peak_force_n": 18956.18636247162,
+                "peak_vertical_n": 18692.00836623727,
+                "peak_moment_nm": 1188.8111013796088,
+                "peak_force_time_s": 0.007760000000000019,
+                "subtree_mass_kg": 1.5666
+              },
+              "knee_r": {
+                "peak_force_n": 16354.43973200382,
+                "peak_vertical_n": 14022.067830041373,
+                "peak_moment_nm": 6086.834992454908,
+                "peak_force_time_s": 0.007240000000000017,
+                "subtree_mass_kg": 5.2741
+              },
+              "hip_r": {
+                "peak_force_n": 15459.773689742095,
+                "peak_vertical_n": 14700.135112483636,
+                "peak_moment_nm": 2734.911150125121,
+                "peak_force_time_s": 0.01999999999999952,
+                "subtree_mass_kg": 14.661699999999998
+              },
+              "lumbar": {
+                "peak_force_n": 30664.244348139866,
+                "peak_vertical_n": 28533.817213977385,
+                "peak_moment_nm": 4607.856219127052,
+                "peak_force_time_s": 0.01999999999999952,
+                "subtree_mass_kg": 34.2366
+              }
+            }
+          }
+        }
+      }
+    },
+    "flexed_combined": {
+      "height_m": 3.5,
+      "pose": {
+        "knee_flexion_deg": 45.0,
+        "hip_flexion_deg": 25.0,
+        "ankle_deg": 10.0,
+        "torso_lean_deg": 0.0
+      },
+      "grf_peak_n": 45791.712433130626,
+      "impact_speed_ms": 8.285321357678288,
+      "joint_peaks": {
+        "subtalar_r": {
+          "peak_force_n": 21956.844242264706,
+          "peak_vertical_n": 21941.133416856068,
+          "peak_moment_nm": 111.08403758123968,
+          "peak_force_time_s": 0.019459999999999544,
+          "subtree_mass_kg": 1.4666
+        },
+        "ankle_r": {
+          "peak_force_n": 21888.211143975095,
+          "peak_vertical_n": 21870.367849889375,
+          "peak_moment_nm": 1351.2345639736598,
+          "peak_force_time_s": 0.019459999999999544,
+          "subtree_mass_kg": 1.5666
+        },
+        "knee_r": {
+          "peak_force_n": 19757.389291588355,
+          "peak_vertical_n": 19633.39556388006,
+          "peak_moment_nm": 4344.635162209224,
+          "peak_force_time_s": 0.019459999999999544,
+          "subtree_mass_kg": 5.2741
+        },
+        "hip_r": {
+          "peak_force_n": 14256.55193839571,
+          "peak_vertical_n": 14102.13196957028,
+          "peak_moment_nm": 835.7255050451514,
+          "peak_force_time_s": 0.019459999999999544,
+          "subtree_mass_kg": 14.661699999999998
+        },
+        "lumbar": {
+          "peak_force_n": 20692.29456827266,
+          "peak_vertical_n": 20651.23134243677,
+          "peak_moment_nm": 1258.5660232286862,
+          "peak_force_time_s": 0.019439999999999544,
+          "subtree_mass_kg": 34.2366
+        }
+      }
+    },
+    "flexed_combined_torso_lean": {
+      "height_m": 3.5,
+      "pose": {
+        "knee_flexion_deg": 45.0,
+        "hip_flexion_deg": 25.0,
+        "ankle_deg": 10.0,
+        "torso_lean_deg": -20.0
+      },
+      "grf_peak_n": 45791.712433130626,
+      "impact_speed_ms": 8.285321357678288,
+      "joint_peaks": {
+        "subtalar_r": {
+          "peak_force_n": 21994.578670382853,
+          "peak_vertical_n": 21989.95021587312,
+          "peak_moment_nm": 108.37903699046184,
+          "peak_force_time_s": 0.019459999999999544,
+          "subtree_mass_kg": 1.4666
+        },
+        "ankle_r": {
+          "peak_force_n": 21931.299058169523,
+          "peak_vertical_n": 21926.027632833393,
+          "peak_moment_nm": 1343.1774628532526,
+          "peak_force_time_s": 0.019459999999999544,
+          "subtree_mass_kg": 1.5666
+        },
+        "knee_r": {
+          "peak_force_n": 19728.37423849766,
+          "peak_vertical_n": 19683.19401499013,
+          "peak_moment_nm": 4348.231450148708,
+          "peak_force_time_s": 0.019459999999999544,
+          "subtree_mass_kg": 5.2741
+        },
+        "hip_r": {
+          "peak_force_n": 14149.903678188193,
+          "peak_vertical_n": 13974.691541602626,
+          "peak_moment_nm": 837.8041242631182,
+          "peak_force_time_s": 0.019459999999999544,
+          "subtree_mass_kg": 14.661699999999998
+        },
+        "lumbar": {
+          "peak_force_n": 21003.423830737313,
+          "peak_vertical_n": 20501.550710419346,
+          "peak_moment_nm": 612.9502753641362,
+          "peak_force_time_s": 0.019459999999999544,
+          "subtree_mass_kg": 34.2366
+        }
+      }
+    }
+  },
+  "path_b_passive_sweep": {
+    "heights_m": [
+      2.0,
+      3.0,
+      3.5,
+      4.5
+    ],
+    "by_height": {
+      "2": {
+        "height_m": 2.0,
+        "wall_s": 25.977299690246582,
+        "grf_peak_n": 42263.68493882344,
+        "joint_peaks": {
+          "subtalar_r": {
+            "peak_force_n": 20339.806445333452,
+            "peak_vertical_n": 20328.359592569323,
+            "peak_moment_nm": 652.7857349177006,
+            "peak_force_time_s": 0.018799878397261844,
+            "subtree_mass_kg": 1.4666
+          },
+          "ankle_r": {
+            "peak_force_n": 20278.936759100256,
+            "peak_vertical_n": 20265.933685804885,
+            "peak_moment_nm": 1166.6524999576586,
+            "peak_force_time_s": 0.018799878397261844,
+            "subtree_mass_kg": 1.5666
+          },
+          "knee_r": {
+            "peak_force_n": 18143.468809341775,
+            "peak_vertical_n": 18055.58527493803,
+            "peak_moment_nm": 1305.052491364315,
+            "peak_force_time_s": 0.018799878397261844,
+            "subtree_mass_kg": 5.2741
+          },
+          "hip_r": {
+            "peak_force_n": 15279.28203228796,
+            "peak_vertical_n": 15023.324407078762,
+            "peak_moment_nm": 1104.8921773479126,
+            "peak_force_time_s": 0.015216674913926188,
+            "subtree_mass_kg": 14.661699999999998
+          },
+          "lumbar": {
+            "peak_force_n": 25809.575278050863,
+            "peak_vertical_n": 24928.656127190683,
+            "peak_moment_nm": 2813.8951007903293,
+            "peak_force_time_s": 0.015216674913926188,
+            "subtree_mass_kg": 34.2366
+          }
+        },
+        "excursions": {
+          "knee_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -1.0951562012944977e-07,
+            "min_deg": -6.274782824175434e-06,
+            "max_rad": 0.025059407291287524,
+            "max_deg": 1.4357982748901374,
+            "peak_flexion_rad": 0.025059407291287524,
+            "peak_flexion_deg": 1.4357982748901374,
+            "range_rad": 2.0944,
+            "range_min_rad": 0.0,
+            "range_max_rad": 2.0944,
+            "within_range": true
+          },
+          "hip_flexion_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.00936652743663538,
+            "min_deg": -0.5366624908126969,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.00936652743663538,
+            "peak_flexion_deg": 0.5366624908126969,
+            "range_rad": 2.6179938799999998,
+            "range_min_rad": -0.52359878,
+            "range_max_rad": 2.0943951,
+            "within_range": true
+          },
+          "ankle_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.012641401668661878,
+            "min_deg": -0.7242989627439619,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.012641401668661878,
+            "peak_flexion_deg": 0.7242989627439619,
+            "range_rad": 1.2217304800000002,
+            "range_min_rad": -0.6981317,
+            "range_max_rad": 0.52359878,
+            "within_range": true
+          }
+        }
+      },
+      "3": {
+        "height_m": 3.0,
+        "wall_s": 31.0706889629364,
+        "grf_peak_n": 44246.60922030006,
+        "joint_peaks": {
+          "subtalar_r": {
+            "peak_force_n": 21269.17175924935,
+            "peak_vertical_n": 21253.065572008,
+            "peak_moment_nm": 836.366051517035,
+            "peak_force_time_s": 0.01927798414830235,
+            "subtree_mass_kg": 1.4666
+          },
+          "ankle_r": {
+            "peak_force_n": 21202.354342348244,
+            "peak_vertical_n": 21184.07448903298,
+            "peak_moment_nm": 1397.4108194600026,
+            "peak_force_time_s": 0.01927798414830235,
+            "subtree_mass_kg": 1.5666
+          },
+          "knee_r": {
+            "peak_force_n": 18903.44930467271,
+            "peak_vertical_n": 18779.660060983908,
+            "peak_moment_nm": 1407.1859182112703,
+            "peak_force_time_s": 0.01927798414830235,
+            "subtree_mass_kg": 5.2741
+          },
+          "hip_r": {
+            "peak_force_n": 15722.048092702587,
+            "peak_vertical_n": 15460.949840325613,
+            "peak_moment_nm": 1143.9398846555205,
+            "peak_force_time_s": 0.013221640058307475,
+            "subtree_mass_kg": 14.661699999999998
+          },
+          "lumbar": {
+            "peak_force_n": 26679.77334032989,
+            "peak_vertical_n": 25751.537742385877,
+            "peak_moment_nm": 2908.584082758387,
+            "peak_force_time_s": 0.013221640058307475,
+            "subtree_mass_kg": 34.2366
+          }
+        },
+        "excursions": {
+          "knee_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -1.2385636051095836e-07,
+            "min_deg": -7.096446723128706e-06,
+            "max_rad": 0.03106575902633824,
+            "max_deg": 1.7799368795796227,
+            "peak_flexion_rad": 0.03106575902633824,
+            "peak_flexion_deg": 1.7799368795796227,
+            "range_rad": 2.0944,
+            "range_min_rad": 0.0,
+            "range_max_rad": 2.0944,
+            "within_range": true
+          },
+          "hip_flexion_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.009433538527945467,
+            "min_deg": -0.5405019435253307,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.009433538527945467,
+            "peak_flexion_deg": 0.5405019435253307,
+            "range_rad": 2.6179938799999998,
+            "range_min_rad": -0.52359878,
+            "range_max_rad": 2.0943951,
+            "within_range": true
+          },
+          "ankle_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.01275001206710552,
+            "min_deg": -0.7305218801860169,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.01275001206710552,
+            "peak_flexion_deg": 0.7305218801860169,
+            "range_rad": 1.2217304800000002,
+            "range_min_rad": -0.6981317,
+            "range_max_rad": 0.52359878,
+            "within_range": true
+          }
+        }
+      },
+      "3.5": {
+        "height_m": 3.5,
+        "wall_s": 32.87682557106018,
+        "grf_peak_n": 45791.712433130626,
+        "joint_peaks": {
+          "subtalar_r": {
+            "peak_force_n": 21986.494467784625,
+            "peak_vertical_n": 21967.25194626749,
+            "peak_moment_nm": 940.097620190103,
+            "peak_force_time_s": 0.01948563152634457,
+            "subtree_mass_kg": 1.4666
+          },
+          "ankle_r": {
+            "peak_force_n": 21915.700557945762,
+            "peak_vertical_n": 21893.85708760748,
+            "peak_moment_nm": 1527.4879370404506,
+            "peak_force_time_s": 0.01948563152634457,
+            "subtree_mass_kg": 1.5666
+          },
+          "knee_r": {
+            "peak_force_n": 19505.045919264732,
+            "peak_vertical_n": 19358.23440514131,
+            "peak_moment_nm": 1492.0488544287239,
+            "peak_force_time_s": 0.01948563152634457,
+            "subtree_mass_kg": 5.2741
+          },
+          "hip_r": {
+            "peak_force_n": 16314.041492135375,
+            "peak_vertical_n": 16040.4997650679,
+            "peak_moment_nm": 1194.7150923800698,
+            "peak_force_time_s": 0.012431163311175868,
+            "subtree_mass_kg": 14.661699999999998
+          },
+          "lumbar": {
+            "peak_force_n": 27788.34656620202,
+            "peak_vertical_n": 26795.753029641695,
+            "peak_moment_nm": 3064.0756985654302,
+            "peak_force_time_s": 0.012431163311175868,
+            "subtree_mass_kg": 34.2366
+          }
+        },
+        "excursions": {
+          "knee_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -1.069390468407481e-07,
+            "min_deg": -6.127156049126686e-06,
+            "max_rad": 0.03384594748834955,
+            "max_deg": 1.9392299447038381,
+            "peak_flexion_rad": 0.03384594748834955,
+            "peak_flexion_deg": 1.9392299447038381,
+            "range_rad": 2.0944,
+            "range_min_rad": 0.0,
+            "range_max_rad": 2.0944,
+            "within_range": true
+          },
+          "hip_flexion_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.009460565094723435,
+            "min_deg": -0.5420504517364367,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.009460565094723435,
+            "peak_flexion_deg": 0.5420504517364367,
+            "range_rad": 2.6179938799999998,
+            "range_min_rad": -0.52359878,
+            "range_max_rad": 2.0943951,
+            "within_range": true
+          },
+          "ankle_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.01279462544440691,
+            "min_deg": -0.7330780384152112,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.01279462544440691,
+            "peak_flexion_deg": 0.7330780384152112,
+            "range_rad": 1.2217304800000002,
+            "range_min_rad": -0.6981317,
+            "range_max_rad": 0.52359878,
+            "within_range": true
+          }
+        }
+      },
+      "4.5": {
+        "height_m": 4.5,
+        "wall_s": 36.239428758621216,
+        "grf_peak_n": 50191.46587894272,
+        "joint_peaks": {
+          "subtalar_r": {
+            "peak_force_n": 26380.72899049733,
+            "peak_vertical_n": 24001.911564774487,
+            "peak_moment_nm": 1181.7245618136033,
+            "peak_force_time_s": 0.01996205786910464,
+            "subtree_mass_kg": 1.4666
+          },
+          "ankle_r": {
+            "peak_force_n": 26977.16817254816,
+            "peak_vertical_n": 23917.111743698915,
+            "peak_moment_nm": 2040.8217764018061,
+            "peak_force_time_s": 0.01996205786910464,
+            "subtree_mass_kg": 1.5666
+          },
+          "knee_r": {
+            "peak_force_n": 23174.014688143427,
+            "peak_vertical_n": 21457.740752645925,
+            "peak_moment_nm": 8269.718732825091,
+            "peak_force_time_s": 0.019968852339022812,
+            "subtree_mass_kg": 5.2741
+          },
+          "hip_r": {
+            "peak_force_n": 33085.58707695963,
+            "peak_vertical_n": 17798.657098905715,
+            "peak_moment_nm": 7136.195736888934,
+            "peak_force_time_s": 0.019965455104063726,
+            "subtree_mass_kg": 14.661699999999998
+          },
+          "lumbar": {
+            "peak_force_n": 42499.65773451042,
+            "peak_vertical_n": 29980.46043739163,
+            "peak_moment_nm": 11908.938901397472,
+            "peak_force_time_s": 0.019968852339022812,
+            "subtree_mass_kg": 34.2366
+          }
+        },
+        "excursions": {
+          "knee_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -1.1633263247900316e-07,
+            "min_deg": -6.665368860693404e-06,
+            "max_rad": 0.03672718595364283,
+            "max_deg": 2.1043127485358935,
+            "peak_flexion_rad": 0.03672718595364283,
+            "peak_flexion_deg": 2.1043127485358935,
+            "range_rad": 2.0944,
+            "range_min_rad": 0.0,
+            "range_max_rad": 2.0944,
+            "within_range": true
+          },
+          "hip_flexion_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.009516453581386168,
+            "min_deg": -0.5452526261455845,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.009516453581386168,
+            "peak_flexion_deg": 0.5452526261455845,
+            "range_rad": 2.6179938799999998,
+            "range_min_rad": -0.52359878,
+            "range_max_rad": 2.0943951,
+            "within_range": true
+          },
+          "ankle_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.01287419373698272,
+            "min_deg": -0.7376369657628673,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.01287419373698272,
+            "peak_flexion_deg": 0.7376369657628673,
+            "range_rad": 1.2217304800000002,
+            "range_min_rad": -0.6981317,
+            "range_max_rad": 0.52359878,
+            "within_range": true
+          }
+        }
+      }
+    }
+  },
+  "path_b_stiffness_sensitivity": {
+    "height_m": 3.0,
+    "cases": {
+      "soft_k50_c5": {
+        "knee_stiffness": 50.0,
+        "knee_damping": 5.0,
+        "joint_peaks": {
+          "subtalar_r": {
+            "peak_force_n": 56112.476264079145,
+            "peak_vertical_n": 42338.92110878155,
+            "peak_moment_nm": 7089.71363750032,
+            "peak_force_time_s": 0.006759993324290178,
+            "subtree_mass_kg": 1.4666
+          },
+          "ankle_r": {
+            "peak_force_n": 59497.51256876394,
+            "peak_vertical_n": 42202.149698489935,
+            "peak_moment_nm": 4663.572534092676,
+            "peak_force_time_s": 0.006759993324290178,
+            "subtree_mass_kg": 1.5666
+          },
+          "knee_r": {
+            "peak_force_n": 39968.14545883398,
+            "peak_vertical_n": 35164.05873773147,
+            "peak_moment_nm": 22662.97554194541,
+            "peak_force_time_s": 0.006764346247639037,
+            "subtree_mass_kg": 5.2741
+          },
+          "hip_r": {
+            "peak_force_n": 83227.01684153485,
+            "peak_vertical_n": 30815.4348680883,
+            "peak_moment_nm": 23528.327186964394,
+            "peak_force_time_s": 0.006764346247639037,
+            "subtree_mass_kg": 14.661699999999998
+          },
+          "lumbar": {
+            "peak_force_n": 105489.425014585,
+            "peak_vertical_n": 64078.070339471284,
+            "peak_moment_nm": 28989.7795209608,
+            "peak_force_time_s": 0.006788487864442053,
+            "subtree_mass_kg": 34.2366
+          }
+        },
+        "excursions": {
+          "knee_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.0002746660690310865,
+            "min_deg": -0.01573720653093018,
+            "max_rad": 0.04131153696482307,
+            "max_deg": 2.366976713283053,
+            "peak_flexion_rad": 0.04131153696482307,
+            "peak_flexion_deg": 2.366976713283053,
+            "range_rad": 2.0944,
+            "range_min_rad": 0.0,
+            "range_max_rad": 2.0944,
+            "within_range": false
+          },
+          "hip_flexion_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.011779844966672105,
+            "min_deg": -0.6749353999087375,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.011779844966672105,
+            "peak_flexion_deg": 0.6749353999087375,
+            "range_rad": 2.6179938799999998,
+            "range_min_rad": -0.52359878,
+            "range_max_rad": 2.0943951,
+            "within_range": true
+          },
+          "ankle_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.01650709150143862,
+            "min_deg": -0.9457866750687023,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.01650709150143862,
+            "peak_flexion_deg": 0.9457866750687023,
+            "range_rad": 1.2217304800000002,
+            "range_min_rad": -0.6981317,
+            "range_max_rad": 0.52359878,
+            "within_range": true
+          }
+        }
+      },
+      "mid_k200_c100": {
+        "knee_stiffness": 200.0,
+        "knee_damping": 100.0,
+        "joint_peaks": {
+          "subtalar_r": {
+            "peak_force_n": 29187.93465685026,
+            "peak_vertical_n": 21200.849632566224,
+            "peak_moment_nm": 2544.5509727579065,
+            "peak_force_time_s": 0.009205958625934214,
+            "subtree_mass_kg": 1.4666
+          },
+          "ankle_r": {
+            "peak_force_n": 30743.073503881897,
+            "peak_vertical_n": 21131.89555779095,
+            "peak_moment_nm": 2159.0619869266316,
+            "peak_force_time_s": 0.009205958625934214,
+            "subtree_mass_kg": 1.5666
+          },
+          "knee_r": {
+            "peak_force_n": 21761.660969539767,
+            "peak_vertical_n": 19269.270428574564,
+            "peak_moment_nm": 11616.806561771715,
+            "peak_force_time_s": 0.009214605455288575,
+            "subtree_mass_kg": 5.2741
+          },
+          "hip_r": {
+            "peak_force_n": 42282.40579745515,
+            "peak_vertical_n": 22568.378496220626,
+            "peak_moment_nm": 11525.666799645518,
+            "peak_force_time_s": 0.009210282040611395,
+            "subtree_mass_kg": 14.661699999999998
+          },
+          "lumbar": {
+            "peak_force_n": 52589.11898314703,
+            "peak_vertical_n": 42612.18742868119,
+            "peak_moment_nm": 13941.893026530779,
+            "peak_force_time_s": 0.009229003182983546,
+            "subtree_mass_kg": 34.2366
+          }
+        },
+        "excursions": {
+          "knee_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -2.523676316284685e-06,
+            "min_deg": -0.00014459600178023512,
+            "max_rad": 0.04026936044108342,
+            "max_deg": 2.307264396965155,
+            "peak_flexion_rad": 0.04026936044108342,
+            "peak_flexion_deg": 2.307264396965155,
+            "range_rad": 2.0944,
+            "range_min_rad": 0.0,
+            "range_max_rad": 2.0944,
+            "within_range": false
+          },
+          "hip_flexion_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.011383956642826935,
+            "min_deg": -0.652252669793901,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.011383956642826935,
+            "peak_flexion_deg": 0.652252669793901,
+            "range_rad": 2.6179938799999998,
+            "range_min_rad": -0.52359878,
+            "range_max_rad": 2.0943951,
+            "within_range": true
+          },
+          "ankle_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.01606103883266715,
+            "min_deg": -0.9202297397075502,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.01606103883266715,
+            "peak_flexion_deg": 0.9202297397075502,
+            "range_rad": 1.2217304800000002,
+            "range_min_rad": -0.6981317,
+            "range_max_rad": 0.52359878,
+            "within_range": true
+          }
+        }
+      },
+      "nominal_k500_c500": {
+        "knee_stiffness": 500.0,
+        "knee_damping": 500.0,
+        "joint_peaks": {
+          "subtalar_r": {
+            "peak_force_n": 21269.17175924935,
+            "peak_vertical_n": 21253.065572008,
+            "peak_moment_nm": 836.366051517035,
+            "peak_force_time_s": 0.01927798414830235,
+            "subtree_mass_kg": 1.4666
+          },
+          "ankle_r": {
+            "peak_force_n": 21202.354342348244,
+            "peak_vertical_n": 21184.07448903298,
+            "peak_moment_nm": 1397.4108194600026,
+            "peak_force_time_s": 0.01927798414830235,
+            "subtree_mass_kg": 1.5666
+          },
+          "knee_r": {
+            "peak_force_n": 18903.44930467271,
+            "peak_vertical_n": 18779.660060983908,
+            "peak_moment_nm": 1407.1859182112703,
+            "peak_force_time_s": 0.01927798414830235,
+            "subtree_mass_kg": 5.2741
+          },
+          "hip_r": {
+            "peak_force_n": 15722.048092702587,
+            "peak_vertical_n": 15460.949840325613,
+            "peak_moment_nm": 1143.9398846555205,
+            "peak_force_time_s": 0.013221640058307475,
+            "subtree_mass_kg": 14.661699999999998
+          },
+          "lumbar": {
+            "peak_force_n": 26679.77334032989,
+            "peak_vertical_n": 25751.537742385877,
+            "peak_moment_nm": 2908.584082758387,
+            "peak_force_time_s": 0.013221640058307475,
+            "subtree_mass_kg": 34.2366
+          }
+        },
+        "excursions": {
+          "knee_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -1.2385636051095836e-07,
+            "min_deg": -7.096446723128706e-06,
+            "max_rad": 0.03106575902633824,
+            "max_deg": 1.7799368795796227,
+            "peak_flexion_rad": 0.03106575902633824,
+            "peak_flexion_deg": 1.7799368795796227,
+            "range_rad": 2.0944,
+            "range_min_rad": 0.0,
+            "range_max_rad": 2.0944,
+            "within_range": true
+          },
+          "hip_flexion_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.009433538527945467,
+            "min_deg": -0.5405019435253307,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.009433538527945467,
+            "peak_flexion_deg": 0.5405019435253307,
+            "range_rad": 2.6179938799999998,
+            "range_min_rad": -0.52359878,
+            "range_max_rad": 2.0943951,
+            "within_range": true
+          },
+          "ankle_angle_r": {
+            "initial_rad": 0.0,
+            "initial_deg": 0.0,
+            "min_rad": -0.01275001206710552,
+            "min_deg": -0.7305218801860169,
+            "max_rad": 0.0,
+            "max_deg": 0.0,
+            "peak_flexion_rad": 0.01275001206710552,
+            "peak_flexion_deg": 0.7305218801860169,
+            "range_rad": 1.2217304800000002,
+            "range_min_rad": -0.6981317,
+            "range_max_rad": 0.52359878,
+            "within_range": true
+          }
+        }
+      }
+    }
+  },
+  "path_b_attenuation": [
+    {
+      "height_m": 2.0,
+      "joint": "subtalar_r",
+      "baseline_force_n": 20310.166360782317,
+      "passive_force_n": 20339.806445333452,
+      "attenuation": -0.001459371825154987,
+      "flew": false
+    },
+    {
+      "height_m": 2.0,
+      "joint": "ankle_r",
+      "baseline_force_n": 20250.332979249357,
+      "passive_force_n": 20278.936759100256,
+      "attenuation": -0.001412509111835769,
+      "flew": false
+    },
+    {
+      "height_m": 2.0,
+      "joint": "knee_r",
+      "baseline_force_n": 18117.830665128757,
+      "passive_force_n": 18143.468809341775,
+      "attenuation": -0.0014150780348314296,
+      "flew": false
+    },
+    {
+      "height_m": 2.0,
+      "joint": "hip_r",
+      "baseline_force_n": 12795.36586385775,
+      "passive_force_n": 15279.28203228796,
+      "attenuation": -0.1941262324859634,
+      "flew": false
+    },
+    {
+      "height_m": 2.0,
+      "joint": "lumbar",
+      "baseline_force_n": 18782.38118721025,
+      "passive_force_n": 25809.575278050863,
+      "attenuation": -0.3741375505479434,
+      "flew": false
+    },
+    {
+      "height_m": 3.0,
+      "joint": "subtalar_r",
+      "baseline_force_n": 21230.903979380233,
+      "passive_force_n": 21269.17175924935,
+      "attenuation": -0.00180245645245658,
+      "flew": false
+    },
+    {
+      "height_m": 3.0,
+      "joint": "ankle_r",
+      "baseline_force_n": 21165.664087977882,
+      "passive_force_n": 21202.354342348244,
+      "attenuation": -0.0017334799521457889,
+      "flew": false
+    },
+    {
+      "height_m": 3.0,
+      "joint": "knee_r",
+      "baseline_force_n": 18873.648941358748,
+      "passive_force_n": 18903.44930467271,
+      "attenuation": -0.0015789402148229659,
+      "flew": false
+    },
+    {
+      "height_m": 3.0,
+      "joint": "hip_r",
+      "baseline_force_n": 13238.137973528377,
+      "passive_force_n": 15722.048092702587,
+      "attenuation": -0.18763289249146342,
+      "flew": false
+    },
+    {
+      "height_m": 3.0,
+      "joint": "lumbar",
+      "baseline_force_n": 19282.54099049938,
+      "passive_force_n": 26679.77334032989,
+      "attenuation": -0.38362331777099157,
+      "flew": false
+    },
+    {
+      "height_m": 3.5,
+      "joint": "subtalar_r",
+      "baseline_force_n": 21953.770522752293,
+      "passive_force_n": 21986.494467784625,
+      "attenuation": -0.0014905842710899453,
+      "flew": false
+    },
+    {
+      "height_m": 3.5,
+      "joint": "ankle_r",
+      "baseline_force_n": 21884.79147225174,
+      "passive_force_n": 21915.700557945762,
+      "attenuation": -0.00141235459031952,
+      "flew": false
+    },
+    {
+      "height_m": 3.5,
+      "joint": "knee_r",
+      "baseline_force_n": 19479.525034067905,
+      "passive_force_n": 19505.045919264732,
+      "attenuation": -0.0013101389870746605,
+      "flew": false
+    },
+    {
+      "height_m": 3.5,
+      "joint": "hip_r",
+      "baseline_force_n": 13611.714771253415,
+      "passive_force_n": 16314.041492135375,
+      "attenuation": -0.19852948480738108,
+      "flew": false
+    },
+    {
+      "height_m": 3.5,
+      "joint": "lumbar",
+      "baseline_force_n": 19740.989903369464,
+      "passive_force_n": 27788.34656620202,
+      "attenuation": -0.40764706847142484,
+      "flew": false
+    },
+    {
+      "height_m": 4.5,
+      "joint": "subtalar_r",
+      "baseline_force_n": 24025.541198515562,
+      "passive_force_n": 26380.72899049733,
+      "attenuation": -0.09802850110728345,
+      "flew": false
+    },
+    {
+      "height_m": 4.5,
+      "joint": "ankle_r",
+      "baseline_force_n": 23947.013293106877,
+      "passive_force_n": 26977.16817254816,
+      "attenuation": -0.12653581648587098,
+      "flew": false
+    },
+    {
+      "height_m": 4.5,
+      "joint": "knee_r",
+      "baseline_force_n": 21245.141795671138,
+      "passive_force_n": 23174.014688143427,
+      "attenuation": -0.09079124587746046,
+      "flew": false
+    },
+    {
+      "height_m": 4.5,
+      "joint": "hip_r",
+      "baseline_force_n": 14743.242059705617,
+      "passive_force_n": 33085.58707695963,
+      "attenuation": -1.24411882698345,
+      "flew": false
+    },
+    {
+      "height_m": 4.5,
+      "joint": "lumbar",
+      "baseline_force_n": 21200.147269161545,
+      "passive_force_n": 42499.65773451042,
+      "attenuation": -1.0046869106580156,
+      "flew": false
+    }
+  ],
+  "path_b_summary": {
+    "passive_model": {
+      "knee_stiffness_nm_per_rad": 500.0,
+      "knee_damping_nms_per_rad": 500.0,
+      "hip_stiffness_nm_per_rad": 500.0,
+      "hip_damping_nms_per_rad": 500.0,
+      "ankle_stiffness_nm_per_rad": 500.0,
+      "ankle_damping_nms_per_rad": 500.0,
+      "knee_limit_stiffness_nm_per_rad": 20000.0,
+      "hip_limit_stiffness_nm_per_rad": 20000.0,
+      "ankle_limit_stiffness_nm_per_rad": 20000.0,
+      "transition_rad": 0.01,
+      "source": "ASSUMED（文献量级，非实测；见 PassiveStiffness docstring）"
+    },
+    "any_joint_out_of_range": false,
+    "attenuation_min": -1.24411882698345,
+    "attenuation_max": -0.0013101389870746605,
+    "attenuation_mean": -0.21617363805634898,
+    "worst_joint": {
+      "joint": "hip_r",
+      "height_m": 4.5,
+      "amplification": 2.24411882698345
+    },
+    "best_joint": {
+      "joint": "knee_r",
+      "height_m": 3.5,
+      "attenuation": -0.0013101389870746605
+    },
+    "verdict": "MIXED_OR_AMPLIFIES"
+  },
+  "assumptions": [
+    "Path (a) 是**刚性腿 + 弯曲几何**：锁在目标姿势，不吸能（方案 §3 L2 路径 a）。",
+    "Path (b) 是**解锁 + 被动刚度**：实测关节只弯 ~2°（撞击 20 ms 内 inertia 主导），被动刚度/阻尼无法显著吸能 → 峰值力未显著衰减（方案 §1 A5 / §6 风险②）。",
+    "被动刚度数值全部 ASSUMED（文献量级）；无量化的 [Y25] 被动关节数据可对标。",
+    "无肌肉主动控制；dead-drop 关激活动力学，完全被动。",
+    "载荷链只到关节反力；FE 上载荷属 S4/S5。"
+  ]
+}

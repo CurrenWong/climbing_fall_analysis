@@ -1,0 +1,449 @@
+{
+  "meta": {
+    "study": "subtalar joint-load representation x analysis type -> cortical gauge",
+    "mesh": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\thums_calcaneus\\calcaneus_r_anatframe.npz",
+    "mesh_kind": "anat (direction C)",
+    "gauge_radius_mm": 4.0,
+    "threshold_mpa": 150.0,
+    "baseline_anat_gauge_mpa": 186.7563689967737,
+    "baseline_reproduced": true,
+    "n_solves_ok": 8,
+    "dynamic": {
+      "rho_cort_tonne_mm3": 1.8e-09,
+      "rho_spon_tonne_mm3": 6e-10,
+      "step_size_s": 0.0001,
+      "time_steps": 50,
+      "ramp_s": 0.002
+    },
+    "default_behavior_unchanged": true
+  },
+  "load": {
+    "h_m": 5.0,
+    "a": 0.0,
+    "f_subt_n": 26383.133775894516,
+    "achilles_n": 0.0,
+    "t1_rel_err": 0.05800800006101414,
+    "sweep_gauge_max_mpa": 186.7563689967737,
+    "sweep_max_mpa": 213.50277948448795
+  },
+  "cases": [
+    {
+      "tag": "baseline_pressure_static",
+      "joint_load": "pressure",
+      "analysis": "STATIC",
+      "gradient_coeff": null,
+      "gradient_dir": null,
+      "gradient_bands": null,
+      "febio_rc": 0,
+      "solve_s": 0.38,
+      "load_n": 26383.133775894516,
+      "load_kN": 26.383133775894514,
+      "achilles_kN": 0.0,
+      "n_states": 2,
+      "headline_kind": "final(static)",
+      "gauge_max": 186.7563689967737,
+      "gauge_p95": 136.9284968696667,
+      "max": 213.50277948448795,
+      "p95": 136.29650339601775,
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "peak_time_s": 1.0,
+      "final_state": {
+        "time_s": 1.0,
+        "gauge_max": 186.7563689967737,
+        "raw_max": 213.50277948448795
+      },
+      "transient_peak": {
+        "time_s": 1.0,
+        "gauge_max": 186.7563689967737,
+        "raw_max": 213.50277948448795
+      },
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.992665020188931,
+      "dist_joint_mm": 13.471916461795068,
+      "dist_plantar_mm": 2.992665020188931,
+      "dist_achilles_mm": 47.89474438764986,
+      "dist_any_named_node_mm": 2.992665020188931,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_boundary": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_baseline_pressure_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_baseline_pressure_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_baseline_pressure_static.hdf5"
+    },
+    {
+      "tag": "gradient_c030_static",
+      "joint_load": "gradient",
+      "analysis": "STATIC",
+      "gradient_coeff": 0.3,
+      "gradient_dir": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "gradient_bands": 6,
+      "febio_rc": 0,
+      "solve_s": 0.441,
+      "load_n": 26383.133775894516,
+      "load_kN": 26.383133775894514,
+      "achilles_kN": 0.0,
+      "n_states": 2,
+      "headline_kind": "final(static)",
+      "gauge_max": 191.84928010258415,
+      "gauge_p95": 141.89830538242492,
+      "max": 233.451252301544,
+      "p95": 141.33112974555976,
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "peak_time_s": 1.0,
+      "final_state": {
+        "time_s": 1.0,
+        "gauge_max": 191.84928010258415,
+        "raw_max": 233.451252301544
+      },
+      "transient_peak": {
+        "time_s": 1.0,
+        "gauge_max": 191.84928010258415,
+        "raw_max": 233.451252301544
+      },
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.992665020188931,
+      "dist_joint_mm": 13.471916461795068,
+      "dist_plantar_mm": 2.992665020188931,
+      "dist_achilles_mm": 47.89474438764986,
+      "dist_any_named_node_mm": 2.992665020188931,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_boundary": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c030_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c030_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c030_static.hdf5"
+    },
+    {
+      "tag": "gradient_c040_static",
+      "joint_load": "gradient",
+      "analysis": "STATIC",
+      "gradient_coeff": 0.4,
+      "gradient_dir": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "gradient_bands": 6,
+      "febio_rc": 0,
+      "solve_s": 0.342,
+      "load_n": 26383.133775894516,
+      "load_kN": 26.383133775894514,
+      "achilles_kN": 0.0,
+      "n_states": 2,
+      "headline_kind": "final(static)",
+      "gauge_max": 194.67910160764535,
+      "gauge_p95": 143.079389458885,
+      "max": 240.1863206310659,
+      "p95": 143.65104386374907,
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "peak_time_s": 1.0,
+      "final_state": {
+        "time_s": 1.0,
+        "gauge_max": 194.67910160764535,
+        "raw_max": 240.1863206310659
+      },
+      "transient_peak": {
+        "time_s": 1.0,
+        "gauge_max": 194.67910160764535,
+        "raw_max": 240.1863206310659
+      },
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.992665020188931,
+      "dist_joint_mm": 13.471916461795068,
+      "dist_plantar_mm": 2.992665020188931,
+      "dist_achilles_mm": 47.89474438764986,
+      "dist_any_named_node_mm": 2.992665020188931,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_boundary": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_static.hdf5"
+    },
+    {
+      "tag": "gradient_c060_static",
+      "joint_load": "gradient",
+      "analysis": "STATIC",
+      "gradient_coeff": 0.6,
+      "gradient_dir": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "gradient_bands": 6,
+      "febio_rc": 0,
+      "solve_s": 0.308,
+      "load_n": 26383.133775894516,
+      "load_kN": 26.383133775894514,
+      "achilles_kN": 0.0,
+      "n_states": 2,
+      "headline_kind": "final(static)",
+      "gauge_max": 205.23061834361891,
+      "gauge_p95": 150.1443251073429,
+      "max": 253.78237539223846,
+      "p95": 150.1444908435154,
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "peak_time_s": 1.0,
+      "final_state": {
+        "time_s": 1.0,
+        "gauge_max": 205.23061834361891,
+        "raw_max": 253.78237539223846
+      },
+      "transient_peak": {
+        "time_s": 1.0,
+        "gauge_max": 205.23061834361891,
+        "raw_max": 253.78237539223846
+      },
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.992665020188931,
+      "dist_joint_mm": 13.471916461795068,
+      "dist_plantar_mm": 2.992665020188931,
+      "dist_achilles_mm": 47.89474438764986,
+      "dist_any_named_node_mm": 2.992665020188931,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_boundary": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c060_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c060_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c060_static.hdf5"
+    },
+    {
+      "tag": "gradient_c040_dirZ_static",
+      "joint_load": "gradient",
+      "analysis": "STATIC",
+      "gradient_coeff": 0.4,
+      "gradient_dir": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "gradient_bands": 6,
+      "febio_rc": 0,
+      "solve_s": 0.362,
+      "load_n": 26383.133775894516,
+      "load_kN": 26.383133775894514,
+      "achilles_kN": 0.0,
+      "n_states": 2,
+      "headline_kind": "final(static)",
+      "gauge_max": 167.5373659988645,
+      "gauge_p95": 119.3449761179635,
+      "max": 167.5373659988645,
+      "p95": 120.10075923962046,
+      "peak_elem": 275,
+      "peak_centroid_mm": [
+        27.279681878432726,
+        -16.819538272040504,
+        20.548345707710737
+      ],
+      "peak_time_s": 1.0,
+      "final_state": {
+        "time_s": 1.0,
+        "gauge_max": 167.5373659988645,
+        "raw_max": 167.5373659988645
+      },
+      "transient_peak": {
+        "time_s": 1.0,
+        "gauge_max": 167.5373659988645,
+        "raw_max": 167.5373659988645
+      },
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 3.529794971288574,
+      "dist_joint_mm": 20.15573007588189,
+      "dist_plantar_mm": 3.529794971288574,
+      "dist_achilles_mm": 25.585884725997527,
+      "dist_any_named_node_mm": 3.529794971288574,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_boundary": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dirZ_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dirZ_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dirZ_static.hdf5"
+    },
+    {
+      "tag": "nodal_static",
+      "joint_load": "nodal",
+      "analysis": "STATIC",
+      "gradient_coeff": null,
+      "gradient_dir": null,
+      "gradient_bands": null,
+      "febio_rc": 0,
+      "solve_s": 0.346,
+      "load_n": 26383.133775894516,
+      "load_kN": 26.383133775894514,
+      "achilles_kN": 0.0,
+      "n_states": 2,
+      "headline_kind": "final(static)",
+      "gauge_max": 199.51875311620176,
+      "gauge_p95": 158.0867167518852,
+      "max": 221.1446270425916,
+      "p95": 157.89750901197198,
+      "peak_elem": 397,
+      "peak_centroid_mm": [
+        2.913943513227557,
+        -25.04058769840175,
+        -14.761465670651056
+      ],
+      "peak_time_s": 1.0,
+      "final_state": {
+        "time_s": 1.0,
+        "gauge_max": 199.51875311620176,
+        "raw_max": 221.1446270425916
+      },
+      "transient_peak": {
+        "time_s": 1.0,
+        "gauge_max": 199.51875311620176,
+        "raw_max": 221.1446270425916
+      },
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.5356256318197032,
+      "dist_joint_mm": 5.4114332719544365,
+      "dist_plantar_mm": 2.5356256318197032,
+      "dist_achilles_mm": 25.707688076896936,
+      "dist_any_named_node_mm": 2.5356256318197032,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_boundary": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_nodal_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_nodal_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_nodal_static.hdf5"
+    },
+    {
+      "tag": "pressure_dynamic",
+      "joint_load": "pressure",
+      "analysis": "DYNAMIC",
+      "gradient_coeff": null,
+      "gradient_dir": null,
+      "gradient_bands": null,
+      "febio_rc": 0,
+      "solve_s": 0.754,
+      "load_n": 26383.133775894516,
+      "load_kN": 26.383133775894514,
+      "achilles_kN": 0.0,
+      "n_states": 5,
+      "headline_kind": "peak(dynamic)",
+      "gauge_max": 188.78942594412064,
+      "gauge_p95": 138.5868786899971,
+      "max": 217.8513954039462,
+      "p95": 138.22249502039057,
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "peak_time_s": 0.004999999888241291,
+      "final_state": {
+        "time_s": 0.004999999888241291,
+        "gauge_max": 188.78942594412064,
+        "raw_max": 217.8513954039462
+      },
+      "transient_peak": {
+        "time_s": 0.004999999888241291,
+        "gauge_max": 188.78942594412064,
+        "raw_max": 217.8513954039462
+      },
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.992665020188931,
+      "dist_joint_mm": 13.471916461795068,
+      "dist_plantar_mm": 2.992665020188931,
+      "dist_achilles_mm": 47.89474438764986,
+      "dist_any_named_node_mm": 2.992665020188931,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_boundary": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_pressure_dynamic.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_pressure_dynamic.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_pressure_dynamic.hdf5"
+    },
+    {
+      "tag": "gradient_c040_dynamic",
+      "joint_load": "gradient",
+      "analysis": "DYNAMIC",
+      "gradient_coeff": 0.4,
+      "gradient_dir": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "gradient_bands": 6,
+      "febio_rc": 0,
+      "solve_s": 0.839,
+      "load_n": 26383.133775894516,
+      "load_kN": 26.383133775894514,
+      "achilles_kN": 0.0,
+      "n_states": 5,
+      "headline_kind": "peak(dynamic)",
+      "gauge_max": 198.59111483932284,
+      "gauge_p95": 145.60886027241733,
+      "max": 244.86556538576565,
+      "p95": 145.57787145821885,
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "peak_time_s": 0.004999999888241291,
+      "final_state": {
+        "time_s": 0.004999999888241291,
+        "gauge_max": 198.59111483932284,
+        "raw_max": 244.86556538576565
+      },
+      "transient_peak": {
+        "time_s": 0.004999999888241291,
+        "gauge_max": 198.59111483932284,
+        "raw_max": 244.86556538576565
+      },
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.992665020188931,
+      "dist_joint_mm": 13.471916461795068,
+      "dist_plantar_mm": 2.992665020188931,
+      "dist_achilles_mm": 47.89474438764986,
+      "dist_any_named_node_mm": 2.992665020188931,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_boundary": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dynamic.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dynamic.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dynamic.hdf5"
+    }
+  ],
+  "t8_invariant": {
+    "pressure_dynamic": {
+      "dynamic_tag": "pressure_dynamic",
+      "static_tag": "baseline_pressure_static",
+      "t_peak_s": 0.004999999888241291,
+      "peak_gauge": 188.78942594412064,
+      "final_gauge": 188.78942594412064,
+      "static_gauge": 186.7563689967737,
+      "ratio": 1.0108861451862028,
+      "ok": true
+    },
+    "gradient_c040_dynamic": {
+      "dynamic_tag": "gradient_c040_dynamic",
+      "static_tag": "gradient_c040_static",
+      "t_peak_s": 0.004999999888241291,
+      "peak_gauge": 198.59111483932284,
+      "final_gauge": 198.59111483932284,
+      "static_gauge": 194.67910160764535,
+      "ratio": 1.0200946747718291,
+      "ok": true
+    }
+  }
+}

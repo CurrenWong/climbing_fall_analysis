@@ -1,0 +1,1029 @@
+{
+  "meta": {
+    "generated_at": "2026-10-04 23:21:11",
+    "study": "Phase-S2 单脚 / 不对称落地（逐足 GRF）",
+    "plan_doc": "docs/非垂直落地扩展方案.md",
+    "units": "mm-N-MPa-s",
+    "height_rep_m": 5.0,
+    "meas_heights_m": [
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      10.0
+    ],
+    "mass_kg": 75.337,
+    "foot_loaded": "right (split=(0,1), single_foot_split('r'))",
+    "commands": [
+      "python scripts/opensim_fe/nonvertical_s2.py"
+    ],
+    "measured_vs_modeled": {
+      "measured": [
+        "默认 (0.5,0.5) 链路重跑（ground_reaction→run_dead_drop→joint_reaction）",
+        "单脚（右足承全）在各测点高度的关节反力峰值（OpenSim 正动力学）",
+        "改前轴向缓存 results/opensim_fe/s1_h5_opensim.json",
+        "对称逐高度关节载荷 results/opensim_fe/fracture_matrix.json::loads_n"
+      ],
+      "modeled_assumed": [
+        "单脚首骨折高度：以实测载荷因子(h)（F_single/loads_sym）线性插值后缩放对称载荷（非逐高度重跑）",
+        "逐骨风险 = 纯轴向 1D 名义应力 + 载荷分配（mult·F/(A·σ_c_weak)），忽略弯曲/剪切/偏心",
+        "σ_c_weak / A_section / 载荷倍率均为既有 assumed/measured 口径，绝对值不可信，只看相对",
+        "单脚仍为刚性腿（LEG_JOINTS 锁死），未含姿势/被动刚度（方案 S3）"
+      ]
+    }
+  },
+  "split_interface": {
+    "default_equals_explicit_0.5": true,
+    "foot_forces_reconstructs_default": true,
+    "default_per_foot_forces": false,
+    "single_right": {
+      "split": [
+        0.0,
+        1.0
+      ],
+      "loaded_sides": [
+        "r"
+      ],
+      "peak_share": [
+        0.0,
+        1.0
+      ],
+      "impulse_ns": 789.328186532879,
+      "peak_total_n": 53064.83319174116
+    },
+    "single_left": {
+      "split": [
+        1.0,
+        0.0
+      ],
+      "loaded_sides": [
+        "l"
+      ],
+      "peak_share": [
+        1.0,
+        0.0
+      ]
+    }
+  },
+  "axial_regression": {
+    "cached_file": "results\\opensim_fe\\s1_h5_opensim.json",
+    "measured_default_run": {
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "grf_peak_n": 53064.83319174116,
+      "subtalar_peak_vertical_n": 26383.133775894516,
+      "subtalar_peak_force_n": 26383.13400751009,
+      "subtalar_peak_moment_nm": 20.025092215745726
+    },
+    "cached": {
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "grf_peak_n": 53064.83319174116,
+      "subtalar_peak_vertical_n": 26383.133775894516,
+      "subtalar_peak_force_n": 26383.13400751009,
+      "subtalar_peak_moment_nm": 20.025092215745726
+    },
+    "rel_err": {
+      "impulse_ns": 0.0,
+      "impulse_rel_err": 0.0,
+      "grf_peak_n": 0.0,
+      "subtalar_peak_vertical_n": 0.0,
+      "subtalar_peak_force_n": 0.0,
+      "subtalar_peak_moment_nm": 0.0
+    },
+    "max_rel_err": 0.0,
+    "verdict": "PASS"
+  },
+  "symmetric_peaks_5m": {
+    "subtalar_r": {
+      "peak_vertical_n": 25354.401972520634,
+      "peak_force_n": 25379.568240988225,
+      "peak_moment_nm": 156.72234213399844,
+      "peak_force_time_s": 0.020099999999999518,
+      "subtree_mass_kg": 1.4666
+    },
+    "ankle_r": {
+      "peak_vertical_n": 25266.24913009046,
+      "peak_force_n": 25294.907532369176,
+      "peak_moment_nm": 1440.8453790727924,
+      "peak_force_time_s": 0.020099999999999518,
+      "subtree_mass_kg": 1.5666
+    },
+    "knee_r": {
+      "peak_vertical_n": 22200.3287058299,
+      "peak_force_n": 22402.052600627205,
+      "peak_moment_nm": 1592.2654243377567,
+      "peak_force_time_s": 0.020099999999999518,
+      "subtree_mass_kg": 5.2741
+    },
+    "hip_r": {
+      "peak_vertical_n": 15227.651697700654,
+      "peak_force_n": 15489.011629591978,
+      "peak_moment_nm": 989.4026231791045,
+      "peak_force_time_s": 0.020099999999999518,
+      "subtree_mass_kg": 14.661699999999998
+    },
+    "lumbar": {
+      "peak_vertical_n": 22087.579953288558,
+      "peak_force_n": 22168.124189005604,
+      "peak_moment_nm": 1633.7005459211925,
+      "peak_force_time_s": 0.020099999999999518,
+      "subtree_mass_kg": 34.2366
+    }
+  },
+  "single_peaks_5m": {
+    "subtalar_r": {
+      "peak_vertical_n": 51057.885324600364,
+      "peak_force_n": 51095.79082264861,
+      "peak_moment_nm": 320.24740842664744,
+      "peak_force_time_s": 0.020099999999999518,
+      "subtree_mass_kg": 1.4666
+    },
+    "ankle_r": {
+      "peak_vertical_n": 50911.101560226,
+      "peak_force_n": 50954.46430138965,
+      "peak_moment_nm": 2948.2761136409963,
+      "peak_force_time_s": 0.020099999999999518,
+      "subtree_mass_kg": 1.5666
+    },
+    "knee_r": {
+      "peak_vertical_n": 46164.94548305746,
+      "peak_force_n": 46466.70429762357,
+      "peak_moment_nm": 4755.653838087945,
+      "peak_force_time_s": 0.020099999999999518,
+      "subtree_mass_kg": 5.2741
+    },
+    "hip_r": {
+      "peak_vertical_n": 37272.548967270595,
+      "peak_force_n": 37559.32156125665,
+      "peak_moment_nm": 5466.706041964046,
+      "peak_force_time_s": 0.020099999999999518,
+      "subtree_mass_kg": 14.661699999999998
+    },
+    "lumbar": {
+      "peak_vertical_n": 21178.65771488159,
+      "peak_force_n": 21331.617142475803,
+      "peak_moment_nm": 2385.673540249007,
+      "peak_force_time_s": 0.007840000000000017,
+      "subtree_mass_kg": 34.2366
+    },
+    "subtalar_l": {
+      "peak_vertical_n": 1670.4839136966696,
+      "peak_force_n": 2849.3704502524897,
+      "peak_moment_nm": 309.95083177643494,
+      "peak_force_time_s": 0.020199999999999513,
+      "subtree_mass_kg": 1.4666
+    }
+  },
+  "joint_load_factors_5m": {
+    "subtalar_r": {
+      "sym_vertical_n": 25354.401972520634,
+      "single_vertical_n": 51057.885324600364,
+      "factor": 2.013768077824807,
+      "sym_peak_force_n": 25379.568240988225,
+      "single_peak_force_n": 51095.79082264861
+    },
+    "ankle_r": {
+      "sym_vertical_n": 25266.24913009046,
+      "single_vertical_n": 50911.101560226,
+      "factor": 2.014984547096632,
+      "sym_peak_force_n": 25294.907532369176,
+      "single_peak_force_n": 50954.46430138965
+    },
+    "knee_r": {
+      "sym_vertical_n": 22200.3287058299,
+      "single_vertical_n": 46164.94548305746,
+      "factor": 2.079471258951871,
+      "sym_peak_force_n": 22402.052600627205,
+      "single_peak_force_n": 46466.70429762357
+    },
+    "hip_r": {
+      "sym_vertical_n": 15227.651697700654,
+      "single_vertical_n": 37272.548967270595,
+      "factor": 2.4476885672988358,
+      "sym_peak_force_n": 15489.011629591978,
+      "single_peak_force_n": 37559.32156125665
+    },
+    "lumbar": {
+      "sym_vertical_n": 22087.579953288558,
+      "single_vertical_n": 21178.65771488159,
+      "factor": 0.9588491704238679,
+      "sym_peak_force_n": 22168.124189005604,
+      "single_peak_force_n": 21331.617142475803
+    }
+  },
+  "unloaded_side_5m": {
+    "joint": "subtalar_l",
+    "peak_force_n": 2849.3704502524897,
+    "peak_vertical_n": 1670.4839136966696,
+    "note": "未承力侧（左）在单脚右落地时仅承受子树惯性，非无效值。"
+  },
+  "single_by_height": [
+    {
+      "height_m": 4.0,
+      "grf": {
+        "impulse_ns": 706.3944675297988,
+        "grf_peak_n": 47771.22474693879,
+        "impulse_rel_err": 0.05860425619330045,
+        "loaded_sides": [
+          "r"
+        ],
+        "peak_share": [
+          0.0,
+          1.0
+        ]
+      },
+      "peaks": {
+        "subtalar_r": {
+          "peak_vertical_n": 46130.2638398354,
+          "peak_force_n": 46159.31740199854,
+          "peak_moment_nm": 265.18408372403076,
+          "peak_force_time_s": 0.019659999999999535,
+          "subtree_mass_kg": 1.4666
+        },
+        "ankle_r": {
+          "peak_vertical_n": 46010.389193769945,
+          "peak_force_n": 46043.6450046535,
+          "peak_moment_nm": 2612.375355486634,
+          "peak_force_time_s": 0.019659999999999535,
+          "subtree_mass_kg": 1.5666
+        },
+        "knee_r": {
+          "peak_vertical_n": 42070.2455642188,
+          "peak_force_n": 42301.75889258745,
+          "peak_moment_nm": 3945.788039278317,
+          "peak_force_time_s": 0.019659999999999535,
+          "subtree_mass_kg": 5.2741
+        },
+        "hip_r": {
+          "peak_vertical_n": 34332.92742753883,
+          "peak_force_n": 34554.89596437906,
+          "peak_moment_nm": 4384.669905982346,
+          "peak_force_time_s": 0.019639999999999536,
+          "subtree_mass_kg": 14.661699999999998
+        },
+        "lumbar": {
+          "peak_vertical_n": 18665.701983023006,
+          "peak_force_n": 18801.507148910332,
+          "peak_moment_nm": 1981.4696440885725,
+          "peak_force_time_s": 0.008359999999999996,
+          "subtree_mass_kg": 34.2366
+        },
+        "subtalar_l": {
+          "peak_vertical_n": 1341.6146037710141,
+          "peak_force_n": 2329.040714972804,
+          "peak_moment_nm": 254.91419345454696,
+          "peak_force_time_s": 0.019739999999999532,
+          "subtree_mass_kg": 1.4666
+        }
+      }
+    },
+    {
+      "height_m": 5.0,
+      "grf": {
+        "impulse_ns": 789.328186532879,
+        "grf_peak_n": 53064.83319174116,
+        "impulse_rel_err": 0.05800800006101414,
+        "loaded_sides": [
+          "r"
+        ],
+        "peak_share": [
+          0.0,
+          1.0
+        ]
+      },
+      "peaks": {
+        "subtalar_r": {
+          "peak_vertical_n": 51057.885324600364,
+          "peak_force_n": 51095.79082264861,
+          "peak_moment_nm": 320.24740842664744,
+          "peak_force_time_s": 0.020099999999999518,
+          "subtree_mass_kg": 1.4666
+        },
+        "ankle_r": {
+          "peak_vertical_n": 50911.101560226,
+          "peak_force_n": 50954.46430138965,
+          "peak_moment_nm": 2948.2761136409963,
+          "peak_force_time_s": 0.020099999999999518,
+          "subtree_mass_kg": 1.5666
+        },
+        "knee_r": {
+          "peak_vertical_n": 46164.94548305746,
+          "peak_force_n": 46466.70429762357,
+          "peak_moment_nm": 4755.653838087945,
+          "peak_force_time_s": 0.020099999999999518,
+          "subtree_mass_kg": 5.2741
+        },
+        "hip_r": {
+          "peak_vertical_n": 37272.548967270595,
+          "peak_force_n": 37559.32156125665,
+          "peak_moment_nm": 5466.706041964046,
+          "peak_force_time_s": 0.020099999999999518,
+          "subtree_mass_kg": 14.661699999999998
+        },
+        "lumbar": {
+          "peak_vertical_n": 21178.65771488159,
+          "peak_force_n": 21331.617142475803,
+          "peak_moment_nm": 2385.673540249007,
+          "peak_force_time_s": 0.007840000000000017,
+          "subtree_mass_kg": 34.2366
+        },
+        "subtalar_l": {
+          "peak_vertical_n": 1670.4839136966696,
+          "peak_force_n": 2849.3704502524897,
+          "peak_moment_nm": 309.95083177643494,
+          "peak_force_time_s": 0.020199999999999513,
+          "subtree_mass_kg": 1.4666
+        }
+      }
+    },
+    {
+      "height_m": 6.0,
+      "grf": {
+        "impulse_ns": 864.498257437988,
+        "grf_peak_n": 59379.06324641105,
+        "impulse_rel_err": 0.057803109316695966,
+        "loaded_sides": [
+          "r"
+        ],
+        "peak_share": [
+          0.0,
+          1.0
+        ]
+      },
+      "peaks": {
+        "subtalar_r": {
+          "peak_vertical_n": 56939.97138515317,
+          "peak_force_n": 56988.26422485656,
+          "peak_moment_nm": 383.07152530124455,
+          "peak_force_time_s": 0.020459999999999503,
+          "subtree_mass_kg": 1.4666
+        },
+        "ankle_r": {
+          "peak_vertical_n": 56761.532733037806,
+          "peak_force_n": 56816.75142975806,
+          "peak_moment_nm": 3345.209545937633,
+          "peak_force_time_s": 0.020459999999999503,
+          "subtree_mass_kg": 1.5666
+        },
+        "knee_r": {
+          "peak_vertical_n": 51066.34554550609,
+          "peak_force_n": 51450.89680738144,
+          "peak_moment_nm": 5706.218056311668,
+          "peak_force_time_s": 0.020459999999999503,
+          "subtree_mass_kg": 5.2741
+        },
+        "hip_r": {
+          "peak_vertical_n": 40813.26934211263,
+          "peak_force_n": 41177.08057054784,
+          "peak_moment_nm": 6735.800962450898,
+          "peak_force_time_s": 0.020459999999999503,
+          "subtree_mass_kg": 14.661699999999998
+        },
+        "lumbar": {
+          "peak_vertical_n": 23525.763566920887,
+          "peak_force_n": 23695.42384747526,
+          "peak_moment_nm": 2835.354299418946,
+          "peak_force_time_s": 0.007540000000000018,
+          "subtree_mass_kg": 34.2366
+        },
+        "subtalar_l": {
+          "peak_vertical_n": 2053.4671661918046,
+          "peak_force_n": 3443.025586458935,
+          "peak_moment_nm": 372.4910393727451,
+          "peak_force_time_s": 0.0205399999999995,
+          "subtree_mass_kg": 1.4666
+        }
+      }
+    },
+    {
+      "height_m": 7.0,
+      "grf": {
+        "impulse_ns": 933.3476264384158,
+        "grf_peak_n": 66100.97709237781,
+        "impulse_rel_err": 0.057330474340733906,
+        "loaded_sides": [
+          "r"
+        ],
+        "peak_share": [
+          0.0,
+          1.0
+        ]
+      },
+      "peaks": {
+        "subtalar_r": {
+          "peak_vertical_n": 63189.59046509607,
+          "peak_force_n": 63249.1343599859,
+          "peak_moment_nm": 450.87200841761637,
+          "peak_force_time_s": 0.020659999999999495,
+          "subtree_mass_kg": 1.4666
+        },
+        "ankle_r": {
+          "peak_vertical_n": 62976.65966430163,
+          "peak_force_n": 63044.71527195068,
+          "peak_moment_nm": 3770.374610068445,
+          "peak_force_time_s": 0.020659999999999495,
+          "subtree_mass_kg": 1.5666
+        },
+        "knee_r": {
+          "peak_vertical_n": 56250.22611066307,
+          "peak_force_n": 56724.81417487232,
+          "peak_moment_nm": 6750.320981898636,
+          "peak_force_time_s": 0.020659999999999495,
+          "subtree_mass_kg": 5.2741
+        },
+        "hip_r": {
+          "peak_vertical_n": 44562.1293550422,
+          "peak_force_n": 44987.47850888646,
+          "peak_moment_nm": 8138.951847782333,
+          "peak_force_time_s": 0.020659999999999495,
+          "subtree_mass_kg": 14.661699999999998
+        },
+        "lumbar": {
+          "peak_vertical_n": 25738.688637522468,
+          "peak_force_n": 25924.506533445463,
+          "peak_moment_nm": 3305.515063594566,
+          "peak_force_time_s": 0.007260000000000017,
+          "subtree_mass_kg": 34.2366
+        },
+        "subtalar_l": {
+          "peak_vertical_n": 2480.413301574439,
+          "peak_force_n": 4086.2205961986724,
+          "peak_moment_nm": 439.99714709390116,
+          "peak_force_time_s": 0.02073999999999949,
+          "subtree_mass_kg": 1.4666
+        }
+      }
+    },
+    {
+      "height_m": 8.0,
+      "grf": {
+        "impulse_ns": 997.5948374428579,
+        "grf_peak_n": 72912.08869807719,
+        "impulse_rel_err": 0.05712304818892133,
+        "loaded_sides": [
+          "r"
+        ],
+        "peak_share": [
+          0.0,
+          1.0
+        ]
+      },
+      "peaks": {
+        "subtalar_r": {
+          "peak_vertical_n": 69500.19308438743,
+          "peak_force_n": 69571.48388299566,
+          "peak_moment_nm": 522.1044171255048,
+          "peak_force_time_s": 0.02079999999999949,
+          "subtree_mass_kg": 1.4666
+        },
+        "ankle_r": {
+          "peak_vertical_n": 69250.80905771597,
+          "peak_force_n": 69332.26171831095,
+          "peak_moment_nm": 4206.447606814685,
+          "peak_force_time_s": 0.02079999999999949,
+          "subtree_mass_kg": 1.5666
+        },
+        "knee_r": {
+          "peak_vertical_n": 61439.46193849468,
+          "peak_force_n": 62008.41161639262,
+          "peak_moment_nm": 7861.291090861864,
+          "peak_force_time_s": 0.02079999999999949,
+          "subtree_mass_kg": 5.2741
+        },
+        "hip_r": {
+          "peak_vertical_n": 48226.4615110711,
+          "peak_force_n": 48765.498778144974,
+          "peak_moment_nm": 9645.383712373956,
+          "peak_force_time_s": 0.02079999999999949,
+          "subtree_mass_kg": 14.661699999999998
+        },
+        "lumbar": {
+          "peak_vertical_n": 27841.5599708444,
+          "peak_force_n": 28042.796060308257,
+          "peak_moment_nm": 3779.7716626842202,
+          "peak_force_time_s": 0.007060000000000017,
+          "subtree_mass_kg": 34.2366
+        },
+        "subtalar_l": {
+          "peak_vertical_n": 2946.981209372011,
+          "peak_force_n": 4765.462559141431,
+          "peak_moment_nm": 511.0790000149846,
+          "peak_force_time_s": 0.020899999999999485,
+          "subtree_mass_kg": 1.4666
+        }
+      }
+    },
+    {
+      "height_m": 10.0,
+      "grf": {
+        "impulse_ns": 1115.2138060110053,
+        "grf_peak_n": 86149.4448330305,
+        "impulse_rel_err": 0.056998763987946566,
+        "loaded_sides": [
+          "r"
+        ],
+        "peak_share": [
+          0.0,
+          1.0
+        ]
+      },
+      "peaks": {
+        "subtalar_r": {
+          "peak_vertical_n": 81664.36792953403,
+          "peak_force_n": 81759.78296197664,
+          "peak_moment_nm": 667.7261666410743,
+          "peak_force_time_s": 0.02099999999999948,
+          "subtree_mass_kg": 1.4666
+        },
+        "ankle_r": {
+          "peak_vertical_n": 81337.15536004874,
+          "peak_force_n": 81446.09926151572,
+          "peak_moment_nm": 5068.4538355282975,
+          "peak_force_time_s": 0.02099999999999948,
+          "subtree_mass_kg": 1.5666
+        },
+        "knee_r": {
+          "peak_vertical_n": 71231.59837056402,
+          "peak_force_n": 71995.4516037404,
+          "peak_moment_nm": 10167.960192633263,
+          "peak_force_time_s": 0.02099999999999948,
+          "subtree_mass_kg": 5.2741
+        },
+        "hip_r": {
+          "peak_vertical_n": 55036.940921407186,
+          "peak_force_n": 55716.84489555586,
+          "peak_moment_nm": 12806.723204158588,
+          "peak_force_time_s": 0.02099999999999948,
+          "subtree_mass_kg": 14.661699999999998
+        },
+        "lumbar": {
+          "peak_vertical_n": 31783.423542599503,
+          "peak_force_n": 32014.118245889502,
+          "peak_moment_nm": 4687.096064141377,
+          "peak_force_time_s": 0.006760000000000016,
+          "subtree_mass_kg": 34.2366
+        },
+        "subtalar_l": {
+          "peak_vertical_n": 3953.169549152115,
+          "peak_force_n": 6163.357367550919,
+          "peak_moment_nm": 656.9029376556989,
+          "peak_force_time_s": 0.021099999999999477,
+          "subtree_mass_kg": 1.4666
+        }
+      }
+    }
+  ],
+  "per_bone_risk_5m": [
+    {
+      "bone": "fibula_r",
+      "part_cn": "腓骨",
+      "joint": "ankle_r",
+      "force_multiplier": 0.23234546642114307,
+      "A_section_mm2": 101.93640134318377,
+      "weak_subregion": "fibula_ends",
+      "sigma_c_weak_mpa": 70.0,
+      "F_sym_vertical_n": 25266.24913009046,
+      "F_single_vertical_n": 50911.101560226,
+      "load_factor_single_over_sym": 2.014984547096632,
+      "risk_sym_5m": 0.8227116349704274,
+      "risk_single_5m": 1.6577512311820164,
+      "risk_factor_single_over_sym": 2.014984547096632,
+      "fracture_sym_5m": false,
+      "fracture_single_5m": true
+    },
+    {
+      "bone": "calcaneus_r",
+      "part_cn": "足部",
+      "joint": "subtalar_r",
+      "force_multiplier": 1.0,
+      "A_section_mm2": 216.00902236993642,
+      "weak_subregion": "calcaneus",
+      "sigma_c_weak_mpa": 150.0,
+      "F_sym_vertical_n": 25354.401972520634,
+      "F_single_vertical_n": 51057.885324600364,
+      "load_factor_single_over_sym": 2.013768077824807,
+      "risk_sym_5m": 0.7825105851087633,
+      "risk_single_5m": 1.5757948368520391,
+      "risk_factor_single_over_sym": 2.013768077824807,
+      "fracture_sym_5m": false,
+      "fracture_single_5m": true
+    },
+    {
+      "bone": "tibia_r",
+      "part_cn": "胫骨",
+      "joint": "ankle_r",
+      "force_multiplier": 0.7676545335788569,
+      "A_section_mm2": 362.64857364930714,
+      "weak_subregion": "tibia_ends",
+      "sigma_c_weak_mpa": 70.0,
+      "F_sym_vertical_n": 25266.24913009046,
+      "F_single_vertical_n": 50911.101560226,
+      "load_factor_single_over_sym": 2.014984547096632,
+      "risk_sym_5m": 0.7640514064176201,
+      "risk_single_5m": 1.5395517771189533,
+      "risk_factor_single_over_sym": 2.0149845470966326,
+      "fracture_sym_5m": false,
+      "fracture_single_5m": true
+    },
+    {
+      "bone": "femur_r",
+      "part_cn": "股骨",
+      "joint": "hip_r",
+      "force_multiplier": 1.0,
+      "A_section_mm2": 404.86538929346074,
+      "weak_subregion": "femoral_neck",
+      "sigma_c_weak_mpa": 80.0,
+      "F_sym_vertical_n": 15227.651697700654,
+      "F_single_vertical_n": 37272.548967270595,
+      "load_factor_single_over_sym": 2.4476885672988358,
+      "risk_sym_5m": 0.4701455131875669,
+      "risk_single_5m": 1.1507697975960516,
+      "risk_factor_single_over_sym": 2.4476885672988358,
+      "fracture_sym_5m": false,
+      "fracture_single_5m": true
+    },
+    {
+      "bone": "T6",
+      "part_cn": "胸椎",
+      "joint": "lumbar",
+      "force_multiplier": 0.5291750503018109,
+      "A_section_mm2": 291.19781141385437,
+      "weak_subregion": "spine",
+      "sigma_c_weak_mpa": 150.0,
+      "F_sym_vertical_n": 22087.579953288558,
+      "F_single_vertical_n": 21178.65771488159,
+      "load_factor_single_over_sym": 0.9588491704238679,
+      "risk_sym_5m": 0.2675889212233883,
+      "risk_single_5m": 0.2565774151296636,
+      "risk_factor_single_over_sym": 0.9588491704238679,
+      "fracture_sym_5m": false,
+      "fracture_single_5m": false
+    },
+    {
+      "bone": "L3",
+      "part_cn": "腰椎",
+      "joint": "lumbar",
+      "force_multiplier": 0.8953722334004024,
+      "A_section_mm2": 692.5966826182083,
+      "weak_subregion": "spine",
+      "sigma_c_weak_mpa": 150.0,
+      "F_sym_vertical_n": 22087.579953288558,
+      "F_single_vertical_n": 21178.65771488159,
+      "load_factor_single_over_sym": 0.9588491704238679,
+      "risk_sym_5m": 0.19036192625530976,
+      "risk_single_5m": 0.18252837507019326,
+      "risk_factor_single_over_sym": 0.9588491704238677,
+      "fracture_sym_5m": false,
+      "fracture_single_5m": false
+    },
+    {
+      "bone": "C5",
+      "part_cn": "颈椎",
+      "joint": "lumbar",
+      "force_multiplier": 0.15090543259557343,
+      "A_section_mm2": 178.8278243982108,
+      "weak_subregion": "spine",
+      "sigma_c_weak_mpa": 150.0,
+      "F_sym_vertical_n": 22087.579953288558,
+      "F_single_vertical_n": 21178.65771488159,
+      "load_factor_single_over_sym": 0.9588491704238679,
+      "risk_sym_5m": 0.12425865751249666,
+      "risk_single_5m": 0.11914531067384095,
+      "risk_factor_single_over_sym": 0.9588491704238679,
+      "fracture_sym_5m": false,
+      "fracture_single_5m": false
+    },
+    {
+      "bone": "R_HIPBONE",
+      "part_cn": "骨盆",
+      "joint": "hip_r",
+      "force_multiplier": 1.0,
+      "A_section_mm2": 1947.6774718138008,
+      "weak_subregion": "pelvis",
+      "sigma_c_weak_mpa": 180.0,
+      "F_sym_vertical_n": 15227.651697700654,
+      "F_single_vertical_n": 37272.548967270595,
+      "load_factor_single_over_sym": 2.4476885672988358,
+      "risk_sym_5m": 0.04343535632131267,
+      "risk_single_5m": 0.10631622508422824,
+      "risk_factor_single_over_sym": 2.4476885672988358,
+      "fracture_sym_5m": false,
+      "fracture_single_5m": false
+    },
+    {
+      "bone": "parietal_r",
+      "part_cn": "颅骨",
+      "joint": "lumbar",
+      "force_multiplier": 0.09456740442655935,
+      "A_section_mm2": 877.5311814302388,
+      "weak_subregion": "skull",
+      "sigma_c_weak_mpa": 160.0,
+      "F_sym_vertical_n": 22087.579953288558,
+      "F_single_vertical_n": 21178.65771488159,
+      "load_factor_single_over_sym": 0.9588491704238679,
+      "risk_sym_5m": 0.01487671571141668,
+      "risk_single_5m": 0.014264526518523607,
+      "risk_factor_single_over_sym": 0.9588491704238681,
+      "fracture_sym_5m": false,
+      "fracture_single_5m": false
+    }
+  ],
+  "first_fracture_projection": [
+    {
+      "bone": "calcaneus_r",
+      "joint": "subtalar_r",
+      "weak_subregion": "calcaneus",
+      "sigma_c_weak_mpa": 150.0,
+      "factor_by_measured_height": {
+        "4": 2.017384614381332,
+        "5": 2.013768077824807,
+        "6": 2.010523068182839,
+        "7": 2.007706362286791,
+        "8": 2.0052274685152627,
+        "10": 2.000860168132802
+      },
+      "first_fracture_sym_m": 8.0,
+      "first_fracture_single_m": 2.0,
+      "first_fracture_single_measured_grid_m": 4.0,
+      "delta_first_fracture_m": 6.0
+    },
+    {
+      "bone": "tibia_r",
+      "joint": "ankle_r",
+      "weak_subregion": "tibia_ends",
+      "sigma_c_weak_mpa": 70.0,
+      "factor_by_measured_height": {
+        "4": 2.0188457386965775,
+        "5": 2.014984547096632,
+        "6": 2.0115218941147974,
+        "7": 2.0085174882773584,
+        "8": 2.0058741086372143,
+        "10": 2.001217436034855
+      },
+      "first_fracture_sym_m": 8.0,
+      "first_fracture_single_m": 2.0,
+      "first_fracture_single_measured_grid_m": 4.0,
+      "delta_first_fracture_m": 6.0
+    },
+    {
+      "bone": "fibula_r",
+      "joint": "ankle_r",
+      "weak_subregion": "fibula_ends",
+      "sigma_c_weak_mpa": 70.0,
+      "factor_by_measured_height": {
+        "4": 2.0188457386965775,
+        "5": 2.014984547096632,
+        "6": 2.0115218941147974,
+        "7": 2.0085174882773584,
+        "8": 2.0058741086372143,
+        "10": 2.001217436034855
+      },
+      "first_fracture_sym_m": 7.0,
+      "first_fracture_single_m": 1.0,
+      "first_fracture_single_measured_grid_m": 4.0,
+      "delta_first_fracture_m": 6.0
+    },
+    {
+      "bone": "femur_r",
+      "joint": "hip_r",
+      "weak_subregion": "femoral_neck",
+      "sigma_c_weak_mpa": 80.0,
+      "factor_by_measured_height": {
+        "4": 2.464945353595251,
+        "5": 2.4476885672988358,
+        "6": 2.433158344574323,
+        "7": 2.422742791012186,
+        "8": 2.41212751008859,
+        "10": 2.4009278676728076
+      },
+      "first_fracture_sym_m": 19.0,
+      "first_fracture_single_m": 4.0,
+      "first_fracture_single_measured_grid_m": 4.0,
+      "delta_first_fracture_m": 15.0
+    },
+    {
+      "bone": "R_HIPBONE",
+      "joint": "hip_r",
+      "weak_subregion": "pelvis",
+      "sigma_c_weak_mpa": 180.0,
+      "factor_by_measured_height": {
+        "4": 2.464945353595251,
+        "5": 2.4476885672988358,
+        "6": 2.433158344574323,
+        "7": 2.422742791012186,
+        "8": 2.41212751008859,
+        "10": 2.4009278676728076
+      },
+      "first_fracture_sym_m": null,
+      "first_fracture_single_m": null,
+      "first_fracture_single_measured_grid_m": null,
+      "delta_first_fracture_m": null
+    },
+    {
+      "bone": "L3",
+      "joint": "lumbar",
+      "weak_subregion": "spine",
+      "sigma_c_weak_mpa": 150.0,
+      "factor_by_measured_height": {
+        "4": 0.9180946142753946,
+        "5": 0.9588491704238679,
+        "6": 0.9730428124849531,
+        "7": 0.9767285003071741,
+        "8": 0.9779189923334703,
+        "10": 0.9860091729124791
+      },
+      "first_fracture_sym_m": null,
+      "first_fracture_single_m": null,
+      "first_fracture_single_measured_grid_m": null,
+      "delta_first_fracture_m": null
+    },
+    {
+      "bone": "T6",
+      "joint": "lumbar",
+      "weak_subregion": "spine",
+      "sigma_c_weak_mpa": 150.0,
+      "factor_by_measured_height": {
+        "4": 0.9180946142753946,
+        "5": 0.9588491704238679,
+        "6": 0.9730428124849531,
+        "7": 0.9767285003071741,
+        "8": 0.9779189923334703,
+        "10": 0.9860091729124791
+      },
+      "first_fracture_sym_m": 47.0,
+      "first_fracture_single_m": 48.0,
+      "first_fracture_single_measured_grid_m": null,
+      "delta_first_fracture_m": -1.0
+    },
+    {
+      "bone": "C5",
+      "joint": "lumbar",
+      "weak_subregion": "spine",
+      "sigma_c_weak_mpa": 150.0,
+      "factor_by_measured_height": {
+        "4": 0.9180946142753946,
+        "5": 0.9588491704238679,
+        "6": 0.9730428124849531,
+        "7": 0.9767285003071741,
+        "8": 0.9779189923334703,
+        "10": 0.9860091729124791
+      },
+      "first_fracture_sym_m": null,
+      "first_fracture_single_m": null,
+      "first_fracture_single_measured_grid_m": null,
+      "delta_first_fracture_m": null
+    },
+    {
+      "bone": "parietal_r",
+      "joint": "lumbar",
+      "weak_subregion": "skull",
+      "sigma_c_weak_mpa": 160.0,
+      "factor_by_measured_height": {
+        "4": 0.9180946142753946,
+        "5": 0.9588491704238679,
+        "6": 0.9730428124849531,
+        "7": 0.9767285003071741,
+        "8": 0.9779189923334703,
+        "10": 0.9860091729124791
+      },
+      "first_fracture_sym_m": null,
+      "first_fracture_single_m": null,
+      "first_fracture_single_measured_grid_m": null,
+      "delta_first_fracture_m": null
+    }
+  ],
+  "ranking": {
+    "order_by_risk5m_sym": [
+      "fibula_r",
+      "calcaneus_r",
+      "tibia_r",
+      "femur_r",
+      "T6",
+      "L3",
+      "C5",
+      "R_HIPBONE",
+      "parietal_r"
+    ],
+    "order_by_risk5m_single": [
+      "fibula_r",
+      "calcaneus_r",
+      "tibia_r",
+      "femur_r",
+      "T6",
+      "L3",
+      "C5",
+      "R_HIPBONE",
+      "parietal_r"
+    ],
+    "order_by_first_fracture_sym": [
+      "fibula_r",
+      "calcaneus_r",
+      "tibia_r",
+      "femur_r",
+      "T6",
+      "L3",
+      "C5",
+      "R_HIPBONE",
+      "parietal_r"
+    ],
+    "order_by_first_fracture_single": [
+      "fibula_r",
+      "calcaneus_r",
+      "tibia_r",
+      "femur_r",
+      "T6",
+      "L3",
+      "C5",
+      "R_HIPBONE",
+      "parietal_r"
+    ],
+    "order_by_risk5m_changed": false,
+    "order_by_first_fracture_changed": false
+  },
+  "asymmetric_api_demo": {
+    "g70_30": {
+      "peak_share": [
+        0.7000000000000001,
+        0.30000000000000004
+      ],
+      "loaded_sides": [
+        "l",
+        "r"
+      ],
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "per_foot_forces": true
+    },
+    "g_time_varying_share": {
+      "share_left_min": 0.2,
+      "share_left_max": 0.8,
+      "peak_share": [
+        0.5062967966339773,
+        0.49370320336602275
+      ],
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "total_max_abs_diff_from_base_n": 7.275957614183426e-12,
+      "total_matches_base_allclose": true
+    }
+  },
+  "axial_subregion_reference": {
+    "ranking": [
+      {
+        "rank": 1,
+        "bone": "fibula_r",
+        "first_fracture_h": 7.0
+      },
+      {
+        "rank": 2,
+        "bone": "calcaneus_r",
+        "first_fracture_h": 8.0
+      },
+      {
+        "rank": 3,
+        "bone": "tibia_r",
+        "first_fracture_h": 8.0
+      },
+      {
+        "rank": 4,
+        "bone": "femur_r",
+        "first_fracture_h": 19.0
+      },
+      {
+        "rank": 5,
+        "bone": "T6",
+        "first_fracture_h": 47.0
+      },
+      {
+        "rank": 6,
+        "bone": "L3",
+        "first_fracture_h": null
+      },
+      {
+        "rank": 7,
+        "bone": "C5",
+        "first_fracture_h": null
+      },
+      {
+        "rank": 8,
+        "bone": "R_HIPBONE",
+        "first_fracture_h": null
+      },
+      {
+        "rank": 9,
+        "bone": "parietal_r",
+        "first_fracture_h": null
+      }
+    ],
+    "note": "既有对称纯轴向+ends 排序（只读对照）"
+  },
+  "assumptions": [
+    "S2 只改 L1 GRF 的逐足接口；不触碰接触本构/摩擦锥/CoP（方案 S4/S5）。",
+    "单脚 = 全部冲量经一足；刚性锁死腿下，偏心加载会引入骨盆转动（实测），故局部载荷因子未必恰为 2。",
+    "单脚首骨折为 modeled（载荷因子沿高度线性插值）；5 m 风险为 measured。",
+    "力链沿用 risk_1d_loadshare 的载荷分配（胫/腓并联 k=E·A/L；中轴骨 mass-above 比）。",
+    "本脚本只读复用既有产物，不调用 FEBio，不覆盖既有产物。"
+  ]
+}

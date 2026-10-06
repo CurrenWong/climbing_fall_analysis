@@ -1,0 +1,1180 @@
+{
+  "meta": {
+    "generated_at": "2026-10-04 23:50:14",
+    "study": "Phase-S5 踝旋后 / 内翻（冠状面）载荷模型",
+    "plan_doc": "docs/非垂直落地扩展方案.md + docs/两篇临床论文启示与建议.md §3 R1",
+    "mechanism_refs": [
+      "paper/Boulder_Dissertation_EN.md §5.2.3 (~L644): foot sink → ankle supination → load rises",
+      "paper/MinerU_markdown_fspor-7-1609133_2106770540625207296.md Discussion (~L313): pad rigidity vs supination"
+    ],
+    "units": "mm-N-MPa-s",
+    "mass_kg": 75.337,
+    "heights_m": [
+      2.0,
+      3.0,
+      3.5,
+      4.5
+    ],
+    "angles_deg": [
+      0.0,
+      15.0,
+      30.0
+    ],
+    "lever_arm_primary_mm": 30.0,
+    "sigma_c_mpa": 70.0,
+    "commands": [
+      "python scripts/opensim_fe/nonvertical_s5_supination.py"
+    ],
+    "measured_vs_modeled": {
+      "measured": [
+        "地面反力 GRF(t) 由 pad.py 1D 接触模型产出（唯一接触物理来源）",
+        "默认轴向链路重跑 vs 缓存 s1_h5_opensim.json（硬门槛）",
+        "轴向踝反力 ankle_r（OpenSim joint_reactions 自由体口径）",
+        "腓骨 A_section（THUMS CORT hex，measured）",
+        "腓骨 I / c（CORT remesh 中段截面，measured）"
+      ],
+      "modeled_assumed": [
+        "F_lat = F_y·sinβ + F_z·cosβ（旋后角把竖直载荷重新指向横向）",
+        "M_inv = F_lat · d（d = CoP→距下轴力臂，默认 assumed 30 mm）",
+        "σ_bend = M_inv·c/I + τ_shear = F_lat/A（1D 梁，线性叠加）",
+        "σ_c = 70 MPa 用作弯曲极限（实为压缩材料强度；拉伸侧仅 30）",
+        "中段皮质截面代理远端腓骨 / 外踝截面（无独立远端截面）"
+      ]
+    }
+  },
+  "interface_regression": {
+    "default_normal": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "default_is_vertical": true,
+    "roll_deg_0_bitwise_equals_default": true,
+    "ground_normal_explicit_bitwise_equals_default": true,
+    "supination_beta0_is_zero": true,
+    "supination_beta0_f_lat_n": 0.0,
+    "supination_beta0_m_inv_nmm": 0.0
+  },
+  "axial_regression": {
+    "cached_file": "results\\opensim_fe\\s1_h5_opensim.json",
+    "measured_default_run": {
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "grf_peak_n": 53064.83319174116,
+      "subtalar_peak_vertical_n": 26383.133775894516,
+      "subtalar_peak_force_n": 26383.13400751009,
+      "subtalar_peak_moment_nm": 20.025092215745726
+    },
+    "cached": {
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "grf_peak_n": 53064.83319174116,
+      "subtalar_peak_vertical_n": 26383.133775894516,
+      "subtalar_peak_force_n": 26383.13400751009,
+      "subtalar_peak_moment_nm": 20.025092215745726
+    },
+    "rel_err": {
+      "impulse_ns": 0.0,
+      "impulse_rel_err": 0.0,
+      "grf_peak_n": 0.0,
+      "subtalar_peak_vertical_n": 0.0,
+      "subtalar_peak_force_n": 0.0,
+      "subtalar_peak_moment_nm": 0.0
+    },
+    "max_rel_err": 0.0,
+    "verdict": "PASS"
+  },
+  "fibula_sections": {
+    "A_section_mm2_route1": 101.93640134318377,
+    "equiv_circle": {
+      "kind": "equivalent_circle",
+      "A_section_mm2": 101.93640134318377,
+      "I_mm4": 826.8918876962899,
+      "c_mm": 5.696258799381752,
+      "source": "risk_1d_bending.json::sections_equivalent_circle.fibula_r (由 measured A_section 反推：r=sqrt(A/pi), I=pi*r^4/4, c=r)"
+    },
+    "real_midshaft": {
+      "kind": "real_midshaft",
+      "A_section_mm2": 82.62131611805981,
+      "I_mm4": 681.8270939696082,
+      "c_mm": 6.315600246716485,
+      "S_weak_mm3": 107.95919110366331,
+      "source": "risk_1d_bending.json::sections_real_midshaft.fibula_r (measured：CORT remesh 中段弱轴二阶矩 + 极值纤维距离)"
+    }
+  },
+  "fibula_force_multiplier": 0.23234546642114307,
+  "axial_baseline_reference": {
+    "fibula_first_fracture_h": 7.0,
+    "paper_range_m": [
+      7,
+      9
+    ],
+    "note": "既有纯轴向+ends 结论（只读对照）：腓骨首骨折 ≈ 7 m"
+  },
+  "measured_heights": [
+    {
+      "height_m": 2.0,
+      "on_pad": false,
+      "grf_peak_total_n": 42263.68493882344,
+      "grf_peak_right_n": 21131.84246941172,
+      "grf_peak_right_vec_n": [
+        0.0,
+        21131.84246941172,
+        0.0
+      ],
+      "impact_speed_ms": 6.2631142413339385,
+      "impulse_rel_err": 0.07659566898425663,
+      "ankle_r_peak_vertical_n": 20239.362827778637,
+      "ankle_r_peak_force_n": 20250.332979249357,
+      "opensim_wall_s": 12.01306962966919
+    },
+    {
+      "height_m": 3.0,
+      "on_pad": false,
+      "grf_peak_total_n": 44246.60922030006,
+      "grf_peak_right_n": 22123.30461015003,
+      "grf_peak_right_vec_n": [
+        0.0,
+        22123.30461015003,
+        0.0
+      ],
+      "impact_speed_ms": 7.6707170460133645,
+      "impulse_rel_err": 0.06522597640783157,
+      "ankle_r_peak_vertical_n": 21150.40961129397,
+      "ankle_r_peak_force_n": 21165.664087977882,
+      "opensim_wall_s": 15.795764684677124
+    },
+    {
+      "height_m": 3.5,
+      "on_pad": false,
+      "grf_peak_total_n": 45791.712433130626,
+      "grf_peak_right_n": 22895.856216565313,
+      "grf_peak_right_vec_n": [
+        0.0,
+        22895.856216565313,
+        0.0
+      ],
+      "impact_speed_ms": 8.285321357678288,
+      "impulse_rel_err": 0.0631011759487754,
+      "ankle_r_peak_vertical_n": 21866.788687151362,
+      "ankle_r_peak_force_n": 21884.79147225174,
+      "opensim_wall_s": 15.724036931991577
+    },
+    {
+      "height_m": 4.5,
+      "on_pad": false,
+      "grf_peak_total_n": 50191.46587894272,
+      "grf_peak_right_n": 25095.73293947136,
+      "grf_peak_right_vec_n": [
+        0.0,
+        25095.73293947136,
+        0.0
+      ],
+      "impact_speed_ms": 9.394671362000908,
+      "impulse_rel_err": 0.05637746567058777,
+      "ankle_r_peak_vertical_n": 23922.543911913453,
+      "ankle_r_peak_force_n": 23947.013293106877,
+      "opensim_wall_s": 15.280893802642822
+    },
+    {
+      "height_m": 2.0,
+      "on_pad": true,
+      "grf_peak_total_n": 34248.79758653132,
+      "grf_peak_right_n": 17124.39879326566,
+      "grf_peak_right_vec_n": [
+        0.0,
+        17124.39879326566,
+        0.0
+      ],
+      "impact_speed_ms": 6.2631142413339385,
+      "impulse_rel_err": 0.09019336965578262,
+      "ankle_r_peak_vertical_n": null
+    },
+    {
+      "height_m": 3.0,
+      "on_pad": true,
+      "grf_peak_total_n": 41864.97082977627,
+      "grf_peak_right_n": 20932.485414888135,
+      "grf_peak_right_vec_n": [
+        0.0,
+        20932.485414888135,
+        0.0
+      ],
+      "impact_speed_ms": 7.6707170460133645,
+      "impulse_rel_err": 0.07400873812212816,
+      "ankle_r_peak_vertical_n": null
+    },
+    {
+      "height_m": 3.5,
+      "on_pad": true,
+      "grf_peak_total_n": 44386.325055670335,
+      "grf_peak_right_n": 22193.162527835168,
+      "grf_peak_right_vec_n": [
+        0.0,
+        22193.162527835168,
+        0.0
+      ],
+      "impact_speed_ms": 8.285321357678288,
+      "impulse_rel_err": 0.07002382286929199,
+      "ankle_r_peak_vertical_n": null
+    },
+    {
+      "height_m": 4.5,
+      "on_pad": true,
+      "grf_peak_total_n": 48608.97180195988,
+      "grf_peak_right_n": 24304.48590097994,
+      "grf_peak_right_vec_n": [
+        0.0,
+        24304.48590097994,
+        0.0
+      ],
+      "impact_speed_ms": 9.394671362000908,
+      "impulse_rel_err": 0.06140980491021364,
+      "ankle_r_peak_vertical_n": null
+    }
+  ],
+  "scenario_hard": [
+    {
+      "height_m": 2.0,
+      "supination_deg": 0.0,
+      "on_pad": false,
+      "F_vert_n": 21131.84246941172,
+      "F_lat_n": 0.0,
+      "M_inv_nmm": 0.0,
+      "M_inv_nm": 0.0,
+      "sigma_bend_mpa": 0.0,
+      "sigma_shear_mpa": 0.0,
+      "sigma_lateral_mpa": 0.0,
+      "sigma_vonmises_mpa": 0.0,
+      "fibula_lateral_risk": 0.0,
+      "fibula_lateral_fracture": false,
+      "axial_fibula_risk_ends": 0.6590277487199715,
+      "combined_risk": 0.6590277487199715,
+      "critical_inversion_deg_this_h": 0.8767926832489679
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 15.0,
+      "on_pad": false,
+      "F_vert_n": 21131.84246941172,
+      "F_lat_n": 5469.323289190035,
+      "M_inv_nmm": 164079.69867570105,
+      "M_inv_nm": 164.07969867570105,
+      "sigma_bend_mpa": 1130.3054743773876,
+      "sigma_shear_mpa": 53.65427087009635,
+      "sigma_lateral_mpa": 1183.9597452474839,
+      "sigma_vonmises_mpa": 1134.119397486568,
+      "fibula_lateral_risk": 16.913710646392627,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": 0.6590277487199715,
+      "combined_risk": 17.572738395112598,
+      "critical_inversion_deg_this_h": 0.8767926832489679
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 30.0,
+      "on_pad": false,
+      "F_vert_n": 21131.84246941172,
+      "F_lat_n": 10565.921234705858,
+      "M_inv_nmm": 316977.63704117574,
+      "M_inv_nm": 316.97763704117574,
+      "sigma_bend_mpa": 2183.582498594071,
+      "sigma_shear_mpa": 103.65209184827059,
+      "sigma_lateral_mpa": 2287.2345904423414,
+      "sigma_vonmises_mpa": 2190.950432255347,
+      "fibula_lateral_risk": 32.67477986346202,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": 0.6590277487199715,
+      "combined_risk": 33.33380761218199,
+      "critical_inversion_deg_this_h": 0.8767926832489679
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 0.0,
+      "on_pad": false,
+      "F_vert_n": 22123.30461015003,
+      "F_lat_n": 0.0,
+      "M_inv_nmm": 0.0,
+      "M_inv_nm": 0.0,
+      "sigma_bend_mpa": 0.0,
+      "sigma_shear_mpa": 0.0,
+      "sigma_lateral_mpa": 0.0,
+      "sigma_vonmises_mpa": 0.0,
+      "fibula_lateral_risk": 0.0,
+      "fibula_lateral_fracture": false,
+      "axial_fibula_risk_ends": 0.6886929667323994,
+      "combined_risk": 0.6886929667323994,
+      "critical_inversion_deg_this_h": 0.8374961072709215
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 15.0,
+      "on_pad": false,
+      "F_vert_n": 22123.30461015003,
+      "F_lat_n": 5725.932573711226,
+      "M_inv_nmm": 171777.97721133678,
+      "M_inv_nm": 171.77797721133678,
+      "sigma_bend_mpa": 1183.3370586766073,
+      "sigma_shear_mpa": 56.171617776009555,
+      "sigma_lateral_mpa": 1239.5086764526168,
+      "sigma_vonmises_mpa": 1187.329923133468,
+      "fibula_lateral_risk": 17.707266806465952,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": 0.6886929667323994,
+      "combined_risk": 18.395959773198353,
+      "critical_inversion_deg_this_h": 0.8374961072709215
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 30.0,
+      "on_pad": false,
+      "F_vert_n": 22123.30461015003,
+      "F_lat_n": 11061.652305075013,
+      "M_inv_nmm": 331849.56915225036,
+      "M_inv_nm": 331.84956915225035,
+      "sigma_bend_mpa": 2286.0316523613546,
+      "sigma_shear_mpa": 108.51523262857147,
+      "sigma_lateral_mpa": 2394.546884989926,
+      "sigma_vonmises_mpa": 2293.7452741608613,
+      "fibula_lateral_risk": 34.20781264271323,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": 0.6886929667323994,
+      "combined_risk": 34.896505609445626,
+      "critical_inversion_deg_this_h": 0.8374961072709215
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 0.0,
+      "on_pad": false,
+      "F_vert_n": 22895.856216565313,
+      "F_lat_n": 0.0,
+      "M_inv_nmm": 0.0,
+      "M_inv_nm": 0.0,
+      "sigma_bend_mpa": 0.0,
+      "sigma_shear_mpa": 0.0,
+      "sigma_lateral_mpa": 0.0,
+      "sigma_vonmises_mpa": 0.0,
+      "fibula_lateral_risk": 0.0,
+      "fibula_lateral_fracture": false,
+      "axial_fibula_risk_ends": 0.7120194762480256,
+      "combined_risk": 0.7120194762480256,
+      "critical_inversion_deg_this_h": 0.809235415290076
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 15.0,
+      "on_pad": false,
+      "F_vert_n": 22895.856216565313,
+      "F_lat_n": 5925.883642776048,
+      "M_inv_nmm": 177776.50928328143,
+      "M_inv_nm": 177.77650928328143,
+      "sigma_bend_mpa": 1224.6594995018322,
+      "sigma_shear_mpa": 58.13314541903138,
+      "sigma_lateral_mpa": 1282.7926449208635,
+      "sigma_vonmises_mpa": 1228.7917958340252,
+      "fibula_lateral_risk": 18.325609213155193,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": 0.7120194762480256,
+      "combined_risk": 19.03762868940322,
+      "critical_inversion_deg_this_h": 0.809235415290076
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 30.0,
+      "on_pad": false,
+      "F_vert_n": 22895.856216565313,
+      "F_lat_n": 11447.928108282655,
+      "M_inv_nmm": 343437.84324847965,
+      "M_inv_nm": 343.4378432484796,
+      "sigma_bend_mpa": 2365.860477958128,
+      "sigma_shear_mpa": 112.30461304732088,
+      "sigma_lateral_mpa": 2478.1650910054486,
+      "sigma_vonmises_mpa": 2373.8434614564176,
+      "fibula_lateral_risk": 35.40235844293498,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": 0.7120194762480256,
+      "combined_risk": 36.114377919183006,
+      "critical_inversion_deg_this_h": 0.809235415290076
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 0.0,
+      "on_pad": false,
+      "F_vert_n": 25095.73293947136,
+      "F_lat_n": 0.0,
+      "M_inv_nmm": 0.0,
+      "M_inv_nm": 0.0,
+      "sigma_bend_mpa": 0.0,
+      "sigma_shear_mpa": 0.0,
+      "sigma_lateral_mpa": 0.0,
+      "sigma_vonmises_mpa": 0.0,
+      "fibula_lateral_risk": 0.0,
+      "fibula_lateral_fracture": false,
+      "axial_fibula_risk_ends": 0.7789583294729311,
+      "combined_risk": 0.7789583294729311,
+      "critical_inversion_deg_this_h": 0.7382942147132375
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 15.0,
+      "on_pad": false,
+      "F_vert_n": 25095.73293947136,
+      "F_lat_n": 6495.253635541853,
+      "M_inv_nmm": 194857.6090662556,
+      "M_inv_nm": 194.8576090662556,
+      "sigma_bend_mpa": 1342.3270765933867,
+      "sigma_shear_mpa": 63.71868684744553,
+      "sigma_lateral_mpa": 1406.0457634408322,
+      "sigma_vonmises_mpa": 1346.8564116922175,
+      "fibula_lateral_risk": 20.086368049154746,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": 0.7789583294729311,
+      "combined_risk": 20.865326378627678,
+      "critical_inversion_deg_this_h": 0.7382942147132375
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 30.0,
+      "on_pad": false,
+      "F_vert_n": 25095.73293947136,
+      "F_lat_n": 12547.866469735678,
+      "M_inv_nmm": 376435.9940920703,
+      "M_inv_nm": 376.4359940920703,
+      "sigma_bend_mpa": 2593.176781217313,
+      "sigma_shear_mpa": 123.09505048634642,
+      "sigma_lateral_mpa": 2716.2718317036592,
+      "sigma_vonmises_mpa": 2601.9267847130695,
+      "fibula_lateral_risk": 38.80388331005228,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": 0.7789583294729311,
+      "combined_risk": 39.582841639525206,
+      "critical_inversion_deg_this_h": 0.7382942147132375
+    }
+  ],
+  "scenario_mat": [
+    {
+      "height_m": 2.0,
+      "supination_deg": 0.0,
+      "on_pad": true,
+      "F_vert_n": 17124.39879326566,
+      "F_lat_n": 0.0,
+      "M_inv_nmm": 0.0,
+      "M_inv_nm": 0.0,
+      "sigma_bend_mpa": 0.0,
+      "sigma_shear_mpa": 0.0,
+      "sigma_lateral_mpa": 0.0,
+      "sigma_vonmises_mpa": 0.0,
+      "fibula_lateral_risk": 0.0,
+      "fibula_lateral_fracture": false,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 1.0820013718048234
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 15.0,
+      "on_pad": true,
+      "F_vert_n": 17124.39879326566,
+      "F_lat_n": 4432.120543627777,
+      "M_inv_nmm": 132963.6163088333,
+      "M_inv_nm": 132.9636163088333,
+      "sigma_bend_mpa": 915.9542869708201,
+      "sigma_shear_mpa": 43.479272224908115,
+      "sigma_lateral_mpa": 959.4335591957282,
+      "sigma_vonmises_mpa": 919.044937508415,
+      "fibula_lateral_risk": 13.706193702796117,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 1.0820013718048234
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 30.0,
+      "on_pad": true,
+      "F_vert_n": 17124.39879326566,
+      "F_lat_n": 8562.199396632828,
+      "M_inv_nmm": 256865.98189898484,
+      "M_inv_nm": 256.86598189898484,
+      "sigma_bend_mpa": 1769.4878029706074,
+      "sigma_shear_mpa": 83.9955039005834,
+      "sigma_lateral_mpa": 1853.4833068711907,
+      "sigma_vonmises_mpa": 1775.4584813192016,
+      "fibula_lateral_risk": 26.478332955302726,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 1.0820013718048234
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 0.0,
+      "on_pad": true,
+      "F_vert_n": 20932.485414888135,
+      "F_lat_n": 0.0,
+      "M_inv_nmm": 0.0,
+      "M_inv_nm": 0.0,
+      "sigma_bend_mpa": 0.0,
+      "sigma_shear_mpa": 0.0,
+      "sigma_lateral_mpa": 0.0,
+      "sigma_vonmises_mpa": 0.0,
+      "fibula_lateral_risk": 0.0,
+      "fibula_lateral_fracture": false,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 0.8851437531101625
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 15.0,
+      "on_pad": true,
+      "F_vert_n": 20932.485414888135,
+      "F_lat_n": 5417.72588670379,
+      "M_inv_nmm": 162531.7766011137,
+      "M_inv_nm": 162.5317766011137,
+      "sigma_bend_mpa": 1119.6422125056447,
+      "sigma_shear_mpa": 53.148098376204445,
+      "sigma_lateral_mpa": 1172.790310881849,
+      "sigma_vonmises_mpa": 1123.4201551990934,
+      "fibula_lateral_risk": 16.75414729831213,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 0.8851437531101625
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 30.0,
+      "on_pad": true,
+      "F_vert_n": 20932.485414888135,
+      "F_lat_n": 10466.242707444066,
+      "M_inv_nmm": 313987.281223322,
+      "M_inv_nm": 313.987281223322,
+      "sigma_bend_mpa": 2162.9826585252704,
+      "sigma_shear_mpa": 102.67424167945592,
+      "sigma_lateral_mpa": 2265.6569002047263,
+      "sigma_vonmises_mpa": 2170.2810833609547,
+      "fibula_lateral_risk": 32.3665271457818,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 0.8851437531101625
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 0.0,
+      "on_pad": true,
+      "F_vert_n": 22193.162527835168,
+      "F_lat_n": 0.0,
+      "M_inv_nmm": 0.0,
+      "M_inv_nm": 0.0,
+      "sigma_bend_mpa": 0.0,
+      "sigma_shear_mpa": 0.0,
+      "sigma_lateral_mpa": 0.0,
+      "sigma_vonmises_mpa": 0.0,
+      "fibula_lateral_risk": 0.0,
+      "fibula_lateral_fracture": false,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 0.83485971502626
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 15.0,
+      "on_pad": true,
+      "F_vert_n": 22193.162527835168,
+      "F_lat_n": 5744.013133259344,
+      "M_inv_nmm": 172320.3939977803,
+      "M_inv_nm": 172.32039399778031,
+      "sigma_bend_mpa": 1187.0736371080625,
+      "sigma_shear_mpa": 56.3489887574242,
+      "sigma_lateral_mpa": 1243.4226258654867,
+      "sigma_vonmises_mpa": 1191.079109681182,
+      "fibula_lateral_risk": 17.76318036950695,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 0.83485971502626
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 30.0,
+      "on_pad": true,
+      "F_vert_n": 22193.162527835168,
+      "F_lat_n": 11096.581263917582,
+      "M_inv_nmm": 332897.43791752745,
+      "M_inv_nm": 332.89743791752744,
+      "sigma_bend_mpa": 2293.25016757915,
+      "sigma_shear_mpa": 108.85788705213676,
+      "sigma_lateral_mpa": 2402.108054631287,
+      "sigma_vonmises_mpa": 2300.9881463888873,
+      "fibula_lateral_risk": 34.31582935187553,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 0.83485971502626
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 0.0,
+      "on_pad": true,
+      "F_vert_n": 24304.48590097994,
+      "F_lat_n": 0.0,
+      "M_inv_nmm": 0.0,
+      "M_inv_nm": 0.0,
+      "sigma_bend_mpa": 0.0,
+      "sigma_shear_mpa": 0.0,
+      "sigma_lateral_mpa": 0.0,
+      "sigma_vonmises_mpa": 0.0,
+      "fibula_lateral_risk": 0.0,
+      "fibula_lateral_fracture": false,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 0.7623312193984401
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 15.0,
+      "on_pad": true,
+      "F_vert_n": 24304.48590097994,
+      "F_lat_n": 6290.463832599306,
+      "M_inv_nmm": 188713.9149779792,
+      "M_inv_nm": 188.71391497797921,
+      "sigma_bend_mpa": 1300.0046496452248,
+      "sigma_shear_mpa": 61.70969103982337,
+      "sigma_lateral_mpa": 1361.7143406850482,
+      "sigma_vonmises_mpa": 1304.3911786745168,
+      "fibula_lateral_risk": 19.453062009786404,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 0.7623312193984401
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 30.0,
+      "on_pad": true,
+      "F_vert_n": 24304.48590097994,
+      "F_lat_n": 12152.242950489968,
+      "M_inv_nmm": 364567.28851469903,
+      "M_inv_nm": 364.56728851469904,
+      "sigma_bend_mpa": 2511.4161307763884,
+      "sigma_shear_mpa": 119.213968615369,
+      "sigma_lateral_mpa": 2630.6300993917575,
+      "sigma_vonmises_mpa": 2519.890254130708,
+      "fibula_lateral_risk": 37.58042999131082,
+      "fibula_lateral_fracture": true,
+      "axial_fibula_risk_ends": null,
+      "combined_risk": null,
+      "critical_inversion_deg_this_h": 0.7623312193984401
+    }
+  ],
+  "sensitivity": [
+    {
+      "height_m": 2.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 15.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 82.03984933785053,
+      "sigma_lateral_mpa": 618.8070080587901,
+      "fibula_lateral_risk": 8.840100115125573,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 15.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 82.03984933785053,
+      "sigma_lateral_mpa": 826.1128608015215,
+      "fibula_lateral_risk": 11.801612297164592,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 15.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 158.48881852058787,
+      "sigma_lateral_mpa": 1195.443341145306,
+      "fibula_lateral_risk": 17.077762016361515,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 15.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 158.48881852058787,
+      "sigma_lateral_mpa": 1595.9274953554714,
+      "fibula_lateral_risk": 22.798964219363878,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 30.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 164.07969867570105,
+      "sigma_lateral_mpa": 1183.9597452474839,
+      "fibula_lateral_risk": 16.913710646392627,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 30.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 164.07969867570105,
+      "sigma_lateral_mpa": 1586.028237150305,
+      "fibula_lateral_risk": 22.657546245004355,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 30.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 316.97763704117574,
+      "sigma_lateral_mpa": 2287.2345904423414,
+      "fibula_lateral_risk": 32.67477986346202,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 30.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 316.97763704117574,
+      "sigma_lateral_mpa": 3063.971270974405,
+      "fibula_lateral_risk": 43.77101815677721,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 45.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 246.1195480135516,
+      "sigma_lateral_mpa": 1749.112482436178,
+      "fibula_lateral_risk": 24.987321177659684,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 45.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 246.1195480135516,
+      "sigma_lateral_mpa": 2345.9436134990883,
+      "fibula_lateral_risk": 33.51348019284412,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 45.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 475.4664555617636,
+      "sigma_lateral_mpa": 3379.025839739377,
+      "fibula_lateral_risk": 48.271797710562524,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 2.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 45.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 475.4664555617636,
+      "sigma_lateral_mpa": 4532.015046593339,
+      "fibula_lateral_risk": 64.74307209419057,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 15.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 85.88898860566839,
+      "sigma_lateral_mpa": 647.8401471143131,
+      "fibula_lateral_risk": 9.254859244490188,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 15.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 85.88898860566839,
+      "sigma_lateral_mpa": 864.8723597258257,
+      "fibula_lateral_risk": 12.355319424654652,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 15.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 165.92478457612518,
+      "sigma_lateral_mpa": 1251.5310588092489,
+      "fibula_lateral_risk": 17.87901512584641,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 15.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 165.92478457612518,
+      "sigma_lateral_mpa": 1670.8050974054888,
+      "fibula_lateral_risk": 23.86864424864984,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 30.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 171.77797721133678,
+      "sigma_lateral_mpa": 1239.5086764526168,
+      "fibula_lateral_risk": 17.707266806465952,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 30.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 171.77797721133678,
+      "sigma_lateral_mpa": 1660.441386574101,
+      "fibula_lateral_risk": 23.720591236772872,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 30.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 331.84956915225035,
+      "sigma_lateral_mpa": 2394.546884989926,
+      "fibula_lateral_risk": 34.20781264271323,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 30.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 331.84956915225035,
+      "sigma_lateral_mpa": 3207.726436662309,
+      "fibula_lateral_risk": 45.82466338089013,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 45.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 257.6669658170052,
+      "sigma_lateral_mpa": 1831.1772057909207,
+      "fibula_lateral_risk": 26.159674368441724,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 45.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 257.6669658170052,
+      "sigma_lateral_mpa": 2456.010413422376,
+      "fibula_lateral_risk": 35.085863048891085,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 45.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 497.77435372837556,
+      "sigma_lateral_mpa": 3537.5627111706035,
+      "fibula_lateral_risk": 50.53661015958005,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.0,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 45.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 497.77435372837556,
+      "sigma_lateral_mpa": 4744.647775919129,
+      "fibula_lateral_risk": 67.78068251313042,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 15.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 88.88825464164071,
+      "sigma_lateral_mpa": 670.4628951699475,
+      "fibula_lateral_risk": 9.578041359570678,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 15.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 88.88825464164071,
+      "sigma_lateral_mpa": 895.0739296370323,
+      "fibula_lateral_risk": 12.786770423386175,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 15.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 171.7189216242398,
+      "sigma_lateral_mpa": 1295.2348520263847,
+      "fibula_lateral_risk": 18.503355028948352,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 15.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 171.7189216242398,
+      "sigma_lateral_mpa": 1729.150050148907,
+      "fibula_lateral_risk": 24.702143573555816,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 30.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 177.77650928328143,
+      "sigma_lateral_mpa": 1282.7926449208635,
+      "fibula_lateral_risk": 18.325609213155193,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 30.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 177.77650928328143,
+      "sigma_lateral_mpa": 1718.4244358138476,
+      "fibula_lateral_risk": 24.548920511626395,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 30.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 343.4378432484796,
+      "sigma_lateral_mpa": 2478.1650910054486,
+      "fibula_lateral_risk": 35.40235844293498,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 30.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 343.4378432484796,
+      "sigma_lateral_mpa": 3319.7410861576327,
+      "fibula_lateral_risk": 47.42487265939475,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 45.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 266.66476392492217,
+      "sigma_lateral_mpa": 1895.1223946717796,
+      "fibula_lateral_risk": 27.07317706673971,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 45.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 266.66476392492217,
+      "sigma_lateral_mpa": 2541.7749419906627,
+      "fibula_lateral_risk": 36.31107059986661,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 45.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 515.1567648727195,
+      "sigma_lateral_mpa": 3661.095329984513,
+      "fibula_lateral_risk": 52.30136185692161,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 3.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 45.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 515.1567648727195,
+      "sigma_lateral_mpa": 4910.332122166359,
+      "fibula_lateral_risk": 70.1476017452337,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 15.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 97.4288045331278,
+      "sigma_lateral_mpa": 734.8822251441388,
+      "fibula_lateral_risk": 10.498317502059127,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 15.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 97.4288045331278,
+      "sigma_lateral_mpa": 981.0743082410839,
+      "fibula_lateral_risk": 14.015347260586914,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 15.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 188.21799704603515,
+      "sigma_lateral_mpa": 1419.683441095003,
+      "fibula_lateral_risk": 20.2811920156429,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 15.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 188.21799704603515,
+      "sigma_lateral_mpa": 1895.2900236774901,
+      "fibula_lateral_risk": 27.075571766821287,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 30.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 194.8576090662556,
+      "sigma_lateral_mpa": 1406.0457634408322,
+      "fibula_lateral_risk": 20.086368049154746,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 30.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 194.8576090662556,
+      "sigma_lateral_mpa": 1883.5338722403717,
+      "fibula_lateral_risk": 26.907626746291026,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 30.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 376.4359940920703,
+      "sigma_lateral_mpa": 2716.2718317036592,
+      "fibula_lateral_risk": 38.80388331005228,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 30.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 376.4359940920703,
+      "sigma_lateral_mpa": 3638.708023774459,
+      "fibula_lateral_risk": 51.981543196777984,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 45.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 292.28641359938337,
+      "sigma_lateral_mpa": 2077.209301737526,
+      "fibula_lateral_risk": 29.67441859625037,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 15.0,
+      "lever_arm_mm": 45.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 292.28641359938337,
+      "sigma_lateral_mpa": 2785.99343623966,
+      "fibula_lateral_risk": 39.79990623199514,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 45.0,
+      "section": "equiv_circle",
+      "M_inv_nm": 564.6539911381055,
+      "sigma_lateral_mpa": 4012.8602223123157,
+      "fibula_lateral_risk": 57.326574604461655,
+      "fibula_lateral_fracture": true
+    },
+    {
+      "height_m": 4.5,
+      "supination_deg": 30.0,
+      "lever_arm_mm": 45.0,
+      "section": "real_midshaft",
+      "M_inv_nm": 564.6539911381055,
+      "sigma_lateral_mpa": 5382.1260238714285,
+      "fibula_lateral_risk": 76.8875146267347,
+      "fibula_lateral_fracture": true
+    }
+  ],
+  "roll_equivalence": {
+    "height_m": 4.5,
+    "rows": [
+      {
+        "beta_deg": 15.0,
+        "roll_route_f_lat_n": 6495.253635541853,
+        "supination_route_f_lat_n": 6495.253635541853,
+        "rel_diff": 0.0
+      },
+      {
+        "beta_deg": 30.0,
+        "roll_route_f_lat_n": 12547.866469735678,
+        "supination_route_f_lat_n": 12547.866469735678,
+        "rel_diff": 0.0
+      }
+    ]
+  },
+  "assumptions": [
+    "旋后角 β 是**载荷模型的输入**（不是 OpenSim 里解锁的 subtalar 自由度）；模型仍为刚性锁死腿（方案 S3 未做）。",
+    "F_lat 由 3D GRF 矢量按旋后角解析；默认 β=0 且地面水平时 F_lat=M_inv=0，逐位复现旧轴向行为。",
+    "d = CoP→距下轴力臂默认 assumed 30 mm（后足横向半宽量级）；无实测 CoP（pad.py 无 CoP），故为 assumed；敏感性覆盖 {15,30,45} mm。",
+    "截面用腓骨**中段皮质**代理**远端/外踝**（无独立远端截面）；外踝略粗 → 偏保守。",
+    "σ_c=70 MPa 是 [Y25] fibula_ends **压缩**材料强度，用作弯曲极限是近似；弯曲拉伸侧更弱（σ_t=30）→ 本口径**低估**拉伸侧风险，结论只会更强。",
+    "1D 梁（Euler-Bernoulli）线性叠加，忽略剪切修正、应力集中、韧带/腱卸载、接触摩擦与能量吸收 —— 上界式筛选，绝对值不可信，只看相对与是否越阈。",
+    "本脚本只读复用既有产物，不调用 FEBio，不覆盖既有产物。"
+  ]
+}

@@ -12,10 +12,16 @@
 
 模型构成：tibia(+spon+marrow) / fibula(+spon) / talus(+spon)
           / calcaneus(+spon) / navicular(+cort+spon)
-        + 胫距软骨(已生成) + 10 组韧带壳
+        + 胫距软骨(已生成) + 距下软骨(A1 接入) + 10 组韧带壳
 
-★ 不建距下关节接触：跟骨被**完全固定**、距骨被**约束** ⇒ 两者无相对运动，
-  接触对不承载（而且它的接触面非 2-流形，是已知阻塞，绕开它）。
+★ 距下关节接触（A1，2026-10-06 接入）：npz 里 `subtalar_talus`/`subtalar_calcaneus`
+  软骨早已生成却从未接进 `.feb` ⇒ 距骨下方只有韧带剪切（伪影 44.8%）。
+  现按 `SUBTALAR` 环境变量接入（默认 auto = npz 有新格式键就接）。
+  几何预检（`temp/pyfebio_demo/a1_subtalar_gap.py`，只测不改）：
+    subtalar 外表面间隙中位 **0.52/0.55 mm**、法向对面（dot 中位 −0.96）
+    ⇒ 比已在跑的 tibiotalar 对（1.00/1.16 mm、−0.91）**更贴合**。
+  ⚠️ 仍存在少量初始穿透（>0.1 mm 的面片 17/584 与 17/688，最大 −0.56/−0.79 mm）
+    —— 与正对照 tibiotalar 同量级（11/174、最大 −1.23 mm）⇒ 一并如实报告。
 """
 from __future__ import annotations
 
@@ -64,6 +70,11 @@ TOPFIX = os.environ.get("TOPFIX", "lateral").strip() or "lateral"
 #   手册 §3.19.1 + 附录 E.2.1：node_data 的 data 支持 ux;uy;uz / Rx;Ry;Rz。
 #   默认关（0）⇒ 不改变既有行为。
 LOG_DATA = os.environ.get("LOG_DATA", "0") == "1"
+
+# ★ A1 载荷路径证据（2026-10-06）：logfile 的 `face_data` 读关节接触面的
+#   `contact gap` / `contact pressure`（手册 §E.2.2）。**默认 0** ⇒ 不动既有
+#   验收；要拿「距下接触力」读数时显式 LOG_CONTACT=1（属附加诊断跑）。
+LOG_CONTACT = os.environ.get("LOG_CONTACT", "0") == "1"
 
 # ★ 加载轴来源：trunc（默认，截断后质心差 = 既有行为）| full（截断前全网格质心差）
 #   动机：TRUNC_MM 截断会移动质心 ⇒ 加载轴被"顺带"转掉 ~12°（实测）。见 [LRN-20261005-060]
@@ -230,6 +241,21 @@ for dom, (key, mat) in BONE_PARTS.items():
 #        + `{j}_is_offset` + `{j}_tie_faces`。**底面脱离骨节点 ⇒ 必须 TIE=1**。
 #        其价值：底面翘曲恒 0、无翻转单元（治「~235 N 上限」）。
 CARTS = ["tibiotalar_tibia", "tibiotalar_talus"]
+# ★ A1（2026-10-06）：距下关节接入开关。默认 auto = npz 含**新格式**键
+#   （`subtalar_*_nodes`，cart_patch 输出）时才接 —— 旧格式 `_offsets` 没在
+#   本管线里验证过，不接（打提示）。SUBTALAR=0 强制关（做基线/消融对照）。
+SUBTALAR = (os.environ.get("SUBTALAR", "auto").strip() or "auto").lower()
+_HAS_SUB = ("subtalar_talus_nodes" in cg.files
+            and "subtalar_calcaneus_nodes" in cg.files)
+if SUBTALAR == "0":
+    pass
+elif SUBTALAR in ("1", "auto", "true", "on") and _HAS_SUB:
+    CARTS += ["subtalar_talus", "subtalar_calcaneus"]
+elif SUBTALAR in ("1", "true", "on"):
+    raise SystemExit("[subtalar] SUBTALAR=1 但 npz 缺 subtalar_*_nodes（新格式）键")
+print(f"[subtalar] 开关={SUBTALAR} 新格式键={_HAS_SUB} "
+      f"⇒ {'接入' if 'subtalar_talus' in CARTS else '不接'}"
+      f"（CARTS={CARTS}）")
 CART_NEW = (os.environ.get("CART_NEW", "").strip() == "1"
             or "tibiotalar_tibia_nodes" in cg.files)
 CN_ISOFF: dict = {}
@@ -605,6 +631,11 @@ if ALIGN_AXIS:
 if POSE_DF or POSE_IE or POSE_TILT or POSE_TILT_ML:
     _FOOT = [d for d in dom_nodes if d.startswith(("talus_", "calcaneus_", "navicular_"))] \
         + [c for c in CARTS if c.endswith("_talus")]
+    # ★ A1 连带修正：距下关节的**两侧**软骨都长在足部组上（距骨 + 跟骨）⇒ 姿势
+    #   旋转必须带上 `subtalar_calcaneus`，否则只转距下距骨侧会把这对接触面撕开
+    #   （tibiotalar 只有距骨侧在足部组 = 正确，因为胫侧留在原处）。
+    if "subtalar_calcaneus" in CARTS:
+        _FOOT.append("subtalar_calcaneus")
     _foot_ids = sorted({i for d in _FOOT for i in dom_nodes[d]})
     _cart_pt = np.array([XYZ[i - 1] for i in sorted(dom_nodes.get(
         "tibiotalar_talus", _foot_ids))])
@@ -1487,10 +1518,15 @@ for j, sel in contact_surfs.items():
     for n, f in enumerate(sel, 1):
         w(f'      <tri3 id="{n}">{",".join(str(x) for x in f)}</tri3>')
     w('    </Surface>')
-w('    <SurfacePair name="tibiotalar_pair">')
-w('      <primary>surf_tibiotalar_tibia</primary>')
-w('      <secondary>surf_tibiotalar_talus</secondary>')
-w('    </SurfacePair>')
+# ★ A1：关节接触对统一定义（与 build_feb.py 的 PAIRS 同序：(pair, primary, secondary)）
+JOINT_PAIRS = [("tibiotalar_pair", "tibiotalar_tibia", "tibiotalar_talus")]
+if "subtalar_talus" in CARTS and "subtalar_calcaneus" in CARTS:
+    JOINT_PAIRS.append(("subtalar_pair", "subtalar_talus", "subtalar_calcaneus"))
+for _pn, _pa, _pb in JOINT_PAIRS:
+    w(f'    <SurfacePair name="{_pn}">')
+    w(f'      <primary>surf_{_pa}</primary>')
+    w(f'      <secondary>surf_{_pb}</secondary>')
+    w('    </SurfacePair>')
 for j, sec in TIE_SEC.items():
     w(f'    <Surface name="tiesurf_{j}">')
     for n, f in enumerate(TIE_PRIM[j], 1):
@@ -1761,16 +1797,28 @@ if (not NO_CONTACT) or TIE_SEC:
     w(f'      <search_radius>{TIE_SRAD}</search_radius>')
     w('    </contact>')
   if not NO_CONTACT:
-    w('    <contact name="tibiotalar" surface_pair="tibiotalar_pair" '
-      'type="sliding-elastic">')
-    w(f'      <laugon>{LAUGON}</laugon>')
-    w(f'      <penalty>{PENALTY}</penalty>')
-    w(f'      <auto_penalty>{0 if LAUGON == "AUGLAG" else 1}</auto_penalty>')
-    w('      <two_pass>0</two_pass>')
-    w(f'      <node_reloc>{NODE_RELOC}</node_reloc>')
-    w('      <symmetric_stiffness>0</symmetric_stiffness>')
-    w('      <tolerance>0.02</tolerance>')
-    w('    </contact>')
+    # ★ A1：关节接触对统一写出。
+    #   · tibiotalar 的参数与旧实现**逐字一致**（LAUGON 原样透传、auto_penalty
+    #     同样的精确比较）⇒ 基线 .feb 不变、零回归。
+    #   · subtalar 默认 AUGLAG（细网格接触 PENALTY 会失败的项目铁律），
+    #     `SUBTALAR_LAUGON` 可覆盖。
+    for _pn, _pa, _pb in JOINT_PAIRS:
+        _nm = _pn[:-5]
+        if _nm == "subtalar":
+            _lg = (os.environ.get("SUBTALAR_LAUGON", "AUGLAG").strip()
+                   or "AUGLAG").upper()
+        else:
+            _lg = LAUGON
+        w(f'    <contact name="{_nm}" surface_pair="{_pn}" '
+          'type="sliding-elastic">')
+        w(f'      <laugon>{_lg}</laugon>')
+        w(f'      <penalty>{PENALTY}</penalty>')
+        w(f'      <auto_penalty>{0 if _lg == "AUGLAG" else 1}</auto_penalty>')
+        w('      <two_pass>0</two_pass>')
+        w(f'      <node_reloc>{NODE_RELOC}</node_reloc>')
+        w('      <symmetric_stiffness>0</symmetric_stiffness>')
+        w('      <tolerance>0.02</tolerance>')
+        w('    </contact>')
   w('  </Contact>')
 _TAG_EARLY = MATSET + ("_" + "_".join(ONLY) if ONLY else "")
 w('  <Output>')
@@ -1791,6 +1839,13 @@ if LOG_DATA:
     w(f'      <node_data data="Rx;Ry;Rz" name="reac_talus" '
       f'file="reac_talus_{_TAG_EARLY}.txt" delim=",">'
       f'{",".join(str(x) for x in ns_of(tal_faces))}</node_data>')
+    if LOG_CONTACT and not NO_CONTACT:
+        # 逐面片接触间隙/压力 ⇒ × 面片面积 可积分出接触力（A1 判据③）
+        _csurfs = [x for x in os.environ.get("LOG_CONTACT_SURF", "").split(",")
+                   if x] or [f"surf_{_pb}" for _pn, _pa, _pb in JOINT_PAIRS]
+        for _sn in _csurfs:
+            w(f'      <face_data data="contact gap;contact pressure" '
+              f'surface="{_sn}" file="cface_{_sn}_{_TAG_EARLY}.txt" delim=","/>')
     w('    </logfile>')
 w('  </Output>')
 if not MULTISTEP:

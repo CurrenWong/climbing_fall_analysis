@@ -48,3 +48,17 @@ memory_file_metadata.json
 .reme_store_v1
 *.weixin-migrate.bak
 agent.json
+ANKLE_600N_TODO.md
+CONV_TODO.md
+
+# --- Large / third-party local assets: 不入库 (2026-10-06) ---
+# temp/          5.8 GB 仿真探针与中间产物（.feb/.log/.xplt 可由脚本再生）
+# paper/         163 MB 文献 PDF / zip（本地资料，非代码）
+# model/AM50_V71_Occupant/  230 MB 丰田 THUMS 第三方模型
+#   含 THUMS_AM50_V71_Occupant_202411.k = 219.4 MB
+#   ⚠️ GitHub 单文件硬上限 100 MB ⇒ 入库即永久 push 失败；且 THUMS 有使用条款
+temp/
+paper/
+model/AM50_V71_Occupant/
+.pytest_cache/
+新目录（基线不动）

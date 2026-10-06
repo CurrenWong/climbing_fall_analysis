@@ -1,0 +1,675 @@
+{
+  "generated_at": "2026-10-04 22:36:45",
+  "scenario": "S1 垫子/地面刚度 -> 首折高度（抱石）",
+  "units": "mm-N-MPa-s；k(N/mm)=FE Winkler；k_pad(N/m)=物理等效",
+  "method": "冻结纯轴向基线（risk_1d_loadshare rows_with_share_parallel）上叠加两个垫子模型：M1=FE 实测 gauge 折减比 R_FE(k)=gauge(spring)/gauge(fixed)（主口径），sigma_pad(h;k)=R_FE(k)·sigma_rigid(h)；M2=串联线性弹簧 R_phys(k_pad)=sqrt(k_pad/(k_pad+k_body))（物理交叉校验）。首折 = 最小 h 使 sigma_pad >= σ_c(弱子区域)。",
+  "inputs": {
+    "risk_1d_loadshare_json": "results\\opensim_fe\\risk_1d_loadshare.json",
+    "fracture_matrix_json": "results\\opensim_fe\\fracture_matrix.json",
+    "plantar_bc_summary_json": "results\\opensim_fe\\plantar_bc_summary.json",
+    "material_strength_source": "src/climbing/bone.py::MATERIAL_STRENGTH_MPA",
+    "share_policy_primary": "rows_with_share_parallel",
+    "k_body_N_per_m": 10000000.0,
+    "k_body_source": "src/climbing/pad.py::hard_surface 默认 1.0e7 N/m"
+  },
+  "heights_m": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "fe_transfer_table": {
+    "source": "results/opensim_fe/plantar_bc_summary.json (FE plantar-BC probe)",
+    "fixed_gauge_max_mpa": 186.7563689967737,
+    "k_N_per_mm": [
+      10.0,
+      100.0,
+      1000.0,
+      10000.0,
+      100000.0,
+      1000000.0
+    ],
+    "gauge_max_mpa": [
+      156.50903841272827,
+      151.896519262805,
+      142.7285259677132,
+      173.43969110369125,
+      184.40387270024954,
+      186.4425566626466
+    ],
+    "ratio_vs_fixed": [
+      0.8380385592923583,
+      0.8133405038809095,
+      0.7642498445136237,
+      0.9286949196719899,
+      0.9874033945446605,
+      0.9983196699753115
+    ],
+    "monotone_non_decreasing": false,
+    "r_min": 0.7642498445136237,
+    "k_at_r_min_N_per_mm": 1000.0,
+    "hardest_k_residual_vs_fixed_pct": 0.16803300246884736
+  },
+  "physics_model": {
+    "formula": "R_phys(k_pad) = sqrt(k_pad / (k_pad + k_body))",
+    "derivation": "F_peak = v0·sqrt(m·k_series)，k_series = k_pad·k_body/(k_pad+k_body)（能量 ½mv²=½k x² 与 F=k x）；R = F_pad/F_rigid = sqrt(k_series/k_body)",
+    "k_body_N_per_m": 10000000.0,
+    "k_grid_N_per_m": [
+      100000.0,
+      300000.0,
+      1000000.0,
+      3000000.0,
+      10000000.0,
+      30000000.0
+    ],
+    "k_pad_equiv_for_fe_best_N_per_m": 14042959.46983697,
+    "k_pad_equiv_for_fe_k1000_N_per_m": 14042959.46983697
+  },
+  "rigid_baseline": {
+    "足部": 8.0,
+    "腓骨": 7.0,
+    "胫骨": 8.0,
+    "股骨": 19.0
+  },
+  "soft_pad_limit": [
+    {
+      "region_cn": "足部",
+      "bone": "calcaneus_r",
+      "first_fracture_rigid_h": 8.0,
+      "first_fracture_best_pad_h": 11.0,
+      "delta_m": 3.0
+    },
+    {
+      "region_cn": "腓骨",
+      "bone": "fibula_r",
+      "first_fracture_rigid_h": 7.0,
+      "first_fracture_best_pad_h": 10.0,
+      "delta_m": 3.0
+    },
+    {
+      "region_cn": "胫骨",
+      "bone": "tibia_r",
+      "first_fracture_rigid_h": 8.0,
+      "first_fracture_best_pad_h": 11.0,
+      "delta_m": 3.0
+    },
+    {
+      "region_cn": "股骨",
+      "bone": "femur_r",
+      "first_fracture_rigid_h": 19.0,
+      "first_fracture_best_pad_h": 31.0,
+      "delta_m": 12.0
+    }
+  ],
+  "bone_curves": [
+    {
+      "region_cn": "足部",
+      "bone": "calcaneus_r",
+      "weak_subregion": "calcaneus",
+      "weak_sigma_c_mpa": 150.0,
+      "sigma_stored_mpa": 150.0,
+      "risk_threshold_rigid": 1.0,
+      "sigma_at_5m_rigid_mpa": 117.37658776631449,
+      "first_fracture_rigid_h": 8.0,
+      "curve_M1_fe_transfer": [
+        {
+          "k_N_per_mm": 10.0,
+          "R_fe": 0.8380385592923583,
+          "risk_threshold": 1.1932625162789674,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 98.36610650633523
+        },
+        {
+          "k_N_per_mm": 30.0,
+          "R_fe": 0.826254592105312,
+          "risk_threshold": 1.2102807168090666,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 96.98294464756954
+        },
+        {
+          "k_N_per_mm": 100.0,
+          "R_fe": 0.8133405038809095,
+          "risk_threshold": 1.2294973571689003,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 95.46713303767602
+        },
+        {
+          "k_N_per_mm": 300.0,
+          "R_fe": 0.7899183068885746,
+          "risk_threshold": 1.2659536958181417,
+          "first_fracture_h": 11.0,
+          "sigma_at_5m_mpa": 92.71791547672532
+        },
+        {
+          "k_N_per_mm": 1000.0,
+          "R_fe": 0.7642498445136237,
+          "risk_threshold": 1.3084726247296918,
+          "first_fracture_h": 11.0,
+          "sigma_at_5m_mpa": 89.70503894994555
+        },
+        {
+          "k_N_per_mm": 3000.0,
+          "R_fe": 0.8427100851056526,
+          "risk_threshold": 1.1866477186808884,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 98.91443426596199
+        },
+        {
+          "k_N_per_mm": 10000.0,
+          "R_fe": 0.9286949196719899,
+          "risk_threshold": 1.0767798755195028,
+          "first_fracture_h": 9.0,
+          "sigma_at_5m_mpa": 109.00704074700971
+        },
+        {
+          "k_N_per_mm": 30000.0,
+          "R_fe": 0.9567059808659163,
+          "risk_threshold": 1.0452532125856453,
+          "first_fracture_h": 8.0,
+          "sigma_at_5m_mpa": 112.29488352966621
+        },
+        {
+          "k_N_per_mm": 100000.0,
+          "R_fe": 0.9874033945446605,
+          "risk_threshold": 1.012757304182804,
+          "first_fracture_h": 8.0,
+          "sigma_at_5m_mpa": 115.8980412005282
+        },
+        {
+          "k_N_per_mm": 1000000.0,
+          "R_fe": 1.0,
+          "risk_threshold": 1.0,
+          "first_fracture_h": 8.0,
+          "sigma_at_5m_mpa": 117.37658776631449
+        },
+        {
+          "k_N_per_mm": null,
+          "R_fe": 1.0,
+          "risk_threshold": 1.0,
+          "first_fracture_h": 8.0,
+          "sigma_at_5m_mpa": 117.37658776631449
+        }
+      ],
+      "curve_M2_physics": [
+        {
+          "k_pad_N_per_m": 100000.0,
+          "R_phys": 0.09950371902099892,
+          "risk_threshold": 10.04987562112089,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 300000.0,
+          "R_phys": 0.1706640371965723,
+          "risk_threshold": 5.859465277082315,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 1000000.0,
+          "R_phys": 0.30151134457776363,
+          "risk_threshold": 3.3166247903554,
+          "first_fracture_h": 46.0
+        },
+        {
+          "k_pad_N_per_m": 3000000.0,
+          "R_phys": 0.4803844614152614,
+          "risk_threshold": 2.0816659994661326,
+          "first_fracture_h": 22.0
+        },
+        {
+          "k_pad_N_per_m": 10000000.0,
+          "R_phys": 0.7071067811865476,
+          "risk_threshold": 1.414213562373095,
+          "first_fracture_h": 12.0
+        },
+        {
+          "k_pad_N_per_m": 30000000.0,
+          "R_phys": 0.8660254037844386,
+          "risk_threshold": 1.1547005383792517,
+          "first_fracture_h": 9.0
+        }
+      ]
+    },
+    {
+      "region_cn": "腓骨",
+      "bone": "fibula_r",
+      "weak_subregion": "fibula_ends",
+      "weak_sigma_c_mpa": 70.0,
+      "sigma_stored_mpa": 160.0,
+      "risk_threshold_rigid": 0.4375,
+      "sigma_at_5m_rigid_mpa": 57.589814447929925,
+      "first_fracture_rigid_h": 7.0,
+      "curve_M1_fe_transfer": [
+        {
+          "k_N_per_mm": 10.0,
+          "R_fe": 0.8380385592923583,
+          "risk_threshold": 0.5220523508720483,
+          "first_fracture_h": 9.0,
+          "sigma_at_5m_mpa": 48.26248512985743
+        },
+        {
+          "k_N_per_mm": 30.0,
+          "R_fe": 0.826254592105312,
+          "risk_threshold": 0.5294978136039666,
+          "first_fracture_h": 9.0,
+          "sigma_at_5m_mpa": 47.58384864609495
+        },
+        {
+          "k_N_per_mm": 100.0,
+          "R_fe": 0.8133405038809095,
+          "risk_threshold": 0.537905093761394,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 46.84012870148741
+        },
+        {
+          "k_N_per_mm": 300.0,
+          "R_fe": 0.7899183068885746,
+          "risk_threshold": 0.5538547419204369,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 45.491248722735975
+        },
+        {
+          "k_N_per_mm": 1000.0,
+          "R_fe": 0.7642498445136237,
+          "risk_threshold": 0.5724567733192402,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 44.01300673739888
+        },
+        {
+          "k_N_per_mm": 3000.0,
+          "R_fe": 0.8427100851056526,
+          "risk_threshold": 0.5191583769228887,
+          "first_fracture_h": 9.0,
+          "sigma_at_5m_mpa": 48.53151743463377
+        },
+        {
+          "k_N_per_mm": 10000.0,
+          "R_fe": 0.9286949196719899,
+          "risk_threshold": 0.4710911955397825,
+          "first_fracture_h": 8.0,
+          "sigma_at_5m_mpa": 53.48336810264509
+        },
+        {
+          "k_N_per_mm": 30000.0,
+          "R_fe": 0.9567059808659163,
+          "risk_threshold": 0.45729828050621985,
+          "first_fracture_h": 8.0,
+          "sigma_at_5m_mpa": 55.096519919292916
+        },
+        {
+          "k_N_per_mm": 100000.0,
+          "R_fe": 0.9874033945446605,
+          "risk_threshold": 0.44308132057997673,
+          "first_fracture_h": 7.0,
+          "sigma_at_5m_mpa": 56.86437827708314
+        },
+        {
+          "k_N_per_mm": 1000000.0,
+          "R_fe": 1.0,
+          "risk_threshold": 0.4375,
+          "first_fracture_h": 7.0,
+          "sigma_at_5m_mpa": 57.589814447929925
+        },
+        {
+          "k_N_per_mm": null,
+          "R_fe": 1.0,
+          "risk_threshold": 0.4375,
+          "first_fracture_h": 7.0,
+          "sigma_at_5m_mpa": 57.589814447929925
+        }
+      ],
+      "curve_M2_physics": [
+        {
+          "k_pad_N_per_m": 100000.0,
+          "R_phys": 0.09950371902099892,
+          "risk_threshold": 4.396820584240389,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 300000.0,
+          "R_phys": 0.1706640371965723,
+          "risk_threshold": 2.5635160587235126,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 1000000.0,
+          "R_phys": 0.30151134457776363,
+          "risk_threshold": 1.4510233457804873,
+          "first_fracture_h": 42.0
+        },
+        {
+          "k_pad_N_per_m": 3000000.0,
+          "R_phys": 0.4803844614152614,
+          "risk_threshold": 0.910728874766433,
+          "first_fracture_h": 20.0
+        },
+        {
+          "k_pad_N_per_m": 10000000.0,
+          "R_phys": 0.7071067811865476,
+          "risk_threshold": 0.6187184335382291,
+          "first_fracture_h": 11.0
+        },
+        {
+          "k_pad_N_per_m": 30000000.0,
+          "R_phys": 0.8660254037844386,
+          "risk_threshold": 0.5051814855409226,
+          "first_fracture_h": 9.0
+        }
+      ]
+    },
+    {
+      "region_cn": "胫骨",
+      "bone": "tibia_r",
+      "weak_subregion": "tibia_ends",
+      "weak_sigma_c_mpa": 70.0,
+      "sigma_stored_mpa": 200.0,
+      "risk_threshold_rigid": 0.35,
+      "sigma_at_5m_rigid_mpa": 53.483598449233405,
+      "first_fracture_rigid_h": 8.0,
+      "curve_M1_fe_transfer": [
+        {
+          "k_N_per_mm": 10.0,
+          "R_fe": 0.8380385592923583,
+          "risk_threshold": 0.4176418806976385,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 44.82131779016657
+        },
+        {
+          "k_N_per_mm": 30.0,
+          "R_fe": 0.826254592105312,
+          "risk_threshold": 0.42359825088317327,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 44.191068820995646
+        },
+        {
+          "k_N_per_mm": 100.0,
+          "R_fe": 0.8133405038809095,
+          "risk_threshold": 0.4303240750091151,
+          "first_fracture_h": 11.0,
+          "sigma_at_5m_mpa": 43.50037691206373
+        },
+        {
+          "k_N_per_mm": 300.0,
+          "R_fe": 0.7899183068885746,
+          "risk_threshold": 0.4430837935363496,
+          "first_fracture_h": 11.0,
+          "sigma_at_5m_mpa": 42.24767353332684
+        },
+        {
+          "k_N_per_mm": 1000.0,
+          "R_fe": 0.7642498445136237,
+          "risk_threshold": 0.4579654186553921,
+          "first_fracture_h": 11.0,
+          "sigma_at_5m_mpa": 40.874831798855716
+        },
+        {
+          "k_N_per_mm": 3000.0,
+          "R_fe": 0.8427100851056526,
+          "risk_threshold": 0.4153267015383109,
+          "first_fracture_h": 10.0,
+          "sigma_at_5m_mpa": 45.07116780091003
+        },
+        {
+          "k_N_per_mm": 10000.0,
+          "R_fe": 0.9286949196719899,
+          "risk_threshold": 0.376872956431826,
+          "first_fracture_h": 9.0,
+          "sigma_at_5m_mpa": 49.66994616557978
+        },
+        {
+          "k_N_per_mm": 30000.0,
+          "R_fe": 0.9567059808659163,
+          "risk_threshold": 0.3658386244049759,
+          "first_fracture_h": 9.0,
+          "sigma_at_5m_mpa": 51.168078514612645
+        },
+        {
+          "k_N_per_mm": 100000.0,
+          "R_fe": 0.9874033945446605,
+          "risk_threshold": 0.35446505646398135,
+          "first_fracture_h": 8.0,
+          "sigma_at_5m_mpa": 52.809886661236604
+        },
+        {
+          "k_N_per_mm": 1000000.0,
+          "R_fe": 1.0,
+          "risk_threshold": 0.35,
+          "first_fracture_h": 8.0,
+          "sigma_at_5m_mpa": 53.483598449233405
+        },
+        {
+          "k_N_per_mm": null,
+          "R_fe": 1.0,
+          "risk_threshold": 0.35,
+          "first_fracture_h": 8.0,
+          "sigma_at_5m_mpa": 53.483598449233405
+        }
+      ],
+      "curve_M2_physics": [
+        {
+          "k_pad_N_per_m": 100000.0,
+          "R_phys": 0.09950371902099892,
+          "risk_threshold": 3.517456467392311,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 300000.0,
+          "R_phys": 0.1706640371965723,
+          "risk_threshold": 2.05081284697881,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 1000000.0,
+          "R_phys": 0.30151134457776363,
+          "risk_threshold": 1.1608186766243898,
+          "first_fracture_h": 48.0
+        },
+        {
+          "k_pad_N_per_m": 3000000.0,
+          "R_phys": 0.4803844614152614,
+          "risk_threshold": 0.7285830998131464,
+          "first_fracture_h": 23.0
+        },
+        {
+          "k_pad_N_per_m": 10000000.0,
+          "R_phys": 0.7071067811865476,
+          "risk_threshold": 0.4949747468305832,
+          "first_fracture_h": 13.0
+        },
+        {
+          "k_pad_N_per_m": 30000000.0,
+          "R_phys": 0.8660254037844386,
+          "risk_threshold": 0.40414518843273806,
+          "first_fracture_h": 10.0
+        }
+      ]
+    },
+    {
+      "region_cn": "股骨",
+      "bone": "femur_r",
+      "weak_subregion": "femoral_neck",
+      "weak_sigma_c_mpa": 80.0,
+      "sigma_stored_mpa": 220.0,
+      "risk_threshold_rigid": 0.36363636363636365,
+      "sigma_at_5m_rigid_mpa": 37.61164105500535,
+      "first_fracture_rigid_h": 19.0,
+      "curve_M1_fe_transfer": [
+        {
+          "k_N_per_mm": 10.0,
+          "R_fe": 0.8380385592923583,
+          "risk_threshold": 0.43391364228326085,
+          "first_fracture_h": 27.0,
+          "sigma_at_5m_mpa": 31.520005482358
+        },
+        {
+          "k_N_per_mm": 30.0,
+          "R_fe": 0.826254592105312,
+          "risk_threshold": 0.44010207883966057,
+          "first_fracture_h": 27.0,
+          "sigma_at_5m_mpa": 31.07679113831486
+        },
+        {
+          "k_N_per_mm": 100.0,
+          "R_fe": 0.8133405038809095,
+          "risk_threshold": 0.44708994806141833,
+          "first_fracture_h": 28.0,
+          "sigma_at_5m_mpa": 30.591071087465956
+        },
+        {
+          "k_N_per_mm": 300.0,
+          "R_fe": 0.7899183068885746,
+          "risk_threshold": 0.46034679847932425,
+          "first_fracture_h": 29.0,
+          "sigma_at_5m_mpa": 29.710123821470628
+        },
+        {
+          "k_N_per_mm": 1000.0,
+          "R_fe": 0.7642498445136237,
+          "risk_threshold": 0.4758082271744334,
+          "first_fracture_h": 31.0,
+          "sigma_at_5m_mpa": 28.744690828190066
+        },
+        {
+          "k_N_per_mm": 3000.0,
+          "R_fe": 0.8427100851056526,
+          "risk_threshold": 0.4315082613385049,
+          "first_fracture_h": 26.0,
+          "sigma_at_5m_mpa": 31.69570923442682
+        },
+        {
+          "k_N_per_mm": 10000.0,
+          "R_fe": 0.9286949196719899,
+          "risk_threshold": 0.3915563183707283,
+          "first_fracture_h": 22.0,
+          "sigma_at_5m_mpa": 34.92973996830992
+        },
+        {
+          "k_N_per_mm": 30000.0,
+          "R_fe": 0.9567059808659163,
+          "risk_threshold": 0.38009207730387107,
+          "first_fracture_h": 21.0,
+          "sigma_at_5m_mpa": 35.98328194750566
+        },
+        {
+          "k_N_per_mm": 100000.0,
+          "R_fe": 0.9874033945446605,
+          "risk_threshold": 0.36827538333920146,
+          "first_fracture_h": 20.0,
+          "sigma_at_5m_mpa": 37.1378620521076
+        },
+        {
+          "k_N_per_mm": 1000000.0,
+          "R_fe": 1.0,
+          "risk_threshold": 0.36363636363636365,
+          "first_fracture_h": 19.0,
+          "sigma_at_5m_mpa": 37.61164105500535
+        },
+        {
+          "k_N_per_mm": null,
+          "R_fe": 1.0,
+          "risk_threshold": 0.36363636363636365,
+          "first_fracture_h": 19.0,
+          "sigma_at_5m_mpa": 37.61164105500535
+        }
+      ],
+      "curve_M2_physics": [
+        {
+          "k_pad_N_per_m": 100000.0,
+          "R_phys": 0.09950371902099892,
+          "risk_threshold": 3.654500225862142,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 300000.0,
+          "R_phys": 0.1706640371965723,
+          "risk_threshold": 2.130714646211751,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 1000000.0,
+          "R_phys": 0.30151134457776363,
+          "risk_threshold": 1.2060453783110545,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 3000000.0,
+          "R_phys": 0.4803844614152614,
+          "risk_threshold": 0.756969454351321,
+          "first_fracture_h": null
+        },
+        {
+          "k_pad_N_per_m": 10000000.0,
+          "R_phys": 0.7071067811865476,
+          "risk_threshold": 0.5142594772265799,
+          "first_fracture_h": 35.0
+        },
+        {
+          "k_pad_N_per_m": 30000000.0,
+          "R_phys": 0.8660254037844386,
+          "risk_threshold": 0.4198911048651824,
+          "first_fracture_h": 25.0
+        }
+      ]
+    }
+  ],
+  "fe_absolute_comparison": {
+    "scale": "FE anat 单骨跟骨尺度（非冻结 1D 尺度，绝对高度不可直接比较）",
+    "fixed_first_fracture_h": 2.1081586888208976,
+    "spring_k1000_first_fracture_h": 5.431528100230156,
+    "height_ratio_k1000_over_fixed": 2.5764322814180716,
+    "note": "FE 外推高度用 anat 扫描真跑 F_subt(h) 反查；本脚本不重跑 FEBio。"
+  },
+  "assumptions": [
+    "冻结基线（纯轴向 σ(h)=risk_by_height×stored σ_c）与子区域强度（足150/腓两端70/胫两端70/股骨颈80）逐位沿用 AXIAL_SUBREGION_REPORT.md；本脚本只加垫子这一维。",
+    "M1 假设垫子按同一折减比 R_FE(k) 折减整条载荷链峰值应力（1D 链线弹性 ⇒ 载荷与应力成比例）。R_FE 是**跟骨局部 gauge** 实测（单骨 THUMS AM50、h=5m、a=0、线弹性后处理、无单元删除），外推到腓/胫/股骨是**假设**，不是实测。",
+    "M1 的 R_FE(k) 非单调（软端峰值在内部/关节面边缘，硬端在跖面边缘；k=1e3 最低 0.764）；k>=1e6 视为刚性极限 R=1；k<10 平推软端 0.838。",
+    "M2 用线性弹簧；真实泡沫是平台+压实非线性，R_phys 只应视为量级/方向校验，若要定量应取相关压缩量下的**割线刚度**。",
+    "绝对首折高度不可移植（[Y25] 范式）；本报告只给相对变化与排序。",
+    "本脚本只读复用既有产物，不调用 FEBio，不重跑 OpenSim 正动力学。"
+  ]
+}

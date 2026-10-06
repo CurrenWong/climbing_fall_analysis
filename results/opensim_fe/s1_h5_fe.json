@@ -1,0 +1,9 @@
+{
+  "height_m": 5.0,
+  "load_n": 26383.133775894516,
+  "von_mises_p95_mpa": 14.972,
+  "von_mises_p99_mpa": 30.269,
+  "von_mises_mean_mpa": 3.802,
+  "von_mises_max_mpa": 179.807,
+  "note": "p95 为稳健判据；峰值受面压/固定边奇异支配，未收敛"
+}

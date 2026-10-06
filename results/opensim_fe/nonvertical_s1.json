@@ -1,0 +1,354 @@
+{
+  "meta": {
+    "generated_at": "2026-10-04 22:43:41",
+    "study": "Phase-S1 非垂直落地方向（矢量通路）",
+    "plan_doc": "docs/非垂直落地扩展方案.md",
+    "units": "mm-N-MPa-s",
+    "height_m": 5.0,
+    "mass_kg": 75.337,
+    "model_mass_kg_actual": 75.337,
+    "commands": [
+      "python scripts/opensim_fe/nonvertical_s1.py --tilt-deg 20"
+    ],
+    "measured_vs_modeled": {
+      "measured": [
+        "GRF 由 pad.py 1D 模型产出（唯一接触物理来源）",
+        "OpenSim 正动力学关节反力（joint_reactions 自由体口径）",
+        "缓存轴向基准 results/opensim_fe/s1_h5_opensim.json"
+      ],
+      "modeled_assumed": [
+        "矢量通路：沿用标量 GRF 大小，仅改方向（方案 §3 L1 最小版），非接触本构重写",
+        "逐骨风险用 Route-1 1D 名义应力 + 载荷分配（A_section/σ_c/质量分数），忽略弯曲/剪切/偏心",
+        "FE 适配器仍只吃 大小×方向；力矩/偏心映射属 S4"
+      ]
+    }
+  },
+  "axial_regression": {
+    "cached_file": "results\\opensim_fe\\s1_h5_opensim.json",
+    "measured_default_run": {
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "grf_peak_n": 53064.83319174116,
+      "subtalar_peak_vertical_n": 26383.133775894516,
+      "subtalar_peak_force_n": 26383.13400751009,
+      "subtalar_peak_moment_nm": 20.025092215745726
+    },
+    "cached": {
+      "impulse_ns": 789.328186532879,
+      "impulse_rel_err": 0.05800800006101414,
+      "grf_peak_n": 53064.83319174116,
+      "subtalar_peak_vertical_n": 26383.133775894516,
+      "subtalar_peak_force_n": 26383.13400751009,
+      "subtalar_peak_moment_nm": 20.025092215745726
+    },
+    "rel_err": {
+      "impulse_ns": 0.0,
+      "impulse_rel_err": 0.0,
+      "grf_peak_n": 0.0,
+      "subtalar_peak_vertical_n": 0.0,
+      "subtalar_peak_force_n": 0.0,
+      "subtalar_peak_moment_nm": 0.0
+    },
+    "max_rel_err": 0.0,
+    "tilt0_vs_default": {
+      "grf_arrays_bitwise_equal": true,
+      "subtalar_peak_vertical_rel_diff": 0.0
+    },
+    "verdict": "PASS"
+  },
+  "tilted_demo": {
+    "tilt_deg": 20.0,
+    "ground_normal": [
+      0.3420201433256687,
+      0.9396926207859084,
+      0.0
+    ],
+    "vertical_fraction": 0.9396926207859084,
+    "grf": {
+      "peak_total_n_axial": 53064.83319174116,
+      "peak_total_n_tilt": 53064.83319174116,
+      "impulse_rel_err_axial": 0.05800800006101414,
+      "impulse_rel_err_tilt": 0.05800800006101414,
+      "impact_speed_ms": 9.90285312422637
+    },
+    "subtalar": {
+      "axial": {
+        "peak_force_n": 25379.568240988225,
+        "peak_vertical_n": 25354.401972520634,
+        "peak_horizontal_x_n": 1139.095440621889,
+        "peak_horizontal_z_n": 1.6405627622061202e-11,
+        "peak_moment_nm": 156.72234213399844,
+        "peak_force_time_s": 0.020099999999999518
+      },
+      "tilt": {
+        "peak_force_n": 21490.380389531812,
+        "peak_vertical_n": 20764.37984800232,
+        "peak_horizontal_x_n": 5542.63755059314,
+        "peak_horizontal_z_n": 2.267964317010484e-11,
+        "peak_moment_nm": 273.63701044322573,
+        "peak_force_time_s": 0.007900000000000015
+      }
+    },
+    "feloadspec": {
+      "call": "transfer(subtalar_n=abs(F_y), subtalar_force=peak_vec, subtalar_moment=peak_mom)",
+      "subtalar_n": 20764.37984800232,
+      "force_vector_n": [
+        -5538.680241235139,
+        -20764.37984800232,
+        -4.21353093031823e-12
+      ],
+      "moment_vector_nm": [
+        3.6911583902923017,
+        -6.096950403879884,
+        76.46028154401743
+      ],
+      "magnitude_n": 21490.380389531812,
+      "direction": [
+        -0.2577283482582322,
+        -0.9662174178227607,
+        -1.9606590734758167e-16
+      ]
+    },
+    "joint_peaks_axial": {
+      "subtalar_r": {
+        "peak_force_n": 25379.568240988225,
+        "peak_vertical_n": 25354.401972520634,
+        "peak_horizontal_x_n": 1139.095440621889,
+        "peak_horizontal_z_n": 1.6405627622061202e-11,
+        "peak_moment_nm": 156.72234213399844,
+        "peak_force_time_s": 0.020099999999999518
+      },
+      "ankle_r": {
+        "peak_force_n": 25294.907532369176,
+        "peak_vertical_n": 25266.24913009046,
+        "peak_horizontal_x_n": 1213.469816739834,
+        "peak_horizontal_z_n": 1.6186306692043258e-11,
+        "peak_moment_nm": 1440.8453790727924,
+        "peak_force_time_s": 0.020099999999999518
+      },
+      "hip_r": {
+        "peak_force_n": 15489.011629591978,
+        "peak_vertical_n": 15227.651697700654,
+        "peak_horizontal_x_n": 2858.054788739799,
+        "peak_horizontal_z_n": 4.301278346066634e-11,
+        "peak_moment_nm": 989.4026231791045,
+        "peak_force_time_s": 0.020099999999999518
+      },
+      "lumbar": {
+        "peak_force_n": 22168.124189005604,
+        "peak_vertical_n": 22087.579953288558,
+        "peak_horizontal_x_n": 1910.2834427006085,
+        "peak_horizontal_z_n": 2.8398616791491804e-11,
+        "peak_moment_nm": 1633.7005459211925,
+        "peak_force_time_s": 0.020099999999999518
+      }
+    },
+    "joint_peaks_tilt": {
+      "subtalar_r": {
+        "peak_force_n": 21490.380389531812,
+        "peak_vertical_n": 20764.37984800232,
+        "peak_horizontal_x_n": 5542.63755059314,
+        "peak_horizontal_z_n": 2.267964317010484e-11,
+        "peak_moment_nm": 273.63701044322573,
+        "peak_force_time_s": 0.007900000000000015
+      },
+      "ankle_r": {
+        "peak_force_n": 21380.72710655572,
+        "peak_vertical_n": 20694.627001052126,
+        "peak_horizontal_x_n": 5377.954979074984,
+        "peak_horizontal_z_n": 2.4212031062229356e-11,
+        "peak_moment_nm": 848.2753221849879,
+        "peak_force_time_s": 0.007880000000000015
+      },
+      "hip_r": {
+        "peak_force_n": 12477.124660053023,
+        "peak_vertical_n": 12215.935954810398,
+        "peak_horizontal_x_n": 5310.63003307633,
+        "peak_horizontal_z_n": 8.327855211339087e-11,
+        "peak_moment_nm": 1527.0819485566874,
+        "peak_force_time_s": 0.007480000000000018
+      },
+      "lumbar": {
+        "peak_force_n": 18014.054808049063,
+        "peak_vertical_n": 17670.217448197032,
+        "peak_horizontal_x_n": 5676.096423617079,
+        "peak_horizontal_z_n": 2.5485391574875397e-11,
+        "peak_moment_nm": 1795.9151905865565,
+        "peak_force_time_s": 0.007380000000000018
+      }
+    },
+    "per_bone_risk": [
+      {
+        "bone": "calcaneus_r",
+        "part_cn": "足部",
+        "joint": "subtalar_r",
+        "force_multiplier": 1.0,
+        "A_section_mm2": 216.00902236993642,
+        "sigma_c_mpa": 150.0,
+        "F_axial_axial_n": 25354.401972520634,
+        "F_axial_tilt_n": 20764.37984800232,
+        "F_mag_axial_n": 25379.568240988225,
+        "F_mag_tilt_n": 21490.380389531812,
+        "risk_axial": 0.7825105851087633,
+        "risk_tilt_vertical": 0.6408491528173703,
+        "risk_tilt_magnitude": 0.6632556410144588,
+        "shift_factor_vertical": 0.8189654747332229,
+        "shift_factor_magnitude": 0.8475995770999968,
+        "fracture_at_5m_axial": false,
+        "fracture_at_5m_tilt": false
+      },
+      {
+        "bone": "fibula_r",
+        "part_cn": "腓骨",
+        "joint": "ankle_r",
+        "force_multiplier": 0.23234546642114307,
+        "A_section_mm2": 101.93640134318377,
+        "sigma_c_mpa": 160.0,
+        "F_axial_axial_n": 25266.24913009046,
+        "F_axial_tilt_n": 20694.627001052126,
+        "F_mag_axial_n": 25294.907532369176,
+        "F_mag_tilt_n": 21380.72710655572,
+        "risk_axial": 0.359936340299562,
+        "risk_tilt_vertical": 0.29481021374685284,
+        "risk_tilt_magnitude": 0.3045842154113897,
+        "shift_factor_vertical": 0.8190620972072254,
+        "shift_factor_magnitude": 0.8462169036832882,
+        "fracture_at_5m_axial": false,
+        "fracture_at_5m_tilt": false
+      },
+      {
+        "bone": "T6",
+        "part_cn": "胸椎",
+        "joint": "lumbar",
+        "force_multiplier": 0.5291750503018109,
+        "A_section_mm2": 291.19781141385437,
+        "sigma_c_mpa": 150.0,
+        "F_axial_axial_n": 22087.579953288558,
+        "F_axial_tilt_n": 17670.217448197032,
+        "F_mag_axial_n": 22168.124189005604,
+        "F_mag_tilt_n": 18014.054808049063,
+        "risk_axial": 0.2675889212233883,
+        "risk_tilt_vertical": 0.2140729964416833,
+        "risk_tilt_magnitude": 0.21823855321131047,
+        "shift_factor_vertical": 0.8000069489535073,
+        "shift_factor_magnitude": 0.8155739490766167,
+        "fracture_at_5m_axial": false,
+        "fracture_at_5m_tilt": false
+      },
+      {
+        "bone": "tibia_r",
+        "part_cn": "胫骨",
+        "joint": "ankle_r",
+        "force_multiplier": 0.7676545335788569,
+        "A_section_mm2": 362.64857364930714,
+        "sigma_c_mpa": 200.0,
+        "F_axial_axial_n": 25266.24913009046,
+        "F_axial_tilt_n": 20694.627001052126,
+        "F_mag_axial_n": 25294.907532369176,
+        "F_mag_tilt_n": 21380.72710655572,
+        "risk_axial": 0.267417992246167,
+        "risk_tilt_vertical": 0.21903194156009112,
+        "risk_tilt_magnitude": 0.22629362538775305,
+        "shift_factor_vertical": 0.8190620972072254,
+        "shift_factor_magnitude": 0.8462169036832883,
+        "fracture_at_5m_axial": false,
+        "fracture_at_5m_tilt": false
+      },
+      {
+        "bone": "L3",
+        "part_cn": "腰椎",
+        "joint": "lumbar",
+        "force_multiplier": 0.8953722334004024,
+        "A_section_mm2": 692.5966826182083,
+        "sigma_c_mpa": 150.0,
+        "F_axial_axial_n": 22087.579953288558,
+        "F_axial_tilt_n": 17670.217448197032,
+        "F_mag_axial_n": 22168.124189005604,
+        "F_mag_tilt_n": 18014.054808049063,
+        "risk_axial": 0.19036192625530976,
+        "risk_tilt_vertical": 0.15229086382042292,
+        "risk_tilt_magnitude": 0.15525422794987467,
+        "shift_factor_vertical": 0.8000069489535073,
+        "shift_factor_magnitude": 0.8155739490766167,
+        "fracture_at_5m_axial": false,
+        "fracture_at_5m_tilt": false
+      },
+      {
+        "bone": "femur_r",
+        "part_cn": "股骨",
+        "joint": "hip_r",
+        "force_multiplier": 1.0,
+        "A_section_mm2": 404.86538929346074,
+        "sigma_c_mpa": 220.0,
+        "F_axial_axial_n": 15227.651697700654,
+        "F_axial_tilt_n": 12215.935954810398,
+        "F_mag_axial_n": 15489.011629591978,
+        "F_mag_tilt_n": 12477.124660053023,
+        "risk_axial": 0.17096200479547888,
+        "risk_tilt_vertical": 0.13714924288706393,
+        "risk_tilt_magnitude": 0.140081628363477,
+        "shift_factor_vertical": 0.8022206048129523,
+        "shift_factor_magnitude": 0.8193728690246471,
+        "fracture_at_5m_axial": false,
+        "fracture_at_5m_tilt": false
+      },
+      {
+        "bone": "C5",
+        "part_cn": "颈椎",
+        "joint": "lumbar",
+        "force_multiplier": 0.15090543259557343,
+        "A_section_mm2": 178.8278243982108,
+        "sigma_c_mpa": 150.0,
+        "F_axial_axial_n": 22087.579953288558,
+        "F_axial_tilt_n": 17670.217448197032,
+        "F_mag_axial_n": 22168.124189005604,
+        "F_mag_tilt_n": 18014.054808049063,
+        "risk_axial": 0.12425865751249666,
+        "risk_tilt_vertical": 0.09940778947763128,
+        "risk_tilt_magnitude": 0.1013421240144257,
+        "shift_factor_vertical": 0.8000069489535074,
+        "shift_factor_magnitude": 0.8155739490766166,
+        "fracture_at_5m_axial": false,
+        "fracture_at_5m_tilt": false
+      },
+      {
+        "bone": "R_HIPBONE",
+        "part_cn": "骨盆",
+        "joint": "hip_r",
+        "force_multiplier": 1.0,
+        "A_section_mm2": 1947.6774718138008,
+        "sigma_c_mpa": 180.0,
+        "F_axial_axial_n": 15227.651697700654,
+        "F_axial_tilt_n": 12215.935954810398,
+        "F_mag_axial_n": 15489.011629591978,
+        "F_mag_tilt_n": 12477.124660053023,
+        "risk_axial": 0.04343535632131267,
+        "risk_tilt_vertical": 0.03484473781834954,
+        "risk_tilt_magnitude": 0.0355897525261018,
+        "shift_factor_vertical": 0.8022206048129523,
+        "shift_factor_magnitude": 0.819372869024647,
+        "fracture_at_5m_axial": false,
+        "fracture_at_5m_tilt": false
+      },
+      {
+        "bone": "parietal_r",
+        "part_cn": "颅骨",
+        "joint": "lumbar",
+        "force_multiplier": 0.09456740442655935,
+        "A_section_mm2": 877.5311814302388,
+        "sigma_c_mpa": 160.0,
+        "F_axial_axial_n": 22087.579953288558,
+        "F_axial_tilt_n": 17670.217448197032,
+        "F_mag_axial_n": 22168.124189005604,
+        "F_mag_tilt_n": 18014.054808049063,
+        "risk_axial": 0.01487671571141668,
+        "risk_tilt_vertical": 0.011901475946739166,
+        "risk_tilt_magnitude": 0.012133061782050251,
+        "shift_factor_vertical": 0.8000069489535074,
+        "shift_factor_magnitude": 0.8155739490766167,
+        "fracture_at_5m_axial": false,
+        "fracture_at_5m_tilt": false
+      }
+    ]
+  }
+}

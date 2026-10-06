@@ -1,0 +1,488 @@
+{
+  "meta": {
+    "generated_at": "2026-10-04 23:09:51",
+    "study": "Phase-S4 — 3D wrench 上 FE + 跖面弹性支撑（opt-in，默认回归不变）",
+    "plan_doc": "docs/非垂直落地扩展方案.md",
+    "units": "mm-N-MPa-s",
+    "mesh": "temp\\opensim_fe\\thums_calcaneus\\calcaneus_r_anatframe.npz",
+    "mesh_kind": "anat (direction C registration)",
+    "gauge_radius_mm": 4.0,
+    "threshold_mpa": 150.0,
+    "tilt_deg": 20.0,
+    "spring_k_N_per_mm": 100.0,
+    "load_side": "regression/axial-baseline = use_rigid=False (PressureLoad, PLANAR_BC 口径); 3D wrench = use_rigid=True (幽灵刚体 RigidForceLoad + RigidMomentLoad)",
+    "commands": [
+      "python scripts/opensim_fe/nonvertical_s4.py"
+    ],
+    "measured_vs_modeled": {
+      "measured": [
+        "open-FE 暂态距下关节峰值（s1_h5_opensim.json）",
+        "S1 20° 倾斜 wrench 力矢量+力矩（nonvertical_s1.json feloadspec）",
+        "PLANAR_BC 改前 fixed 基线 gauge/max/p95（plantar_bc_summary.json）",
+        "FEBio 4.13 STATIC 实解（本脚本 8 次，全部 rc=0）"
+      ],
+      "modeled_assumed": [
+        "把 OpenSim 全局帧的 3D wrench 直接在 FE 帧施加（与既有轴向口径一致）",
+        "3D 力矩 = 幽灵刚体 RigidMomentLoad（值按 N·mm），给力矩时放开承载其的转动 DOF",
+        "压力梯度力矩路径在本曲面关节面病态 → 负结果，不作为主口径",
+        "跖面弹性支撑 = 三向 Winkler 地基（k=100 N/mm，PLANAR_BC 最优点）",
+        "gauge 正则化 R=4 mm；骨折阈值 150 MPa 仅后处理，不做单元删除"
+      ]
+    }
+  },
+  "regression_gate": {
+    "cached": {
+      "source": "results/opensim_fe/plantar_bc_summary.json (cases[fixed])",
+      "gauge_max_mpa": 186.7563689967737,
+      "max_mpa": 213.50277948448795,
+      "p95_mpa": 136.29650339601775
+    },
+    "reproduced": {
+      "gauge_max_mpa": 186.7563689967737,
+      "max_mpa": 213.50277948448795,
+      "p95_mpa": 136.29650339601775
+    },
+    "rel_err": {
+      "gauge_max": 0.0,
+      "max": 0.0,
+      "p95": 0.0
+    },
+    "max_rel_err": 0.0,
+    "verdict": "PASS"
+  },
+  "wrench_representation": {
+    "frame": {
+      "n_facets": 238,
+      "area_mm2": 2495.3348886683507,
+      "centroid_mm": [
+        -1.428186385611247,
+        2.219589465563721,
+        0.572717910188697
+      ],
+      "normal_unit": [
+        -0.1380751746014881,
+        0.8912442893172842,
+        -0.43199405426243753
+      ]
+    },
+    "force": {
+      "vector_n": [
+        -5538.680241235139,
+        -20764.37984800232,
+        -4.21353093031823e-12
+      ],
+      "normal_component_n": -17741.380719376608,
+      "tangential_magnitude_n": 12127.648554311976,
+      "p0_mpa": 7.109819527608334
+    },
+    "gradient": {
+      "moment_nm": [
+        3.6911583902923017,
+        -6.096950403879884,
+        76.46028154401743
+      ],
+      "moment_inplane_nm": [
+        -1.6901719468337675,
+        28.638330183205284,
+        59.62378130876453
+      ],
+      "base_uniform_pressure_mpa": 7.109819527608334,
+      "base_uniform_moment_nm": [
+        -33.944074508876,
+        -6.594242094134891,
+        -10.623561114401474
+      ],
+      "achievable_moment_nm": [
+        3.691158390291981,
+        -6.096950403880286,
+        76.46028154401756
+      ],
+      "dropped_normal_axis_nm": 3.7058782313125086e-13,
+      "moment_residual_nm": 5.305997468537385e-13,
+      "slope_mpa_per_mm": 12.332352206695008,
+      "direction_unit": [
+        0.0016941366235658677,
+        -0.7955629995541252,
+        0.6058685035893049
+      ],
+      "facet_exact": true
+    },
+    "gradient_slope_mpa_per_mm": 12.332352206695008,
+    "gradient_direction_unit": [
+      0.0016941366235658677,
+      -0.7955629995541252,
+      0.6058685035893049
+    ],
+    "pressure_band_range_mpa": [
+      -93.54942379969013,
+      192.87136050949297
+    ],
+    "realized_moment_nm": [
+      31.393834232259845,
+      -1.210091100772297,
+      70.94503825975407
+    ],
+    "pressure_path_ill_conditioned": true
+  },
+  "cases": [
+    {
+      "tag": "axial_baseline_fixed",
+      "plantar_bc": "fixed",
+      "spring_k_N_per_mm": null,
+      "use_rigid": false,
+      "febio_rc": 0,
+      "load_n": 26383.133775894516,
+      "has_force_vector": false,
+      "has_moment": false,
+      "subtalar_force_n": null,
+      "subtalar_moment_nm": null,
+      "max": 213.50277948448795,
+      "p99": 177.220588253663,
+      "p95": 136.29650339601775,
+      "mean": 61.27914329921224,
+      "median": 62.94793828230782,
+      "gauge_max": 186.7563689967737,
+      "gauge_p95": 136.9284968696667,
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.992665020188931,
+      "dist_joint_mm": 13.471916461795068,
+      "dist_plantar_mm": 2.992665020188931,
+      "dist_any_named_node_mm": 2.992665020188931,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_plantar_rim": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_axial_baseline_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_axial_baseline_fixed.xplt",
+      "wall_s": 0.47000575065612793
+    },
+    {
+      "tag": "axial_baseline_spring",
+      "plantar_bc": "spring",
+      "spring_k_N_per_mm": 100.0,
+      "use_rigid": false,
+      "febio_rc": 0,
+      "load_n": 26383.133775894516,
+      "has_force_vector": false,
+      "has_moment": false,
+      "subtalar_force_n": null,
+      "subtalar_moment_nm": null,
+      "max": 151.896519262805,
+      "p99": 135.05217446156834,
+      "p95": 121.95763106030896,
+      "mean": 66.69155745051356,
+      "median": 65.18565134666002,
+      "gauge_max": 151.896519262805,
+      "gauge_p95": 121.7204486665668,
+      "peak_elem": 196,
+      "peak_centroid_mm": [
+        12.546301137990476,
+        7.467541189915366,
+        16.82985568772297
+      ],
+      "nearest_surface": "subtalar_joint",
+      "nearest_surface_dist_mm": 2.482362904658868,
+      "dist_joint_mm": 2.482362904658868,
+      "dist_plantar_mm": 31.524203752873213,
+      "dist_any_named_node_mm": 2.482362904658868,
+      "location_class": "关节面边缘 (joint rim)",
+      "at_plantar_rim": false,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_axial_baseline_spring.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_axial_baseline_spring.xplt",
+      "wall_s": 0.3381233215332031
+    },
+    {
+      "tag": "rigid_axial_fixed",
+      "plantar_bc": "fixed",
+      "spring_k_N_per_mm": null,
+      "use_rigid": true,
+      "febio_rc": 0,
+      "load_n": 26383.133775894516,
+      "has_force_vector": true,
+      "has_moment": false,
+      "subtalar_force_n": [
+        0.0,
+        -26383.133775894516,
+        0.0
+      ],
+      "subtalar_moment_nm": null,
+      "max": 319.3674123830279,
+      "p99": 205.71297260771559,
+      "p95": 87.69054846318012,
+      "mean": 29.43862340557668,
+      "median": 16.08926631043516,
+      "gauge_max": 319.3674123830279,
+      "gauge_p95": 86.58111336219933,
+      "peak_elem": 409,
+      "peak_centroid_mm": [
+        10.913446600885754,
+        -23.17134170588119,
+        -12.920999196005788
+      ],
+      "nearest_surface": "subtalar_joint",
+      "nearest_surface_dist_mm": 3.3155995575354638,
+      "dist_joint_mm": 3.3155995575354638,
+      "dist_plantar_mm": 3.7982987127381502,
+      "dist_any_named_node_mm": 3.3155995575354638,
+      "location_class": "关节面边缘 (joint rim)",
+      "at_plantar_rim": false,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_axial_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_axial_fixed.xplt",
+      "wall_s": 0.28397607803344727
+    },
+    {
+      "tag": "rigid_axial_spring",
+      "plantar_bc": "spring",
+      "spring_k_N_per_mm": 100.0,
+      "use_rigid": true,
+      "febio_rc": 0,
+      "load_n": 26383.133775894516,
+      "has_force_vector": true,
+      "has_moment": false,
+      "subtalar_force_n": [
+        0.0,
+        -26383.133775894516,
+        0.0
+      ],
+      "subtalar_moment_nm": null,
+      "max": 256.9758391467251,
+      "p99": 170.72965312130995,
+      "p95": 129.15770250766252,
+      "mean": 60.59780385220532,
+      "median": 58.73339553058594,
+      "gauge_max": 256.9758391467251,
+      "gauge_p95": 124.90270786530965,
+      "peak_elem": 348,
+      "peak_centroid_mm": [
+        20.40461778991221,
+        -15.681517363681237,
+        -12.451385144815355
+      ],
+      "nearest_surface": "subtalar_joint",
+      "nearest_surface_dist_mm": 3.17886470122794,
+      "dist_joint_mm": 3.17886470122794,
+      "dist_plantar_mm": 12.719911386445654,
+      "dist_any_named_node_mm": 3.17886470122794,
+      "location_class": "关节面边缘 (joint rim)",
+      "at_plantar_rim": false,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_axial_spring.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_axial_spring.xplt",
+      "wall_s": 0.3375394344329834
+    },
+    {
+      "tag": "rigid_tilt_fixed",
+      "plantar_bc": "fixed",
+      "spring_k_N_per_mm": null,
+      "use_rigid": true,
+      "febio_rc": 0,
+      "load_n": 21490.380389531812,
+      "has_force_vector": true,
+      "has_moment": true,
+      "subtalar_force_n": [
+        -5538.680241235139,
+        -20764.37984800232,
+        -4.21353093031823e-12
+      ],
+      "subtalar_moment_nm": [
+        3.6911583902923017,
+        -6.096950403879884,
+        76.46028154401743
+      ],
+      "max": 190.04502720735104,
+      "p99": 148.6827718191915,
+      "p95": 115.98063951960224,
+      "mean": 34.475980578070654,
+      "median": 17.22824534883864,
+      "gauge_max": 189.0493447450595,
+      "gauge_p95": 113.10410853726552,
+      "peak_elem": 397,
+      "peak_centroid_mm": [
+        2.913943513227557,
+        -25.04058769840175,
+        -14.761465670651056
+      ],
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.5356256318197032,
+      "dist_joint_mm": 5.4114332719544365,
+      "dist_plantar_mm": 2.5356256318197032,
+      "dist_any_named_node_mm": 2.5356256318197032,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_plantar_rim": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_fixed.xplt",
+      "wall_s": 0.30269694328308105
+    },
+    {
+      "tag": "rigid_tilt_spring",
+      "plantar_bc": "spring",
+      "spring_k_N_per_mm": 100.0,
+      "use_rigid": true,
+      "febio_rc": 0,
+      "load_n": 21490.380389531812,
+      "has_force_vector": true,
+      "has_moment": true,
+      "subtalar_force_n": [
+        -5538.680241235139,
+        -20764.37984800232,
+        -4.21353093031823e-12
+      ],
+      "subtalar_moment_nm": [
+        3.6911583902923017,
+        -6.096950403879884,
+        76.46028154401743
+      ],
+      "max": 202.94535973319088,
+      "p99": 185.05100979601735,
+      "p95": 148.35672122211162,
+      "mean": 47.887456490004595,
+      "median": 25.5388130587323,
+      "gauge_max": 202.94535973319088,
+      "gauge_p95": 146.0620355045993,
+      "peak_elem": 480,
+      "peak_centroid_mm": [
+        -27.583794590230013,
+        -16.63798424588326,
+        -10.327272247482746
+      ],
+      "nearest_surface": "achilles",
+      "nearest_surface_dist_mm": 3.4910849087650053,
+      "dist_joint_mm": 12.012505832302283,
+      "dist_plantar_mm": 9.47600922636563,
+      "dist_any_named_node_mm": 3.4910849087650053,
+      "location_class": "achilles 边缘",
+      "at_plantar_rim": false,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_spring.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_spring.xplt",
+      "wall_s": 0.4414792060852051
+    },
+    {
+      "tag": "rigid_tilt_nomoment_fixed",
+      "plantar_bc": "fixed",
+      "spring_k_N_per_mm": null,
+      "use_rigid": true,
+      "febio_rc": 0,
+      "load_n": 21490.380389531812,
+      "has_force_vector": true,
+      "has_moment": false,
+      "subtalar_force_n": [
+        -5538.680241235139,
+        -20764.37984800232,
+        -4.21353093031823e-12
+      ],
+      "subtalar_moment_nm": null,
+      "max": 278.74808564455026,
+      "p99": 178.7176106402457,
+      "p95": 81.97448101483083,
+      "mean": 25.781710846353494,
+      "median": 13.628539095086314,
+      "gauge_max": 278.74808564455026,
+      "gauge_p95": 82.19897639318299,
+      "peak_elem": 409,
+      "peak_centroid_mm": [
+        10.913446600885754,
+        -23.17134170588119,
+        -12.920999196005788
+      ],
+      "nearest_surface": "subtalar_joint",
+      "nearest_surface_dist_mm": 3.3155995575354638,
+      "dist_joint_mm": 3.3155995575354638,
+      "dist_plantar_mm": 3.7982987127381502,
+      "dist_any_named_node_mm": 3.3155995575354638,
+      "location_class": "关节面边缘 (joint rim)",
+      "at_plantar_rim": false,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_nomoment_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_nomoment_fixed.xplt",
+      "wall_s": 0.28411102294921875
+    },
+    {
+      "tag": "pressure_tilt_fixed",
+      "plantar_bc": "fixed",
+      "spring_k_N_per_mm": null,
+      "use_rigid": false,
+      "febio_rc": 0,
+      "load_n": 21490.380389531812,
+      "has_force_vector": true,
+      "has_moment": true,
+      "subtalar_force_n": [
+        -5538.680241235139,
+        -20764.37984800232,
+        -4.21353093031823e-12
+      ],
+      "subtalar_moment_nm": [
+        3.6911583902923017,
+        -6.096950403879884,
+        76.46028154401743
+      ],
+      "max": 1272.799482248061,
+      "p99": 932.7199437807931,
+      "p95": 806.1396761436877,
+      "mean": 304.5939872550165,
+      "median": 264.94714737492416,
+      "gauge_max": 1063.8236206731276,
+      "gauge_p95": 804.966130695154,
+      "peak_elem": 377,
+      "peak_centroid_mm": [
+        33.36362916141815,
+        -0.9427441372537118,
+        -16.668439280312484
+      ],
+      "nearest_surface": "plantar",
+      "nearest_surface_dist_mm": 2.992665020188931,
+      "dist_joint_mm": 13.471916461795068,
+      "dist_plantar_mm": 2.992665020188931,
+      "dist_any_named_node_mm": 2.992665020188931,
+      "location_class": "跖面边缘 (plantar rim)",
+      "at_plantar_rim": true,
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_pressure_tilt_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_pressure_tilt_fixed.xplt",
+      "wall_s": 0.37032532691955566
+    }
+  ],
+  "analysis": {
+    "A7_relief_baseline_pressure": {
+      "gauge_max_drop_pct": 18.66594961190905,
+      "max_drop_pct": 28.855015550820482,
+      "p95_change_pct": -10.520352304304048
+    },
+    "A7_relief_rigid_axial": {
+      "gauge_max_drop_pct": 19.535986082848844,
+      "max_drop_pct": 19.535986082848844,
+      "p95_change_pct": 47.288054153172276
+    },
+    "A7_relief_rigid_tilt": {
+      "gauge_max_drop_pct": -7.350469797644998,
+      "max_drop_pct": -6.788040032094478,
+      "p95_change_pct": 27.915074306033127
+    },
+    "tilt_vs_axial_baseline_fixed": {
+      "gauge_ratio": 1.0122778985295298,
+      "max_ratio": 0.8901290543674574,
+      "p95_ratio": 0.8509436165256086
+    },
+    "tilt_vs_rigid_axial_fixed": {
+      "gauge_ratio": 0.5919493893707801,
+      "max_ratio": 0.5950670601902982,
+      "p95_ratio": 1.3226127735795914
+    },
+    "direction_effect_forceonly_fixed": {
+      "axial_gauge": 319.3674123830279,
+      "tilt_nomoment_gauge": 278.74808564455026,
+      "gauge_ratio_tilt_over_axial": 0.8728131764121208
+    },
+    "moment_effect_rigid_tilt_fixed": {
+      "with_moment_gauge": 189.0493447450595,
+      "no_moment_gauge": 278.74808564455026,
+      "gauge_ratio_with_over_without": 0.678208585030889,
+      "note": "带力矩须放开转动 DOF，与无力矩(锁转动)的 BC 不同，力矩效应含 BC 影响"
+    },
+    "pressure_gradient_vs_rigid_tilt_fixed": {
+      "pressure_gauge": 1063.8236206731276,
+      "rigid_gauge": 189.0493447450595,
+      "ratio": 5.627227230582236
+    }
+  }
+}
