@@ -290,7 +290,9 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
 **结论（2026-10-06 晚间修订；取代原「波3/波4 在那之前不启动」）**：接触在**中等压入区间稳健可信**（增强 **~1.6**，穿透≈0）。G7 工况的「**不可复现**」已**解除** —— `laugon="PENALTY"` + `penalty=0.1` ⇒ **复现 ×4**、`rc=0 NORMAL`、力平衡 ≈1e-7，`F_n ≈ 34.4 kN` / `σ_contact ≈ 0.574 MPa` 跨 3 网格漂移 **<0.6 %**；但 **G7 的 σ/σ_law 仍不网格收敛**（4 项独立 FAIL）。
 ⇒ **波3/波4 可以启动，但只准在可信口径内做**：引用一律以 `docs\S5_QUOTABLE.md` 的 **QUOTABLE** 行为准（绝对量 + ξ ≤ 0.25 包线），**任何 σ/σ_law 比值不得作为收敛值**。完整修订见 `S5_contact_contract.md` §4 结论条 6–8。
 
-**未做**：波3（`plantar_bc="contact"` 接进 `febio_model.build_calcaneus_feb` / `thums_feb.py`）、波4（`scripts/opensim_fe/nonvertical_s5_contact.py` + `NONVERTICAL_S5_CONTACT_REPORT.md` + JSON）。
+**状态（2026-10-06 更新）**
+- ✅ **波3 已实现** —— `plantar_bc="contact"`（**opt-in，默认 `"fixed"` 逐字不变**）：`plantar_bc.py` 新增 `BC_KINDS` += `"contact"`、`_build_pad_floor()`、`_apply_contact()`；`febio_model.build_calcaneus_feb` / `thums_feb.build_thums_feb` **签名一行未动**（`plantar_bc` 参数本就存在，只捕获返回值挂 `st.contact`）；`thums_feb_run.py` 新增 `--plantar-bc {fixed,roller,roller_free,spring,contact}`。门禁 **93 / 19+1 / `test_nonvertical_s4` 11 / `test_plantar_contact` 11（新）** 全绿。实测 **FEBio 4.13 的 4.0 schema 不支持 `rigid_wall`**（`<Mesh><rigid_wall>` → `unrecognized tag`），故最小版按 §3.1 走「刚性 body」路径（全节点固定的 `hex8` 薄板）。交付报告：**`docs/S5_wave3_contact.md`**。
+- 🚧 **波4 进行中** —— 设计已 **APPROVED**（**`docs/S5_wave4_design.md`**，§5 十个开放问题全数裁决于 **§5.1**）；实现目标 `scripts/opensim_fe/nonvertical_s5_contact.py` + `NONVERTICAL_S5_CONTACT_REPORT.md` + `nonvertical_s5_contact.json`（⚠️ **不能用 `nonvertical_s5.json`**，该名已被 `nonvertical_s5_supination.py` 占用）。
 
 ---
 
@@ -485,7 +487,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
   重标判据）——**超出方向 C 边界**，需另立方向后再做。
 - 🔭 **非垂直落地扩展 → `docs/非垂直落地扩展方案.md`**：把两端 1D 接口升到 3D、
   透传完整 wrench（中段 `subtalar_reaction` 已是 3D）。**S1（斜向矢量）✅ → S2（单脚）✅ →
-  S3（姿势）✅ → S4（力矩上 FE）✅ 均已实现并回归；S5（FE 脚-垫接触）计划（`docs/S5接触方案.md`）。** 详见 `results/opensim_fe/NONVERTICAL_S*.md`。
+  S3（姿势）✅ → S4（力矩上 FE）✅ 均已实现并回归；S5（FE 脚-垫接触）核心求解器 ✅ + **波3 ✅** / **波4 🚧**（`docs/S5接触方案.md`；取数一律以 `docs/S5_QUOTABLE.md` 为准）。** 详见 `results/opensim_fe/NONVERTICAL_S*.md`。
 - 🧪 **跖面 BC 敏感性实验（已完成）→ `results/opensim_fe/PLANTAR_BC_REPORT.md`**：把跖面从
   **三向全固定**换成 **三向 Winkler 弹簧**（k≈1e3 N/mm）后，gauge **186.8 → 142.7 MPa（降 24%）**、
   峰值**离开跖面棱边**，首次骨折外推 **2.11 → 5.43 m**（**向 [Y25] 7–9 m 靠近但未到达**）。

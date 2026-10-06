@@ -626,8 +626,12 @@ def build_thums_feb(
 
     * ``"fixed"``  : ``BCZeroDisplacement(plantar, x=y=z=1)`` (original);
     * ``"roller"`` : normal-only zero displacement + 2 lateral pins;
+    * ``"roller_free"`` : global-Y zero displacement + very soft tangential springs;
     * ``"spring"`` : 3-direction Winkler foundation with stiffness ``spring_k``
-                     (N/mm) per plantar node.
+                     (N/mm) per plantar node;
+    * ``"contact"`` : **wave-3 minimal** real FEBio contact (plantar facets ⇄ a
+                      fixed numerically-rigid plate stand-in for a pad) + Coulomb
+                      friction (udg NEW PENALTY recipe).  Opt-in; default unchanged.
 
     See :mod:`climbing.coupling.plantar_bc`.
 
@@ -842,6 +846,11 @@ def build_thums_feb(
         kind=plantar_bc,
         spring_k=spring_k,
     )
+    # ``plantar_bc="contact"`` (opt-in): attach the step-level ``<Contact>`` block
+    # returned by ``apply_plantar_bc``.  Default ``"fixed"`` returns no ``"contact"``
+    # key ⇒ the historical deck is bit-for-bit unchanged.
+    if plantar_meta.get("contact") is not None:
+        st.contact = plantar_meta["contact"]
 
     surface_loads: list = []
     nodal_loads: list = []

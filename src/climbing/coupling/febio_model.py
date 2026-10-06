@@ -340,8 +340,11 @@ def build_calcaneus_feb(
         STATIC 载荷步数与每步时长（默认 10×0.1，载荷线性加载到 1.0）。
     plantar_bc:
         跖面 BC 类型：``"fixed"``（默认，三向零位移，原行为）/ ``"roller"``
-        （法向零位移 + 切向销）/ ``"spring"``（三向 Winkler 弹簧，刚度
-        ``spring_k`` N/mm）。见 :mod:`climbing.coupling.plantar_bc`。
+        （法向零位移 + 切向销）/ ``"roller_free"``（诊断变体）/ ``"spring"``
+        （三向 Winkler 弹簧，刚度 ``spring_k`` N/mm）/ ``"contact"``（**波3 最小版**：
+        跖面 ⇄ 对偶固定薄板（数值刚性壁）的真实 FEBio 接触 + Coulomb 摩擦，recipe
+        取 ``pad_contact`` 的 udg NEW PENALTY 配方；**opt-in，默认不变**）。
+        见 :mod:`climbing.coupling.plantar_bc`。
     spring_k:
         Winkler 弹簧刚度 k（N/mm），仅 ``plantar_bc="spring"`` 时使用。
     subtalar_force:
@@ -476,7 +479,7 @@ def build_calcaneus_feb(
     )
 
     bcs: list = []
-    apply_plantar_bc(
+    plantar_meta = apply_plantar_bc(
         model,
         nodes=nodes,
         plantar_local=plantar_nodes,
@@ -487,6 +490,12 @@ def build_calcaneus_feb(
         kind=plantar_bc,
         spring_k=spring_k,
     )
+    # ``plantar_bc="contact"`` (opt-in): the contact interface lives in the step's
+    # ``<Contact>`` block.  ``apply_plantar_bc`` only sees ``model`` (not the step),
+    # so it returns the pyfebio ``Contact`` object here and we attach it.  Default
+    # ``"fixed"`` returns no ``"contact"`` key ⇒ bit-for-bit unchanged deck.
+    if plantar_meta.get("contact") is not None:
+        st.contact = plantar_meta["contact"]
 
     surface_loads = []
     if use_rigid:

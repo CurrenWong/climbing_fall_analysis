@@ -93,6 +93,12 @@ def main(argv: list[str] | None = None) -> int:
                     metavar=("X", "Y", "Z"), help="载荷方向（FE 坐标）")
     ap.add_argument("--no-rigid", action="store_true", help="直接用 PressureLoad (p=F/A)")
     ap.add_argument("--achilles-n", type=float, default=0.0, help="跟腱牵引力 (N)")
+    ap.add_argument(
+        "--plantar-bc",
+        choices=("fixed", "roller", "roller_free", "spring", "contact"),
+        default="fixed",
+        help="跖面 BC（默认 fixed，逐位保留历史行为）；contact = 波3 最小版刚性壁接触",
+    )
     ap.add_argument("--time-steps", type=int, default=1, help="STATIC 载荷步数")
     ap.add_argument("--gauge-radius", type=float, default=5.0, help="正则化半径 (mm)")
     args = ap.parse_args(argv)
@@ -131,9 +137,10 @@ def main(argv: list[str] | None = None) -> int:
         mesh, FEB,
         load_n=args.load_n, load_dir=tuple(args.load_dir),
         use_rigid=use_rigid, time_steps=args.time_steps,
-        achilles_n=args.achilles_n,
+        achilles_n=args.achilles_n, plantar_bc=args.plantar_bc,
     )
     load_mode = "rigid" if use_rigid else "pressure"
+    print(f"[bc] plantar_bc={args.plantar_bc}")
 
     try:
         rc = run_febio(feb, workdir=feb.parent, timeout=900)
@@ -150,7 +157,7 @@ def main(argv: list[str] | None = None) -> int:
             mesh, FEB,
             load_n=args.load_n, load_dir=tuple(args.load_dir),
             use_rigid=False, time_steps=args.time_steps,
-            achilles_n=args.achilles_n,
+            achilles_n=args.achilles_n, plantar_bc=args.plantar_bc,
         )
         rc = run_febio(feb, workdir=feb.parent, timeout=900)
 
