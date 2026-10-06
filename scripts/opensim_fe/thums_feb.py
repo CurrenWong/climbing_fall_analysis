@@ -489,6 +489,69 @@ def load_thums_mesh(npz_path: str | Path = DEFAULT_NPZ) -> dict:
 # ---------------------------------------------------------------------------
 # .feb writer
 # ---------------------------------------------------------------------------
+def _build_thums_plantar_quads(mesh: dict) -> np.ndarray:
+    """从 THUMS 两域网格的 boundary 多边形里重建跖面 quad4 facet。
+
+    THUMS 跖面节点**全部**在 CORT hex8 域（`docs/S5_contact_facet_fix.md` §1.3
+    实测：191/191），所以跖面分类命中的是 hex 面的 4-tuple polys（146 个），
+    而不是 SPON tet4 的 tri3（mesh['surfaces']['plantar'] 把 quad 切成 2 个
+    tri3，共 292 个 ⇒ 挂在 hex8 域上 FEBio 报 ``invalid facets`` ⇒ 接触不承载）。
+
+    本函数直接返回 ``(K, 4)`` 0-based 局部节点索引（每个元素 4 个角节点 id），
+    不重排、不重三角化、不修改 mesh。
+    """
+    if "elements_cort" not in mesh or "boundary_polys" not in mesh:
+        raise ValueError(
+            "mesh 不是 THUMS 两域网格（缺少 elements_cort 或 boundary_polys）；"
+            "请使用三域/单域的 _apply_contact(plantar_tris=...) 路径。"
+        )
+    cort = np.asarray(mesh["elements_cort"], dtype=np.int64)
+    nodes = np.asarray(mesh["nodes"], dtype=np.float64)
+    polys = mesh["boundary_polys"]
+    owners = np.asarray(mesh["boundary_owners"], dtype=np.int64)
+    normals = np.asarray(mesh["boundary_normals"], dtype=np.float64)
+    n_cort = int(len(cort))
+    plantar_mask = normals[:, 1] < meshing.PLANTAR_NORMAL_Y_MAX
+    quads: list[list[int]] = []
+    for i in np.flatnonzero(plantar_mask):
+        if owners[int(i)] >= n_cort:
+            # tet4 domain — should not happen for the plantar surface on the
+            # THUMS calcaneus (all 191 plantar nodes are CORT-only), but be strict.
+            continue
+        poly = polys[int(i)]
+        if len(poly) != 4:
+            continue
+        q = [int(v) for v in poly]
+        # FEBio computes a contact facet's normal from the **node order**
+        # (right-hand rule), NOT from the stored normal vector.
+        # ``_polygon_centroids_normals`` flipped the stored VECTOR away from the
+        # element centroid, but left the poly node order untouched — so the raw
+        # poly order yields an INWARD normal for the hex bottom faces (measured:
+        # 146/146 bottom quads give normal.y > 0). An inward-oriented contact
+        # primary surface makes the gap sign wrong ⇒ contact never engages.
+        # Reorient each quad so its right-hand-rule normal points along the
+        # stored OUTWARD normal.
+        p = nodes[q]
+        n_raw = np.cross(p[1] - p[0], p[2] - p[0])
+        if float(np.dot(n_raw, normals[int(i)])) < 0.0:
+            q = q[::-1]
+        quads.append(q)
+    if not quads:
+        raise ValueError(
+            "THUMS 网格跖面 quad4 集为空（plantar_mask 没命中任何 CORT hex 面）；"
+            "请检查 _classify_surfaces_poly 的法向阈值。"
+        )
+    return np.asarray(quads, dtype=np.int64)
+
+
+#: G7 求解器配方（`docs/S5_contact_udg.md` §7 实测验证）。
+#: 全部 opt-in —— 默认 None ⇒ 字节级保留旧版控制块。
+_G7_TIME_STEPS = 2400
+_G7_CUTBACK = 0.125
+_G7_MAX_RETRIES = 20
+_G7_OPT_ITER = 15
+_G7_QN_MAX_UPS = 10
+_G7_REFORM_EACH_TIME_STEP = 1
 def _gradient_band_loads(
     model,
     fmesh,
@@ -612,6 +675,13 @@ def build_thums_feb(
     fascia_x_frac: float = FASCIA_X_FRAC,
     fascia_y_frac: float = FASCIA_Y_FRAC,
     fascia_z_frac: float = FASCIA_Z_FRAC,
+    g7_solver_recipe: bool = False,
+    load_ramp_time_s: float | None = None,
+    load_ramp_lc_id: int = 1,
+    contact_gap_mm: float | None = None,
+    contact_node_reloc: int = 0,
+    contact_swap_pair: bool = False,
+    contact_hold_spring_k: float | None = None,
 ) -> Path:
     """Write the two-domain THUMS calcaneus ``.feb`` (mm-N-MPa-s).
 
@@ -704,6 +774,24 @@ def build_thums_feb(
         raise ValueError("analysis='DYNAMIC' 必须显式给 step_size (s)")
     if analysis == "DYNAMIC" and (ramp_time_s is None or float(ramp_time_s) <= 0.0):
         raise ValueError("analysis='DYNAMIC' 需要正的 ramp_time_s (s)")
+    if g7_solver_recipe and not (analysis == "STATIC" and int(time_steps) == 1):
+        # G7 配方是为 sink 170 / prescribed displacement + sliding-elastic 验证过的；
+        # DYNAMIC / 多步 STATIC 与该配方一起使用需自行验证。
+        # 当前实现仅在 STATIC + time_steps==1 路径下硬性允许；其余情况显式提示。
+        raise ValueError(
+            "g7_solver_recipe=True 当前仅支持 analysis='STATIC' + time_steps=1；"
+            f"得到 analysis={analysis!r} time_steps={time_steps!r}"
+        )
+    if load_ramp_time_s is not None and float(load_ramp_time_s) <= 0.0:
+        raise ValueError(f"load_ramp_time_s 必须为正，得到 {load_ramp_time_s!r}")
+    if not isinstance(load_ramp_lc_id, int) or int(load_ramp_lc_id) != 1:
+        # FEBio 4.13 拒绝非 1 的 load_controller id（实测 id=2/3/5/10 均报
+        # "invalid value for attribute id"，只有 id=1 被接受——load controller
+        # id 必须从 1 开始连续；本 deck 只有一条 ramp 曲线 ⇒ 只能是 1）。
+        raise ValueError(
+            f"load_ramp_lc_id 必须为 1（FEBio 4.13 只接受 id=1 作为首条 load "
+            f"controller；本 deck 只有一条 ramp），得到 {load_ramp_lc_id!r}"
+        )
 
     nodes = np.asarray(mesh["nodes"], dtype=np.float64)
     cort = np.asarray(mesh["elements_cort"], dtype=np.int64)
@@ -812,12 +900,47 @@ def build_thums_feb(
     if step_size is None:
         step_size = 1.0 / max(int(time_steps), 1)
     st = fstep.StepEntry(id=1, name="Step")
-    st.control = control.Control(
-        analysis=analysis,
-        time_steps=int(time_steps),
-        step_size=float(step_size),
-        time_stepper=None,  # FEBio 4.13 拒绝 <time_stepper type=...>
-    )
+
+    # --- G7 配方（opt-in） -------------------------------------------------
+    # 默认：time_stepper=None，控制块与历史逐字节一致（G0 隔离）。
+    # g7_solver_recipe=True：写 time_steps=2400, dtmax=1/2400, cutback=0.125,
+    #   max_retries=20, opt_iter=15。
+    # BFGS max_ups=10 / reform_each_time_step=1 已经是 ``SolidSolver()`` 的 pyfebio
+    # 默认值（FEBio 4.13 的内置默认）；它们在 ``_fix_febio413`` 后落盘的
+    # ``<solver/>`` 里也是默认 ⇒ 不需显式写。
+    if g7_solver_recipe:
+        # pyfebio 默认会同时发射 top-level ``Model.control_``（FEBio 默认值）与
+        # step 内 ``<Control>``。默认路径两者本就不同（历史 deck 亦如此，FEBio
+        # 取 step 级），故**默认路径不动**以保逐位一致；G7 下两份值差异更大，
+        # 清掉 top-level 一份以消歧（仅在 opt-in 分支内做）。
+        model.control_ = None
+        n_g7 = int(_G7_TIME_STEPS)
+        dt_g7 = 1.0 / float(n_g7)
+        st.control = control.Control(
+            analysis="STATIC",
+            time_steps=n_g7,
+            step_size=float(dt_g7),
+            time_stepper=control.TimeStepper(
+                type="default",
+                max_retries=int(_G7_MAX_RETRIES),
+                opt_iter=int(_G7_OPT_ITER),
+                dtmin=0.0,
+                dtmax=control.TimeStepValue(lc=None, text=float(dt_g7)),
+                aggressiveness=0,
+                cutback=float(_G7_CUTBACK),
+                dtforce=0,
+            ),
+        )
+        # 与 G7 qn_method / reform_each_time_step 相关的 kwargs 留在签名上
+        # 以便 API 显式，但实际值即 SolidSolver 默认值（无需覆盖）。
+        _ = (_G7_QN_MAX_UPS, _G7_REFORM_EACH_TIME_STEP)
+    else:
+        st.control = control.Control(
+            analysis=analysis,
+            time_steps=int(time_steps),
+            step_size=float(step_size),
+            time_stepper=None,  # FEBio 4.13 拒绝 <time_stepper type=...>
+        )
 
     # Dynamic runs ramp the joint load over ramp_time_s via a load controller
     # (id=1).  Load objects reference it with lc=1; static runs use lc=None so
@@ -835,7 +958,42 @@ def build_thums_feb(
             )
         )
 
+    # --- Static load-curve ramp（opt-in：load_ramp_time_s） ----------------
+    # G7 配方要求 prescribed quantity 上挂一条 ramp curve（0→1 线性）以避免
+    # 静态分析下的瞬时全载荷施加（与接触闭合耦合 ⇒ 首步反演）。
+    # 默认 None ⇒ 不写 <LoadData> ⇒ 字节级保留旧版。
+    ramp_lc_id: int | None = None
+    if load_ramp_time_s is not None and analysis == "STATIC":
+        ramp_lc_id = int(load_ramp_lc_id)
+        ramp = float(load_ramp_time_s)
+        model.loaddata_.add_load_curve(
+            fld.LoadCurve(
+                id=ramp_lc_id,
+                interpolate="LINEAR",
+                extend="CONSTANT",
+                points=fld.CurvePoints(points=["0.0,0.0", f"{ramp:.10g},1.0"]),
+            )
+        )
+        lc_ref = ramp_lc_id
+
+    # --- 跖面 quad4 重建（opt-in：THUMS 两域网格自动启用） ----------------
+    # 当 mesh 是 THUMS 两域（CORT hex8 + SPON tet4）时，从 boundary_polys 重建
+    # 跖面 quad4 facet（详见 docs/S5_contact_facet_fix.md §1.3）。
+    # 其它 mesh（合成测试 / 单域 cube）走原 tri3 路径。
+    plantar_quads: np.ndarray | None = None
+    if plantar_bc == "contact" and "elements_cort" in mesh and "boundary_polys" in mesh:
+        plantar_quads = _build_thums_plantar_quads(mesh)
+
     bcs: list = []
+    contact_kw: dict = {}
+    if contact_gap_mm is not None:
+        contact_kw["contact_gap_mm"] = float(contact_gap_mm)
+    if int(contact_node_reloc) != 0:
+        contact_kw["contact_node_reloc"] = int(contact_node_reloc)
+    if bool(contact_swap_pair):
+        contact_kw["contact_swap_pair"] = True
+    if contact_hold_spring_k is not None and float(contact_hold_spring_k) > 0.0:
+        contact_kw["contact_hold_spring_k"] = float(contact_hold_spring_k)
     plantar_meta = apply_plantar_bc(
         model,
         nodes=nodes,
@@ -847,6 +1005,8 @@ def build_thums_feb(
         kind=plantar_bc,
         spring_k=spring_k,
         contact_mu=contact_mu,
+        contact_plantar_quads=plantar_quads,
+        **contact_kw,
     )
     # ``plantar_bc="contact"`` (opt-in): attach the step-level ``<Contact>`` block
     # returned by ``apply_plantar_bc``.  Default ``"fixed"`` returns no ``"contact"``
@@ -874,7 +1034,8 @@ def build_thums_feb(
             if fv[comp] != 0.0:
                 rigid_loads.append(
                     rigid.RigidForceLoad(
-                        rb="ghost", dof=dof, value=rigid.Value(text=float(fv[comp]))
+                        rb="ghost", dof=dof,
+                        value=rigid.Value(lc=lc_ref, text=float(fv[comp])),
                     )
                 )
         if moment_vec is not None:
@@ -884,7 +1045,8 @@ def build_thums_feb(
                     rigid_loads.append(
                         rigid.RigidMomentLoad(
                             rb="ghost", dof=dof,
-                            value=rigid.Value(text=float(moment_vec[comp] * 1000.0)),
+                            value=rigid.Value(lc=lc_ref,
+                                              text=float(moment_vec[comp] * 1000.0)),
                         )
                     )
         st.rigid = rigid.Rigid(all_rigid_bcs=rigid_bcs, all_rigid_loads=rigid_loads)

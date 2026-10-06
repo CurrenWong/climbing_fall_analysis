@@ -100,3 +100,75 @@
    `invalid facets` error but the deck still inverts at step 1 for every penalty/load tried.
 3. G2–G6 therefore **FAIL** with real diagnostics; G1/G7 carry their required distinct codes.
 
+---
+
+## 5. CORRECTION (2026-10-06 晚，wave-4 → wave-5 facet/solver fix)
+
+> Appended by the follow-up task. **Wave-4 §4 findings #2/#3 above are amended below;
+> the measurements in §3 (matrix outcomes) and §4 #1 (G0 PASS) stand.**
+> Full plan + evidence: `docs\S5_contact_facet_fix.md`.
+
+### 5.1 What wave-4 got right vs what it missed
+
+* **Right**: the plantar surface was `292 tri3` on a **hex8** domain → FEBio `invalid facets`
+  → contact never engaged. Rebuilding it as `quad4` removed the error.
+* **Missed #1 (orientation)**: the raw `boundary_polys` **node order** yields an
+  **INWARD** facet normal (measured 146/146 with `normal.y > 0`). FEBio computes a contact
+  facet's normal from the **node order** (right-hand rule), *not* from the stored normal
+  vector that `_polygon_centroids_normals` flips. An inward master surface makes the gap
+  sign wrong ⇒ contact never closes. Fixed by reordering each emitted quad so its
+  right-hand-rule normal matches the stored **outward** normal.
+* **Missed #2 (solver/load)**: the deck used FEBio defaults (`time_steps=10`,
+  `step_size=0.1`, `cutback=0.5`, `max_retries=5`, no `<LoadData>`). The validated G7
+  recipe (`docs\S5_contact_udg.md` §7: 2400 steps, `dtmax=1/2400`, `cutback=0.125`,
+  `max_retries=20`, `opt_iter=15`, BFGS `max_ups=10`, `reform_each_time_step=1`, plus a
+  static load-curve ramp) is now applied (opt-in `g7_solver_recipe=True`,
+  `load_ramp_time_s`). The **fixed** reference deck reproduces `end_t=1.0`, `negJac=0`.
+* **Missed #3 (rigid-body mode)**: the bare calcaneus is supported **only** by the
+  unilateral sliding contact. Before engagement the tangent stiffness is singular (3 free
+  translations) ⇒ Newton diverges at step 1 (`displacement ≈ 2.3e25`), invariant to gap
+  (0.5 → 1e-6), `node_reloc`, pair orientation, `penalty`, `laugon`, load,
+  `search_radius`, `two_pass`, solver `symmetric_stiffness`, and ghost X/Z fixation.
+  A weak hold spring (`contact_hold_spring_k`, k=1 N/mm ≪ bone stiffness) removes the
+  mode; the contact then runs.
+
+### 5.2 Corrected verdict on wave-4 §4 #2 ("contact never engages")
+
+**The contact DOES carry load — wave-4 read it as "carries nothing" because the default
+soft penalty (`0.1`, calibrated for a FOAM pad) gives a huge penetration on a 15000 MPa
+cortical bone vs a rigid plate.** Measured on the single proof case
+`h2.0_contact_rigid_mu0.6_pad` (2 m, μ=0.6), 2400 G7 steps, hold spring k=1:
+
+| penalty | rc | end_t | negJac warnings | invalid facets | NAN | plantar sink (mm) |
+|---|---|---|---|---|---|---|
+| 0.1 (recipe default) | 0 | 1.0 | 75 | 0 | 0 | 39.16 |
+| 1 | 0 | 1.0 | 6 | 0 | 0 | 17.34 |
+| 100 | 0 | 1.0 | **0** | 0 | 0 | 5.03 |
+| 10000 | 0 | 1.0 | **0** | 0 | 0 | 3.99 |
+
+The sink **decreases monotonically with penalty** ⇒ the contact stiffness is active ⇒ the
+contact carries load. `penalty ≥ 100` also drives the negative-jacobian warnings to **0**.
+
+### 5.3 Measurement caveat (a hidden defect in the wave-4 `F_n` extraction)
+
+FEBio 4.13's `reaction forces` **node output does not report the fixed-DOF (plantar/plate)
+reactions in this deck**: the **fixed** reference deck's plantar reaction also reads
+`0.00 N` while its gauge reproduces the S4 baseline bit-for-bit (load provably carried).
+Therefore `nonvertical_s5_contact.py`'s plate-reaction `F_n` extraction (§2 "Contact force
+extraction") is **unreliable as written** and must move to a contact-pressure output or a
+prescribed-displacement reaction path before any 2 m `F_n` is quoted.
+
+### 5.4 Files changed by this correction
+
+| Action | File |
+|---|---|
+| changed | `src\climbing\coupling\plantar_bc.py` (`quad4` + outward orientation + `swap_pair` + `hold_spring_k`; `_apply_spring` anchor-id fix) |
+| changed | `scripts\opensim_fe\thums_feb.py` (`_build_thums_plantar_quads`; G7 recipe; static ramp; `model.control_ = None`; contact opt-ins) |
+| added | `scripts\opensim_fe\proof_s5_facet_fix.py` |
+| added | `tests\test_s5_contact_facet_fix.py` (15 tests) |
+| added | `docs\S5_contact_facet_fix.md` |
+
+**Defaults unchanged**: `plantar_bc="fixed"`, `pad_domain_type=""`, `pad_hg=None`,
+`DEFAULT_PENALTY=1.0`. Every new kwarg is opt-in. Hard gates: **93 / 19+1 / 11 / 11 / 13 +
+15 new**.
+
