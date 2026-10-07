@@ -1,4 +1,4 @@
-cff-version: 1.2.0
+﻿cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "climbing_fall_analysis: 室内抱石与攀岩坠落损伤的多层级建模"
 type: software
@@ -14,6 +14,6 @@ keywords:
   - ankle ligament
   - finite element
   - Monte Carlo
-repository-code: "https://github.com/OWNER/climbing_fall_analysis"  # TODO: replace OWNER before publishing
+repository-code: "https://github.com/CurrenWong/climbing_fall_analysis"
 authors:
-  - name: "climbing_fall_analysis contributors"  # TODO: replace with real author(s) before publishing
+  - name: "climbing_fall_analysis contributors"
