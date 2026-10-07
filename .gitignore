@@ -51,14 +51,51 @@ agent.json
 ANKLE_600N_TODO.md
 CONV_TODO.md
 
-# --- Large / third-party local assets: 不入库 (2026-10-06) ---
-# temp/          5.8 GB 仿真探针与中间产物（.feb/.log/.xplt 可由脚本再生）
-# paper/         163 MB 文献 PDF / zip（本地资料，非代码）
-# model/AM50_V71_Occupant/  230 MB 丰田 THUMS 第三方模型
-#   含 THUMS_AM50_V71_Occupant_202411.k = 219.4 MB
-#   ⚠️ GitHub 单文件硬上限 100 MB ⇒ 入库即永久 push 失败；且 THUMS 有使用条款
+# --- Large / third-party local assets: 不入库 ---
+# This repository is published as code + docs + regenerable results only.
+# The paths below are excluded for third-party licensing and/or GitHub's
+# 100 MB single-file limit (one over-limit blob permanently breaks push).
+#
+# model/   ~326 MB  ALL third-party geometry / finite-element models:
+#   - OpenSim FullBodyModel 4.0                        (model/opensim/)
+#   - IITD Ankle-foot NLSR-class .OSIM models          (model/Model/)
+#     + FootwithinLowerlimb geometry incl. ~12 MB STL  (model/FootwithinLowerlimbModel/)
+#   - Toyota THUMS AM50 V71 occupant model             (model/AM50_V71_Occupant/)
+#     incl. THUMS_AM50_V71_Occupant_202411.k ≈ 219 MB
+#   Excluded for third-party licensing; also far above GitHub's 100 MB file
+#   limit. Obtain these models from their original distributors.
+# paper/   ~163 MB  literature PDFs / zips (third-party copyright; not redistributable).
+#
+# Regenerable simulation artefacts (safe to delete — reproduced by scripts):
+#   *.feb *.xplt *.log                    FEBio input/output + solver logs
+#   *.msh *.stl *.obj                     generated meshes / geometry exports
+#   *.hdf5 *.h5 *.npz *.npy *.vtp *.vtk   field-data / post-processing dumps
+#   *.c3d                                 motion-capture trials
+#   *.mp4                                 rendered animations
+#   OUTPUT/ temp/ src/temp/               solver scratch + intermediate probes
+#
+# ~$*  SolidWorks lock files (auto-created while a document is open).
 temp/
 paper/
-model/AM50_V71_Occupant/
+model/
+.codegraph/
+.learnings/
+.omo/
+src/temp/
+*.log
+*.xplt
+*.hdf5
+*.h5
+*.feb
+*.msh
+*.npz
+*.npy
+*.vtp
+*.vtk
+*.stl
+*.obj
+*.c3d
+*.mp4
+~$*
 .pytest_cache/
 新目录（基线不动）

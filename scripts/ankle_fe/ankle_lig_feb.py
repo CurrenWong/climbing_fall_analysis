@@ -241,10 +241,22 @@ for dom, (key, mat) in BONE_PARTS.items():
 #        + `{j}_is_offset` + `{j}_tie_faces`。**底面脱离骨节点 ⇒ 必须 TIE=1**。
 #        其价值：底面翘曲恒 0、无翻转单元（治「~235 N 上限」）。
 CARTS = ["tibiotalar_tibia", "tibiotalar_talus"]
-# ★ A1（2026-10-06）：距下关节接入开关。默认 auto = npz 含**新格式**键
-#   （`subtalar_*_nodes`，cart_patch 输出）时才接 —— 旧格式 `_offsets` 没在
-#   本管线里验证过，不接（打提示）。SUBTALAR=0 强制关（做基线/消融对照）。
-SUBTALAR = (os.environ.get("SUBTALAR", "auto").strip() or "auto").lower()
+# ★ A1（2026-10-06）：距下关节接入开关。**默认 `0`（不接）= 可用基线**。
+#   ⚠️ 实测（2026-10-06，分支 ankle-subtalar-a1）：
+#     SUBTALAR=0      ⇒ 592.6020 N NORMAL（零回归精确复现）
+#     SUBTALAR=auto   ⇒ **t=0 崩溃**（11 负 Jacobian，首步 residual 4.93e+21）
+#   ⇒ 接入尚未收敛验证，故**默认必须关**，接入改为**显式 opt-in**（SUBTALAR=1），
+#     否则任何未显式传参的运行都会拿到崩溃的基线。
+#   A1 执行结果（2026-10-06；**几何预检已交付**，详见 docs/A1_距下关节_交接报告.md）：
+#     ① 预检（只测不改，`temp/pyfebio_demo/a1_subtalar_gap.py`）：subtalar 两面最近距离
+#        中位 **0.66 mm**（能跑通的正对照 tibiotalar 1.00 mm）、法向 dot 中位 −0.96
+#        ⇒ **比正对照更贴合**；但 17/584、17/688 个面片穿透 >0.1 mm（最大 −0.56/−0.79 mm，
+#        正对照为 −1.23 mm）。⚠️ 按任务书字面（穿透>0.1mm 须先报告）这是一次**越规推进**。
+#     ② 接入后 rc=1，且**与 dt 无关**；二分结论：**只接距骨侧 rc=0、只接跟骨侧 rc=1、
+#        关掉全部关节接触仍 rc=1** ⇒ 罪魁是 `subtalar_calcaneus`（软骨层/其 tie），
+#        **不是接触本身**。元件级定位：先失控的是 tibia 侧（runaway ~1e4 mm，det −1e12）。
+#     ③ 未解：**机制**（首嫌疑 = 拟牛顿更新病态 ⇒ 未测的 `MAX_UPS=0` 实验）。
+SUBTALAR = (os.environ.get("SUBTALAR", "0").strip() or "0").lower()
 _HAS_SUB = ("subtalar_talus_nodes" in cg.files
             and "subtalar_calcaneus_nodes" in cg.files)
 if SUBTALAR == "0":
