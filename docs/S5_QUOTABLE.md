@@ -75,6 +75,8 @@ The numbers below are the only ones currently defensible for citation, with the 
 
 1. **`F_n ≈ 34.4 kN`** at the 2 m landing (NEW PENALTY recipe, tet4 pad, sink 170 mm, indenter `(2,2,1,(200,300,5))` offset `(50,0,200.5)`, gap 0.5 mm, μ = 0.6). Mesh-converged to **< 0.6 %** across `(3,3,2)`→`(6,6,4)`→`(12,12,8)` (a 64× element-count change); reproducible ×4; force-balance ≈ 1e-7 (Newton-3rd identity check holds). Source: `S5_g7_verify_mesh.md` §2.1 / §3.
 
+   > ⚠️ **2026-10-07 — sink basis.** The `sink 170 mm` basis came from the **now-retracted 16–18 cm** indentation window. Recomputing the window from `pad.py` (progressive contact area, not the initial 0.06 m²) gives **13–15 cm** (`S5_contact_contract.md` §2.2). The value above is still a **valid fixed-sink FE measurement**, but it is **no longer the physical 2 m-fall value** until re-derived at the corrected sink (13–15 cm). Do not present it as "the 2 m landing F_n" without this qualifier.
+
 2. **`σ_contact = F_n / 60 000 mm² ≈ 0.574 MPa`** at the 2 m landing — same basis, same convergence, same reproducibility as `F_n`. Source: `S5_g7_verify_mesh.md` §3.
 
 3. **`σ_1D-law(ξ)`** is `pad_stress_pa(ξ)/1e6` (MPa). Mesh-independent by construction; it is a fitted material function, not an FE result. Source: `src/climbing/coupling/pad_foam.py::pad_stress_pa`.
