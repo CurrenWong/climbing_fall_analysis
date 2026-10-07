@@ -47,11 +47,12 @@ import matplotlib.pyplot as plt
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from climbing.coupling.opensim_grf import ground_reaction          # noqa: E402
+from climbing.coupling.opensim_grf import ground_reaction, DEFAULT_POSTURE  # noqa: E402
 from climbing.coupling.opensim_fall import (                       # noqa: E402
     run_dead_drop,
     PassiveStiffness,
 )
+from climbing.pad import simulate_boulder_fall                     # noqa: E402
 
 GEO = ROOT / "model" / "opensim" / "FullBodyModel-4.0" / "Geometry"
 OUTD = ROOT / "temp" / "opensim_fe" / "_fall_frames"
@@ -174,6 +175,22 @@ def main() -> None:
     if args.passive:
         kw["passive"] = PassiveStiffness.nominal_landing()
     fall = run_dead_drop(grf, **kw)
+
+    # True pad compression comp(t) from the 1D model. The pad top is drawn at
+    # ``-comp(t)`` and the body is re-levelled so the foot rests exactly on it,
+    # instead of trusting the FD's unconstrained (~16 cm) body sink which
+    # over-states the pad compression (pad.py gives ~13 cm for the same impact).
+    _pres = simulate_boulder_fall(height_m=args.height, mass_kg=args.mass,
+                                  posture=DEFAULT_POSTURE, on_pad=args.on_pad)
+    _w0, _w1 = _pres.meta["impact_window_s"]
+    _pt = np.asarray(_pres.t_s, dtype=float)
+    _pm = (_pt >= _w0 - 1e-12) & (_pt <= _w1 + 1e-12)
+    _tc = _pt[_pm] - _w0
+    _cc = np.maximum(np.asarray(_pres.pad_compression_m, dtype=float)[_pm], 0.0)
+
+    def comp_at(tq: float) -> float:
+        return float(np.interp(tq, _tc, _cc)) if _tc.size >= 2 else 0.0
+
     model = fall.model
     table = fall.states
     tt = np.asarray(table.getIndependentColumn(), dtype=float)
@@ -228,14 +245,27 @@ def main() -> None:
         else:
             set_row(float(tq))
 
-        # --- pose every mesh once; collect foot verts for the pad dent ------
-        posed, foot_pts = [], []
+        # --- pose every mesh; keep transforms so the body can be re-levelled --
+        frames_tf = []
         for mm, bn in meshes:
             R, p = mat4(model.getBodySet().get(bn).getTransformInGround(state))
-            pts = np.asarray(mm.points) @ R.T + p + np.array([0.0, dy, 0.0])
-            posed.append(pts)
-            if _is_foot(bn):
-                foot_pts.append(pts)
+            frames_tf.append((mm, bn, R, p))
+
+        def place(dy_use):
+            pts_all, foot_all = [], []
+            for mm, bn, R, p in frames_tf:
+                pts = np.asarray(mm.points) @ R.T + p + np.array([0.0, dy_use, 0.0])
+                pts_all.append(pts)
+                if _is_foot(bn):
+                    foot_all.append(pts)
+            return pts_all, foot_all
+
+        posed, foot_pts = place(dy)
+        if src == "fd":
+            # re-level: put the foot's lowest vertex exactly on the TRUE pad top
+            lo = min((fp[:, 1].min() for fp in foot_pts), default=0.0)
+            dy = -comp_at(float(tq)) - float(lo)
+            posed, foot_pts = place(dy)
 
         # pad top deforms under the foot (natural local dent); base stays fixed
         top = _pad_top_field(foot_pts)
