@@ -254,7 +254,11 @@ FOOT_AREA_MM2 = 60_000.0
 #: Implied fall contact stress (N/mm²) = 34 800 / 60 000 = 0.58.
 FALL_CONTACT_STRESS_MPA = FALL_LOAD_N / FOOT_AREA_MM2
 #: G7 sinkage window (cm) — contract §2.2.
-G7_SINKAGE_WINDOW_CM = (16.0, 18.0)
+#: 2026-10-07 recomputed from ``pad.py`` (progressive contact area, not the
+#: initial 0.06 m²): 12.96 cm (feet-first-stiff) .. 14.76 cm (one-leg-awkward).
+#: The old (16.0, 18.0) is retracted (it reverse-solved the pad law with the
+#: *indenter* pressure 580 kPa instead of the pad stress 173 kPa).
+G7_SINKAGE_WINDOW_CM = (13.0, 15.0)
 #: G2/G3 force-balance tolerance.
 FORCE_BALANCE_TOL = 0.02
 
@@ -1228,7 +1232,7 @@ def _main() -> int:
     # ---- G7: fall load -> sinkage window (LOAD-DRIVEN, non-circular) ----
     # First, honestly report that pressure-mode ("load-driven" in the strict
     # sense) does NOT converge on the fitted-Ogden + tet4 contact system.
-    print("\n[G7] load-driven 2 m-fall (580 kPa / 34.8 kN) -> sinkage window 16-18 cm")
+    print("\n[G7] load-driven 2 m-fall (580 kPa / 34.8 kN) -> sinkage window 13-15 cm")
     lo, hi = G7_SINKAGE_WINDOW_CM
     g7_ok = False
     g7_result = None
@@ -1375,7 +1379,7 @@ def _main() -> int:
         if np.isnan(sink_interp):
             print(f"  -> interpolation to 580 kPa failed (sweep outside range); "
                   f"reporting nearest sweep point")
-        print(f"  [{'PASS' if g7_ok else 'FAIL'}] G7 sinkage in 16-18 cm: "
+        print(f"  [{'PASS' if g7_ok else 'FAIL'}] G7 sinkage in {lo:.0f}-{hi:.0f} cm: "
               f"measured {sink_cm:.2f} cm")
     else:
         print(f"  [FAIL] G7: no successful run")
