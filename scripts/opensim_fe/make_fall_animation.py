@@ -63,6 +63,61 @@ PAD_THICK = 0.20            # m — src/climbing/pad.py CrashPad.thickness_m
 GROUND_Y = -PAD_THICK       # pad base rests on the floor at this level
 WIN = (1000, 1200)
 
+# pad footprint (matches the reference box) + dent-grid resolution
+PAD_X = (-0.62, 0.62)
+PAD_Z = (-0.45, 0.55)
+PAD_NX, PAD_NZ = 56, 44
+FOOT_R = 0.065              # m — horizontal influence radius of a foot vertex
+
+
+def _is_foot(name: str) -> bool:
+    return any(s in name for s in ("calcn", "talus", "toes", "foot", "calcaneus"))
+
+
+def _pad_top_field(foot_pts: list) -> "np.ndarray":
+    """(PAD_NX, PAD_NZ) top-surface height: ``0`` where the pad is uncompressed,
+    else the lowest foot surface over that cell, clamped to the floor.
+
+    A foot vertex only pulls the pad down within ``FOOT_R`` horizontally, so the
+    slab forms a *local* dent under the sole instead of dropping uniformly.
+    """
+    top = np.zeros((PAD_NX, PAD_NZ))
+    if not foot_pts:
+        return top
+    fp = np.vstack(foot_pts)
+    xs = np.linspace(PAD_X[0], PAD_X[1], PAD_NX)
+    zs = np.linspace(PAD_Z[0], PAD_Z[1], PAD_NZ)
+    Xg, Zg = np.meshgrid(xs, zs, indexing="ij")
+    gx, gz = Xg.ravel(), Zg.ravel()
+    # squared horizontal distance from every grid cell to every foot vertex
+    d2 = (gx[:, None] - fp[None, :, 0]) ** 2 + (gz[:, None] - fp[None, :, 2]) ** 2
+    near = d2 <= FOOT_R ** 2
+    ys = fp[:, 1]
+    out = top.ravel()
+    for gi in range(gx.size):
+        m = near[gi]
+        if m.any():
+            y = float(ys[m].min())
+            if y < 0.0:
+                out[gi] = max(GROUND_Y, y)
+    return top
+
+
+def _pad_solid(top: "np.ndarray") -> "pv.PolyData":
+    """Closed solid between the dented top surface and the floor at ``GROUND_Y``."""
+    xs = np.linspace(PAD_X[0], PAD_X[1], PAD_NX)
+    zs = np.linspace(PAD_Z[0], PAD_Z[1], PAD_NZ)
+    Xg, Zg = np.meshgrid(xs, zs, indexing="ij")
+    # StructuredGrid wants x varying fastest -> transpose (NX,NZ) -> (NZ,NX)
+    xT, zT, tT = Xg.T.ravel(), Zg.T.ravel(), top.T.ravel()
+    layer_top = np.column_stack([xT, tT, zT])
+    layer_bot = np.column_stack([xT, np.full_like(tT, GROUND_Y), zT])
+    g = pv.StructuredGrid()
+    g.points = np.vstack([layer_top, layer_bot])
+    g.dimensions = (PAD_NX, PAD_NZ, 2)
+    return g.extract_surface()
+
+
 
 def mat4(T):
     R = np.array([[T.R().get(r, c) for c in range(3)] for r in range(3)])
@@ -173,17 +228,19 @@ def main() -> None:
         else:
             set_row(float(tq))
 
-        # --- pose every mesh once; also find the lowest bone vertex ---------
-        posed, lo_y = [], np.inf
+        # --- pose every mesh once; collect foot verts for the pad dent ------
+        posed, foot_pts = [], []
         for mm, bn in meshes:
             R, p = mat4(model.getBodySet().get(bn).getTransformInGround(state))
             pts = np.asarray(mm.points) @ R.T + p + np.array([0.0, dy, 0.0])
-            lo_y = min(lo_y, float(pts[:, 1].min()))
             posed.append(pts)
+            if _is_foot(bn):
+                foot_pts.append(pts)
 
-        # pad base is FIXED on the floor; only the top surface compresses
-        pad_top = float(min(0.0, max(GROUND_Y, lo_y)))
-        pad = pv.Box(bounds=(-0.62, 0.62, GROUND_Y, pad_top, -0.45, 0.55))
+        # pad top deforms under the foot (natural local dent); base stays fixed
+        top = _pad_top_field(foot_pts)
+        max_dent = float(-top.min())
+        pad = _pad_solid(top)
 
         pl = pv.Plotter(off_screen=True, window_size=WIN)
         pl.set_background("white")
@@ -205,7 +262,7 @@ def main() -> None:
         pl.add_text(f"{txt}\n{joint_tag}\n"
                     f"knee_r = {flex_deg('knee_angle_r'):+5.2f} deg    "
                     f"ankle_r = {flex_deg('ankle_angle_r'):+5.2f} deg\n"
-                    f"pad: {abs(pad_top)*100:4.1f} / {PAD_THICK*100:.0f} cm compressed",
+                    f"pad: {max_dent*100:4.1f} / {PAD_THICK*100:.0f} cm compressed",
                     position="upper_left", font_size=12, color="#222222")
         pl.camera.up = (0, 1, 0)
         pl.camera.focal_point = (0.0, 1.70, 0.0)
@@ -239,7 +296,7 @@ def main() -> None:
                  transform=ax1.transAxes, fontsize=10, va="top")
         fig.savefig(str(OUTD / f"f{idx:04d}.png"))
         plt.close(fig)
-        print(f"  frame {idx+1}/{len(frames)}  {txt}  pad_top={pad_top*100:+.1f}cm")
+        print(f"  frame {idx+1}/{len(frames)}  {txt}  pad_dent={max_dent*100:.1f}cm")
 
     if args.quick:
         print("quick mode: frames written to", OUTD)
