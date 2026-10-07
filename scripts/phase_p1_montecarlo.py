@@ -131,6 +131,14 @@ def _make_longitudinal(rng) -> Posture2D:
       * ``ankle_d_lateral_m = 0.030`` —— β≥0（内翻）的 CoP→距下轴力臂（m）
       * ``ankle_d_medial_m = 0.045`` —— β<0（外翻）的 CoP→距下轴力臂（m）
       * ``ligament_r_mm = 22.0`` —— 韧带力臂（[R6] 默认值）
+      * ``ankle_load_share = 0.477`` —— measured anchor（见
+        ``results/opensim_fe/joint_reactions_summary.csv`` 中
+        ``ankle_r.peak_force_n / GRF_peak = 25294.9 / 53060``）。
+        **结构性诚实声明**：本期望以此 share 把踝骨折从 23% 降到 ≈ 8%，
+        但 V6 校准把 ``ANKLE_AVULSION_LOAD_N`` 钉到 300 N，导致所有 stuck
+        在 share=0.477 下 F_lig 仍 >> 300，fracture 率结构性不能解耦。
+        故实际 fracture 率在 share=1.0 与 share=0.477 下几乎一致
+        （228 vs 230）。详见 ``docs/P2_踝结论_2026-10-07.md`` §四。
     """
     mag_deg = float(rng.choice([10.0, 20.0, 30.0]))
     sign = float(rng.choice([-1.0, 1.0]))
@@ -141,6 +149,7 @@ def _make_longitudinal(rng) -> Posture2D:
         ankle_d_lateral_m=0.030,
         ankle_d_medial_m=0.045,
         ligament_r_mm=22.0,
+        ankle_load_share=0.477,
     )
 
 

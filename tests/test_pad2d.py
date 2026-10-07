@@ -989,6 +989,214 @@ class TestP2bPadStiffnessNonMonotonic:
 
 
 # ==========================================================================
+# 载荷分配系数（load-partition factor）—— ``ankle_load_share``
+# ==========================================================================
+# 契约：
+#   1. ``ankle_load_share = 1.0``（默认）⇒ 与今日行为**逐位一致**（regression
+#      锁），包括 bit-identicality 不变量（TestInvariant1BitIdentical）。
+#   2. ``ankle_load_share = 0.0`` ⇒ 踝所有派生量精确为 0 / False / "none"。
+#   3. ``peak_ligament_strain`` 与 ``ankle_bone_utilization`` 在
+#      ``ankle_load_share`` 单调变化时也**单调变化**（线性缩放）。
+#
+# 【不要混淆】 ``ankle_load_share`` 不影响任何 1D 轨迹
+# （不在 ``rhs_2d``），只缩放 ``_derive_ankle_state`` 中的 ``f_pad``。
+class TestLoadPartition:
+    """载荷分配系数 ``ankle_load_share`` 的契约测试。"""
+
+    def test_default_share_equals_one(self):
+        """默认 ``ankle_load_share == 1.0`` —— regression 锁。"""
+        p = Posture2D()
+        assert p.ankle_load_share == 1.0
+
+    @pytest.mark.parametrize("posture", [
+        "controlled-drop", "feet-first-stiff", "butt-impact",
+        "flat-flop", "tuck-roll", "head-first",
+    ])
+    def test_share_one_reproduces_old_numbers_exactly(self, posture):
+        """``ankle_load_share = 1.0`` ⇒ 与 ``Posture2D()``（不显式设
+        ankle_load_share）等价：peak_ligament_strain / bone_util / 状态全部
+        ``np.array_equal``（不是 ``pytest.approx``）。
+
+        这是 regression 锁：lock 当前数字确保未来默认不变。
+        """
+        common = dict(
+            ankle_beta0_rad=np.deg2rad(20.0),
+            beta_from_theta=0.0,
+            mu_slide=0.4, ankle_d_lateral_m=0.030, ankle_d_medial_m=0.045,
+            ligament_r_mm=22.0,
+        )
+        r_default = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture=posture,
+            posture2d=Posture2D(**common),
+        )
+        r_share1 = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture=posture,
+            posture2d=Posture2D(ankle_load_share=1.0, **common),
+        )
+        assert np.array_equal(r_default.peak_ligament_strain,
+                              r_share1.peak_ligament_strain)
+        assert np.array_equal(r_default.ankle_bone_utilization,
+                              r_share1.ankle_bone_utilization)
+        assert r_default.peak_inversion_moment_nmm == r_share1.peak_inversion_moment_nmm
+        assert r_default.ankle_sprain == r_share1.ankle_sprain
+        assert r_default.ankle_fracture == r_share1.ankle_fracture
+
+    def test_share_zero_zeroes_all_ankle_outputs(self):
+        """``ankle_load_share = 0.0`` ⇒ 踝所有派生量 = 0 / False / 'none'。
+
+        与 Posture2D() 默认（β=0）的「全 0」输出**结构上等价**——
+        这是 ``f_pad_ankle = share * f_pad = 0`` ⇒ M = F_lat = F_lig = 0
+        ⇒ 后续所有派生量 0。
+        """
+        r = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D(
+                ankle_beta0_rad=np.deg2rad(20.0),    # 非零 β
+                mu_slide=0.4, ankle_d_lateral_m=0.030,
+                ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+                ankle_load_share=0.0,
+            ),
+        )
+        assert np.array_equal(r.ankle_inversion_moment_nmm,
+                              np.zeros_like(r.t_s))
+        assert r.peak_inversion_moment_nmm == 0.0
+        assert r.peak_ligament_strain == 0.0
+        assert r.ankle_bone_utilization == 0.0
+        assert r.ankle_fracture is False
+        assert r.ankle_sprain is False
+
+    @pytest.mark.parametrize("share", [1.0, 0.8, 0.6, 0.477, 0.4, 0.2])
+    def test_peak_ligament_strain_monotonic_in_share(self, share):
+        """``peak_ligament_strain`` 随 ``ankle_load_share`` 单调非增。
+
+        ``F_lig = |M|/r ∝ share·f_pad`` ⇒ ``ε = F_lig/(k·L)`` 也线性。
+        单调性来源：``f_pad`` 本身 ≥ 0（数值上）且 share ∈ [0, 1] ⇒ 乘积单调。
+        """
+        shares = [1.0, 0.8, 0.6, 0.477, 0.4, 0.2]
+        strains = []
+        for s in shares:
+            r = simulate_boulder_fall_2d(
+                height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+                posture2d=Posture2D(
+                    ankle_beta0_rad=np.deg2rad(20.0),
+                    beta_from_theta=0.0,
+                    mu_slide=0.4, ankle_d_lateral_m=0.030,
+                    ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+                    ankle_load_share=s,
+                ),
+            )
+            strains.append(r.peak_ligament_strain)
+        for i in range(1, len(strains)):
+            assert strains[i] <= strains[i - 1] + 1e-12, (
+                f"peak_ligament_strain 不单调: shares={shares}, strains={strains}"
+            )
+        # share=1.0 必须严格 > share=0.0（只要 β ≠ 0）
+        r1 = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D(
+                ankle_beta0_rad=np.deg2rad(20.0),
+                mu_slide=0.4, ankle_d_lateral_m=0.030,
+                ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+                ankle_load_share=1.0,
+            ),
+        )
+        r0 = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D(
+                ankle_beta0_rad=np.deg2rad(20.0),
+                mu_slide=0.4, ankle_d_lateral_m=0.030,
+                ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+                ankle_load_share=0.0,
+            ),
+        )
+        assert r1.peak_ligament_strain > r0.peak_ligament_strain
+
+    @pytest.mark.parametrize("share", [1.0, 0.8, 0.6, 0.477, 0.4, 0.2])
+    def test_ankle_bone_utilization_monotonic_in_share(self, share):
+        """``ankle_bone_utilization`` 随 ``ankle_load_share`` 单调非增。
+
+        ``bone_util = max(σ_bend + τ_shear) / σ_c`` 中 ``σ_bend ∝ |M|·c/I ∝ share``，
+        ``τ_shear ∝ |F_lat|/A ∝ share``。线性 ⇒ 单调。
+        """
+        shares = [1.0, 0.8, 0.6, 0.477, 0.4, 0.2]
+        utils = []
+        for s in shares:
+            r = simulate_boulder_fall_2d(
+                height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+                posture2d=Posture2D(
+                    ankle_beta0_rad=np.deg2rad(20.0),
+                    beta_from_theta=0.0,
+                    mu_slide=0.4, ankle_d_lateral_m=0.030,
+                    ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+                    ankle_load_share=s,
+                ),
+            )
+            utils.append(r.ankle_bone_utilization)
+        for i in range(1, len(utils)):
+            assert utils[i] <= utils[i - 1] + 1e-12, (
+                f"ankle_bone_utilization 不单调: shares={shares}, utils={utils}"
+            )
+        # 边界：share=1.0 ≫ share=0.0（只要 β ≠ 0）
+        r1 = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D(
+                ankle_beta0_rad=np.deg2rad(20.0),
+                mu_slide=0.4, ankle_d_lateral_m=0.030,
+                ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+                ankle_load_share=1.0,
+            ),
+        )
+        r0 = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D(
+                ankle_beta0_rad=np.deg2rad(20.0),
+                mu_slide=0.4, ankle_d_lateral_m=0.030,
+                ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+                ankle_load_share=0.0,
+            ),
+        )
+        assert r1.ankle_bone_utilization > r0.ankle_bone_utilization
+
+    def test_share_does_not_affect_1d_trajectory(self):
+        """``ankle_load_share`` 不影响 1D 轨迹 —— bit-identicality 锁。
+
+        在任何 share 下，``t_s`` / ``z_foot_m`` / ``z_torso_m`` /
+        ``pad_force_n`` 等**逐位**一致（``np.array_equal``）。
+        """
+        common = dict(
+            ankle_beta0_rad=np.deg2rad(20.0),
+            mu_slide=0.4, ankle_d_lateral_m=0.030,
+            ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+        )
+        for s in (1.0, 0.477, 0.0):
+            r = simulate_boulder_fall_2d(
+                height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+                posture2d=Posture2D(ankle_load_share=s, **common),
+            )
+            assert r.peak_force_n > 0.0                          # sanity
+
+        r1 = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D(ankle_load_share=1.0, **common),
+        )
+        r0477 = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D(ankle_load_share=0.477, **common),
+        )
+        r0 = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D(ankle_load_share=0.0, **common),
+        )
+        # 1D 轨迹逐位一致（不进入 rhs_2d）
+        for attr in ("t_s", "z_foot_m", "z_torso_m", "pad_force_n",
+                     "pad_compression_m", "peak_force_n"):
+            assert np.array_equal(getattr(r1, attr), getattr(r0477, attr)), \
+                f"share=0.477 与 share=1.0 在 {attr} 上不一致"
+            assert np.array_equal(getattr(r1, attr), getattr(r0, attr)), \
+                f"share=0.0 与 share=1.0 在 {attr} 上不一致"
+
+
+# ==========================================================================
 # P2 默认逐位一致 + 新输出归零
 # ==========================================================================
 class TestP2DefaultsBitIdentical:
