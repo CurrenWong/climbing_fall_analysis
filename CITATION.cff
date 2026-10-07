@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "climbing_fall_analysis: 室内抱石与攀岩坠落损伤的多层级建模"
+type: software
+license: MIT
+abstract: >-
+  Multi-level modelling of indoor bouldering and climbing fall injury,
+  combining a pad-impact ODE, 2D ankle rotation, a head-neck branch and
+  Monte Carlo sampling, validated against literature targets.
+keywords:
+  - bouldering
+  - climbing fall
+  - injury biomechanics
+  - ankle ligament
+  - finite element
+  - Monte Carlo
+repository-code: "https://github.com/OWNER/climbing_fall_analysis"  # TODO: replace OWNER before publishing
+authors:
+  - name: "climbing_fall_analysis contributors"  # TODO: replace with real author(s) before publishing
