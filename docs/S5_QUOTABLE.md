@@ -1,6 +1,6 @@
 # S5 — What may be quoted (authoritative verdict)
 
-**Status:** COMPLETE (2026-10-06) — the single entry point for any reader who needs a number out of S5-contact. **Start here.** This doc is the authoritative reconciliation of the **six** G7 verification studies against the older "1.56/1.59/1.62/1.64" and "2.205" recommendations that still appear in the downstream docs.
+**Status:** COMPLETE (2026-10-06) — the single entry point for any reader who needs a number out of S5-contact. **Start here.** This doc is the authoritative reconciliation of the **six** G7 verification studies against the older "1.56/1.59/1.62/1.64" and "2.205" recommendations that still appear in the downstream docs. **§8 (2026-10-07) adds the wave5 bone-integrated contact results — a DIFFERENT quantity set (real THUMS mesh + a modeling hold spring); never mix a §8 number with a §0–§7 number.**
 
 **The contradiction it resolves.** Four independent verification studies (`S5_g7_verify_anchors.md`, `S5_g7_verify_mesh.md`, `S5_g7_verify_fixedxi.md`, `S5_g7_verify_anchors_mesh.md`) have now returned FAIL for every σ÷σ_law ratio. The fifth (`S5_g7_verify_element.md`) returns PASS only on its narrow matched-ξ question; its §5 recommendation to "quote 2.205" is itself superseded here. The sixth (`S5_g7_verify_metric.md`) tested whether an alternative stress metric would converge and returned **FAIL** — closing the last open thread (§5). Yet two docs still recommend quoting 2.205, and several downstream docs still cite 1.56 / 1.59 / 1.62 / 1.64 / 2.205 / 2.70 / 15.14 with no recipe or mesh qualifier. **Anyone reading the repo today can walk out with a wrong number.** This doc fixes that.
 
@@ -167,3 +167,28 @@ ls temp\opensim_fe\s5_t9\fixa\        # NEW-anchor mesh x-grid
 ls temp\opensim_fe\s5_t9\g7verify_c\  # matched-ξ element runs
 ls temp\opensim_fe\s5_t9\fixmetric\   # interior-margin metric (3 runs @ sink 170, 5 margins each)
 ```
+
+---
+
+## 8. Wave5 — bone-integrated contact on the real THUMS calcaneus (2026-10-07)
+
+**§0–§7 are the standalone-pad G7 verdict** (tet4 pad, prescribed sink, NEW PENALTY). **§8 is a different quantity set**: the **bone-integrated** model (real THUMS `calcaneus_r_anatframe.npz`, 137 plantar quad4) driven by the subtalar-joint load, and it carries a **modeling hold spring**. **Never place a §8 number next to a §0–§7 number.** Full report: `results/opensim_fe/NONVERTICAL_S5_CONTACT_WAVE5_REPORT.md`; plan/log: `docs/S5_wave5_matrix.md`.
+
+### 8.1 Quotable ✅
+
+| Quantity | Value | Condition | Evidence |
+|---|---|---|---|
+| **Bone-integrated contact is usable (method)** | real mesh 10/10 contact rows ran; **8 CONVERGED+CARRYING** (`rc=0`, `end_t=1.0`); wave4 was **0/7** | recipe = plantar **quad4** + G7 `<Control>` (2400 steps, `dtmax`=1÷2400, `cutback`=0.125, `max_retries`=20, BFGS) + opt-in hold spring + **`use_rigid=True`** | `..._WAVE5_REPORT.md` §0/§2 |
+| **Load-path finding (method)** | `PressureLoad` (`use_rigid=False`) diverges at contact closure **t≈0.419**; rigid path converges | same mesh/recipe | §1/§2 |
+| **Hold spring required (method)** | remove hold ⇒ **DIVERGED** (2–3 s, pre-closure rigid modes) | — | §3 |
+| **Bone-integrated contact force `F_n` (pen100)** | **≈ 20.4 kN** @ h = 2.0 m (applied 21.086 kN; hold spring contributes only **3.4 %**; penetration **2.19 mm**) | `penalty=100`, `use_rigid=True`, hold 1 N/mm, μ=0.6, anatframe 137q | §2 (`h2.0_contact_rigid_mu0.6_pad_pen100`) |
+| **Penetration magnitude (cite penalty with it)** | pen0.1 → **40–48 mm** (h=2.0–4.5); pen100 → **≈ 2.2 mm** | penalty label mandatory | §2/§4 |
+
+### 8.2 NOT quotable ❌
+
+| Quantity | Reason |
+|---|---|
+| **pen0.1 contact `F_n`** (e.g. 13.8 kN @ h2.0) as a physical force | it is `applied − hold-spring force`, and the hold spring (1 N/mm/node × 175 = **175 N/mm**) is an **un-calibrated numerical device**; at pen0.1 it carries **7310/21086 = 35 %** ⇒ `F_n` depends on the arbitrary spring stiffness. Near-robust only at pen100 (3.4 %). |
+| **bone-integrated `F_n` next to the standalone-pad `F_n ≈ 34.4 kN`** | different mesh, different load path (subtalar load vs prescribed sink), and the integrated model includes a modeling spring |
+| **any wave5 σ/σ_law or footprint-averaged stress** | same soft-penalty spill as §2; wave5 did no mesh-convergence study and resolved no contact-pressure field |
+| **bone-integrated `contact_area`** (e.g. 2953.8 mm² at pen0.1) as a contact patch | it is a geometric count ("triangles with all 3 nodes below the plate plane"), not the contact-pressure patch |

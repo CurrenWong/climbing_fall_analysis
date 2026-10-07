@@ -10,7 +10,7 @@
 > **但 G2–G6 全 FAIL**（7 条 contact 行收敛 0 条）→ `docs/S5_wave4_impl.md`。
 > ✅ **波5 已交付（2026-10-06 深夜）—— 真实网格从「不收敛」到「收敛且承载」**：三缺陷（跖面 **tri3→quad4**、
 > 内向法向、FEBio 默认 `<Control>`）+ 加载路径（`PressureLoad` → **`use_rigid=True`**）全部修复；
-> **17/17 case 跑完，10 条 contact 行 CONVERGED+CARRYING**（`nohold`/`press` 对照 DIVERGED），门禁
+> **17/17 case 跑完，8/10 条 contact 行 CONVERGED+CARRYING**（`nohold`/`press` 对照 DIVERGED），门禁
 > **162 passed / 1 skipped**，`F_n` 口径修正为 **`施加载荷 − hold 弹簧力`**（原式在 pen0.1 时高报 1.53×）
 > → `docs/S5_wave5_matrix.md` / `results/opensim_fe/NONVERTICAL_S5_CONTACT_WAVE5_REPORT.md`。
 > ⚠️ 波5 的接触 `F_n`（含 hold 弹簧建模补充，INFERRED）与 penalty 政策仍属**未决建模决策**，
