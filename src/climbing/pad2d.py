@@ -32,6 +32,30 @@ P3 的 2D 扩展目标：
 **默认 → 1D**。所有 2D 字段默认 0.0（``theta0, omega0, lateral_offset,
 foot_x_lever, mu_foot, I_body, c_rot``），叠加后 2D RHS 全零，纵向
 子系统原样解出 ⇒ 与 1D 完全 bit-identical。
+
+P2a/P2b —— 踝姿势角 + 滑动/卡住 + 韧带/骨失效（**纯后处理派生量**）
+----------------------------------------------------------------
+P2 不引入新的 ODE 状态，``rhs_2d`` 一字不改。所有踝量都在 1D+2D 轨迹
+**解完之后**由已知状态派生：
+
+* **踝姿势角** ``β(t) = ankle_beta0_rad + beta_from_theta·theta(t)``。
+  ``β>0`` = 内翻（inversion，[T22] §结果），``β<0`` = 外翻（eversion）。
+* **内翻力矩** ``M(t) = f_pad(t)·d_side·sinβ(t)`` (N·m)，存 ×1000 为 N·mm。
+  ``d_side`` 按 β 的符号在 ``ankle_d_lateral_m`` / ``ankle_d_medial_m`` 间切换
+  —— 后者 > 前者即编码 [T22] V9「内翻损伤轻于外翻」。
+* **滑动 vs 卡住**（[T22] Table 4 的核心）：Coulomb 锥
+  ``sliding(t) = |sinβ(t)| > mu_slide``（横向需求 ``F_lat=N·sinβ`` vs
+  承载力 ``μ·N``）。大角度 ⇒ 足在垫面滑动 ⇒ **力被卸掉**（``ANKLE_SLIDE_UNLOAD``）
+  ⇒ 无关节内骨折，但韧带被拉长（[T22] txt:181-187）。
+* **骨失效**：``σ(t) = unload·|M(t)|·c/I + |F_lat(t)|/A``（弯曲 + 剪切，
+  复用 ``ankle_supination.fibula_lateral_stress`` 的语义），``σ_c=70 MPa``。
+* **韧带失效**：用**未卸载**的 ``M(t)``，``ε(t) = F_lig/(k·L)``，
+  ``F_lig = |M|/ligament_r_mm``（``ankle_ligament`` 口径，ATFL：k=14 N/mm、
+  L=22 mm、失效 ε=0.14）。
+
+**默认（β0=0 且 beta_from_theta=0）⇒ β≡0 ⇒ 所有踝量恒为 0 / False / "none"**，
+1D 轨迹仍 ``np.array_equal``。``mu_slide`` / ``ankle_d_*`` 只影响派生量，
+**从不进入轨迹**。
 """
 
 from __future__ import annotations
@@ -42,6 +66,13 @@ import numpy as np
 from scipy.integrate import solve_ivp
 
 from . import G
+from .coupling.ankle_ligament import (
+    ATFL_FAILURE_STRAIN,
+    ATFL_INVERSION_FAIL_MOMENT_NO_PRELOAD_NM,
+    ATFL_RESTING_LENGTH_MM,
+    ATFL_STIFFNESS_N_PER_MM,
+)
+from .coupling.ankle_supination import FIBULA_ENDS_SIGMA_C_MPA
 from .pad import (
     BoulderFallResult,
     CrashPad,
@@ -56,6 +87,11 @@ __all__ = [
     "simulate_boulder_fall_2d",
     "sign_reg",
     "LEG_EXT0_M",
+    "ANKLE_SLIDE_UNLOAD",
+    "ANKLE_BONE_A_MM2",
+    "ANKLE_BONE_C_MM",
+    "ANKLE_BONE_I_MM4",
+    "ANKLE_BONE_SIGMA_C_MPA",
 ]
 
 
@@ -64,6 +100,147 @@ __all__ = [
 # 必须在两模块之间手动同步：任何对 pad.py leg_ext0 的修改都需要同时
 # 更新这里的常量（详见 __init__.py 中的约定）。
 LEG_EXT0_M: float = 0.85
+
+
+# ---------------------------------------------------------------------------
+# P2b —— 踝滑动 / 骨 / 韧带失效标定常量（单位 mm–N–MPa–s，见模块 docstring）
+# ---------------------------------------------------------------------------
+#: 滑动相位的**卸载系数**（无量纲，[0,1]）—— [T22]：大角度 ⇒ 足在垫面滑动
+#: ⇒ 「力被卸掉」⇒ 无关节内骨折。``unload = 1.0``（卡住）或本值（滑动），
+#: 乘在弯曲项 ``|M|·c/I`` 上（剪切项 ``|F_lat|/A`` 不卸载）。
+#:
+#: **标定说明（重要）**：spec 建议 0.55；但用**原始** 1D 垫反力
+#: （``f_pad`` 峰值 22–192 kN，见 tests）代入 ``M=f_pad·d·sinβ`` 时，
+#: 0.55 在数学上**无法**重现 [T22] Table 4——因为 ``σ ∝ sinβ`` 单调，
+#: 0.55 的卸载弱于 sin(30°)/sin(10°) 的增幅，滑动相永远比小角度卡住相更危险
+#: （可解析证明：``σ_slide(30°)/σ_stuck(10°) = 0.5·u·/(0.174·)`` 对 ``u≥0.347``
+#: 恒 >1）。要做出一条「角度↑却变安全」的转变曲线，卸载必须接近「完全卸掉」，
+#: 故取 0.005（99.5% 卸载）。这是 [T22] 定性曲线的**标定旋钮**，不是实测值。
+ANKLE_SLIDE_UNLOAD: float = 0.005
+
+#: 踝骨**有效剪切截面** (mm²)。1D 垫反力（45 kN @5 m）是全身接触力，用细
+#: 腓骨干截面（~83 mm²）代入会让 σ 高 1–2 个数量级、所有格一律骨折。此值
+#: 按 [T22] Table 4 的「角度—高度」转变位置标定（剪切 + 弯曲共同定阈值）。
+#: **非实测**，是标定常量。
+ANKLE_BONE_A_MM2: float = 1500.0
+
+#: 踝骨弯曲**极值纤维距离** c (mm) —— 远端腓骨/外踝中段皮质截面弱轴，
+#: **measured**：``results/opensim_fe/risk_1d_bending.json``
+#: ``sections_real_midshaft.fibula_r.c_weak_mm``。
+ANKLE_BONE_C_MM: float = 6.315600246716485
+
+#: 踝骨弯曲**弱轴二阶矩** I (mm⁴) —— 同上 ``...I_weak_mm4``。
+#: **measured**（干净 CORT remesh 中段皮质截面）。
+ANKLE_BONE_I_MM4: float = 681.8270939696082
+
+#: 踝骨压缩强度 σ_c (MPa) —— 复用
+#: ``ankle_supination.FIBULA_ENDS_SIGMA_C_MPA``（[Y25] `fibula_ends`，70 MPa）。
+ANKLE_BONE_SIGMA_C_MPA: float = FIBULA_ENDS_SIGMA_C_MPA
+
+
+def _derive_ankle_state(
+    theta: np.ndarray, f_pad: np.ndarray, p2d: "Posture2D"
+) -> dict:
+    """由已解出的 ``theta(t)``、``f_pad(t)`` 派生全部 P2a/P2b 踝量。
+
+    **不进入 ``rhs_2d``**：纯后处理，``ankle_beta0_rad``/``beta_from_theta``/
+    ``mu_slide``/``ankle_d_*`` 都不影响轨迹。默认
+    （``ankle_beta0_rad=0, beta_from_theta=0``）下
+    ``β≡0 ⇒ sinβ≡0 ⇒`` 每个输出都精确为 ``0/False/"none"``。
+
+    Returns
+    -------
+    dict
+        键名与 :class:`BoulderFallResult2D` 的 P2 字段一一对应，外加
+        ``ankle_beta0_rad``（供 ``meta`` 镜像 / 下游读取）。
+    """
+    beta0_rad = p2d.ankle_beta0_rad
+    beta_from_theta = p2d.beta_from_theta
+    mu_slide = p2d.mu_slide
+    d_lateral_m = p2d.ankle_d_lateral_m
+    d_medial_m = p2d.ankle_d_medial_m
+    ligament_r_mm = p2d.ligament_r_mm
+    n = int(theta.shape[0])
+    zero_arr = np.zeros(0)
+    if n == 0:
+        return {
+            "ankle_beta_rad": zero_arr,
+            "ankle_inversion_moment_nmm": zero_arr,
+            "peak_ankle_beta_rad": 0.0,
+            "peak_inversion_moment_nmm": 0.0,
+            "peak_ligament_strain": 0.0,
+            "ankle_slide_frac": 0.0,
+            "ankle_mode": "none",
+            "ankle_bone_utilization": 0.0,
+            "ankle_fracture": False,
+            "ankle_sprain": False,
+            "ankle_beta0_rad": float(beta0_rad),
+        }
+
+    # ---- P2a：踝姿势角 β(t) = β0 + beta_from_theta·θ(t) ----
+    beta = beta0_rad + beta_from_theta * theta
+    sin_beta = np.sin(beta)
+    peak_beta = float(np.max(np.abs(beta)))
+
+    # 力臂按 β 符号切换：β≥0（内翻）用 lateral，β<0（外翻）用 medial。
+    d_side_m = np.where(beta >= 0.0, float(d_lateral_m), float(d_medial_m))
+
+    # ---- P2b：内翻力矩 M(t) = f_pad·d_side·sinβ (N·m) → ×1000 N·mm ----
+    m_nmm = f_pad * d_side_m * sin_beta * 1000.0      # N·mm（带符号）
+    peak_m = float(np.max(np.abs(m_nmm)))
+
+    # ---- 滑动/卡住（Coulomb 锥）----
+    sliding = np.abs(sin_beta) > float(mu_slide)
+    slide_frac = float(np.mean(sliding))
+    if peak_beta == 0.0:
+        mode = "none"
+    elif slide_frac == 0.0:
+        mode = "stuck"
+    elif slide_frac == 1.0:
+        mode = "sliding"
+    else:
+        mode = "mixed"
+
+    # ---- 骨失效：σ = unload·|M|·c/I + |F_lat|/A（弯曲 + 剪切，MPa）----
+    # 语义复用 ankle_supination.fibula_lateral_stress（σ_lat = M·c/I + F_lat/A,
+    # ankle_supination.py:162-191）：弯曲用 M·c/I，剪切用 F_lat/A。
+    unload = np.where(sliding, ANKLE_SLIDE_UNLOAD, 1.0)
+    f_lat = f_pad * sin_beta                          # N（带符号，见 ankle_supination.py:106-115）
+    c_over_i = ANKLE_BONE_C_MM / ANKLE_BONE_I_MM4     # 1/mm
+    sigma = (
+        unload * np.abs(m_nmm) * c_over_i
+        + np.abs(f_lat) / ANKLE_BONE_A_MM2
+    )                                                 # MPa
+    bone_util = float(np.max(sigma) / ANKLE_BONE_SIGMA_C_MPA)
+    fracture = bool(bone_util >= 1.0)
+
+    # ---- 韧带失效：用**未卸载**的 M，ε = F_lig/(k·L)，F_lig = |M|/r ----
+    # 口径与 ankle_ligament.ligament_force_n / ligament_strain 一致
+    # （ankle_ligament.py:393-421）：F_lig = |M_inv|/r_lig（N），ε = F_lig/(k·L)。
+    if ligament_r_mm > 0.0:
+        f_lig = np.abs(m_nmm) / float(ligament_r_mm)          # N
+        eps = f_lig / (ATFL_STIFFNESS_N_PER_MM * ATFL_RESTING_LENGTH_MM)
+        peak_eps = float(np.max(eps))
+    else:
+        peak_eps = 0.0
+    sprain = bool(
+        peak_eps >= ATFL_FAILURE_STRAIN
+        or peak_m >= ATFL_INVERSION_FAIL_MOMENT_NO_PRELOAD_NM * 1000.0
+    )
+
+    return {
+        "ankle_beta_rad": beta,
+        "ankle_inversion_moment_nmm": m_nmm,
+        "peak_ankle_beta_rad": peak_beta,
+        "peak_inversion_moment_nmm": peak_m,
+        "peak_ligament_strain": peak_eps,
+        "ankle_slide_frac": slide_frac,
+        "ankle_mode": mode,
+        "ankle_bone_utilization": bone_util,
+        "ankle_fracture": fracture,
+        "ankle_sprain": sprain,
+        "ankle_beta0_rad": float(beta0_rad),
+    }
 
 
 def sign_reg(v: np.ndarray | float, eps: float = 1e-3) -> np.ndarray | float:
@@ -87,7 +264,10 @@ def sign_reg(v: np.ndarray | float, eps: float = 1e-3) -> np.ndarray | float:
 class Posture2D:
     """2D 姿势扩展 —— 纯数据载体，不影响现有 ``pad.Posture`` 的 1D 行为。
 
-    所有字段默认 0.0 ⇒ 默认与 1D 完全 bit-identical。
+    轨迹类字段（``theta0_rad … c_rot``）默认全 0.0 ⇒ 默认与 1D 完全
+    bit-identical。P2 踝字段里 ``ligament_r_mm`` 是**物理常量**（22 mm），
+    默认非零但**不进入轨迹**（只影响后处理派生量），故不影响
+    bit-identical；其余 P2 踝字段默认 0.0。
 
     Attributes
     ----------
@@ -104,12 +284,31 @@ class Posture2D:
         ``f_pad`` 与力臂 ``L_arm*sin(theta)`` 之外多出一段常数力臂，
         引入**符号敏感**的转动激励 —— 这是内翻 vs 外翻不对称的来源。
     mu_foot
-        脚-垫摩擦系数。无量纲。
+        脚-垫摩擦系数。无量纲。**注意**：这是 P3 横向位移 ``x_f`` 的
+        摩擦系数，与 ``mu_slide``（P2 滑动判据）**不是**同一个量。
     I_body_kgm2
         身体绕脚的转动惯量（kg·m²）。**为 0 时跳过转动方程更新**，
         保持 ``theta`` 与 ``omega`` 在初值上不动，避免 0/0。
     c_rot
         转动阻尼（kg·m²/s）。默认 0。
+    ankle_beta0_rad
+        规定的初始踝姿势角 β0（rad）。**>0 = 内翻（inversion），
+        <0 = 外翻（eversion）**（[T22]）。
+    beta_from_theta
+        把身体滚转耦合进踝旋转：``β(t) = ankle_beta0_rad +
+        beta_from_theta·theta(t)``。无量纲。默认 0 ⇒ β 不随 θ 演化。
+    mu_slide
+        滑动-卡住相位的摩擦系数（无量纲）：``sliding(t) = |sinβ(t)| > mu_slide``
+        （Coulomb 锥）。**与 ``mu_foot`` 不同** —— ``mu_foot`` 驱动 P3 的
+        横向位移 ``x_f``，本量只决定 P2 的 ``ankle_mode`` / 骨卸载。
+    ankle_d_lateral_m
+        ``β ≥ 0``（内翻侧）的力矩臂（m）。``M(t)=f_pad·d_side·sinβ``。
+    ankle_d_medial_m
+        ``β < 0``（外翻侧）的力矩臂（m）。**取 ``> ankle_d_lateral_m``
+        即编码 V9「内翻损伤轻于外翻」**。
+    ligament_r_mm
+        韧带力臂 (mm)，镜像 ``ankle_ligament.DEFAULT_LIGAMENT_LEVER_ARM_MM``。
+        **物理常量**（默认 22.0），不影响 1D 轨迹。
     """
 
     theta0_rad: float = 0.0
@@ -119,6 +318,13 @@ class Posture2D:
     mu_foot: float = 0.0
     I_body_kgm2: float = 0.0
     c_rot: float = 0.0
+    # ---- P2a/P2b 踝字段（后处理派生，不进入 rhs_2d）----
+    ankle_beta0_rad: float = 0.0
+    beta_from_theta: float = 0.0
+    mu_slide: float = 0.0
+    ankle_d_lateral_m: float = 0.0
+    ankle_d_medial_m: float = 0.0
+    ligament_r_mm: float = 22.0
 
 
 @dataclass
@@ -135,6 +341,18 @@ class BoulderFallResult2D(BoulderFallResult):
     ``BoulderFallResult`` 的存储直接复用，**默认参数下与 1D 轨迹
     ``np.array_equal``**（bit-identicality 验证见
     ``tests/test_pad2d.py::TestInvariant1BitIdentical``）。
+
+    P2a/P2b 踝字段（默认全 0 / False / "none"）：
+
+    * ``ankle_beta_rad`` —— ``β(t)`` 时程 (rad)
+    * ``ankle_inversion_moment_nmm`` —— ``M(t)`` 时程 (N·mm)
+    * ``peak_ankle_beta_rad`` / ``peak_inversion_moment_nmm``
+    * ``peak_ligament_strain`` —— 峰值韧带应变（无量纲；0.14 = ATFL 失效）
+    * ``ankle_slide_frac`` / ``ankle_mode``（``"none"|"stuck"|"sliding"|"mixed"``）
+    * ``ankle_bone_utilization`` / ``ankle_fracture``
+    * ``ankle_sprain``
+
+    这些标量同时镜像到 ``meta``（同名键），供 duck-typed 消费者读取。
     """
 
     x_foot_m: np.ndarray = field(default_factory=lambda: np.zeros(0))
@@ -142,6 +360,17 @@ class BoulderFallResult2D(BoulderFallResult):
     omega_rad_s: np.ndarray = field(default_factory=lambda: np.zeros(0))
     peak_theta_rad: float = 0.0
     peak_omega_rad_s: float = 0.0
+    # ---- P2a/P2b 踝后处理派生量 ----
+    ankle_beta_rad: np.ndarray = field(default_factory=lambda: np.zeros(0))
+    peak_ankle_beta_rad: float = 0.0
+    ankle_inversion_moment_nmm: np.ndarray = field(default_factory=lambda: np.zeros(0))
+    peak_inversion_moment_nmm: float = 0.0
+    peak_ligament_strain: float = 0.0
+    ankle_slide_frac: float = 0.0
+    ankle_mode: str = "none"
+    ankle_bone_utilization: float = 0.0
+    ankle_fracture: bool = False
+    ankle_sprain: bool = False
 
 
 def simulate_boulder_fall_2d(
@@ -217,6 +446,12 @@ def simulate_boulder_fall_2d(
         and p2d.theta0_rad == 0.0
         and p2d.omega0_rad_s == 0.0
         and p2d.lateral_offset_m == 0.0
+        # P2a：踝姿势角为零 ⇒ β≡0 ⇒ 所有踝派生量恒零。把这两项并入
+        # 短路条件，确保"全默认 Posture2D()"必然走短路路径。
+        # 注意：``mu_slide`` / ``ankle_d_*`` **刻意不进**本条件——它们只
+        # 影响派生量，从不进入 rhs_2d，对轨迹无作用。
+        and p2d.ankle_beta0_rad == 0.0
+        and p2d.beta_from_theta == 0.0
     )
 
     if trivially_zero_2d:
@@ -275,9 +510,27 @@ def simulate_boulder_fall_2d(
     peak_theta = float(np.max(np.abs(theta))) if theta.size else 0.0
     peak_omega = float(np.max(np.abs(omega))) if omega.size else 0.0
 
+    # ---- Step 2b: P2a/P2b 踝量后处理（不进入 rhs_2d，纯派生）----
+    # 默认（beta0=0 且 beta_from_theta=0）⇒ β≡0 ⇒ 全 0 / False / "none"。
+    ankle = _derive_ankle_state(theta, f_pad_1d, p2d)
+
     # 浅拷贝 1D meta（包含 posture_obj, m_up, m_low, impact_window_s 等所有
     # injury.py / bone.py 需要的字段），不修改 r1d.meta 原对象。
     meta_2d = dict(r1d.meta)
+    # P2 标量镜像进 meta（同名键），供 duck-typed 消费者（ankle_injury.py）
+    # 无需知道 BoulderFallResult2D 类型即可读取。
+    for _k in (
+        "peak_ankle_beta_rad",
+        "peak_inversion_moment_nmm",
+        "peak_ligament_strain",
+        "ankle_slide_frac",
+        "ankle_mode",
+        "ankle_bone_utilization",
+        "ankle_fracture",
+        "ankle_sprain",
+        "ankle_beta0_rad",
+    ):
+        meta_2d[_k] = ankle[_k]
 
     return BoulderFallResult2D(
         posture=r1d.posture,
@@ -309,4 +562,14 @@ def simulate_boulder_fall_2d(
         omega_rad_s=omega,
         peak_theta_rad=peak_theta,
         peak_omega_rad_s=peak_omega,
+        ankle_beta_rad=ankle["ankle_beta_rad"],
+        peak_ankle_beta_rad=ankle["peak_ankle_beta_rad"],
+        ankle_inversion_moment_nmm=ankle["ankle_inversion_moment_nmm"],
+        peak_inversion_moment_nmm=ankle["peak_inversion_moment_nmm"],
+        peak_ligament_strain=ankle["peak_ligament_strain"],
+        ankle_slide_frac=ankle["ankle_slide_frac"],
+        ankle_mode=ankle["ankle_mode"],
+        ankle_bone_utilization=ankle["ankle_bone_utilization"],
+        ankle_fracture=ankle["ankle_fracture"],
+        ankle_sprain=ankle["ankle_sprain"],
     )

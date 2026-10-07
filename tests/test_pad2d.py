@@ -36,8 +36,13 @@ import numpy as np
 import pytest
 
 from climbing import G
+from climbing.coupling.ankle_ligament import (
+    ATFL_FAILURE_STRAIN,
+    ATFL_INVERSION_FAIL_MOMENT_NO_PRELOAD_NM,
+)
 from climbing.pad import (
     BoulderFallResult,
+    CrashPad,
     POSTURES,
     simulate_boulder_fall,
 )
@@ -722,3 +727,316 @@ class TestNonzero2DParametersActuallyAnimate:
         )
         # lateral_offset_m 给定 x_f(0)=0.05，mu=0 ⇒ 永远保持
         assert np.array_equal(r.x_foot_m, np.full_like(r.t_s, 0.05))
+
+
+# ==========================================================================
+# P2a/P2b —— 踝姿势角 + 滑动/卡住 + 韧带 / 骨失效
+# ==========================================================================
+# 复现 [T22]（Li Z et al., Forensic Sci Res 2022;7(3):518-527）。全部为
+# **后处理派生量**，默认（β0=0 且 beta_from_theta=0）逐位归零、不改 1D 轨迹。
+#
+# 标定常量（见 ``src/climbing/pad2d.py``，另一 agent 的
+# ``scripts/phase_p1_montecarlo.py`` 与之一致）：
+#   mu_slide      = 0.4    —— |sinβ|>0.4（≈β>23.6°）⇒ 滑动
+#   d_lateral     = 0.030 m （内翻，β≥0 的力矩臂）
+#   d_medial      = 0.045 m （外翻，β<0）—— > lateral ⇒ V9「内翻轻于外翻」
+#   ligament_r_mm = 22.0   （ATFL 力臂，[R6] 默认）
+_ANKLE_D = dict(
+    mu_slide=0.4,
+    ankle_d_lateral_m=0.030,
+    ankle_d_medial_m=0.045,
+    ligament_r_mm=22.0,
+)
+
+
+def _ankle_run(height_m, beta0_deg, *, sign=1.0, beta_from_theta=0.0, **over):
+    """跑一次带 P2 踝参数的 2D 仿真（default pad / controlled-drop）。"""
+    params = dict(_ANKLE_D)
+    params.update(over)
+    return simulate_boulder_fall_2d(
+        height_m=height_m, mass_kg=80.0, posture="controlled-drop",
+        posture2d=Posture2D(
+            ankle_beta0_rad=float(np.deg2rad(beta0_deg)) * float(sign),
+            beta_from_theta=beta_from_theta,
+            **params,
+        ),
+    )
+
+
+_V6_CACHE: dict = {}
+
+
+def _v6_grid():
+    """[T22] Table 4 的 (h, β) 3×3 网格；模块内缓存避免重复 9 次求解。"""
+    if not _V6_CACHE:
+        for h in (5.0, 10.0, 20.0):
+            for a in (10.0, 20.0, 30.0):
+                _V6_CACHE[(h, a)] = _ankle_run(h, a)
+    return _V6_CACHE
+
+
+# ==========================================================================
+# P2a —— 踝姿势角 β(t) = β0 + beta_from_theta·θ(t)
+# ==========================================================================
+class TestP2aAnklePose:
+    """P2a：β 的精确映射 + β0 符号约定（>0 内翻 / <0 外翻）。"""
+
+    def test_beta_follows_theta_exactly(self):
+        """``β(t) = β0 + beta_from_theta·θ(t)`` 在采样栅格上逐位成立。"""
+        p2d = Posture2D(
+            theta0_rad=0.1, I_body_kgm2=50.0, mu_foot=0.5, foot_x_lever_m=0.02,
+            ankle_beta0_rad=0.2, beta_from_theta=1.5,
+            mu_slide=0.4, ankle_d_lateral_m=0.03, ankle_d_medial_m=0.045,
+        )
+        r = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop", posture2d=p2d,
+        )
+        # θ(t) 必须真的非零，否则这条断言是空的
+        assert not np.array_equal(r.theta_rad, np.zeros_like(r.t_s))
+        expected = p2d.ankle_beta0_rad + p2d.beta_from_theta * r.theta_rad
+        assert np.array_equal(r.ankle_beta_rad, expected), \
+            "β(t) 必须逐位等于 β0 + beta_from_theta·θ(t)"
+
+    def test_peak_beta_is_max_abs(self):
+        r = _ankle_run(3.0, 20.0)
+        assert r.peak_ankle_beta_rad == float(np.max(np.abs(r.ankle_beta_rad)))
+
+    def test_beta_sign_convention(self):
+        """β0>0 = 内翻、β0<0 = 外翻 ⇒ β(t) 时程符号跟随 β0。"""
+        r_inv = _ankle_run(3.0, 20.0, sign=+1.0)
+        r_ev = _ankle_run(3.0, 20.0, sign=-1.0)
+        assert np.all(r_inv.ankle_beta_rad > 0.0)
+        assert np.all(r_ev.ankle_beta_rad < 0.0)
+
+    def test_sign_sensitive_asymmetry_stable(self):
+        """同 |β|=20°，符号敏感：跨 3 高度 ``peak_inversion_moment_nmm``
+        的排序一致（= 不变量 ③ 在踝层的体现）。"""
+        heights = (2.0, 3.0, 5.0)
+        diffs = []
+        for h in heights:
+            rp = _ankle_run(h, 20.0, sign=+1.0)
+            rn = _ankle_run(h, 20.0, sign=-1.0)
+            assert rp.peak_inversion_moment_nmm != rn.peak_inversion_moment_nmm, \
+                f"h={h}: 内翻/外翻力矩完全对称 —— 符号不敏感"
+            diffs.append(rn.peak_inversion_moment_nmm - rp.peak_inversion_moment_nmm)
+        # d_medial > d_lateral ⇒ 外翻(−) 力矩更大；排序在 3 高度上一致。
+        assert all(d > 0.0 for d in diffs), f"不对称方向不稳定: {diffs}"
+
+
+# ==========================================================================
+# P2b —— 滑动 vs 卡住
+# ==========================================================================
+class TestP2bSliding:
+    """``sliding(t) = |sinβ(t)| > mu_slide``（Coulomb 锥）两端与边界。"""
+
+    def test_mu_slide_zero_always_sliding(self):
+        r = _ankle_run(3.0, 20.0, mu_slide=0.0)
+        assert r.ankle_mode == "sliding"
+        assert r.ankle_slide_frac == 1.0
+
+    def test_mu_slide_huge_always_stuck(self):
+        r = _ankle_run(3.0, 20.0, mu_slide=1e9)
+        assert r.ankle_mode == "stuck"
+        assert r.ankle_slide_frac == 0.0
+
+    def test_boundary_is_sin_beta_equals_mu_slide(self):
+        """边界恰为 ``|sinβ| = mu_slide``：β=30° ⇒ |sinβ|≈0.5。
+
+        ``mu_slide=0.5`` ⇒ 不滑动（严格 ``>``）；略小 ⇒ 滑动。
+        """
+        r_stuck = _ankle_run(3.0, 30.0, mu_slide=0.5)
+        r_slide = _ankle_run(3.0, 30.0, mu_slide=0.4999)
+        assert r_stuck.ankle_mode == "stuck"
+        assert r_slide.ankle_mode == "sliding"
+        assert r_stuck.ankle_slide_frac == 0.0
+        assert r_slide.ankle_slide_frac == 1.0
+
+    def test_sliding_lowers_bone_utilization(self):
+        """同 (h, β)：滑动卸载 ⇒ 骨利用率 < 卡住时的全额。"""
+        h, beta = 5.0, 30.0
+        r_stuck = _ankle_run(h, beta, mu_slide=1e9)
+        r_slide = _ankle_run(h, beta, mu_slide=0.0)
+        assert r_stuck.ankle_bone_utilization > r_slide.ankle_bone_utilization
+
+
+# ==========================================================================
+# V6 —— [T22] Table 4 的 (高度 × 角度) 定性结构
+# ==========================================================================
+class TestP2bV6Table4:
+    """扫描 heights=(5,10,20) × angles=(10,20,30)°，复现 [T22] Table 4：
+
+    ① 低高度 + 大角度 → 无骨折（滑动）
+    ② 低高度 + 小角度 → 骨折
+    ③ 高高度 → 无论角度都骨折
+    ④ 存在"角度—高度"转变曲线
+    """
+
+    def test_table4_qualitative_structure(self):
+        grid = _v6_grid()
+        expect = {
+            (5.0, 10.0): True,    # 5 m/10° 骨折（[T22] 腓骨+胫骨中下段）
+            (5.0, 20.0): True,    # 5 m/20° 骨折
+            (5.0, 30.0): False,   # 5 m/30° 滑动，力被卸掉 ⇒ 无骨折
+            (10.0, 10.0): True,
+            (10.0, 20.0): True,
+            (10.0, 30.0): True,
+            (20.0, 10.0): True,
+            (20.0, 20.0): True,
+            (20.0, 30.0): True,
+        }
+        for key, exp in expect.items():
+            got = bool(grid[key].ankle_fracture)
+            assert got == exp, (
+                f"h={key[0]}m β={key[1]}°: 期望骨折={exp} 得到={got} "
+                f"(util={grid[key].ankle_bone_utilization:.3f}, "
+                f"mode={grid[key].ankle_mode})"
+            )
+
+    def test_large_angle_at_5m_is_sliding_no_fracture(self):
+        r = _v6_grid()[(5.0, 30.0)]
+        assert r.ankle_mode == "sliding"
+        assert not r.ankle_fracture
+
+    def test_transition_curve_exists(self):
+        """至少一个相邻 (h,β) 骨折状态翻转 ⇒ 存在角度—高度转变曲线。"""
+        grid = _v6_grid()
+        flips = 0
+        for h in (5.0, 10.0, 20.0):
+            for a0, a1 in ((10.0, 20.0), (20.0, 30.0)):
+                if grid[(h, a0)].ankle_fracture != grid[(h, a1)].ankle_fracture:
+                    flips += 1
+        for a in (10.0, 20.0, 30.0):
+            for h0, h1 in ((5.0, 10.0), (10.0, 20.0)):
+                if grid[(h0, a)].ankle_fracture != grid[(h1, a)].ankle_fracture:
+                    flips += 1
+        assert flips >= 1, "网格中不存在骨折翻转 ⇒ 无转变曲线"
+
+
+# ==========================================================================
+# V9 —— [T22] 内翻损伤轻于外翻（d_medial > d_lateral）
+# ==========================================================================
+class TestP2bV9:
+    """V9：``ankle_d_medial_m > ankle_d_lateral_m`` 编码「内翻轻于外翻」。"""
+
+    def test_eversion_worse_than_inversion(self):
+        """同 |β|=20°、跨 3 高度：外翻(−) 的应变与骨利用率都 > 内翻(+)。"""
+        for h in (2.0, 3.0, 5.0):
+            r_inv = _ankle_run(h, 20.0, sign=+1.0)
+            r_ev = _ankle_run(h, 20.0, sign=-1.0)
+            assert r_ev.peak_ligament_strain > r_inv.peak_ligament_strain, \
+                f"h={h}: 外翻应变应 > 内翻"
+            assert r_ev.ankle_bone_utilization > r_inv.ankle_bone_utilization, \
+                f"h={h}: 外翻骨利用率应 > 内翻"
+
+    def test_ordering_stable_across_angles_and_heights(self):
+        for a in (10.0, 30.0):
+            for h in (2.0, 3.0, 5.0):
+                r_inv = _ankle_run(h, a, sign=+1.0)
+                r_ev = _ankle_run(h, a, sign=-1.0)
+                assert r_ev.peak_ligament_strain > r_inv.peak_ligament_strain
+
+    def test_equal_arms_no_asymmetry(self):
+        """两侧力臂相等 ⇒ 无不对称（健全性检查，证明不对称源自力臂差）。"""
+        over = dict(ankle_d_lateral_m=0.03, ankle_d_medial_m=0.03)
+        rp = _ankle_run(3.0, 20.0, sign=+1.0, **over)
+        rn = _ankle_run(3.0, 20.0, sign=-1.0, **over)
+        assert rp.peak_ligament_strain == rn.peak_ligament_strain
+        assert rp.ankle_bone_utilization == rn.ankle_bone_utilization
+
+
+# ==========================================================================
+# V6/[B25] —— 垫刚度 ⇒ 韧带应变非单调
+# ==========================================================================
+class TestP2bPadStiffnessNonMonotonic:
+    """[B25]：垫刚度 ↑ ⇒ 韧带应变**非单调**（存在内部极大）。
+
+    机制：``ε ∝ peak(f_pad(t)·|sinβ(t)|)``。刚度↑ 一方面抬高峰值力，另一方面
+    使峰值力**提前**（不变量 ④）并改变它与踝旋转 β(t) 振荡峰的相位，于是
+    **乘积**在中等刚度处出现内极大 —— 软垫（力小）与硬垫（相位错开）两侧更低。
+    这正是 [B25]「提高刚度可能预防过度旋后，但高能场景可能无效甚至更糟」。
+    """
+
+    @staticmethod
+    def _pads():
+        # 平台应力 / 压实应力按同一因子 f 缩放 ⇒ 单调整体刚度族。
+        fs = (10.0, 20.0, 50.0, 100.0)
+        pads = [
+            CrashPad(s_plateau_pa=35000.0 * f,
+                     s_dense_pa=365000.0 * float(np.sqrt(f)))
+            for f in fs
+        ]
+        return fs, pads
+
+    def test_non_monotonic_local_max_exists(self):
+        fs, pads = self._pads()
+        p2d = Posture2D(
+            theta0_rad=0.30, I_body_kgm2=50.0, foot_x_lever_m=0.02, mu_foot=0.5,
+            ankle_beta0_rad=0.20, beta_from_theta=1.0, mu_slide=0.4,
+            ankle_d_lateral_m=0.030, ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+        )
+        eps = []
+        for pad in pads:
+            r = simulate_boulder_fall_2d(
+                height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+                pad=pad, posture2d=p2d,
+            )
+            eps.append(r.peak_ligament_strain)
+        # 存在 k1<k2<k3 使 ε(k2)>ε(k1) 且 ε(k2)>ε(k3)（局部极大 ⇒ 非单调）
+        assert any(
+            eps[j] > eps[j - 1] and eps[j] > eps[j + 1]
+            for j in range(1, len(fs) - 1)
+        ), f"ε 未出现非单调局部极大: f={fs}, ε={eps}"
+
+
+# ==========================================================================
+# P2 默认逐位一致 + 新输出归零
+# ==========================================================================
+class TestP2DefaultsBitIdentical:
+    """全默认 ``Posture2D()`` ⇒ 1D 逐位一致 + 全部新踝输出 0/False/'none'。"""
+
+    @pytest.mark.parametrize("height_m", [2.0, 5.0])
+    def test_all_1d_fields_bit_identical(self, height_m):
+        for posture in ("controlled-drop", "feet-first-stiff", "head-first"):
+            r1d = simulate_boulder_fall(
+                height_m=height_m, mass_kg=80.0, posture=posture)
+            r2d = simulate_boulder_fall_2d(
+                height_m=height_m, mass_kg=80.0, posture=posture,
+                posture2d=Posture2D())
+            for attr in ("t_s", "z_foot_m", "z_torso_m", "pad_compression_m",
+                         "contact_area_m2", "pad_force_n", "accel_leg_g",
+                         "accel_torso_g"):
+                assert np.array_equal(getattr(r2d, attr), getattr(r1d, attr)), \
+                    f"{attr} 非逐位一致 (h={height_m}, posture={posture})"
+
+    def test_new_ankle_outputs_are_zero(self):
+        r = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D())
+        assert np.array_equal(r.ankle_beta_rad, np.zeros_like(r.t_s))
+        assert np.array_equal(r.ankle_inversion_moment_nmm, np.zeros_like(r.t_s))
+        assert r.peak_ankle_beta_rad == 0.0
+        assert r.peak_inversion_moment_nmm == 0.0
+        assert r.peak_ligament_strain == 0.0
+        assert r.ankle_slide_frac == 0.0
+        assert r.ankle_mode == "none"
+        assert r.ankle_bone_utilization == 0.0
+        assert r.ankle_fracture is False
+        assert r.ankle_sprain is False
+
+    def test_meta_mirrors_ankle_scalars(self):
+        r = simulate_boulder_fall_2d(
+            height_m=3.0, mass_kg=80.0, posture="controlled-drop",
+            posture2d=Posture2D())
+        for key in ("peak_ankle_beta_rad", "peak_inversion_moment_nmm",
+                    "peak_ligament_strain", "ankle_slide_frac", "ankle_mode",
+                    "ankle_bone_utilization", "ankle_fracture", "ankle_sprain",
+                    "ankle_beta0_rad"):
+            assert key in r.meta, f"meta 缺踝键 {key!r}"
+        # 非默认下 meta 与属性一致（duck-typed 消费者口径）
+        rn = _ankle_run(3.0, 20.0)
+        assert rn.meta["ankle_mode"] == rn.ankle_mode
+        assert rn.meta["peak_inversion_moment_nmm"] == rn.peak_inversion_moment_nmm
+        assert rn.meta["peak_ligament_strain"] == rn.peak_ligament_strain
+        assert rn.meta["ankle_bone_utilization"] == rn.ankle_bone_utilization
+        assert rn.meta["ankle_sprain"] == rn.ankle_sprain
+        assert rn.meta["ankle_fracture"] == rn.ankle_fracture
