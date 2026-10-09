@@ -28,9 +28,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import multiprocessing as mp
 import re
 import sys
 import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 
@@ -637,6 +639,68 @@ def _sensitivity(runs: list[dict]) -> dict:
 
 
 # --------------------------------------------------------------------------
+# 场景矩阵执行（串行 / 进程级并行）
+# --------------------------------------------------------------------------
+#: 进程池 worker 的网格缓存（Windows spawn：每进程独立加载一次）。
+_WORKER_MESH: dict | None = None
+
+
+def _worker_mesh() -> dict:
+    """worker 进程内懒加载 THUMS 网格（spawn 下每进程只加载一次）。"""
+    global _WORKER_MESH
+    if _WORKER_MESH is None:
+        _WORKER_MESH = T.load_thums_mesh(MESH_ANAT)
+    return _WORKER_MESH
+
+
+def _worker_run_case(case: dict) -> dict:
+    """模块级 worker（Windows spawn 需可 pickle）：单 case 独立 deck/workdir。"""
+    return _solve_case(_worker_mesh(), **case)
+
+
+def _run_plan(plan: list[dict], mesh, *, workers: int = 1,
+              on_row=None) -> list[dict]:
+    """按 ``plan`` 顺序执行 FE 工况，返回 rows（顺序 == plan）。
+
+    * ``workers <= 1``（默认）或单 case：**原串行路径**，直接用调用方已加载的 ``mesh``。
+    * ``workers > 1``：进程池并行（spawn；``_worker_run_case`` 在 worker 里懒加载网格）。
+      完成顺序可能乱序 ⇒ 先缓冲，只在**前缀**齐了才回调 ``on_row(row, rows)``
+      （保住逐行 partial dump 的崩溃恢复语义：磁盘上永远是 plan 的一个前缀）。
+
+    ``on_row(row, rows)`` 在每个前缀行就绪时被调用（顺序 == plan）。
+    """
+    if not plan:
+        return []
+    rows: list[dict | None] = [None] * len(plan)
+    done: list[dict] = []
+    emitted = 0
+
+    def _flush() -> None:
+        """把「已连续就绪」的前缀发出去（顺序 == plan）。"""
+        nonlocal emitted
+        while emitted < len(rows) and rows[emitted] is not None:
+            r = rows[emitted]
+            done.append(r)
+            if on_row is not None:
+                on_row(r, done)
+            emitted += 1
+
+    if workers <= 1 or len(plan) < 2:
+        for i, case in enumerate(plan):
+            rows[i] = _solve_case(mesh, **case)
+            _flush()
+        return done
+
+    ctx = mp.get_context("spawn")
+    with ProcessPoolExecutor(max_workers=int(workers), mp_context=ctx) as ex:
+        futs = {ex.submit(_worker_run_case, case): i for i, case in enumerate(plan)}
+        for fut in as_completed(futs):
+            rows[futs[fut]] = fut.result()
+            _flush()
+    return done
+
+
+# --------------------------------------------------------------------------
 # main
 # --------------------------------------------------------------------------
 def main(argv: list[str] | None = None) -> int:
@@ -646,6 +710,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out-md", type=Path, default=OUT_MD)
     ap.add_argument("--fast", action="store_true",
                     help="跳过 OpenSim 轴向回归重跑（接口逐位检查仍执行）")
+    ap.add_argument("--workers", type=int, default=1,
+                    help="FE 工况并行进程数（默认 1 = 原串行路径，行为不变；"
+                         ">=2 时进程级并行，结果仍按 plan 顺序装配并保留 partial dump）")
     args = ap.parse_args(argv)
 
     for p in (args.out_json, args.out_md):
@@ -676,11 +743,10 @@ def main(argv: list[str] | None = None) -> int:
     s4 = json.loads(S4_JSON.read_text(encoding="utf-8"))
     s4_base = next(c for c in s4["cases"] if c["tag"] == "axial_baseline_fixed")
 
-    print("[3/4] FE 场景矩阵（每行落盘后追加）...", flush=True)
+    print(f"[3/4] FE 场景矩阵（每行落盘后追加；workers={args.workers}）...", flush=True)
     runs: list[dict] = []
-    for case in _plan_cases(loads):
-        row = _solve_case(mesh, **case)
-        runs.append(row)
+
+    def _on_row(row: dict, prefix: list[dict]) -> None:
         fn = row.get("F_n_n")
         fn_txt = "—" if not fn else f"{fn['value']/1e3:.2f} kN"
         dg = row.get("diagnostics", {})
@@ -688,8 +754,10 @@ def main(argv: list[str] | None = None) -> int:
               f"F_n={fn_txt:>9s} verdict={row['run_verdict']} "
               f"negJac={dg.get('neg_jacobians')} invalid={dg.get('invalid_facets')} "
               f"[{row['wall_s']['value']:.1f}s]", flush=True)
-        # 逐行落盘（崩溃也不丢）
-        _dump_partial(args.out_json, runs, ts, iface, axial, s4_base)
+        # 逐行落盘（崩溃也不丢；并行时只落 plan 前缀）
+        _dump_partial(args.out_json, prefix, ts, iface, axial, s4_base)
+
+    runs = _run_plan(_plan_cases(loads), mesh, workers=args.workers, on_row=_on_row)
 
     print("[4/4] 汇总门禁 + 写报告 ...", flush=True)
     gates = _regression_gates(runs, axial, s4_base)
@@ -833,6 +901,7 @@ def _assemble(runs, ts, iface, axial, s4_base, gates, sens, loads, mesh) -> dict
         "repro": {
             "commands": [
                 r"$env:PYTHONPATH='src'; .venv\Scripts\python.exe scripts\opensim_fe\nonvertical_s5_contact.py",
+                r"# FE 工况进程级并行（默认 --workers 1 = 原串行路径）：.venv\Scripts\python.exe scripts\opensim_fe\nonvertical_s5_contact.py --workers 4",
             ],
             "files_read": [
                 str(HEIGHT_SWEEP_JSON.relative_to(ROOT)),
@@ -1117,6 +1186,8 @@ def _write_report(path: Path, res: dict, ts: str) -> None:
     A("& .venv\\Scripts\\python.exe scripts\\opensim_fe\\nonvertical_s5_contact.py")
     A("# 只跑 FE（跳过 OpenSim 轴向回归重跑）：")
     A("& .venv\\Scripts\\python.exe scripts\\opensim_fe\\nonvertical_s5_contact.py --fast")
+    A("# FE 工况进程级并行（结果按 plan 顺序装配 + 前缀 partial dump；默认 --workers 1）：")
+    A("& .venv\\Scripts\\python.exe scripts\\opensim_fe\\nonvertical_s5_contact.py --workers 4")
     A("```")
     A("")
     A("## 12. 产物")

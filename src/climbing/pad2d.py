@@ -156,26 +156,37 @@ ANKLE_BONE_SIGMA_C_MPA: float = FIBULA_ENDS_SIGMA_C_MPA
 #: 2. **数据来源**：``ankle_ligament.ATFL_ULTIMATE_LOAD_N = 200 N``
 #:    （``ankle_ligament.py:129``）是韧带本身**断裂**的极限载荷；
 #:    撕脱骨折阈值是**骨端撕脱**所需的韧带拉力，文献区间 200–2000 N
-#:    （与年龄、骨密度相关）。本常量取 **300 N**，略高于 ATFL 极限，
-#:    含义：「韧带力 > 300 N 时，韧带已**先于**骨附着点被拉脱 ⇒ 撕脱」
+#:    （与年龄、骨密度相关）。本常量取 **215 N**（2026-10-08 重标定，见 3），
+#:    略高于 ATFL 极限，
+#:    含义：「韧带力 > 215 N 时，韧带已**先于**骨附着点被拉脱 ⇒ 撕脱」
 #:    —— 这是「韧带断裂伴随骨撕脱」的组合阈值。
-#: 3. **V6 校准约束**：[T22] Table 4 要求 (5 m, 30°) sliding 不骨折、
-#:    (10 m, 30°) 与 (20 m, 30°) sliding 骨折。把滑动卸载
-#:    ``ANKLE_SLIDE_UNLOAD = 0.005`` 应用到 ``F_lig`` 后：
-#:    - (5, 30°) sliding  ``F_lig_eff = 30801 · 0.005 ≈ 154 N`` < 300 ⇒ no fire ✓
-#:    - (10, 30°) sliding ``F_lig_eff = 69800 · 0.005 ≈ 349 N`` > 300 ⇒ fire ✓
-#:    - (20, 30°) sliding ``F_lig_eff = 130999 · 0.005 ≈ 655 N`` > 300 ⇒ fire ✓
-#:    三档高度**单调**通过 [T22] 转变曲线 —— V6 preserved。
+#: 3. **V6 校准约束（2026-10-08 重标定：靶面 = 刚性地面）**：[T22] 是
+#:    刚性地面 5–20 m 工况（本项目「工况错配」诊断的文献侧）。Table 4
+#:    要求 (5 m, 30°) sliding 不骨折、(10 m, 30°) 与 (20 m, 30°)
+#:    sliding 骨折。**首版 T=300 是按【垫】波形标定的**（69800·0.005≈349
+#:    > 300）；【刚】冲击窗更短、β 未长大 ⇒ raw F_lig 反而低于【垫】
+#:    （50951 < 69800），(10,30) eff=254.8 < 300 漏判 ⇒ 刚侧 V6 8/9
+#:    （`docs/rigid_vtarget_2026-10-08.md` §6.2）。重标定 **T = 215 N**：
+#:    以【刚】为靶面取可行窗 173.2 < T ≤ 254.8 的中值附近，【垫】三格
+#:    与【刚】三格同时通过（两侧裕度 ~16–20%），且仍 > ATFL 200 N：
+#:    - (5, 30°)  【垫】eff = 30801 · 0.005 ≈ 154.0 N < 215 ⇒ no fire ✓
+#:    - (10, 30°) 【垫】eff = 69800 · 0.005 ≈ 349.0 N > 215 ⇒ fire ✓
+#:    - (20, 30°) 【垫】eff = 130999 · 0.005 ≈ 655.0 N > 215 ⇒ fire ✓
+#:    - (5, 30°)  【刚】eff = 34632 · 0.005 ≈ 173.2 N < 215 ⇒ no fire ✓
+#:    - (10, 30°) 【刚】eff = 50951 · 0.005 ≈ 254.8 N > 215 ⇒ fire ✓
+#:    - (20, 30°) 【刚】eff = 75612 · 0.005 ≈ 378.1 N > 215 ⇒ fire ✓
+#:    三档高度**单调**通过转变曲线，**两工况 V6 均 9/9**
+#:    （诊断脚本 `temp/a1_v6_diag.py`，mass=80）。
 #: 4. **bit-identical 保留**：默认 ``ankle_load_share=1.0`` 下，
-#:    ``_v6_grid`` 中所有 stuck 都 ``F_lig > 300``（最小 stuck F_lig = 1892 N），
+#:    ``_v6_grid`` 中所有 stuck 都 ``F_lig > T``（最小 stuck F_lig = 1892 N），
 #:    全部触发 fracture；sliding 按上表的 F_lig_eff 决定。**净骨折计数
 #:    = 230/345**（与旧 σ_bend 判据的 230/345 几乎完全一致）。
 #: 5. **标定 load-partition 失效诚实声明**（重要）：期望把
 #:    ``ankle_load_share`` 调到 measured anchor ``0.477`` 后能把踝骨折
 #:    比例从 23% 降到 ≈ 8%。**实际做不到**（见 §四 标定分析）：
-#:    - 在 share=1.0 下，stuck trial 的 F_lig 最小 1892 N ≫ T = 300
+#:    - 在 share=1.0 下，stuck trial 的 F_lig 最小 1892 N ≫ T = 215
 #:      ⇒ 所有 stuck 都触发 fracture。
-#:    - 调 share=0.477 后 stuck F_lig 缩放到 902 N，仍 ≫ T = 300
+#:    - 调 share=0.477 后 stuck F_lig 缩放到 902 N，仍 ≫ T = 215
 #:      ⇒ 所有 stuck 仍触发 fracture。
 #:    ⇒ fracture 率在 share=1.0 和 share=0.477 下**几乎不变**（228 vs 230）。
 #:    这是结构性约束，不是拟合失败：单 share 缩放 + 单阈值 T + V6 校准
@@ -185,7 +196,7 @@ ANKLE_BONE_SIGMA_C_MPA: float = FIBULA_ENDS_SIGMA_C_MPA
 #:
 #: **诚实边界**：撕脱强度高度依赖骨密度 / 年龄；本常量是**标定旋钮**，
 #: 与 ``ANKLE_SLIDE_UNLOAD``/``ANKLE_BONE_A_MM2`` 同级，都不是实测。
-ANKLE_AVULSION_LOAD_N: float = 300.0
+ANKLE_AVULSION_LOAD_N: float = 215.0
 
 
 def _derive_ankle_state(
@@ -301,7 +312,7 @@ def _derive_ankle_state(
     # ---- 踝骨折判定：撕脱（avulsion）而非弯曲破坏 ----
     # **MODELLING CHOICE**：用韧带力是否超过 ``ANKLE_AVULSION_LOAD_N``
     # 来判定撕脱性骨折。这是 P2 修复「sprain/fracture 比例」的核心 —— 见
-    # ``ANKLE_AVULSION_LOAD_N`` 常量的 docstring（:154-203）。
+    # ``ANKLE_AVULSION_LOAD_N`` 常量的 docstring（:146-199）。
     #
     # 旧判据 ``bone_util >= 1.0`` 是腓骨中段弯曲应力，对踝骨折机理错误
     # （临床踝骨折 = 撕脱 / 胫骨压缩，不是腓骨弯曲）。新判据更直接：

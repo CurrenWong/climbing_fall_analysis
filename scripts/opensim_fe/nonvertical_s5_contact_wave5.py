@@ -342,6 +342,8 @@ def _write_report(path: Path, res: dict, ts: str) -> None:
     A("cd D:\\Project\\climbing_fall_analysis")
     A('$env:PYTHONPATH="src"')
     A("& .venv\\Scripts\\python.exe scripts\\opensim_fe\\nonvertical_s5_contact_wave5.py")
+    A("# FE 工况进程级并行（结果按 plan 顺序装配 + 前缀 partial dump；默认 --workers 1）：")
+    A("& .venv\\Scripts\\python.exe scripts\\opensim_fe\\nonvertical_s5_contact_wave5.py --workers 4")
     A("```")
     A("")
     path.write_text("\n".join(L) + "\n", encoding="utf-8")
@@ -358,6 +360,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out-json", type=Path, default=OUT_JSON)
     ap.add_argument("--out-md", type=Path, default=OUT_MD)
     ap.add_argument("--contact-only", action="store_true", help="只跑 contact 行（子集先行）")
+    ap.add_argument("--workers", type=int, default=1,
+                    help="FE 工况并行进程数（默认 1 = 原串行路径；>=2 进程级并行，"
+                         "结果仍按 plan 顺序装配并保留 partial dump）")
     ap.add_argument("--reuse-json", type=Path, default=None,
                     help="不跑 FEBio，直接读取既有 runs JSON 重新汇总/写报告")
     args = ap.parse_args(argv)
@@ -382,12 +387,12 @@ def main(argv: list[str] | None = None) -> int:
               f"plantar_nodes={len(mesh['node_sets']['plantar'])}", flush=True)
         selected = [c for c in cases if c["plantar_bc"] == "contact"] if args.contact_only else cases
         print(f"[cases] {len(selected)} 行（contact="
-              f"{sum(1 for c in selected if c['plantar_bc'] == 'contact')}）", flush=True)
-        runs = []
-        for case in selected:
-            row = S5C._solve_case(mesh, **case)
+              f"{sum(1 for c in selected if c['plantar_bc'] == 'contact')}；"
+              f"workers={args.workers}）", flush=True)
+
+        def _on_row(row: dict, prefix: list[dict]) -> None:
+            """前缀行就绪：补 deck 证据 → 打印 → 落盘（并行时只落 plan 前缀）。"""
             row["deck_evidence"] = _deck_evidence(Path(row["feb_path"]))
-            runs.append(row)
             dg = row.get("diagnostics", {})
             pen = _val(row, "penetration_mm")
             print(f"  {row['id']:42s} rc={row['febio_rc']} end_t={row['febio_end_t']} "
@@ -396,7 +401,9 @@ def main(argv: list[str] | None = None) -> int:
                   f"carries={row.get('carries_load')} "
                   f"verdict={row.get('contact_verdict', row['run_verdict'])} "
                   f"[{row['wall_s']['value']:.0f}s]", flush=True)
-            _dump(args.out_json, _finalize(runs, ts, cases, mesh_name))
+            _dump(args.out_json, _finalize(prefix, ts, cases, mesh_name))
+
+        runs = S5C._run_plan(selected, mesh, workers=args.workers, on_row=_on_row)
 
     res = _finalize(runs, ts, cases, mesh_name)
     _dump(args.out_json, res)

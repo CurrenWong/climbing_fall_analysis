@@ -163,6 +163,9 @@ def main() -> None:
     ap.add_argument("--fps", type=int, default=25)
     ap.add_argument("--passive", action="store_true",
                     help="S3 path (b): unlock joints + passive stiffness (bends ~2 deg)")
+    ap.add_argument("--suffix", default="",
+                    help="输出文件名后缀（如 _20261009，标定口径版本标识）；"
+                         "默认空 = 旧文件名逐字节不变")
     ap.add_argument("--quick", action="store_true")
     args = ap.parse_args()
     if args.quick:
@@ -331,7 +334,7 @@ def main() -> None:
     if args.quick:
         print("quick mode: frames written to", OUTD)
         return
-    name = "fall_simulation_passive" if args.passive else "fall_simulation"
+    name = ("fall_simulation_passive" if args.passive else "fall_simulation") + args.suffix
     mp4 = ROOT / "results" / "opensim_fe" / "figures" / f"{name}.mp4"
     subprocess.run([FFMPEG, "-y", "-framerate", str(args.fps),
                     "-i", str(OUTD / "f%04d.png"), "-pix_fmt", "yuv420p",

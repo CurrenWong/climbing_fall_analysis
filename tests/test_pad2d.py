@@ -945,6 +945,62 @@ class TestP2bV9:
 
 
 # ==========================================================================
+# V8 观测量对齐（2026-10-08）—— 峰值时刻 = 踝内翻力矩峰 t_moment
+# ==========================================================================
+class TestV8MomentObservable:
+    """V8 判据的观测量口径（``docs/methods/方案更新_v2.md:866``）。
+
+    [T22] Table 3 报的是**胫骨远端应变 / 韧带应变**的局部峰值时刻
+    （11.9/6.5/4.6 与 4.1/2.8/1.8 ms @5/10/20 m）——不是头峰；头峰归
+    V3（[Y25] §2.3）。本模型的局部代理量 = 2D 踝内翻力矩峰
+    ``t_moment``（驱动 = F_pad × sin β，与 GRF 首峰同步）。
+
+    判据本体（V8a 单调 / V8b @20 ≤ 5 ms）由
+    ``scripts/rigid_vtarget_probe.py`` 出结论（未标定期间 FAIL 不进 CI）。
+    本类只锁定**观测量的测量口径**：
+    峰值必须在冲击窗口内取 —— 刚性地面无接触阻尼 ⇒ settle 事件不触发、
+    轨迹跑满 t_max，全程 argmax 会被窗后振铃污染（2026-10-08 实测踩过
+    假峰 t0+1325 ms，见 probe ``_peak_rel_ms`` 的注释）。
+    """
+
+    # probe 的 SOLVER_RIGID 口径（与紧容差 Fpk 差 <0.004%，单跑 ~4× 快）
+    _SOLVER_RIGID = dict(max_ode_step=5e-4, rtol=1e-6, atol=1e-9)
+
+    def _run(self, h: float):
+        return simulate_boulder_fall_2d(
+            height_m=h, mass_kg=80.0, posture="feet-first-stiff",
+            on_pad=False,
+            posture2d=Posture2D(
+                ankle_beta0_rad=np.deg2rad(20.0),
+                mu_slide=0.4, ankle_d_lateral_m=0.030,
+                ankle_d_medial_m=0.045, ligament_r_mm=22.0,
+            ),
+            **self._SOLVER_RIGID,
+        )
+
+    @pytest.mark.parametrize("h", [5.0, 20.0])
+    def test_moment_peak_taken_within_impact_window(self, h):
+        """``t_moment`` 必须 = 冲击窗内 argmax（窗口守卫，防振铃假峰）。"""
+        r = self._run(h)
+        t0, t1 = r.meta["impact_window_s"]
+        t = np.asarray(r.t_s)
+        mom = np.asarray(r.ankle_inversion_moment_nmm)
+        win = (t >= t0) & (t <= t1)
+        assert win.any(), f"h={h}: 冲击窗内无采样点"
+        i = int(np.argmax(np.abs(mom[win])))
+        t_mom = float(t[win][i])
+        assert t0 <= t_mom <= t1, (
+            f"h={h}: t_moment={t_mom:.4f}s 落在窗外 [{t0:.4f}, {t1:.4f}]"
+        )
+        # t_moment 与 GRF 首峰同步（t_moment ≡ contact_to_peak_time，
+        # 同一采样栅格上当前为逐点相等；容差给 10 个采样步防未来漂移）
+        assert abs((t_mom - t0) - contact_to_peak_time(r)) <= 2e-3, (
+            f"h={h}: t_moment 与 GRF 首峰延迟差 > 2 ms —— 力矩/GRF "
+            f"解耦，t_moment 不再是 T22 局部峰的合法代理"
+        )
+
+
+# ==========================================================================
 # V6/[B25] —— 垫刚度 ⇒ 韧带应变非单调
 # ==========================================================================
 class TestP2bPadStiffnessNonMonotonic:

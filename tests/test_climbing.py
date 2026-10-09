@@ -811,7 +811,7 @@ class TestFastSolverPreset:
 # ==========================================================================
 # ASCII 流程图与文档同步（防漂移）
 # ==========================================================================
-# docs/方案更新_v2.md 里的 ASCII 流程图是**生成**的
+# docs/methods/方案更新_v2.md 里的 ASCII 流程图是**生成**的
 # （scripts/make_ascii_flowchart.py），注入在标记块之间。
 # 这类"生成物 + 手工文档"的组合最容易漂移：改了生成器忘了重新注入，
 # 文档就永远停在旧版本，而且**没人会发现**。
@@ -835,11 +835,11 @@ class TestAsciiFlowchart:
     def test_doc_block_matches_render(self):
         """文档里的块必须与生成器**逐字一致** —— 防止改了图忘了注入。"""
         m = self._mod()
-        doc = (ROOT / "docs" / "方案更新_v2.md").read_text(encoding="utf-8")
+        doc = (ROOT / "docs" / "methods" / "方案更新_v2.md").read_text(encoding="utf-8")
         assert m.BEGIN in doc and m.END in doc, "文档里缺 ASCII-FLOWCHART 标记块"
         got = doc.split(m.BEGIN, 1)[1].split(m.END, 1)[0].strip()
         assert got == m.render().strip(), (
-            "docs/方案更新_v2.md 的 ASCII 流程图与生成器不一致 —— "
+            "docs/methods/方案更新_v2.md 的 ASCII 流程图与生成器不一致 —— "
             "跑 `python scripts/make_ascii_flowchart.py` 重新注入")
 
     def test_display_width_cjk_is_two(self):

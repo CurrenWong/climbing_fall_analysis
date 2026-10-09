@@ -692,6 +692,38 @@ def _select_top_bottom(
 
 
 # ---------------------------------------------------------------------------
+# opt-in PCA long-axis alignment (B1.1 决策①; ported verbatim from
+# temp/opensim_fe/fracture_matrix_remesh/run_remesh_fe.py:44-64)
+# ---------------------------------------------------------------------------
+def _align_pca_rotate(nodes: np.ndarray) -> np.ndarray:
+    """Rotate `nodes` about their centroid so the largest PCA axis -> +Z.
+
+    Returns a **new** array; the input is never mutated (the caller may pass
+    the same mesh dict repeatedly, e.g. the descending-load retry loop in
+    ``fracture_matrix.solve_bone_fe``).  Math is a verbatim port of the
+    proven ``run_remesh_fe.align_pca`` implementation -- do not re-derive.
+    """
+    nodes = np.array(nodes, dtype=np.float64, copy=True)
+    c = nodes.mean(0)
+    X = nodes - c
+    w, v = np.linalg.eigh(X.T @ X)
+    ax = v[:, -1]
+    if ax[2] < 0:
+        ax = -ax
+    z = np.array([0.0, 0.0, 1.0])
+    vv = np.cross(ax, z)
+    s = np.linalg.norm(vv)
+    if s < 1e-9:
+        R = np.eye(3)
+    else:
+        vv = vv / s
+        ang = np.arctan2(s, float(np.dot(ax, z)))
+        K = np.array([[0, -vv[2], vv[1]], [vv[2], 0, -vv[0]], [-vv[1], vv[0], 0]])
+        R = np.eye(3) + np.sin(ang) * K + (1 - np.cos(ang)) * (K @ K)
+    return (X @ R.T) + c
+
+
+# ---------------------------------------------------------------------------
 # .feb writer -- mirrors l3_shell_feb.py: model + control + boundary + load
 # ---------------------------------------------------------------------------
 def _fix_febio413(path: Path) -> list[str]:
@@ -717,6 +749,7 @@ def build_bone_feb(
     with_shell: bool = True,
     time_steps: int = 1,
     mesh: dict | None = None,
+    align_pca: bool = False,
 ) -> dict:
     """Write a ``.feb`` for `spec`.
 
@@ -745,6 +778,13 @@ def build_bone_feb(
     mesh:
         Optional pre-extracted mesh (output of :func:`extract_mesh`).  If
         None, :func:`extract_mesh` is called here.
+    align_pca:
+        When True, rotate a **copy** of the mesh nodes about their centroid so
+        the longest PCA axis points to +Z *before* band selection, so that
+        ``axis=None`` picks the bone axis (axial loading for oblique bones).
+        Default False = byte-identical to the pre-B1.2 behaviour.  The input
+        `mesh` dict is never mutated (the caller may reuse it across
+        descending-load retries).
 
     Returns
     -------
@@ -768,6 +808,12 @@ def build_bone_feb(
     if mesh is None:
         master = ROOT / "model" / "AM50_V71_Occupant" / "main_THUMS_AM50_V71.k"
         mesh = extract_mesh(spec, master)
+
+    # opt-in PCA alignment (B1.1 ①): rotate a COPY of the nodes so the
+    # longest PCA axis -> +Z; `axis=None` below then selects the bone axis.
+    # align_pca=False leaves `mesh` untouched -> byte-identical legacy path.
+    if align_pca:
+        mesh = {**mesh, "nodes": _align_pca_rotate(mesh["nodes"])}
 
     # 1) top/bottom selection
     axis_idx, a_min, a_max, top_local, bot_local = _select_top_bottom(
@@ -939,6 +985,7 @@ def build_bone_feb(
         "load_dir_unit": axis_vec.tolist(),
         "load_vec_per_node": load_vec.tolist(),
         "load_desc": load_desc,
+        "align_pca": bool(align_pca),
         "febio413_notes": notes,
         "solid_domains": [
             {"mat_name": mn, "mesh_name": ms, "n_elem": ne,

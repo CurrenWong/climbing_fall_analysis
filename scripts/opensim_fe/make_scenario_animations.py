@@ -141,7 +141,8 @@ def make_plotter(meshes, win, *, ref_wire):
     return pl, pad_pd, bones
 
 
-def render(scenario: str, quick: bool = False, two_foot: bool = False) -> None:
+def render(scenario: str, quick: bool = False, two_foot: bool = False,
+           suffix: str = "") -> None:
     grf, grf_rigid, fall, meta = build(scenario, two_foot=two_foot)
     model, table = fall.model, fall.states
     tt = np.asarray(table.getIndependentColumn(), dtype=float)
@@ -187,7 +188,8 @@ def render(scenario: str, quick: bool = False, two_foot: bool = False) -> None:
         p_.camera.up = (0, 1, 0)
 
     tag = "_twofoot" if two_foot else ""
-    mp4 = ROOT / "results" / "opensim_fe" / "figures" / f"fall_scenario_{scenario}{tag}.mp4"
+    mp4 = (ROOT / "results" / "opensim_fe" / "figures"
+           / f"fall_scenario_{scenario}{tag}{suffix}.mp4")
     for idx, (dy, v_free, tq) in enumerate(frames):
         is_impact = tq is not None
         set_row(float(tt[0]) if not is_impact else float(tq))
@@ -294,9 +296,12 @@ def main() -> None:
     ap.add_argument("--quick", action="store_true")
     ap.add_argument("--two-foot", action="store_true",
                     help="split=(0.5,0.5) + 75.337 kg = 精确复现 R1/S5 报告口径")
+    ap.add_argument("--suffix", default="",
+                    help="输出文件名后缀（如 _20261009，标定口径版本标识）；"
+                         "默认空 = 旧文件名逐字节不变")
     a = ap.parse_args()
     for s in (["ser", "talus"] if a.scenario == "both" else [a.scenario]):
-        render(s, quick=a.quick, two_foot=a.two_foot)
+        render(s, quick=a.quick, two_foot=a.two_foot, suffix=a.suffix)
 
 
 if __name__ == "__main__":

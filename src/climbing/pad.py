@@ -436,6 +436,37 @@ class BoulderFallResult:
 # --------------------------------------------------------------------------
 # 求解
 # --------------------------------------------------------------------------
+# L2 标定门（2026-10-08 标定采纳）：刚性口径 + 直立姿势（feet-first-stiff）
+# 专用链参数。**默认值 = 已采纳的标定配置**（temp/v_l2_sweep / v_l2b_sweep /
+# v_iso_sweep 三轮扫描的择优结果）：
+#
+#   kf_mult=2.0, x_max=0.015  —— **等平台刚化**：k_flex·x_max = 2.2e6×0.015
+#       = 33 kN，与原值 1.1e6×0.03 完全相同 ⇒ 塌陷平台力/力包络不变
+#       （V2"低于7m无骨折"完整保留：util@5m 0.71→0.76、@6.5m 0.83），
+#       但加载率翻倍 ⇒ 上升沿提前。物理动机：刚性地面冲击是高加载率事件，
+#       腿部等效刚度高于按【垫】g 级别调出来的准静态值（原 k_flex/k_stop
+#       注释明说按 pad 口径标定，刚性口径从未参与）。
+#   k_stop=None（沿用 3e5 软止挡）—— 保留。对照实验：k_stop="kf"（切线
+#       不软化）时序更好（tT@20 10.6）但 util@6.5=1.13 ⇒ **打破 V2**，弃。
+#   实测收益（feet-first-stiff / 80kg / 刚性）：V3 头峰@k2000 全高度
+#       11.8/11.2/10.6/10.0/9.6 ms（h1..8）**全过 12.5**（基线 h1=13.6 ✗）；
+#       t_torso@20 26.0→14.0 ms 且随高度单调提前（基线 h1→h2 反而变晚）。
+#   未救回的（如实记录）：V8b（@20 ≤5 ms）t_torso@20=14.0 仍 ✗ —— 1D 双质点
+#       链的峰值时刻下限 ~10-14 ms，达不到 FE 应力波尺度（4.6 ms）；
+#       k_n=1e8 曾给出 tF@20=2.0ms，但那是**弹跳区制伪影**（首分离窗只剩
+#       拍击、能量账 resid=0.74），已否证拒用（L3 结论：k_n 维持 1e7）。
+#
+# 门控范围：仅 ``on_pad=False and POSTURES 键=="feet-first-stiff"``；
+# pad 路径与其他姿势（含 one-leg-awkward 等刚性格）**逐位不变**。
+RIGID_STANDING_CHAIN: dict = {"kf_mult": 2.0, "x_max": 0.015, "k_stop": None}
+
+
+# L3 门：刚性接触刚度（hard_surface 的 k_n，pad.py 自认"全模型最弱参数"）。
+# None = 沿用 hard_surface 默认 1.0e7（动态冲击区间下沿，见其 docstring）。
+# 文献局部峰时（T22 胫骨 4.6-11.9 ms）标定需要更陡的接触上升沿时可调。
+RIGID_CONTACT: dict = {"k_n_per_m": None}
+
+
 def simulate_boulder_fall(
     *,
     height_m: float = 3.0,
@@ -462,7 +493,13 @@ def simulate_boulder_fall(
         姿势名（``POSTURES`` 的键）或自定义 ``Posture``。
     """
     post = POSTURES[posture] if isinstance(posture, str) else posture
-    pad = (pad or CrashPad()) if on_pad else hard_surface()
+    # L2 门用 POSTURES 的**键**判姿势（post.name 是中文显示名）
+    posture_key = posture if isinstance(posture, str) else None
+    if on_pad:
+        pad = pad or CrashPad()
+    else:
+        _kn = RIGID_CONTACT.get("k_n_per_m")
+        pad = hard_surface(k_n_per_m=_kn if _kn is not None else 1.0e7)
 
     # ---- 积分时长必须覆盖整个坠落 ----------------------------------------
     # 自由落体到接触需要 t_fall = √(2h/g)。早期版本 t_max 固定 2.0 s，
@@ -502,6 +539,21 @@ def simulate_boulder_fall(
     # 阻尼；整条腿的等效粘性系数在 100-500 N·s/m 量级。这里取 400。
     # Phase B-2 的遗留项：用 Hill 型力-速关系 + 肌肉做功上限替代它。
     c_flex = 400.0
+
+    # ---- L2 门（见模块顶 RIGID_STANDING_CHAIN 注释）--------------------
+    # 仅刚性 + 直立姿势生效；默认配置 kf_mult=1.0 / k_stop=None ⇒ 不改行为。
+    rigid_chain_cfg = None
+    if not on_pad and posture_key == "feet-first-stiff":
+        rigid_chain_cfg = dict(RIGID_STANDING_CHAIN)
+        k_flex *= float(rigid_chain_cfg.get("kf_mult", 1.0))
+        _xm = rigid_chain_cfg.get("x_max")
+        if _xm is not None:
+            x_flex_max = float(_xm)      # 等平台：kf↑ × x_max↓ 保持 k_flex·x_max 不变
+        _ks = rigid_chain_cfg.get("k_stop")
+        if _ks == "kf":
+            k_stop = k_flex                    # 切线连续，止挡不再软化
+        elif _ks is not None:
+            k_stop = max(float(_ks), k_flex)   # 硬止挡
 
     # ---- 几何约定 ------------------------------------------------------
     # z 是"自释放点起的向下位移"，向下为正。躯干在双足**之上**，
@@ -691,6 +743,8 @@ def simulate_boulder_fall(
         energy_residual_j=max(0.0, e_impact - e_pad - e_flex),
         meta={"pad_thickness_m": pad.thickness_m, "k_flex": k_flex,
               "x_flex_max": x_flex_max, "on_pad": on_pad, "posture_obj": post,
+              # L2 门配置（None=未启用；非空=刚性直立链生效参数）
+              "rigid_chain": rigid_chain_cfg,
               "head_is_contact": post.first_contact_is_head,
               # 供 injury.py 估算脊柱轴向载荷
               "f_flex_peak_n": float(np.max(f_flex[sl])) if f_flex[sl].size else 0.0,

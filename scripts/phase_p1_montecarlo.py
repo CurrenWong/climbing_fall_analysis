@@ -5,6 +5,14 @@
     python scripts/phase_p1_montecarlo.py                # 1000 次，快速预设
     python scripts/phase_p1_montecarlo.py --n 200        # 小样本试跑
     python scripts/phase_p1_montecarlo.py --strict-tol   # 用严格容差（慢 ~18x）
+    python scripts/phase_p1_montecarlo.py --workers 1    # 串行（等价对照/调试基线）
+
+并行（PERF-3）
+------------
+默认**进程池并行**（`--workers`，缺省自动 = 核数-2、上限 14；`1` = 串行）。
+三阶段保逐位等价：A 串行按 RNG 流预生成全部任务 → B
+`climbing.batch.parallel_map` 保序并行仿真 → C 主进程按 `i` 序装配。
+等价对照：同 seed 下 `--workers 1` 与 auto 的 CSV/TXT 逐字节一致。
 
 产出
 ----
@@ -47,7 +55,8 @@ import numpy as np
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
 
 from climbing.ankle_injury import assess_ankle              # noqa: E402
-from climbing.bone import BONE_SITES, assess_sites          # noqa: E402
+from climbing.batch import parallel_map                         # noqa: E402
+from climbing.bone import BONE_SITES, assess_sites              # noqa: E402
 from climbing.pad import POSTURES                           # noqa: E402
 from climbing.pad2d import Posture2D, simulate_boulder_fall_2d  # noqa: E402
 from climbing.scenarios import (                            # noqa: E402
@@ -236,7 +245,81 @@ def _ankle_row_from_verdict(av) -> dict:
 
 
 # --------------------------------------------------------------------------
-def run_trials(n: int, seed: int, fast: bool) -> tuple[list[dict], list[dict]]:
+def _run_one(task: dict) -> dict:
+    """单次 trial —— 进程池 worker（模块级、可 pickle）。
+
+    与串行版**逐位一致**的关键：``spec`` / ``posture2d`` / ``t_max`` / ``kw``
+    都由 ``run_trials`` 阶段 A 按 RNG 流顺序在主进程预生成，本函数只做
+    确定性仿真 + 评估；返回带 ``i``，由阶段 C 按 ``parallel_map`` 的保序
+    返回值装配。
+
+    ⚠️ pickle 按**模块名**反序列化：CLI（``__main__``）场景 spawn 自动
+    处理；tests 用 ``importlib`` 按路径加载本脚本 ⇒ 无法按名导入，那些
+    场景必须走 ``workers=1``（``run_trials`` 默认值）。
+    """
+    i = task["i"]
+    spec = task["spec"]
+    sc = spec.scenario
+    out: dict = {"i": i, "row": None, "site_rows": [],
+                 "fail": None, "ankle_note": None}
+    try:
+        r = simulate_boulder_fall_2d(
+            height_m=spec.height_m, mass_kg=spec.mass_kg,
+            posture=spec.posture, on_pad=spec.on_pad,
+            t_max=task["t_max"], posture2d=task["posture2d"], **task["kw"],
+        )
+    except RuntimeError as e:                     # 撞击未发生 —— 不该出现
+        out["fail"] = f"第 {i} 次仿真失败: {e}"
+        return out
+    v = assess_sites(r, posture=spec.posture)
+
+    # ---- 踝评估：并行 agent 还没把 ankle_* 加到 pad2d.py 时会抛 ValueError ----
+    try:
+        av = assess_ankle(r, posture=spec.posture)
+        ankle_data = _ankle_row_from_verdict(av)
+    except ValueError as e:
+        ankle_data = _empty_ankle_row()
+        out["ankle_note"] = str(e)[:120]
+
+    out["row"] = {
+        "i": i,
+        **sc.to_dict(),
+        "posture": spec.posture,
+        "height_m": round(spec.height_m, 3),
+        "mass_kg": round(spec.mass_kg, 1),
+        "on_pad": int(spec.on_pad),
+        "rotation_free": int(sc.rotation_free),
+        "ligament_dominant": int(spec.ligament_dominant),
+        "upper_limb_mechanism": int(spec.upper_limb_mechanism),
+        "weight_exact": int(spec.weight_exact),
+        "peak_force_kn": round(r.peak_force_kn, 3),
+        "peak_primary_g": round(r.peak_primary_g, 1),
+        "hic": round(r.hic, 1),
+        "n_fractured_sites": len(v.fractured_sites),
+        "worst_site": v.worst.key if v.worst else "",
+        "worst_utilization": round(v.worst.utilization, 3) if v.worst else 0.0,
+        "fractured": "|".join(sorted(s2.key for s2 in v.fractured_sites)),
+        **ankle_data,
+    }
+    for load in v.sites:
+        out["site_rows"].append({
+            "i": i,
+            "site": load.key,
+            "utilization": round(load.utilization, 4),
+            "fractured": int(load.fractured),
+            "peak_force_kn": round(load.peak_force_kn, 3),
+            "threshold_kn": round(load.threshold_kn, 3),
+            "rotation_free": int(sc.rotation_free),
+            "weight_exact": int(spec.weight_exact),
+            # 踝列也镜像到 site_rows —— ``site_distribution``
+            # 按 trial 数踝时，从任意一行读都可以（用 seen 集合去重）
+            **ankle_data,
+        })
+    return out
+
+
+def run_trials(n: int, seed: int, fast: bool,
+               workers: int | None = 1) -> tuple[list[dict], list[dict]]:
     """跑 n 次；返回 ``(逐次场景记录, 逐次部位记录)``。
 
     仿真器：``pad2d.simulate_boulder_fall_2d``（**继承 1D 子系统 + 2D
@@ -244,17 +327,22 @@ def run_trials(n: int, seed: int, fast: bool) -> tuple[list[dict], list[dict]]:
     成 ``Posture2D``。无踝字段时（并行 agent 还在写 pad2d.py），
     ``assess_ankle`` 抛 ``ValueError``，本函数**静默回退**到踝列
     零默认 + 试运行时不报错。
+
+    并行（PERF-3）：``workers`` = 进程数，**默认 1（串行）** —— 并行由
+    CLI ``--workers`` 显式开启（tests 经 ``importlib`` 加载本脚本，
+    spawn 无法按模块名 pickle worker，且 monkeypatch 只在进程内生效）。
+    ``None`` = 自动（核数-2、上限 14）。三阶段：
+    A 串行按 RNG 流预生成全部任务 → B ``parallel_map`` 保序并行仿真 →
+    C 主进程按 ``i`` 序装配 ⇒ 输出与串行**逐位一致**。
     """
     s = ScenarioSampler(seed=seed)
     kw = FAST_KW if fast else STRICT_KW
-    trial_rows: list[dict] = []
-    site_rows: list[dict] = []
-    ankle_unavailable_warned = False
 
+    # ---- 阶段 A（串行）：采样流与纯串行版完全同序 ----
     t0 = time.time()
+    tasks: list[dict] = []
     for i in range(n):
         spec = s.sample_simulation()
-        sc = spec.scenario
         t_max = None
         if fast:
             t_max = float(np.sqrt(2.0 * spec.height_m / 9.80665)) + POST_IMPACT_S
@@ -263,69 +351,40 @@ def run_trials(n: int, seed: int, fast: bool) -> tuple[list[dict], list[dict]]:
         # ``ROTATION_TO_POSTURE2D`` 里的纵向角度等。这样采样器的随机流
         # 与"没有踝扩展"时**逐位一致**，§一 的边际验证不受踝抽样影响。
         trial_rng = np.random.default_rng([seed, i])
-        factory = ROTATION_TO_POSTURE2D.get(sc.rotation, ROTATION_TO_POSTURE2D["unknown"])
+        factory = ROTATION_TO_POSTURE2D.get(
+            spec.scenario.rotation, ROTATION_TO_POSTURE2D["unknown"])
         posture2d = factory(trial_rng)
+        tasks.append({"i": i, "spec": spec, "posture2d": posture2d,
+                      "t_max": t_max, "kw": kw})
 
-        try:
-            r = simulate_boulder_fall_2d(
-                height_m=spec.height_m, mass_kg=spec.mass_kg,
-                posture=spec.posture, on_pad=spec.on_pad,
-                t_max=t_max, posture2d=posture2d, **kw,
-            )
-        except RuntimeError as e:                     # 撞击未发生 —— 不该出现
-            print(f"  [warn] 第 {i} 次仿真失败: {e}")
+    # ---- 阶段 B：并行仿真（``parallel_map`` 保序返回） ----
+    nstep = max(1, len(tasks) // 20)
+
+    def _prog(k: int, tot: int) -> None:
+        if k % nstep == 0 or k == tot:
+            print(f"  {k}/{tot}", flush=True)
+
+    results = parallel_map(_run_one, tasks, workers=workers, progress=_prog)
+
+    # ---- 阶段 C（串行）：按 ``i`` 序装配，语义与串行版一致 ----
+    trial_rows: list[dict] = []
+    site_rows: list[dict] = []
+    ankle_unavailable_warned = False
+    for res in results:
+        if res["fail"] is not None:
+            print(f"  [warn] {res['fail']}")
             continue
-        v = assess_sites(r, posture=spec.posture)
+        if res["ankle_note"] and not ankle_unavailable_warned:
+            print(f"  [info] 踝数据未在 pad2d 中就绪 —— 踝列将为零默认。"
+                  f"首条诊断: {res['ankle_note']}")
+            ankle_unavailable_warned = True
+        trial_rows.append(res["row"])
+        site_rows.extend(res["site_rows"])
 
-        # ---- 踝评估：并行 agent 还没把 ankle_* 加到 pad2d.py 时会抛 ValueError ----
-        try:
-            av = assess_ankle(r, posture=spec.posture)
-            ankle_data = _ankle_row_from_verdict(av)
-        except ValueError as e:
-            if not ankle_unavailable_warned:
-                print(f"  [info] 踝数据未在 pad2d 中就绪 —— 踝列将为零默认。"
-                      f"首条诊断: {str(e)[:120]}")
-                ankle_unavailable_warned = True
-            ankle_data = _empty_ankle_row()
-
-        row = {
-            "i": i,
-            **sc.to_dict(),
-            "posture": spec.posture,
-            "height_m": round(spec.height_m, 3),
-            "mass_kg": round(spec.mass_kg, 1),
-            "on_pad": int(spec.on_pad),
-            "rotation_free": int(sc.rotation_free),
-            "ligament_dominant": int(spec.ligament_dominant),
-            "upper_limb_mechanism": int(spec.upper_limb_mechanism),
-            "weight_exact": int(spec.weight_exact),
-            "peak_force_kn": round(r.peak_force_kn, 3),
-            "peak_primary_g": round(r.peak_primary_g, 1),
-            "hic": round(r.hic, 1),
-            "n_fractured_sites": len(v.fractured_sites),
-            "worst_site": v.worst.key if v.worst else "",
-            "worst_utilization": round(v.worst.utilization, 3) if v.worst else 0.0,
-            "fractured": "|".join(sorted(s2.key for s2 in v.fractured_sites)),
-            **ankle_data,
-        }
-        trial_rows.append(row)
-        for load in v.sites:
-            site_rows.append({
-                "i": i,
-                "site": load.key,
-                "utilization": round(load.utilization, 4),
-                "fractured": int(load.fractured),
-                "peak_force_kn": round(load.peak_force_kn, 3),
-                "threshold_kn": round(load.threshold_kn, 3),
-                "rotation_free": int(sc.rotation_free),
-                "weight_exact": int(spec.weight_exact),
-                # 踝列也镜像到 site_rows —— ``site_distribution``
-                # 按 trial 数踝时，从任意一行读都可以（用 seen 集合去重）
-                **ankle_data,
-            })
     dt = time.time() - t0
+    wtag = "" if (workers or 1) == 1 else f"，workers={workers or 'auto'}"
     print(f"  跑完 {len(trial_rows)}/{n} 次，用时 {dt:.1f} s "
-          f"（{dt/max(1,len(trial_rows))*1000:.0f} ms/次）")
+          f"（{dt/max(1,len(trial_rows))*1000:.0f} ms/次{wtag}）")
     return trial_rows, site_rows
 
 
@@ -672,14 +731,18 @@ def main() -> int:
     ap.add_argument("--seed", type=int, default=20261003)
     ap.add_argument("--strict-tol", action="store_true",
                     help="用严格容差（慢约 18 倍，用于核对快速预设）")
+    ap.add_argument("--workers", type=int, default=None,
+                    help="并行进程数（默认自动：核数-2、上限 14；1 = 串行）")
     args = ap.parse_args()
 
     OUT.mkdir(parents=True, exist_ok=True)
     FIG.mkdir(parents=True, exist_ok=True)
 
     print(f"[P1] 蒙特卡洛：N={args.n} seed={args.seed} "
-          f"预设={'严格' if args.strict_tol else '快速'}")
-    rows, site_rows = run_trials(args.n, args.seed, fast=not args.strict_tol)
+          f"预设={'严格' if args.strict_tol else '快速'} "
+          f"workers={args.workers or 'auto'}")
+    rows, site_rows = run_trials(args.n, args.seed, fast=not args.strict_tol,
+                                 workers=args.workers)
     n = len(rows)
     if n == 0:
         print("没有任何成功样本")

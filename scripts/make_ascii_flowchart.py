@@ -29,7 +29,7 @@ import pathlib
 import unicodedata
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-DOC = ROOT / "docs" / "方案更新_v2.md"
+DOC = ROOT / "docs" / "methods" / "方案更新_v2.md"
 BEGIN = "<!-- ASCII-FLOWCHART:BEGIN -->"
 END = "<!-- ASCII-FLOWCHART:END -->"
 
@@ -294,7 +294,7 @@ FLOW: list[tuple] = [
 
     ("down", None),
 
-    ("box", "实际跑过的参数矩阵  (明细见 docs/方案更新_v2.md 1.3 节)", [
+    ("box", "实际跑过的参数矩阵  (明细见 docs/methods/方案更新_v2.md 1.3 节)", [
         "  用途            高度范围       步长    姿势         质量       落点",
         "  B-2 全套分析    0.3 - 5.0 m    9 点    全部 10 种   80 kg      软垫+硬地",
         "  时程/压力图     0.5 - 5.0 m    0.5 m   逐个         80 kg      软垫+硬地",
