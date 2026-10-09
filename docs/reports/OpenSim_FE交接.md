@@ -214,12 +214,13 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
 | 1–7 | `figures/fig1…fig7*.png` | 管线 / 对齐 / 单脚 / 旋后(R1) / 垫权衡 / 韧带 / 外旋(S6) | 各自 JSON（`axial_subregion`…`ankle_external_rotation`） |
 | **8** | `figures/fig8_trimalleolar_ser.png` | **三踝骨折机制**：真实骨几何 + **SER 受伤体位（内翻28° + 外旋20°）**，**J 后方观** | 无（机制示意）+ 外踝臂定量见 `ankle_external_rotation.json` |
 | **9** | `figures/fig9_talus_mechanism.png` | **距骨骨折机制**：真实骨几何 + **背屈24°** 体位，**G 内侧观** | 无（机制示意） |
-| 动画 | `figures/fall_simulation.mp4` / `.gif` | **全身坠落仿真过程**（自由落体段 + 冲击段慢放 + GRF(t) 曲线面板） | `run_dead_drop` 正动力学 states |
+| 动画 | `figures/fall_simulation_20261009.mp4` / `.gif` | **全身坠落仿真过程**（自由落体段 + 冲击段慢放 + GRF(t) 曲线面板） | `run_dead_drop` 正动力学 states |
 | **10** | `figures/fig_pad_paradox.png` | **「垫子悖论」**：旋后着地时 `total_risk(k)` 随垫子刚度单调递减（越软越危险，无内部最优） | `pad_supination_tradeoff.json`（R4） |
-| **动画 A** | `figures/fall_scenario_ser.mp4` / `.gif` | **三踝 / SER 姿势演示**：单脚 + 内翻30° + 外旋25°，垫 vs 刚性 + 踝部特写 | `ankle_supination` 口径（见 FIGURE_CAPTIONS 附 2） |
-| **动画 B** | `figures/fall_scenario_talus.mp4` / `.gif` | **距骨 / 背屈楔入演示**：单脚 + 踝背屈25°（真实锁定姿势） | 同上（机制演示，无量化判据） |
+| **动画 A** | `figures/fall_scenario_ser_20261009.mp4` / `.gif` | **三踝 / SER 姿势演示**：单脚 + 内翻30° + 外旋25°，垫 vs 刚性 + 踝部特写 | `ankle_supination` 口径（见 FIGURE_CAPTIONS 附 2） |
+| **动画 B** | `figures/fall_scenario_talus_20261009.mp4` / `.gif` | **距骨 / 背屈楔入演示**：单脚 + 踝背屈25°（真实锁定姿势） | 同上（机制演示，无量化判据） |
 
-> ⚠️ **载荷口径（务必注明）**：两个场景动画默认是**单脚** `split=(1,0)` + 77 kg（比 R1/S5 报告严格 ≈2×：518 vs 257 N·m）。要**精确复现 S5 报告数字**用 `--two-foot`（`split=(0.5,0.5)` + 75.337 kg → `fall_scenario_ser_twofoot.mp4`，M_inv ≈264 N·m）。
+> ⚠️ **载荷口径（务必注明）**：两个场景动画默认是**单脚** `split=(1,0)` + 77 kg（比 R1/S5 报告严格 ≈2×：518 vs 257 N·m）。要**精确复现 S5 报告数字**用 `--two-foot`（`split=(0.5,0.5)` + 75.337 kg → `fall_scenario_ser_twofoot_20261009.mp4`，M_inv ≈264 N·m）。
+> 📌 **版本命名（2026-10-09 起）**：动画产物一律带日期后缀 `*_YYYYMMDD`（渲染脚本 opt-in `--suffix`，默认空=旧名），本表所列即当轮标定口径版本；无后缀旧档已删除。
 > ⚠️ **动画 ≠ 计算的部分**（画面已标注）：① 自由落体段是纯运动学插值，非 FD；② 垫子压缩是**渲染约定**（FD 无接触约束，16 cm 是自由行程）；③ SER 的「内翻/外旋」**不是模型自由度**，画面足部为中立位；④ 右侧刚性虚线仅作**载荷**对比，姿态仍是垫工况解。
 > 完整审计表见 `results/opensim_fe/figures/FIGURE_CAPTIONS.md` §附 2。
 
