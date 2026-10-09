@@ -1,0 +1,18 @@
+{
+  "height_m": 5.0,
+  "grf_peak_n": 53064.83319174116,
+  "grf_window_s": [
+    0.0,
+    0.021100000000000008
+  ],
+  "impact_speed_ms": 9.90285312422637,
+  "impulse_ns": 789.328186532879,
+  "momentum_ns": 746.051245819842,
+  "impulse_rel_err": 0.05800800006101414,
+  "t1_ok": true,
+  "fd_frames": 1206,
+  "subtalar_peak_force_n": 26383.13400751009,
+  "subtalar_peak_vertical_n": 26383.133775894516,
+  "subtalar_peak_vertical_time_s": 0.020099999999999518,
+  "subtalar_peak_moment_nm": 20.025092215745726
+}

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-06 17:18:22",
+    "generated_at": "2026-10-09 12:04:44",
     "study": "Nonvertical S5-contact, FEBio plantar-pad contact + friction (wave 4, opt-in)",
     "plan_doc": "docs/非垂直落地扩展方案.md §3 L4 / §4 S5 · docs/S5接触方案.md §3",
     "contract_ref": "docs/S5_contact_contract.md §4 (acceptance G0..G7) + §4 条 7 (scope limit)",
@@ -95,20 +95,20 @@
   "axial_regression": {
     "cached_file": "results\\opensim_fe\\s1_h5_opensim.json",
     "measured_default_run": {
-      "impulse_ns": 789.328186532879,
-      "impulse_rel_err": 0.05800800006101414,
-      "grf_peak_n": 53064.83319174116,
-      "subtalar_peak_vertical_n": 26383.133775894516,
-      "subtalar_peak_force_n": 26383.13400751009,
-      "subtalar_peak_moment_nm": 20.025092215745726
+      "impulse_ns": 782.4143858295431,
+      "impulse_rel_err": 0.04874080730170394,
+      "grf_peak_n": 57074.262331776656,
+      "subtalar_peak_vertical_n": 28520.60776125554,
+      "subtalar_peak_force_n": 28520.607938062432,
+      "subtalar_peak_moment_nm": 17.974180657380156
     },
     "cached": {
-      "impulse_ns": 789.328186532879,
-      "impulse_rel_err": 0.05800800006101414,
-      "grf_peak_n": 53064.83319174116,
-      "subtalar_peak_vertical_n": 26383.133775894516,
-      "subtalar_peak_force_n": 26383.13400751009,
-      "subtalar_peak_moment_nm": 20.025092215745726
+      "impulse_ns": 782.4143858295431,
+      "impulse_rel_err": 0.04874080730170394,
+      "grf_peak_n": 57074.262331776656,
+      "subtalar_peak_vertical_n": 28520.60776125554,
+      "subtalar_peak_force_n": 28520.607938062432,
+      "subtalar_peak_moment_nm": 17.974180657380156
     },
     "rel_err": {
       "impulse_ns": 0.0,
@@ -263,12 +263,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\g0_fixed_axial_ref.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\g0_fixed_axial_ref.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.24104046821594238,
+        "value": 0.3157825469970703,
         "label": "measured",
         "unit": "s"
       },
@@ -276,17 +279,19 @@
         "end_t": 1.0,
         "neg_jacobians": 0,
         "invalid_facets": 2,
-        "terminated": "?"
+        "terminated": "NORMAL"
       },
       "F_n_n": {
         "value": 26383.133775894516,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N",
-        "source": "support reaction resultant (last state)"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
+      "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N"
       },
       "friction_cone_ratio_max": null,
@@ -297,40 +302,36 @@
       },
       "sigma_contact_avg_mpa": {
         "value": 0.43971889626490857,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
       },
       "sigma_contact_max_mpa": {
         "value": 8.932000130129797,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, max"
+        "unit": "MPa"
       },
       "sigma_contact_p95_mpa": {
         "value": 8.932000130129797,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, p95"
+        "unit": "MPa"
       },
       "sigma_mid_mpa": {
         "value": 0.2931459308432724,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
       },
       "penetration_mm": null,
-      "contact_area_mm2": {
-        "value": 2953.7766896014505,
-        "label": "measured",
-        "unit": "mm²",
-        "source": "support footprint proxy"
-      },
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
       "footprint_mm2": {
         "value": 2953.7766896014505,
         "label": "measured",
         "unit": "mm²"
       },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
       "gauge_max_mpa": {
         "value": 186.7563689967737,
         "label": "measured",
@@ -362,12 +363,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2_fixed_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2_fixed_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.3242058753967285,
+        "value": 0.3005061149597168,
         "label": "measured",
         "unit": "s"
       },
@@ -375,17 +379,19 @@
         "end_t": 1.0,
         "neg_jacobians": 0,
         "invalid_facets": 2,
-        "terminated": "?"
+        "terminated": "NORMAL"
       },
       "F_n_n": {
         "value": 21086.242237064915,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N",
-        "source": "support reaction resultant (last state)"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
+      "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N"
       },
       "friction_cone_ratio_max": null,
@@ -396,40 +402,36 @@
       },
       "sigma_contact_avg_mpa": {
         "value": 0.3514373706177486,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
       },
       "sigma_contact_max_mpa": {
         "value": 7.138739469133686,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, max"
+        "unit": "MPa"
       },
       "sigma_contact_p95_mpa": {
         "value": 7.138739469133686,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, p95"
+        "unit": "MPa"
       },
       "sigma_mid_mpa": {
         "value": 0.23429158041183237,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
       },
       "penetration_mm": null,
-      "contact_area_mm2": {
-        "value": 2953.7766896014505,
-        "label": "measured",
-        "unit": "mm²",
-        "source": "support footprint proxy"
-      },
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
       "footprint_mm2": {
         "value": 2953.7766896014505,
         "label": "measured",
         "unit": "mm²"
       },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
       "gauge_max_mpa": {
         "value": 149.88160099958688,
         "label": "measured",
@@ -461,12 +463,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_fixed_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_fixed_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.2384786605834961,
+        "value": 0.26371192932128906,
         "label": "measured",
         "unit": "s"
       },
@@ -474,17 +479,19 @@
         "end_t": 1.0,
         "neg_jacobians": 0,
         "invalid_facets": 2,
-        "terminated": "?"
+        "terminated": "NORMAL"
       },
       "F_n_n": {
         "value": 22050.632451503363,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N",
-        "source": "support reaction resultant (last state)"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
+      "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N"
       },
       "friction_cone_ratio_max": null,
@@ -495,40 +502,36 @@
       },
       "sigma_contact_avg_mpa": {
         "value": 0.36751054085838936,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
       },
       "sigma_contact_max_mpa": {
         "value": 7.465233417655086,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, max"
+        "unit": "MPa"
       },
       "sigma_contact_p95_mpa": {
         "value": 7.465233417655086,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, p95"
+        "unit": "MPa"
       },
       "sigma_mid_mpa": {
         "value": 0.24500702723892626,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
       },
       "penetration_mm": null,
-      "contact_area_mm2": {
-        "value": 2953.7766896014505,
-        "label": "measured",
-        "unit": "mm²",
-        "source": "support footprint proxy"
-      },
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
       "footprint_mm2": {
         "value": 2953.7766896014505,
         "label": "measured",
         "unit": "mm²"
       },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
       "gauge_max_mpa": {
         "value": 156.6100667254852,
         "label": "measured",
@@ -560,12 +563,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_fixed_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_fixed_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.24431967735290527,
+        "value": 0.2892751693725586,
         "label": "measured",
         "unit": "s"
       },
@@ -573,17 +579,19 @@
         "end_t": 1.0,
         "neg_jacobians": 0,
         "invalid_facets": 2,
-        "terminated": "?"
+        "terminated": "NORMAL"
       },
       "F_n_n": {
         "value": 22913.127608075236,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N",
-        "source": "support reaction resultant (last state)"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
+      "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N"
       },
       "friction_cone_ratio_max": null,
@@ -594,40 +602,36 @@
       },
       "sigma_contact_avg_mpa": {
         "value": 0.38188546013458724,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
       },
       "sigma_contact_max_mpa": {
         "value": 7.757230832222079,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, max"
+        "unit": "MPa"
       },
       "sigma_contact_p95_mpa": {
         "value": 7.757230832222079,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, p95"
+        "unit": "MPa"
       },
       "sigma_mid_mpa": {
         "value": 0.2545903067563915,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
       },
       "penetration_mm": null,
-      "contact_area_mm2": {
-        "value": 2953.7766896014505,
-        "label": "measured",
-        "unit": "mm²",
-        "source": "support footprint proxy"
-      },
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
       "footprint_mm2": {
         "value": 2953.7766896014505,
         "label": "measured",
         "unit": "mm²"
       },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
       "gauge_max_mpa": {
         "value": 162.6185156260254,
         "label": "measured",
@@ -659,12 +663,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_fixed_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_fixed_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.23311996459960938,
+        "value": 0.25411128997802734,
         "label": "measured",
         "unit": "s"
       },
@@ -672,17 +679,19 @@
         "end_t": 1.0,
         "neg_jacobians": 0,
         "invalid_facets": 2,
-        "terminated": "?"
+        "terminated": "NORMAL"
       },
       "F_n_n": {
         "value": 25079.378270270812,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N",
-        "source": "support reaction resultant (last state)"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
+      "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N"
       },
       "friction_cone_ratio_max": null,
@@ -693,40 +702,36 @@
       },
       "sigma_contact_avg_mpa": {
         "value": 0.4179896378378469,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
       },
       "sigma_contact_max_mpa": {
         "value": 8.490614188459434,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, max"
+        "unit": "MPa"
       },
       "sigma_contact_p95_mpa": {
         "value": 8.490614188459434,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, p95"
+        "unit": "MPa"
       },
       "sigma_mid_mpa": {
         "value": 0.27865975855856456,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
       },
       "penetration_mm": null,
-      "contact_area_mm2": {
-        "value": 2953.7766896014505,
-        "label": "measured",
-        "unit": "mm²",
-        "source": "support footprint proxy"
-      },
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
       "footprint_mm2": {
         "value": 2953.7766896014505,
         "label": "measured",
         "unit": "mm²"
       },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
       "gauge_max_mpa": {
         "value": 177.6718147718886,
         "label": "measured",
@@ -762,12 +767,15 @@
         "unit": "N/mm"
       },
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_spring_k100_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_spring_k100_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.2954444885253906,
+        "value": 0.31656360626220703,
         "label": "measured",
         "unit": "s"
       },
@@ -775,17 +783,19 @@
         "end_t": 1.0,
         "neg_jacobians": 0,
         "invalid_facets": 2,
-        "terminated": "?"
+        "terminated": "NORMAL"
       },
       "F_n_n": {
         "value": 21086.242237064915,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N",
-        "source": "support reaction resultant (last state)"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
+      "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N"
       },
       "friction_cone_ratio_max": null,
@@ -796,40 +806,36 @@
       },
       "sigma_contact_avg_mpa": {
         "value": 0.3514373706177486,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
       },
       "sigma_contact_max_mpa": {
         "value": 7.138739469133686,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, max"
+        "unit": "MPa"
       },
       "sigma_contact_p95_mpa": {
         "value": 7.138739469133686,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, p95"
+        "unit": "MPa"
       },
       "sigma_mid_mpa": {
         "value": 0.23429158041183237,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
       },
       "penetration_mm": null,
-      "contact_area_mm2": {
-        "value": 2953.7766896014505,
-        "label": "measured",
-        "unit": "mm²",
-        "source": "support footprint proxy"
-      },
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
       "footprint_mm2": {
         "value": 2953.7766896014505,
         "label": "measured",
         "unit": "mm²"
       },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
       "gauge_max_mpa": {
         "value": 122.65935674794888,
         "label": "measured",
@@ -861,23 +867,28 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.0,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0_pad.xplt",
       "febio_rc": 1,
       "febio_end_t": null,
       "wall_s": {
-        "value": 0.5329031944274902,
+        "value": 4.145031452178955,
         "label": "measured",
         "unit": "s"
       },
       "diagnostics": {
         "end_t": null,
-        "neg_jacobians": 6,
-        "invalid_facets": 4,
-        "terminated": "?"
+        "neg_jacobians": 21,
+        "invalid_facets": 2,
+        "terminated": "ERROR"
       },
       "run_verdict": "FAIL",
-      "error": "O-time (plot, dmp, data) .... : 0:00:00 (0.0039763 sec)\n\n\t   serialization ................ : 0:00:00 (0.0265365 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0502729 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0324775 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0059156 sec)\n\n\t   model update ................. : 0:00:00 (0.007214 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.356077 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.501348 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "contact_verdict": "DIVERGED",
+      "carries_load": null,
+      "error": "time (plot, dmp, data) .... : 0:00:00 (0.0157901 sec)\n\n\t   serialization ................ : 0:00:00 (0.127755 sec)\n\n\t   reforming stiffness .......... : 0:00:01 (0.504739 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.391621 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.197059 sec)\n\n\t   model update ................. : 0:00:00 (0.235874 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0017304 sec)\n\n\t   time in linear solver ........ : 0:00:03 (2.57269 sec)\n\n\tTotal elapsed time .............. : 0:00:04 (4.09035 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "F_n_n": null,
       "F_t_n": null,
       "friction_cone_ratio_max": null,
@@ -907,23 +918,28 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.3,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.3_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.3_pad.xplt",
       "febio_rc": 1,
       "febio_end_t": null,
       "wall_s": {
-        "value": 0.5506546497344971,
+        "value": 4.140451431274414,
         "label": "measured",
         "unit": "s"
       },
       "diagnostics": {
         "end_t": null,
-        "neg_jacobians": 6,
-        "invalid_facets": 4,
-        "terminated": "?"
+        "neg_jacobians": 21,
+        "invalid_facets": 2,
+        "terminated": "ERROR"
       },
       "run_verdict": "FAIL",
-      "error": "O-time (plot, dmp, data) .... : 0:00:00 (0.0041892 sec)\n\n\t   serialization ................ : 0:00:00 (0.0257107 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0501247 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0309134 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0068689 sec)\n\n\t   model update ................. : 0:00:00 (0.0078757 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.364901 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.51333 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "contact_verdict": "DIVERGED",
+      "carries_load": null,
+      "error": "-time (plot, dmp, data) .... : 0:00:00 (0.0161064 sec)\n\n\t   serialization ................ : 0:00:00 (0.12625 sec)\n\n\t   reforming stiffness .......... : 0:00:01 (0.517568 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.381848 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.168632 sec)\n\n\t   model update ................. : 0:00:00 (0.222549 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0032381 sec)\n\n\t   time in linear solver ........ : 0:00:03 (2.59923 sec)\n\n\tTotal elapsed time .............. : 0:00:04 (4.08034 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "F_n_n": null,
       "F_t_n": null,
       "friction_cone_ratio_max": null,
@@ -953,23 +969,28 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad.xplt",
       "febio_rc": 1,
       "febio_end_t": null,
       "wall_s": {
-        "value": 0.5420498847961426,
+        "value": 4.73017430305481,
         "label": "measured",
         "unit": "s"
       },
       "diagnostics": {
         "end_t": null,
-        "neg_jacobians": 6,
-        "invalid_facets": 4,
-        "terminated": "?"
+        "neg_jacobians": 21,
+        "invalid_facets": 2,
+        "terminated": "ERROR"
       },
       "run_verdict": "FAIL",
-      "error": "IO-time (plot, dmp, data) .... : 0:00:00 (0.005408 sec)\n\n\t   serialization ................ : 0:00:00 (0.0243652 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0497443 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0295201 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0060965 sec)\n\n\t   model update ................. : 0:00:00 (0.0073541 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.35723 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.501323 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "contact_verdict": "DIVERGED",
+      "carries_load": null,
+      "error": "time (plot, dmp, data) .... : 0:00:00 (0.0295089 sec)\n\n\t   serialization ................ : 0:00:00 (0.123778 sec)\n\n\t   reforming stiffness .......... : 0:00:01 (0.545911 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.408858 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.229725 sec)\n\n\t   model update ................. : 0:00:00 (0.298655 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0040255 sec)\n\n\t   time in linear solver ........ : 0:00:03 (2.96778 sec)\n\n\tTotal elapsed time .............. : 0:00:05 (4.65965 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "F_n_n": null,
       "F_t_n": null,
       "friction_cone_ratio_max": null,
@@ -999,23 +1020,28 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_contact_rigid_mu0.6_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_contact_rigid_mu0.6_pad.xplt",
       "febio_rc": 1,
       "febio_end_t": null,
       "wall_s": {
-        "value": 0.528836727142334,
+        "value": 4.8510541915893555,
         "label": "measured",
         "unit": "s"
       },
       "diagnostics": {
         "end_t": null,
-        "neg_jacobians": 6,
-        "invalid_facets": 4,
-        "terminated": "?"
+        "neg_jacobians": 21,
+        "invalid_facets": 2,
+        "terminated": "ERROR"
       },
       "run_verdict": "FAIL",
-      "error": "-time (plot, dmp, data) .... : 0:00:00 (0.0050881 sec)\n\n\t   serialization ................ : 0:00:00 (0.0265944 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0521966 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0274555 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0072083 sec)\n\n\t   model update ................. : 0:00:00 (0.0086995 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.340906 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.490416 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "contact_verdict": "DIVERGED",
+      "carries_load": null,
+      "error": "time (plot, dmp, data) .... : 0:00:00 (0.0398709 sec)\n\n\t   serialization ................ : 0:00:00 (0.132514 sec)\n\n\t   reforming stiffness .......... : 0:00:01 (0.590747 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.415619 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.238766 sec)\n\n\t   model update ................. : 0:00:00 (0.342411 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0033315 sec)\n\n\t   time in linear solver ........ : 0:00:03 (2.88754 sec)\n\n\tTotal elapsed time .............. : 0:00:05 (4.69964 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "F_n_n": null,
       "F_t_n": null,
       "friction_cone_ratio_max": null,
@@ -1045,23 +1071,28 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_contact_rigid_mu0.6_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_contact_rigid_mu0.6_pad.xplt",
       "febio_rc": 1,
       "febio_end_t": null,
       "wall_s": {
-        "value": 0.5633580684661865,
+        "value": 4.591349124908447,
         "label": "measured",
         "unit": "s"
       },
       "diagnostics": {
         "end_t": null,
-        "neg_jacobians": 6,
-        "invalid_facets": 4,
-        "terminated": "?"
+        "neg_jacobians": 21,
+        "invalid_facets": 2,
+        "terminated": "ERROR"
       },
       "run_verdict": "FAIL",
-      "error": "O-time (plot, dmp, data) .... : 0:00:00 (0.0045706 sec)\n\n\t   serialization ................ : 0:00:00 (0.0252942 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0528056 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0351714 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.006236 sec)\n\n\t   model update ................. : 0:00:00 (0.0079737 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.370681 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.526463 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "contact_verdict": "DIVERGED",
+      "carries_load": null,
+      "error": "-time (plot, dmp, data) .... : 0:00:00 (0.0227372 sec)\n\n\t   serialization ................ : 0:00:00 (0.121734 sec)\n\n\t   reforming stiffness .......... : 0:00:01 (0.516393 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.365591 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.248201 sec)\n\n\t   model update ................. : 0:00:00 (0.302231 sec)\n\n\t   QN updates ................... : 0:00:00 (0.004583 sec)\n\n\t   time in linear solver ........ : 0:00:03 (2.89548 sec)\n\n\tTotal elapsed time .............. : 0:00:05 (4.53121 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "F_n_n": null,
       "F_t_n": null,
       "friction_cone_ratio_max": null,
@@ -1091,23 +1122,28 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_contact_rigid_mu0.6_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_contact_rigid_mu0.6_pad.xplt",
       "febio_rc": 1,
       "febio_end_t": null,
       "wall_s": {
-        "value": 0.5477397441864014,
+        "value": 4.682893753051758,
         "label": "measured",
         "unit": "s"
       },
       "diagnostics": {
         "end_t": null,
-        "neg_jacobians": 6,
-        "invalid_facets": 4,
-        "terminated": "?"
+        "neg_jacobians": 21,
+        "invalid_facets": 2,
+        "terminated": "ERROR"
       },
       "run_verdict": "FAIL",
-      "error": "O-time (plot, dmp, data) .... : 0:00:00 (0.005789 sec)\n\n\t   serialization ................ : 0:00:00 (0.0245599 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0508666 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0328545 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0061505 sec)\n\n\t   model update ................. : 0:00:00 (0.0065653 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.361902 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.512762 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "contact_verdict": "DIVERGED",
+      "carries_load": null,
+      "error": "-time (plot, dmp, data) .... : 0:00:00 (0.017866 sec)\n\n\t   serialization ................ : 0:00:00 (0.131233 sec)\n\n\t   reforming stiffness .......... : 0:00:01 (0.592946 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.399191 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.223641 sec)\n\n\t   model update ................. : 0:00:00 (0.289849 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0026223 sec)\n\n\t   time in linear solver ........ : 0:00:03 (2.81549 sec)\n\n\tTotal elapsed time .............. : 0:00:05 (4.52326 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "F_n_n": null,
       "F_t_n": null,
       "friction_cone_ratio_max": null,
@@ -1137,12 +1173,15 @@
       "pad_scenario": "hard_surface",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_fixed_hard_surface.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_fixed_hard_surface.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.23739218711853027,
+        "value": 0.257615327835083,
         "label": "measured",
         "unit": "s"
       },
@@ -1150,17 +1189,19 @@
         "end_t": 1.0,
         "neg_jacobians": 0,
         "invalid_facets": 2,
-        "terminated": "?"
+        "terminated": "NORMAL"
       },
       "F_n_n": {
-        "value": 26020.834635125684,
-        "label": "measured",
+        "value": 28009.67699202822,
+        "label": "INFERRED",
         "unit": "N",
-        "source": "support reaction resultant (last state)"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
+      "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
-        "label": "measured",
+        "label": "INFERRED",
         "unit": "N"
       },
       "friction_cone_ratio_max": null,
@@ -1170,48 +1211,44 @@
         "unit": "-"
       },
       "sigma_contact_avg_mpa": {
-        "value": 0.43368057725209475,
-        "label": "measured",
+        "value": 0.466827949867137,
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
       },
       "sigma_contact_max_mpa": {
-        "value": 8.809343890731512,
+        "value": 9.482665731175342,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, max"
+        "unit": "MPa"
       },
       "sigma_contact_p95_mpa": {
-        "value": 8.809343890731512,
+        "value": 9.482665731175342,
         "label": "measured",
-        "unit": "MPa",
-        "source": "nodal support pressure, p95"
+        "unit": "MPa"
       },
       "sigma_mid_mpa": {
-        "value": 0.28912038483472985,
-        "label": "measured",
+        "value": 0.311218633244758,
+        "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
       },
       "penetration_mm": null,
-      "contact_area_mm2": {
-        "value": 2953.7766896014505,
-        "label": "measured",
-        "unit": "mm²",
-        "source": "support footprint proxy"
-      },
+      "plantar_drop_mm": null,
+      "contact_area_mm2": null,
       "footprint_mm2": {
         "value": 2953.7766896014505,
         "label": "measured",
         "unit": "mm²"
       },
+      "no_contact_sink_mm": null,
+      "carries_load": null,
       "gauge_max_mpa": {
-        "value": 184.2189567291724,
+        "value": 198.13828286314626,
         "label": "measured",
         "unit": "MPa"
       },
       "gauge_p95_mpa": {
-        "value": 135.08456526678108,
+        "value": 145.19551329099278,
         "label": "measured",
         "unit": "MPa"
       },
@@ -1236,23 +1273,28 @@
       "pad_scenario": "hard_surface",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.0,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.0_hard_surface.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.0_hard_surface.xplt",
       "febio_rc": 1,
       "febio_end_t": null,
       "wall_s": {
-        "value": 0.5520856380462646,
+        "value": 2.846877098083496,
         "label": "measured",
         "unit": "s"
       },
       "diagnostics": {
         "end_t": null,
-        "neg_jacobians": 6,
-        "invalid_facets": 4,
-        "terminated": "?"
+        "neg_jacobians": 21,
+        "invalid_facets": 2,
+        "terminated": "ERROR"
       },
       "run_verdict": "FAIL",
-      "error": "-time (plot, dmp, data) .... : 0:00:00 (0.0039362 sec)\n\n\t   serialization ................ : 0:00:00 (0.0246058 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0524039 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0324334 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0054601 sec)\n\n\t   model update ................. : 0:00:00 (0.0074062 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.363502 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.507791 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "contact_verdict": "DIVERGED",
+      "carries_load": null,
+      "error": "ime (plot, dmp, data) .... : 0:00:00 (0.0139953 sec)\n\n\t   serialization ................ : 0:00:00 (0.0937933 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.389556 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.21376 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.066137 sec)\n\n\t   model update ................. : 0:00:00 (0.0856714 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0013033 sec)\n\n\t   time in linear solver ........ : 0:00:02 (1.90611 sec)\n\n\tTotal elapsed time .............. : 0:00:03 (2.80939 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "F_n_n": null,
       "F_t_n": null,
       "friction_cone_ratio_max": null,
@@ -1367,7 +1409,8 @@
   ],
   "repro": {
     "commands": [
-      "$env:PYTHONPATH='src'; .venv\\Scripts\\python.exe scripts\\opensim_fe\\nonvertical_s5_contact.py"
+      "$env:PYTHONPATH='src'; .venv\\Scripts\\python.exe scripts\\opensim_fe\\nonvertical_s5_contact.py",
+      "# FE 工况进程级并行（默认 --workers 1 = 原串行路径）：.venv\\Scripts\\python.exe scripts\\opensim_fe\\nonvertical_s5_contact.py --workers 4"
     ],
     "files_read": [
       "results\\opensim_fe\\s2_thums_height_sweep.json",

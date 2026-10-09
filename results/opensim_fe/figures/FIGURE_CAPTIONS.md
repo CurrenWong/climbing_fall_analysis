@@ -146,10 +146,10 @@ $env:PYTHONPATH="src"
 | 图 7 | `figures/fig7_external_rotation.png` | `ankle_external_rotation.json` |
 | 图 8 | `figures/fig8_trimalleolar_ser.png` | （无仿真数据；真实骨几何 + SER 受伤体位渲染，见论文 §3.6 / §4.2；外踝臂定量见 `ankle_external_rotation.json`） |
 | 图 9 | `figures/fig9_talus_mechanism.png` | （无仿真数据；真实骨几何 + 背屈体位渲染，见论文 §3.6） |
-| 动画 | `figures/fall_simulation.mp4` / `.gif`（+ `_passive` 对比版） | OpenSim 正动力学 states 轨迹（`run_dead_drop`，见附节） |
+| 动画 | `figures/fall_simulation_20261009.mp4` / `.gif`（+ `fall_simulation_passive_20261009` 对比版） | OpenSim 正动力学 states 轨迹（`run_dead_drop`，见附节） |
 | 图 10 | `figures/fig_pad_paradox.png` | 「垫子悖论」：旋后着地时 total_risk(k) 单调递减 | `pad_supination_tradeoff.json`（R4，见附 2） |
-| 动画 A | `figures/fall_scenario_ser.mp4` / `.gif` | 三踝 / SER 姿势演示（单脚 + 内翻30° + 外旋25°） | 见附 2 |
-| 动画 B | `figures/fall_scenario_talus.mp4` / `.gif` | 距骨 / 背屈楔入姿势演示（单脚 + 踝背屈25°） | 见附 2 |
+| 动画 A | `figures/fall_scenario_ser_20261009.mp4` / `.gif` | 三踝 / SER 姿势演示（单脚 + 内翻30° + 外旋25°） | 见附 2 |
+| 动画 B | `figures/fall_scenario_talus_20261009.mp4` / `.gif` | 距骨 / 背屈楔入姿势演示（单脚 + 踝背屈25°） | 见附 2 |
 
 **通用诚实边界**：本组图仅复现既有 1D/FE 筛选口径的**相对结论与阈值跨越**，绝对值不可直接引用；`measured` 量来自 OpenSim/FE/THUMS，`modeled/assumed` 量的敏感性见对应 `*_REPORT.md` 的“假设与诚实边界”节。
 
@@ -174,7 +174,7 @@ $env:PYTHONPATH="src"
 
 ---
 
-## 附：坠落仿真动画  `fall_simulation.mp4` / `.gif`　·　对比版 `fall_simulation_passive.mp4` / `.gif`
+## 附：坠落仿真动画  `fall_simulation_20261009.mp4` / `.gif`　·　对比版 `fall_simulation_passive_20261009.mp4` / `.gif`
 
 **内容**：把**全身多体坠落仿真过程**渲染成动画（左：Rajagopal2015 全身骨模型 + 垫 + 地面；右：同步的 GRF(t) 脉冲曲线 + 时间游标）。两段：
 1. **自由落体段**（24 帧）：身体从释放高度以 v = g·t 下落（纯运动学，非 FD），`h` 读数递减到 0；
@@ -185,7 +185,7 @@ $env:PYTHONPATH="src"
 2. **角标标注关节模式**：`joints: LOCKED (S1 rigid leg, [Y25])` 或 `UNLOCKED + passive stiffness (S3b)`，并实时打印 `knee_r / ankle_r` 屈曲角 —— 免得观众期待模型并不求解的屈膝。
 3. **新增 `--passive` 对比版**：S3 path (b)（解锁 `LEG_FLEX_JOINTS` + `PassiveStiffness.nominal_landing()`）；实测冲击中踝/膝只弯 **≈1.3° / 0.7°**（画面角标即为实时读数），与 `NONVERTICAL_S3_POSTURE_REPORT.md`「被动刚度拦住了'飞'，但没换来'弯'」一致。
 
-**参数（本次渲染）**：释放高度 **2.0 m**、质量 **77 kg（AM50/[Y25] 口径）**、**落在软垫上**（`on_pad=True`）；撞击速度 **v₀ = 6.26 m/s**，**峰值 GRF ≈ 34.8 kN**，冲击窗 **≈ 34 ms**。对照：同一工况落**刚性地面**峰值 **42.4 kN**、窗 **20 ms** —— 即垫子把峰值削低 ≈ 18%、并把冲击时间拉长 ≈ 70%（与论文 §3「垫子削峰」的定性结论一致）。
+**参数（本次渲染）**：释放高度 **2.0 m**、质量 **77 kg（AM50/[Y25] 口径）**、**落在软垫上**（`on_pad=True`）；撞击速度 **v₀ = 6.26 m/s**，**峰值 GRF ≈ 34.8 kN**，冲击窗 **≈ 34 ms**。对照：同一工况落**刚性地面**峰值 **45.6 kN**、窗 **14.2 ms**（2026-10-08 标定口径；标定前为 42.4 kN / 20 ms）—— 即垫子把峰值削低 ≈ 24%、并把冲击时间拉长 ≈ 2.4 倍（与论文 §3「垫子削峰」的定性结论一致）。
 
 **顺带得到一个结论性数字**：FD 里身体在冲击窗内**下沉 ≈ 16.2 cm**（`probe_sink.py`：pelvis 0.940 → 0.781 m）；而垫子总厚只有 **20 cm** —— 即 **2 m 坠落已把垫子压到约 81%（接近触底）**。这与论文"垫子在中高坠落里会触底、不再非线性吸能"的论点是同一件事，可直接用于演示。
 
@@ -241,9 +241,9 @@ $env:PYTHONPATH="src"
 | 产物 | 内容 | 关键数字 |
 |---|---|---|
 | `fig_pad_paradox.png` | **R4 数据**：踝总风险 `total_risk(k)` vs 垫子等效刚度 k（4 个高度） | 刚性极限 risk **0.66–0.78**（=纯轴向）；软垫（k ≤ 1000 N/mm）risk **26–45**；安全阈值 **k_th ≈ 1.0–2.4×10⁵ N/mm** → **越软越危险、无内部最优** |
-| `fall_scenario_ser.mp4` | **三踝（SER）姿势**：单脚先落 + 内翻 β=30° + 外旋 θ=25°，h=2 m，垫 vs 刚性 | **单脚口径**：M_inv 峰值 ≈ **518 N·m = 24.7 × 21 N·m**；削峰 40.0 → 35.2 kN |
-| `fall_scenario_ser_twofoot.mp4` | 同上，但 **S5 报告口径**（`--two-foot`：split=(0.5,0.5) + 75.337 kg） | M_inv 峰值 ≈ **264 N·m**（≈ 报告 256.9）→ 供与 R1/S5 数字逐条对齐 |
-| `fall_scenario_talus.mp4` | **距骨（Hawkins 背屈楔入）姿势**：单脚 + 踝背屈 +25°，h=2 m | 削峰 **42.4 → 34.8 kN**、窗 20 → 33 ms；**无量化判据**（机制演示） |
+| `fall_scenario_ser_20261009.mp4` | **三踝（SER）姿势**：单脚先落 + 内翻 β=30° + 外旋 θ=25°，h=2 m，垫 vs 刚性 | **单脚口径**：M_inv 峰值 ≈ **518 N·m = 24.7 × 21 N·m**；削峰 40.0 → 35.2 kN（one-leg-awkward 链未标定 ⇒ 与标定前一致） |
+| `fall_scenario_ser_twofoot_20261009.mp4` | 同上，但 **S5 报告口径**（`--two-foot`：split=(0.5,0.5) + 75.337 kg） | M_inv 峰值 ≈ **264 N·m**（≈ 报告 256.9）→ 供与 R1/S5 数字逐条对齐 |
+| `fall_scenario_talus_20261009.mp4` | **距骨（Hawkins 背屈楔入）姿势**：单脚 + 踝背屈 +25°，h=2 m | 削峰 **45.6 → 34.8 kN**、窗 14 → 33 ms（feet-first-stiff 链已随 10-08 标定更新；标定前 42.4/20）；**无量化判据**（机制演示） |
 
 ### 与计算的一致性审计（必读）
 

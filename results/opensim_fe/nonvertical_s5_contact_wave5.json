@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-07 00:49:38",
+    "generated_at": "2026-10-09 11:18:18",
     "wave": 5,
     "partial": false,
     "study": "S5-contact 波5：真实泡沫垫矩阵（G7 配方 + hold 弹簧 + rigid 加载路径）",
@@ -26,12 +26,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\g0_fixed_axial_ref.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\g0_fixed_axial_ref.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.2359907627105713,
+        "value": 0.2452716827392578,
         "label": "measured",
         "unit": "s"
       },
@@ -45,8 +48,9 @@
         "value": 26383.133775894516,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
       "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
@@ -116,10 +120,7 @@
         "control_time_steps_2400": false,
         "control_dtmax_1_2400": false,
         "control_cutback_0125": false
-      },
-      "contact_penalty": null,
-      "contact_hold_spring_k_N_per_mm": null,
-      "use_rigid": false
+      }
     },
     {
       "id": "h2_fixed_pad",
@@ -133,12 +134,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2_fixed_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2_fixed_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.24542975425720215,
+        "value": 0.2693665027618408,
         "label": "measured",
         "unit": "s"
       },
@@ -152,8 +156,9 @@
         "value": 21086.242237064915,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
       "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
@@ -223,10 +228,7 @@
         "control_time_steps_2400": false,
         "control_dtmax_1_2400": false,
         "control_cutback_0125": false
-      },
-      "contact_penalty": null,
-      "contact_hold_spring_k_N_per_mm": null,
-      "use_rigid": false
+      }
     },
     {
       "id": "h3_fixed_pad",
@@ -240,12 +242,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_fixed_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_fixed_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.24036574363708496,
+        "value": 0.2543354034423828,
         "label": "measured",
         "unit": "s"
       },
@@ -259,8 +264,9 @@
         "value": 22050.632451503363,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
       "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
@@ -330,10 +336,7 @@
         "control_time_steps_2400": false,
         "control_dtmax_1_2400": false,
         "control_cutback_0125": false
-      },
-      "contact_penalty": null,
-      "contact_hold_spring_k_N_per_mm": null,
-      "use_rigid": false
+      }
     },
     {
       "id": "h3.5_fixed_pad",
@@ -347,12 +350,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_fixed_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_fixed_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.268735408782959,
+        "value": 0.24212312698364258,
         "label": "measured",
         "unit": "s"
       },
@@ -366,8 +372,9 @@
         "value": 22913.127608075236,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
       "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
@@ -437,10 +444,7 @@
         "control_time_steps_2400": false,
         "control_dtmax_1_2400": false,
         "control_cutback_0125": false
-      },
-      "contact_penalty": null,
-      "contact_hold_spring_k_N_per_mm": null,
-      "use_rigid": false
+      }
     },
     {
       "id": "h4.5_fixed_pad",
@@ -454,12 +458,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_fixed_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_fixed_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.2401719093322754,
+        "value": 0.27669382095336914,
         "label": "measured",
         "unit": "s"
       },
@@ -473,8 +480,9 @@
         "value": 25079.378270270812,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
       "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
@@ -544,10 +552,7 @@
         "control_time_steps_2400": false,
         "control_dtmax_1_2400": false,
         "control_cutback_0125": false
-      },
-      "contact_penalty": null,
-      "contact_hold_spring_k_N_per_mm": null,
-      "use_rigid": false
+      }
     },
     {
       "id": "h2.0_spring_k100_pad",
@@ -565,12 +570,15 @@
         "unit": "N/mm"
       },
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_spring_k100_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_spring_k100_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.2673776149749756,
+        "value": 0.28873276710510254,
         "label": "measured",
         "unit": "s"
       },
@@ -584,8 +592,9 @@
         "value": 21086.242237064915,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
       "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
@@ -655,10 +664,7 @@
         "control_time_steps_2400": false,
         "control_dtmax_1_2400": false,
         "control_cutback_0125": false
-      },
-      "contact_penalty": null,
-      "contact_hold_spring_k_N_per_mm": null,
-      "use_rigid": false
+      }
     },
     {
       "id": "h2.0_contact_rigid_mu0_pad",
@@ -672,12 +678,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.0,
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 250.084979057312,
+        "value": 555.3427464962006,
         "label": "measured",
         "unit": "s"
       },
@@ -691,7 +700,13 @@
         "value": 13775.96944806345,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触反力 = 施加载荷 − hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_hold_spring_n": {
+        "value": 7310.272789001465,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total × plantar_drop"
       },
       "F_n_reaction_sum_n": {
         "value": 84344.96875,
@@ -774,15 +789,6 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 0.1,
-      "contact_hold_spring_k_N_per_mm": 1.0,
-      "use_rigid": true,
-      "F_hold_spring_n": {
-        "value": 7310.272789001465,
-        "label": "INFERRED",
-        "unit": "N",
-        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
       }
     },
     {
@@ -797,12 +803,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.3,
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.3_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.3_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 255.1536831855774,
+        "value": 558.755033493042,
         "label": "measured",
         "unit": "s"
       },
@@ -816,7 +825,13 @@
         "value": 13775.96944806345,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触反力 = 施加载荷 − hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_hold_spring_n": {
+        "value": 7310.272789001465,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total × plantar_drop"
       },
       "F_n_reaction_sum_n": {
         "value": 84344.96875,
@@ -899,15 +914,6 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 0.1,
-      "contact_hold_spring_k_N_per_mm": 1.0,
-      "use_rigid": true,
-      "F_hold_spring_n": {
-        "value": 7310.272789001465,
-        "label": "INFERRED",
-        "unit": "N",
-        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
       }
     },
     {
@@ -922,12 +928,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 252.3313183784485,
+        "value": 565.1415891647339,
         "label": "measured",
         "unit": "s"
       },
@@ -941,7 +950,13 @@
         "value": 13775.96944806345,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触反力 = 施加载荷 − hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_hold_spring_n": {
+        "value": 7310.272789001465,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total × plantar_drop"
       },
       "F_n_reaction_sum_n": {
         "value": 84344.96875,
@@ -1024,15 +1039,6 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 0.1,
-      "contact_hold_spring_k_N_per_mm": 1.0,
-      "use_rigid": true,
-      "F_hold_spring_n": {
-        "value": 7310.272789001465,
-        "label": "INFERRED",
-        "unit": "N",
-        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
       }
     },
     {
@@ -1047,12 +1053,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_contact_rigid_mu0.6_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3_contact_rigid_mu0.6_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 247.95263361930847,
+        "value": 543.1910104751587,
         "label": "measured",
         "unit": "s"
       },
@@ -1066,7 +1075,13 @@
         "value": 14413.045762508002,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触反力 = 施加载荷 − hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_hold_spring_n": {
+        "value": 7637.586688995361,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total × plantar_drop"
       },
       "F_n_reaction_sum_n": {
         "value": 88202.53125,
@@ -1149,15 +1164,6 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 0.1,
-      "contact_hold_spring_k_N_per_mm": 1.0,
-      "use_rigid": true,
-      "F_hold_spring_n": {
-        "value": 7637.586688995361,
-        "label": "INFERRED",
-        "unit": "N",
-        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
       }
     },
     {
@@ -1172,18 +1178,21 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_contact_rigid_mu0.6_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h3.5_contact_rigid_mu0.6_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 341.2829089164734,
+        "value": 548.8015058040619,
         "label": "measured",
         "unit": "s"
       },
       "diagnostics": {
         "end_t": 1.0,
-        "neg_jacobians": 27,
+        "neg_jacobians": 28,
         "invalid_facets": 0,
         "terminated": "NORMAL"
       },
@@ -1191,7 +1200,13 @@
         "value": 14971.713537945841,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触反力 = 施加载荷 − hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_hold_spring_n": {
+        "value": 7941.4140701293945,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total × plantar_drop"
       },
       "F_n_reaction_sum_n": {
         "value": 91652.5078125,
@@ -1249,12 +1264,12 @@
       },
       "carries_load": true,
       "gauge_max_mpa": {
-        "value": 252.36294178800418,
+        "value": 252.362941802424,
         "label": "measured",
         "unit": "MPa"
       },
       "gauge_p95_mpa": {
-        "value": 138.39435153128247,
+        "value": 138.39435228755718,
         "label": "measured",
         "unit": "MPa"
       },
@@ -1274,15 +1289,6 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 0.1,
-      "contact_hold_spring_k_N_per_mm": 1.0,
-      "use_rigid": true,
-      "F_hold_spring_n": {
-        "value": 7941.4140701293945,
-        "label": "INFERRED",
-        "unit": "N",
-        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
       }
     },
     {
@@ -1297,18 +1303,21 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_contact_rigid_mu0.6_pad.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h4.5_contact_rigid_mu0.6_pad.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 356.6536183357239,
+        "value": 553.235514163971,
         "label": "measured",
         "unit": "s"
       },
       "diagnostics": {
         "end_t": 1.0,
-        "neg_jacobians": 44,
+        "neg_jacobians": 46,
         "invalid_facets": 0,
         "terminated": "NORMAL"
       },
@@ -1316,7 +1325,13 @@
         "value": 16399.512051703918,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触反力 = 施加载荷 − hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_hold_spring_n": {
+        "value": 8679.866218566895,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total × plantar_drop"
       },
       "F_n_reaction_sum_n": {
         "value": 100317.515625,
@@ -1379,7 +1394,7 @@
         "unit": "MPa"
       },
       "gauge_p95_mpa": {
-        "value": 151.82408324998752,
+        "value": 151.824083236893,
         "label": "measured",
         "unit": "MPa"
       },
@@ -1399,15 +1414,6 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 0.1,
-      "contact_hold_spring_k_N_per_mm": 1.0,
-      "use_rigid": true,
-      "F_hold_spring_n": {
-        "value": 8679.866218566895,
-        "label": "INFERRED",
-        "unit": "N",
-        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
       }
     },
     {
@@ -1422,12 +1428,15 @@
       "pad_scenario": "hard_surface",
       "spring_k_N_per_mm": null,
       "contact_mu": null,
+      "contact_penalty": null,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_fixed_hard_surface.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_fixed_hard_surface.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 0.3915822505950928,
+        "value": 0.2600669860839844,
         "label": "measured",
         "unit": "s"
       },
@@ -1438,11 +1447,12 @@
         "terminated": "NORMAL"
       },
       "F_n_n": {
-        "value": 26020.834635125684,
+        "value": 28009.67699202822,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触/支撑反力 = 施加载荷（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触/支撑反力 = 施加载荷（无 hold 弹簧；FEBio 反力输出不可用）"
       },
+      "F_hold_spring_n": null,
       "F_n_reaction_sum_n": null,
       "F_t_n": {
         "value": 0.0,
@@ -1456,23 +1466,23 @@
         "unit": "-"
       },
       "sigma_contact_avg_mpa": {
-        "value": 0.43368057725209475,
+        "value": 0.466827949867137,
         "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
       },
       "sigma_contact_max_mpa": {
-        "value": 8.809343890731512,
+        "value": 9.482665731175342,
         "label": "measured",
         "unit": "MPa"
       },
       "sigma_contact_p95_mpa": {
-        "value": 8.809343890731512,
+        "value": 9.482665731175342,
         "label": "measured",
         "unit": "MPa"
       },
       "sigma_mid_mpa": {
-        "value": 0.28912038483472985,
+        "value": 0.311218633244758,
         "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
@@ -1488,12 +1498,12 @@
       "no_contact_sink_mm": null,
       "carries_load": null,
       "gauge_max_mpa": {
-        "value": 184.2189567291724,
+        "value": 198.13828286314626,
         "label": "measured",
         "unit": "MPa"
       },
       "gauge_p95_mpa": {
-        "value": 135.08456526678108,
+        "value": 145.19551329099278,
         "label": "measured",
         "unit": "MPa"
       },
@@ -1512,10 +1522,7 @@
         "control_time_steps_2400": false,
         "control_dtmax_1_2400": false,
         "control_cutback_0125": false
-      },
-      "contact_penalty": null,
-      "contact_hold_spring_k_N_per_mm": null,
-      "use_rigid": false
+      }
     },
     {
       "id": "h2.0_contact_rigid_mu0.0_hard_surface",
@@ -1529,12 +1536,15 @@
       "pad_scenario": "hard_surface",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.0,
+      "contact_penalty": 100.0,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.0_hard_surface.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.0_hard_surface.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 439.4453458786011,
+        "value": 669.7610778808594,
         "label": "measured",
         "unit": "s"
       },
@@ -1545,13 +1555,19 @@
         "terminated": "NORMAL"
       },
       "F_n_n": {
-        "value": 25235.668300019788,
+        "value": 27197.806107132896,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触反力 = 施加载荷 − hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_hold_spring_n": {
+        "value": 811.8708848953247,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total × plantar_drop"
       },
       "F_n_reaction_sum_n": {
-        "value": 104083.3359375,
+        "value": 112038.7109375,
         "label": "unreliable_diagnostic",
         "unit": "N"
       },
@@ -1563,7 +1579,7 @@
       "friction_cone_ratio_max": null,
       "force_balance_relative_err": null,
       "sigma_contact_avg_mpa": {
-        "value": 0.4205944716669965,
+        "value": 0.45329676845221495,
         "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 60000 mm² (QUOTABLE §3 #2 basis; F_n rescale)"
@@ -1571,19 +1587,19 @@
       "sigma_contact_max_mpa": null,
       "sigma_contact_p95_mpa": null,
       "sigma_mid_mpa": {
-        "value": 0.2803963144446643,
+        "value": 0.30219784563480995,
         "label": "INFERRED",
         "unit": "MPa",
         "source": "F_n / 90000 mm² (mid-depth rescale; no enhancement info)"
       },
       "penetration_mm": {
-        "value": 2.3146586418151855,
+        "value": 2.362996816635132,
         "label": "measured",
         "unit": "mm",
         "source": "跖面越过刚性板面的最大深度（末态位移场）"
       },
       "plantar_drop_mm": {
-        "value": 4.486664772033691,
+        "value": 4.6392621994018555,
         "label": "measured",
         "unit": "mm"
       },
@@ -1599,19 +1615,19 @@
         "unit": "mm²"
       },
       "no_contact_sink_mm": {
-        "value": 136.23473630955854,
+        "value": 146.64752351847235,
         "label": "assumed",
         "unit": "mm",
         "source": "施加载荷/191 N·mm⁻¹（无接触下沉量级；判据下界）"
       },
       "carries_load": true,
       "gauge_max_mpa": {
-        "value": 340.2107407635871,
+        "value": 363.5949443275952,
         "label": "measured",
         "unit": "MPa"
       },
       "gauge_p95_mpa": {
-        "value": 248.6107118488839,
+        "value": 265.05967093017097,
         "label": "measured",
         "unit": "MPa"
       },
@@ -1631,15 +1647,6 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 100.0,
-      "contact_hold_spring_k_N_per_mm": 1.0,
-      "use_rigid": true,
-      "F_hold_spring_n": {
-        "value": 785.166335105896,
-        "label": "INFERRED",
-        "unit": "N",
-        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
       }
     },
     {
@@ -1654,12 +1661,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": null,
+      "use_rigid": true,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_nohold.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_nohold.xplt",
       "febio_rc": 1,
       "febio_end_t": null,
       "wall_s": {
-        "value": 3.1435248851776123,
+        "value": 2.3390519618988037,
         "label": "measured",
         "unit": "s"
       },
@@ -1670,7 +1680,9 @@
         "terminated": "ERROR"
       },
       "run_verdict": "FAIL",
-      "error": "IO-time (plot, dmp, data) .... : 0:00:00 (0.0099673 sec)\n\n\t   serialization ................ : 0:00:00 (0.117559 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.20771 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.192652 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.235544 sec)\n\n\t   model update ................. : 0:00:00 (0.44982 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0018977 sec)\n\n\t   time in linear solver ........ : 0:00:02 (1.86189 sec)\n\n\tTotal elapsed time .............. : 0:00:03 (3.1091 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "contact_verdict": "DIVERGED",
+      "carries_load": null,
+      "error": "-time (plot, dmp, data) .... : 0:00:00 (0.0093163 sec)\n\n\t   serialization ................ : 0:00:00 (0.0935792 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.195182 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.177002 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.100755 sec)\n\n\t   model update ................. : 0:00:00 (0.11974 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0018156 sec)\n\n\t   time in linear solver ........ : 0:00:02 (1.5681 sec)\n\n\tTotal elapsed time .............. : 0:00:02 (2.29977 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "F_n_n": null,
       "F_t_n": null,
       "friction_cone_ratio_max": null,
@@ -1694,11 +1706,7 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 0.1,
-      "contact_hold_spring_k_N_per_mm": null,
-      "use_rigid": true,
-      "contact_verdict": "DIVERGED"
+      }
     },
     {
       "id": "h2.0_contact_rigid_mu0.6_pad_pen100",
@@ -1712,12 +1720,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": 100.0,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": true,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_pen100.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_pen100.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "wall_s": {
-        "value": 366.63695549964905,
+        "value": 607.6640837192535,
         "label": "measured",
         "unit": "s"
       },
@@ -1731,7 +1742,13 @@
         "value": 20369.294419262485,
         "label": "INFERRED",
         "unit": "N",
-        "source": "静力平衡：接触反力 = 施加载荷 - hold 弹簧力（FEBio 反力输出不可用）"
+        "source": "静力平衡：接触反力 = 施加载荷 − hold 弹簧力（FEBio 反力输出不可用）"
+      },
+      "F_hold_spring_n": {
+        "value": 716.9478178024292,
+        "label": "INFERRED",
+        "unit": "N",
+        "source": "hold 弹簧（Winkler）承载 = k_total × plantar_drop"
       },
       "F_n_reaction_sum_n": {
         "value": 84344.96875,
@@ -1814,15 +1831,6 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 100.0,
-      "contact_hold_spring_k_N_per_mm": 1.0,
-      "use_rigid": true,
-      "F_hold_spring_n": {
-        "value": 716.9478178024292,
-        "label": "INFERRED",
-        "unit": "N",
-        "source": "hold 弹簧（Winkler）承载 = k_total x plantar_drop"
       }
     },
     {
@@ -1837,12 +1845,15 @@
       "pad_scenario": "on_pad",
       "spring_k_N_per_mm": null,
       "contact_mu": 0.6,
+      "contact_penalty": 0.1,
+      "contact_hold_spring_k_N_per_mm": 1.0,
+      "use_rigid": false,
       "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_press.feb",
       "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_rigid_mu0.6_pad_press.xplt",
       "febio_rc": 1,
       "febio_end_t": 0.419308,
       "wall_s": {
-        "value": 245.34545469284058,
+        "value": 378.50944328308105,
         "label": "measured",
         "unit": "s"
       },
@@ -1853,7 +1864,9 @@
         "terminated": "ERROR"
       },
       "run_verdict": "FAIL",
-      "error": ")\n\n\t   IO-time (plot, dmp, data) .... : 0:00:04 (4.05658 sec)\n\n\t   serialization ................ : 0:00:04 (3.77979 sec)\n\n\t   reforming stiffness .......... : 0:00:16 (15.7527 sec)\n\n\t   evaluating stiffness ......... : 0:00:13 (13.3677 sec)\n\n\t   evaluating residual .......... : 0:00:26 (26.172 sec)\n\n\t   model update ................. : 0:00:41 (40.8993 sec)\n\n\t   QN updates ................... : 0:00:01 (1.02729 sec)\n\n\t   time in linear solver ........ : 0:02:17 (136.927 sec)\n\n\tTotal elapsed time .............. : 0:04:05 (245.261 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "contact_verdict": "DIVERGED",
+      "carries_load": null,
+      "error": ")\n\n\t   IO-time (plot, dmp, data) .... : 0:00:04 (4.47079 sec)\n\n\t   serialization ................ : 0:00:05 (4.77961 sec)\n\n\t   reforming stiffness .......... : 0:00:34 (33.8239 sec)\n\n\t   evaluating stiffness ......... : 0:00:28 (27.6889 sec)\n\n\t   evaluating residual .......... : 0:00:34 (34.1236 sec)\n\n\t   model update ................. : 0:00:41 (41.4052 sec)\n\n\t   QN updates ................... : 0:00:02 (1.61088 sec)\n\n\t   time in linear solver ........ : 0:03:46 (225.69 sec)\n\n\tTotal elapsed time .............. : 0:06:18 (378.333 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "F_n_n": null,
       "F_t_n": null,
       "friction_cone_ratio_max": null,
@@ -1877,11 +1890,7 @@
         "control_time_steps_2400": true,
         "control_dtmax_1_2400": true,
         "control_cutback_0125": true
-      },
-      "contact_penalty": 0.1,
-      "contact_hold_spring_k_N_per_mm": 1.0,
-      "use_rigid": false,
-      "contact_verdict": "DIVERGED"
+      }
     }
   ],
   "summary": {

@@ -22,12 +22,12 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 20,steep,top,vertical,longitudinal,standing_on_feet,foot_slip,pads,feet-first-stiff,3.219,66.2,1,0,0,0,0,40.803,66.8,0.0,0,tibia_distal,0.516,,sliding,0.5236,43.0855,0.2858,0,1,1
 21,steep,middle,leaning_backward,antero_posterior,back_or_front_to_pad,dyno,between_pads_and_wall,flat-flop,2.779,76.0,0,0,0,1,0,143.587,186.9,0.0,0,calcaneus,0.532,,none,0.0,0.0,0.0,0,0,0
 22,steep,middle,vertical,back_transverse,on_feet_leaning,dyno,pads,toe-point,1.822,69.1,1,0,1,0,0,24.546,36.8,0.0,0,tibia_distal,0.344,,none,0.0,0.0,0.0,0,0,0
-23,vertical,bottom,vertical,without,on_feet_leaning,foot_slip,between_pads_and_wall,feet-first-stiff,1.232,75.4,0,1,1,0,0,36.505,48.2,0.0,0,tibia_distal,0.426,,none,0.0,0.0,0.0,0,0,0
+23,vertical,bottom,vertical,without,on_feet_leaning,foot_slip,between_pads_and_wall,feet-first-stiff,1.232,75.4,0,1,1,0,0,40.78,53.7,0.0,0,tibia_distal,0.473,,none,0.0,0.0,0.0,0,0,0
 24,steep,top,vertical,antero_posterior,standing_on_feet,foot_slip,pads,feet-first-stiff,3.034,51.8,1,0,0,0,0,34.667,74.4,0.0,0,tibia_distal,0.448,,none,0.0,0.0,0.0,0,0,0
 25,corner,middle,vertical,antero_posterior,head_first,missed_hold,pads,head-first,1.845,58.5,1,0,0,0,0,10.569,21.5,0.0,0,tibia_distal,0.148,,none,0.0,0.0,0.0,0,0,0
 26,vertical,middle,leaning_backward,antero_posterior,standing_on_feet,route_finish,pads,feet-first-stiff,1.904,74.8,1,0,0,1,0,33.012,48.4,0.0,0,tibia_distal,0.425,,none,0.0,0.0,0.0,0,0,0
 27,vertical,top,vertical,without,head_first,dyno,pads,head-first,3.769,62.2,1,1,0,0,1,16.03,57.3,0.0,0,tibia_distal,0.226,,none,0.0,0.0,0.0,0,0,0
-28,vertical,top,vertical,without,standing_on_feet,other,between_pads_and_wall,feet-first-stiff,3.289,81.2,0,1,0,0,1,47.194,64.9,0.0,0,tibia_distal,0.614,,none,0.0,0.0,0.0,0,0,0
+28,vertical,top,vertical,without,standing_on_feet,other,between_pads_and_wall,feet-first-stiff,3.289,81.2,0,1,0,0,1,50.649,69.6,0.0,0,tibia_distal,0.659,,none,0.0,0.0,0.0,0,0,0
 29,roof_overhang,top,vertical,without,on_feet_leaning,missed_hold,pads,feet-first-stiff,3.27,82.6,1,1,1,0,0,44.825,60.1,0.0,0,tibia_distal,0.58,,none,0.0,0.0,0.0,0,0,0
 30,vertical,middle,vertical,longitudinal,head_first,foot_slip,pads,head-first,2.893,71.5,1,0,0,0,0,15.098,42.0,0.0,0,tibia_distal,0.214,,stuck,-0.1745,8.3051,7.4585,1,1,1
 31,vertical,top,vertical,without,on_feet_leaning,route_finish,pads,toe-point,4.275,62.7,1,1,1,0,0,35.915,57.8,0.0,0,tibia_distal,0.485,,none,0.0,0.0,0.0,0,0,0
@@ -40,7 +40,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 38,vertical,top,vertical,multiple,standing_on_feet,foot_slip,pads,feet-first-stiff,3.152,73.6,1,0,0,0,0,42.28,62.6,0.0,0,tibia_distal,0.538,,none,0.0,0.0,0.0,0,0,0
 39,steep,bottom,vertical,without,on_feet_leaning,dyno,pads,feet-first-stiff,0.683,79.0,1,1,1,0,0,16.656,21.2,0.0,0,tibia_distal,0.201,,none,0.0,0.0,0.0,0,0,0
 40,steep,top,vertical,longitudinal,back_or_front_to_pad,balance_loss,pads,flat-flop,3.149,63.4,1,0,0,0,0,50.334,103.6,0.0,0,calcaneus,0.186,,stuck,0.3491,36.3561,32.6764,1,1,1
-41,vertical,top,leaning_backward,without,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,3.993,43.3,0,1,0,1,0,42.296,104.3,0.0,0,tibia_distal,0.524,,none,0.0,0.0,0.0,0,0,0
+41,vertical,top,leaning_backward,without,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,3.993,43.3,0,1,0,1,0,46.46,113.0,0.0,0,tibia_distal,0.567,,none,0.0,0.0,0.0,0,0,0
 42,vertical,top,vertical,longitudinal,standing_on_feet,foot_slip,pads,feet-first-stiff,3.248,60.2,1,0,0,0,0,39.294,70.7,0.0,0,tibia_distal,0.495,,stuck,-0.3491,42.5735,38.2339,1,1,1
 43,steep,top,vertical,without,back_or_front_to_pad,missed_hold,pads,flat-flop,4.217,55.6,1,1,0,0,1,57.99,135.6,0.0,0,calcaneus,0.215,,none,0.0,0.0,0.0,0,0,0
 44,roof_overhang,middle,leaning_backward,multiple,back_or_front_to_pad,foot_slip,pads,flat-flop,1.76,61.2,1,0,0,1,0,29.96,63.2,0.0,0,calcaneus,0.111,,none,0.0,0.0,0.0,0,0,0
@@ -77,7 +77,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 75,slab,top,vertical,antero_posterior,standing_on_feet,foot_slip,pads,controlled-drop,3.211,65.6,1,0,0,0,0,26.631,41.9,0.0,0,tibia_distal,0.324,,none,0.0,0.0,0.0,0,0,0
 76,corner,middle,leaning_forward,antero_posterior,on_buttocks,missed_hold,pads,butt-impact,2.669,55.2,1,0,0,0,0,23.954,71.4,0.0,0,tibia_distal,0.28,,none,0.0,0.0,0.0,0,0,0
 77,vertical,top,vertical,longitudinal,on_feet_leaning,foot_slip,pads,one-leg-awkward,4.425,74.4,1,0,1,0,0,46.023,66.8,0.0,0,tibia_distal,0.636,,stuck,0.3491,33.2422,29.8776,1,1,1
-78,steep,bottom,vertical,longitudinal,on_feet_leaning,other,between_pads_and_wall,feet-first-stiff,1.092,66.8,0,0,1,0,0,31.652,47.2,0.0,0,tibia_distal,0.37,,stuck,-0.3491,34.2933,30.7977,1,1,1
+78,steep,bottom,vertical,longitudinal,on_feet_leaning,other,between_pads_and_wall,feet-first-stiff,1.092,66.8,0,0,1,0,0,35.292,53.7,0.0,0,tibia_distal,0.42,,stuck,-0.3491,38.2375,34.3399,1,1,1
 79,corner,top,leaning_backward,longitudinal,standing_on_feet,foot_slip,pads,controlled-drop,3.016,80.1,1,0,0,1,0,30.328,37.3,0.0,0,tibia_distal,0.352,,stuck,-0.3491,32.8587,29.5094,1,1,1
 80,steep,bottom,vertical,multiple,on_feet_leaning,missed_hold,pads,toe-point,1.332,62.5,1,0,1,0,0,20.637,33.6,0.0,0,tibia_distal,0.285,,none,0.0,0.0,0.0,0,0,0
 81,vertical,top,vertical,without,standing_on_feet,missed_hold,pads,feet-first-stiff,3.565,60.5,1,1,0,0,1,40.938,73.5,0.0,0,tibia_distal,0.518,,none,0.0,0.0,0.0,0,0,0
@@ -256,7 +256,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 254,steep,middle,vertical,longitudinal,standing_on_feet,route_finish,pads,feet-first-stiff,2.209,52.1,1,0,0,0,0,27.818,58.3,0.0,0,tibia_distal,0.355,,stuck,0.1745,10.2014,9.1689,1,1,1
 255,roof_overhang,top,vertical,longitudinal,on_feet_leaning,dyno,pads,toe-point,3.32,56.8,1,0,1,0,0,29.951,52.7,0.0,0,tibia_distal,0.402,,stuck,-0.3491,32.4508,29.1431,1,1,1
 256,vertical,top,vertical,without,standing_on_feet,foot_slip,pads,feet-first-stiff,4.053,56.9,1,1,0,0,1,42.034,80.6,0.0,0,tibia_distal,0.534,,none,0.0,0.0,0.0,0,0,0
-257,steep,top,vertical,without,on_feet_leaning,dyno,between_pads_and_wall,feet-first-stiff,3.536,86.5,0,1,1,0,0,50.587,64.0,0.0,0,tibia_distal,0.647,,none,0.0,0.0,0.0,0,0,0
+257,steep,top,vertical,without,on_feet_leaning,dyno,between_pads_and_wall,feet-first-stiff,3.536,86.5,0,1,1,0,0,52.784,68.5,0.0,0,tibia_distal,0.691,,none,0.0,0.0,0.0,0,0,0
 258,slab,top,vertical,longitudinal,on_feet_leaning,route_finish,pads,one-leg-awkward,3.775,66.4,1,0,1,0,0,42.852,67.3,0.0,0,tibia_distal,0.572,,stuck,-0.1745,23.5723,21.1696,1,1,1
 259,roof_overhang,bottom,vertical,without,on_feet_leaning,foot_slip,pads,one-leg-awkward,0.815,84.4,1,1,1,0,0,20.176,24.0,0.0,0,tibia_distal,0.266,,none,0.0,0.0,0.0,0,0,0
 260,steep,middle,vertical,longitudinal,head_first,missed_hold,pads,head-first,2.749,64.1,1,0,0,0,0,13.753,37.1,0.0,0,tibia_distal,0.195,,sliding,0.5236,14.5227,0.0963,0,1,1
@@ -285,7 +285,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 283,vertical,middle,vertical,antero_posterior,standing_on_feet,foot_slip,pads,feet-first-stiff,2.401,63.6,1,0,0,0,0,34.328,59.7,0.0,0,tibia_distal,0.443,,none,0.0,0.0,0.0,0,0,0
 284,steep,top,leaning_forward,longitudinal,standing_on_feet,missed_hold,pads,feet-first-stiff,3.041,72.7,1,0,0,0,0,41.486,62.0,0.0,0,tibia_distal,0.526,,stuck,-0.1745,22.821,20.4948,1,1,1
 285,vertical,middle,vertical,without,on_feet_leaning,other,pads,toe-point,2.898,57.9,1,1,1,0,0,28.275,49.3,0.0,0,tibia_distal,0.384,,none,0.0,0.0,0.0,0,0,0
-286,vertical,top,leaning_backward,longitudinal,on_feet_leaning,foot_slip,between_pads_and_wall,feet-first-stiff,3.743,78.4,0,0,1,1,0,49.238,69.6,0.0,0,tibia_distal,0.636,,sliding,0.5236,51.9922,0.3449,0,1,1
+286,vertical,top,leaning_backward,longitudinal,on_feet_leaning,foot_slip,between_pads_and_wall,feet-first-stiff,3.743,78.4,0,0,1,1,0,52.121,74.5,0.0,0,tibia_distal,0.68,,sliding,0.5236,55.0358,0.3651,0,1,1
 287,steep,middle,leaning_backward,antero_posterior,on_feet_leaning,other,pads,feet-first-stiff,2.786,51.5,1,0,1,1,0,32.541,69.8,0.0,0,tibia_distal,0.419,,none,0.0,0.0,0.0,0,0,0
 288,steep,top,vertical,longitudinal,on_feet_leaning,dyno,pads,toe-point,4.171,94.4,1,0,1,0,0,43.771,47.6,0.0,0,tibia_distal,0.605,,stuck,0.3491,31.6159,28.4159,1,1,1
 289,vertical,bottom,leaning_backward,back_transverse,on_feet_leaning,foot_slip,pads,one-leg-awkward,0.947,52.4,1,0,1,1,0,14.975,28.9,0.0,0,tibia_distal,0.197,,none,0.0,0.0,0.0,0,0,0
@@ -352,7 +352,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 350,steep,top,leaning_backward,multiple,on_buttocks,foot_slip,pads,butt-impact,4.057,61.8,1,0,0,1,0,37.982,95.3,0.0,0,tibia_distal,0.417,,none,0.0,0.0,0.0,0,0,0
 351,vertical,top,vertical,without,head_first,balance_loss,pads,head-first,4.141,103.3,1,1,0,0,1,29.255,75.8,0.0,0,tibia_distal,0.358,,none,0.0,0.0,0.0,0,0,0
 352,roof_overhang,middle,vertical,longitudinal,standing_on_feet,hands_let_go,pads,controlled-drop,2.102,85.8,1,0,0,0,0,24.288,29.5,0.0,0,tibia_distal,0.301,,stuck,-0.1745,13.3606,11.9988,1,1,1
-353,vertical,middle,vertical,without,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,2.872,77.9,0,1,0,0,1,44.478,63.3,0.0,0,tibia_distal,0.576,,none,0.0,0.0,0.0,0,0,0
+353,vertical,middle,vertical,without,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,2.872,77.9,0,1,0,0,1,48.483,68.3,0.0,0,tibia_distal,0.62,,none,0.0,0.0,0.0,0,0,0
 354,vertical,top,vertical,longitudinal,on_feet_leaning,hands_let_go,pads,one-leg-awkward,3.271,59.7,1,0,1,0,0,39.373,67.3,0.0,0,tibia_distal,0.514,,stuck,-0.3491,42.6586,38.3104,1,1,1
 355,roof_overhang,middle,vertical,longitudinal,standing_on_feet,route_finish,pads,controlled-drop,2.715,55.8,1,0,0,0,0,20.347,40.3,0.0,0,tibia_distal,0.264,,stuck,-0.3491,22.0449,19.7978,1,1,1
 356,vertical,middle,leaning_backward,without,standing_on_feet,missed_hold,pads,controlled-drop,1.702,51.4,1,1,0,1,0,13.815,30.8,0.0,0,tibia_distal,0.188,,none,0.0,0.0,0.0,0,0,0
@@ -417,7 +417,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 415,vertical,top,vertical,without,standing_on_feet,dyno,pads,feet-first-stiff,3.708,76.0,1,1,0,0,1,45.489,66.5,0.0,0,tibia_distal,0.59,,none,0.0,0.0,0.0,0,0,0
 416,steep,top,leaning_backward,multiple,on_feet_leaning,route_finish,pads,toe-point,3.957,61.8,1,0,1,1,0,34.316,55.7,0.0,0,tibia_distal,0.462,,none,0.0,0.0,0.0,0,0,0
 417,vertical,middle,vertical,longitudinal,standing_on_feet,route_finish,pads,feet-first-stiff,1.542,78.5,1,0,0,0,0,29.588,40.9,0.0,0,tibia_distal,0.378,,stuck,-0.3491,32.0573,28.7897,1,1,1
-418,vertical,middle,vertical,longitudinal,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,2.22,63.9,0,0,0,0,0,42.022,66.7,0.0,0,tibia_distal,0.497,,sliding,0.5236,44.3719,0.2944,0,1,1
+418,vertical,middle,vertical,longitudinal,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,2.22,63.9,0,0,0,0,0,45.106,71.7,0.0,0,tibia_distal,0.533,,sliding,0.5236,47.6285,0.316,0,1,1
 419,vertical,top,vertical,multiple,standing_on_feet,missed_hold,pads,feet-first-stiff,4.066,71.3,1,0,0,0,0,45.933,71.8,0.0,0,tibia_distal,0.597,,none,0.0,0.0,0.0,0,0,0
 420,corner,top,vertical,longitudinal,on_feet_leaning,dyno,pads,one-leg-awkward,3.723,68.4,1,0,1,0,0,43.052,65.8,0.0,0,tibia_distal,0.576,,stuck,0.3491,31.0965,27.9491,1,1,1
 421,vertical,middle,vertical,without,standing_on_feet,route_finish,pads,controlled-drop,2.55,56.3,1,1,0,0,1,19.617,38.6,0.0,0,tibia_distal,0.256,,none,0.0,0.0,0.0,0,0,0
@@ -459,7 +459,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 457,slab,top,vertical,longitudinal,standing_on_feet,foot_slip,pads,controlled-drop,3.186,75.8,1,0,0,0,0,30.167,39.3,0.0,0,tibia_distal,0.352,,stuck,0.3491,21.7897,19.5843,1,1,1
 458,corner,middle,vertical,front_transverse,head_first,other,pads,head-first,1.849,62.8,1,0,0,0,0,11.045,20.9,0.0,0,tibia_distal,0.155,,none,0.0,0.0,0.0,0,0,0
 459,vertical,top,vertical,longitudinal,standing_on_feet,dyno,pads,feet-first-stiff,3.946,90.3,1,0,0,0,0,49.519,62.5,0.0,0,tibia_distal,0.658,,stuck,-0.1745,27.2397,24.4631,1,1,1
-460,steep,bottom,vertical,front_transverse,standing_on_feet,missed_hold,between_pads_and_wall,feet-first-stiff,1.186,78.8,0,0,0,0,0,36.702,46.3,0.0,0,tibia_distal,0.428,,none,0.0,0.0,0.0,0,0,0
+460,steep,bottom,vertical,front_transverse,standing_on_feet,missed_hold,between_pads_and_wall,feet-first-stiff,1.186,78.8,0,0,0,0,0,40.974,51.4,0.0,0,tibia_distal,0.474,,none,0.0,0.0,0.0,0,0,0
 461,vertical,middle,leaning_backward,without,on_feet_leaning,balance_loss,pads,one-leg-awkward,2.346,59.6,1,1,1,1,0,32.512,57.2,0.0,0,tibia_distal,0.438,,none,0.0,0.0,0.0,0,0,0
 462,roof_overhang,top,vertical,without,on_feet_leaning,route_finish,pads,toe-point,3.211,66.8,1,1,1,0,0,32.263,48.0,0.0,0,tibia_distal,0.431,,none,0.0,0.0,0.0,0,0,0
 463,vertical,bottom,leaning_backward,without,on_feet_leaning,foot_slip,between_pads_and_wall,toe-point,1.136,64.9,0,1,1,1,0,21.206,34.0,0.0,0,tibia_distal,0.299,,none,0.0,0.0,0.0,0,0,0
@@ -535,7 +535,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 533,vertical,top,vertical,longitudinal,standing_on_feet,hands_let_go,pads,feet-first-stiff,3.839,93.4,1,0,0,0,0,49.625,60.6,0.0,0,tibia_distal,0.661,,stuck,0.1745,18.1985,16.3565,1,1,1
 534,steep,top,vertical,multiple,standing_on_feet,foot_slip,pads,feet-first-stiff,3.15,81.3,1,0,0,0,0,43.961,59.5,0.0,0,tibia_distal,0.565,,none,0.0,0.0,0.0,0,0,0
 535,roof_overhang,top,vertical,antero_posterior,head_first,dyno,pads,head-first,3.561,76.7,1,0,0,0,0,17.794,57.5,0.0,0,tibia_distal,0.249,,none,0.0,0.0,0.0,0,0,0
-536,vertical,middle,vertical,without,on_feet_leaning,dyno,between_2_pads,feet-first-stiff,2.797,69.8,0,1,1,0,0,43.326,67.3,0.0,0,tibia_distal,0.548,,none,0.0,0.0,0.0,0,0,0
+536,vertical,middle,vertical,without,on_feet_leaning,dyno,between_2_pads,feet-first-stiff,2.797,69.8,0,1,1,0,0,47.258,72.8,0.0,0,tibia_distal,0.592,,none,0.0,0.0,0.0,0,0,0
 537,steep,bottom,leaning_backward,front_transverse,head_first,foot_slip,pads,head-first,1.382,69.2,1,0,0,1,0,10.084,17.5,0.0,0,tibia_distal,0.14,,none,0.0,0.0,0.0,0,0,0
 538,steep,top,leaning_backward,without,on_buttocks,missed_hold,pads,butt-impact,4.215,83.6,1,1,0,1,0,51.345,89.8,0.0,0,tibia_distal,0.532,,none,0.0,0.0,0.0,0,0,0
 539,vertical,top,vertical,multiple,standing_on_feet,foot_slip,pads,feet-first-stiff,4.493,70.3,1,0,0,0,0,47.377,75.8,0.0,0,tibia_distal,0.62,,none,0.0,0.0,0.0,0,0,0
@@ -683,7 +683,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 681,vertical,middle,vertical,longitudinal,on_feet_leaning,other,pads,feet-first-stiff,2.192,61.7,1,0,1,0,0,31.494,56.1,0.0,0,tibia_distal,0.405,,stuck,-0.1745,17.3241,15.5583,1,1,1
 682,vertical,top,vertical,without,standing_on_feet,dyno,pads,controlled-drop,3.435,67.0,1,1,0,0,1,28.647,43.2,0.0,0,tibia_distal,0.34,,none,0.0,0.0,0.0,0,0,0
 683,steep,top,vertical,back_transverse,on_feet_leaning,dyno,pads,toe-point,4.474,60.4,1,0,1,0,0,35.995,60.2,0.0,0,tibia_distal,0.487,,none,0.0,0.0,0.0,0,0,0
-684,steep,middle,leaning_backward,longitudinal,standing_on_feet,balance_loss,between_2_pads,feet-first-stiff,2.102,50.4,0,0,0,1,0,38.624,77.5,0.0,0,tibia_distal,0.455,,stuck,0.1745,14.1643,12.7307,1,1,1
+684,steep,middle,leaning_backward,longitudinal,standing_on_feet,balance_loss,between_2_pads,feet-first-stiff,2.102,50.4,0,0,0,1,0,42.934,82.7,0.0,0,tibia_distal,0.485,,stuck,0.1745,15.7447,14.1511,1,1,1
 685,steep,middle,vertical,antero_posterior,on_feet_leaning,route_finish,pads,toe-point,2.831,58.5,1,0,1,0,0,28.083,48.6,0.0,0,tibia_distal,0.382,,none,0.0,0.0,0.0,0,0,0
 686,steep,bottom,vertical,antero_posterior,standing_on_feet,missed_hold,pads,controlled-drop,1.109,70.7,1,0,0,0,0,13.317,21.2,0.0,0,tibia_distal,0.181,,none,0.0,0.0,0.0,0,0,0
 687,vertical,top,vertical,without,on_feet_leaning,foot_slip,pads,toe-point,4.137,92.2,1,1,1,0,0,43.225,48.0,0.0,0,tibia_distal,0.595,,none,0.0,0.0,0.0,0,0,0
@@ -734,7 +734,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 732,steep,bottom,leaning_backward,longitudinal,on_feet_leaning,foot_slip,pads,feet-first-stiff,1.133,68.1,1,0,1,1,0,21.263,32.8,0.0,0,tibia_distal,0.264,,stuck,0.1745,7.7977,7.0085,1,1,1
 733,steep,top,vertical,longitudinal,standing_on_feet,missed_hold,pads,controlled-drop,3.907,62.0,1,0,0,0,0,29.575,48.0,0.0,0,tibia_distal,0.349,,stuck,0.1745,10.8459,9.7481,1,1,1
 734,roof_overhang,top,leaning_backward,longitudinal,on_feet_leaning,foot_slip,pads,one-leg-awkward,3.251,84.9,1,0,1,1,0,44.055,54.8,0.0,0,tibia_distal,0.597,,sliding,-0.5236,69.7792,0.4129,0,1,1
-735,vertical,middle,leaning_forward,back_transverse,on_feet_leaning,dyno,between_pads_and_wall,feet-first-stiff,1.846,60.1,0,0,1,0,0,39.984,66.9,0.0,0,tibia_distal,0.469,,none,0.0,0.0,0.0,0,0,0
+735,vertical,middle,leaning_forward,back_transverse,on_feet_leaning,dyno,between_pads_and_wall,feet-first-stiff,1.846,60.1,0,0,1,0,0,43.468,70.3,0.0,0,tibia_distal,0.493,,none,0.0,0.0,0.0,0,0,0
 736,vertical,top,vertical,longitudinal,on_feet_leaning,missed_hold,pads,feet-first-stiff,3.4,55.6,1,0,1,0,0,38.655,75.5,0.0,0,tibia_distal,0.488,,sliding,0.5236,40.8168,0.2708,0,1,1
 737,steep,middle,vertical,antero_posterior,standing_on_feet,hands_let_go,pads,feet-first-stiff,1.706,78.0,1,0,0,0,0,31.579,44.2,0.0,0,tibia_distal,0.405,,none,0.0,0.0,0.0,0,0,0
 738,vertical,middle,vertical,without,standing_on_feet,dyno,pads,feet-first-stiff,2.1,91.4,1,1,0,0,1,39.43,46.3,0.0,0,tibia_distal,0.497,,none,0.0,0.0,0.0,0,0,0
@@ -860,7 +860,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 858,roof_overhang,middle,leaning_backward,without,standing_on_feet,missed_hold,pads,feet-first-stiff,1.713,66.3,1,1,0,1,0,27.986,45.8,0.0,0,tibia_distal,0.356,,none,0.0,0.0,0.0,0,0,0
 859,vertical,top,vertical,without,standing_on_feet,foot_slip,pads,feet-first-stiff,4.5,98.2,1,1,0,0,1,53.508,63.2,0.0,0,tibia_distal,0.725,,none,0.0,0.0,0.0,0,0,0
 860,vertical,middle,vertical,without,on_feet_leaning,missed_hold,pads,toe-point,2.721,73.7,1,1,1,0,0,31.355,42.0,0.0,0,tibia_distal,0.417,,none,0.0,0.0,0.0,0,0,0
-861,steep,middle,vertical,without,standing_on_feet,missed_hold,between_2_pads,feet-first-stiff,1.764,72.8,0,1,0,0,1,41.869,57.2,0.0,0,tibia_distal,0.487,,none,0.0,0.0,0.0,0,0,0
+861,steep,middle,vertical,without,standing_on_feet,missed_hold,between_2_pads,feet-first-stiff,1.764,72.8,0,1,0,0,1,44.559,60.8,0.0,0,tibia_distal,0.517,,none,0.0,0.0,0.0,0,0,0
 862,vertical,bottom,vertical,back_transverse,back_or_front_to_pad,missed_hold,pads,flat-flop,1.109,67.7,1,0,0,0,0,23.308,44.8,0.0,0,calcaneus,0.086,,none,0.0,0.0,0.0,0,0,0
 863,vertical,top,leaning_backward,longitudinal,on_feet_leaning,hands_let_go,pads,one-leg-awkward,3.115,82.1,1,0,1,1,0,43.187,55.0,0.0,0,tibia_distal,0.579,,sliding,0.5236,45.6022,0.3025,0,1,1
 864,steep,bottom,vertical,longitudinal,head_first,dyno,pads,head-first,0.998,91.7,1,0,0,0,0,10.235,13.3,0.0,0,tibia_distal,0.142,,stuck,-0.1745,5.6301,5.0562,1,1,1
@@ -902,7 +902,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 900,vertical,top,leaning_forward,without,on_feet_leaning,foot_slip,pads,one-leg-awkward,3.917,63.1,1,1,1,0,0,42.654,70.5,0.0,0,tibia_distal,0.568,,none,0.0,0.0,0.0,0,0,0
 901,corner,bottom,leaning_backward,back_transverse,standing_on_feet,downclimbing_trouble,pads,feet-first-stiff,1.265,67.2,1,0,0,1,0,22.781,35.9,0.0,0,tibia_distal,0.285,,none,0.0,0.0,0.0,0,0,0
 902,vertical,middle,leaning_forward,longitudinal,on_feet_leaning,missed_hold,pads,feet-first-stiff,2.622,66.8,1,0,1,0,0,37.526,61.3,0.0,0,tibia_distal,0.479,,stuck,-0.1745,20.6424,18.5383,1,1,1
-903,roof_overhang,middle,leaning_forward,longitudinal,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,1.952,60.9,0,0,0,0,0,41.17,67.6,0.0,0,tibia_distal,0.48,,sliding,-0.5236,65.2096,0.3859,0,1,1
+903,roof_overhang,middle,leaning_forward,longitudinal,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,1.952,60.9,0,0,0,0,0,43.98,71.0,0.0,0,tibia_distal,0.504,,sliding,-0.5236,69.6606,0.4122,0,1,1
 904,vertical,top,vertical,without,head_first,dyno,pads,head-first,4.289,70.2,1,1,0,0,1,18.593,71.0,0.0,0,tibia_distal,0.26,,none,0.0,0.0,0.0,0,0,0
 905,steep,top,vertical,without,on_feet_leaning,hands_let_go,pads,one-leg-awkward,3.988,77.9,1,1,1,0,0,45.364,62.4,0.0,0,tibia_distal,0.623,,none,0.0,0.0,0.0,0,0,0
 906,steep,middle,leaning_backward,without,head_first,other,pads,head-first,2.229,58.4,1,1,0,1,0,11.648,25.3,0.0,0,tibia_distal,0.164,,none,0.0,0.0,0.0,0,0,0
@@ -972,7 +972,7 @@ i,wall_type,height_band,start_position,rotation,landing_position,cause,landing_s
 970,slab,bottom,leaning_backward,without,back_or_front_to_pad,missed_hold,pads,flat-flop,0.983,66.6,1,1,0,1,0,21.383,42.2,0.0,0,calcaneus,0.079,,none,0.0,0.0,0.0,0,0,0
 971,vertical,top,vertical,longitudinal,on_feet_leaning,dyno,pads,toe-point,4.096,72.1,1,0,1,0,0,37.917,53.2,0.0,0,tibia_distal,0.515,,sliding,0.5236,40.0382,0.2656,0,1,1
 972,vertical,middle,leaning_forward,longitudinal,head_first,balance_loss,pads,head-first,2.024,66.5,1,0,0,0,0,11.969,23.5,0.0,0,tibia_distal,0.169,,sliding,-0.5236,18.9585,0.1122,0,1,1
-973,roof_overhang,top,vertical,antero_posterior,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,3.719,61.3,0,0,0,0,0,44.3,81.1,0.0,0,tibia_distal,0.578,,none,0.0,0.0,0.0,0,0,0
+973,roof_overhang,top,vertical,antero_posterior,standing_on_feet,foot_slip,between_pads_and_wall,feet-first-stiff,3.719,61.3,0,0,0,0,0,48.8,87.5,0.0,0,tibia_distal,0.623,,none,0.0,0.0,0.0,0,0,0
 974,vertical,top,vertical,without,standing_on_feet,route_finish,pads,feet-first-stiff,3.82,67.9,1,1,0,0,1,44.074,71.5,0.0,0,tibia_distal,0.566,,none,0.0,0.0,0.0,0,0,0
 975,steep,top,vertical,without,standing_on_feet,missed_hold,pads,controlled-drop,3.381,67.1,1,1,0,0,1,28.32,42.8,0.0,0,tibia_distal,0.338,,none,0.0,0.0,0.0,0,0,0
 976,roof_overhang,middle,vertical,without,head_first,dyno,pads,head-first,2.682,63.1,1,1,0,0,1,13.455,35.5,0.0,0,tibia_distal,0.19,,none,0.0,0.0,0.0,0,0,0

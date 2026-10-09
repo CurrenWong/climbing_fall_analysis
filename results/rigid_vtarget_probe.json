@@ -1,0 +1,543 @@
+{
+  "V3_V8": {
+    "rows": [
+      {
+        "surface": "rigid",
+        "h_m": 1.0,
+        "window_ms": 34.6,
+        "tF_ms": 16.8,
+        "t_torso_ms": 20.0,
+        "tpeak_ms_k200": 22.8,
+        "tpeak_ms_k1000": 13.8,
+        "tpeak_ms_k2500": 11.4
+      },
+      {
+        "surface": "rigid",
+        "h_m": 2.0,
+        "window_ms": 35.0,
+        "tF_ms": 14.2,
+        "t_torso_ms": 18.8,
+        "tpeak_ms_k200": 22.2,
+        "tpeak_ms_k1000": 13.2,
+        "tpeak_ms_k2500": 10.8,
+        "t_moment_ms": 14.2
+      },
+      {
+        "surface": "rigid",
+        "h_m": 3.0,
+        "window_ms": 36.6,
+        "tF_ms": 12.0,
+        "t_torso_ms": 17.8,
+        "tpeak_ms_k200": 22.2,
+        "tpeak_ms_k1000": 12.8,
+        "tpeak_ms_k2500": 10.2,
+        "t_moment_ms": 12.0
+      },
+      {
+        "surface": "rigid",
+        "h_m": 5.0,
+        "window_ms": 41.0,
+        "tF_ms": 24.8,
+        "t_torso_ms": 16.4,
+        "tpeak_ms_k200": 21.8,
+        "tpeak_ms_k1000": 12.4,
+        "tpeak_ms_k2500": 9.4,
+        "t_moment_ms": 24.8
+      },
+      {
+        "surface": "rigid",
+        "h_m": 8.0,
+        "window_ms": 44.2,
+        "tF_ms": 23.6,
+        "t_torso_ms": 15.6,
+        "tpeak_ms_k200": 21.8,
+        "tpeak_ms_k1000": 12.4,
+        "tpeak_ms_k2500": 9.0
+      },
+      {
+        "surface": "rigid",
+        "h_m": 10.0,
+        "window_ms": 44.2,
+        "tF_ms": 23.0,
+        "t_torso_ms": 15.2,
+        "tpeak_ms_k200": 21.8,
+        "tpeak_ms_k1000": 12.4,
+        "tpeak_ms_k2500": 9.0,
+        "t_moment_ms": 23.0
+      },
+      {
+        "surface": "rigid",
+        "h_m": 20.0,
+        "window_ms": 43.2,
+        "tF_ms": 21.4,
+        "t_torso_ms": 14.0,
+        "tpeak_ms_k200": 21.4,
+        "tpeak_ms_k1000": 12.4,
+        "tpeak_ms_k2500": 8.6,
+        "t_moment_ms": 21.4
+      },
+      {
+        "surface": "pad",
+        "h_m": 2.0,
+        "window_ms": 66.6,
+        "tF_ms": 34.2,
+        "t_torso_ms": 32.0,
+        "tpeak_ms_k200": 37.0,
+        "tpeak_ms_k1000": 31.4,
+        "tpeak_ms_k2500": 31.4,
+        "t_moment_ms": 34.2,
+        "paper_4_5_ms": 37.0
+      },
+      {
+        "surface": "pad",
+        "h_m": 3.0,
+        "window_ms": 63.4,
+        "tF_ms": 27.6,
+        "t_torso_ms": 32.0,
+        "tpeak_ms_k200": 33.8,
+        "tpeak_ms_k1000": 27.2,
+        "tpeak_ms_k2500": 25.6,
+        "t_moment_ms": 27.6,
+        "paper_4_5_ms": 33.8
+      },
+      {
+        "surface": "pad",
+        "h_m": 5.0,
+        "window_ms": 59.0,
+        "tF_ms": 21.4,
+        "t_torso_ms": 28.2,
+        "tpeak_ms_k200": 31.2,
+        "tpeak_ms_k1000": 22.6,
+        "tpeak_ms_k2500": 20.4,
+        "t_moment_ms": 21.4,
+        "paper_4_5_ms": 31.2
+      },
+      {
+        "surface": "pad",
+        "h_m": 10.0,
+        "window_ms": 60.4,
+        "tF_ms": 31.6,
+        "t_torso_ms": 23.6,
+        "tpeak_ms_k200": 28.8,
+        "tpeak_ms_k1000": 19.4,
+        "tpeak_ms_k2500": 16.6,
+        "t_moment_ms": 31.6,
+        "paper_4_5_ms": 28.8
+      },
+      {
+        "surface": "pad",
+        "h_m": 20.0,
+        "window_ms": 56.2,
+        "tF_ms": 25.6,
+        "t_torso_ms": 29.4,
+        "tpeak_ms_k200": 26.6,
+        "tpeak_ms_k1000": 17.8,
+        "tpeak_ms_k2500": 14.6,
+        "t_moment_ms": 25.6,
+        "paper_4_5_ms": 26.6
+      }
+    ],
+    "verdict": {
+      "rigid": {
+        "V3_calib_k": 2500,
+        "V3_pass_by_h": {
+          "1": true,
+          "2": true,
+          "3": true,
+          "5": true,
+          "8": true
+        },
+        "V3_pass_by_h_all_k": {
+          "k200": {
+            "1": false,
+            "2": false,
+            "3": false,
+            "5": false,
+            "8": false
+          },
+          "k1000": {
+            "1": false,
+            "2": false,
+            "3": false,
+            "5": true,
+            "8": true
+          },
+          "k2500": {
+            "1": true,
+            "2": true,
+            "3": true,
+            "5": true,
+            "8": true
+          }
+        },
+        "V3_pass": true,
+        "V8a_monotone_tibia_proxy": true,
+        "V8a_monotone_moment_ligament": false,
+        "V8a_monotone_head_legacy": {
+          "k200": true,
+          "k1000": true,
+          "k2500": true
+        },
+        "V8b_ttorso_at_20m_ms": 14.0,
+        "V8b_pass": false,
+        "V8b_tmoment_at_20m_ms": 21.4,
+        "V8_head_legacy_at20_ms": {
+          "k200": 21.4,
+          "k1000": 12.4,
+          "k2500": 8.6
+        },
+        "V8_head_legacy_pass": {
+          "k200": false,
+          "k1000": false,
+          "k2500": false
+        }
+      },
+      "pad": {
+        "V3_calib_k": 200,
+        "V3_pass_by_h": {
+          "2": false,
+          "3": false,
+          "5": false
+        },
+        "V3_pass_by_h_all_k": {
+          "k200": {
+            "2": false,
+            "3": false,
+            "5": false
+          },
+          "k1000": {
+            "2": false,
+            "3": false,
+            "5": false
+          },
+          "k2500": {
+            "2": false,
+            "3": false,
+            "5": false
+          }
+        },
+        "V3_pass": false,
+        "V8a_monotone_tibia_proxy": false,
+        "V8a_monotone_moment_ligament": false,
+        "V8a_monotone_head_legacy": {
+          "k200": true,
+          "k1000": true,
+          "k2500": true
+        },
+        "V8b_ttorso_at_20m_ms": 29.4,
+        "V8b_pass": false,
+        "V8b_tmoment_at_20m_ms": 25.6,
+        "V8_head_legacy_at20_ms": {
+          "k200": 26.6,
+          "k1000": 17.8,
+          "k2500": 14.6
+        },
+        "V8_head_legacy_pass": {
+          "k200": false,
+          "k1000": false,
+          "k2500": false
+        }
+      }
+    },
+    "thresholds_s": {
+      "V3": 0.0125,
+      "V8_at20": 0.005
+    }
+  },
+  "meta": {
+    "head_posture": "feet-first-stiff",
+    "head_mass_kg": 80.0,
+    "ankle_posture": "controlled-drop",
+    "ankle_mass_kg": 80.0,
+    "k_necks": [
+      200.0,
+      1000.0,
+      2500.0
+    ],
+    "calib_k": {
+      "rigid": 2500.0,
+      "pad": 200.0
+    },
+    "solver_pad": {
+      "max_ode_step": 0.0001,
+      "rtol": 1e-08,
+      "atol": 1e-11
+    },
+    "solver_rigid": {
+      "max_ode_step": 0.0005,
+      "rtol": 1e-06,
+      "atol": 1e-09
+    },
+    "v8_observable_primary": "t_torso_ms (f_flex 峰 = 胫骨轴向载荷; T22 Table3 第一列同源)",
+    "v8_observable_secondary": "t_moment_ms (踝内翻力矩 = 韧带序列; T22 Table3 第二列)",
+    "rigid_chain_default": "kf_mult=2.0 x_max=0.015 k_stop=None (iso2+soft, L2 标定)",
+    "note": "V3/V8 口径=feet-first-stiff（论文§4.5 复核）；V6/V9 口径=controlled-drop（镜像 test_pad2d._ankle_run）；垫格紧容差逐位、刚格放松容差（等价验证 <0.004%）；峰时一律限冲击窗内（head_branch 窗口守卫）"
+  },
+  "V6": {
+    "expect": {
+      "5.0/10.0": true,
+      "5.0/20.0": true,
+      "5.0/30.0": false,
+      "10.0/10.0": true,
+      "10.0/20.0": true,
+      "10.0/30.0": true,
+      "20.0/10.0": true,
+      "20.0/20.0": true,
+      "20.0/30.0": true
+    },
+    "runs": {
+      "pad": {
+        "cells": {
+          "5.0/10.0": {
+            "surface": "pad",
+            "h_m": 5.0,
+            "beta_deg": 10.0,
+            "fracture": true,
+            "expect": true,
+            "util": 31.216,
+            "mode": "stuck"
+          },
+          "5.0/20.0": {
+            "surface": "pad",
+            "h_m": 5.0,
+            "beta_deg": 20.0,
+            "fracture": true,
+            "expect": true,
+            "util": 61.4835,
+            "mode": "stuck"
+          },
+          "5.0/30.0": {
+            "surface": "pad",
+            "h_m": 5.0,
+            "beta_deg": 30.0,
+            "fracture": false,
+            "expect": false,
+            "util": 0.6635,
+            "mode": "sliding"
+          },
+          "10.0/10.0": {
+            "surface": "pad",
+            "h_m": 10.0,
+            "beta_deg": 10.0,
+            "fracture": true,
+            "expect": true,
+            "util": 70.7399,
+            "mode": "stuck"
+          },
+          "10.0/20.0": {
+            "surface": "pad",
+            "h_m": 10.0,
+            "beta_deg": 20.0,
+            "fracture": true,
+            "expect": true,
+            "util": 139.3303,
+            "mode": "stuck"
+          },
+          "10.0/30.0": {
+            "surface": "pad",
+            "h_m": 10.0,
+            "beta_deg": 30.0,
+            "fracture": true,
+            "expect": true,
+            "util": 1.5035,
+            "mode": "sliding"
+          },
+          "20.0/10.0": {
+            "surface": "pad",
+            "h_m": 20.0,
+            "beta_deg": 10.0,
+            "fracture": true,
+            "expect": true,
+            "util": 132.7622,
+            "mode": "stuck"
+          },
+          "20.0/20.0": {
+            "surface": "pad",
+            "h_m": 20.0,
+            "beta_deg": 20.0,
+            "fracture": true,
+            "expect": true,
+            "util": 261.4906,
+            "mode": "stuck"
+          },
+          "20.0/30.0": {
+            "surface": "pad",
+            "h_m": 20.0,
+            "beta_deg": 30.0,
+            "fracture": true,
+            "expect": true,
+            "util": 2.8217,
+            "mode": "sliding"
+          }
+        },
+        "hits": 9,
+        "total": 9,
+        "transition_flips": 4,
+        "structure_pass": true
+      },
+      "rigid": {
+        "cells": {
+          "5.0/10.0": {
+            "surface": "rigid",
+            "h_m": 5.0,
+            "beta_deg": 10.0,
+            "fracture": true,
+            "expect": true,
+            "util": 35.0976,
+            "mode": "stuck"
+          },
+          "5.0/20.0": {
+            "surface": "rigid",
+            "h_m": 5.0,
+            "beta_deg": 20.0,
+            "fracture": true,
+            "expect": true,
+            "util": 69.1289,
+            "mode": "stuck"
+          },
+          "5.0/30.0": {
+            "surface": "rigid",
+            "h_m": 5.0,
+            "beta_deg": 30.0,
+            "fracture": false,
+            "expect": false,
+            "util": 0.746,
+            "mode": "sliding"
+          },
+          "10.0/10.0": {
+            "surface": "rigid",
+            "h_m": 10.0,
+            "beta_deg": 10.0,
+            "fracture": true,
+            "expect": true,
+            "util": 51.6363,
+            "mode": "stuck"
+          },
+          "10.0/20.0": {
+            "surface": "rigid",
+            "h_m": 10.0,
+            "beta_deg": 20.0,
+            "fracture": true,
+            "expect": true,
+            "util": 101.7037,
+            "mode": "stuck"
+          },
+          "10.0/30.0": {
+            "surface": "rigid",
+            "h_m": 10.0,
+            "beta_deg": 30.0,
+            "fracture": true,
+            "expect": true,
+            "util": 1.0975,
+            "mode": "sliding"
+          },
+          "20.0/10.0": {
+            "surface": "rigid",
+            "h_m": 20.0,
+            "beta_deg": 10.0,
+            "fracture": true,
+            "expect": true,
+            "util": 76.6301,
+            "mode": "stuck"
+          },
+          "20.0/20.0": {
+            "surface": "rigid",
+            "h_m": 20.0,
+            "beta_deg": 20.0,
+            "fracture": true,
+            "expect": true,
+            "util": 150.9318,
+            "mode": "stuck"
+          },
+          "20.0/30.0": {
+            "surface": "rigid",
+            "h_m": 20.0,
+            "beta_deg": 30.0,
+            "fracture": true,
+            "expect": true,
+            "util": 1.6287,
+            "mode": "sliding"
+          }
+        },
+        "hits": 9,
+        "total": 9,
+        "transition_flips": 4,
+        "structure_pass": true
+      }
+    }
+  },
+  "V9": {
+    "runs": {
+      "pad": {
+        "rows": [
+          {
+            "surface": "pad",
+            "h_m": 2.0,
+            "inv_strain": 33.343075149151225,
+            "ev_strain": 50.014612723726835,
+            "inv_util": 29.9683,
+            "ev_util": 44.9166,
+            "strain_ok": true,
+            "util_ok": true
+          },
+          {
+            "surface": "pad",
+            "h_m": 3.0,
+            "inv_strain": 45.70297621248999,
+            "ev_strain": 68.55446431873497,
+            "inv_util": 41.0772,
+            "ev_util": 61.5667,
+            "strain_ok": true,
+            "util_ok": true
+          },
+          {
+            "surface": "pad",
+            "h_m": 5.0,
+            "inv_strain": 68.4072188643669,
+            "ev_strain": 102.61082829655034,
+            "inv_util": 61.4835,
+            "ev_util": 92.1516,
+            "strain_ok": true,
+            "util_ok": true
+          }
+        ],
+        "pass": true
+      },
+      "rigid": {
+        "rows": [
+          {
+            "surface": "rigid",
+            "h_m": 2.0,
+            "inv_strain": 51.06808442735212,
+            "ev_strain": 76.60212664102816,
+            "inv_util": 45.8993,
+            "ev_util": 68.794,
+            "strain_ok": true,
+            "util_ok": true
+          },
+          {
+            "surface": "rigid",
+            "h_m": 3.0,
+            "inv_strain": 58.21769807424677,
+            "ev_strain": 87.32654711137016,
+            "inv_util": 52.3253,
+            "ev_util": 78.4253,
+            "strain_ok": true,
+            "util_ok": true
+          },
+          {
+            "surface": "rigid",
+            "h_m": 5.0,
+            "inv_strain": 76.91357645338442,
+            "ev_strain": 115.37036468007663,
+            "inv_util": 69.1289,
+            "ev_util": 103.6106,
+            "strain_ok": true,
+            "util_ok": true
+          }
+        ],
+        "pass": true
+      }
+    }
+  }
+}

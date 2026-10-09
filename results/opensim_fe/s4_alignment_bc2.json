@@ -1,0 +1,1273 @@
+{
+  "generated_at": "2026-10-09 17:41:42",
+  "official_route": "乙 = fracture_matrix_bc2.json (align_pca=True, median)",
+  "criteria_source": "docs/methods/OpenSim_FE复现方案.md §六",
+  "A1": {
+    "targets_m": [
+      7.0,
+      16.0
+    ],
+    "tol_m": 2.0,
+    "ours_boundaries_m": [
+      5.0,
+      12.0
+    ],
+    "abs_delta": [
+      2.0,
+      4.0
+    ],
+    "verdict": "FAIL",
+    "phases": [
+      {
+        "phase": 1,
+        "label": "轴向传导",
+        "range_m": [
+          1,
+          5
+        ],
+        "heights": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fractured_regions": [
+          "胫骨",
+          "腓骨",
+          "股骨",
+          "胸椎"
+        ],
+        "clusters": [
+          3,
+          4
+        ]
+      },
+      {
+        "phase": 2,
+        "label": "全身复合",
+        "range_m": [
+          6,
+          12
+        ],
+        "heights": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "fractured_regions": [
+          "胫骨",
+          "腓骨",
+          "股骨",
+          "腰椎",
+          "胸椎",
+          "颈椎",
+          "颅骨"
+        ],
+        "clusters": [
+          5,
+          1
+        ]
+      },
+      {
+        "phase": 3,
+        "label": "全身复合",
+        "range_m": [
+          13,
+          50
+        ],
+        "heights": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50
+        ],
+        "fractured_regions": [
+          "足部",
+          "胫骨",
+          "腓骨",
+          "股骨",
+          "腰椎",
+          "胸椎",
+          "颈椎",
+          "颅骨"
+        ],
+        "clusters": [
+          2
+        ]
+      }
+    ]
+  },
+  "A2": {
+    "targets": [
+      [
+        "足部"
+      ],
+      [
+        "胫骨"
+      ],
+      [
+        "股骨"
+      ],
+      [
+        "腰椎",
+        "胸椎"
+      ],
+      [
+        "颈椎"
+      ]
+    ],
+    "hits": [
+      true,
+      true,
+      false,
+      false,
+      true
+    ],
+    "n_hit": 3,
+    "n_target": 5,
+    "n_hit_loose": 4,
+    "per_target": {
+      "足部": {
+        "parts": [
+          "足部"
+        ],
+        "behavior": [
+          "阶跃"
+        ],
+        "hit_strict": true,
+        "hit_loose": true
+      },
+      "胫骨": {
+        "parts": [
+          "胫骨"
+        ],
+        "behavior": [
+          "阶跃"
+        ],
+        "hit_strict": true,
+        "hit_loose": true
+      },
+      "股骨": {
+        "parts": [
+          "股骨"
+        ],
+        "behavior": [
+          "常值1"
+        ],
+        "hit_strict": false,
+        "hit_loose": false
+      },
+      "腰椎+胸椎": {
+        "parts": [
+          "腰椎",
+          "胸椎"
+        ],
+        "behavior": [
+          "阶跃",
+          "常值1"
+        ],
+        "hit_strict": false,
+        "hit_loose": true
+      },
+      "颈椎": {
+        "parts": [
+          "颈椎"
+        ],
+        "behavior": [
+          "阶跃"
+        ],
+        "hit_strict": true,
+        "hit_loose": true
+      }
+    },
+    "verdict": "FAIL"
+  },
+  "A3": {
+    "targets": {
+      "腓骨": 1.682,
+      "骨盆": 1.236,
+      "颅骨": 1.576
+    },
+    "per_part": {
+      "腓骨": {
+        "target": 1.682,
+        "ours": null,
+        "status": "all_one",
+        "within": false
+      },
+      "骨盆": {
+        "target": 1.236,
+        "ours": null,
+        "status": "all_zero",
+        "within": false
+      },
+      "颅骨": {
+        "target": 1.576,
+        "ours": null,
+        "status": "complete_separation",
+        "within": false
+      }
+    },
+    "n_within": 0,
+    "n_target": 3,
+    "verdict": "FAIL"
+  },
+  "A4": {
+    "method": "cov(per-part sigma(h)) -> eigh -> top-2 PC loadings; linear separability via LP (scipy.linprog highs)",
+    "explained_var": [
+      280518.2796103069,
+      67.93106730004506
+    ],
+    "explained_var_ratio": [
+      0.9997534072451838,
+      0.00024210299623029133
+    ],
+    "part_positions": {
+      "足部": [
+        0.16877211838699002,
+        0.3009176942169096
+      ],
+      "胫骨": [
+        0.040057788759752744,
+        0.07315525745072651
+      ],
+      "腓骨": [
+        0.4481981571545058,
+        0.818518759788803
+      ],
+      "股骨": [
+        0.025530782487250072,
+        0.0062091777874402065
+      ],
+      "骨盆": [
+        0.07670613337560517,
+        0.018655206504295203
+      ],
+      "腰椎": [
+        0.23695166344460036,
+        -0.13119145402598703
+      ],
+      "胸椎": [
+        0.7630099065741143,
+        -0.4224506282193009
+      ],
+      "颈椎": [
+        0.23565532229455724,
+        -0.1304737174297339
+      ],
+      "颅骨": [
+        0.26197417147717134,
+        -0.14504549988715137
+      ]
+    },
+    "group1": [
+      "胫骨",
+      "股骨",
+      "腰椎",
+      "胸椎",
+      "颈椎"
+    ],
+    "group2": [
+      "腓骨",
+      "骨盆",
+      "颅骨"
+    ],
+    "unlabeled": [
+      "足部"
+    ],
+    "separable": false,
+    "verdict": "FAIL",
+    "lp_message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is Infeasible)"
+  },
+  "A1_jia": {
+    "targets_m": [
+      7.0,
+      16.0
+    ],
+    "tol_m": 2.0,
+    "ours_boundaries_m": [
+      5.0,
+      17.0
+    ],
+    "abs_delta": [
+      2.0,
+      1.0
+    ],
+    "verdict": "FAIL",
+    "phases": [
+      {
+        "phase": 1,
+        "label": "局部耗散(仅下肢)",
+        "range_m": [
+          1,
+          5
+        ],
+        "heights": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "fractured_regions": [
+          "足部",
+          "胫骨",
+          "腓骨",
+          "股骨"
+        ],
+        "clusters": [
+          1
+        ]
+      },
+      {
+        "phase": 2,
+        "label": "轴向传导",
+        "range_m": [
+          6,
+          17
+        ],
+        "heights": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "fractured_regions": [
+          "足部",
+          "胫骨",
+          "腓骨",
+          "股骨",
+          "腰椎"
+        ],
+        "clusters": [
+          2
+        ]
+      },
+      {
+        "phase": 3,
+        "label": "轴向传导",
+        "range_m": [
+          18,
+          50
+        ],
+        "heights": [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50
+        ],
+        "fractured_regions": [
+          "足部",
+          "胫骨",
+          "腓骨",
+          "股骨",
+          "腰椎",
+          "胸椎"
+        ],
+        "clusters": [
+          3
+        ]
+      }
+    ]
+  },
+  "A2_jia": {
+    "targets": [
+      [
+        "足部"
+      ],
+      [
+        "胫骨"
+      ],
+      [
+        "股骨"
+      ],
+      [
+        "腰椎",
+        "胸椎"
+      ],
+      [
+        "颈椎"
+      ]
+    ],
+    "hits": [
+      false,
+      false,
+      false,
+      true,
+      false
+    ],
+    "n_hit": 1,
+    "n_target": 5,
+    "n_hit_loose": 1,
+    "per_target": {
+      "足部": {
+        "parts": [
+          "足部"
+        ],
+        "behavior": [
+          "常值1"
+        ],
+        "hit_strict": false,
+        "hit_loose": false
+      },
+      "胫骨": {
+        "parts": [
+          "胫骨"
+        ],
+        "behavior": [
+          "常值1"
+        ],
+        "hit_strict": false,
+        "hit_loose": false
+      },
+      "股骨": {
+        "parts": [
+          "股骨"
+        ],
+        "behavior": [
+          "常值1"
+        ],
+        "hit_strict": false,
+        "hit_loose": false
+      },
+      "腰椎+胸椎": {
+        "parts": [
+          "腰椎",
+          "胸椎"
+        ],
+        "behavior": [
+          "阶跃",
+          "阶跃"
+        ],
+        "hit_strict": true,
+        "hit_loose": true
+      },
+      "颈椎": {
+        "parts": [
+          "颈椎"
+        ],
+        "behavior": [
+          "常值0"
+        ],
+        "hit_strict": false,
+        "hit_loose": false
+      }
+    },
+    "verdict": "FAIL"
+  },
+  "A3_jia": {
+    "targets": {
+      "腓骨": 1.682,
+      "骨盆": 1.236,
+      "颅骨": 1.576
+    },
+    "per_part": {
+      "腓骨": {
+        "target": 1.682,
+        "ours": null,
+        "status": "all_one",
+        "within": false
+      },
+      "骨盆": {
+        "target": 1.236,
+        "ours": null,
+        "status": "all_zero",
+        "within": false
+      },
+      "颅骨": {
+        "target": 1.576,
+        "ours": null,
+        "status": "all_zero",
+        "within": false
+      }
+    },
+    "n_within": 0,
+    "n_target": 3,
+    "verdict": "FAIL"
+  },
+  "A1_p95": {
+    "targets_m": [
+      7.0,
+      16.0
+    ],
+    "tol_m": 2.0,
+    "ours_boundaries_m": [
+      1.0,
+      7.0
+    ],
+    "abs_delta": [
+      6.0,
+      9.0
+    ],
+    "verdict": "FAIL",
+    "phases": [
+      {
+        "phase": 1,
+        "label": "全身复合",
+        "range_m": [
+          1,
+          1
+        ],
+        "heights": [
+          1
+        ],
+        "fractured_regions": [
+          "胫骨",
+          "腓骨",
+          "股骨",
+          "腰椎",
+          "胸椎",
+          "颈椎",
+          "颅骨"
+        ],
+        "clusters": [
+          3
+        ]
+      },
+      {
+        "phase": 2,
+        "label": "全身复合",
+        "range_m": [
+          2,
+          7
+        ],
+        "heights": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "fractured_regions": [
+          "足部",
+          "胫骨",
+          "腓骨",
+          "股骨",
+          "腰椎",
+          "胸椎",
+          "颈椎",
+          "颅骨"
+        ],
+        "clusters": [
+          1
+        ]
+      },
+      {
+        "phase": 3,
+        "label": "全身复合",
+        "range_m": [
+          8,
+          50
+        ],
+        "heights": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50
+        ],
+        "fractured_regions": [
+          "足部",
+          "胫骨",
+          "腓骨",
+          "股骨",
+          "骨盆",
+          "腰椎",
+          "胸椎",
+          "颈椎",
+          "颅骨"
+        ],
+        "clusters": [
+          2
+        ]
+      }
+    ]
+  },
+  "A2_p95": {
+    "targets": [
+      [
+        "足部"
+      ],
+      [
+        "胫骨"
+      ],
+      [
+        "股骨"
+      ],
+      [
+        "腰椎",
+        "胸椎"
+      ],
+      [
+        "颈椎"
+      ]
+    ],
+    "hits": [
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    "n_hit": 1,
+    "n_target": 5,
+    "n_hit_loose": 1,
+    "per_target": {
+      "足部": {
+        "parts": [
+          "足部"
+        ],
+        "behavior": [
+          "阶跃"
+        ],
+        "hit_strict": true,
+        "hit_loose": true
+      },
+      "胫骨": {
+        "parts": [
+          "胫骨"
+        ],
+        "behavior": [
+          "常值1"
+        ],
+        "hit_strict": false,
+        "hit_loose": false
+      },
+      "股骨": {
+        "parts": [
+          "股骨"
+        ],
+        "behavior": [
+          "常值1"
+        ],
+        "hit_strict": false,
+        "hit_loose": false
+      },
+      "腰椎+胸椎": {
+        "parts": [
+          "腰椎",
+          "胸椎"
+        ],
+        "behavior": [
+          "常值1",
+          "常值1"
+        ],
+        "hit_strict": false,
+        "hit_loose": false
+      },
+      "颈椎": {
+        "parts": [
+          "颈椎"
+        ],
+        "behavior": [
+          "常值1"
+        ],
+        "hit_strict": false,
+        "hit_loose": false
+      }
+    },
+    "verdict": "FAIL"
+  },
+  "A3_p95": {
+    "targets": {
+      "腓骨": 1.682,
+      "骨盆": 1.236,
+      "颅骨": 1.576
+    },
+    "per_part": {
+      "腓骨": {
+        "target": 1.682,
+        "ours": null,
+        "status": "all_one",
+        "within": false
+      },
+      "骨盆": {
+        "target": 1.236,
+        "ours": null,
+        "status": "complete_separation",
+        "within": false
+      },
+      "颅骨": {
+        "target": 1.576,
+        "ours": null,
+        "status": "all_one",
+        "within": false
+      }
+    },
+    "n_within": 0,
+    "n_target": 3,
+    "verdict": "FAIL"
+  },
+  "first_fracture_jia_m": {
+    "足部": 1.0,
+    "胫骨": 1.0,
+    "腓骨": 1.0,
+    "股骨": 1.0,
+    "骨盆": null,
+    "腰椎": 6.0,
+    "胸椎": 18.0,
+    "颈椎": null,
+    "颅骨": null
+  },
+  "first_fracture_yi_m": {
+    "足部": 13.0,
+    "胫骨": 5.0,
+    "腓骨": 1.0,
+    "股骨": 1.0,
+    "骨盆": null,
+    "腰椎": 7.0,
+    "胸椎": 1.0,
+    "颈椎": 7.0,
+    "颅骨": 6.0
+  },
+  "logistic_yi": {
+    "足部": {
+      "n": 50,
+      "n_fracture": 38,
+      "n_safe": 12,
+      "status": "complete_separation",
+      "separation_threshold_m": 12.0,
+      "note": "存在完美阈值 12 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+    },
+    "胫骨": {
+      "n": 50,
+      "n_fracture": 46,
+      "n_safe": 4,
+      "status": "complete_separation",
+      "separation_threshold_m": 4.0,
+      "note": "存在完美阈值 4 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+    },
+    "腓骨": {
+      "n": 50,
+      "n_fracture": 50,
+      "n_safe": 0,
+      "status": "all_one",
+      "note": "区间内始终骨折（常值 1）"
+    },
+    "股骨": {
+      "n": 50,
+      "n_fracture": 50,
+      "n_safe": 0,
+      "status": "all_one",
+      "note": "区间内始终骨折（常值 1）"
+    },
+    "骨盆": {
+      "n": 50,
+      "n_fracture": 0,
+      "n_safe": 50,
+      "status": "all_zero",
+      "note": "区间内从不骨折（常值 0）"
+    },
+    "腰椎": {
+      "n": 50,
+      "n_fracture": 44,
+      "n_safe": 6,
+      "status": "complete_separation",
+      "separation_threshold_m": 6.0,
+      "note": "存在完美阈值 6 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+    },
+    "胸椎": {
+      "n": 50,
+      "n_fracture": 50,
+      "n_safe": 0,
+      "status": "all_one",
+      "note": "区间内始终骨折（常值 1）"
+    },
+    "颈椎": {
+      "n": 50,
+      "n_fracture": 44,
+      "n_safe": 6,
+      "status": "complete_separation",
+      "separation_threshold_m": 6.0,
+      "note": "存在完美阈值 6 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+    },
+    "颅骨": {
+      "n": 50,
+      "n_fracture": 45,
+      "n_safe": 5,
+      "status": "complete_separation",
+      "separation_threshold_m": 5.0,
+      "note": "存在完美阈值 5 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+    }
+  },
+  "logistic_jia": {
+    "足部": {
+      "n": 50,
+      "n_fracture": 50,
+      "n_safe": 0,
+      "status": "all_one",
+      "note": "区间内始终骨折（常值 1）"
+    },
+    "胫骨": {
+      "n": 50,
+      "n_fracture": 50,
+      "n_safe": 0,
+      "status": "all_one",
+      "note": "区间内始终骨折（常值 1）"
+    },
+    "腓骨": {
+      "n": 50,
+      "n_fracture": 50,
+      "n_safe": 0,
+      "status": "all_one",
+      "note": "区间内始终骨折（常值 1）"
+    },
+    "股骨": {
+      "n": 50,
+      "n_fracture": 50,
+      "n_safe": 0,
+      "status": "all_one",
+      "note": "区间内始终骨折（常值 1）"
+    },
+    "骨盆": {
+      "n": 50,
+      "n_fracture": 0,
+      "n_safe": 50,
+      "status": "all_zero",
+      "note": "区间内从不骨折（常值 0）"
+    },
+    "腰椎": {
+      "n": 50,
+      "n_fracture": 45,
+      "n_safe": 5,
+      "status": "complete_separation",
+      "separation_threshold_m": 5.0,
+      "note": "存在完美阈值 5 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+    },
+    "胸椎": {
+      "n": 50,
+      "n_fracture": 33,
+      "n_safe": 17,
+      "status": "complete_separation",
+      "separation_threshold_m": 17.0,
+      "note": "存在完美阈值 17 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+    },
+    "颈椎": {
+      "n": 50,
+      "n_fracture": 0,
+      "n_safe": 50,
+      "status": "all_zero",
+      "note": "区间内从不骨折（常值 0）"
+    },
+    "颅骨": {
+      "n": 50,
+      "n_fracture": 0,
+      "n_safe": 50,
+      "status": "all_zero",
+      "note": "区间内从不骨折（常值 0）"
+    }
+  },
+  "cluster_ranges_yi": [
+    {
+      "cluster": 1,
+      "heights": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "range_m": [
+        7,
+        12
+      ],
+      "n": 6
+    },
+    {
+      "cluster": 2,
+      "heights": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "range_m": [
+        13,
+        50
+      ],
+      "n": 38
+    },
+    {
+      "cluster": 3,
+      "heights": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "range_m": [
+        1,
+        4
+      ],
+      "n": 4
+    },
+    {
+      "cluster": 4,
+      "heights": [
+        5
+      ],
+      "range_m": [
+        5,
+        5
+      ],
+      "n": 1
+    },
+    {
+      "cluster": 5,
+      "heights": [
+        6
+      ],
+      "range_m": [
+        6,
+        6
+      ],
+      "n": 1
+    }
+  ],
+  "phases_yi": [
+    {
+      "phase": 1,
+      "label": "轴向传导",
+      "range_m": [
+        1,
+        5
+      ],
+      "heights": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "fractured_regions": [
+        "胫骨",
+        "腓骨",
+        "股骨",
+        "胸椎"
+      ],
+      "clusters": [
+        3,
+        4
+      ]
+    },
+    {
+      "phase": 2,
+      "label": "全身复合",
+      "range_m": [
+        6,
+        12
+      ],
+      "heights": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "fractured_regions": [
+        "胫骨",
+        "腓骨",
+        "股骨",
+        "腰椎",
+        "胸椎",
+        "颈椎",
+        "颅骨"
+      ],
+      "clusters": [
+        5,
+        1
+      ]
+    },
+    {
+      "phase": 3,
+      "label": "全身复合",
+      "range_m": [
+        13,
+        50
+      ],
+      "heights": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "fractured_regions": [
+        "足部",
+        "胫骨",
+        "腓骨",
+        "股骨",
+        "腰椎",
+        "胸椎",
+        "颈椎",
+        "颅骨"
+      ],
+      "clusters": [
+        2
+      ]
+    }
+  ],
+  "detail_yi": {
+    "足部": {
+      "domain": "solid_calc_cort",
+      "sub_stat": "median",
+      "whole_sigma_c": 150.0,
+      "sigma_h_at_ref": 78.17907448078924
+    },
+    "胫骨": {
+      "domain": "tibia_cort",
+      "sub_stat": "median",
+      "ends_stat_mpa": 3.6869808002149282,
+      "shaft_stat_mpa": 43.38305745593374,
+      "fe_solve_n": 5000.0,
+      "ends_sigma_c": 70.0,
+      "shaft_sigma_c": 200.0,
+      "first_ends": 38.0,
+      "first_shaft": 5.0,
+      "n_ends": 1473,
+      "load_axis": "Z"
+    },
+    "腓骨": {
+      "domain": "fib_cort",
+      "sub_stat": "median",
+      "ends_stat_mpa": 41.25285122529499,
+      "shaft_stat_mpa": 305.3368170146935,
+      "fe_solve_n": 5000.0,
+      "ends_sigma_c": 70.0,
+      "shaft_sigma_c": 160.0,
+      "first_ends": 1.0,
+      "first_shaft": 1.0,
+      "n_ends": 435,
+      "load_axis": "Z"
+    },
+    "股骨": {
+      "domain": "fem_cort",
+      "sub_stat": "median",
+      "ends_stat_mpa": 14.93858122446266,
+      "shaft_stat_mpa": 426.7738838918742,
+      "fe_solve_n": 15227.651697700654,
+      "ends_sigma_c": 80.0,
+      "shaft_sigma_c": 220.0,
+      "first_ends": null,
+      "first_shaft": 1.0,
+      "n_ends": 1814,
+      "load_axis": "Z"
+    },
+    "骨盆": {
+      "domain": "shell_hip_cort_83500205",
+      "sub_stat": "median",
+      "whole_sigma_c": 180.0,
+      "sigma_h_at_ref": 44.882322130870456
+    },
+    "腰椎": {
+      "domain": "shell_l3_cort",
+      "sub_stat": "median",
+      "whole_sigma_c": 150.0,
+      "sigma_h_at_ref": 132.30581865664428
+    },
+    "胸椎": {
+      "domain": "shell_t6_cort",
+      "sub_stat": "median",
+      "whole_sigma_c": 150.0,
+      "sigma_h_at_ref": 426.0390024905661
+    },
+    "颈椎": {
+      "domain": "shell_c5_cort",
+      "sub_stat": "median",
+      "whole_sigma_c": 150.0,
+      "sigma_h_at_ref": 131.58198547218197
+    },
+    "颅骨": {
+      "domain": "shell_par_int",
+      "sub_stat": "median",
+      "whole_sigma_c": 160.0,
+      "sigma_h_at_ref": 146.27754336186365
+    }
+  },
+  "elapsed_s": 0.8
+}

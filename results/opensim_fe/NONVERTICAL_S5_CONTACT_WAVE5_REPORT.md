@@ -1,6 +1,6 @@
 # S5-contact 波5 · 真实泡沫垫矩阵报告（G7 配方 + hold 弹簧 + rigid 加载路径）
 
-> 生成时间 2026-10-07 00:49:38；仓库 `D:\Project\climbing_fall_analysis`；单位 mm-N-MPa-s；FEBio 4.13。
+> 生成时间 2026-10-09 11:18:18；仓库 `D:\Project\climbing_fall_analysis`；单位 mm-N-MPa-s；FEBio 4.13。
 > 计划 `docs/S5_wave5_matrix.md`；契约 `docs/S5_contact_contract.md` §4/§5/§6。
 > 引用限定：仅 `docs/S5_QUOTABLE.md` 的 QUOTABLE 行。F_n 一律 **INFERRED**（见 §6）。
 
@@ -35,10 +35,10 @@
 | h2.0_contact_rigid_mu0.3_pad | on_pad | True | 0.1 | 1.0 | 0 | 1.0 | 29 | 137q/0t | 0 | 40.454 | 2953.8 | True | CONVERGED+CARRYING |
 | h2.0_contact_rigid_mu0.6_pad | on_pad | True | 0.1 | 1.0 | 0 | 1.0 | 29 | 137q/0t | 0 | 40.454 | 2953.8 | True | CONVERGED+CARRYING |
 | h3_contact_rigid_mu0.6_pad | on_pad | True | 0.1 | 1.0 | 0 | 1.0 | 19 | 137q/0t | 0 | 42.285 | 2953.8 | True | CONVERGED+CARRYING |
-| h3.5_contact_rigid_mu0.6_pad | on_pad | True | 0.1 | 1.0 | 0 | 1.0 | 27 | 137q/0t | 0 | 43.989 | 2953.8 | True | CONVERGED+CARRYING |
-| h4.5_contact_rigid_mu0.6_pad | on_pad | True | 0.1 | 1.0 | 0 | 1.0 | 44 | 137q/0t | 0 | 48.120 | 2953.8 | True | CONVERGED+CARRYING |
+| h3.5_contact_rigid_mu0.6_pad | on_pad | True | 0.1 | 1.0 | 0 | 1.0 | 28 | 137q/0t | 0 | 43.989 | 2953.8 | True | CONVERGED+CARRYING |
+| h4.5_contact_rigid_mu0.6_pad | on_pad | True | 0.1 | 1.0 | 0 | 1.0 | 46 | 137q/0t | 0 | 48.120 | 2953.8 | True | CONVERGED+CARRYING |
 | h2.0_fixed_hard_surface | hard_surface | False | — | — | 0 | 1.0 | 0 | — | 2 | — | — | None | PASS |
-| h2.0_contact_rigid_mu0.0_hard_surface | hard_surface | True | 100.0 | 1.0 | 0 | 1.0 | 0 | 137q/0t | 0 | 2.315 | 146.3 | True | CONVERGED+CARRYING |
+| h2.0_contact_rigid_mu0.0_hard_surface | hard_surface | True | 100.0 | 1.0 | 0 | 1.0 | 0 | 137q/0t | 0 | 2.363 | 146.3 | True | CONVERGED+CARRYING |
 | h2.0_contact_rigid_mu0.6_pad_nohold | on_pad | True | 0.1 | — | 1 | — | 21 | 137q/0t | 0 | — | — | None | DIVERGED |
 | h2.0_contact_rigid_mu0.6_pad_pen100 | on_pad | True | 100.0 | 1.0 | 0 | 1.0 | 0 | 137q/0t | 0 | 2.186 | 130.5 | True | CONVERGED+CARRYING |
 | h2.0_contact_rigid_mu0.6_pad_press | on_pad | False | 0.1 | 1.0 | 1 | 0.419308 | 0 | 137q/0t | 2 | — | — | None | DIVERGED |
@@ -97,5 +97,7 @@
 cd D:\Project\climbing_fall_analysis
 $env:PYTHONPATH="src"
 & .venv\Scripts\python.exe scripts\opensim_fe\nonvertical_s5_contact_wave5.py
+# FE 工况进程级并行（结果按 plan 顺序装配 + 前缀 partial dump；默认 --workers 1）：
+& .venv\Scripts\python.exe scripts\opensim_fe\nonvertical_s5_contact_wave5.py --workers 4
 ```
 

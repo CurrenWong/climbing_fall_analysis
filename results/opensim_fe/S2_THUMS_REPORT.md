@@ -1,5 +1,13 @@
 # S2-THUMS · AM50 跟骨刚性地面全高度扫描（Option C）
 
+> ⚠️ **更正（2026-10-08）**：本报告 $h=1$ m `gauge_max=258.4 MPa`（raw 288.1）→ "首折 ≤1 m"
+> **已归因为配准伪影，非物理** —— 旧 foot-frame ICP 把距下关节载荷斑块压缩到 **222 mm²（14 面）**，
+> `PressureLoad p=F/A` 在小斑块上打出数值量级应力（`registration_anatomical.py` 自述
+> "non-physical fracture at <= 1 m"）。**解剖配准**（2495 mm²，119 面）修复后：
+> a=0 首折 **3 m**（内插 2.02 m，gauge 156.6）、+跖面接触 BC **5 m**（外推 5.43 m）、
+> a=1 满激活仍 1 m（246.6，如实保留）。详见 `S2_THUMS_REPORT_ANAT.md`。
+> **本报告数值仅作历史记录，引用请以 ANAT / PLANTAR_BC_BASE 报告为准。**
+
 **模型**：`temp/opensim_fe/thums_calcaneus/calcaneus_r_calcnframe.npz`（AM50 THUMS 右跟骨，mm，OpenSim `calcn_r` 帧；原点 = 距下关节中心）。
 双材料域：皮质 `calcaneus`（hex8，E=15000 MPa，ν=0.30）+ 松质 `trabecular`（tet4，E=73.4 MPa，ν=0.45）。
 

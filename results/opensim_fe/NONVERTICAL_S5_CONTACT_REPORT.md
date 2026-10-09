@@ -1,6 +1,6 @@
 # Phase-S5-contact 波4 · 跟骨跖面真实接触 + Coulomb 摩擦（FE 场景矩阵）报告
 
-> 生成时间 2026-10-06 17:18:22；仓库 `D:\Project\climbing_fall_analysis`；单位 mm-N-MPa-s；FEBio 4.13。
+> 生成时间 2026-10-09 12:04:44；仓库 `D:\Project\climbing_fall_analysis`；单位 mm-N-MPa-s；FEBio 4.13。
 > 设计 `docs/S5_wave4_design.md`（APPROVED）；契约 `docs/S5_contact_contract.md` §4（G0–G7）/§5/§6。
 > **本脚本只报绝对量，任何 σ/σ_law 比值一律不得作为「收敛」单一值引用**（`docs/S5_QUOTABLE.md` §4 #1、#2）。
 > 引用限定：仅 `docs/S5_QUOTABLE.md` 的 QUOTABLE 行；跨配方对比禁止。
@@ -42,11 +42,11 @@
 
 | 量 | 本次默认 | 缓存 | 相对误差 |
 |---|---:|---:|---:|
-| `impulse_ns` | 789.328187 | 789.328187 | 0.00e+00 |
-| `grf_peak_n` | 53064.8332 | 53064.8332 | 0.00e+00 |
-| `subtalar_peak_vertical_n` | 26383.1338 | 26383.1338 | 0.00e+00 |
-| `subtalar_peak_force_n` | 26383.134 | 26383.134 | 0.00e+00 |
-| `subtalar_peak_moment_nm` | 20.0250922 | 20.0250922 | 0.00e+00 |
+| `impulse_ns` | 782.414386 | 782.414386 | 0.00e+00 |
+| `grf_peak_n` | 57074.2623 | 57074.2623 | 0.00e+00 |
+| `subtalar_peak_vertical_n` | 28520.6078 | 28520.6078 | 0.00e+00 |
+| `subtalar_peak_force_n` | 28520.6079 | 28520.6079 | 0.00e+00 |
+| `subtalar_peak_moment_nm` | 17.9741807 | 17.9741807 | 0.00e+00 |
 
 - 最大相对误差 **0.00e+00**（阈值 1e-06）→ **PASS**
 
@@ -79,7 +79,7 @@
 | h3_contact_rigid_mu0.6_pad | contact | on_pad | — | — | — | — | — | — | — | 1 | — | FAIL |
 | h3.5_contact_rigid_mu0.6_pad | contact | on_pad | — | — | — | — | — | — | — | 1 | — | FAIL |
 | h4.5_contact_rigid_mu0.6_pad | contact | on_pad | — | — | — | — | — | — | — | 1 | — | FAIL |
-| h2.0_fixed_hard_surface | fixed | hard_surface | 26021 | 0 | — | 0.4337 | 8.8093 | 8.8093 | 184.22 | 0 | 1 | PASS |
+| h2.0_fixed_hard_surface | fixed | hard_surface | 28010 | 0 | — | 0.4668 | 9.4827 | 9.4827 | 198.14 | 0 | 1 | PASS |
 | h2.0_contact_rigid_mu0.0_hard_surface | contact | hard_surface | — | — | — | — | — | — | — | 1 | — | FAIL |
 
 > 单位：F_n/F_t = N；σ = MPa；tolerance 见 §3。`—` = 未收敛/无结果（见 §10）。
@@ -109,7 +109,7 @@
 
 | id | h (m) | BC | μ | spring k | F_n (N) | verdict |
 |---|---:|---|---:|---:|---:|---|
-| h2.0_fixed_hard_surface | 2 | fixed | — | — | 26021 | PASS |
+| h2.0_fixed_hard_surface | 2 | fixed | — | — | 28010 | PASS |
 | h2.0_contact_rigid_mu0.0_hard_surface | 2 | contact | 0 | — | — | FAIL |
 
 ---
@@ -208,6 +208,8 @@ $env:PYTHONPATH="src"
 & .venv\Scripts\python.exe scripts\opensim_fe\nonvertical_s5_contact.py
 # 只跑 FE（跳过 OpenSim 轴向回归重跑）：
 & .venv\Scripts\python.exe scripts\opensim_fe\nonvertical_s5_contact.py --fast
+# FE 工况进程级并行（结果按 plan 顺序装配 + 前缀 partial dump；默认 --workers 1）：
+& .venv\Scripts\python.exe scripts\opensim_fe\nonvertical_s5_contact.py --workers 4
 ```
 
 ## 12. 产物
