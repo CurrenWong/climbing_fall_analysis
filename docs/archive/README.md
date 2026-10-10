@@ -5,9 +5,11 @@
 
 ## 归档清单
 
-| 归档日期 | 文件 | 被谁取代 | 归档原因 |
+| 归档日期 | 文件（原位置） | 被谁取代 | 归档原因 |
 |---|---|---|---|
-| 2026-10-10 | `论文初稿_抱石落地骨与韧带损伤建模.md` | [`../paper/论文v2_数学建模版.md`](../paper/论文v2_数学建模版.md) | 用户指示「以论文 v2 为准」；v2 有配套 [`论文v2_出处索引.md`](../paper/论文v2_出处索引.md) 逐条溯源 |
+| 2026-10-10 | `论文初稿_抱石落地骨与韧带损伤建模.md`（原 `docs/paper/`） | [`../paper/论文v2_数学建模版.md`](../paper/论文v2_数学建模版.md) | 用户指示「以论文 v2 为准」；v2 有配套 [`论文v2_出处索引.md`](../paper/论文v2_出处索引.md) 逐条溯源 |
+| 2026-10-10 | `论文评审_2026-10-07.md`（原 `docs/paper/`） | [`../paper/论文v2_数学建模版.md`](../paper/论文v2_数学建模版.md) | 2026-10-07 评审快照，意见已落进 v2；**归档前 0 处持久引用**（7 处命中全在 `temp/` 自测脚本，已一并改写） |
+| 2026-10-10 | `rerun20261008_NONVERTICAL_S5_CONTACT_REPORT.v1.md`（原 `results/opensim_fe/rerun_20261008/NONVERTICAL_S5_CONTACT_REPORT.v1.md`，归档时加 `rerun20261008_` 前缀避免与现役同名冲突） | [`../../results/opensim_fe/rerun_20261008/NONVERTICAL_S5_CONTACT_REPORT.md`](../../results/opensim_fe/rerun_20261008/NONVERTICAL_S5_CONTACT_REPORT.md) | 重跑前的旧版备份，**归档前 0 处引用** |
 
 ---
 
