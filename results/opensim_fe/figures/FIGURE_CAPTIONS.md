@@ -2,7 +2,7 @@
 
 > 生成脚本：`scripts/opensim_fe/make_paper_figures.py`（仅新增，只读复用既有 JSON 产物；不调用 FEBio、不重跑 OpenSim、不改任何既有文件）。
 > 输出目录：`results/opensim_fe/figures/`；分辨率 **300 dpi**（>=200 dpi 要求已满足）。
-> 用途：供 `docs/论文初稿_抱石落地骨与韧带损伤建模.md` 图表清单引用。
+> 用途：供 `docs/archive/论文初稿_抱石落地骨与韧带损伤建模.md` 图表清单引用。
 > **字体路由**：本机检测到 CJK 字体 **Microsoft YaHei**（备选 Microsoft YaHei UI / SimHei / SimSun / Noto Sans CJK SC），故图中轴标签/图例/注记均以**中文渲染**；若在无 CJK 字体的环境重跑，脚本会自动**回退英文轴标签**（判定逻辑见脚本 `_pick_cjk_font()` / `FONT_ROUTE`），中文图注仍保留于本文件。
 
 **标签约定**：
