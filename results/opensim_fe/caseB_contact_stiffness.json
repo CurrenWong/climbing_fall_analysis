@@ -1,0 +1,76 @@
+{
+  "analytic_slab_k": 400.0,
+  "caseA_measured": 390.1,
+  "runs": [
+    {
+      "tag": "cb_a1_gap0",
+      "auto": 1,
+      "F": -0.0,
+      "k": null,
+      "normal": false,
+      "nnz": [
+        2766,
+        2766,
+        2766
+      ],
+      "neg": [
+        2
+      ],
+      "uzp": 0.0,
+      "uzs": 0.0
+    },
+    {
+      "tag": "cb_a0_gap0",
+      "auto": 0,
+      "F": -0.0,
+      "k": null,
+      "normal": false,
+      "nnz": [
+        2766,
+        2766,
+        2766
+      ],
+      "neg": [
+        5
+      ],
+      "uzp": 0.0,
+      "uzs": 0.0
+    },
+    {
+      "tag": "cb_a1_ov002",
+      "auto": 1,
+      "F": -0.0,
+      "k": null,
+      "normal": false,
+      "nnz": [
+        2766,
+        2766,
+        2766
+      ],
+      "neg": [
+        2,
+        4,
+        5
+      ],
+      "uzp": 0.0,
+      "uzs": 0.0
+    },
+    {
+      "tag": "cb_a0_ov002",
+      "auto": 0,
+      "F": -0.0,
+      "k": null,
+      "normal": false,
+      "nnz": [
+        2766,
+        2766,
+        2766
+      ],
+      "neg": [
+        2
+      ],
+      "uzp": 0.0,
+      "uzs": 0.0
+    }
+  ]
+}

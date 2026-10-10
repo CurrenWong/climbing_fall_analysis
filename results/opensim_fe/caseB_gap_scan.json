@@ -1,0 +1,162 @@
+[
+  {
+    "tag": "g_0.005_200000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 200000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [
+      2
+    ],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "g_0.01_200000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 200000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [
+      2
+    ],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "g_0.02_200000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 200000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [
+      2
+    ],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "g_0.05_200000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 200000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [
+      2
+    ],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "g_0.1_200000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 200000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [
+      2
+    ],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "g_0.005_2000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 2000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "g_0.01_2000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 2000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "g_0.02_2000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 2000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "g_0.05_2000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 2000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "g_0.1_2000",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 2000.0,
+    "normal": false,
+    "nnz": [
+      2325,
+      2325
+    ],
+    "neg": [],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  }
+]

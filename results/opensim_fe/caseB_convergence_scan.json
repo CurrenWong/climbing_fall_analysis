@@ -1,0 +1,100 @@
+[
+  {
+    "tag": "c_A_base",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 200000.0,
+    "normal": false,
+    "nnz": [
+      2766,
+      2766
+    ],
+    "neg": [
+      2
+    ],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "c_B_swap",
+    "auto": 1,
+    "swap": true,
+    "E_pl": 200000.0,
+    "normal": false,
+    "nnz": [
+      2766,
+      2766
+    ],
+    "neg": [
+      6
+    ],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "c_C_soft",
+    "auto": 1,
+    "swap": false,
+    "E_pl": 2000.0,
+    "normal": false,
+    "nnz": [
+      2766,
+      2766
+    ],
+    "neg": [],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "c_D_swapsoft",
+    "auto": 1,
+    "swap": true,
+    "E_pl": 2000.0,
+    "normal": false,
+    "nnz": [
+      2766,
+      2766
+    ],
+    "neg": [
+      3
+    ],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "c_E_soft_a0",
+    "auto": 0,
+    "swap": false,
+    "E_pl": 2000.0,
+    "normal": false,
+    "nnz": [
+      2766,
+      2766
+    ],
+    "neg": [
+      4
+    ],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  },
+  {
+    "tag": "c_F_soft_a0_swap",
+    "auto": 0,
+    "swap": true,
+    "E_pl": 2000.0,
+    "normal": false,
+    "nnz": [
+      2766,
+      2766
+    ],
+    "neg": [],
+    "steps": null,
+    "F": -0.0,
+    "k": null
+  }
+]

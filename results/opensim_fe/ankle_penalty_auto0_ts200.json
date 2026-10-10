@@ -1,0 +1,52 @@
+{
+  "config": {
+    "TIE": "0",
+    "LAUGON": "PENALTY",
+    "TIME_STEPS": "200",
+    "DRIVER": "disp",
+    "DISP_MM": "0.1472"
+  },
+  "rows": [
+    {
+      "pen": "2",
+      "arm": "control(auto=1)",
+      "rc": 1,
+      "wall_s": 29.5,
+      "normal_term": false,
+      "neg_jac": true,
+      "neg_jac_msg": "2",
+      "steps_done": null,
+      "fail_t": 0.000454545,
+      "fail_t_last": [
+        0.000454545
+      ],
+      "fe_elapsed": "0:00:29",
+      "diverged": false,
+      "driver_wall_s": 32.1,
+      "deck_auto_penalty": "1"
+    },
+    {
+      "pen": "2",
+      "arm": "test(auto=0)",
+      "rc": null,
+      "wall_s": null,
+      "normal_term": false,
+      "neg_jac": true,
+      "neg_jac_msg": "2",
+      "steps_done": null,
+      "fail_t": 0.15031,
+      "fail_t_last": [
+        0.144141,
+        0.146197,
+        0.148254,
+        0.15031
+      ],
+      "fe_elapsed": "0:12:32",
+      "diverged": true,
+      "driver_wall_s": 752.2,
+      "patched_lines": 1,
+      "case_dir": "D:\\Project\\climbing_fall_analysis\\temp\\thums\\febio\\_e1\\pen2_auto0_ts200"
+    }
+  ],
+  "generated": "2026-10-09 22:58:08"
+}
