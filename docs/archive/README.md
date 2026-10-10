@@ -10,6 +10,12 @@
 | 2026-10-10 | `论文初稿_抱石落地骨与韧带损伤建模.md`（原 `docs/paper/`） | [`../paper/论文v2_数学建模版.md`](../paper/论文v2_数学建模版.md) | 用户指示「以论文 v2 为准」；v2 有配套 [`论文v2_出处索引.md`](../paper/论文v2_出处索引.md) 逐条溯源 |
 | 2026-10-10 | `论文评审_2026-10-07.md`（原 `docs/paper/`） | [`../paper/论文v2_数学建模版.md`](../paper/论文v2_数学建模版.md) | 2026-10-07 评审快照，意见已落进 v2；**归档前 0 处持久引用**（7 处命中全在 `temp/` 自测脚本，已一并改写） |
 | 2026-10-10 | `rerun20261008_NONVERTICAL_S5_CONTACT_REPORT.v1.md`（原 `results/opensim_fe/rerun_20261008/NONVERTICAL_S5_CONTACT_REPORT.v1.md`，归档时加 `rerun20261008_` 前缀避免与现役同名冲突） | [`../../results/opensim_fe/rerun_20261008/NONVERTICAL_S5_CONTACT_REPORT.md`](../../results/opensim_fe/rerun_20261008/NONVERTICAL_S5_CONTACT_REPORT.md) | 重跑前的旧版备份，**归档前 0 处引用** |
+| 2026-10-10 | `OpenSim_FE阶段性总结.md`（原 `docs/reports/`） | [`../reports/OpenSim_FE交接.md`](../reports/OpenSim_FE交接.md) | **0 § 级引用** ⇒ 路径可改写（3 处已改写）；系"一页看到哪了"，交接文档更全 |
+| 2026-10-10 | `攀岩坠落摔伤仿真方案.md`（原 `docs/methods/`） | [`../methods/方案更新_v2.md`](../methods/方案更新_v2.md) | **v1 方案**，v2 已取代；**0 § 级引用**（1 处 `legacy/README.md` 已改写） |
+
+> **未归档**：`docs/paper/汇总报告_骨与韧带损伤建模.md` —— 10 处引用含 **4 处 § 级**
+> （`对齐_Y25` 引其 `§3`），正文不可合并也不可归档，
+> 详见 [`../reports/文档处置说明.md`](../reports/文档处置说明.md)。
 
 ---
 
