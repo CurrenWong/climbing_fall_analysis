@@ -129,7 +129,7 @@ def _annotate(ax, text, xy, xytext, color="black", arrow=True):
 
 
 # =========================================================================== #
-# fig2 — 与 [Y25] 对齐：首次骨折高度
+# fig2 — 与 [1] 对齐：首次骨折高度
 # =========================================================================== #
 def fig2_alignment() -> None:
     d = load_json("axial_subregion.json")
@@ -165,7 +165,7 @@ def fig2_alignment() -> None:
 
     fig, ax = plt.subplots(figsize=FIGSIZE_WIDE)
 
-    # [Y25] 7–9 m 阈值带
+    # [1] 7–9 m 阈值带
     ax.axhspan(band[0], band[1], color="#d62728", alpha=0.12, zorder=0)
     ax.axhline(band[0], color="#d62728", lw=1.0, ls="--", zorder=1)
     ax.axhline(band[1], color="#d62728", lw=1.0, ls="--", zorder=1)
@@ -189,8 +189,8 @@ def fig2_alignment() -> None:
     fib_i = order.index("腓骨")
     _annotate(
         ax,
-        L("腓骨首骨折 7 m\n落在 [Y25] 7–9 m 区间",
-          "Fibula first fracture 7 m\nwithin [Y25] 7-9 m band"),
+        L("腓骨首骨折 7 m\n落在 [1] 7–9 m 区间",
+          "Fibula first fracture 7 m\nwithin [1] 7-9 m band"),
         xy=(fib_i, rows["腓骨"]["first_fracture_h"]),
         xytext=(fib_i + 1.35, 31),
         color=C_FIB,
@@ -198,7 +198,7 @@ def fig2_alignment() -> None:
 
     ax.text(
         len(order) - 0.4, band[1] + 0.4,
-        L("[Y25] 腓骨两端首骨折区间 7–9 m", "[Y25] fibula-ends first-fracture band 7-9 m"),
+        L("[1] 腓骨两端首骨折区间 7–9 m", "[1] fibula-ends first-fracture band 7-9 m"),
         ha="right", va="bottom", color="#d62728", fontsize=9,
     )
 
@@ -207,8 +207,8 @@ def fig2_alignment() -> None:
     ax.set_ylabel(L("首次骨折高度 (m)", "First-fracture height (m)"))
     ax.set_ylim(0, 56)
     ax.set_title(
-        L("图 2  纯轴向+弱子区域 1D 首骨折高度与 [Y25] 对齐检验（标 measured/modeled）",
-          "Fig.2  Pure-axial + weak-subregion 1D first-fracture height vs [Y25]"),
+        L("图 2  纯轴向+弱子区域 1D 首骨折高度与 [1] 对齐检验（标 measured/modeled）",
+          "Fig.2  Pure-axial + weak-subregion 1D first-fracture height vs [1]"),
         fontsize=11,
     )
     ax.text(

@@ -1,0 +1,248 @@
+{
+  "threshold_scan": {
+    "positive_control": {
+      "official_counts": {
+        "injured": 345,
+        "sprain": 345,
+        "fracture": 228
+      },
+      "recount_T215": 228,
+      "match": true
+    },
+    "grid": [
+      {
+        "T_N": 154.0,
+        "fracture_n": 229,
+        "fracture_share": 0.229,
+        "injured_n": 345,
+        "injured_share": 0.345,
+        "ci95_fracture": [
+          0.204,
+          0.2561
+        ]
+      },
+      {
+        "T_N": 165.0,
+        "fracture_n": 229,
+        "fracture_share": 0.229,
+        "injured_n": 345,
+        "injured_share": 0.345,
+        "ci95_fracture": [
+          0.204,
+          0.2561
+        ]
+      },
+      {
+        "T_N": 215.0,
+        "fracture_n": 228,
+        "fracture_share": 0.228,
+        "injured_n": 345,
+        "injured_share": 0.345,
+        "ci95_fracture": [
+          0.2031,
+          0.255
+        ]
+      },
+      {
+        "T_N": 265.0,
+        "fracture_n": 228,
+        "fracture_share": 0.228,
+        "injured_n": 345,
+        "injured_share": 0.345,
+        "ci95_fracture": [
+          0.2031,
+          0.255
+        ]
+      },
+      {
+        "T_N": 349.0,
+        "fracture_n": 228,
+        "fracture_share": 0.228,
+        "injured_n": 345,
+        "injured_share": 0.345,
+        "ci95_fracture": [
+          0.2031,
+          0.255
+        ]
+      }
+    ],
+    "wilson_ci_official": {
+      "injured_345": [
+        0.3162,
+        0.375
+      ],
+      "fracture_228": [
+        0.2031,
+        0.255
+      ],
+      "sprain_345": [
+        0.3162,
+        0.375
+      ]
+    }
+  },
+  "runs": [
+    {
+      "n": 1000,
+      "injured": 345,
+      "injured_share": 0.345,
+      "sprain": 345,
+      "sprain_share": 0.345,
+      "fracture": 228,
+      "fracture_share": 0.228,
+      "bone_events": 0,
+      "worst_util_max": 0.725,
+      "no_rot_n": 321,
+      "no_rot_injured": 0,
+      "ci95_fracture": [
+        0.2031,
+        0.255
+      ],
+      "ci95_injured": [
+        0.3162,
+        0.375
+      ],
+      "alpha_pad": 1.0,
+      "seed": 20261003
+    },
+    {
+      "n": 1000,
+      "injured": 345,
+      "injured_share": 0.345,
+      "sprain": 345,
+      "sprain_share": 0.345,
+      "fracture": 230,
+      "fracture_share": 0.23,
+      "bone_events": 0,
+      "worst_util_max": 0.729,
+      "no_rot_n": 321,
+      "no_rot_injured": 0,
+      "ci95_fracture": [
+        0.205,
+        0.2571
+      ],
+      "ci95_injured": [
+        0.3162,
+        0.375
+      ],
+      "alpha_pad": 10.0,
+      "seed": 20261003
+    },
+    {
+      "n": 1000,
+      "injured": 345,
+      "injured_share": 0.345,
+      "sprain": 345,
+      "sprain_share": 0.345,
+      "fracture": 232,
+      "fracture_share": 0.232,
+      "bone_events": 1,
+      "worst_util_max": 1.081,
+      "no_rot_n": 321,
+      "no_rot_injured": 0,
+      "ci95_fracture": [
+        0.2069,
+        0.2592
+      ],
+      "ci95_injured": [
+        0.3162,
+        0.375
+      ],
+      "alpha_pad": 30.0,
+      "seed": 20261003
+    },
+    {
+      "n": 1000,
+      "injured": 316,
+      "injured_share": 0.316,
+      "sprain": 316,
+      "sprain_share": 0.316,
+      "fracture": 206,
+      "fracture_share": 0.206,
+      "bone_events": 0,
+      "worst_util_max": 0.725,
+      "no_rot_n": 357,
+      "no_rot_injured": 0,
+      "ci95_fracture": [
+        0.1821,
+        0.2322
+      ],
+      "ci95_injured": [
+        0.2879,
+        0.3455
+      ],
+      "alpha_pad": 1.0,
+      "seed": 20261004
+    },
+    {
+      "n": 1000,
+      "injured": 345,
+      "injured_share": 0.345,
+      "sprain": 345,
+      "sprain_share": 0.345,
+      "fracture": 250,
+      "fracture_share": 0.25,
+      "bone_events": 0,
+      "worst_util_max": 0.691,
+      "no_rot_n": 321,
+      "no_rot_injured": 0,
+      "ci95_fracture": [
+        0.2242,
+        0.2778
+      ],
+      "ci95_injured": [
+        0.3162,
+        0.375
+      ],
+      "alpha_pad": 1.0,
+      "seed": 20261005
+    }
+  ],
+  "alpha_pipeline_control": {
+    "expected": {
+      "injured": 345,
+      "sprain": 345,
+      "fracture": 228
+    },
+    "got": {
+      "injured": 345,
+      "fracture": 228
+    },
+    "match": true
+  },
+  "seed_stability": {
+    "seeds": [
+      20261003,
+      20261004,
+      20261005
+    ],
+    "injured_share_range": [
+      0.316,
+      0.345
+    ],
+    "fracture_share_range": [
+      0.206,
+      0.25
+    ]
+  },
+  "alpha_pad_effect": [
+    {
+      "alpha": 1.0,
+      "fracture_share": 0.228,
+      "injured_share": 0.345,
+      "sprain_share": 0.345
+    },
+    {
+      "alpha": 10.0,
+      "fracture_share": 0.23,
+      "injured_share": 0.345,
+      "sprain_share": 0.345
+    },
+    {
+      "alpha": 30.0,
+      "fracture_share": 0.232,
+      "injured_share": 0.345,
+      "sprain_share": 0.345
+    }
+  ]
+}
