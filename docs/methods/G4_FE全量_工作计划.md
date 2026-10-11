@@ -1,7 +1,10 @@
 # G4 · 全量 FE 损伤材料 · 工作计划（② FE 级深水区）
 
-> 状态：**计划稿 v2.1**（2026-10-11；经 **Momus 完整性评审** + **联网可行性验证** + **P0 可行性 spike 实测**后修订；**待用户批准 → 预注册冻结**）。
-> **P0 实测（2026-10-11）**：材料**可用**（FEBio 4.13 解析+求解 `elastic damage`/`CDF Simo`/`DC Drucker shear stress`，rc=0、1.0 s/解），但**力控软化不稳定**（≥250 N 单元倒置发散）⇒ **条件 GO**（见 §9.3；报告 `results/opensim_fe/G4_FE_SPIKE_REPORT.md`）。
+> 状态：**计划稿 v2.2**（2026-10-11；经 **Momus 评审** + **联网验证** + **P0/P1-a spike 实测** + **失败可视化** + **FEBio 能力调研**后修订；**待用户批准 → 预注册冻结**）。
+> **P0（条件 GO）**：材料**可用**（FEBio 4.13 `elastic damage`/`CDF Simo`/`DC Drucker shear stress`，rc=0、1.0 s/解）。
+> **P1-a（稳定化）= 工况不可达**：最佳 stock 杠杆（位移控制 + `Dmax=0.9`）达 **1088 N**，工况 **25266 N** ⇒ **差 23.2×**；根因 = **人工点载荷奇异**（1000 N 弹性 σ_vm 已 1054 MPa ≈ 29×σ_y）。
+> **可视化结论**：损伤**在人工 `top_load`/`bottom_fix` 带萌生**（max|u|=3.14 mm 时 Dmax=0.58、727 单元），失效为**屈曲折叠**。
+> ⇒ **② 的瓶颈不在损伤材料，在 FE 载荷 BC**（P1-b 前置）。见 §9.3–§9.6。
 > 定位：`docs/methods/G4_损伤演化设计.md`（最小路径，已跑 **A4 FAIL**）的**升级件**——把 σ(h) **后处理**损伤律升级为 **FEBio 原生损伤材料 + 逐高度 FE 重解**。
 > 上游：`docs/methods/目标重构_刚性验证与垫上推断.md` §三（G4/G6 缺口）；`docs/reports/最终结论_2026-10-10.md` §八。
 > 实证来源：**FEBio 4.13 官方手册**（本机 KB `C:\Users\curre\.copaw\workspaces\default\knowledge\books\engineering\`）+ **FEBio 4.13.0 源码 / 官方测试实例**（联网核实）。
@@ -97,6 +100,8 @@
 > 目的：把"能不能做 / 值不值得做"从假设变事实。**同时验 R1/R2**。
 >
 > **结果 = 条件 GO**：材料/软件 **PASS**；但**按现 BC（顶/底带点载荷）+ 力控，软化损伤在 ≥250 N 单元倒置发散**（工况 @5 m 载荷为数千 N，低 1–2 个量级）、**同一 .feb 重复求解仅 4/5 收敛**。⇒ P1 上马前必须先解决 **(a) 求解器**（位移控制/粘性正则/弧长法）**(b) 载荷 BC**（点载荷带 → 分布式/接触）。完整实测见 `results/opensim_fe/G4_FE_SPIKE_REPORT.md` + §9.3。
+>
+> **P1-a 补充（2026-10-11）**：stock 杠杆实测 → 力控 `Dmax=0.9` 只到 **250 N**；**位移控制 + `Dmax=0.9` 达 1088 N**（唯一过 1000 N）；**工况 25266 N 差 23.2×**。失败可视化（§9.5）证明损伤萌生于**人工加载带**、失效为**屈曲折叠**。⇒ **P1 上马前必须先做 P1-b（改载荷 BC）**。
 
 1. `febio4.exe` 材料库枚举，确认 `elastic damage` / `uncoupled elastic damage` + `DC Drucker shear stress` 在 4.13 本构建可用（对照 `dm05.feb`）。
 2. 取**一个**部件（腓骨或胫骨）+ **1 高度**，用 THUMS `(E, ν, SIGY, ETAN)` + §2.2 唯一映射表建模型，跑通。
@@ -110,6 +115,7 @@
 - 🛑 **止损线（量化，v2）**：若单解 > 5 min **或** 9 部件 × 目标高度数总墙钟 > **12 h** **或** 网格客观性不可接受（偏差 > 10%）⇒ ② 记"已验证不可行/缩水"，回退 ③ 或仅做非软化版。
 
 ### 🟠 P1 · 全量损伤材料 FE（核心，**主目标**）
+> ⚠️ **前置（P1-b，必须先做）**：**改载荷 BC** —— 顶/底 30% 带点力 → **分布式压力 / 刚体压板接触**（或沿 PCA 骨轴加载）。理由：P0/P1-a/可视化一致证明**人工点载荷奇异**是根因（损伤在其上萌生、屈曲折叠发散）。
 - 全 **9 部件**建 FEBio 损伤模型（替换 `bone_feb.py` 弹性近似）。
 - `fracture_matrix.py` 的**线性缩放**（**L606–608**：`ratio = load_h/ref_load; sig = …*ratio`）→ **逐高度 FE 重解**。
 - 重算 σ(h) → `a4_rank2_from_sigma` → **如实**判 A4。
@@ -135,7 +141,7 @@
 |---|---|---|
 | ~~FEBio 无等价材料~~ | ~~中~~ → **低（§2.2 已确认有）** | 材料已实证 |
 | **R1 · 判据（von Mises 对骨不合适）** | **高** | 骨拉压不对称+各向异性；von Mises 等向/对称/压敏无关 ⇒ **模型形式错误风险**（Morgan 2018："isotropic and symmetric criteria… not capable of describing the multiaxial strength"）。**缓解**：改用 `DC Drucker shear stress`（压敏，参数 `c` 取自骨拉压比），von Mises 仅作敏感性对照。诚实注：Keyak&Rossi 2000 发现 von Mises 对**整体股骨骨折载荷回归**表现好——仅限"载荷回归"，不含损伤定位。 |
-| **R2 · 正则化（FEBio 无）** | **高** | FEBio reactive damage **纯局部**（源码：无特征长度/无空间平均/无梯度）；**无** nonlocal/gradient/crack-band/phase-field；仅 `erosion`（**非**正则化，网格依赖）+ `Dmax<1`。**完全软化 → 单元倒置 → 负 Jacobian 终止**（FEBio 作者亲述）。**缓解**：`Dmax<1` + neo-Hookean 基体 + P0 mesh-refinement 初判；**若须严格网格客观 ⇒ FEBio 不可行**（须自写 plugin 或换 ABAQUS）。**P0 实测已证实**：力控下 ≥250 N 软化单元倒置发散、同解非确定（4/5）。 |
+| **R2 · 正则化（FEBio 无）** | **高** | FEBio reactive damage **纯局部**（源码：无特征长度/无空间平均/无梯度）；**无** nonlocal/gradient/crack-band/phase-field；**stock 无粘性正则 / 无非局部/梯度**（全库 `nonlocal`=0；`FEDamageCDF` 仅 `Dmax`）；仅 `erosion`（网格 adaptor，**非**正则化，网格依赖）+ `Dmax<1`。**完全软化 → 单元倒置 → 负 Jacobian 终止**（FEBio 作者亲述"这是损伤分析的正常结束方式"）。**缓解**：`Dmax<1` + neo-Hookean 基体 + P0 mesh-refinement 初判；**若须严格网格客观 ⇒ FEBio 不可行**（须自写 plugin 或换 ABAQUS）。**P0 实测已证实**：力控下 ≥250 N 软化单元倒置发散、同解非确定（4/5）。 |
 | 全量 FE **不比后处理强**（同参数） | 中 | P0 单骨对照先证；弱则如实报限 |
 | 逐高度重解成本爆炸 | 中 | P0 计时门（§3 P0）；超预算砍高度 |
 | 网格依赖（软化病态） | 中 | = R2 |
@@ -157,7 +163,7 @@
 | **D5** | 集成点 | **逐高度 FE 重解**（替换线性缩放 `fracture_matrix.py:606-608`）；冻结输入只读 | **取代**（原：σ(h) 后处理层·不改 FE） |
 | **D6** | 载荷链 | 单一冻结 `PassiveStiffness.nominal_landing()`；**不扫不调** | 沿用 |
 
-> **冻结即锁**：跑后**禁止**调 `SIGY`/`ETAN`/CDF 参数/α 去凑 A4/A2/V7。
+> **冻结即锁**：跑后**禁止**调 `SIGY`/`ETAN`/CDF 参数/Drucker `c` 去凑 A4/A2/V7。
 
 ---
 
@@ -221,6 +227,26 @@
 - **网格客观性**：**未测**（仓库无纯实体 fibula 重网格器；诚实记录，不声称）。
 - 产物：`scripts/opensim_fe/g4_fe_spike.py` + `results/opensim_fe/G4_FE_SPIKE_REPORT.md`。**未改任何既有模块**。
 
+### 9.4 P1-a 稳定化实测（2026-10-11，已完成）
+- **stock 杠杆**：`Dmax<1`（力控）最高 **250 N**；**位移控制 + `Dmax=0.9`** 达 **R_peak=1088.3 N**（δ=−198.9 mm，σ_vm p95=256 MPa）；更强 `time_stepper` 无效。
+- **工况载荷 = 25266.2 N**（`ankle_r` @5 m，`load_fraction=1.0`）⇒ 最佳可达差 **23.2×**。
+- **根因 = 人工点载荷奇异**：1000 N 弹性 σ_vm 已 1054–1068 MPa（≈29×σ_y）——655 节点压在薄斜皮质环上。
+- **P0 勘误**：P0 报告"time_stepper+10steps 未救"实为**解析失败**（`<time_stepper type="default">` 被 4.13 拒 `invalid attribute "type"`），且 P0 错误读取器读了**陈旧日志**；结论方向不变（time_stepper 仍无效）。
+- 产物：`scripts/opensim_fe/g4_fe_stab.py` + `results/opensim_fe/G4_FE_STAB_REPORT.md`。
+
+### 9.5 失败可视化（2026-10-11，已完成）
+- 产物：`results/opensim_fe/g4_fe_viz/`（`initial_mesh.vtk`、`deformed_first_failure*.vtk`、`damage_onset.vtk` + PNG + `README.md`）；脚本 `g4_fe_viz.py`/`g4_fe_viz2.py`。
+- **忠实首失**：δ* 二分 → **211.36 mm**（过冲仅 1.062×），末收敛 state 63/64、max|u|=217.7 mm、min detJ/|detJ0|=0.0025。
+- **损伤起始**：state 1、max|u| **仅 3.14 mm**、`fib_cort` Dmax=0.579、**727 单元** ⇒ 损伤萌生于**人工 `top_load`/`bottom_fix` 带**，**非生理骨折点**。
+- **失效模式 = 屈曲折叠**（max|u| 饱和于 ~218 mm，与 δ 幅度无关）——**FEBio 在发散试探步即终止，反转构型永不写入** `.xplt`。
+
+### 9.6 FEBio 4.13 能力调研（源码+文档，2026-10-11）
+- **单元删除/侵蚀 = ✅ stock**：`<mesh_adaptor type="erosion">`（FEAMR）；判据 `<criterion type="damage"/>`；参数 `max_iters/max_elems/sort/remove_islands/erode_surfaces`。**⚠️ FEAMR 与 auto time_stepper 不兼容**（须固定步长）；`erode_surfaces` 源码默认 `ERODE`（手册写 `no`）——显式写死。
+- **粘性正则 = ❌**：`FEDamageCDF` 仅 `Dmax`，**无 η / rate 项**（全库无 `damage stabilization`）；最近替代 = 粘弹性损伤基材（**本构变更**，非数值正则）。
+- **非局部/梯度损伤 = ❌**：全库 `nonlocal`=0 命中，**须自写插件**。
+- **弧长法 = ✅ 但受限**：`arc_length`（Crisfield）**仅允许零位移 BC + 节点力**，与"规定位移"**冲突**。
+- **FEBio 作者（Ateshian）立场**：100% 损伤时负 Jacobian 终止"often the normal way these analyses end"；首推 **neo-Hookean 基材 + `Dmax<1` + 不放宽容差 + 慢/斜坡加载**；**未把 erosion 列为主推**。
+
 ---
 
-*本件为 ② 的活跃工作计划（v2.1）；**P0 已完成（条件 GO）**：材料可用、但力控软化不稳定 ⇒ P1 上马前先解决求解器 / Load BC；R2 若触发硬约束则整体可行性重估。*
+*本件为 ② 的活跃工作计划（v2.2）；P0 条件 GO、P1-a 工况不可达 ⇒ **② 的瓶颈在 FE 载荷 BC（P1-b 前置）**；stock FEBio 无粘性正则/非局部（须插件）；有 erosion 兜底但需固定步长。*
