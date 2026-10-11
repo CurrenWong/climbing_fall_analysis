@@ -1,6 +1,7 @@
 # G4 · 全量 FE 损伤材料 · 工作计划（② FE 级深水区）
 
-> 状态：**计划稿 v2**（2026-10-11；经 **Momus 完整性评审** + **联网可行性验证**后修订；**待用户批准 → 预注册冻结**）。
+> 状态：**计划稿 v2.1**（2026-10-11；经 **Momus 完整性评审** + **联网可行性验证** + **P0 可行性 spike 实测**后修订；**待用户批准 → 预注册冻结**）。
+> **P0 实测（2026-10-11）**：材料**可用**（FEBio 4.13 解析+求解 `elastic damage`/`CDF Simo`/`DC Drucker shear stress`，rc=0、1.0 s/解），但**力控软化不稳定**（≥250 N 单元倒置发散）⇒ **条件 GO**（见 §9.3；报告 `results/opensim_fe/G4_FE_SPIKE_REPORT.md`）。
 > 定位：`docs/methods/G4_损伤演化设计.md`（最小路径，已跑 **A4 FAIL**）的**升级件**——把 σ(h) **后处理**损伤律升级为 **FEBio 原生损伤材料 + 逐高度 FE 重解**。
 > 上游：`docs/methods/目标重构_刚性验证与垫上推断.md` §三（G4/G6 缺口）；`docs/reports/最终结论_2026-10-10.md` §八。
 > 实证来源：**FEBio 4.13 官方手册**（本机 KB `C:\Users\curre\.copaw\workspaces\default\knowledge\books\engineering\`）+ **FEBio 4.13.0 源码 / 官方测试实例**（联网核实）。
@@ -54,7 +55,7 @@
 |---|---|---|
 | **材料类型** | `elastic damage`（约束基体）/ `uncoupled elastic damage`（近不可压，带 `k`） | User Manual §4.6.1（L13005） |
 | 损伤框架 | Reactive damage：`σ=(1−D)σ₀`，D = 断键质量分数，`Dmax∈[0,1]` | §4.6（L12970） |
-| **损伤判据（v2 修订）** | **主：`DC Drucker shear stress`**（压敏；α=0 时退化 von Mises）；**对照：`DC von Mises stress`**、`DC max normal stress`、`DC max normal Lagrange strain` 等 | Library §4.6.3（L13276 `DC von Mises`） |
+| **损伤判据（v2 修订）** | **主：`DC Drucker shear stress`**（压敏；`c`=0 时退化 von Mises）；**对照：`DC von Mises stress`**、`DC max normal stress`、`DC max normal Lagrange strain` 等 | Library §4.6.3（L13276 `DC von Mises`） |
 | **CDF（软化）** | `CDF Weibull` / `Simo` / `log-normal` / `quintic` / `gamma` / `step` / `user` | §4.6.2（L13028+） |
 | 弹塑 + 损伤 | 区分 intact bond 损伤 vs **yielded bond** 损伤 | Theory Manual（L15382） |
 
@@ -68,8 +69,8 @@
 | 要素 | 冻结值 | 来源（非调参） |
 |---|---|---|
 | 基体本构 `<elastic>` | **neo-Hookean**（有限变形下病态单元更稳健） | 官方示例 + FEBio 作者建议 |
-| 损伤判据 `<criterion>` | **`DC Drucker shear stress`** | 骨拉压不对称（见 §4 R1）；α 见下行 |
-| Drucker 压敏常数 α | **由骨拉压强度比（~1.4–1.6）反推，取自文献**（非拟合） | Morgan 2018 / Bayraktar 2004 |
+| 损伤判据 `<criterion>` | **`DC Drucker shear stress`** | 骨拉压不对称（见 §4 R1）；参数 `c` 见下行 |
+| Drucker 常数 **`c`** | **∈[−27/8, 9/4]；由骨拉压强度比反推，取自文献**（非拟合）；`c=0` ⇒ 退化 von Mises | FEBio 手册 §4.6.3.7（L13318）；Morgan 2018 / Bayraktar 2004 |
 | CDF 族 | **`CDF Simo`**（单参数可覆盖饱和/渐进） | G4 设计 §4 选型 |
 | 阈值（SIGY→） | 逐 PID THUMS `SIGY` | THUMS 卡 |
 | 软化（ETAN→） | CDF 参数（**模型类别变更，非参数搬运**，见 §4 R1） | THUMS 卡 + 文献 |
@@ -81,8 +82,8 @@
   <elastic type="neo-Hookean">
     <density>DENS</density><E>E_THUMS</E><v>NU</v>
   </elastic>
-  <criterion type="DC Drucker shear stress"> <a>ALPHA_FROM_LIT</a> </criterion>
-  <damage type="CDF Simo"> <a>..</a><b>..</b><Dmax>DMAX</Dmax> </damage>
+  <criterion type="DC Drucker shear stress"> <c>C_FROM_LIT</c> </criterion>
+  <damage type="CDF Simo"> <a>a_SIMO=SIGY_OVER_SQRT3</a><b>..</b><Dmax>DMAX</Dmax> </damage>
 </material>
 ```
 
@@ -92,8 +93,10 @@
 
 ## 3. 分阶段工作包
 
-### 🔴 P0 · 可行性 spike（≤1 天，先做，决定投不投）
+### 🔴 P0 · 可行性 spike（≤1 天）— ✅ **已完成（2026-10-11）**
 > 目的：把"能不能做 / 值不值得做"从假设变事实。**同时验 R1/R2**。
+>
+> **结果 = 条件 GO**：材料/软件 **PASS**；但**按现 BC（顶/底带点载荷）+ 力控，软化损伤在 ≥250 N 单元倒置发散**（工况 @5 m 载荷为数千 N，低 1–2 个量级）、**同一 .feb 重复求解仅 4/5 收敛**。⇒ P1 上马前必须先解决 **(a) 求解器**（位移控制/粘性正则/弧长法）**(b) 载荷 BC**（点载荷带 → 分布式/接触）。完整实测见 `results/opensim_fe/G4_FE_SPIKE_REPORT.md` + §9.3。
 
 1. `febio4.exe` 材料库枚举，确认 `elastic damage` / `uncoupled elastic damage` + `DC Drucker shear stress` 在 4.13 本构建可用（对照 `dm05.feb`）。
 2. 取**一个**部件（腓骨或胫骨）+ **1 高度**，用 THUMS `(E, ν, SIGY, ETAN)` + §2.2 唯一映射表建模型，跑通。
@@ -131,8 +134,8 @@
 | 风险 | 概率 | 缓解 / 结论 |
 |---|---|---|
 | ~~FEBio 无等价材料~~ | ~~中~~ → **低（§2.2 已确认有）** | 材料已实证 |
-| **R1 · 判据（von Mises 对骨不合适）** | **高** | 骨拉压不对称+各向异性；von Mises 等向/对称/压敏无关 ⇒ **模型形式错误风险**（Morgan 2018："isotropic and symmetric criteria… not capable of describing the multiaxial strength"）。**缓解**：改用 `DC Drucker shear stress`（压敏，α 取自骨拉压比 ~1.4–1.6），von Mises 仅作敏感性对照。诚实注：Keyak&Rossi 2000 发现 von Mises 对**整体股骨骨折载荷回归**表现好——仅限"载荷回归"，不含损伤定位。 |
-| **R2 · 正则化（FEBio 无）** | **高** | FEBio reactive damage **纯局部**（源码：无特征长度/无空间平均/无梯度）；**无** nonlocal/gradient/crack-band/phase-field；仅 `erosion`（**非**正则化，网格依赖）+ `Dmax<1`。**完全软化 → 单元倒置 → 负 Jacobian 终止**（FEBio 作者亲述）。**缓解**：`Dmax<1` + neo-Hookean 基体 + P0 mesh-refinement 初判；**若须严格网格客观 ⇒ FEBio 不可行**（须自写 plugin 或换 ABAQUS）。 |
+| **R1 · 判据（von Mises 对骨不合适）** | **高** | 骨拉压不对称+各向异性；von Mises 等向/对称/压敏无关 ⇒ **模型形式错误风险**（Morgan 2018："isotropic and symmetric criteria… not capable of describing the multiaxial strength"）。**缓解**：改用 `DC Drucker shear stress`（压敏，参数 `c` 取自骨拉压比），von Mises 仅作敏感性对照。诚实注：Keyak&Rossi 2000 发现 von Mises 对**整体股骨骨折载荷回归**表现好——仅限"载荷回归"，不含损伤定位。 |
+| **R2 · 正则化（FEBio 无）** | **高** | FEBio reactive damage **纯局部**（源码：无特征长度/无空间平均/无梯度）；**无** nonlocal/gradient/crack-band/phase-field；仅 `erosion`（**非**正则化，网格依赖）+ `Dmax<1`。**完全软化 → 单元倒置 → 负 Jacobian 终止**（FEBio 作者亲述）。**缓解**：`Dmax<1` + neo-Hookean 基体 + P0 mesh-refinement 初判；**若须严格网格客观 ⇒ FEBio 不可行**（须自写 plugin 或换 ABAQUS）。**P0 实测已证实**：力控下 ≥250 N 软化单元倒置发散、同解非确定（4/5）。 |
 | 全量 FE **不比后处理强**（同参数） | 中 | P0 单骨对照先证；弱则如实报限 |
 | 逐高度重解成本爆炸 | 中 | P0 计时门（§3 P0）；超预算砍高度 |
 | 网格依赖（软化病态） | 中 | = R2 |
@@ -149,7 +152,7 @@
 |---|---|---|---|
 | **D1** | 本构 | **FEBio 原生 `elastic damage` / `uncoupled elastic damage`**（§2.2 唯一映射表） | **取代**（原：双线性弹塑·降阶后处理） |
 | **D2** | 屈服来源 | 逐 PID THUMS `SIGY`（**非调参**） | 沿用 |
-| **D3** | 软化/压敏来源 | CDF 参数 + Drucker α（α 取自**文献**拉压比，**非拟合**） | 沿用+细化 |
+| **D3** | 软化/压敏来源 | CDF 参数 + Drucker `c`（`c` 取自**文献**拉压比，**非拟合**） | 沿用+细化 |
 | **D4** | rank-2 度量 | PC2 解释方差比 vs **平行分析 null / 断棍 null**（沿用 `a4_rank2_from_sigma` 口径） | 沿用（口径不变） |
 | **D5** | 集成点 | **逐高度 FE 重解**（替换线性缩放 `fracture_matrix.py:606-608`）；冻结输入只读 | **取代**（原：σ(h) 后处理层·不改 FE） |
 | **D6** | 载荷链 | 单一冻结 `PassiveStiffness.nominal_landing()`；**不扫不调** | 沿用 |
@@ -210,6 +213,14 @@
 - **R1 判据**：von Mises 对骨 = 模型形式错误风险 → §2.2 改 **`DC Drucker shear stress`**（+von Mises 对照）、§4；
 - **R2 正则化**：FEBio 无正则化 → §4 + §3 P0 网格门 + §7。
 
+### 9.3 P0 spike 实测（2026-10-11，已完成）
+- **解析/求解**：`elastic damage` + `CDF Simo` + `DC Drucker shear stress` **ACCEPT**（FEBio 4.13 日志出物料摘要）；pyfebio 无这些类 ⇒ **裸 XML 文本替换注入 `<Material>` 块**（`name`/`id` 保留，MeshDomains 仍解析）。
+- **参数校正**：Drucker 判据参数是 **`c`（∈[−27/8, 9/4]）**，非"α"（§2.2/§5 已改）；`c=0` ⇒ 退化 von Mises（k=σ_y/√3）。CDF Simo 用 `<a>`（α，与 Ξ 同量纲）、`<b>`（β，最大损伤 1−β）、`<Dmax>`。
+- **实测（fibula_r，主域 `fib_cort` PID 81000900，E=18500 / ν=0.3 / σ_y=37 / E_t=16700 → Simo `a`=21.36）**：单解 **rc=0、1.0 s**；σ_vm max 111.6→36.7 MPa（**−67%**）、p95 66.0→34.0（−48%）、mean 21.3→16.7（−21%）；Dmax=0.98、D>0 占 **86.3%**。
+- **🛑 关键风险**：**力控 + 软化 + 人工点载荷奇异** ⇒ **≥250 N 单元倒置发散**（`NNN negative jacobians detected | failed to converge`）；同 .feb 重复求解 **4/5**（两个损伤吸引子）。⇒ ② 按现 BC 在工况载荷下**不可用**。
+- **网格客观性**：**未测**（仓库无纯实体 fibula 重网格器；诚实记录，不声称）。
+- 产物：`scripts/opensim_fe/g4_fe_spike.py` + `results/opensim_fe/G4_FE_SPIKE_REPORT.md`。**未改任何既有模块**。
+
 ---
 
-*本件为 ② 的活跃工作计划（v2）；P0 结果用于决定 P1 是否上马；R2 若触发硬约束则整体可行性重估。*
+*本件为 ② 的活跃工作计划（v2.1）；**P0 已完成（条件 GO）**：材料可用、但力控软化不稳定 ⇒ P1 上马前先解决求解器 / Load BC；R2 若触发硬约束则整体可行性重估。*
