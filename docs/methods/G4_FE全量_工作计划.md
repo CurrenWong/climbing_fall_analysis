@@ -4,7 +4,8 @@
 > **P0（条件 GO）**：材料**可用**（FEBio 4.13 `elastic damage`/`CDF Simo`/`DC Drucker shear stress`，rc=0、1.0 s/解）。
 > **P1-a（稳定化）= 工况不可达**：最佳 stock 杠杆（位移控制 + `Dmax=0.9`）达 **1088 N**，工况 **25266 N** ⇒ **差 23.2×**；根因 = **人工点载荷奇异**（1000 N 弹性 σ_vm 已 1054 MPa ≈ 29×σ_y）。
 > **可视化结论**：损伤**在人工 `top_load`/`bottom_fix` 带萌生**（max|u|=3.14 mm 时 Dmax=0.58、727 单元），失效为**屈曲折叠**。
-> ⇒ **② 的瓶颈不在损伤材料，在 FE 载荷 BC**（P1-b 前置）。见 §9.3–§9.6。
+> ⇒ **② 的瓶颈不在损伤材料，在 FE 载荷 BC**（P1-b 前置）。见 §9.3–§9.7。
+> **P1-b 探针（erosion adaptor）＝ FAIL（2026-10-11）**：FEAMR 侵蚀**不能救** —— 力控 1000 N 仍在增量 1 发散（erosion 无收敛步可作用）；且**一旦触发删除反而更早发散**（去掉 auto-stepper 的 dt 回退）；工况 25266 N 差 23.2×。⇒ **stock 杠杆已穷尽**（`Dmax<1`/位移控制/`time_stepper`/erosion 均不到工况）——**只剩 P1-b（改载荷 BC）**。
 > 定位：`docs/methods/G4_损伤演化设计.md`（最小路径，已跑 **A4 FAIL**）的**升级件**——把 σ(h) **后处理**损伤律升级为 **FEBio 原生损伤材料 + 逐高度 FE 重解**。
 > 上游：`docs/methods/目标重构_刚性验证与垫上推断.md` §三（G4/G6 缺口）；`docs/reports/最终结论_2026-10-10.md` §八。
 > 实证来源：**FEBio 4.13 官方手册**（本机 KB `C:\Users\curre\.copaw\workspaces\default\knowledge\books\engineering\`）+ **FEBio 4.13.0 源码 / 官方测试实例**（联网核实）。
@@ -102,6 +103,7 @@
 > **结果 = 条件 GO**：材料/软件 **PASS**；但**按现 BC（顶/底带点载荷）+ 力控，软化损伤在 ≥250 N 单元倒置发散**（工况 @5 m 载荷为数千 N，低 1–2 个量级）、**同一 .feb 重复求解仅 4/5 收敛**。⇒ P1 上马前必须先解决 **(a) 求解器**（位移控制/粘性正则/弧长法）**(b) 载荷 BC**（点载荷带 → 分布式/接触）。完整实测见 `results/opensim_fe/G4_FE_SPIKE_REPORT.md` + §9.3。
 >
 > **P1-a 补充（2026-10-11）**：stock 杠杆实测 → 力控 `Dmax=0.9` 只到 **250 N**；**位移控制 + `Dmax=0.9` 达 1088 N**（唯一过 1000 N）；**工况 25266 N 差 23.2×**。失败可视化（§9.5）证明损伤萌生于**人工加载带**、失效为**屈曲折叠**。⇒ **P1 上马前必须先做 P1-b（改载荷 BC）**。
+> **P1-b 探针（erosion adaptor）＝ FAIL**：stock 的 FEAMR 侵蚀**不能**让模型达到 1000 N（详见 §9.7）——stock 杠杆穷尽。
 
 1. `febio4.exe` 材料库枚举，确认 `elastic damage` / `uncoupled elastic damage` + `DC Drucker shear stress` 在 4.13 本构建可用（对照 `dm05.feb`）。
 2. 取**一个**部件（腓骨或胫骨）+ **1 高度**，用 THUMS `(E, ν, SIGY, ETAN)` + §2.2 唯一映射表建模型，跑通。
@@ -247,6 +249,14 @@
 - **弧长法 = ✅ 但受限**：`arc_length`（Crisfield）**仅允许零位移 BC + 节点力**，与"规定位移"**冲突**。
 - **FEBio 作者（Ateshian）立场**：100% 损伤时负 Jacobian 终止"often the normal way these analyses end"；首推 **neo-Hookean 基材 + `Dmax<1` + 不放宽容差 + 慢/斜坡加载**；**未把 erosion 列为主推**。
 
+### 9.7 erosion adaptor 探针（2026-10-11，已完成，判定 FAIL）
+- **目的**：验 stock 的 FEAMR 侵蚀（`<mesh_adaptor type="erosion">` + `<criterion type="min-max filter"><data type="damage"/>`）能否让模型达到 1000 N / 突破 1088 N。
+- **FEBio 接受**：✅ 解析 `<MeshAdaptor>`（日志回显 adaptor 块）；**erosion 会触发**（`Deactivated elements: 8` 等）。
+- **判定**：**(a) 力控 1000 N = FAIL**（增量 1 即 `98 negative jacobians`，erosion 无收敛步可作用，eroded=0）；**(b) 位移控制 >1088 N = FAIL**（1088.34 N 与无 erosion 完全相同，且仅来自 erosion **no-op** 单元）；**(c) 工况 25266 N = FAIL**（差 23.2×）。**一旦触发删除反而更早发散**（dc1x_D1.0：off 16 步→on 2 步；dc1x_D0.9：off 收敛 1088 N→on 5 步发散）。
+- **两个决定性机制**：① **CDF-Simo 损伤从下方趋近 `Dmax`**（Dmax=0.9 → D→0.8988），故 plan 的 `<min>0.9</min>` 在 Dmax=0.9 下**永不触发**；② **FEAMR 强制关闭 auto time-stepper** ⇒ **失去 dt 回退（cutback）**，而正是它此前救过濒临奇异的步——**开 erosion 本身就是鲁棒性回退**，且无 auto-stepper 时全载荷在增量 1 一次施加（无斜坡）。
+- ⇒ **stock 杠杆穷尽**（`Dmax<1` / 位移控制 / `time_stepper` / erosion 全部到不了工况）。**根因未变 = 人工点载荷奇异**。
+- 产物：`scripts/opensim_fe/g4_fe_erosion.py` + `results/opensim_fe/G4_FE_EROSION_REPORT.md`。
+
 ---
 
-*本件为 ② 的活跃工作计划（v2.2）；P0 条件 GO、P1-a 工况不可达 ⇒ **② 的瓶颈在 FE 载荷 BC（P1-b 前置）**；stock FEBio 无粘性正则/非局部（须插件）；有 erosion 兜底但需固定步长。*
+*本件为 ② 的活跃工作计划（v2.3）；P0 条件 GO、P1-a + erosion 探针均**工况不可达** ⇒ **stock 杠杆已穷尽**；② 只剩 **P1-b（改 FE 载荷 BC）或 ③ 封版**两条路。*
