@@ -1,0 +1,310 @@
+{
+  "meta": {
+    "title": "G8 fibula progressive OR via 1D load-share path (Route A, pre-registered)",
+    "generated_at": "2026-10-11 12:22:16",
+    "design_doc": "docs/methods/G8_腓骨OR_1D载荷分享设计.md",
+    "method": "mixed sigma_nom: fibula row <- 1D load-share nominal stress F/A (risk_by_height * sigma_c_row=160); other 8 rows <- fracture_matrix_bc2.json sigma_vm_mpa[median]; G3 subject-variability reused unchanged (logistic_fit / a3_verdict).",
+    "correction": "design draft said sigma_fib=risk*70; corrected to risk*sigma_c_row=risk*160 (true nominal stress). Decisions F1-F5 unchanged.",
+    "seeds": [
+      20261003,
+      20261004,
+      20261005
+    ],
+    "official_seed": 20261003,
+    "n_subj": 400,
+    "cov_primary": {
+      "cov_b": 0.15,
+      "cov_e": 0.1,
+      "cov_a": 0.15
+    },
+    "primary_share": "lit05",
+    "a3_targets": {
+      "腓骨": 1.682,
+      "骨盆": 1.236,
+      "颅骨": 1.576
+    },
+    "fibula_window": [
+      1.1773999999999998,
+      2.1866
+    ],
+    "sources": {
+      "fibula_1d": "results/opensim_fe/risk_1d_loadshare.json",
+      "other8": "results/opensim_fe/fracture_matrix_bc2.json::sigma_vm_mpa[median]",
+      "g3_machinery": "scripts/opensim_fe/g3_subject_variability.py"
+    },
+    "ban_note": "no FE rerun; no existing file modified; OR reported per-metre."
+  },
+  "height_grid_check": {
+    "g3_heights_n": 50,
+    "fibula_1d_heights_n": 50,
+    "match": true
+  },
+  "fibula_site": "腓骨",
+  "fibula_row_index": 2,
+  "shares": {
+    "lit05": {
+      "share_fraction_fibula": 0.05,
+      "share_fraction_tibia": 0.95,
+      "source_key": "rows_with_share_lit05",
+      "sigma_c_row_mpa": 160.0,
+      "risk_at_5m": 0.07745714729099797,
+      "risk_max": 0.3462143595515814,
+      "sigma_c_weak_mpa": 70.0,
+      "util_at_5m": 0.17704490809370962,
+      "util_max": 0.7913471075464719,
+      "first_fracture_deterministic_h": null,
+      "fibula_status": "ok",
+      "fibula_OR": 1.1516495481396787,
+      "fibula_ci95": [
+        1.1360642191777803,
+        1.1674486876192838
+      ],
+      "fibula_n_fracture": 433,
+      "fibula_n_safe": 19567,
+      "fibula_seed_ORs": {
+        "20261003": 1.1516495481396787,
+        "20261004": 1.1407038794774387,
+        "20261005": 1.1413634020794117
+      },
+      "a3": {
+        "targets": {
+          "腓骨": 1.682,
+          "骨盆": 1.236,
+          "颅骨": 1.576
+        },
+        "per_part": {
+          "腓骨": {
+            "target": 1.682,
+            "ours": 1.1516495481396787,
+            "rel_err": 0.31530942441160603,
+            "ci95": [
+              1.1360642191777803,
+              1.1674486876192838
+            ],
+            "within": false
+          },
+          "骨盆": {
+            "target": 1.236,
+            "ours": 1.1471078425186825,
+            "rel_err": 0.07191922126320183,
+            "ci95": [
+              1.138756146644474,
+              1.1555207901579687
+            ],
+            "within": true
+          },
+          "颅骨": {
+            "target": 1.576,
+            "ours": 1.4165461055998183,
+            "rel_err": 0.10117632893412543,
+            "ci95": [
+              1.397511480524602,
+              1.4358399893335883
+            ],
+            "within": true
+          }
+        },
+        "n_within": 2,
+        "n_target": 3,
+        "verdict": "PASS"
+      },
+      "verdict": {
+        "fibula_status": "ok",
+        "fibula_or": 1.1516495481396787,
+        "fibula_ci95": [
+          1.1360642191777803,
+          1.1674486876192838
+        ],
+        "fibula_window": [
+          1.1773999999999998,
+          2.1866
+        ],
+        "fibula_within": false,
+        "a3_verdict": "PASS",
+        "a3_n_within": 2,
+        "dod1_pass": false,
+        "dod3_pass": true
+      }
+    },
+    "lit10": {
+      "share_fraction_fibula": 0.1,
+      "share_fraction_tibia": 0.9,
+      "source_key": "rows_with_share_lit10",
+      "sigma_c_row_mpa": 160.0,
+      "risk_at_5m": 0.15491429458199593,
+      "risk_max": 0.6924287191031628,
+      "sigma_c_weak_mpa": 70.0,
+      "util_at_5m": 0.35408981618741925,
+      "util_max": 1.5826942150929437,
+      "first_fracture_deterministic_h": 24.0,
+      "fibula_status": "ok",
+      "fibula_OR": 1.1470664880532766,
+      "fibula_ci95": [
+        1.1429362531840248,
+        1.1512116483744317
+      ],
+      "fibula_n_fracture": 8142,
+      "fibula_n_safe": 11858,
+      "fibula_seed_ORs": {
+        "20261003": 1.1470664880532766,
+        "20261004": 1.149288221255424,
+        "20261005": 1.1379225499703607
+      },
+      "a3": {
+        "targets": {
+          "腓骨": 1.682,
+          "骨盆": 1.236,
+          "颅骨": 1.576
+        },
+        "per_part": {
+          "腓骨": {
+            "target": 1.682,
+            "ours": 1.1470664880532766,
+            "rel_err": 0.3180341925961494,
+            "ci95": [
+              1.1429362531840248,
+              1.1512116483744317
+            ],
+            "within": false
+          },
+          "骨盆": {
+            "target": 1.236,
+            "ours": 1.1471078425186825,
+            "rel_err": 0.07191922126320183,
+            "ci95": [
+              1.138756146644474,
+              1.1555207901579687
+            ],
+            "within": true
+          },
+          "颅骨": {
+            "target": 1.576,
+            "ours": 1.4165461055998183,
+            "rel_err": 0.10117632893412543,
+            "ci95": [
+              1.397511480524602,
+              1.4358399893335883
+            ],
+            "within": true
+          }
+        },
+        "n_within": 2,
+        "n_target": 3,
+        "verdict": "PASS"
+      },
+      "verdict": {
+        "fibula_status": "ok",
+        "fibula_or": 1.1470664880532766,
+        "fibula_ci95": [
+          1.1429362531840248,
+          1.1512116483744317
+        ],
+        "fibula_window": [
+          1.1773999999999998,
+          2.1866
+        ],
+        "fibula_within": false,
+        "a3_verdict": "PASS",
+        "a3_n_within": 2,
+        "dod1_pass": false,
+        "dod3_pass": true
+      }
+    }
+  },
+  "unchanged_check": {
+    "available": true,
+    "all_equal": true,
+    "per_site": {
+      "足部": true,
+      "胫骨": true,
+      "股骨": true,
+      "骨盆": true,
+      "腰椎": true,
+      "胸椎": true,
+      "颈椎": true,
+      "颅骨": true
+    },
+    "max_abs_or_diff": 0.0,
+    "g3_source": "results/opensim_fe/g3_or_estimates.json"
+  },
+  "degenerate": {
+    "cov": 0.001,
+    "majority_matches_base": true,
+    "max_abs_dev": 0.35750000000000004
+  },
+  "probability_matrix_primary_fibula": {
+    "site": "腓骨",
+    "p": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0025,
+      0.0025,
+      0.005,
+      0.0075,
+      0.01,
+      0.02,
+      0.0225,
+      0.0275,
+      0.0275,
+      0.0325,
+      0.035,
+      0.0375,
+      0.0425,
+      0.045,
+      0.0475,
+      0.05,
+      0.0675,
+      0.0725,
+      0.075,
+      0.08,
+      0.0825,
+      0.09,
+      0.0975,
+      0.1025
+    ]
+  },
+  "verdict": {
+    "primary_share": "lit05",
+    "fibula_status": "ok",
+    "fibula_or": 1.1516495481396787,
+    "fibula_ci95": [
+      1.1360642191777803,
+      1.1674486876192838
+    ],
+    "fibula_window": [
+      1.1773999999999998,
+      2.1866
+    ],
+    "fibula_within": false,
+    "a3_verdict": "PASS",
+    "a3_n_within": 2,
+    "dod1_pass": false,
+    "dod3_pass": true,
+    "unchanged_other8": true,
+    "degenerate_ok": true
+  }
+}

@@ -117,10 +117,35 @@ class Part:
     main_kind: str               # "shell" | "solid"
     main_solid_mesh: str | None  # mesh_name of the CORT solid when main_kind=="solid"
     mapping_note: str = ""       # why this representative / σ_c
+    #: Fraction of this part's joint reaction that the representative bone
+    #: actually carries.  Default ``1.0`` = **no load sharing** (the bone is fed
+    #: the WHOLE joint reaction), i.e. exactly the historical behaviour, so the
+    #: frozen outputs are reproduced bit-for-bit.  Set to the tibia/fibula
+    #: literature anchor (tibia ~0.90-0.95 / fibula ~0.05-0.10, cf.
+    #: ``bone.py::fibula_ends`` and ``risk_1d_loadshare.py``) to model ankle
+    #: load sharing; see ``results/opensim_fe/FIBULA_IDENTIFIABILITY_REPORT.md``
+    #: §5.  Applied at the FE ``ref_load`` entry via :func:`effective_ref_load`.
+    load_fraction: float = 1.0
 
     @property
     def sigma_c_mpa(self) -> float:
         return float(MATERIAL_STRENGTH_MPA[self.sigma_key][1])
+
+
+def effective_ref_load(part: Part, joint_load_n: float) -> float:
+    """Allocate a joint reaction to one bone by ``part.load_fraction``.
+
+    The tibia and fibula both draw on the same ``ankle_r`` reaction; in-vivo the
+    fibula carries only ~5-10 % of the axial load while the tibia carries the
+    rest.  ``load_fraction`` (default ``1.0``) expresses that share.  With the
+    default the return value is ``joint_load_n`` unchanged, so the default FE
+    reference load is identical to the pre-load-sharing chain; only a
+    non-default ``load_fraction`` changes the FE solve (and hence the emitted
+    matrix row).  The per-height matrix scaling still uses the *full* joint
+    load profile, so ``sigma(h)`` remains the bone's true stress at its
+    allocated share of ``load(h)``.
+    """
+    return float(joint_load_n) * float(part.load_fraction)
 
 
 def _solid(pids: list[int], mat: str) -> SolidDomainSpec:
@@ -1023,6 +1048,12 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--time-steps", type=int, default=1,
                     help="FE load increments (default 1, same as bone_feb_validate; "
                          "note: >1 makes FEBio mis-ramp this NodalForce setup and diverge)")
+    ap.add_argument("--load-fraction", action="append", default=None,
+                    metavar="BONE=FRAC",
+                    help="optional per-bone share of its joint reaction (repeatable), "
+                         "e.g. --load-fraction fibula_r=0.05 --load-fraction tibia_r=0.95. "
+                         "Default (unset) = 1.0 for every bone = historical NO-sharing "
+                         "behaviour (bit-identical outputs).")
     args = ap.parse_args(argv)
 
     OUT_TEMP.mkdir(parents=True, exist_ok=True)
@@ -1031,6 +1062,17 @@ def main(argv: list[str] | None = None) -> int:
     t_start = time.time()
 
     parts = build_parts()
+    if args.load_fraction:
+        frac: dict[str, float] = {}
+        for item in args.load_fraction:
+            key, _, val = item.partition("=")
+            frac[key.strip()] = float(val)
+        applied: list[str] = []
+        for p in parts:
+            if p.bone in frac or p.cn in frac:
+                p.load_fraction = float(frac.get(p.bone, frac.get(p.cn, 1.0)))
+                applied.append(f"{p.bone}={p.load_fraction:.4f}")
+        log("[init] load_fraction 覆盖: " + (", ".join(applied) or "(无匹配 bone)"))
     log(f"[init] {len(parts)} 部位；heights={HEIGHTS[0]}..{HEIGHTS[-1]}；"
         f"joints={JOINTS}；ref_h={REF_H} m；primary_stat={args.stat}")
 
@@ -1047,8 +1089,9 @@ def main(argv: list[str] | None = None) -> int:
 
     fe: dict[str, dict] = {}
     for part in parts:
-        rl = ref_load_by_joint[part.joint]
-        log(f"[fe] {part.bone}: ref load={rl/1e3:.3f} kN (joint {part.joint}), "
+        rl = effective_ref_load(part, ref_load_by_joint[part.joint])
+        log(f"[fe] {part.bone}: ref load={rl/1e3:.3f} kN (joint {part.joint}, "
+            f"load_fraction={part.load_fraction:.4f}), "
             f"time_steps={args.time_steps}")
         fe[part.bone] = solve_bone_fe(
             part, rl, log, reuse=not args.force_fe, time_steps=args.time_steps)
@@ -1088,6 +1131,13 @@ def main(argv: list[str] | None = None) -> int:
         "grf_peak_ratio_50_over_5": float(loads["grf_peak_n"][-1] / loads["grf_peak_n"][ref_idx]),
         "total_seconds": time.time() - t_start,
     }
+    _lf = {p.bone: p.load_fraction for p in parts if p.load_fraction != 1.0}
+    if _lf:
+        meta["load_fraction"] = _lf
+        meta["load_sharing_note"] = (
+            "per-bone share of the joint reaction; FE ref load = "
+            "joint load x load_fraction (matrix per-height scaling still uses the "
+            "full joint load profile)")
     write_outputs(mat, parts, loads, fe, meta, log)
     write_report(mat, parts, loads, fe, meta, log)
 

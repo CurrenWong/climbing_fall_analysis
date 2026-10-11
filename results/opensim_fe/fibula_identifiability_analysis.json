@@ -1,0 +1,659 @@
+{
+  "meta": {
+    "title": "Fibula all_one identifiability -- read-only forensic analysis",
+    "inputs": {
+      "sigma_nom_source": "fracture_matrix_bc2.json::sigma_vm_mpa[\"median\"][bone]",
+      "sigma_c_source": "paper_alignment.REGIONS weak key <- bone.py::MATERIAL_STRENGTH_MPA",
+      "heights_m": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ]
+    },
+    "notes": [
+      "确定性只读取证；零 FE 调用；零随机；不写回任何既有产物。",
+      "σ_nom/σc 为越阈物理量（非禁用类）；不含 σ/σ_law 比值。"
+    ]
+  },
+  "per_part_sigma_nom_over_sigma_c": [
+    {
+      "bone": "calcaneus_r",
+      "part_cn": "足部",
+      "joint": "subtalar_r",
+      "sigma_c_weak_mpa": 150.0,
+      "sigma_c_shaft_mpa": null,
+      "sigma_nom_h1_mpa": 47.79225592577684,
+      "sigma_nom_h5_mpa": 78.17907448078924,
+      "sigma_nom_h50_mpa": 350.58783680331123,
+      "ratio_min": 0.31861503950517894,
+      "ratio_max": 2.3372522453554083,
+      "ratio_h1": 0.31861503950517894,
+      "ratio_h5": 0.5211938298719283,
+      "ratio_h50": 2.3372522453554083,
+      "n_fractured_h": 38,
+      "first_fracture_h": 13,
+      "all_one": false
+    },
+    {
+      "bone": "tibia_r",
+      "part_cn": "胫骨",
+      "joint": "ankle_r",
+      "sigma_c_weak_mpa": 70.0,
+      "sigma_c_shaft_mpa": 200.0,
+      "sigma_nom_h1_mpa": 30.384732773004515,
+      "sigma_nom_h5_mpa": 49.67539955421902,
+      "sigma_nom_h50_mpa": 222.0367938096222,
+      "ratio_min": 0.43406761104292163,
+      "ratio_max": 3.171954197280317,
+      "ratio_h1": 0.43406761104292163,
+      "ratio_h5": 0.7096485650602717,
+      "ratio_h50": 3.171954197280317,
+      "n_fractured_h": 42,
+      "first_fracture_h": 9,
+      "all_one": false
+    },
+    {
+      "bone": "fibula_r",
+      "part_cn": "腓骨",
+      "joint": "ankle_r",
+      "sigma_c_weak_mpa": 70.0,
+      "sigma_c_shaft_mpa": 160.0,
+      "sigma_nom_h1_mpa": 418.5523726311819,
+      "sigma_nom_h5_mpa": 684.2830081853766,
+      "sigma_nom_h50_mpa": 3058.5764092355507,
+      "ratio_min": 5.979319609016884,
+      "ratio_max": 43.69394870336501,
+      "ratio_h1": 5.979319609016884,
+      "ratio_h5": 9.77547154550538,
+      "ratio_h50": 43.69394870336501,
+      "n_fractured_h": 50,
+      "first_fracture_h": 1,
+      "all_one": true
+    },
+    {
+      "bone": "femur_r",
+      "part_cn": "股骨",
+      "joint": "hip_r",
+      "sigma_c_weak_mpa": 80.0,
+      "sigma_c_shaft_mpa": 220.0,
+      "sigma_nom_h1_mpa": 38.636222483852094,
+      "sigma_nom_h5_mpa": 60.13409277858595,
+      "sigma_nom_h50_mpa": 228.81061244704017,
+      "ratio_min": 0.4829527810481512,
+      "ratio_max": 2.8601326555880022,
+      "ratio_h1": 0.4829527810481512,
+      "ratio_h5": 0.7516761597323244,
+      "ratio_h50": 2.8601326555880022,
+      "n_fractured_h": 42,
+      "first_fracture_h": 9,
+      "all_one": false
+    },
+    {
+      "bone": "R_HIPBONE",
+      "part_cn": "骨盆",
+      "joint": "hip_r",
+      "sigma_c_weak_mpa": 180.0,
+      "sigma_c_shaft_mpa": null,
+      "sigma_nom_h1_mpa": 28.836942627955388,
+      "sigma_nom_h5_mpa": 44.882322130870456,
+      "sigma_nom_h50_mpa": 170.77752636299607,
+      "ratio_min": 0.16020523682197438,
+      "ratio_max": 0.9487640353499782,
+      "ratio_h1": 0.16020523682197438,
+      "ratio_h5": 0.24934623406039141,
+      "ratio_h50": 0.9487640353499782,
+      "n_fractured_h": 0,
+      "first_fracture_h": null,
+      "all_one": false
+    },
+    {
+      "bone": "L3",
+      "part_cn": "腰椎",
+      "joint": "lumbar",
+      "sigma_c_weak_mpa": 150.0,
+      "sigma_c_shaft_mpa": null,
+      "sigma_nom_h1_mpa": 86.87223677610059,
+      "sigma_nom_h5_mpa": 132.30581865664428,
+      "sigma_nom_h50_mpa": 516.3636925449458,
+      "ratio_min": 0.579148245174004,
+      "ratio_max": 3.4424246169663055,
+      "ratio_h1": 0.579148245174004,
+      "ratio_h5": 0.8820387910442952,
+      "ratio_h50": 3.4424246169663055,
+      "n_fractured_h": 44,
+      "first_fracture_h": 7,
+      "all_one": false
+    },
+    {
+      "bone": "T6",
+      "part_cn": "胸椎",
+      "joint": "lumbar",
+      "sigma_c_weak_mpa": 150.0,
+      "sigma_c_shaft_mpa": null,
+      "sigma_nom_h1_mpa": 279.73796977337634,
+      "sigma_nom_h5_mpa": 426.0390024905661,
+      "sigma_nom_h50_mpa": 1662.7467690223639,
+      "ratio_min": 1.8649197984891757,
+      "ratio_max": 11.084978460149092,
+      "ratio_h1": 1.8649197984891757,
+      "ratio_h5": 2.8402600166037737,
+      "ratio_h50": 11.084978460149092,
+      "n_fractured_h": 50,
+      "first_fracture_h": 1,
+      "all_one": true
+    },
+    {
+      "bone": "C5",
+      "part_cn": "颈椎",
+      "joint": "lumbar",
+      "sigma_c_weak_mpa": 150.0,
+      "sigma_c_shaft_mpa": null,
+      "sigma_nom_h1_mpa": 86.3969666147013,
+      "sigma_nom_h5_mpa": 131.58198547218197,
+      "sigma_nom_h50_mpa": 513.5387134192318,
+      "ratio_min": 0.575979777431342,
+      "ratio_max": 3.4235914227948787,
+      "ratio_h1": 0.575979777431342,
+      "ratio_h5": 0.8772132364812131,
+      "ratio_h50": 3.4235914227948787,
+      "n_fractured_h": 44,
+      "first_fracture_h": 7,
+      "all_one": false
+    },
+    {
+      "bone": "parietal_r",
+      "part_cn": "颅骨",
+      "joint": "lumbar",
+      "sigma_c_weak_mpa": 160.0,
+      "sigma_c_shaft_mpa": null,
+      "sigma_nom_h1_mpa": 96.046096165552,
+      "sigma_nom_h5_mpa": 146.27754336186365,
+      "sigma_nom_h50_mpa": 570.8925971181553,
+      "ratio_min": 0.6002881010347,
+      "ratio_max": 3.5680787319884706,
+      "ratio_h1": 0.6002881010347,
+      "ratio_h5": 0.9142346460116478,
+      "ratio_h50": 3.5680787319884706,
+      "n_fractured_h": 45,
+      "first_fracture_h": 6,
+      "all_one": false
+    }
+  ],
+  "fibula": {
+    "bone": "fibula_r",
+    "part_cn": "腓骨",
+    "joint": "ankle_r",
+    "sigma_c_weak_mpa": 70.0,
+    "sigma_c_shaft_mpa": 160.0,
+    "sigma_nom_h1_mpa": 418.5523726311819,
+    "sigma_nom_h5_mpa": 684.2830081853766,
+    "sigma_nom_h50_mpa": 3058.5764092355507,
+    "ratio_min": 5.979319609016884,
+    "ratio_max": 43.69394870336501,
+    "ratio_h1": 5.979319609016884,
+    "ratio_h5": 9.77547154550538,
+    "ratio_h50": 43.69394870336501,
+    "n_fractured_h": 50,
+    "first_fracture_h": 1,
+    "all_one": true
+  },
+  "tibia": {
+    "bone": "tibia_r",
+    "part_cn": "胫骨",
+    "joint": "ankle_r",
+    "sigma_c_weak_mpa": 70.0,
+    "sigma_c_shaft_mpa": 200.0,
+    "sigma_nom_h1_mpa": 30.384732773004515,
+    "sigma_nom_h5_mpa": 49.67539955421902,
+    "sigma_nom_h50_mpa": 222.0367938096222,
+    "ratio_min": 0.43406761104292163,
+    "ratio_max": 3.171954197280317,
+    "ratio_h1": 0.43406761104292163,
+    "ratio_h5": 0.7096485650602717,
+    "ratio_h50": 3.171954197280317,
+    "n_fractured_h": 42,
+    "first_fracture_h": 9,
+    "all_one": false
+  },
+  "sigma_c_sensitivity_fibula": {
+    "sigma_nom_min_mpa": 418.5523726311819,
+    "all_one_critical_sigma_c_mpa": 418.5523726311819,
+    "candidates": [
+      {
+        "sigma_c_mpa": 70.0,
+        "n_fractured_h": 50,
+        "all_one": true,
+        "first_safe_h": null
+      },
+      {
+        "sigma_c_mpa": 80.0,
+        "n_fractured_h": 50,
+        "all_one": true,
+        "first_safe_h": null
+      },
+      {
+        "sigma_c_mpa": 160.0,
+        "n_fractured_h": 50,
+        "all_one": true,
+        "first_safe_h": null
+      },
+      {
+        "sigma_c_mpa": 200.0,
+        "n_fractured_h": 50,
+        "all_one": true,
+        "first_safe_h": null
+      },
+      {
+        "sigma_c_mpa": 220.0,
+        "n_fractured_h": 50,
+        "all_one": true,
+        "first_safe_h": null
+      },
+      {
+        "sigma_c_mpa": 418.5524,
+        "n_fractured_h": 50,
+        "all_one": true,
+        "first_safe_h": null
+      },
+      {
+        "sigma_c_mpa": 419.5524,
+        "n_fractured_h": 49,
+        "all_one": false,
+        "first_safe_h": 1
+      },
+      {
+        "sigma_c_mpa": 500.0,
+        "n_fractured_h": 49,
+        "all_one": false,
+        "first_safe_h": 1
+      }
+    ]
+  },
+  "load_share_counterfactual_fibula": {
+    "sigma_c_mpa": 70.0,
+    "share_h1_safe": 0.16724310881324828,
+    "share_all_safe": 0.022886464365784977,
+    "cases": [
+      {
+        "case": "no_share_1.0",
+        "share": 1.0,
+        "ratio_h1": 5.979319609016884,
+        "ratio_h50": 43.69394870336501,
+        "n_fractured_h": 50,
+        "all_one": true,
+        "all_zero": false,
+        "identifiable_0_1_mixed": false,
+        "first_fracture_h": 1
+      },
+      {
+        "case": "unilateral_05",
+        "share": 0.05,
+        "ratio_h1": 0.29896598045084427,
+        "ratio_h50": 2.1846974351682507,
+        "n_fractured_h": 36,
+        "all_one": false,
+        "all_zero": false,
+        "identifiable_0_1_mixed": true,
+        "first_fracture_h": 15
+      },
+      {
+        "case": "ipsilateral_10",
+        "share": 0.1,
+        "ratio_h1": 0.5979319609016885,
+        "ratio_h50": 4.369394870336501,
+        "n_fractured_h": 45,
+        "all_one": false,
+        "all_zero": false,
+        "identifiable_0_1_mixed": true,
+        "first_fracture_h": 6
+      },
+      {
+        "case": "parallel_stiffness",
+        "share": 0.23234546642114307,
+        "ratio_h1": 1.389267803438115,
+        "ratio_h50": 10.152090891264843,
+        "n_fractured_h": 50,
+        "all_one": true,
+        "all_zero": false,
+        "identifiable_0_1_mixed": false,
+        "first_fracture_h": 1
+      }
+    ]
+  },
+  "fibula_shaft_sigma_c_160": {
+    "sigma_c_mpa": 160.0,
+    "sigma_nom_source": "BC2 median whole-domain",
+    "ratio_min": 2.615952328944887,
+    "ratio_max": 19.116102557722193,
+    "ratio_h1": 2.615952328944887,
+    "ratio_h5": 4.276768801158604,
+    "ratio_h50": 19.116102557722193,
+    "n_fractured_h": 50,
+    "first_fracture_h": 1,
+    "all_one": true
+  },
+  "sibling_tibia_vs_fibula": {
+    "joint_shared": "ankle_r (tibia_r & fibula_r both)",
+    "ankle_load_n": {
+      "h1": 15454.495281029975,
+      "h5": 25266.24913009046,
+      "h50": 112933.90689927466
+    },
+    "sigma_c_mpa_both": 70.0,
+    "A_section_mm2": {
+      "tibia_r": 362.64857364930714,
+      "fibula_r": 101.93640134318377
+    },
+    "sig_nom_fibula_over_tibia": {
+      "h1": 13.77508815884822,
+      "h5": 13.775088158848222,
+      "h50": 13.775088158848222,
+      "min": 13.77508815884822,
+      "max": 13.775088158848222
+    }
+  },
+  "route_yi_ends_shaft": {
+    "腓骨": {
+      "ends_stat_mpa_at_solve": 41.25285122529499,
+      "shaft_stat_mpa_at_solve": 305.3368170146935,
+      "ends_ratio": {
+        "ratio_min": 1.8215485559724371,
+        "ratio_max": 13.310987598877409,
+        "ratio_h1": 1.8215485559724371,
+        "ratio_h5": 2.9780137610996014,
+        "ratio_h50": 13.310987598877409,
+        "n_fractured_h": 50,
+        "first_fracture_h": 1,
+        "all_one": true
+      },
+      "shaft_ratio": {
+        "ratio_min": 5.898532997097867,
+        "ratio_max": 43.103599582072825,
+        "ratio_h1": 5.898532997097867,
+        "ratio_h5": 9.643395109102611,
+        "ratio_h50": 43.103599582072825,
+        "n_fractured_h": 50,
+        "first_fracture_h": 1,
+        "all_one": true
+      },
+      "first_ends_h": 1.0,
+      "first_shaft_h": 1.0
+    },
+    "胫骨": {
+      "ends_stat_mpa_at_solve": 3.6869808002149282,
+      "shaft_stat_mpa_at_solve": 43.38305745593374,
+      "ends_ratio": {
+        "ratio_min": 0.16280122108048495,
+        "ratio_max": 1.1896718469453884,
+        "ratio_h1": 0.16280122108048495,
+        "ratio_h5": 0.2661605012459733,
+        "ratio_h50": 1.1896718469453884,
+        "n_fractured_h": 13,
+        "first_fracture_h": 38,
+        "all_one": false
+      },
+      "shaft_ratio": {
+        "ratio_min": 0.6704632567293802,
+        "ratio_max": 4.899418171734304,
+        "ratio_h1": 0.6704632567293802,
+        "ratio_h5": 1.0961271377066502,
+        "ratio_h50": 4.899418171734304,
+        "n_fractured_h": 46,
+        "first_fracture_h": 5,
+        "all_one": false
+      },
+      "first_ends_h": 38.0,
+      "first_shaft_h": 5.0
+    }
+  },
+  "fe_provenance": {
+    "fibula_r": {
+      "bone": "fibula_r",
+      "status": "ok",
+      "ref_load_n": 25266.24913009046,
+      "fe_solve_load_n": 5000.0,
+      "load_reduction_factor": 5.053249826018091,
+      "n_nodes": 1837,
+      "by_solid": {
+        "fib_spon_end": {
+          "tets": 762,
+          "hexes": 0
+        },
+        "fib_spon_center": {
+          "tets": 2216,
+          "hexes": 0
+        },
+        "fib_cort": {
+          "tets": 0,
+          "hexes": 842
+        }
+      },
+      "linearity": null,
+      "attempts": [
+        [
+          25266.24913009046,
+          false
+        ],
+        [
+          10000.0,
+          false
+        ],
+        [
+          5000.0,
+          true
+        ],
+        [
+          2500.0,
+          false
+        ]
+      ]
+    },
+    "tibia_r": {
+      "bone": "tibia_r",
+      "status": "ok",
+      "ref_load_n": 25266.24913009046,
+      "fe_solve_load_n": 5000.0,
+      "load_reduction_factor": 5.053249826018091,
+      "n_nodes": 7245,
+      "by_solid": {
+        "tibia_spon_end": {
+          "tets": 6651,
+          "hexes": 0
+        },
+        "tibia_spon_center": {
+          "tets": 14482,
+          "hexes": 0
+        },
+        "tibia_cort": {
+          "tets": 0,
+          "hexes": 2417
+        }
+      },
+      "linearity": {
+        "check_load_n": 2500.0,
+        "ratio_max": 7.127063520393471,
+        "ratio_p95": 5.619236230573574,
+        "ratio_mean": 4.747172484389642,
+        "ratio_median": 3.233075029806898,
+        "expected_ratio": 2.0
+      },
+      "attempts": [
+        [
+          25266.24913009046,
+          false
+        ],
+        [
+          10000.0,
+          false
+        ],
+        [
+          5000.0,
+          true
+        ],
+        [
+          2500.0,
+          true
+        ]
+      ]
+    }
+  },
+  "legacy_fibula_fe": {
+    "fe_solve_load_n": 1000.0,
+    "load_reduction_factor": 25.266,
+    "sigma_vm_ref_median_mpa": 2032.5176843757379,
+    "fe_status": "ok"
+  },
+  "g3_primary_p": {
+    "腓骨": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "胫骨": [
+      0.0,
+      0.0025,
+      0.0025,
+      0.0175,
+      0.055,
+      0.11,
+      0.2225,
+      0.325,
+      0.4375,
+      0.52,
+      0.615,
+      0.6925,
+      0.755,
+      0.8025,
+      0.835,
+      0.8775,
+      0.91,
+      0.93,
+      0.945,
+      0.955,
+      0.9675,
+      0.9775,
+      0.98,
+      0.98,
+      0.985,
+      0.985,
+      0.9875,
+      0.9925,
+      0.995,
+      0.9975,
+      0.9975,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  }
+}

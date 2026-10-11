@@ -1,0 +1,2066 @@
+{
+  "meta": {
+    "title": "Fibula FE magnitude audit -- tibia/fibula load sharing",
+    "generated_at": "2026-10-11 11:37:24",
+    "scope": "FIBULA_IDENTIFIABILITY_REPORT.md §5 (4 items)",
+    "fe_conditions": "align_pca=True (BC2 opt-in), time_steps=1",
+    "febio": {
+      "exe": "D:\\Program\\FEBioStudio\\bin\\febio4.exe",
+      "version": "4.13.0"
+    },
+    "frozen_inputs_read_only": [
+      "results/opensim_fe/fracture_matrix_bc2.json",
+      "temp/opensim_fe/fracture_matrix_bc2/load_chain.npz",
+      "temp/opensim_fe/fracture_matrix_bc2/<b>/<b>_fe.json"
+    ],
+    "new_outputs": [
+      "results/opensim_fe/fibula_fe_audit_matrix.json",
+      "results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md",
+      "temp/opensim_fe/fibula_fe_audit/"
+    ],
+    "policies": [
+      0.05,
+      0.075,
+      0.1
+    ],
+    "notes": [
+      "Default load_fraction=1.0 path re-verified bit-identical vs frozen BC2.",
+      "No σc change, no G3 re-run, no target back-solving."
+    ],
+    "total_seconds": 353.3020133972168
+  },
+  "ankle_ref_load_n": 25266.24913009046,
+  "default_path_identity": {
+    "load_fraction": 1.0,
+    "max_abs_sigma_delta_vs_frozen_bc2": 0.0,
+    "bit_identical": true
+  },
+  "baseline_fibula_row": {
+    "load_fraction": 1.0,
+    "sigma_nom_median_h1_h5_h50_mpa": [
+      418.5523726311819,
+      684.2830081853766,
+      3058.5764092355507
+    ],
+    "weak_sigma_c_70": {
+      "sigma_c_mpa": 70.0,
+      "ratio_min": 5.979319609016884,
+      "ratio_max": 43.69394870336501,
+      "ratio_h1": 5.979319609016884,
+      "ratio_h5": 9.77547154550538,
+      "ratio_h50": 43.69394870336501,
+      "n_fractured_h": 50,
+      "n_safe_h": 0,
+      "first_fracture_h": 1,
+      "all_one": true,
+      "all_zero": false,
+      "identifiable_0_1_mixed": false,
+      "matrix": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "logistic": {
+        "status": "all_one",
+        "n": 50,
+        "n_fracture": 50,
+        "n_safe": 0,
+        "note": "区间内始终骨折（常值 1）"
+      }
+    },
+    "shaft_sigma_c_160": {
+      "sigma_c_mpa": 160.0,
+      "ratio_min": 2.615952328944887,
+      "ratio_max": 19.116102557722193,
+      "ratio_h1": 2.615952328944887,
+      "ratio_h5": 4.276768801158604,
+      "ratio_h50": 19.116102557722193,
+      "n_fractured_h": 50,
+      "n_safe_h": 0,
+      "first_fracture_h": 1,
+      "all_one": true,
+      "all_zero": false,
+      "identifiable_0_1_mixed": false
+    },
+    "fe": {
+      "status": "ok",
+      "fe_solve_load_n": 5000.0,
+      "load_reduction_factor": 5.053249826018091,
+      "linearity": null,
+      "attempts": [
+        [
+          25266.24913009046,
+          false
+        ],
+        [
+          10000.0,
+          false
+        ],
+        [
+          5000.0,
+          true
+        ],
+        [
+          2500.0,
+          false
+        ]
+      ]
+    }
+  },
+  "policies": {
+    "share_0.050": {
+      "fibula_share": 0.05,
+      "tibia_share": 0.95,
+      "allocated_ref_load_n": 1263.312456504523,
+      "fe": {
+        "status": "failed",
+        "fe_solve_load_n": null,
+        "load_reduction_factor": null,
+        "linearity": null,
+        "error": "RuntimeError: 无可用载荷：所有候选均发散 [1263.312456504523, 1000.0]",
+        "retries": [
+          {
+            "try": 0,
+            "status": "failed",
+            "fe_solve_load_n": null,
+            "load_reduction_factor": null,
+            "attempts": [
+              [
+                1263.312456504523,
+                false,
+                "search"
+              ],
+              [
+                1000.0,
+                false,
+                "search"
+              ]
+            ],
+            "error": "RuntimeError: 无可用载荷：所有候选均发散 [1263.312456504523, 1000.0]"
+          },
+          {
+            "try": 1,
+            "status": "failed",
+            "fe_solve_load_n": null,
+            "load_reduction_factor": null,
+            "attempts": [
+              [
+                1263.312456504523,
+                false,
+                "search"
+              ],
+              [
+                1000.0,
+                false,
+                "search"
+              ]
+            ],
+            "error": "RuntimeError: 无可用载荷：所有候选均发散 [1263.312456504523, 1000.0]"
+          }
+        ]
+      },
+      "search": {
+        "attempt_sequence": [
+          [
+            1263.312456504523,
+            false,
+            "search"
+          ],
+          [
+            1000.0,
+            false,
+            "search"
+          ]
+        ]
+      },
+      "fe_row_weak_sigma_c_70": {
+        "error": "no FE solution"
+      },
+      "fe_sigma_nom_h1_h5_h50_mpa": null,
+      "linear_share_counterfactual_weak_sigma_c_70": {
+        "sigma_c_mpa": 70.0,
+        "ratio_min": 0.29896598045084427,
+        "ratio_max": 2.1846974351682507,
+        "ratio_h1": 0.29896598045084427,
+        "ratio_h5": 0.48877357727526904,
+        "ratio_h50": 2.1846974351682507,
+        "n_fractured_h": 36,
+        "n_safe_h": 14,
+        "first_fracture_h": 15,
+        "all_one": false,
+        "all_zero": false,
+        "identifiable_0_1_mixed": true,
+        "matrix": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "logistic": {
+          "status": "complete_separation",
+          "n": 50,
+          "n_fracture": 36,
+          "n_safe": 14,
+          "separation_threshold_m": 14.0,
+          "note": "存在完美阈值 14 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+        },
+        "sigma_nom_median_h1_h5_h50_mpa": [
+          20.9276186315591,
+          34.21415040926883,
+          152.92882046177755
+        ]
+      },
+      "tibia_fe": {
+        "status": "ok",
+        "fe_solve_load_n": 24002.936673585933,
+        "load_reduction_factor": 1.0,
+        "linearity": null
+      },
+      "corrected_matrix_rows": [
+        {
+          "part_cn": "足部",
+          "bone": "calcaneus_r",
+          "joint": "subtalar_r",
+          "sigma_key": "calcaneus",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "solid",
+          "main_domain": "solid_calc_cort",
+          "main_domain_n_elem": 634,
+          "fe_status": "ok",
+          "fe_solve_load_n": 25354.401972520634,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 25354.401972520634,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "跟骨是 [Y25] 足部加载的代表骨；无壳 → 取实体 CORT 域。σ_c=150（calcaneus）。",
+          "sigma_vm_ref_mpa": {
+            "max": 375.5676653844511,
+            "p95": 241.24952798380855,
+            "mean": 86.6932954847542,
+            "median": 78.17907448078924
+          },
+          "sigma_vm_ref": 78.17907448078924,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 2,
+          "first_fracture_mean_m": 12,
+          "first_fracture_median_m": 13,
+          "utilization_at_5m": 0.5211938298719283,
+          "load_scale_1_to_50": 4.484420404458233
+        },
+        {
+          "part_cn": "胫骨",
+          "bone": "tibia_r",
+          "joint": "ankle_r",
+          "sigma_key": "tibia_shaft",
+          "sigma_c_mpa": 200.0,
+          "main_kind": "solid",
+          "main_domain": "solid_tibia_cort",
+          "main_domain_n_elem": 2417,
+          "fe_status": "ok",
+          "fe_solve_load_n": 24002.936673585933,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 25266.24913009046,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "合并 3 PID 成一根骨（PARTS_MAPPING §1）；THUMS 胫 CORT 为实体 hex。无壳 → 取实体 CORT 域。σ_c=200（tibia_shaft，按任务默认；胫骨两端 70 见诚实边界）。",
+          "sigma_vm_ref_mpa": {
+            "max": 3035.9600102486493,
+            "p95": 1259.2109356405201,
+            "mean": 248.26107688102897,
+            "median": 109.228354856681
+          },
+          "sigma_vm_ref": 109.228354856681,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 3,
+          "first_fracture_median_m": 12,
+          "utilization_at_5m": 0.5461417742834049,
+          "load_scale_1_to_50": 4.469753556129459
+        },
+        {
+          "part_cn": "腓骨",
+          "bone": "fibula_r",
+          "joint": "ankle_r",
+          "sigma_key": "fibula_shaft",
+          "sigma_c_mpa": 160.0,
+          "main_kind": "solid",
+          "main_domain": null,
+          "main_domain_n_elem": null,
+          "fe_status": "failed",
+          "fe_solve_load_n": null,
+          "load_reduction_factor": null,
+          "load_ref_n": 25266.24913009046,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "合并 3 PID；无壳 → 实体 CORT 域。σ_c=160（fibula_shaft）。",
+          "error": "主承载实体域 solid_fib_cort 不在 post.domains",
+          "first_fracture_max_m": null,
+          "first_fracture_p95_m": null,
+          "first_fracture_mean_m": null,
+          "first_fracture_median_m": null
+        },
+        {
+          "part_cn": "股骨",
+          "bone": "femur_r",
+          "joint": "hip_r",
+          "sigma_key": "femur_shaft",
+          "sigma_c_mpa": 220.0,
+          "main_kind": "solid",
+          "main_domain": "solid_fem_cort",
+          "main_domain_n_elem": 3060,
+          "fe_status": "ok",
+          "fe_solve_load_n": 15227.651697700654,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 15227.651697700654,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "合并 3 PID；无壳 → 实体 CORT 域。σ_c=220（femur_shaft；股骨颈 80 见诚实边界）。",
+          "sigma_vm_ref_mpa": {
+            "max": 1288.6667515235722,
+            "p95": 942.1572031972739,
+            "mean": 221.02754679824525,
+            "median": 60.13409277858595
+          },
+          "sigma_vm_ref": 60.13409277858595,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 5,
+          "first_fracture_median_m": 47,
+          "utilization_at_5m": 0.2733367853572089,
+          "load_scale_1_to_50": 3.8050064759357403
+        },
+        {
+          "part_cn": "骨盆",
+          "bone": "R_HIPBONE",
+          "joint": "hip_r",
+          "sigma_key": "pelvis",
+          "sigma_c_mpa": 180.0,
+          "main_kind": "shell",
+          "main_domain": "shell_hip_cort_83500205",
+          "main_domain_n_elem": 2232,
+          "fe_status": "ok",
+          "fe_solve_load_n": 15227.651697700654,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 15227.651697700654,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取髋骨代表骨（骶/耻骨联合未并，PARTS_MAPPING §3）；有壳 → 取最受载壳域（每统计量取跨 9 壳的最大）。σ_c=180（pelvis）。",
+          "sigma_vm_ref_mpa": {
+            "max": 203.4969094165073,
+            "p95": 140.60933169484326,
+            "mean": 57.425604841834655,
+            "median": 44.882322130870456
+          },
+          "sigma_vm_ref": 44.882322130870456,
+          "main_domain_detail": {
+            "shell_hip_cort_83500201": {
+              "max": 176.8108267981649,
+              "p95": 103.89903697089807,
+              "mean": 30.720014584902756,
+              "median": 24.381809036909985
+            },
+            "shell_hip_cort_83500202": {
+              "max": 130.83650170913697,
+              "p95": 53.340486030691594,
+              "mean": 17.952189062100544,
+              "median": 12.266545973065533
+            },
+            "shell_hip_cort_83500203": {
+              "max": 0.39129726529373043,
+              "p95": 0.29046275708385993,
+              "mean": 0.07948321371750125,
+              "median": 0.021360614503059403
+            },
+            "shell_hip_cort_83500204": {
+              "max": 116.23497109324266,
+              "p95": 81.89836844308998,
+              "mean": 28.807777834669277,
+              "median": 26.753109271623224
+            },
+            "shell_hip_cort_83500205": {
+              "max": 203.4969094165073,
+              "p95": 140.60933169484326,
+              "mean": 57.425604841834655,
+              "median": 42.63595386644728
+            },
+            "shell_hip_cort_83500206": {
+              "max": 52.046642409398686,
+              "p95": 51.01347841818511,
+              "mean": 45.34586165418243,
+              "median": 44.882322130870456
+            },
+            "shell_hip_cort_83500207": {
+              "max": 95.98282505455308,
+              "p95": 64.09743526190306,
+              "mean": 9.83344495438191,
+              "median": 0.006765427321091097
+            },
+            "shell_hip_cort_83500208": {
+              "max": 132.81485676517426,
+              "p95": 70.9716780987722,
+              "mean": 10.355249333309777,
+              "median": 0.03958722565116579
+            },
+            "shell_hip_cort_83500209": {
+              "max": 144.34714379838013,
+              "p95": 98.52593079382326,
+              "mean": 37.66784039519761,
+              "median": 38.42840156919623
+            }
+          },
+          "first_fracture_max_m": 4,
+          "first_fracture_p95_m": 8,
+          "first_fracture_mean_m": 37,
+          "first_fracture_median_m": null,
+          "utilization_at_5m": 0.24934623406039141,
+          "load_scale_1_to_50": 3.8050064759357403
+        },
+        {
+          "part_cn": "腰椎",
+          "bone": "L3",
+          "joint": "lumbar",
+          "sigma_key": "spine",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "shell",
+          "main_domain": "shell_l3_cort",
+          "main_domain_n_elem": 1340,
+          "fe_status": "ok",
+          "fe_solve_load_n": 22087.579953288558,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单代表椎体 L3（左右 SPON 两半合并，PARTS_MAPPING §3）；有壳 → 壳域。σ_c=150（spine）。",
+          "sigma_vm_ref_mpa": {
+            "max": 1743.9462959149412,
+            "p95": 554.8132503031882,
+            "mean": 185.20358214654104,
+            "median": 132.30581865664428
+          },
+          "sigma_vm_ref": 132.30581865664428,
+          "main_domain_detail": {
+            "shell_l3_cort": {
+              "max": 1743.9462959149412,
+              "p95": 554.8132503031882,
+              "mean": 185.20358214654104,
+              "median": 132.30581865664428
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 2,
+          "first_fracture_median_m": 7,
+          "utilization_at_5m": 0.8820387910442952,
+          "load_scale_1_to_50": 3.9028041078449918
+        },
+        {
+          "part_cn": "胸椎",
+          "bone": "T6",
+          "joint": "lumbar",
+          "sigma_key": "spine",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "shell",
+          "main_domain": "shell_t6_cort",
+          "main_domain_n_elem": 712,
+          "fe_status": "ok",
+          "fe_solve_load_n": 10000.0,
+          "load_reduction_factor": 2.2087579953288556,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单代表椎体 T6；有壳 → 壳域。σ_c=150（spine）。",
+          "sigma_vm_ref_mpa": {
+            "max": 3319.486361442326,
+            "p95": 1952.5210965884014,
+            "mean": 638.480653522909,
+            "median": 426.0390024905661
+          },
+          "sigma_vm_ref": 426.0390024905661,
+          "main_domain_detail": {
+            "shell_t6_cort": {
+              "max": 1502.8746329215198,
+              "p95": 883.9905053960863,
+              "mean": 289.0677271449322,
+              "median": 192.8862299045733
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 1,
+          "first_fracture_median_m": 1,
+          "utilization_at_5m": 2.8402600166037737,
+          "load_scale_1_to_50": 3.9028041078449918
+        },
+        {
+          "part_cn": "颈椎",
+          "bone": "C5",
+          "joint": "lumbar",
+          "sigma_key": "spine",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "shell",
+          "main_domain": "shell_c5_cort",
+          "main_domain_n_elem": 466,
+          "fe_status": "ok",
+          "fe_solve_load_n": 22087.579953288558,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单代表椎体 C5；有壳 → 壳域。σ_c=150（spine）。",
+          "sigma_vm_ref_mpa": {
+            "max": 1008.9248074140002,
+            "p95": 641.1051790340571,
+            "mean": 195.67139017624604,
+            "median": 131.58198547218197
+          },
+          "sigma_vm_ref": 131.58198547218197,
+          "main_domain_detail": {
+            "shell_c5_cort": {
+              "max": 1008.9248074140002,
+              "p95": 641.1051790340571,
+              "mean": 195.67139017624604,
+              "median": 131.58198547218197
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 2,
+          "first_fracture_median_m": 7,
+          "utilization_at_5m": 0.8772132364812131,
+          "load_scale_1_to_50": 3.9028041078449918
+        },
+        {
+          "part_cn": "颅骨",
+          "bone": "parietal_r",
+          "joint": "lumbar",
+          "sigma_key": "skull",
+          "sigma_c_mpa": 160.0,
+          "main_kind": "shell",
+          "main_domain": "shell_par_int",
+          "main_domain_n_elem": 2860,
+          "fe_status": "ok",
+          "fe_solve_load_n": 22087.579953288558,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单块代表颅骨 parietal_r（整颅是薄壳穹顶，不可当实心骨，PARTS_MAPPING §4）；有壳 → 壳域。σ_c=160（skull）。载荷沿用 lumbar（默认映射，非物理结论，见诚实边界）。",
+          "sigma_vm_ref_mpa": {
+            "max": 586.1076448521993,
+            "p95": 285.3365131391469,
+            "mean": 133.05007204832626,
+            "median": 146.27754336186365
+          },
+          "sigma_vm_ref": 146.27754336186365,
+          "main_domain_detail": {
+            "shell_par_ext": {
+              "max": 394.31231047025614,
+              "p95": 241.91651320715187,
+              "mean": 92.12493944953033,
+              "median": 83.24185091909685
+            },
+            "shell_par_int": {
+              "max": 586.1076448521993,
+              "p95": 285.3365131391469,
+              "mean": 133.05007204832626,
+              "median": 146.27754336186365
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 8,
+          "first_fracture_median_m": 6,
+          "utilization_at_5m": 0.9142346460116478,
+          "load_scale_1_to_50": 3.9028041078449918
+        }
+      ]
+    },
+    "share_0.075": {
+      "fibula_share": 0.075,
+      "tibia_share": 0.925,
+      "allocated_ref_load_n": 1894.9686847567843,
+      "fe": {
+        "status": "ok",
+        "fe_solve_load_n": 1000.0,
+        "load_reduction_factor": 1.8949686847567844,
+        "linearity": {
+          "check_load_n": 500.0,
+          "ratio_max": 16.039562689902148,
+          "ratio_p95": 13.740861151756011,
+          "ratio_mean": 13.909334196155964,
+          "ratio_median": 21.800239038629936,
+          "expected_ratio": 2.0
+        },
+        "error": "",
+        "retries": [
+          {
+            "try": 0,
+            "status": "ok",
+            "fe_solve_load_n": 1000.0,
+            "load_reduction_factor": 1.8949686847567844,
+            "attempts": [
+              [
+                1894.9686847567843,
+                false,
+                "search"
+              ],
+              [
+                1000.0,
+                true,
+                "search"
+              ],
+              [
+                500.0,
+                true,
+                "linearity_check"
+              ]
+            ],
+            "error": ""
+          }
+        ]
+      },
+      "search": {
+        "attempt_sequence": [
+          [
+            1894.9686847567843,
+            false,
+            "search"
+          ],
+          [
+            1000.0,
+            true,
+            "search"
+          ],
+          [
+            500.0,
+            true,
+            "linearity_check"
+          ]
+        ]
+      },
+      "fe_row_weak_sigma_c_70": {
+        "sigma_c_mpa": 70.0,
+        "ratio_min": 1.851787185888369,
+        "ratio_max": 13.531956744332406,
+        "ratio_h1": 1.851787185888369,
+        "ratio_h5": 3.027450299978122,
+        "ratio_h50": 13.531956744332406,
+        "n_fractured_h": 50,
+        "n_safe_h": 0,
+        "first_fracture_h": 1,
+        "all_one": true,
+        "all_zero": false,
+        "identifiable_0_1_mixed": false,
+        "matrix": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "logistic": {
+          "status": "all_one",
+          "n": 50,
+          "n_fracture": 50,
+          "n_safe": 0,
+          "note": "区间内始终骨折（常值 1）"
+        }
+      },
+      "fe_sigma_nom_h1_h5_h50_mpa": [
+        129.62510301218583,
+        211.92152099846854,
+        947.2369721032685
+      ],
+      "linear_share_counterfactual_weak_sigma_c_70": {
+        "sigma_c_mpa": 70.0,
+        "ratio_min": 0.4484489706762663,
+        "ratio_max": 3.2770461527523755,
+        "ratio_h1": 0.4484489706762663,
+        "ratio_h5": 0.7331603659129035,
+        "ratio_h50": 3.2770461527523755,
+        "n_fractured_h": 43,
+        "n_safe_h": 7,
+        "first_fracture_h": 8,
+        "all_one": false,
+        "all_zero": false,
+        "identifiable_0_1_mixed": true,
+        "matrix": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "logistic": {
+          "status": "complete_separation",
+          "n": 50,
+          "n_fracture": 43,
+          "n_safe": 7,
+          "separation_threshold_m": 7.0,
+          "note": "存在完美阈值 7 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+        },
+        "sigma_nom_median_h1_h5_h50_mpa": [
+          31.39142794733864,
+          51.321225613903245,
+          229.3932306926663
+        ]
+      },
+      "tibia_fe": {
+        "status": "ok",
+        "fe_solve_load_n": 5000.0,
+        "load_reduction_factor": 4.674256089066735,
+        "linearity": {
+          "check_load_n": 2500.0,
+          "ratio_max": 7.127063520393471,
+          "ratio_p95": 5.619236230573574,
+          "ratio_mean": 4.747172484330969,
+          "ratio_median": 3.2330750152283816,
+          "expected_ratio": 2.0
+        }
+      },
+      "corrected_matrix_rows": [
+        {
+          "part_cn": "足部",
+          "bone": "calcaneus_r",
+          "joint": "subtalar_r",
+          "sigma_key": "calcaneus",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "solid",
+          "main_domain": "solid_calc_cort",
+          "main_domain_n_elem": 634,
+          "fe_status": "ok",
+          "fe_solve_load_n": 25354.401972520634,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 25354.401972520634,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "跟骨是 [Y25] 足部加载的代表骨；无壳 → 取实体 CORT 域。σ_c=150（calcaneus）。",
+          "sigma_vm_ref_mpa": {
+            "max": 375.5676653844511,
+            "p95": 241.24952798380855,
+            "mean": 86.6932954847542,
+            "median": 78.17907448078924
+          },
+          "sigma_vm_ref": 78.17907448078924,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 2,
+          "first_fracture_mean_m": 12,
+          "first_fracture_median_m": 13,
+          "utilization_at_5m": 0.5211938298719283,
+          "load_scale_1_to_50": 4.484420404458233
+        },
+        {
+          "part_cn": "胫骨",
+          "bone": "tibia_r",
+          "joint": "ankle_r",
+          "sigma_key": "tibia_shaft",
+          "sigma_c_mpa": 200.0,
+          "main_kind": "solid",
+          "main_domain": "solid_tibia_cort",
+          "main_domain_n_elem": 2417,
+          "fe_status": "ok",
+          "fe_solve_load_n": 5000.0,
+          "load_reduction_factor": 4.674256089066735,
+          "load_ref_n": 25266.24913009046,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "合并 3 PID 成一根骨（PARTS_MAPPING §1）；THUMS 胫 CORT 为实体 hex。无壳 → 取实体 CORT 域。σ_c=200（tibia_shaft，按任务默认；胫骨两端 70 见诚实边界）。",
+          "sigma_vm_ref_mpa": {
+            "max": 873.846109970852,
+            "p95": 475.96239395875506,
+            "mean": 113.01214991145743,
+            "median": 45.94974438045694
+          },
+          "sigma_vm_ref": 45.94974438045694,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 12,
+          "first_fracture_median_m": 48,
+          "utilization_at_5m": 0.2297487219022847,
+          "load_scale_1_to_50": 4.469753556129459
+        },
+        {
+          "part_cn": "腓骨",
+          "bone": "fibula_r",
+          "joint": "ankle_r",
+          "sigma_key": "fibula_shaft",
+          "sigma_c_mpa": 160.0,
+          "main_kind": "solid",
+          "main_domain": "solid_fib_cort",
+          "main_domain_n_elem": 842,
+          "fe_status": "ok",
+          "fe_solve_load_n": 1000.0,
+          "load_reduction_factor": 1.8949686847567844,
+          "load_ref_n": 25266.24913009046,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "合并 3 PID；无壳 → 实体 CORT 域。σ_c=160（fibula_shaft）。",
+          "sigma_vm_ref_mpa": {
+            "max": 2033.8123020026137,
+            "p95": 1302.8940628915168,
+            "mean": 426.32719640553415,
+            "median": 211.92152099846854
+          },
+          "sigma_vm_ref": 211.92152099846854,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 1,
+          "first_fracture_median_m": 2,
+          "utilization_at_5m": 1.3245095062404284,
+          "load_scale_1_to_50": 4.469753556129459
+        },
+        {
+          "part_cn": "股骨",
+          "bone": "femur_r",
+          "joint": "hip_r",
+          "sigma_key": "femur_shaft",
+          "sigma_c_mpa": 220.0,
+          "main_kind": "solid",
+          "main_domain": "solid_fem_cort",
+          "main_domain_n_elem": 3060,
+          "fe_status": "ok",
+          "fe_solve_load_n": 15227.651697700654,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 15227.651697700654,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "合并 3 PID；无壳 → 实体 CORT 域。σ_c=220（femur_shaft；股骨颈 80 见诚实边界）。",
+          "sigma_vm_ref_mpa": {
+            "max": 1288.6667515235722,
+            "p95": 942.1572031972739,
+            "mean": 221.02754679824525,
+            "median": 60.13409277858595
+          },
+          "sigma_vm_ref": 60.13409277858595,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 5,
+          "first_fracture_median_m": 47,
+          "utilization_at_5m": 0.2733367853572089,
+          "load_scale_1_to_50": 3.8050064759357403
+        },
+        {
+          "part_cn": "骨盆",
+          "bone": "R_HIPBONE",
+          "joint": "hip_r",
+          "sigma_key": "pelvis",
+          "sigma_c_mpa": 180.0,
+          "main_kind": "shell",
+          "main_domain": "shell_hip_cort_83500205",
+          "main_domain_n_elem": 2232,
+          "fe_status": "ok",
+          "fe_solve_load_n": 15227.651697700654,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 15227.651697700654,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取髋骨代表骨（骶/耻骨联合未并，PARTS_MAPPING §3）；有壳 → 取最受载壳域（每统计量取跨 9 壳的最大）。σ_c=180（pelvis）。",
+          "sigma_vm_ref_mpa": {
+            "max": 203.4969094165073,
+            "p95": 140.60933169484326,
+            "mean": 57.425604841834655,
+            "median": 44.882322130870456
+          },
+          "sigma_vm_ref": 44.882322130870456,
+          "main_domain_detail": {
+            "shell_hip_cort_83500201": {
+              "max": 176.8108267981649,
+              "p95": 103.89903697089807,
+              "mean": 30.720014584902756,
+              "median": 24.381809036909985
+            },
+            "shell_hip_cort_83500202": {
+              "max": 130.83650170913697,
+              "p95": 53.340486030691594,
+              "mean": 17.952189062100544,
+              "median": 12.266545973065533
+            },
+            "shell_hip_cort_83500203": {
+              "max": 0.39129726529373043,
+              "p95": 0.29046275708385993,
+              "mean": 0.07948321371750125,
+              "median": 0.021360614503059403
+            },
+            "shell_hip_cort_83500204": {
+              "max": 116.23497109324266,
+              "p95": 81.89836844308998,
+              "mean": 28.807777834669277,
+              "median": 26.753109271623224
+            },
+            "shell_hip_cort_83500205": {
+              "max": 203.4969094165073,
+              "p95": 140.60933169484326,
+              "mean": 57.425604841834655,
+              "median": 42.63595386644728
+            },
+            "shell_hip_cort_83500206": {
+              "max": 52.046642409398686,
+              "p95": 51.01347841818511,
+              "mean": 45.34586165418243,
+              "median": 44.882322130870456
+            },
+            "shell_hip_cort_83500207": {
+              "max": 95.98282505455308,
+              "p95": 64.09743526190306,
+              "mean": 9.83344495438191,
+              "median": 0.006765427321091097
+            },
+            "shell_hip_cort_83500208": {
+              "max": 132.81485676517426,
+              "p95": 70.9716780987722,
+              "mean": 10.355249333309777,
+              "median": 0.03958722565116579
+            },
+            "shell_hip_cort_83500209": {
+              "max": 144.34714379838013,
+              "p95": 98.52593079382326,
+              "mean": 37.66784039519761,
+              "median": 38.42840156919623
+            }
+          },
+          "first_fracture_max_m": 4,
+          "first_fracture_p95_m": 8,
+          "first_fracture_mean_m": 37,
+          "first_fracture_median_m": null,
+          "utilization_at_5m": 0.24934623406039141,
+          "load_scale_1_to_50": 3.8050064759357403
+        },
+        {
+          "part_cn": "腰椎",
+          "bone": "L3",
+          "joint": "lumbar",
+          "sigma_key": "spine",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "shell",
+          "main_domain": "shell_l3_cort",
+          "main_domain_n_elem": 1340,
+          "fe_status": "ok",
+          "fe_solve_load_n": 22087.579953288558,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单代表椎体 L3（左右 SPON 两半合并，PARTS_MAPPING §3）；有壳 → 壳域。σ_c=150（spine）。",
+          "sigma_vm_ref_mpa": {
+            "max": 1743.9462959149412,
+            "p95": 554.8132503031882,
+            "mean": 185.20358214654104,
+            "median": 132.30581865664428
+          },
+          "sigma_vm_ref": 132.30581865664428,
+          "main_domain_detail": {
+            "shell_l3_cort": {
+              "max": 1743.9462959149412,
+              "p95": 554.8132503031882,
+              "mean": 185.20358214654104,
+              "median": 132.30581865664428
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 2,
+          "first_fracture_median_m": 7,
+          "utilization_at_5m": 0.8820387910442952,
+          "load_scale_1_to_50": 3.9028041078449918
+        },
+        {
+          "part_cn": "胸椎",
+          "bone": "T6",
+          "joint": "lumbar",
+          "sigma_key": "spine",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "shell",
+          "main_domain": "shell_t6_cort",
+          "main_domain_n_elem": 712,
+          "fe_status": "ok",
+          "fe_solve_load_n": 10000.0,
+          "load_reduction_factor": 2.2087579953288556,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单代表椎体 T6；有壳 → 壳域。σ_c=150（spine）。",
+          "sigma_vm_ref_mpa": {
+            "max": 3319.486361442326,
+            "p95": 1952.5210965884014,
+            "mean": 638.480653522909,
+            "median": 426.0390024905661
+          },
+          "sigma_vm_ref": 426.0390024905661,
+          "main_domain_detail": {
+            "shell_t6_cort": {
+              "max": 1502.8746329215198,
+              "p95": 883.9905053960863,
+              "mean": 289.0677271449322,
+              "median": 192.8862299045733
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 1,
+          "first_fracture_median_m": 1,
+          "utilization_at_5m": 2.8402600166037737,
+          "load_scale_1_to_50": 3.9028041078449918
+        },
+        {
+          "part_cn": "颈椎",
+          "bone": "C5",
+          "joint": "lumbar",
+          "sigma_key": "spine",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "shell",
+          "main_domain": "shell_c5_cort",
+          "main_domain_n_elem": 466,
+          "fe_status": "ok",
+          "fe_solve_load_n": 22087.579953288558,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单代表椎体 C5；有壳 → 壳域。σ_c=150（spine）。",
+          "sigma_vm_ref_mpa": {
+            "max": 1008.9248074140002,
+            "p95": 641.1051790340571,
+            "mean": 195.67139017624604,
+            "median": 131.58198547218197
+          },
+          "sigma_vm_ref": 131.58198547218197,
+          "main_domain_detail": {
+            "shell_c5_cort": {
+              "max": 1008.9248074140002,
+              "p95": 641.1051790340571,
+              "mean": 195.67139017624604,
+              "median": 131.58198547218197
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 2,
+          "first_fracture_median_m": 7,
+          "utilization_at_5m": 0.8772132364812131,
+          "load_scale_1_to_50": 3.9028041078449918
+        },
+        {
+          "part_cn": "颅骨",
+          "bone": "parietal_r",
+          "joint": "lumbar",
+          "sigma_key": "skull",
+          "sigma_c_mpa": 160.0,
+          "main_kind": "shell",
+          "main_domain": "shell_par_int",
+          "main_domain_n_elem": 2860,
+          "fe_status": "ok",
+          "fe_solve_load_n": 22087.579953288558,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单块代表颅骨 parietal_r（整颅是薄壳穹顶，不可当实心骨，PARTS_MAPPING §4）；有壳 → 壳域。σ_c=160（skull）。载荷沿用 lumbar（默认映射，非物理结论，见诚实边界）。",
+          "sigma_vm_ref_mpa": {
+            "max": 586.1076448521993,
+            "p95": 285.3365131391469,
+            "mean": 133.05007204832626,
+            "median": 146.27754336186365
+          },
+          "sigma_vm_ref": 146.27754336186365,
+          "main_domain_detail": {
+            "shell_par_ext": {
+              "max": 394.31231047025614,
+              "p95": 241.91651320715187,
+              "mean": 92.12493944953033,
+              "median": 83.24185091909685
+            },
+            "shell_par_int": {
+              "max": 586.1076448521993,
+              "p95": 285.3365131391469,
+              "mean": 133.05007204832626,
+              "median": 146.27754336186365
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 8,
+          "first_fracture_median_m": 6,
+          "utilization_at_5m": 0.9142346460116478,
+          "load_scale_1_to_50": 3.9028041078449918
+        }
+      ]
+    },
+    "share_0.100": {
+      "fibula_share": 0.1,
+      "tibia_share": 0.9,
+      "allocated_ref_load_n": 2526.624913009046,
+      "fe": {
+        "status": "failed",
+        "fe_solve_load_n": null,
+        "load_reduction_factor": null,
+        "linearity": null,
+        "error": "RuntimeError: 无可用载荷：所有候选均发散 [2526.624913009046, 2500.0, 1000.0]",
+        "retries": [
+          {
+            "try": 0,
+            "status": "failed",
+            "fe_solve_load_n": null,
+            "load_reduction_factor": null,
+            "attempts": [
+              [
+                2526.624913009046,
+                false,
+                "search"
+              ],
+              [
+                2500.0,
+                false,
+                "search"
+              ],
+              [
+                1000.0,
+                false,
+                "search"
+              ]
+            ],
+            "error": "RuntimeError: 无可用载荷：所有候选均发散 [2526.624913009046, 2500.0, 1000.0]"
+          },
+          {
+            "try": 1,
+            "status": "failed",
+            "fe_solve_load_n": null,
+            "load_reduction_factor": null,
+            "attempts": [
+              [
+                2526.624913009046,
+                false,
+                "search"
+              ],
+              [
+                2500.0,
+                false,
+                "search"
+              ],
+              [
+                1000.0,
+                false,
+                "search"
+              ]
+            ],
+            "error": "RuntimeError: 无可用载荷：所有候选均发散 [2526.624913009046, 2500.0, 1000.0]"
+          }
+        ]
+      },
+      "search": {
+        "attempt_sequence": [
+          [
+            2526.624913009046,
+            false,
+            "search"
+          ],
+          [
+            2500.0,
+            false,
+            "search"
+          ],
+          [
+            1000.0,
+            false,
+            "search"
+          ]
+        ]
+      },
+      "fe_row_weak_sigma_c_70": {
+        "error": "no FE solution"
+      },
+      "fe_sigma_nom_h1_h5_h50_mpa": null,
+      "linear_share_counterfactual_weak_sigma_c_70": {
+        "sigma_c_mpa": 70.0,
+        "ratio_min": 0.5979319609016885,
+        "ratio_max": 4.369394870336501,
+        "ratio_h1": 0.5979319609016885,
+        "ratio_h5": 0.9775471545505381,
+        "ratio_h50": 4.369394870336501,
+        "n_fractured_h": 45,
+        "n_safe_h": 5,
+        "first_fracture_h": 6,
+        "all_one": false,
+        "all_zero": false,
+        "identifiable_0_1_mixed": true,
+        "matrix": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "logistic": {
+          "status": "complete_separation",
+          "n": 50,
+          "n_fracture": 45,
+          "n_safe": 5,
+          "separation_threshold_m": 5.0,
+          "note": "存在完美阈值 5 m 把 0/1 完全分开 → MLE 发散、二元 Logistic 拟合无统计学意义（与论文“完全分离”一致）"
+        },
+        "sigma_nom_median_h1_h5_h50_mpa": [
+          41.8552372631182,
+          68.42830081853766,
+          305.8576409235551
+        ]
+      },
+      "tibia_fe": {
+        "status": "ok",
+        "fe_solve_load_n": 5000.0,
+        "load_reduction_factor": 4.547924843416283,
+        "linearity": {
+          "check_load_n": 2500.0,
+          "ratio_max": 7.127063520393471,
+          "ratio_p95": 5.619236230573574,
+          "ratio_mean": 4.747172484202746,
+          "ratio_median": 3.2330750304478313,
+          "expected_ratio": 2.0
+        }
+      },
+      "corrected_matrix_rows": [
+        {
+          "part_cn": "足部",
+          "bone": "calcaneus_r",
+          "joint": "subtalar_r",
+          "sigma_key": "calcaneus",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "solid",
+          "main_domain": "solid_calc_cort",
+          "main_domain_n_elem": 634,
+          "fe_status": "ok",
+          "fe_solve_load_n": 25354.401972520634,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 25354.401972520634,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "跟骨是 [Y25] 足部加载的代表骨；无壳 → 取实体 CORT 域。σ_c=150（calcaneus）。",
+          "sigma_vm_ref_mpa": {
+            "max": 375.5676653844511,
+            "p95": 241.24952798380855,
+            "mean": 86.6932954847542,
+            "median": 78.17907448078924
+          },
+          "sigma_vm_ref": 78.17907448078924,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 2,
+          "first_fracture_mean_m": 12,
+          "first_fracture_median_m": 13,
+          "utilization_at_5m": 0.5211938298719283,
+          "load_scale_1_to_50": 4.484420404458233
+        },
+        {
+          "part_cn": "胫骨",
+          "bone": "tibia_r",
+          "joint": "ankle_r",
+          "sigma_key": "tibia_shaft",
+          "sigma_c_mpa": 200.0,
+          "main_kind": "solid",
+          "main_domain": "solid_tibia_cort",
+          "main_domain_n_elem": 2417,
+          "fe_status": "ok",
+          "fe_solve_load_n": 5000.0,
+          "load_reduction_factor": 4.547924843416283,
+          "load_ref_n": 25266.24913009046,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "合并 3 PID 成一根骨（PARTS_MAPPING §1）；THUMS 胫 CORT 为实体 hex。无壳 → 取实体 CORT 域。σ_c=200（tibia_shaft，按任务默认；胫骨两端 70 见诚实边界）。",
+          "sigma_vm_ref_mpa": {
+            "max": 850.2286475392073,
+            "p95": 463.0985454733833,
+            "mean": 109.95776747508742,
+            "median": 44.70785960766012
+          },
+          "sigma_vm_ref": 44.70785960766012,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 12,
+          "first_fracture_median_m": null,
+          "utilization_at_5m": 0.22353929803830058,
+          "load_scale_1_to_50": 4.469753556129459
+        },
+        {
+          "part_cn": "腓骨",
+          "bone": "fibula_r",
+          "joint": "ankle_r",
+          "sigma_key": "fibula_shaft",
+          "sigma_c_mpa": 160.0,
+          "main_kind": "solid",
+          "main_domain": null,
+          "main_domain_n_elem": null,
+          "fe_status": "failed",
+          "fe_solve_load_n": null,
+          "load_reduction_factor": null,
+          "load_ref_n": 25266.24913009046,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "合并 3 PID；无壳 → 实体 CORT 域。σ_c=160（fibula_shaft）。",
+          "error": "主承载实体域 solid_fib_cort 不在 post.domains",
+          "first_fracture_max_m": null,
+          "first_fracture_p95_m": null,
+          "first_fracture_mean_m": null,
+          "first_fracture_median_m": null
+        },
+        {
+          "part_cn": "股骨",
+          "bone": "femur_r",
+          "joint": "hip_r",
+          "sigma_key": "femur_shaft",
+          "sigma_c_mpa": 220.0,
+          "main_kind": "solid",
+          "main_domain": "solid_fem_cort",
+          "main_domain_n_elem": 3060,
+          "fe_status": "ok",
+          "fe_solve_load_n": 15227.651697700654,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 15227.651697700654,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "合并 3 PID；无壳 → 实体 CORT 域。σ_c=220（femur_shaft；股骨颈 80 见诚实边界）。",
+          "sigma_vm_ref_mpa": {
+            "max": 1288.6667515235722,
+            "p95": 942.1572031972739,
+            "mean": 221.02754679824525,
+            "median": 60.13409277858595
+          },
+          "sigma_vm_ref": 60.13409277858595,
+          "main_domain_detail": {},
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 5,
+          "first_fracture_median_m": 47,
+          "utilization_at_5m": 0.2733367853572089,
+          "load_scale_1_to_50": 3.8050064759357403
+        },
+        {
+          "part_cn": "骨盆",
+          "bone": "R_HIPBONE",
+          "joint": "hip_r",
+          "sigma_key": "pelvis",
+          "sigma_c_mpa": 180.0,
+          "main_kind": "shell",
+          "main_domain": "shell_hip_cort_83500205",
+          "main_domain_n_elem": 2232,
+          "fe_status": "ok",
+          "fe_solve_load_n": 15227.651697700654,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 15227.651697700654,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取髋骨代表骨（骶/耻骨联合未并，PARTS_MAPPING §3）；有壳 → 取最受载壳域（每统计量取跨 9 壳的最大）。σ_c=180（pelvis）。",
+          "sigma_vm_ref_mpa": {
+            "max": 203.4969094165073,
+            "p95": 140.60933169484326,
+            "mean": 57.425604841834655,
+            "median": 44.882322130870456
+          },
+          "sigma_vm_ref": 44.882322130870456,
+          "main_domain_detail": {
+            "shell_hip_cort_83500201": {
+              "max": 176.8108267981649,
+              "p95": 103.89903697089807,
+              "mean": 30.720014584902756,
+              "median": 24.381809036909985
+            },
+            "shell_hip_cort_83500202": {
+              "max": 130.83650170913697,
+              "p95": 53.340486030691594,
+              "mean": 17.952189062100544,
+              "median": 12.266545973065533
+            },
+            "shell_hip_cort_83500203": {
+              "max": 0.39129726529373043,
+              "p95": 0.29046275708385993,
+              "mean": 0.07948321371750125,
+              "median": 0.021360614503059403
+            },
+            "shell_hip_cort_83500204": {
+              "max": 116.23497109324266,
+              "p95": 81.89836844308998,
+              "mean": 28.807777834669277,
+              "median": 26.753109271623224
+            },
+            "shell_hip_cort_83500205": {
+              "max": 203.4969094165073,
+              "p95": 140.60933169484326,
+              "mean": 57.425604841834655,
+              "median": 42.63595386644728
+            },
+            "shell_hip_cort_83500206": {
+              "max": 52.046642409398686,
+              "p95": 51.01347841818511,
+              "mean": 45.34586165418243,
+              "median": 44.882322130870456
+            },
+            "shell_hip_cort_83500207": {
+              "max": 95.98282505455308,
+              "p95": 64.09743526190306,
+              "mean": 9.83344495438191,
+              "median": 0.006765427321091097
+            },
+            "shell_hip_cort_83500208": {
+              "max": 132.81485676517426,
+              "p95": 70.9716780987722,
+              "mean": 10.355249333309777,
+              "median": 0.03958722565116579
+            },
+            "shell_hip_cort_83500209": {
+              "max": 144.34714379838013,
+              "p95": 98.52593079382326,
+              "mean": 37.66784039519761,
+              "median": 38.42840156919623
+            }
+          },
+          "first_fracture_max_m": 4,
+          "first_fracture_p95_m": 8,
+          "first_fracture_mean_m": 37,
+          "first_fracture_median_m": null,
+          "utilization_at_5m": 0.24934623406039141,
+          "load_scale_1_to_50": 3.8050064759357403
+        },
+        {
+          "part_cn": "腰椎",
+          "bone": "L3",
+          "joint": "lumbar",
+          "sigma_key": "spine",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "shell",
+          "main_domain": "shell_l3_cort",
+          "main_domain_n_elem": 1340,
+          "fe_status": "ok",
+          "fe_solve_load_n": 22087.579953288558,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单代表椎体 L3（左右 SPON 两半合并，PARTS_MAPPING §3）；有壳 → 壳域。σ_c=150（spine）。",
+          "sigma_vm_ref_mpa": {
+            "max": 1743.9462959149412,
+            "p95": 554.8132503031882,
+            "mean": 185.20358214654104,
+            "median": 132.30581865664428
+          },
+          "sigma_vm_ref": 132.30581865664428,
+          "main_domain_detail": {
+            "shell_l3_cort": {
+              "max": 1743.9462959149412,
+              "p95": 554.8132503031882,
+              "mean": 185.20358214654104,
+              "median": 132.30581865664428
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 2,
+          "first_fracture_median_m": 7,
+          "utilization_at_5m": 0.8820387910442952,
+          "load_scale_1_to_50": 3.9028041078449918
+        },
+        {
+          "part_cn": "胸椎",
+          "bone": "T6",
+          "joint": "lumbar",
+          "sigma_key": "spine",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "shell",
+          "main_domain": "shell_t6_cort",
+          "main_domain_n_elem": 712,
+          "fe_status": "ok",
+          "fe_solve_load_n": 10000.0,
+          "load_reduction_factor": 2.2087579953288556,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单代表椎体 T6；有壳 → 壳域。σ_c=150（spine）。",
+          "sigma_vm_ref_mpa": {
+            "max": 3319.486361442326,
+            "p95": 1952.5210965884014,
+            "mean": 638.480653522909,
+            "median": 426.0390024905661
+          },
+          "sigma_vm_ref": 426.0390024905661,
+          "main_domain_detail": {
+            "shell_t6_cort": {
+              "max": 1502.8746329215198,
+              "p95": 883.9905053960863,
+              "mean": 289.0677271449322,
+              "median": 192.8862299045733
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 1,
+          "first_fracture_median_m": 1,
+          "utilization_at_5m": 2.8402600166037737,
+          "load_scale_1_to_50": 3.9028041078449918
+        },
+        {
+          "part_cn": "颈椎",
+          "bone": "C5",
+          "joint": "lumbar",
+          "sigma_key": "spine",
+          "sigma_c_mpa": 150.0,
+          "main_kind": "shell",
+          "main_domain": "shell_c5_cort",
+          "main_domain_n_elem": 466,
+          "fe_status": "ok",
+          "fe_solve_load_n": 22087.579953288558,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单代表椎体 C5；有壳 → 壳域。σ_c=150（spine）。",
+          "sigma_vm_ref_mpa": {
+            "max": 1008.9248074140002,
+            "p95": 641.1051790340571,
+            "mean": 195.67139017624604,
+            "median": 131.58198547218197
+          },
+          "sigma_vm_ref": 131.58198547218197,
+          "main_domain_detail": {
+            "shell_c5_cort": {
+              "max": 1008.9248074140002,
+              "p95": 641.1051790340571,
+              "mean": 195.67139017624604,
+              "median": 131.58198547218197
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 2,
+          "first_fracture_median_m": 7,
+          "utilization_at_5m": 0.8772132364812131,
+          "load_scale_1_to_50": 3.9028041078449918
+        },
+        {
+          "part_cn": "颅骨",
+          "bone": "parietal_r",
+          "joint": "lumbar",
+          "sigma_key": "skull",
+          "sigma_c_mpa": 160.0,
+          "main_kind": "shell",
+          "main_domain": "shell_par_int",
+          "main_domain_n_elem": 2860,
+          "fe_status": "ok",
+          "fe_solve_load_n": 22087.579953288558,
+          "load_reduction_factor": 1.0,
+          "load_ref_n": 22087.579953288558,
+          "load_ref_height_m": 5.0,
+          "mapping_note": "取单块代表颅骨 parietal_r（整颅是薄壳穹顶，不可当实心骨，PARTS_MAPPING §4）；有壳 → 壳域。σ_c=160（skull）。载荷沿用 lumbar（默认映射，非物理结论，见诚实边界）。",
+          "sigma_vm_ref_mpa": {
+            "max": 586.1076448521993,
+            "p95": 285.3365131391469,
+            "mean": 133.05007204832626,
+            "median": 146.27754336186365
+          },
+          "sigma_vm_ref": 146.27754336186365,
+          "main_domain_detail": {
+            "shell_par_ext": {
+              "max": 394.31231047025614,
+              "p95": 241.91651320715187,
+              "mean": 92.12493944953033,
+              "median": 83.24185091909685
+            },
+            "shell_par_int": {
+              "max": 586.1076448521993,
+              "p95": 285.3365131391469,
+              "mean": 133.05007204832626,
+              "median": 146.27754336186365
+            }
+          },
+          "first_fracture_max_m": 1,
+          "first_fracture_p95_m": 1,
+          "first_fracture_mean_m": 8,
+          "first_fracture_median_m": 6,
+          "utilization_at_5m": 0.9142346460116478,
+          "load_scale_1_to_50": 3.9028041078449918
+        }
+      ]
+    }
+  },
+  "convergence_ladder_fibula": {
+    "levels": [
+      {
+        "load_n": 400.0,
+        "ok": true,
+        "fib_cort": {
+          "max": 47.95709229162711,
+          "p95": 35.12125048454026,
+          "mean": 11.948498735956488,
+          "median": 4.42460706048685
+        }
+      },
+      {
+        "load_n": 500.0,
+        "ok": true,
+        "fib_cort": {
+          "max": 66.9138947954146,
+          "p95": 50.03721349632775,
+          "mean": 16.174641349105116,
+          "median": 5.129933895808772
+        }
+      },
+      {
+        "load_n": 600.0,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 700.0,
+        "ok": true,
+        "fib_cort": {
+          "max": 330.28296433311755,
+          "p95": 276.2011739458277,
+          "mean": 97.86191544550174,
+          "median": 68.12467616683371
+        }
+      },
+      {
+        "load_n": 750.0,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 800.0,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 900.0,
+        "ok": true,
+        "fib_cort": {
+          "max": 884.9253975190651,
+          "p95": 614.9815876871083,
+          "mean": 206.17814133339982,
+          "median": 98.50426851019623
+        }
+      },
+      {
+        "load_n": 1000.0,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 1200.0,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 1263.3125,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 1500.0,
+        "ok": true,
+        "fib_cort": {
+          "max": 1491.329509706841,
+          "p95": 963.1447060365085,
+          "mean": 272.58386957476455,
+          "median": 101.6970346514382
+        }
+      },
+      {
+        "load_n": 1894.9687,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 2000.0,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 2500.0,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 2526.6249,
+        "ok": false,
+        "error": "BoneFebError"
+      },
+      {
+        "load_n": 5000.0,
+        "ok": true,
+        "fib_cort": {
+          "max": 1111.0893762287265,
+          "p95": 623.9613794575714,
+          "mean": 201.2038909676048,
+          "median": 135.39774570110262
+        }
+      }
+    ],
+    "convergent_loads_n": [
+      400.0,
+      500.0,
+      700.0,
+      900.0,
+      1500.0,
+      5000.0
+    ],
+    "failed_loads_n": [
+      600.0,
+      750.0,
+      800.0,
+      1000.0,
+      1200.0,
+      1263.3125,
+      1894.9687,
+      2000.0,
+      2500.0,
+      2526.6249
+    ],
+    "search_monotonic_down_closed": false,
+    "counterexamples_load_above_which_smaller_failed": [
+      [
+        700.0,
+        600.0
+      ],
+      [
+        900.0,
+        600.0
+      ],
+      [
+        900.0,
+        750.0
+      ],
+      [
+        900.0,
+        800.0
+      ],
+      [
+        1500.0,
+        600.0
+      ],
+      [
+        1500.0,
+        750.0
+      ],
+      [
+        1500.0,
+        800.0
+      ],
+      [
+        1500.0,
+        1000.0
+      ],
+      [
+        1500.0,
+        1200.0
+      ],
+      [
+        1500.0,
+        1263.3125
+      ],
+      [
+        5000.0,
+        600.0
+      ],
+      [
+        5000.0,
+        750.0
+      ],
+      [
+        5000.0,
+        800.0
+      ],
+      [
+        5000.0,
+        1000.0
+      ],
+      [
+        5000.0,
+        1200.0
+      ],
+      [
+        5000.0,
+        1263.3125
+      ],
+      [
+        5000.0,
+        1894.9687
+      ],
+      [
+        5000.0,
+        2000.0
+      ],
+      [
+        5000.0,
+        2500.0
+      ],
+      [
+        5000.0,
+        2526.6249
+      ]
+    ]
+  },
+  "shared_joint_registration": {
+    "class": "multi-bone rows sharing ONE joint reaction",
+    "joint": "lumbar",
+    "bones": [
+      "L3",
+      "T6",
+      "C5",
+      "parietal_r"
+    ],
+    "same_class_as_fibula": true,
+    "evidence": "REGIONS/paper_alignment gives joint='lumbar' to L3,T6,C5,parietal_r; fracture_matrix feeds each the WHOLE lumbar reaction (ref_load = loads['lumbar__vert'][ref_idx]) with load_fraction=1.0. risk_1d_loadshare.py already documents this ('lumbar free-body force supports the whole torso + both arms; applying it to a cervical vertebra or the skull over-counts 5-10x') and fixes it in the 1D path via a mass-above ratio -- but the FE path is NOT fixed.",
+    "recommended_action": "register only (out of this audit's scope); a future FE audit should allocate the lumbar reaction by a mass-above ratio (as risk_1d_loadshare.py does).",
+    "rows": [
+      {
+        "bone": "L3",
+        "part_cn": "腰椎",
+        "joint": "lumbar",
+        "load_ref_n": 22087.579953288558,
+        "fe_solve_load_n": 22087.579953288558,
+        "load_reduction_factor": 1.0,
+        "utilization_at_5m": 0.8820387910442952,
+        "first_fracture_median_m": 7,
+        "load_fraction": 1.0
+      },
+      {
+        "bone": "T6",
+        "part_cn": "胸椎",
+        "joint": "lumbar",
+        "load_ref_n": 22087.579953288558,
+        "fe_solve_load_n": 10000.0,
+        "load_reduction_factor": 2.2087579953288556,
+        "utilization_at_5m": 2.8402600166037737,
+        "first_fracture_median_m": 1,
+        "load_fraction": 1.0
+      },
+      {
+        "bone": "C5",
+        "part_cn": "颈椎",
+        "joint": "lumbar",
+        "load_ref_n": 22087.579953288558,
+        "fe_solve_load_n": 22087.579953288558,
+        "load_reduction_factor": 1.0,
+        "utilization_at_5m": 0.8772132364812131,
+        "first_fracture_median_m": 7,
+        "load_fraction": 1.0
+      },
+      {
+        "bone": "parietal_r",
+        "part_cn": "颅骨",
+        "joint": "lumbar",
+        "load_ref_n": 22087.579953288558,
+        "fe_solve_load_n": 22087.579953288558,
+        "load_reduction_factor": 1.0,
+        "utilization_at_5m": 0.9142346460116478,
+        "first_fracture_median_m": 6,
+        "load_fraction": 1.0
+      }
+    ]
+  }
+}

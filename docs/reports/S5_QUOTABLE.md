@@ -1,6 +1,7 @@
 # S5 — What may be quoted (authoritative verdict)
 
 **Status:** COMPLETE (2026-10-06) — the single entry point for any reader who needs a number out of S5-contact. **Start here.** This doc is the authoritative reconciliation of the **six** G7 verification studies against the older "1.56/1.59/1.62/1.64" and "2.205" recommendations that still appear in the downstream docs. **§8 (2026-10-07) adds the wave5 bone-integrated contact results — a DIFFERENT quantity set (real THUMS mesh + a modeling hold spring); never mix a §8 number with a §0–§7 number.**
+**§9 (2026-10-10) adds the corrected-window 130/140/150 mm re-verification — same single standalone-pad (tet4 / sliding-elastic μ=0.6 / NEW PENALTY 0.1 / G7 control) recipe as §0–§7, run at the corrected sink window 13–15 cm (pad 压缩 12.96 cm, `pad.py` 2026-10-07 重算) instead of the now-retracted 16–18 cm.**
 
 **The contradiction it resolves.** Four independent verification studies (`S5_g7_verify_anchors.md`, `S5_g7_verify_mesh.md`, `S5_g7_verify_fixedxi.md`, `S5_g7_verify_anchors_mesh.md`) have now returned FAIL for every σ÷σ_law ratio. The fifth (`S5_g7_verify_element.md`) returns PASS only on its narrow matched-ξ question; its §5 recommendation to "quote 2.205" is itself superseded here. The sixth (`S5_g7_verify_metric.md`) tested whether an alternative stress metric would converge and returned **FAIL** — closing the last open thread (§5). Yet two docs still recommend quoting 2.205, and several downstream docs still cite 1.56 / 1.59 / 1.62 / 1.64 / 2.205 / 2.70 / 15.14 with no recipe or mesh qualifier. **Anyone reading the repo today can walk out with a wrong number.** This doc fixes that.
 
@@ -10,8 +11,9 @@
 
 | Quantity | Value | QUOTABLE? | Evidence |
 |---|---|:---:|---|
-| `F_n` at 2 m landing (sink 170, NEW PENALTY recipe, mesh-converged at fixed sink) | **≈ 34.4 kN** (34 404 / 34 602 / 34 395 N across (3,3,2)/(6,6,4)/(12,12,8) — drift **−0.026 %**) | **✅ QUOTABLE** | `S5_g7_verify_mesh.md` §3; reproducible ×4 |
-| `σ_contact = F_n / 60 000 mm²` (same basis) | **≈ 0.574 MPa** (0.5734 / 0.5767 / 0.5733 MPa — drift **−0.026 %**) | **✅ QUOTABLE** | `S5_g7_verify_mesh.md` §3; same provenance |
+| `F_n` at 2 m landing (sink 170, NEW PENALTY recipe, mesh-converged at fixed sink) | **≈ 34.4 kN** (34 404 / 34 602 / 34 395 N across (3,3,2)/(6,6,4)/(12,12,8) — drift **−0.026 %**) | **✅ QUOTABLE only as a historical fixed-sink-170 mm FE measurement; ❌ the 1.1 % line-1↔FE 闭环 is NOT closed at the corrected sink window (see §9)** | `S5_g7_verify_mesh.md` §3; reproducible ×4 |
+| `σ_contact = F_n / 60 000 mm²` (same basis) | **≈ 0.574 MPa** (0.5734 / 0.5767 / 0.5733 MPa — drift **−0.026 %**) | **✅ QUOTABLE (same historical basis as the row above)** | `S5_g7_verify_mesh.md` §3; same provenance |
+| **Corrected-window FE `F_contact` at sink ∈ {130, 140, 150} mm** (pad compression 12.96 cm ⇒ 13–15 cm admissible window; minimal baseline, tet4 standalone pad, sliding-elastic μ=0.6, NEW PENALTY 0.1, G7 control) | **13.96 / 17.45 / 21.81 kN** (per sink) — closure delta vs line-1 dynamics peak 34.8 kN: **−59.9 % / −49.9 % / −37.3 %** (all **NOT-CLOSED**, root cause = FE constant 60 000 mm² footprint vs line-1 progressive area 3.35×; see §9) | **✅ QUOTABLE as a fixed-sink measurement** (with corrected sink basis); **❌ NOT-CLOSED as line-1 ↔ FE 闭环** (the original 『1.1% closure』 was a numerical coincidence at sink=170 mm only) | `results/opensim_fe/SINK_130_140_150_CLOSURE_REPORT.md` (2026-10-10); reproducible |
 | `σ_1D-law(ξ)` | a `pad_stress_pa(ξ)` material function (Pa → /1e6 = MPa) | **✅ QUOTABLE** | mesh-independent by construction; `pad_foam.pad_stress_pa` |
 | Element agreement `udg-hex` vs `tet4` at matched ξ ≤ 0.65 | **≤ ±2.5 %** in σ/σ_law | **✅ QUOTABLE** (method validation only) | `S5_g7_verify_element.md` §3.3 / §5 |
 | OLD-recipe anchor reproducibility | **≤ 0.1 %** vs the historical 1.56/1.59/1.62/1.64 (AUGLAG pen=1, n=1200, default `<Control>`) | **✅ QUOTABLE** (credibility of the harness under the OLD recipe; label the recipe) | `S5_g7_verify_anchors.md` §4.3 |
@@ -194,3 +196,39 @@ ls temp\opensim_fe\s5_t9\fixmetric\   # interior-margin metric (3 runs @ sink 17
 | **bone-integrated `F_n` next to the standalone-pad `F_n ≈ 34.4 kN`** | different mesh, different load path (subtalar load vs prescribed sink), and the integrated model includes a modeling spring |
 | **any wave5 σ/σ_law or footprint-averaged stress** | same soft-penalty spill as §2; wave5 did no mesh-convergence study and resolved no contact-pressure field |
 | **bone-integrated `contact_area`** (e.g. 2953.8 mm² at pen0.1) as a contact patch | it is a geometric count ("triangles with all 3 nodes below the plate plane"), not the contact-pressure patch |
+
+---
+
+## 9. Corrected-sink closure re-verification (2026-10-10) — §0–§7 anchor re-run at 130/140/150 mm
+
+**Why this section exists.** §0 row #1 (`F_n ≈ 34.4 kN`) was measured at a **prescribed sink of 170 mm**, which came from the **now-retracted 16–18 cm** indentation window. Recomputing the window from `pad.py` (progressive contact area; `feet-first-stiff`, 2 m / **77 kg** ⇒ peak **34.898 kN**, pad compression **12.96 cm**. Note `FALL_LOAD_N = 34 800 N` is the rounded constant used as the closure denominator) gives the admissible **sink window 13–15 cm** (`S5_contact_contract.md` §2.2; `src/climbing/coupling/pad_contact.py::G7_SINKAGE_WINDOW_CM`). The "1.1 % closure" against the 34.8 kN line-1 peak was therefore left **待复核**; this section closes that thread.
+
+**What was run (minimal baseline).** The **same single case that produced `F_n ≈ 34.4 kN` / `σ_contact ≈ 0.574 MPa`** — `udg_contact_sweep2.py::run_case("n7_tet4_s170")`: tet4 pad `(6,6,4)` over `(300,300,200)`, indenter `(2,2,1)` `(200,300,5)` offset `(50,0,200.5)` ⇒ fixed **60 000 mm²** footprint, gap 0.5 mm, `sliding-elastic` μ=0.6, NEW **PENALTY 0.1**, G7 `<Control>` (2400 steps, `dtmax` = 1/2400, `cutback` = 0.125, `max_retries` = 20, BFGS) — re-run **only** at sink ∈ {130, 140, 150} mm. No matrix was re-run, and no solver default was changed.
+
+**Result (all three CONVERGED+CARRYING: `rc=0`, `end_t=1.0`, NORMAL TERMINATION):**
+
+| sink (mm) | F_contact (kN) | σ_contact (MPa) | penetration (mm) | indentation (cm) | closure δ vs 34.8 kN | verdict |
+|---:|---:|---:|---:|---:|---:|:---:|
+| 130 | 13.963 | 0.2327 | 13.60 | 11.59 | **−59.88 %** | ❌ NOT-CLOSED |
+| 140 | 17.450 | 0.2908 | 14.91 | 12.46 | **−49.86 %** | ❌ NOT-CLOSED |
+| 150 | 21.810 | 0.3635 | 16.44 | 13.31 | **−37.33 %** | ❌ NOT-CLOSED |
+
+`F_contact` 口径 = `|Σ_z F_reaction(indenter)|` = the wave-5 corrected 口径 `applied load − hold-spring force` in the **no-hold-spring** special case (`F_hold_spring_n = 0`); `σ_contact = F_contact / 60 000 mm²` (same basis as §0 row #2). Source: `results/opensim_fe/SINK_130_140_150_CLOSURE_REPORT.md` + `results/opensim_fe/sink130_140_150_closure.json`; driver `scripts/opensim_fe/run_sink_closure_20261010.py`; run logs `temp/opensim_fe/sink_closure_20261010/sink{130,140,150}/*.log`.
+
+**Verdict — the 『1.1 % closure』 does NOT hold at the corrected window: it BREAKS.** (It neither holds nor improves.) All three rows are individually valid fixed-sink FE measurements, but none reproduces the line-1 dynamics peak.
+
+**Root cause (why it breaks; why 170 mm "agreed").** The FE standalone-pad model uses a **fixed 60 000 mm² flat-punch footprint**; line-1 uses a **progressive contact area** `A(κ)` reaching **≈0.201 m² ≈ 201 000 mm²** at peak compression (**3.35×** the FE footprint; κ=0.589 for `feet-first-stiff`). These are **different models** — agreement at any single prescribed sink is coincidental, not a physical closure. At the corrected window the FE/line-1 force ratio is ≈0.4–0.6 (FE lower), so closure breaks. (The reason 170 mm happened to land within 1.1 % is this same footprint/area mismatch, not a genuine match.)
+
+**Provenance / references (what to keep, and what NOT to do).**
+- The old **sink = 170 mm** row and its **`σ ≈ 0.574 MPa`** are **kept** (§0 rows #1–#2) as **historical fixed-sink FE measurements**, with the 170 mm basis **visible** — but they are **not** the corrected-window value, and the **1.1 %** is now explained as a **sink-specific coincidence**.
+- Do **not** present the 130/140/150 mm row as a **continuation** of the 1.1 %. They are independent fixed-sink readings.
+- Do **not** quote **any σ/σ_law** from these runs (§4 #1); the σ_law column in the source report is informational only.
+- The previously flagged **σ÷σ_law ratios / 2.205 / 15.14 cm / 2.70×** remain **NOT-QUOTABLE**.
+- This is a **closed verification loop** (kinematics fixes the sink ⇒ FE reads back the force ⇒ compare to the dynamics peak); it is **explicitly NOT an independent prediction** of the dynamics peak.
+
+**Reproduce:**
+```powershell
+cd D:\Project\climbing_fall_analysis
+$env:PYTHONPATH = "src"
+.venv\Scripts\python.exe scripts\opensim_fe\run_sink_closure_20261010.py --overwrite
+```

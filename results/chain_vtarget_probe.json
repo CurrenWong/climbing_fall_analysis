@@ -1,0 +1,221 @@
+{
+  "meta": {
+    "module": "climbing.chain2d",
+    "posture": "feet-first-stiff",
+    "mass_kg": 80.0,
+    "on_pad": false,
+    "heights_m": [
+      2.0,
+      3.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "observable": "eps_tibia = (F_ankle/A_tibia)/E_tibia; first-significant local peak inside meta['impact_window_s'] (head_branch._first_significant_peak)",
+    "tibia_segment": "小腿-胫骨",
+    "v8b_threshold_ms": 5.0,
+    "ref_1d_ttorso_at_20m_ms": 14.0,
+    "ref_t22_tibia_ms": {
+      "2.0": null,
+      "3.0": null,
+      "5.0": 11.9,
+      "10.0": 6.5,
+      "20.0": 4.6
+    },
+    "note": "纯增量新增件；观测量跑前冻结（胫骨段首显著局部峰），禁止事后换口径。"
+  },
+  "rows": [
+    {
+      "h_m": 2.0,
+      "t_tibia_ms": 17.6,
+      "eps_tibia": 0.0066632108594007365,
+      "window_ms": 36.8,
+      "impact_speed_ms": 6.263,
+      "peak_force_kn": 36.58,
+      "max_compression_mm": 41.98,
+      "monotone_through_collapse": true,
+      "per_segment_local_peak": {
+        "足": {
+          "t_peak_ms": 17.4,
+          "eps_peak": 24.387761585396746
+        },
+        "小腿-胫骨": {
+          "t_peak_ms": 17.6,
+          "eps_peak": 0.0066632108594007365
+        },
+        "大腿": {
+          "t_peak_ms": 17.6,
+          "eps_peak": 0.004036992010482759
+        },
+        "骨盆-躯干": {
+          "t_peak_ms": 18.2,
+          "eps_peak": 2.695742596867131
+        },
+        "胸廓": {
+          "t_peak_ms": 18.6,
+          "eps_peak": 1.5085298147405277
+        },
+        "头颈": {
+          "t_peak_ms": 18.4,
+          "eps_peak": 3.842140189520226
+        }
+      },
+      "t22_tibia_ms": null
+    },
+    {
+      "h_m": 3.0,
+      "t_tibia_ms": 13.8,
+      "eps_tibia": 0.008574227738721378,
+      "window_ms": 35.4,
+      "impact_speed_ms": 7.671,
+      "peak_force_kn": 49.98,
+      "max_compression_mm": 51.17,
+      "monotone_through_collapse": true,
+      "per_segment_local_peak": {
+        "足": {
+          "t_peak_ms": 18.4,
+          "eps_peak": 33.320972947509084
+        },
+        "小腿-胫骨": {
+          "t_peak_ms": 13.8,
+          "eps_peak": 0.008574227738721378
+        },
+        "大腿": {
+          "t_peak_ms": 14.2,
+          "eps_peak": 0.005071914833698894
+        },
+        "骨盆-躯干": {
+          "t_peak_ms": 15.6,
+          "eps_peak": 4.363138579111026
+        },
+        "胸廓": {
+          "t_peak_ms": 17.0,
+          "eps_peak": 2.1084316121979456
+        },
+        "头颈": {
+          "t_peak_ms": 18.4,
+          "eps_peak": 5.353155853043649
+        }
+      },
+      "t22_tibia_ms": null
+    },
+    {
+      "h_m": 5.0,
+      "t_tibia_ms": 10.4,
+      "eps_tibia": 0.010756772610855642,
+      "window_ms": 33.4,
+      "impact_speed_ms": 9.903,
+      "peak_force_kn": 72.86,
+      "max_compression_mm": 64.5,
+      "monotone_through_collapse": true,
+      "per_segment_local_peak": {
+        "足": {
+          "t_peak_ms": 17.2,
+          "eps_peak": 48.571839029310205
+        },
+        "小腿-胫骨": {
+          "t_peak_ms": 10.4,
+          "eps_peak": 0.010756772610855642
+        },
+        "大腿": {
+          "t_peak_ms": 13.6,
+          "eps_peak": 0.007600774511159103
+        },
+        "骨盆-躯干": {
+          "t_peak_ms": 12.8,
+          "eps_peak": 6.019011228303404
+        },
+        "胸廓": {
+          "t_peak_ms": 15.0,
+          "eps_peak": 2.7781039835972643
+        },
+        "头颈": {
+          "t_peak_ms": 17.4,
+          "eps_peak": 7.813978341166474
+        }
+      },
+      "t22_tibia_ms": 11.9
+    },
+    {
+      "h_m": 10.0,
+      "t_tibia_ms": 7.4,
+      "eps_tibia": 0.014422884754634742,
+      "window_ms": 29.2,
+      "impact_speed_ms": 14.005,
+      "peak_force_kn": 123.12,
+      "max_compression_mm": 88.01,
+      "monotone_through_collapse": true,
+      "per_segment_local_peak": {
+        "足": {
+          "t_peak_ms": 14.2,
+          "eps_peak": 82.08218288731796
+        },
+        "小腿-胫骨": {
+          "t_peak_ms": 7.4,
+          "eps_peak": 0.014422884754634742
+        },
+        "大腿": {
+          "t_peak_ms": 10.0,
+          "eps_peak": 0.012946063800107986
+        },
+        "骨盆-躯干": {
+          "t_peak_ms": 10.2,
+          "eps_peak": 9.262453129612913
+        },
+        "胸廓": {
+          "t_peak_ms": 15.6,
+          "eps_peak": 7.5947922785344915
+        },
+        "头颈": {
+          "t_peak_ms": 17.0,
+          "eps_peak": 17.833524973308343
+        }
+      },
+      "t22_tibia_ms": 6.5
+    },
+    {
+      "h_m": 20.0,
+      "t_tibia_ms": 5.8,
+      "eps_tibia": 0.01936814527521753,
+      "window_ms": 25.4,
+      "impact_speed_ms": 19.806,
+      "peak_force_kn": 204.66,
+      "max_compression_mm": 118.12,
+      "monotone_through_collapse": true,
+      "per_segment_local_peak": {
+        "足": {
+          "t_peak_ms": 14.8,
+          "eps_peak": 136.44327108901865
+        },
+        "小腿-胫骨": {
+          "t_peak_ms": 5.8,
+          "eps_peak": 0.01936814527521753
+        },
+        "大腿": {
+          "t_peak_ms": 7.2,
+          "eps_peak": 0.015484789444711312
+        },
+        "骨盆-躯干": {
+          "t_peak_ms": 8.4,
+          "eps_peak": 13.361584939485299
+        },
+        "胸廓": {
+          "t_peak_ms": 12.4,
+          "eps_peak": 12.051515235066582
+        },
+        "头颈": {
+          "t_peak_ms": 14.4,
+          "eps_peak": 31.730400024103826
+        }
+      },
+      "t22_tibia_ms": 4.6
+    }
+  ],
+  "verdict": {
+    "V8a_monotone_non_increasing": true,
+    "V8b_tibia_at_20m_ms": 5.8,
+    "V8b_threshold_ms": 5.0,
+    "V8b_pass": false,
+    "improvement_vs_1d_ttorso": 2.413793103448276
+  }
+}

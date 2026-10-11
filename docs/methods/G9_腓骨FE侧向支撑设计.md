@@ -1,0 +1,138 @@
+---
+title: G9 · 腓骨 FE 侧向支撑（抑屈曲）—— 路线 B
+date: 2026-10-11
+type: 设计（待审批）
+status: 预注册（pre-registration）· 待批准即锁
+tags:
+  - G9
+  - 腓骨
+  - FE
+  - 屈曲
+  - 骨间膜
+  - 路线B
+  - A3
+---
+
+# G9 · 腓骨 FE 侧向支撑（抑屈曲）—— 路线 B · 预注册
+
+> **一句话**：修掉**孤立腓骨 FE 的欧拉屈曲**伪影（中段无骨间膜侧向支撑 ⇒ ~550–700 N 分叉、收敛不单调、后屈曲饱和），在**分配载荷**下得到**线性、收敛**的腓骨 σ(h)，重出腓骨行接入 G3，使腓骨 OR 可定义并对标 [Y25] **1.682**（±30%）。
+> **性质 = 预注册**：侧向支撑模型、分配载荷、σ 口径、判定规则跑数**前**锁定；跑后**禁止**回解支撑参数 / 分担比 / σc 凑 OR（红线）。
+> **上游根因**：`results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md` §3.2（屈曲拐点 550–700 N；冻结 5000 N 后屈曲解线性外推得 σ_nom(h=5)=684 MPa 是后屈曲应力）；`FIBULA_IDENTIFIABILITY_REPORT.md`。
+> **路线定位**：三路线 A/B/C 中的 **B（贵·FE 级）**。A（G8，1D 载荷分享）已跑：腓骨变渐进但 OR=1.152 ∉±30% ⇒ 差 2%（`results/opensim_fe/G8_FIBULA_OR_REPORT.md`）。
+
+---
+
+## 0. 目标与范围
+
+| | 内容 |
+|---|---|
+| **直接目标** | 用**物理上正确**的腓骨 FE（含侧向支撑）在分配载荷下重解，得到线性收敛的 σ(h)，重算腓骨 OR，检验是否落 [Y25] ±30% |
+| **方法** | `bone_feb.build_bone_feb` **加法式**新增可选 `lateral_support`（默认 `None` = 逐位不变）；G9 脚本用它给腓骨中段补横向约束后重解 |
+| **零回归** | 默认路径（`lateral_support=None`）逐位不变；不改任何冻结产物；纯增量 |
+| **不解锁** | 路线 C（胫骨两端概率层形状）；A4；A2 其余 miss；绝对骨折高度 |
+
+---
+
+## 1. 背景与缺口
+
+- 冻结 BC2 的腓骨行 `σ_nom(h=5)=684 MPa`（σ_nom/σc≈**6–44×**）⇒ 确定性 all_one ⇒ G3 概率层不可辨识（`S4_A3_G3_REPORT.md`）。
+- 根因（审计）：腓骨 FE 是**一根两端受压、中段横向自由**的细长柱 ⇒ 在 **~550–700 N 欧拉屈曲**（材料卡是线弹性，非线性只能来自几何）⇒ 收敛集**不单调**（600/750/800 N 失败而 700/900 N 成功）、**后屈曲饱和**（5000 N→median 135 MPa）。冻结 5000 N 解是**后屈曲**解，线性外推到各高度**无物理意义**。
+- 真实小腿的腓骨经**骨间膜 + 远端胫腓联合 + 近端胫腓关节**与胫骨**全程侧向相连**，**不是**自由柱 ⇒ 孤立自由中段是**建模伪影**。
+
+---
+
+## 2. 修法与假设（⭐ 冻结）
+
+| # | 决策 | 冻结值 | 性质 |
+|---|---|---|---|
+| **D1** | 侧向支撑模型 | 把腓骨**中段**节点在**横断面 2 个自由度**（PCA 对齐后轴向 = Z ⇒ 约束 **X, Y**）上固定，模拟骨间膜/胫腓联合的侧向约束；**不约束 Z**（轴向） | assumed（无直接文献锚，见 §7） |
+| **D1a** | 主设定支撑带 | **单中段带** `[0.45, 0.55]`（沿 bbox 最长轴的轴向分数区间） | assumed |
+| **D1b** | 敏感性支撑带 | **三段带** `[0.25,0.35] ∪ [0.45,0.55] ∪ [0.65,0.75]` | 全量报告，不挑 |
+| **D2** | 分配载荷 | 腓骨 = **0.05**（主）/ **0.10**（敏感）× `ankle_r(h)`；胫骨 = 补 | 同 G8 / `bone.py::fibula_ends` |
+| **D3** | σ(h) 口径 | 主承载实体域 **`fib_cort` 的 median**（与冻结 G3 输入 `sigma_vm_mpa["median"]["fibula_r"]` 同口径），严格线弹性 `σ(h)=σ_ref·load(h)/load_ref` | 与 G3 一致 |
+| **D4** | 判定规则 | `logistic_fit` / `a3_verdict` **零改动**（腓骨靶 1.682，±30%） | 冻结 |
+| **D5** | 收敛/线性门槛 | 分配载荷处 **FE 收敛**；双载荷线性自检 `|ratio_median−2|/2 ≤ 0.15` | 由 §6 DoD 给出 |
+
+> **冻结即锁**：跑后**禁止**调支撑带宽度/数量、分担比、σc 去凑 OR。主设定 FAIL 就是 FAIL。
+
+---
+
+## 3. 实现（加法式，零回归）
+
+1. `bone_feb.build_bone_feb` 新增可选参数 `lateral_support: list[tuple[float,float]] | None = None`：
+   对每个 `(lo,hi)`，取轴向坐标落在 `[a_min+lo·span, a_min+hi·span]` 的节点建 NodeSet `lat_support_k`，并对其加 `BCZeroDisplacement`（**仅两个非轴向自由度**）。
+   **默认 `None` ⇒ 不写该节点集/BC ⇒ `.feb` 与历史逐位一致**（有测试锁）。
+2. G9 脚本 `scripts/opensim_fe/g9_fibula_fe_support.py`：
+   - `extract_mesh(fibula_spec, MASTER)` 一次（`align_pca=True`，BC2 口径）；
+   - 对每个（分担比 × 支撑带）组合：`build_bone_feb(..., lateral_support=..., load_n=alloc)` → `run_bone_feb` → `post_process` → 取 `fib_cort` median；
+   - 分配载荷 `alloc = share · ankle_r(@5 m)`；σ(h) = `median(at alloc) · load(h)/alloc`（**严格线弹性**；因已抑屈曲，线性成立）；
+   - 线性自检：在 `alloc × 2`（或 `÷2`）再解一次，检查 `ratio_median≈2`；
+   - 把腓骨 σ(h) 接入 G3 混合矩阵（其余 8 部位 FE 不动），跑 `g3_subject_variability`（复用）→ 腓骨 OR。
+
+---
+
+## 4. G3 接入（复用，零改动）
+
+同 G8：构造 9×50 混合 `sigma_nom`（**只换腓骨一行**），跑 G3 主设定 COV（B=0.15/E=0.10/A=0.15）、n=400×seeds{20261003,20261004,20261005}，`logistic_fit` / `a3_verdict` 原封。
+
+---
+
+## 5. 预注册决策点汇总
+
+见 §2（D1–D5）+ §6 DoD。**冻结项**：D1a 主设定单中段带、D2 主设定 0.05、D3 median 口径、D4 判定零改、D5 线性门槛。
+
+---
+
+## 6. 验收判据（DoD）
+
+| # | 判据 | 线 |
+|---|---|---|
+| 1 | **FE 有效性** | 分配载荷处**收敛**；双载荷线性自检 `\|ratio_median−2\|/2 ≤ 0.15`（抑屈曲后应近严格线性） |
+| 2 | **腓骨** | `status=ok`（渐进）**且 OR ∈ [1.18, 2.19]**（主设定 0.05 + 单中段带） |
+| 3 | **其余部位不变** | 其余 8 部位 OR/status 与 G3 主设定**逐值相同** |
+| 4 | **A3** | ≥2/3（不降；若腓骨入靶则 3/3） |
+| 5 | **零回归** | 默认路径 `.feb` 逐位不变；全测试套件 **≥696 passed / 8 skipped**；纯增量 |
+| 6 | **口径纪律** | OR 标 "per-metre + 主设定分担比 + 支撑带；σ 口径 median"；不出现禁用比值 |
+
+---
+
+## 7. 诚实风险（必须记录）
+
+1. **侧向支撑无直接文献锚**：骨间膜刚度/连接刚度**未实测**，本件用**刚性横向约束**作上界近似（`assumed`）；敏感性（单带 vs 三带）量化其影响。
+2. **仍可能不落靶**：*任何*「σ(h) ∝ load(h)」的线性模型，其 OR 由 **load(h) 的形状 + 交叉高度**决定；G8（1D）得 1.152、骨盆 1.147、颅骨 1.417——存在**结构性上限**的可能，B 未必能到 1.682。**如实报，不回解。**
+3. **FE 网格非确定性**：`extract_mesh` 松质骨四面体网格末位非确定（同 5000 N 复算 median 差 0.03%）。
+4. **单骨截断**：仍无关节/韧带/相邻骨；侧向约束是「胫骨作为地面」的近似。
+
+---
+
+## 8. 范围外 / 备选
+
+- **路线 C**（胫骨两端概率层形状收成真阶跃，动 σc 口径）—— 单独预注册。
+- 把侧向支撑推广到「弹性弹簧（可调刚度）」—— 待有骨间膜刚度数据再做。
+- 修 A2 其余 miss（股骨/胸椎）—— 与本件无关。
+
+---
+
+## 9. 依赖与复现
+
+- **复用（只读）**：`bone_feb.py`（加法式扩展）、`fracture_matrix.py::{build_parts, effective_ref_load, extract_main_domain, REF_H}`、`g3_subject_variability.py`、`paper_alignment.py`、`s4_alignment_bc2.py`、`climbing/coupling/febio_run.py`、THUMS 主 deck。
+- **命令**：`$env:PYTHONPATH="src"; & .venv\Scripts\python.exe scripts\opensim_fe\g9_fibula_fe_support.py`（FEBio `febio4.exe`；`.venv` 纪律）。
+- **依赖**：`numpy`、`pyfebio`、FEBio 4.13。
+
+---
+
+## 10. 交付物
+
+| 件 | 内容 |
+|---|---|
+| `scripts/opensim_fe/g9_fibula_fe_support.py` | 侧向支撑腓骨 FE 重解 + σ(h) 抽取 + G3 复算（增量） |
+| `scripts/opensim_fe/bone_feb.py`（加法式） | 新增 `lateral_support`（默认 None ⇒ 零漂移） |
+| `results/opensim_fe/g9_fibula_fe_support.json` | FE 收敛/线性 + σ(h) + 腓骨 OR/CI/status ×(分担比×支撑带) + 混合矩阵 meta |
+| `results/opensim_fe/G9_FIBULA_FE_SUPPORT_REPORT.md` | 判定补录（DoD 逐条 + 诚实风险） |
+| `tests/test_g9_fibula_fe_support.py` | 支撑 BC 构造 + 默认零漂移 + 混合矩阵 + 判定接口锁 |
+| `temp/opensim_fe/g9_fibula_fe_support/` | .feb/.xplt/.hdf5/日志 |
+| 文档同步 | `最终结论_2026-10-10.md`、`目标重构` §三、`总体进度.md`、`docs/README.md` 按结果更新 |
+
+---
+
+*本件为 G9 预注册设计稿（路线 B）。批准即冻结 §2/§5。*

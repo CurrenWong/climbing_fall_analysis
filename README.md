@@ -75,7 +75,7 @@ res2d = simulate_boulder_fall_2d(height_m=2.0, mass_kg=77.0)
 | --- | --- |
 | `python scripts/phase_p1_montecarlo.py` | 场景库蒙特卡洛，n=1000，seed 20261003，输出 `results/p1_montecarlo.txt` |
 | `python scripts/validate_vs_fem.py` | 对标文献的分部位阈值验证 |
-| `python -m pytest tests -q` | 全套回归（626 passed / 8 skipped / 0 failed） |
+| `python -m pytest tests -q` | 全套回归（672 passed / 8 skipped / 0 failed） |
 
 脚本输出写到 `results/`，图表写到 `results/figures/`。
 
@@ -138,7 +138,7 @@ climbing_fall_analysis/
 
 ## 验证与回归 Validation and Regression
 
-- **回归套件：626 passed / 8 skipped / 0 failed。**
+- **回归套件：672 passed / 8 skipped / 0 failed。**
 - **1D 冻结锁**：`src/climbing/pad.py` 与其测试保持逐位（bit-identical）不变，`git diff -- src/climbing/pad.py tests/test_climbing.py` 为空。
 - **1D/2D 一致性**：默认参数下 2D 轨迹与 1D 逐位相等，2D 扩展不污染已有基线。
 - **外部依赖**：载荷链测试依赖 OpenSim 与 FEBio，环境未装时这部分用例无法完整执行。
@@ -211,7 +211,7 @@ climbing_fall_analysis/
 
 **相对（排序、机制、单项量级）可用；绝对（N、MPa、%、峰值时刻）不可用。**
 
-详细论证与逐项证据见 [`docs/reports/最终结论_2026-10-07.md`](docs/reports/最终结论_2026-10-07.md)。
+详细论证与逐项证据见 [`docs/reports/最终结论_2026-10-10.md`](docs/reports/最终结论_2026-10-10.md)。
 
 ---
 
@@ -219,7 +219,7 @@ climbing_fall_analysis/
 
 完整索引见 [`docs/README.md`](docs/README.md)。建议按下面顺序阅读：
 
-1. [`docs/reports/最终结论_2026-10-07.md`](docs/reports/最终结论_2026-10-07.md)：当前研究的最终结论与可信边界（先读这份）。
+1. [`docs/reports/最终结论_2026-10-10.md`](docs/reports/最终结论_2026-10-10.md)：当前研究的最终结论与可信边界（先读这份）。
 2. [`docs/paper/论文v2_数学建模版.md`](docs/paper/论文v2_数学建模版.md)：论文 v2 稿（数学建模版），模型公式的权威出处。
 3. [`docs/paper/论文v2_出处索引.md`](docs/paper/论文v2_出处索引.md)：正文每条数字对应的来源与工况标签。
 4. [`docs/methods/方案更新_v2.md`](docs/methods/方案更新_v2.md)：结构性诊断与 P0-P5 重构路线。

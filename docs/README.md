@@ -14,8 +14,16 @@
 | **现在整体到哪了 / 下一步做什么** | [`reports/总体进度.md`](reports/总体进度.md) —— 一页总览，**§四 = 下一步**，§五 = V/A 靶子总表 |
 | **目标是什么 / 做到什么算够 / 推断怎么合法** | [`methods/目标重构_刚性验证与垫上推断.md`](methods/目标重构_刚性验证与垫上推断.md) —— **目标层权威件**（两阶段：刚性验证 → 垫上推断） |
 | **论文写什么 / 数字从哪来** | [`paper/论文v2_数学建模版.md`](paper/论文v2_数学建模版.md) ＋ [`paper/论文v2_出处索引.md`](paper/论文v2_出处索引.md)（逐条溯源） |
-| **当前结论与可信边界** | [`reports/最终结论_2026-10-07.md`](reports/最终结论_2026-10-07.md) |
+| **当前结论与可信边界** | [`reports/最终结论_2026-10-10.md`](reports/最终结论_2026-10-10.md)（重述版；旧件 `最终结论_2026-10-07.md` 保留为历史） |
 | **线 1 路线 P0–P5** | [`methods/方案更新_v2.md`](methods/方案更新_v2.md) |
+| **结构件 G1 多段链（= P3 二切）** | [`methods/G1_多段链设计.md`](methods/G1_多段链设计.md)（预注册，已冻结）＋ 判定 [`../results/G1_CHAIN2D_REPORT.md`](../results/G1_CHAIN2D_REPORT.md)、[`../results/G1_WAVE_ROD_REPORT.md`](../results/G1_WAVE_ROD_REPORT.md) |
+| **结构件 G3 被试级变异（统计层）** | [`methods/G3_被试级变异_统计层设计.md`](methods/G3_被试级变异_统计层设计.md)（预注册，已执行）＋ 判定 [`../results/opensim_fe/S4_A3_G3_REPORT.md`](../results/opensim_fe/S4_A3_G3_REPORT.md) |
+| **结构件 G4 损伤演化** | [`methods/G4_损伤演化设计.md`](methods/G4_损伤演化设计.md)（预注册，已冻结）＋ 判定 [`../results/opensim_fe/G4_DAMAGE_REPORT.md`](../results/opensim_fe/G4_DAMAGE_REPORT.md)（最小实现已跑 10-11，A4 如实 FAIL） |
+| **结构件 G8 腓骨 OR（1D 载荷分享，路线 A）** | [`methods/G8_腓骨OR_1D载荷分享设计.md`](methods/G8_腓骨OR_1D载荷分享设计.md)（预注册）＋ 判定 [`../results/opensim_fe/G8_FIBULA_OR_REPORT.md`](../results/opensim_fe/G8_FIBULA_OR_REPORT.md)（已跑 10-11；腓骨变渐进 status=ok 但 OR=1.152 差 2% ⇒ DoD-1 如实 FAIL） |
+| **结构件 G9 腓骨 FE 侧向支撑（路线 B）** | [`methods/G9_腓骨FE侧向支撑设计.md`](methods/G9_腓骨FE侧向支撑设计.md)（预注册）＋ 判定 [`../results/opensim_fe/G9_FIBULA_FE_SUPPORT_REPORT.md`](../results/opensim_fe/G9_FIBULA_FE_SUPPORT_REPORT.md)（已跑 10-11；单带 FE 分叉非唯一 + 三段带稳定档 5%=all_zero/10% OR=1.130 ⇒ DoD FAIL） |
+| **腓骨 all_one 根因 + FE 审计** | [`../results/opensim_fe/FIBULA_IDENTIFIABILITY_REPORT.md`](../results/opensim_fe/FIBULA_IDENTIFIABILITY_REPORT.md)（FE 量级：无胫-腓载荷分配）＋ [`../results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md`](../results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md)（10-11：分配必要但不充分，孤立腓骨 FE 屈曲） |
+| **[Y25] OR 口径重审（我们 vs 论文是不是同一个量）** | [`reports/重审_Y25_OR口径.md`](reports/重审_Y25_OR口径.md) —— 我三部位 OR 均在 [Y25] 各自 95% CI 内、log-OR 差异均不显著；A3 的 ±30% 带**比 [Y25] 自身精度更严**（腓骨 CI 下界 1.106<1.177）⇒ 腓骨"未落靶"含判据口径效应；**OR 次序腓/颅互换为真实差异** |
+| **OR（优势比）是什么 / 怎么读 / 怎么用** | [`notes/OR_优势比_说明.md`](notes/OR_优势比_说明.md) —— 概率→几率→OR、读法、用途、与 RR 的区别、本项目"变异口径"坑（写论文/答辩可直接引） |
 | **主线 P2 踝（解析模型）结论** | [`reports/P2_踝结论_2026-10-07.md`](reports/P2_踝结论_2026-10-07.md) |
 | **工况错配到底占多少（P5 前置侦察）** | [`notes/P5_CONDITION_ALIGN.md`](notes/P5_CONDITION_ALIGN.md) |
 | **踝 FE 子线怎么用 / 到哪了** | [`notes/ANKLE_FIX_TODO.md`](notes/ANKLE_FIX_TODO.md) **顶部「🧭 接手入口」** |

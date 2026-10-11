@@ -1,0 +1,54 @@
+{
+  "verdicts": {
+    "a4_rank2": "FAIL",
+    "a4_lp_separation": "FAIL",
+    "break_rank1_ceiling_numeric": true
+  },
+  "rank2_damaged": {
+    "pc2_explained_ratio": 0.008791374382587045,
+    "baseline_pc2_explained_ratio": 0.00024210299623027442,
+    "pa_null_pc2_ratio_p95": 0.13813652492441858,
+    "broken_stick_pc2_ratio": 0.24166666666666664,
+    "pc2_exceeds_pa_null_p95": false,
+    "rank2_holds": false
+  },
+  "a4_baseline_frozen_call": {
+    "explained_var_ratio": [
+      0.9997534072451838,
+      0.00024210299623029133
+    ],
+    "separable": false,
+    "verdict": "FAIL",
+    "lp_message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is Infeasible)"
+  },
+  "a4_damaged_transcribed": {
+    "explained_var_ratio": [
+      0.9911800221363297,
+      0.008791374382587288
+    ],
+    "separable": false,
+    "verdict": "FAIL"
+  },
+  "a2_femur_thoracic": {
+    "股骨": {
+      "bone": "femur_r",
+      "weak_sigma_c_mpa": 80.0,
+      "line_first_fracture_h": null,
+      "damage_first_fracture_h": null,
+      "line_status": "all_zero",
+      "line_behavior": "常值0",
+      "damage_status": "all_zero",
+      "damage_behavior": "常值0"
+    },
+    "胸椎": {
+      "bone": "T6",
+      "weak_sigma_c_mpa": 150.0,
+      "line_first_fracture_h": 1.0,
+      "damage_first_fracture_h": null,
+      "line_status": "all_one",
+      "line_behavior": "常值1",
+      "damage_status": "all_zero",
+      "damage_behavior": "常值0"
+    }
+  }
+}

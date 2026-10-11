@@ -88,6 +88,7 @@ __all__ = [
     "ShellDomainSpec",
     "Material",
     "read_materials",
+    "read_material_damage",
     "extract_mesh",
     "build_bone_feb",
     "run_bone_feb",
@@ -113,6 +114,11 @@ class Material:
     src_keyword: str  # "*MAT_ELASTIC", "*MAT_PIECEWISE_LINEAR_PLASTICITY", ...
     src_card: list[float]  # first card numbers, verbatim (for diagnostics)
     note: str = ""  # e.g. "elastic approximation of piecewise_linear_plasticity"
+    # G4 损伤演化（docs/methods/G4_损伤演化设计.md §3）：卡布局
+    #   [mid, rho, E, nu, yield, tan_mod, ...] -> nums[4]=σ_y, nums[5]=E_t
+    # 默认 None ⇒ ``read_materials`` 的既有构造**逐位不变**（本模块加法式扩展）。
+    yield_stress_mpa: float | None = None
+    tangent_modulus_mpa: float | None = None
 
     @property
     def is_pure_elastic(self) -> bool:
@@ -262,6 +268,64 @@ def read_materials(master_k: Path, pids: Iterable[int]) -> dict[int, Material]:
                     note=note,
                 )
     return out
+
+
+#: 卡布局带 (σ_y=col4, E_t=col5) 的关键字（G4：设计 §3；`MAT_ELASTIC` / viscoelastic 无）。
+_DAMAGE_CARDS = {
+    "MAT_PIECEWISE_LINEAR_PLASTICITY",
+    "MAT_DAMAGE_2",
+    "MAT_PLASTICITY_WITH_DAMAGE",
+}
+
+
+def read_material_damage(master_k: Path, pids: Iterable[int]) -> dict[int, Material]:
+    """同 :func:`read_materials`，并额外填 ``yield_stress_mpa`` / ``tangent_modulus_mpa``。
+
+    G4 加法式扩展（设计 §3）：THUMS 材料卡布局 ``[mid, rho, E, nu, yield, tan_mod]``
+    ⇒ 逐 PID ``σ_y = nums[4]``、``E_t = nums[5]``（`_DAMAGE_CARDS` 内的关键字）。
+    其余卡的这两个字段保持 ``None``（不虚构参数）。
+
+    **不改** :func:`read_materials`：本函数复用其本体取得 ``E/nu/src_keyword/note``
+    （逐位相同），仅额外读卡 4/5 列并写入返回对象的两个新字段。
+    """
+    base = read_materials(master_k, pids)
+    if not base:
+        return base
+    wanted = set(base)
+    paths = [Path(master_k)] + list(kio.read_include_tree(master_k))
+    for path in paths:
+        try:
+            fh = open(path, "r", encoding="latin-1", errors="replace")
+        except OSError:
+            continue
+        cur: str | None = None
+        with fh:
+            for raw in fh:
+                st = raw.strip()
+                if not st or st[0] == "$":
+                    continue
+                if st[0] == "*":
+                    cur = kio._keyword(st)
+                    continue
+                if cur is None or cur not in _DAMAGE_CARDS:
+                    continue
+                toks = st.replace(",", " ").split()
+                nums: list[float] = []
+                for t in toks:
+                    f = _to_float(t)
+                    if f is None:
+                        break
+                    nums.append(f)
+                if len(nums) < 6:
+                    continue
+                mid = int(round(nums[0]))
+                if mid not in wanted:
+                    continue
+                mat = base[mid]
+                if mat.yield_stress_mpa is None:
+                    mat.yield_stress_mpa = float(nums[4])
+                    mat.tangent_modulus_mpa = float(nums[5])
+    return base
 
 
 # ---------------------------------------------------------------------------
@@ -750,6 +814,7 @@ def build_bone_feb(
     time_steps: int = 1,
     mesh: dict | None = None,
     align_pca: bool = False,
+    lateral_support: list[tuple[float, float]] | None = None,
 ) -> dict:
     """Write a ``.feb`` for `spec`.
 
@@ -890,6 +955,34 @@ def build_bone_feb(
         fmesh.NodeSet(name="bottom_fix", text=",".join(map(str, bot_local.tolist())))
     )
 
+    # 4b) optional lateral supports (G9, additive; default None = no-op).
+    #     For each (lo,hi) axial fraction band, constrain the **two transverse
+    #     dofs** (all except the load axis) -> models the interosseous
+    #     membrane / tibiofibular tethers that suppress isolated-fibula Euler
+    #     buckling.  The axial dof is left free.  With lateral_support=None no
+    #     node set / BC is written, so the .feb stays byte-identical.
+    lat_band_names: list[str] = []
+    lat_band_boundary: list[tuple[str, list[int]]] = []
+    if lateral_support:
+        span = float(a_max - a_min)
+        coord = np.asarray(mesh["nodes"], dtype=float)[:, axis_idx]
+        trans_dofs = [d for d in (1, 2, 3) if (d - 1) != axis_idx]
+        for k, (lo, hi) in enumerate(lateral_support):
+            thr_lo = a_min + float(lo) * span
+            thr_hi = a_min + float(hi) * span
+            sel = (np.flatnonzero((coord >= thr_lo) & (coord <= thr_hi)) + 1
+                   ).astype(np.int64)
+            if sel.size == 0:
+                raise BoneFebError(
+                    f"lateral_support[{k}] 带 [{lo},{hi}] 在轴 {axis_idx} 上无节点"
+                    f"（bbox [{a_min:.3f}, {a_max:.3f}]）")
+            nm = f"lat_support_{k}"
+            model.mesh_.add_node_set(
+                fmesh.NodeSet(name=nm, text=",".join(map(str, sel.tolist())))
+            )
+            lat_band_names.append(nm)
+            lat_band_boundary.append((nm, trans_dofs))
+
     # 5) materials (one per distinct mat_name)
     all_mats: dict[str, Material] = {}
     for sd in spec.solid_domains:
@@ -938,6 +1031,11 @@ def build_bone_feb(
             )
         ]
     )
+    for nm, dofs in lat_band_boundary:
+        kw = {f"{c}_dof": 1 for c, d in zip("xyz", (1, 2, 3)) if d in dofs}
+        st.boundary.all_bcs.append(
+            fbc.BCZeroDisplacement(node_set=nm, **kw)
+        )
     axis_vec = np.zeros(3, dtype=float)
     axis_vec[axis_idx] = 1.0
     load_vec = -float(load_n) * axis_vec / float(len(top_local))
@@ -986,6 +1084,9 @@ def build_bone_feb(
         "load_vec_per_node": load_vec.tolist(),
         "load_desc": load_desc,
         "align_pca": bool(align_pca),
+        "lateral_support": ([[float(lo), float(hi)] for lo, hi in lateral_support]
+                            if lateral_support else None),
+        "lateral_support_bands": list(lat_band_names),
         "febio413_notes": notes,
         "solid_domains": [
             {"mat_name": mn, "mesh_name": ms, "n_elem": ne,

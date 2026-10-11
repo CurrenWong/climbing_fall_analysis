@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "module": "climbing.wave_rod",
+    "purpose": "G1 §7 decision 6 pre-registered fallback (triggered by chain2d V8b FAIL, no retune)",
+    "mass_kg": 80.0,
+    "heights_m": [
+      2.0,
+      3.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "material": {
+      "cortical_bone_E_pa": 17000000000.0,
+      "cortical_bone_rho_kg_m3": 1900.0,
+      "tibia_length_m": 0.38,
+      "tibia_area_m2": 0.00032,
+      "wave_speed_ms": 2991.215208080594,
+      "sources": "cortical bone E~15-20 GPa (17 used), rho~1800-2100 (1900 used), tibia length ~0.38 m (Drillis & Contini 1966 / Winter 2009); documented, not tuned."
+    },
+    "observable": "distal (impact-end) local tissue strain eps=du/dx; peak time = argmax |eps| within [0, round_trips*(2L/c)]",
+    "analytic_peak_time_s": 0.00025407733885108105,
+    "analytic_peak_time_ms": 0.254077338851081,
+    "v8b_threshold_ms": 5.0,
+    "ref_t22_tibia_ms": {
+      "2.0": null,
+      "3.0": null,
+      "5.0": 11.9,
+      "10.0": 6.5,
+      "20.0": 4.6
+    },
+    "note": "纯增量新增件；材料/几何/观测量跑前冻结，禁止调参凑 4.6/5.0 ms。"
+  },
+  "rows": [
+    {
+      "h_m": 2.0,
+      "t_peak_ms": 0.256459,
+      "eps_peak": -0.002794993744357221,
+      "impact_speed_ms": 6.2631,
+      "impact_strain": 0.0020938360517874137,
+      "round_trip_ms": 0.254077,
+      "ratio_tpeak_over_2Lc": 1.009375,
+      "submillisecond": true,
+      "t22_tibia_ms": null
+    },
+    {
+      "h_m": 3.0,
+      "t_peak_ms": 0.256459,
+      "eps_peak": -0.0034231542539734238,
+      "impact_speed_ms": 7.6707,
+      "impact_strain": 0.002564414965961449,
+      "round_trip_ms": 0.254077,
+      "ratio_tpeak_over_2Lc": 1.009375,
+      "submillisecond": true,
+      "t22_tibia_ms": null
+    },
+    {
+      "h_m": 5.0,
+      "t_peak_ms": 0.256459,
+      "eps_peak": -0.004419273139044757,
+      "impact_speed_ms": 9.9029,
+      "impact_strain": 0.00331064548531125,
+      "round_trip_ms": 0.254077,
+      "ratio_tpeak_over_2Lc": 1.009375,
+      "submillisecond": true,
+      "t22_tibia_ms": 11.9
+    },
+    {
+      "h_m": 10.0,
+      "t_peak_ms": 0.256459,
+      "eps_peak": -0.0062497960090704486,
+      "impact_speed_ms": 14.0047,
+      "impact_strain": 0.004681959745536427,
+      "round_trip_ms": 0.254077,
+      "ratio_tpeak_over_2Lc": 1.009375,
+      "submillisecond": true,
+      "t22_tibia_ms": 6.5
+    },
+    {
+      "h_m": 20.0,
+      "t_peak_ms": 0.256459,
+      "eps_peak": -0.008838546278089514,
+      "impact_speed_ms": 19.8057,
+      "impact_strain": 0.0066212909706225,
+      "round_trip_ms": 0.254077,
+      "ratio_tpeak_over_2Lc": 1.009375,
+      "submillisecond": true,
+      "t22_tibia_ms": 4.6
+    }
+  ],
+  "verdict": {
+    "t_peak_at_20m_ms": 0.256459,
+    "analytic_2L_over_c_ms": 0.254077338851081,
+    "v8b_threshold_ms": 5.0,
+    "V8b_numeric_pass_submillisecond_below_threshold": true,
+    "height_monotone_non_increasing": true,
+    "t22_tibia_at_20m_ms": 4.6,
+    "overshoot_vs_t22": true,
+    "overshoot_factor_vs_t22": 17.936590254192676,
+    "reproduces_t22_magnitude": false,
+    "honest_conclusion": "The 1D axial stress-wave rod predicts a SUB-MILLISECOND tibial peak (~2L/c). It satisfies the literal V8b inequality (<=5.0 ms) only by OVERSHOOTING ~18x earlier than [T22] 4.6 ms; it does NOT reproduce the [T22] magnitude and its peak time is height-independent. This is the EXPECTED, pre-registered finding: it confirms [T22]'s 4.6 ms is CONTACT-CRUSH-controlled, not wave-controlled, and that the 6-segment chain's 5.8 ms is the closer physical match. No parameter was tuned."
+  }
+}
