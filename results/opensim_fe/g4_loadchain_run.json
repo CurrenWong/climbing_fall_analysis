@@ -1,0 +1,61 @@
+{
+  "verdicts": {
+    "a4_rank2": "FAIL",
+    "a4_lp_separation": "FAIL",
+    "break_rank1_ceiling_numeric": true,
+    "section7_trigger_met": false,
+    "section7_trigger_condition": "PC2 exceeds PA null AND LP separation fails"
+  },
+  "pc2_explained_ratio": {
+    "rank1_baseline": 0.00024210299623027442,
+    "damage_only": 0.008791374382587045,
+    "damage_compliant": 0.00928809052587848
+  },
+  "pa_null_pc2_ratio_p95": {
+    "rank1_baseline": 0.27026681417548565,
+    "damage_only": 0.13813652492441858,
+    "damage_compliant": 0.14052273722646344
+  },
+  "rank2_holds": {
+    "damage_only": false,
+    "damage_compliant": false
+  },
+  "a4_lp_separation": {
+    "rank1_baseline": "FAIL",
+    "damage_only": "FAIL",
+    "damage_compliant": "FAIL"
+  },
+  "a2_femur_thoracic": {
+    "rank1_baseline": {
+      "股骨": "all_zero",
+      "胸椎": "all_one"
+    },
+    "damage_only": {
+      "股骨": "all_zero",
+      "胸椎": "all_zero"
+    },
+    "damage_compliant": {
+      "股骨": "complete_separation",
+      "胸椎": "all_zero"
+    }
+  },
+  "meta": {
+    "design": "docs/methods/G4_损伤演化设计.md",
+    "lever": "load-chain compliance (G4 第二杠杆)",
+    "preset": "PassiveStiffness.nominal_landing()",
+    "mass_kg": 75.337,
+    "frozen_input": "results/opensim_fe/fracture_matrix_bc2.json (read-only)",
+    "load_chain_compliant": "results/opensim_fe/load_chain_compliant.json (new)",
+    "material_card": "model/AM50_V71_Occupant/main_THUMS_AM50_V71.k",
+    "zero_fe_resolve": true,
+    "a4_input_trajectory": "long bones: ends stat * load_compliant(h)/fe_solve; others: sigma_vm_mpa[median][bone] (identical to frozen)",
+    "pa_seed": 20261011,
+    "pa_trials": 5000,
+    "classify_thresholds": {
+      "plateau_ratio": 0.05,
+      "gradual_ratio": 0.5
+    },
+    "deterministic": "no wall-clock field; fixed PA seed",
+    "command": "$env:PYTHONPATH=\"src\"; & .venv\\Scripts\\python.exe scripts\\opensim_fe\\g4_load_chain_compliant.py"
+  }
+}

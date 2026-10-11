@@ -19,11 +19,13 @@
 | **结构件 G1 多段链（= P3 二切）** | [`methods/G1_多段链设计.md`](methods/G1_多段链设计.md)（预注册，已冻结）＋ 判定 [`../results/G1_CHAIN2D_REPORT.md`](../results/G1_CHAIN2D_REPORT.md)、[`../results/G1_WAVE_ROD_REPORT.md`](../results/G1_WAVE_ROD_REPORT.md) |
 | **结构件 G3 被试级变异（统计层）** | [`methods/G3_被试级变异_统计层设计.md`](methods/G3_被试级变异_统计层设计.md)（预注册，已执行）＋ 判定 [`../results/opensim_fe/S4_A3_G3_REPORT.md`](../results/opensim_fe/S4_A3_G3_REPORT.md) |
 | **结构件 G4 损伤演化** | [`methods/G4_损伤演化设计.md`](methods/G4_损伤演化设计.md)（预注册，已冻结）＋ 判定 [`../results/opensim_fe/G4_DAMAGE_REPORT.md`](../results/opensim_fe/G4_DAMAGE_REPORT.md)（最小实现已跑 10-11，A4 如实 FAIL） |
+| **结构件 G4 载荷链顺应性杠杆（第二杠杆）** | 判定 [`../results/opensim_fe/G4_LOADCHAIN_REPORT.md`](../results/opensim_fe/G4_LOADCHAIN_REPORT.md)（已跑 10-11；唯一冻结预设 D6 重跑顺应载荷链；A4 rank-2/LP 如实 FAIL；**A2 股骨获阶跃、胸椎 all_zero**；§7 触发未成立） |
 | **结构件 G8 腓骨 OR（1D 载荷分享，路线 A）** | [`methods/G8_腓骨OR_1D载荷分享设计.md`](methods/G8_腓骨OR_1D载荷分享设计.md)（预注册）＋ 判定 [`../results/opensim_fe/G8_FIBULA_OR_REPORT.md`](../results/opensim_fe/G8_FIBULA_OR_REPORT.md)（已跑 10-11；腓骨变渐进 status=ok 但 OR=1.152 差 2% ⇒ DoD-1 如实 FAIL） |
 | **结构件 G9 腓骨 FE 侧向支撑（路线 B）** | [`methods/G9_腓骨FE侧向支撑设计.md`](methods/G9_腓骨FE侧向支撑设计.md)（预注册）＋ 判定 [`../results/opensim_fe/G9_FIBULA_FE_SUPPORT_REPORT.md`](../results/opensim_fe/G9_FIBULA_FE_SUPPORT_REPORT.md)（已跑 10-11；单带 FE 分叉非唯一 + 三段带稳定档 5%=all_zero/10% OR=1.130 ⇒ DoD FAIL） |
 | **腓骨 all_one 根因 + FE 审计** | [`../results/opensim_fe/FIBULA_IDENTIFIABILITY_REPORT.md`](../results/opensim_fe/FIBULA_IDENTIFIABILITY_REPORT.md)（FE 量级：无胫-腓载荷分配）＋ [`../results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md`](../results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md)（10-11：分配必要但不充分，孤立腓骨 FE 屈曲） |
 | **[Y25] OR 口径重审（我们 vs 论文是不是同一个量）** | [`reports/重审_Y25_OR口径.md`](reports/重审_Y25_OR口径.md) —— 我三部位 OR 均在 [Y25] 各自 95% CI 内、log-OR 差异均不显著；A3 的 ±30% 带**比 [Y25] 自身精度更严**（腓骨 CI 下界 1.106<1.177）⇒ 腓骨"未落靶"含判据口径效应；**OR 次序腓/颅互换为真实差异** |
 | **OR（优势比）是什么 / 怎么读 / 怎么用** | [`notes/OR_优势比_说明.md`](notes/OR_优势比_说明.md) —— 概率→几率→OR、读法、用途、与 RR 的区别、本项目"变异口径"坑（写论文/答辩可直接引） |
+| **阶段二推断 · P-1/P-2/P-3 输出清单** | [`reports/阶段二推断_输出清单.md`](reports/阶段二推断_输出清单.md) —— 三条垫侧推断的三件套（点估计 + 区间 + 工况标签【垫】）+ 可信度链 + 后验检查单；含 P-1 能量闭环 BREAKS 归属（= **口径差**非线1 误差）与 "接触窗 34 ms = **力峰时刻 tF**" 的口径澄清 |
 | **主线 P2 踝（解析模型）结论** | [`reports/P2_踝结论_2026-10-07.md`](reports/P2_踝结论_2026-10-07.md) |
 | **工况错配到底占多少（P5 前置侦察）** | [`notes/P5_CONDITION_ALIGN.md`](notes/P5_CONDITION_ALIGN.md) |
 | **踝 FE 子线怎么用 / 到哪了** | [`notes/ANKLE_FIX_TODO.md`](notes/ANKLE_FIX_TODO.md) **顶部「🧭 接手入口」** |

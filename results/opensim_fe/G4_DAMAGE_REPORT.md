@@ -94,3 +94,5 @@ $env:PYTHONPATH="src"
 - `results/opensim_fe/G4_DAMAGE_REPORT.md`（本文件）
 - `src/climbing/coupling/bone_damage.py`、`scripts/opensim_fe/g4_damage_evolution.py`（新）
 
+> **载荷链顺应性杠杆（G4 第二杠杆，§3 行4 / §6 D6）已完成 → 见** `results/opensim_fe/G4_LOADCHAIN_REPORT.md`（驱动 `scripts/opensim_fe/g4_load_chain_compliant.py`；唯一冻结预设 `PassiveStiffness.nominal_landing()`）。三路对照：PC2 0.024%→0.88%(损伤)→**0.93%**(损伤+顺应链)，仍 < 平行分析 null 0.141 ⇒ A4 rank-2/LP **如实 FAIL**；A2 **股骨获阶跃、胸椎 all_zero**；§7 触发条件**未成立**。本件（最小路径）数值**未变**。
+
