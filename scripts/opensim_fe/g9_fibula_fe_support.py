@@ -44,8 +44,10 @@ for _p in (ROOT, ROOT / "src", _HERE):
     if str(_p) not in sys.path:
         sys.path.insert(0, str(_p))
 
+import h5py  # noqa: E402
 import fracture_matrix as fm  # noqa: E402
-from bone_feb import build_bone_feb, post_process, run_bone_feb  # noqa: E402
+from bone_feb import (build_bone_feb, post_process, run_bone_feb,  # noqa: E402
+                      _von_mises_from_voigt as _vm_from_voigt)
 from scripts.opensim_fe import fibula_fe_audit as audit  # noqa: E402  (load_frozen)
 from scripts.opensim_fe import g3_subject_variability as g3  # noqa: E402
 from scripts.opensim_fe import g8_fibula_or_share as g8  # noqa: E402  (build_mixed_inputs)
@@ -80,6 +82,31 @@ FIBULA_WINDOW = [FIBULA_TARGET * 0.7, FIBULA_TARGET * 1.3]
 
 
 # ---------------------------------------------------------------------------
+def _szz_stats(hdf5: Path, dom: str = "fib_cort") -> dict:
+    """从 h5 取 `fib_cort` 的**轴向应力** σ_zz（Voigt 第 3 分量）统计。
+
+    D3′（docs/methods/G9_...md §11.2）：长程横向支撑 ⇒ 近**单轴应变** ⇒ σ_vm 被
+    `(1−2ν)/(1−ν)` 压低（ν=0.3 → 0.571；**同骨实测 0.566–0.573**，
+    `G4_FE_PILOT_GUIDED_REPORT.md` §5e）⇒ 压缩判据（σ_c=70 是压缩强度）须用 `|σ_zz|`。
+    另记 `vm_over_abs_szz_median` 作为"是否被侧向约束"的诊断量（≈1 自由 / ≈0.57 全约束）。
+    """
+    with h5py.File(hdf5, "r") as h5:
+        sid = sorted(h5["states"].keys(), key=int)[-1]
+        s = np.asarray(h5[f"states/{sid}/element_data/stress/{dom}"][:],
+                       dtype=np.float64)
+    zz = s[:, 2]
+    vm = _vm_from_voigt(s)
+    az = np.abs(zz)
+    return {"n_elem": int(s.shape[0]),
+            "szz_min_mpa": float(zz.min()), "szz_max_mpa": float(zz.max()),
+            "abs_szz_median_mpa": float(np.median(az)),
+            "abs_szz_p95_mpa": float(np.percentile(az, 95)),
+            "abs_szz_max_mpa": float(az.max()),
+            "vm_median_mpa__h5": float(np.median(vm)),
+            "vm_over_abs_szz_median": (float(np.median(vm) / np.median(az))
+                                       if np.median(az) > 0 else None)}
+
+
 def _build_run(part, mesh, mats, feb: Path, load: float,
                lateral_support) -> None:
     for sd in part.spec.solid_domains:
@@ -92,7 +119,8 @@ def _build_run(part, mesh, mats, feb: Path, load: float,
     run_bone_feb(feb, workdir=feb.parent, timeout=1800)
 
 
-def _solve(part, mesh, mats, feb: Path, load: float, lateral_support) -> dict:
+def _solve(part, mesh, mats, feb: Path, load: float, lateral_support,
+           szz: bool = False) -> dict:
     """build+solve+post the fibula at `load`; return status + fib_cort stats."""
     rec: dict = {"load_n": float(load), "lateral_support": lateral_support}
     try:
@@ -114,6 +142,11 @@ def _solve(part, mesh, mats, feb: Path, load: float, lateral_support) -> dict:
                    vm_median_mpa=float(d["vm_median_mpa"]),
                    vm_p95_mpa=float(d["vm_p95_mpa"]),
                    vm_max_mpa=float(d["vm_max_mpa"]))
+        if szz:  # D3′：并行取 |σ_zz| 口径（不改 σ_vm 口径）
+            try:
+                rec.update(_szz_stats(feb.with_suffix(".hdf5")))
+            except Exception as exc:  # noqa: BLE001
+                rec["szz_error"] = f"{type(exc).__name__}: {exc}"
     except Exception as exc:  # noqa: BLE001
         rec.update(ok=False, stage="post", error=f"{type(exc).__name__}: {exc}")
     return rec
@@ -131,7 +164,7 @@ def _fibula_row_stats(sigma_h: np.ndarray, sigma_c: float) -> dict:
 
 
 # ---------------------------------------------------------------------------
-def run(quick: bool, linearity: bool, bands: str = "") -> dict:
+def run(quick: bool, linearity: bool, bands: str = "", szz: bool = False) -> dict:
     frozen = audit.load_frozen()
     heights = np.asarray(frozen["heights"], float)
     loads = frozen["loads"]
@@ -174,7 +207,7 @@ def run(quick: bool, linearity: bool, bands: str = "") -> dict:
         print("=" * 72, flush=True)
         print(f"[g9] {key}: share={share:.3f} alloc={alloc:.1f} N bands={bands}",
               flush=True)
-        rec = _solve(fib, mesh, mats, d / "fib_g9.feb", alloc, bands)
+        rec = _solve(fib, mesh, mats, d / "fib_g9.feb", alloc, bands, szz=szz)
         rec["share"] = share
         rec["band"] = bname
         rec["bands"] = [list(b) for b in bands]
@@ -184,8 +217,14 @@ def run(quick: bool, linearity: bool, bands: str = "") -> dict:
             sigma_h = med * ratio
             rec["sigma_h_median_mpa"] = [float(x) for x in sigma_h]
             rec["row_weak_sigma_c_70"] = _fibula_row_stats(sigma_h, FIBULA_SIGMA_C_WEAK)
+            szz_med = rec.get("abs_szz_median_mpa") if szz else None
+            if szz_med:
+                rec["sigma_h_abs_szz_mpa"] = [float(x) for x in szz_med * ratio]
+                rec["row_weak_sigma_c_70_abs_szz"] = _fibula_row_stats(
+                    szz_med * ratio, FIBULA_SIGMA_C_WEAK)
             if linearity:
-                rec["linearity"] = _linearity(fib, mesh, mats, d, alloc, bands, med)
+                rec["linearity"] = _linearity(fib, mesh, mats, d, alloc, bands, med,
+                                              szz=szz, szz_med=szz_med)
             print(f"[g9] {key}: OK median@alloc={med:.3f} MPa; "
                   f"σ_nom/σc(70) 区间 "
                   f"{rec['row_weak_sigma_c_70']['ratio_min']:.3f}–"
@@ -195,19 +234,37 @@ def run(quick: bool, linearity: bool, bands: str = "") -> dict:
                   flush=True)
         combos[key] = rec
 
+    if szz:  # D3′：把 |σ_zz| 口径行克隆进 G3，供 OR 口径对照（纯增量键）
+        for key, rec in list(combos.items()):
+            row = rec.get("sigma_h_abs_szz_mpa")
+            if rec.get("ok") and row:
+                combos[key + "__szz"] = {
+                    "ok": True, "sigma_h_median_mpa": row,
+                    "share": rec["share"], "band": rec["band"] + "+szz",
+                    "sigma_measure": "abs_sigma_zz_median", "source_key": key,
+                    "abs_szz_median_at_alloc_mpa": rec.get("abs_szz_median_mpa"),
+                    "row_weak_sigma_c_70": rec.get("row_weak_sigma_c_70_abs_szz")}
+
     g3_out = _g3_feed(combos)
     return {"frozen_loads": {"ankle_ref_n": ankle_ref, "heights": [int(h) for h in heights]},
             "combos": combos, "g3": g3_out}
 
 
-def _linearity(part, mesh, mats, d: Path, alloc: float, bands, med: float) -> dict:
+def _linearity(part, mesh, mats, d: Path, alloc: float, bands, med: float,
+               szz: bool = False, szz_med: float | None = None) -> dict:
     rec = {"load2_n": alloc * 2.0, "expected_ratio": 2.0}
-    r2 = _solve(part, mesh, mats, d / "fib_g9_x2.feb", alloc * 2.0, bands)
+    r2 = _solve(part, mesh, mats, d / "fib_g9_x2.feb", alloc * 2.0, bands, szz=szz)
     if r2.get("ok") and med:
         ratio = r2["vm_median_mpa"] / med
         rec.update(ok=True, median2_mpa=r2["vm_median_mpa"], ratio_median=ratio,
                    abs_rel_err=abs(ratio - 2.0) / 2.0,
                    within_tol=bool(abs(ratio - 2.0) / 2.0 <= LIN_TOL))
+        s2 = r2.get("abs_szz_median_mpa")
+        if szz and szz_med and s2:  # D3′：|σ_zz| 口径的线性自检（同一次 ×2 解）
+            r = s2 / szz_med
+            rec.update(ratio_abs_szz_median=r,
+                       abs_rel_err_abs_szz=abs(r - 2.0) / 2.0,
+                       within_tol_abs_szz=bool(abs(r - 2.0) / 2.0 <= LIN_TOL))
     else:
         rec.update(ok=False, error=r2.get("error"), stage=r2.get("stage"))
     return rec
@@ -278,10 +335,13 @@ def main(argv: list[str] | None = None) -> int:
                     help="覆盖 verdict 的主设定带名（默认 mid）")
     ap.add_argument("--out-suffix", default="",
                     help="输出文件名后缀（纯增量，避免覆盖预注册产物）")
+    ap.add_argument("--szz", action="store_true",
+                    help="D3′：并行计算 |σ_zz| 口径的 σ(h) 与 OR（不改 σ_vm 口径）")
     args = ap.parse_args(argv)
     t0 = time.time()
 
-    res = run(quick=args.quick, linearity=not args.no_linearity, bands=args.bands)
+    res = run(quick=args.quick, linearity=not args.no_linearity, bands=args.bands,
+              szz=args.szz)
     res["meta"] = {
         "title": "G9 fibula FE lateral support (anti-buckling) -> G3 fibula OR",
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -316,6 +376,24 @@ def main(argv: list[str] | None = None) -> int:
           f"window={[round(x,3) for x in FIBULA_WINDOW]} within={v['fibula_within']}")
     print(f"  A3={v['a3_n_within']}/3 {v['a3_verdict']}; "
           f"other8_unchanged={v['unchanged_other8']}")
+    if args.szz:  # D3′ 口径对照（σ_vm vs |σ_zz|）
+        print("-" * 96)
+        print("D3′ 口径对照（同一 FE 解；σ(h)=median·load(h)/load_ref）")
+        for k in sorted(res["combos"]):
+            if not k.endswith("__szz"):
+                continue
+            base = res["combos"][k].get("source_key")
+            b = res["combos"].get(base, {})
+            r0 = b.get("row_weak_sigma_c_70") or {}
+            r1 = res["combos"][k].get("row_weak_sigma_c_70") or {}
+            g = res["g3"].get(k, {})
+            fr = g.get("fibula") or {}
+            print(f"  {k}: σ_vm util_max={r0.get('ratio_max')} "
+                  f"({b.get('row_weak_sigma_c_70', {}).get('n_fractured_h')} h) | "
+                  f"|σ_zz| util_max={r1.get('ratio_max')} "
+                  f"({r1.get('n_fractured_h')} h, 首折={r1.get('first_fracture_h')}) "
+                  f"⇒ status={fr.get('status')} OR={fr.get('OR')} "
+                  f"ci={fr.get('ci95')}")
     print(f"wrote: {OUT_JSON.with_name(OUT_JSON.stem + args.out_suffix + OUT_JSON.suffix)}")
     print(f"wrote: {OUT_REPORT.with_name(OUT_REPORT.stem + args.out_suffix + OUT_REPORT.suffix)}")
     return 0
