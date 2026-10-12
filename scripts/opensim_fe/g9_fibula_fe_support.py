@@ -61,7 +61,15 @@ FIBULA_SIGMA_C_WEAK = 70.0
 
 BAND_MAIN = [(0.45, 0.55)]
 BAND_SENS = [(0.25, 0.35), (0.45, 0.55), (0.65, 0.75)]
-BAND_POLICIES = [("mid", BAND_MAIN), ("three", BAND_SENS)]
+# D1a′/D1b′（2026-10-12，docs/methods/G9_腓骨FE侧向支撑设计.md §11 修订提案，锁定前）：
+# 本 deck 固定区=底 30%、载荷带=顶 30% ⇒ 自由区 = z_frac [0.30,0.70]（自由长 0.40L）。
+# 预注册 mid 只覆盖自由长 25%（⇒ 实测定解非唯一）、three 覆盖 50%（⇒ 稳定线性）
+# ⇒ 按"覆盖率是主控变量"补两条高覆盖候选；**只经 --bands 显式选用，不改默认口径**。
+BAND_LONG95 = [(0.31, 0.69)]
+BAND_LONG85 = [(0.33, 0.67)]
+BAND_POLICIES = [("mid", BAND_MAIN), ("three", BAND_SENS)]        # 预注册（默认口径不变）
+BAND_EXTRA = [("long95", BAND_LONG95), ("long85", BAND_LONG85)]   # D1a′ 候选（纯增量）
+BAND_ALL = dict(BAND_POLICIES + BAND_EXTRA)
 SHARES = [("share_0.050", 0.05), ("share_0.100", 0.10)]
 PRIMARY = ("share_0.050", "mid")
 LIN_TOL = 0.15
@@ -123,7 +131,7 @@ def _fibula_row_stats(sigma_h: np.ndarray, sigma_c: float) -> dict:
 
 
 # ---------------------------------------------------------------------------
-def run(quick: bool, linearity: bool) -> dict:
+def run(quick: bool, linearity: bool, bands: str = "") -> dict:
     frozen = audit.load_frozen()
     heights = np.asarray(frozen["heights"], float)
     loads = frozen["loads"]
@@ -146,8 +154,14 @@ def run(quick: bool, linearity: bool) -> dict:
 
     policies = [("share_0.050", "mid")] if quick else [
         (s, b) for s, _ in SHARES for b, _ in BAND_POLICIES]
+    if bands:  # 显式选择：每个分担比 × 列出的带（可含 D1a′ 候选）
+        want = [b.strip() for b in bands.split(",") if b.strip()]
+        unknown = [b for b in want if b not in BAND_ALL]
+        if unknown:
+            raise SystemExit(f"未知支撑带策略 {unknown}；可选 {sorted(BAND_ALL)}")
+        policies = [(s, b) for s, _ in SHARES for b in want]
     share_of = dict(SHARES)
-    band_of = dict(BAND_POLICIES)
+    band_of = BAND_ALL
 
     combos: dict[str, dict] = {}
     for sname, bname in policies:
@@ -226,8 +240,8 @@ def _g3_feed(combos: dict) -> dict:
 
 
 # ---------------------------------------------------------------------------
-def _verdict(combos: dict, g3_out: dict) -> dict:
-    key = f"{PRIMARY[0]}__{PRIMARY[1]}"
+def _verdict(combos: dict, g3_out: dict, primary=PRIMARY) -> dict:
+    key = f"{primary[0]}__{primary[1]}"
     rec = combos.get(key, {})
     g = g3_out.get(key, {})
     fr = g.get("fibula", {}) if g.get("fe_ok") else {}
@@ -258,10 +272,16 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--quick", action="store_true", help="只跑主设定组合")
     ap.add_argument("--no-linearity", action="store_true")
+    ap.add_argument("--bands", default="",
+                    help="逗号分隔的支撑带策略（mid/three/long95/long85）；默认=预注册口径")
+    ap.add_argument("--primary-band", default="",
+                    help="覆盖 verdict 的主设定带名（默认 mid）")
+    ap.add_argument("--out-suffix", default="",
+                    help="输出文件名后缀（纯增量，避免覆盖预注册产物）")
     args = ap.parse_args(argv)
     t0 = time.time()
 
-    res = run(quick=args.quick, linearity=not args.no_linearity)
+    res = run(quick=args.quick, linearity=not args.no_linearity, bands=args.bands)
     res["meta"] = {
         "title": "G9 fibula FE lateral support (anti-buckling) -> G3 fibula OR",
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -274,14 +294,20 @@ def main(argv: list[str] | None = None) -> int:
         "cov_primary": {"cov_b": g3.COV_B_PRIMARY, "cov_e": g3.COV_E_PRIMARY,
                         "cov_a": g3.COV_A_PRIMARY},
         "band_policies": {k: [list(b) for b in v] for k, v in BAND_POLICIES},
+        "bands_run": sorted({k.split("__")[1] for k in res["combos"]}),
+        "amendment": ("long95/long85 = D1a′ 候选（docs/methods/G9_...md §11 修订提案，锁定前）；"
+                      "mid/three 为预注册值，未改动"),
         "shares": dict(SHARES),
         "a3_targets": A3_TARGETS, "fibula_window": FIBULA_WINDOW,
         "lin_tol": LIN_TOL,
     }
-    res["verdict"] = _verdict(res["combos"], res["g3"])
+    primary = (PRIMARY[0], args.primary_band or PRIMARY[1])
+    res["meta"]["primary"] = list(primary)
+    res["verdict"] = _verdict(res["combos"], res["g3"], primary)
     res["elapsed_s"] = time.time() - t0
-    OUT_JSON.write_text(json.dumps(res, indent=2, ensure_ascii=False), encoding="utf-8")
-    write_report(res)
+    OUT_JSON.with_name(OUT_JSON.stem + args.out_suffix + OUT_JSON.suffix).write_text(
+        json.dumps(res, indent=2, ensure_ascii=False), encoding="utf-8")
+    write_report(res, suffix=args.out_suffix)
     v = res["verdict"]
     print("=" * 96)
     print(f"G9 主设定 {v['primary_key']}: FE_ok={v['fe_ok']} "
@@ -290,13 +316,13 @@ def main(argv: list[str] | None = None) -> int:
           f"window={[round(x,3) for x in FIBULA_WINDOW]} within={v['fibula_within']}")
     print(f"  A3={v['a3_n_within']}/3 {v['a3_verdict']}; "
           f"other8_unchanged={v['unchanged_other8']}")
-    print(f"wrote: {OUT_JSON}")
-    print(f"wrote: {OUT_REPORT}")
+    print(f"wrote: {OUT_JSON.with_name(OUT_JSON.stem + args.out_suffix + OUT_JSON.suffix)}")
+    print(f"wrote: {OUT_REPORT.with_name(OUT_REPORT.stem + args.out_suffix + OUT_REPORT.suffix)}")
     return 0
 
 
 # ---------------------------------------------------------------------------
-def write_report(res: dict) -> None:
+def write_report(res: dict, suffix: str = "") -> None:
     L: list[str] = []
     A = L.append
     m = res["meta"]
@@ -436,7 +462,8 @@ def write_report(res: dict) -> None:
     A("#   temp/opensim_fe/g9_fibula_fe_support/")
     A("```")
     A("")
-    OUT_REPORT.write_text("\n".join(L) + "\n", encoding="utf-8")
+    OUT_REPORT.with_name(OUT_REPORT.stem + suffix + OUT_REPORT.suffix).write_text(
+        "\n".join(L) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
