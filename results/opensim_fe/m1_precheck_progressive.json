@@ -1,0 +1,447 @@
+{
+  "meta": {
+    "title": "M1 S0 前置：share→σ(h) 解析渐进性扫描（严格线弹性）",
+    "ref_h_m": 5.0,
+    "ankle_ref_n": 25266.24913009046,
+    "sigma_c_mpa": 70.0,
+    "areas_mm2": {
+      "A_cort_measured_101.9": 101.9,
+      "A_eff_loadflow_76.01": 76.01,
+      "A_equiv_median_33": 33.0
+    },
+    "share_hypotheses": {
+      "g8_g9_assumed": 0.05,
+      "literature_max": 0.3,
+      "m1_spike_closed_form": 0.22414329039556277
+    },
+    "model": "σ(h) = σ_ref·load(h)/load_ref, σ_ref = share·F_ref/(A·1.0) ⇒ util(h) = share·F_ref·load(h)/(F_ref·A·σ_c) = share·load(h)/(A·σ_c) —— 面积口径与 share 解耦，先扫面积"
+  },
+  "areas": {
+    "A_cort_measured_101.9": {
+      "area_mm2": 101.9,
+      "share_progressive_window": [
+        0.06316083624346669,
+        0.4615485572508853
+      ],
+      "window_definition": "[A*sigma_c/loads.max, A*sigma_c/loads.min)",
+      "positive_control_rows_agree": true,
+      "closed_form_share_in_window": true,
+      "rows": {
+        "0.0100": {
+          "util_min": 0.021666192739422368,
+          "util_max": 0.15832595948307118,
+          "util_at_ref": 0.03542163063239935,
+          "n_fractured_h": 0,
+          "frac_fractured_h": 0.0,
+          "first_fracture_h": null,
+          "all_one": false,
+          "all_zero": true,
+          "shape": "all_zero",
+          "share": 0.01,
+          "alloc_at_ref_n": 252.66249130090458
+        },
+        "0.0200": {
+          "util_min": 0.043332385478844736,
+          "util_max": 0.31665191896614236,
+          "util_at_ref": 0.0708432612647987,
+          "n_fractured_h": 0,
+          "frac_fractured_h": 0.0,
+          "first_fracture_h": null,
+          "all_one": false,
+          "all_zero": true,
+          "shape": "all_zero",
+          "share": 0.02,
+          "alloc_at_ref_n": 505.32498260180915
+        },
+        "0.0500": {
+          "util_min": 0.10833096369711184,
+          "util_max": 0.7916297974153558,
+          "util_at_ref": 0.17710815316199677,
+          "n_fractured_h": 0,
+          "frac_fractured_h": 0.0,
+          "first_fracture_h": null,
+          "all_one": false,
+          "all_zero": true,
+          "shape": "all_zero",
+          "share": 0.05,
+          "alloc_at_ref_n": 1263.312456504523
+        },
+        "0.1000": {
+          "util_min": 0.21666192739422369,
+          "util_max": 1.5832595948307115,
+          "util_at_ref": 0.35421630632399353,
+          "n_fractured_h": 27,
+          "frac_fractured_h": 0.54,
+          "first_fracture_h": 24,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.1,
+          "alloc_at_ref_n": 2526.624913009046
+        },
+        "0.2241": {
+          "util_min": 0.48563317309585813,
+          "util_max": 3.5487701513570125,
+          "util_at_ref": 0.7939520841122251,
+          "n_fractured_h": 43,
+          "frac_fractured_h": 0.86,
+          "first_fracture_h": 8,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.22414329039556277,
+          "alloc_at_ref_n": 5663.260215972501
+        },
+        "0.2500": {
+          "util_min": 0.5416548184855592,
+          "util_max": 3.958148987076779,
+          "util_at_ref": 0.8855407658099839,
+          "n_fractured_h": 44,
+          "frac_fractured_h": 0.88,
+          "first_fracture_h": 7,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.25,
+          "alloc_at_ref_n": 6316.562282522615
+        },
+        "0.2820": {
+          "util_min": 0.6109866352517107,
+          "util_max": 4.464792057422606,
+          "util_at_ref": 0.9988899838336617,
+          "n_fractured_h": 45,
+          "frac_fractured_h": 0.9,
+          "first_fracture_h": 6,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.282,
+          "alloc_at_ref_n": 7125.082254685509
+        },
+        "0.3000": {
+          "util_min": 0.649985782182671,
+          "util_max": 4.749778784492135,
+          "util_at_ref": 1.0626489189719805,
+          "n_fractured_h": 46,
+          "frac_fractured_h": 0.92,
+          "first_fracture_h": 5,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.3,
+          "alloc_at_ref_n": 7579.874739027137
+        },
+        "0.4000": {
+          "util_min": 0.8666477095768947,
+          "util_max": 6.333038379322846,
+          "util_at_ref": 1.4168652252959741,
+          "n_fractured_h": 49,
+          "frac_fractured_h": 0.98,
+          "first_fracture_h": 2,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.4,
+          "alloc_at_ref_n": 10106.499652036184
+        },
+        "0.5000": {
+          "util_min": 1.0833096369711184,
+          "util_max": 7.916297974153558,
+          "util_at_ref": 1.7710815316199677,
+          "n_fractured_h": 50,
+          "frac_fractured_h": 1.0,
+          "first_fracture_h": 1,
+          "all_one": true,
+          "all_zero": false,
+          "shape": "all_one",
+          "share": 0.5,
+          "alloc_at_ref_n": 12633.12456504523
+        }
+      }
+    },
+    "A_eff_loadflow_76.01": {
+      "area_mm2": 76.01,
+      "share_progressive_window": [
+        0.04711339708406186,
+        0.34428170595328556
+      ],
+      "window_definition": "[A*sigma_c/loads.max, A*sigma_c/loads.min)",
+      "positive_control_rows_agree": true,
+      "closed_form_share_in_window": true,
+      "rows": {
+        "0.0100": {
+          "util_min": 0.029045981320183382,
+          "util_max": 0.21225385174746678,
+          "util_at_ref": 0.047486701242487744,
+          "n_fractured_h": 0,
+          "frac_fractured_h": 0.0,
+          "first_fracture_h": null,
+          "all_one": false,
+          "all_zero": true,
+          "shape": "all_zero",
+          "share": 0.01,
+          "alloc_at_ref_n": 252.66249130090458
+        },
+        "0.0200": {
+          "util_min": 0.058091962640366764,
+          "util_max": 0.42450770349493355,
+          "util_at_ref": 0.09497340248497549,
+          "n_fractured_h": 0,
+          "frac_fractured_h": 0.0,
+          "first_fracture_h": null,
+          "all_one": false,
+          "all_zero": true,
+          "shape": "all_zero",
+          "share": 0.02,
+          "alloc_at_ref_n": 505.32498260180915
+        },
+        "0.0500": {
+          "util_min": 0.14522990660091692,
+          "util_max": 1.0612692587373338,
+          "util_at_ref": 0.23743350621243875,
+          "n_fractured_h": 5,
+          "frac_fractured_h": 0.1,
+          "first_fracture_h": 46,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.05,
+          "alloc_at_ref_n": 1263.312456504523
+        },
+        "0.1000": {
+          "util_min": 0.29045981320183384,
+          "util_max": 2.1225385174746676,
+          "util_at_ref": 0.4748670124248775,
+          "n_fractured_h": 36,
+          "frac_fractured_h": 0.72,
+          "first_fracture_h": 15,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.1,
+          "alloc_at_ref_n": 2526.624913009046
+        },
+        "0.2241": {
+          "util_min": 0.6510461825873955,
+          "util_max": 4.757527672980917,
+          "util_at_ref": 1.0643825466522263,
+          "n_fractured_h": 46,
+          "frac_fractured_h": 0.92,
+          "first_fracture_h": 5,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.22414329039556277,
+          "alloc_at_ref_n": 5663.260215972501
+        },
+        "0.2500": {
+          "util_min": 0.7261495330045846,
+          "util_max": 5.306346293686669,
+          "util_at_ref": 1.1871675310621936,
+          "n_fractured_h": 47,
+          "frac_fractured_h": 0.94,
+          "first_fracture_h": 4,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.25,
+          "alloc_at_ref_n": 6316.562282522615
+        },
+        "0.2820": {
+          "util_min": 0.8190966732291713,
+          "util_max": 5.985558619278563,
+          "util_at_ref": 1.3391249750381544,
+          "n_fractured_h": 49,
+          "frac_fractured_h": 0.98,
+          "first_fracture_h": 2,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.282,
+          "alloc_at_ref_n": 7125.082254685509
+        },
+        "0.3000": {
+          "util_min": 0.8713794396055015,
+          "util_max": 6.367615552424003,
+          "util_at_ref": 1.4246010372746323,
+          "n_fractured_h": 49,
+          "frac_fractured_h": 0.98,
+          "first_fracture_h": 2,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.3,
+          "alloc_at_ref_n": 7579.874739027137
+        },
+        "0.4000": {
+          "util_min": 1.1618392528073354,
+          "util_max": 8.49015406989867,
+          "util_at_ref": 1.89946804969951,
+          "n_fractured_h": 50,
+          "frac_fractured_h": 1.0,
+          "first_fracture_h": 1,
+          "all_one": true,
+          "all_zero": false,
+          "shape": "all_one",
+          "share": 0.4,
+          "alloc_at_ref_n": 10106.499652036184
+        },
+        "0.5000": {
+          "util_min": 1.4522990660091692,
+          "util_max": 10.612692587373338,
+          "util_at_ref": 2.3743350621243873,
+          "n_fractured_h": 50,
+          "frac_fractured_h": 1.0,
+          "first_fracture_h": 1,
+          "all_one": true,
+          "all_zero": false,
+          "shape": "all_one",
+          "share": 0.5,
+          "alloc_at_ref_n": 12633.12456504523
+        }
+      }
+    },
+    "A_equiv_median_33": {
+      "area_mm2": 33.0,
+      "share_progressive_window": [
+        0.020454441570504425,
+        0.1494710734963613
+      ],
+      "window_definition": "[A*sigma_c/loads.max, A*sigma_c/loads.min)",
+      "positive_control_rows_agree": true,
+      "closed_form_share_in_window": false,
+      "rows": {
+        "0.0100": {
+          "util_min": 0.06690257697415573,
+          "util_max": 0.48889137185833187,
+          "util_at_ref": 0.10937770186186345,
+          "n_fractured_h": 0,
+          "frac_fractured_h": 0.0,
+          "first_fracture_h": null,
+          "all_one": false,
+          "all_zero": true,
+          "shape": "all_zero",
+          "share": 0.01,
+          "alloc_at_ref_n": 252.66249130090458
+        },
+        "0.0200": {
+          "util_min": 0.13380515394831147,
+          "util_max": 0.9777827437166637,
+          "util_at_ref": 0.2187554037237269,
+          "n_fractured_h": 0,
+          "frac_fractured_h": 0.0,
+          "first_fracture_h": null,
+          "all_one": false,
+          "all_zero": true,
+          "shape": "all_zero",
+          "share": 0.02,
+          "alloc_at_ref_n": 505.32498260180915
+        },
+        "0.0500": {
+          "util_min": 0.33451288487077874,
+          "util_max": 2.4444568592916593,
+          "util_at_ref": 0.5468885093093173,
+          "n_fractured_h": 39,
+          "frac_fractured_h": 0.78,
+          "first_fracture_h": 12,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.05,
+          "alloc_at_ref_n": 1263.312456504523
+        },
+        "0.1000": {
+          "util_min": 0.6690257697415575,
+          "util_max": 4.888913718583319,
+          "util_at_ref": 1.0937770186186346,
+          "n_fractured_h": 46,
+          "frac_fractured_h": 0.92,
+          "first_fracture_h": 5,
+          "all_one": false,
+          "all_zero": false,
+          "shape": "progressive",
+          "share": 0.1,
+          "alloc_at_ref_n": 2526.624913009046
+        },
+        "0.2241": {
+          "util_min": 1.499576373892968,
+          "util_max": 10.958172073432713,
+          "util_at_ref": 2.451627799122295,
+          "n_fractured_h": 50,
+          "frac_fractured_h": 1.0,
+          "first_fracture_h": 1,
+          "all_one": true,
+          "all_zero": false,
+          "shape": "all_one",
+          "share": 0.22414329039556277,
+          "alloc_at_ref_n": 5663.260215972501
+        },
+        "0.2500": {
+          "util_min": 1.6725644243538933,
+          "util_max": 12.222284296458296,
+          "util_at_ref": 2.7344425465465863,
+          "n_fractured_h": 50,
+          "frac_fractured_h": 1.0,
+          "first_fracture_h": 1,
+          "all_one": true,
+          "all_zero": false,
+          "shape": "all_one",
+          "share": 0.25,
+          "alloc_at_ref_n": 6316.562282522615
+        },
+        "0.2820": {
+          "util_min": 1.8866526706711915,
+          "util_max": 13.786736686404957,
+          "util_at_ref": 3.0844511925045492,
+          "n_fractured_h": 50,
+          "frac_fractured_h": 1.0,
+          "first_fracture_h": 1,
+          "all_one": true,
+          "all_zero": false,
+          "shape": "all_one",
+          "share": 0.282,
+          "alloc_at_ref_n": 7125.082254685509
+        },
+        "0.3000": {
+          "util_min": 2.007077309224672,
+          "util_max": 14.666741155749955,
+          "util_at_ref": 3.2813310558559037,
+          "n_fractured_h": 50,
+          "frac_fractured_h": 1.0,
+          "first_fracture_h": 1,
+          "all_one": true,
+          "all_zero": false,
+          "shape": "all_one",
+          "share": 0.3,
+          "alloc_at_ref_n": 7579.874739027137
+        },
+        "0.4000": {
+          "util_min": 2.67610307896623,
+          "util_max": 19.555654874333275,
+          "util_at_ref": 4.3751080744745385,
+          "n_fractured_h": 50,
+          "frac_fractured_h": 1.0,
+          "first_fracture_h": 1,
+          "all_one": true,
+          "all_zero": false,
+          "shape": "all_one",
+          "share": 0.4,
+          "alloc_at_ref_n": 10106.499652036184
+        },
+        "0.5000": {
+          "util_min": 3.3451288487077866,
+          "util_max": 24.444568592916593,
+          "util_at_ref": 5.4688850930931725,
+          "n_fractured_h": 50,
+          "frac_fractured_h": 1.0,
+          "first_fracture_h": 1,
+          "all_one": true,
+          "all_zero": false,
+          "shape": "all_one",
+          "share": 0.5,
+          "alloc_at_ref_n": 12633.12456504523
+        }
+      }
+    }
+  }
+}
