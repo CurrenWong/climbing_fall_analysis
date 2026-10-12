@@ -324,3 +324,46 @@ zz −0.000）⇒ **`median` 落在"接近零"的噪声地板上**（大量固�
 ---
 
 *本件为 G9 预注册设计稿（路线 B）。批准即冻结 §2/§5。*
+---
+
+## 12. 其他办法（2026-10-12 · 本地 KB=FEBio 官方手册 + 网络文献检索）
+
+> 目的：在「口径已无法救 DoD-2」之后，找出**不是调参**的其他合法路线。分两类：**工具级**（FEBio 自带）与**建模级**（物理更完整）。
+
+### 12.1 工具级：FEBio 手册里的四条
+
+| # | 依据（本地 KB） | 内容 | 对本课题的含义 |
+|---|---|---|---|
+| **T1** | User Manual **§8.12.1 Geometrical instabilities** | "several **paths** for continuing the solution are possible…典型例=柱屈曲；Newton 求解器**无法处理屈曲**，因为此时**弹性切线不唯一**；多数情况下 FEBio 不能收敛" | **把我们实测的「分叉 / median 23% 不重现」确认为工具的文档化行为**，非流水线 bug ⇒ **任何后屈曲 σ 都不可引用** ⇒ 强论证「P_cr ≫ 载荷」是唯一合法路线（§9.14/§11.1 已做到） |
+| **T2** | User Manual **§8.11** | 求解器 **`CG-solid`**（非线性共轭梯度）："对屈曲等不稳定性问题**收敛可靠得多**"；代价：小模型比 BFGS 慢 | **可立即测的一条**：同一 deck 换 solver ⇒ 用**已有的双解复现测试**判它是否真解（非唯一性不靠 solver 能消掉，但可检验） |
+| **T3** | Theory Manual §5.4.1.1 / §5.5.5.1 / §5.7.1.3 + User Manual §12992 | **`sed`（应变能密度）**是 FEBio 的标准导出量；损伤判据 Ξ 可取 "energy density, von Mises, max principal normal strain" | **第三个口径候选，且天然抗 median 刀锋**：`sed` **能量型、可体积积分**（不再是分位数）⇒ 脆性骨断裂的标准量。另有 User Manual §3370 `metric` 开关（0=eff stress / 1=**max principal stress**）⇒ 主应力口径的官方入口 |
+| **T4** | grep 结果 | 手册**无** "linear buckling / eigenvalue buckling" | **FEBio 不支持特征值屈曲分析** ⇒ 不能直接算 P_cr ⇒ 只能用 Euler 解 + 载荷扫描（§9.13 已做） |
+
+### 12.2 建模级：文献指向的更完整物理
+
+| # | 依据 | 内容 | 含义 / 可行性 |
+|---|---|---|---|
+| **M1** | Alito & Vitali 等（*FE analysis of the Fibula's contribution*，Semantic Scholar 6a3cce-00） | **骨间膜(IOM)改变胫腓之间的载荷分配，且远端腓骨承担的轴向比例高于近端** | 本模型用**沿全长均匀 share（0.05/0.10）** ⇒ 分配形状本身就错 ⇒ **「结构性上限」最可能的真来源之一** |
+| **M2** | PMC11882339（*Mechanical contribution of the fibula to torsion stiffness*） | 腓骨"占载荷传递的**最高 30%**" | 文献 share 上界 ≫ 我们的 5% ⇒ **share 区间（0–30%）未被探索**，其不确定性应按概率传播（项目已有 COV 机制） |
+| **M3** | Goh et al., *Clin Orthop Relat Res*（load-bearing characteristics of the fibula / partial fibulectomy 一系） | 胫腓载荷分担的经典实验研究（含部分腓骨切除对照） | 若要走 M1，**这是最该对照的实验基准** |
+| **M4** | *Biomechanical Fracture Thresholds of the Tibia and Fibula* 系统综述（Cureus 454613） | 胫骨断裂阈 **~7.5–11.3 kN**；**腓骨压缩失效载荷仅 77–370 N**（含轴向预载下的侧向弯曲） | ⚠️ **量级冲突**：5% share ⇒ 1 263 N，**比实测压缩失效载荷高 4–10×** ⇒ **单骨 + 固定 share 的路线物理上不自洽**（无论口径都会失真）⇒ 支持「必须走耦合路线」 |
+| **M5** | Weibull weakest-link（Böhlke & Schüler 2013 两尺度最弱链；骨皮质试验 Weibull 分析 PMC3872155） | 最弱链 / Weibull 体积积分 | **方法学正解**：用「体积上最脆的一点」替代 median/p95 分位数 ⇒ 与脆性骨断裂物理一致，**不依赖单点统计量** |
+
+### 12.3 路线优先级（合法、非调参）
+
+1. **M1+M2：胫骨 + 腓骨 + 骨间膜耦合 FE**（自洽求解 share，取消人工横向支撑）
+   —— **本仓库已具备条件**：`fracture_matrix.build_parts()` 一次构建全部 9 骨（**胫骨网格已在手**），
+   只需加 IOM（近端斜束 / 中段 / 远端横束，Unterberg 分区）+ 远端与近端胫腓联合、下胫腓联合弹簧。
+   ⇒ **同时消除「share 假设」与「人工侧向支撑」两个自由度** —— 最有希望真正修掉 DoD-2。
+2. **M4：改用实测断裂载荷（77–370 N）做力判据**，替代 σ_c=70 的应力判据 ⇒ 绕开应力口径之争（量级冲突已定量）。
+3. **T2：换 `CG-solid` 求解器**跑同一 deck，用已有双解测试判唯一性（**当天可测**；预期不解决非唯一性）。
+4. **T3：`sed` 体积积分口径**（FEBio 原生输出，替代 median/p95）⇒ 若仍用单骨路线，这是最稳的口径。
+5. **M5：Weibull 最弱链**（若要严格概率断裂表述）。
+
+**纪律**：以上均**未验证**，属候选；M1 是唯一能同时去掉两个自由度的路线，故优先。
+任何路线都**不得以「调参 / 换判据掩盖 BC 缺陷」为实现方式**（计划 v2.5 红线）。
+
+**证据索引**：
+- 本地 KB：`knowledge/books/engineering/febio-user-manual/FEBio_User_Manual.md`（§8.11、§8.12.1、§12992、§3370）、
+  `febio-theory-manual/FEBio_Theory_Manual.md`（§5.4.1.1、§5.5.5.1、§5.7.1.3）
+- 网络：Semantic Scholar 6a3cce-00、PMC11882339、Cureus 454613、PMC3872155、Böhlke & Schüler 2013
