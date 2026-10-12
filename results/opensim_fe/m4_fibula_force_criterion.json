@@ -1,0 +1,709 @@
+{
+  "meta": {
+    "title": "M4 腓骨力判据（实测断裂载荷）→ share×失效高度映射",
+    "generated_at": "2026-10-12 23:01:28",
+    "heights_m": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+    ],
+    "ankle_r_vert_n": [
+      15454.495281029975,
+      20239.362827778637,
+      21150.40961129397,
+      22790.44322795833,
+      25266.24913009046,
+      28218.20279416677,
+      31354.797770924422,
+      34524.00564897106,
+      37654.735183159275,
+      40643.83704411823,
+      43519.826619074556,
+      46305.044118500526,
+      48932.1347655406,
+      51447.728721156906,
+      53818.84502279606,
+      56091.26957504918,
+      58292.520154096994,
+      60443.41966195141,
+      62546.52916512321,
+      64605.87356533994,
+      66622.9482301237,
+      68602.83769541391,
+      70546.63641429838,
+      72457.62934103938,
+      74335.42569807378,
+      76181.70294582727,
+      78000.96635880317,
+      79791.10686406273,
+      81556.46080231451,
+      83297.16090978045,
+      85014.88298136683,
+      86708.55903443121,
+      88379.23521513562,
+      90030.45885478362,
+      91630.24084894941,
+      93147.42387676219,
+      94649.91402443152,
+      96136.73169297572,
+      97608.89516840773,
+      99067.24673206852,
+      100509.77478044642,
+      101941.6742397736,
+      103357.87767703246,
+      104760.7407826521,
+      106155.24121126387,
+      107531.90298344607,
+      108901.53349335893,
+      110257.6886818254,
+      111599.65090336147,
+      112933.90689927466
+    ],
+    "ref_h_m": 5.0,
+    "ref_load_n": 25266.24913009046,
+    "f_fail_band_n": [
+      77.0,
+      370.0
+    ],
+    "f_fail_median_n": 168.78981011897608,
+    "f_fail_sigma_log": 0.4771117275940992,
+    "fe_p_cr_n": 252.0,
+    "a_cort_mm2": 76.0,
+    "sigma_c_thums_mpa": 70.0,
+    "sigma_c_implied_mpa": [
+      1.013157894736842,
+      4.868421052631579
+    ],
+    "sigma_c_thums_implied_force_n": 5320.0,
+    "sources": [
+      "Cureus 454613 系统综述（腓骨压缩失效 77–370 N）",
+      "本项目 FE P_cr≈252 N（G4 计划 §9.13）",
+      "本项目实测 A_cort≈76 mm²（G9 §11.7 载荷流正对照）"
+    ]
+  },
+  "rows": [
+    {
+      "share": 0.002,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 10,
+      "n_fractured_h": 41,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 50.532498260180915
+    },
+    {
+      "share": 0.002,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 31,
+      "n_fractured_h": 20,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 50.532498260180915
+    },
+    {
+      "share": 0.002,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": null,
+      "n_fractured_h": 0,
+      "n_heights": 50,
+      "status": "all_zero",
+      "alloc_at_ref_n": 50.532498260180915
+    },
+    {
+      "share": 0.002,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": null,
+      "n_fractured_h": 0,
+      "n_heights": 50,
+      "status": "all_zero",
+      "alloc_at_ref_n": 50.532498260180915
+    },
+    {
+      "share": 0.005,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 126.33124565045229
+    },
+    {
+      "share": 0.005,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 8,
+      "n_fractured_h": 43,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 126.33124565045229
+    },
+    {
+      "share": 0.005,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 14,
+      "n_fractured_h": 37,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 126.33124565045229
+    },
+    {
+      "share": 0.005,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 25,
+      "n_fractured_h": 26,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 126.33124565045229
+    },
+    {
+      "share": 0.01,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 252.66249130090458
+    },
+    {
+      "share": 0.01,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 2,
+      "n_fractured_h": 49,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 252.66249130090458
+    },
+    {
+      "share": 0.01,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 5,
+      "n_fractured_h": 46,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 252.66249130090458
+    },
+    {
+      "share": 0.01,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 9,
+      "n_fractured_h": 42,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 252.66249130090458
+    },
+    {
+      "share": 0.015,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 378.9937369513569
+    },
+    {
+      "share": 0.015,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 378.9937369513569
+    },
+    {
+      "share": 0.015,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 2,
+      "n_fractured_h": 49,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 378.9937369513569
+    },
+    {
+      "share": 0.015,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 5,
+      "n_fractured_h": 46,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 378.9937369513569
+    },
+    {
+      "share": 0.02,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 505.32498260180915
+    },
+    {
+      "share": 0.02,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 505.32498260180915
+    },
+    {
+      "share": 0.02,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 505.32498260180915
+    },
+    {
+      "share": 0.02,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 2,
+      "n_fractured_h": 49,
+      "n_heights": 50,
+      "status": "progressive",
+      "alloc_at_ref_n": 505.32498260180915
+    },
+    {
+      "share": 0.03,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 757.9874739027138
+    },
+    {
+      "share": 0.03,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 757.9874739027138
+    },
+    {
+      "share": 0.03,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 757.9874739027138
+    },
+    {
+      "share": 0.03,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 757.9874739027138
+    },
+    {
+      "share": 0.05,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 1263.312456504523
+    },
+    {
+      "share": 0.05,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 1263.312456504523
+    },
+    {
+      "share": 0.05,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 1263.312456504523
+    },
+    {
+      "share": 0.05,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 1263.312456504523
+    },
+    {
+      "share": 0.075,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 1894.9686847567843
+    },
+    {
+      "share": 0.075,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 1894.9686847567843
+    },
+    {
+      "share": 0.075,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 1894.9686847567843
+    },
+    {
+      "share": 0.075,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 1894.9686847567843
+    },
+    {
+      "share": 0.1,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 2526.624913009046
+    },
+    {
+      "share": 0.1,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 2526.624913009046
+    },
+    {
+      "share": 0.1,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 2526.624913009046
+    },
+    {
+      "share": 0.1,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 2526.624913009046
+    },
+    {
+      "share": 0.2,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 5053.249826018092
+    },
+    {
+      "share": 0.2,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 5053.249826018092
+    },
+    {
+      "share": 0.2,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 5053.249826018092
+    },
+    {
+      "share": 0.2,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 5053.249826018092
+    },
+    {
+      "share": 0.3,
+      "fail": "exp_lo_77N",
+      "f_fail_n": 77.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 7579.874739027137
+    },
+    {
+      "share": 0.3,
+      "fail": "exp_median_169N",
+      "f_fail_n": 168.78981011897608,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 7579.874739027137
+    },
+    {
+      "share": 0.3,
+      "fail": "fe_Pcr_252N",
+      "f_fail_n": 252.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 7579.874739027137
+    },
+    {
+      "share": 0.3,
+      "fail": "exp_hi_370N",
+      "f_fail_n": 370.0,
+      "h_star_m": 1,
+      "n_fractured_h": 50,
+      "n_heights": 50,
+      "status": "all_one",
+      "alloc_at_ref_n": 7579.874739027137
+    }
+  ],
+  "windows": {
+    "exp_lo_77N": {
+      "f_fail_n": 77.0,
+      "progressive_share_range": [
+        0.001,
+        0.0045
+      ],
+      "all_zero_share_max": 0.0005,
+      "proj_share_max": 0.3
+    },
+    "exp_median_169N": {
+      "f_fail_n": 168.78981011897608,
+      "progressive_share_range": [
+        0.0015,
+        0.0105
+      ],
+      "all_zero_share_max": 0.001,
+      "proj_share_max": 0.3
+    },
+    "fe_Pcr_252N": {
+      "f_fail_n": 252.0,
+      "progressive_share_range": [
+        0.0025,
+        0.016
+      ],
+      "all_zero_share_max": 0.002,
+      "proj_share_max": 0.3
+    },
+    "exp_hi_370N": {
+      "f_fail_n": 370.0,
+      "progressive_share_range": [
+        0.0035,
+        0.0235
+      ],
+      "all_zero_share_max": 0.003,
+      "proj_share_max": 0.3
+    }
+  },
+  "prob": {
+    "0.010": {
+      "alloc_at_ref_n": 252.66249130090458,
+      "p_at_ref": 0.8010855327910877,
+      "mean_p": 0.956124072252099,
+      "p_first_50": [
+        0.4267,
+        0.6482,
+        0.6818,
+        0.7354,
+        0.8011,
+        0.8593,
+        0.9029,
+        0.9332,
+        0.9537,
+        0.9673,
+        0.9764,
+        0.9828
+      ]
+    },
+    "0.015": {
+      "alloc_at_ref_n": 378.9937369513569,
+      "p_at_ref": 0.9549943049933967,
+      "mean_p": 0.9872192672917102,
+      "p_first_50": [
+        0.747,
+        0.8907,
+        0.907,
+        0.9305,
+        0.955,
+        0.973,
+        0.9841,
+        0.9906,
+        0.9943,
+        0.9964,
+        0.9977,
+        0.9985
+      ]
+    },
+    "0.020": {
+      "alloc_at_ref_n": 505.32498260180915,
+      "p_at_ref": 0.9892277384103318,
+      "mean_p": 0.995905100681774,
+      "p_first_50": [
+        0.8976,
+        0.9666,
+        0.9729,
+        0.9813,
+        0.9892,
+        0.9943,
+        0.997,
+        0.9984,
+        0.9991,
+        0.9995,
+        0.9997,
+        0.9998
+      ]
+    },
+    "0.050": {
+      "alloc_at_ref_n": 1263.312456504523,
+      "p_at_ref": 0.9999877196209622,
+      "mean_p": 0.9999817504592053,
+      "p_first_50": [
+        0.9993,
+        0.9999,
+        0.9999,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "0.100": {
+      "alloc_at_ref_n": 2526.624913009046,
+      "p_at_ref": 0.9999999929263776,
+      "mean_p": 0.9999999616102653,
+      "p_first_50": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "elapsed_s": 0.0030117034912109375
+}
