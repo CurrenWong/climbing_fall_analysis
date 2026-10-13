@@ -1,0 +1,470 @@
+{
+  "bone": "femur_r",
+  "cn": "股骨",
+  "joint": "hip_r",
+  "domain": "fem_cort",
+  "is_long": true,
+  "fe_solve_n": 15227.651697700654,
+  "thresholds": {
+    "ends": 80.0,
+    "shaft": 220.0,
+    "whole": null
+  },
+  "scaling": "per-height re-solve (no extrapolation)",
+  "rows": [
+    {
+      "i": 0,
+      "h_m": 1.0,
+      "load_n": 9783.783403289006,
+      "ends_stat_mpa": 3.793033853496147,
+      "shaft_stat_mpa": 81.93957340138917,
+      "vm_max_mpa": 220.24850461056607,
+      "ends_ratio": 0.04741292316870184,
+      "shaft_ratio": 0.37245260636995076,
+      "frac": false,
+      "lin_ends_h": 9.598055297958501,
+      "lin_shaft_h": 274.20270210205786,
+      "lin_frac": true
+    },
+    {
+      "i": 1,
+      "h_m": 2.0,
+      "load_n": 12703.479256979836,
+      "ends_stat_mpa": 5.367511827476235,
+      "shaft_stat_mpa": 174.4222991527844,
+      "vm_max_mpa": 500.6760061161664,
+      "ends_ratio": 0.06709389784345293,
+      "shaft_ratio": 0.7928286325126563,
+      "frac": false,
+      "lin_ends_h": 12.462325805779036,
+      "lin_shaft_h": 356.0308108609933,
+      "lin_frac": true
+    },
+    {
+      "i": 2,
+      "h_m": 3.0,
+      "load_n": 13106.359111139678,
+      "ends_stat_mpa": 5.562784448118116,
+      "shaft_stat_mpa": 205.82025128719,
+      "vm_max_mpa": 570.366052435739,
+      "ends_ratio": 0.06953480560147644,
+      "shaft_ratio": 0.9355465967599546,
+      "frac": false,
+      "lin_ends_h": 12.857557686869098,
+      "lin_shaft_h": 367.3220200057067,
+      "lin_frac": true
+    },
+    {
+      "i": 3,
+      "h_m": 4.0,
+      "load_n": 13928.474064328635,
+      "seconds": 11.3,
+      "ends_stat_mpa": 6.1158877939582235,
+      "shaft_stat_mpa": 253.183578856601,
+      "vm_max_mpa": 770.3315282494559,
+      "ends_ratio": 0.0764485974244778,
+      "shaft_ratio": 1.1508344493481864,
+      "frac": true,
+      "lin_ends_h": 13.664066218050763,
+      "lin_shaft_h": 390.36281438052265,
+      "lin_frac": true
+    },
+    {
+      "i": 4,
+      "h_m": 5.0,
+      "load_n": 15227.651697700654,
+      "seconds": 11.9,
+      "ends_stat_mpa": 6.6192225427787434,
+      "shaft_stat_mpa": 370.93624015619775,
+      "vm_max_mpa": 1201.3735415150766,
+      "ends_ratio": 0.08274028178473429,
+      "shaft_ratio": 1.686073818891808,
+      "frac": true,
+      "lin_ends_h": 14.93858122446266,
+      "lin_shaft_h": 426.7738838918742,
+      "lin_frac": true
+    },
+    {
+      "i": 5,
+      "h_m": 6.0,
+      "load_n": 16773.78269816338,
+      "seconds": 8.6,
+      "ends_stat_mpa": 8.578198544422841,
+      "shaft_stat_mpa": 449.6109519553948,
+      "vm_max_mpa": 1581.293607561302,
+      "ends_ratio": 0.10722748180528552,
+      "shaft_ratio": 2.0436861452517947,
+      "frac": true,
+      "lin_ends_h": 16.45536161795956,
+      "lin_shaft_h": 470.10612875617875,
+      "lin_frac": true
+    },
+    {
+      "i": 6,
+      "h_m": 7.0,
+      "load_n": 18393.256403592393,
+      "seconds": 11.0,
+      "ends_stat_mpa": 11.194487636004702,
+      "shaft_stat_mpa": 527.6206855765822,
+      "vm_max_mpa": 1985.738133556974,
+      "ends_ratio": 0.13993109545005877,
+      "shaft_ratio": 2.398275843529919,
+      "frac": true,
+      "lin_ends_h": 18.044092432776257,
+      "lin_shaft_h": 515.4938941744715,
+      "lin_frac": true
+    },
+    {
+      "i": 7,
+      "h_m": 8.0,
+      "load_n": 19993.330082827957,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h08\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h08\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 303\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:24\n\n Peak memory  : 184.6 MB\n\n Elapsed time : 0:00:38\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0436488 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0262023 sec)\n\n\tSolve time ...................... : 0:00:38 (38.3701 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0674114 sec)\n\n\t   serialization ................ : 0:00:00 (0.295434 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0291919 sec)\n\n\t   evaluating stiffness ......... : 0:00:03 (2.95674 sec)\n\n\t   evaluating residual .......... : 0:00:06 (6.27067 sec)\n\n\t   model update ................. : 0:00:04 (4.3166 sec)\n\n\t   QN updates ................... : 0:00:00 (0.117623 sec)\n\n\t   time in linear solver ........ : 0:00:24 (24.032 sec)\n\n\tTotal elapsed time .............. : 0:00:38 (38.4618 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 40.7
+    },
+    {
+      "i": 8,
+      "h_m": 9.0,
+      "load_n": 21515.23656993308,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h09\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h09\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 252\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:18\n\n Peak memory  : 184.0 MB\n\n Elapsed time : 0:00:28\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0467095 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0266003 sec)\n\n\tSolve time ...................... : 0:00:28 (28.3882 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.055131 sec)\n\n\t   serialization ................ : 0:00:00 (0.285395 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0316551 sec)\n\n\t   evaluating stiffness ......... : 0:00:02 (2.01716 sec)\n\n\t   evaluating residual .......... : 0:00:05 (4.57253 sec)\n\n\t   model update ................. : 0:00:03 (3.23941 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0925926 sec)\n\n\t   time in linear solver ........ : 0:00:18 (17.8856 sec)\n\n\tTotal elapsed time .............. : 0:00:28 (28.4864 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 30.7
+    },
+    {
+      "i": 9,
+      "h_m": 10.0,
+      "load_n": 22923.19634523376,
+      "seconds": 14.5,
+      "ends_stat_mpa": 48.21045852568854,
+      "shaft_stat_mpa": 781.147949982922,
+      "vm_max_mpa": 3086.1176749428137,
+      "ends_ratio": 0.6026307315711067,
+      "shaft_ratio": 3.550672499922373,
+      "frac": true,
+      "lin_ends_h": 22.48803934616444,
+      "lin_shaft_h": 642.4510968390907,
+      "lin_frac": true
+    },
+    {
+      "i": 10,
+      "h_m": 11.0,
+      "load_n": 24222.613131769584,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h11\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h11\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 144\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:11\n\n Peak memory  : 183.5 MB\n\n Elapsed time : 0:00:17\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0773895 sec)\n\n\tInitialization time ............. : 0:00:00 (0.021082 sec)\n\n\tSolve time ...................... : 0:00:17 (16.7889 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0372647 sec)\n\n\t   serialization ................ : 0:00:00 (0.230132 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0358786 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.16099 sec)\n\n\t   evaluating residual .......... : 0:00:03 (2.6186 sec)\n\n\t   model update ................. : 0:00:02 (1.7796 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0531079 sec)\n\n\t   time in linear solver ........ : 0:00:11 (10.7478 sec)\n\n\tTotal elapsed time .............. : 0:00:17 (16.9075 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 18.8
+    },
+    {
+      "i": 11,
+      "h_m": 12.0,
+      "load_n": 25434.264384768034,
+      "seconds": 4.7,
+      "ends_stat_mpa": 41.61684910836543,
+      "shaft_stat_mpa": 223.09481089422525,
+      "vm_max_mpa": 779.5911529705701,
+      "ends_ratio": 0.5202106138545679,
+      "shaft_ratio": 1.0140673222464784,
+      "frac": true,
+      "lin_ends_h": 24.951439127918,
+      "lin_shaft_h": 712.8269027232387,
+      "lin_frac": true
+    },
+    {
+      "i": 12,
+      "h_m": 13.0,
+      "load_n": 26593.750832359896,
+      "seconds": 7.1,
+      "ends_stat_mpa": 30.965530203525482,
+      "shaft_stat_mpa": 282.5424990016898,
+      "vm_max_mpa": 1027.6610669807383,
+      "ends_ratio": 0.3870691275440685,
+      "shaft_ratio": 1.2842840863713172,
+      "frac": true,
+      "lin_ends_h": 26.08891474266628,
+      "lin_shaft_h": 745.3229529601567,
+      "lin_frac": true
+    },
+    {
+      "i": 13,
+      "h_m": 14.0,
+      "load_n": 27706.28078628462,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h14\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h14\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 548\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:40\n\n Peak memory  : 184.0 MB\n\n Elapsed time : 0:01:10\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0477318 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0209113 sec)\n\n\tSolve time ...................... : 0:01:10 (70.292 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.143182 sec)\n\n\t   serialization ................ : 0:00:01 (0.543012 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.034474 sec)\n\n\t   evaluating stiffness ......... : 0:00:04 (4.4181 sec)\n\n\t   evaluating residual .......... : 0:00:14 (14.3639 sec)\n\n\t   model update ................. : 0:00:10 (9.69577 sec)\n\n\t   QN updates ................... : 0:00:00 (0.227698 sec)\n\n\t   time in linear solver ........ : 0:00:40 (40.3186 sec)\n\n\tTotal elapsed time .............. : 0:01:10 (70.3828 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 72.6
+    },
+    {
+      "i": 14,
+      "h_m": 15.0,
+      "load_n": 28775.69923608489,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h15\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h15\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 174\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:13\n\n Peak memory  : 183.3 MB\n\n Elapsed time : 0:00:23\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.050235 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0212192 sec)\n\n\tSolve time ...................... : 0:00:23 (22.6339 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.042984 sec)\n\n\t   serialization ................ : 0:00:00 (0.224225 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0325113 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.2585 sec)\n\n\t   evaluating residual .......... : 0:00:05 (4.72752 sec)\n\n\t   model update ................. : 0:00:03 (3.19721 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0661469 sec)\n\n\t   time in linear solver ........ : 0:00:13 (12.9237 sec)\n\n\tTotal elapsed time .............. : 0:00:23 (22.729 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 25.3
+    },
+    {
+      "i": 15,
+      "h_m": 16.0,
+      "load_n": 29806.10514450753,
+      "seconds": 5.3,
+      "ends_stat_mpa": 78.3420213983899,
+      "shaft_stat_mpa": 530.7976063900594,
+      "vm_max_mpa": 3107.7465584079087,
+      "ends_ratio": 0.9792752674798738,
+      "shaft_ratio": 2.4127163926820883,
+      "frac": true,
+      "lin_ends_h": 29.240288097299576,
+      "lin_shaft_h": 835.3531791203117,
+      "lin_frac": true
+    },
+    {
+      "i": 16,
+      "h_m": 17.0,
+      "load_n": 30798.48700409755,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h17\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h17\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 216\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:18\n\n Peak memory  : 183.5 MB\n\n Elapsed time : 0:00:30\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0486631 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0220262 sec)\n\n\tSolve time ...................... : 0:00:30 (29.8232 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0558604 sec)\n\n\t   serialization ................ : 0:00:00 (0.286052 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0307993 sec)\n\n\t   evaluating stiffness ......... : 0:00:02 (2.07063 sec)\n\n\t   evaluating residual .......... : 0:00:05 (5.42468 sec)\n\n\t   model update ................. : 0:00:04 (3.63555 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0874148 sec)\n\n\t   time in linear solver ........ : 0:00:18 (18.0388 sec)\n\n\tTotal elapsed time .............. : 0:00:30 (29.9227 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 32.4
+    },
+    {
+      "i": 17,
+      "h_m": 18.0,
+      "load_n": 31757.51547252552,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h18\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h18\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 150\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:12\n\n Peak memory  : 183.9 MB\n\n Elapsed time : 0:00:20\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0464894 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0270572 sec)\n\n\tSolve time ...................... : 0:00:20 (19.5362 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0427723 sec)\n\n\t   serialization ................ : 0:00:00 (0.242128 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0345874 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.28048 sec)\n\n\t   evaluating residual .......... : 0:00:04 (3.70814 sec)\n\n\t   model update ................. : 0:00:02 (2.46321 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0561579 sec)\n\n\t   time in linear solver ........ : 0:00:12 (11.5579 sec)\n\n\tTotal elapsed time .............. : 0:00:20 (19.6371 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 21.7
+    },
+    {
+      "i": 18,
+      "h_m": 19.0,
+      "load_n": 32684.83197749257,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h19\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h19\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 252\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:18\n\n Peak memory  : 183.9 MB\n\n Elapsed time : 0:00:31\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0651855 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0252195 sec)\n\n\tSolve time ...................... : 0:00:31 (30.7347 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0565575 sec)\n\n\t   serialization ................ : 0:00:00 (0.27301 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0385623 sec)\n\n\t   evaluating stiffness ......... : 0:00:02 (2.16646 sec)\n\n\t   evaluating residual .......... : 0:00:06 (6.01095 sec)\n\n\t   model update ................. : 0:00:04 (4.01086 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0982208 sec)\n\n\t   time in linear solver ........ : 0:00:18 (17.8424 sec)\n\n\tTotal elapsed time .............. : 0:00:31 (30.8506 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 32.8
+    },
+    {
+      "i": 19,
+      "h_m": 20.0,
+      "load_n": 33583.15629053101,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h20\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h20\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 126\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:09\n\n Peak memory  : 185.0 MB\n\n Elapsed time : 0:00:15\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0487118 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0226919 sec)\n\n\tSolve time ...................... : 0:00:15 (14.5582 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.033729 sec)\n\n\t   serialization ................ : 0:00:00 (0.267757 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.034072 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (0.854455 sec)\n\n\t   evaluating residual .......... : 0:00:03 (2.62724 sec)\n\n\t   model update ................. : 0:00:02 (1.8685 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0451499 sec)\n\n\t   time in linear solver ........ : 0:00:09 (8.7038 sec)\n\n\tTotal elapsed time .............. : 0:00:15 (14.6494 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 16.7
+    },
+    {
+      "i": 20,
+      "h_m": 21.0,
+      "load_n": 34453.42888818173,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h21\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h21\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 126\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:09\n\n Peak memory  : 184.0 MB\n\n Elapsed time : 0:00:14\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.044179 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0213655 sec)\n\n\tSolve time ...................... : 0:00:14 (14.4344 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0362601 sec)\n\n\t   serialization ................ : 0:00:00 (0.273896 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0324489 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (0.848008 sec)\n\n\t   evaluating residual .......... : 0:00:03 (2.62433 sec)\n\n\t   model update ................. : 0:00:02 (1.89524 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0460973 sec)\n\n\t   time in linear solver ........ : 0:00:09 (8.55866 sec)\n\n\tTotal elapsed time .............. : 0:00:15 (14.5249 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 16.7
+    },
+    {
+      "i": 21,
+      "h_m": 22.0,
+      "load_n": 35297.849040252535,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h22\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h22\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 368\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:27\n\n Peak memory  : 184.3 MB\n\n Elapsed time : 0:00:46\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0593243 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0207709 sec)\n\n\tSolve time ...................... : 0:00:46 (46.1358 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0647261 sec)\n\n\t   serialization ................ : 0:00:00 (0.240932 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0287171 sec)\n\n\t   evaluating stiffness ......... : 0:00:03 (2.91633 sec)\n\n\t   evaluating residual .......... : 0:00:09 (9.25172 sec)\n\n\t   model update ................. : 0:00:06 (6.3972 sec)\n\n\t   QN updates ................... : 0:00:00 (0.152909 sec)\n\n\t   time in linear solver ........ : 0:00:27 (26.6964 sec)\n\n\tTotal elapsed time .............. : 0:00:46 (46.2349 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 48.5
+    },
+    {
+      "i": 22,
+      "h_m": 23.0,
+      "load_n": 36118.517613710545,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h23\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h23\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 126\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:09\n\n Peak memory  : 184.4 MB\n\n Elapsed time : 0:00:15\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0431623 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0221348 sec)\n\n\tSolve time ...................... : 0:00:15 (14.6361 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0344291 sec)\n\n\t   serialization ................ : 0:00:00 (0.31613 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.030992 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (0.907848 sec)\n\n\t   evaluating residual .......... : 0:00:03 (2.54488 sec)\n\n\t   model update ................. : 0:00:02 (1.74716 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0461247 sec)\n\n\t   time in linear solver ........ : 0:00:09 (8.88897 sec)\n\n\tTotal elapsed time .............. : 0:00:15 (14.7223 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 17.0
+    },
+    {
+      "i": 23,
+      "h_m": 24.0,
+      "load_n": 36916.045984221,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h24\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h24\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 90\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:08\n\n Peak memory  : 184.1 MB\n\n Elapsed time : 0:00:12\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0445079 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0253293 sec)\n\n\tSolve time ...................... : 0:00:12 (12.1837 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0290665 sec)\n\n\t   serialization ................ : 0:00:00 (0.27268 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.031196 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (0.86074 sec)\n\n\t   evaluating residual .......... : 0:00:02 (1.88455 sec)\n\n\t   model update ................. : 0:00:01 (1.28792 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0315604 sec)\n\n\t   time in linear solver ........ : 0:00:08 (7.6922 sec)\n\n\tTotal elapsed time .............. : 0:00:12 (12.2889 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 14.4
+    },
+    {
+      "i": 24,
+      "h_m": 25.0,
+      "load_n": 37691.66939510874,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h25\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h25\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 180\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:13\n\n Peak memory  : 183.5 MB\n\n Elapsed time : 0:00:22\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0469667 sec)\n\n\tInitialization time ............. : 0:00:00 (0.02141 sec)\n\n\tSolve time ...................... : 0:00:22 (21.6839 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0396154 sec)\n\n\t   serialization ................ : 0:00:00 (0.287394 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0309557 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.19723 sec)\n\n\t   evaluating residual .......... : 0:00:04 (4.31326 sec)\n\n\t   model update ................. : 0:00:03 (3.00424 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0683287 sec)\n\n\t   time in linear solver ........ : 0:00:13 (12.5677 sec)\n\n\tTotal elapsed time .............. : 0:00:22 (21.7732 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 23.8
+    },
+    {
+      "i": 25,
+      "h_m": 26.0,
+      "load_n": 38550.78488537844,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h26\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h26\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 138\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:12\n\n Peak memory  : 184.8 MB\n\n Elapsed time : 0:00:19\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0445616 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0270324 sec)\n\n\tSolve time ...................... : 0:00:19 (18.836 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.052694 sec)\n\n\t   serialization ................ : 0:00:00 (0.301604 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0299082 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.27569 sec)\n\n\t   evaluating residual .......... : 0:00:03 (3.16896 sec)\n\n\t   model update ................. : 0:00:02 (2.23472 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0525063 sec)\n\n\t   time in linear solver ........ : 0:00:12 (11.5976 sec)\n\n\tTotal elapsed time .............. : 0:00:19 (18.9405 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 21.3
+    },
+    {
+      "i": 26,
+      "h_m": 27.0,
+      "load_n": 39459.67247884331,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h27\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h27\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:05\n\n Peak memory  : 184.5 MB\n\n Elapsed time : 0:00:08\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.110824 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0268133 sec)\n\n\tSolve time ...................... : 0:00:08 (7.82778 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0251676 sec)\n\n\t   serialization ................ : 0:00:00 (0.209978 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0311933 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.462058 sec)\n\n\t   evaluating residual .......... : 0:00:01 (1.17945 sec)\n\n\t   model update ................. : 0:00:01 (0.870814 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0212944 sec)\n\n\t   time in linear solver ........ : 0:00:05 (4.95883 sec)\n\n\tTotal elapsed time .............. : 0:00:08 (7.98513 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 10.3
+    },
+    {
+      "i": 27,
+      "h_m": 28.0,
+      "load_n": 40358.10687733945,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h28\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h28\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:05\n\n Peak memory  : 184.6 MB\n\n Elapsed time : 0:00:08\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0502856 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0224865 sec)\n\n\tSolve time ...................... : 0:00:08 (8.0286 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0248426 sec)\n\n\t   serialization ................ : 0:00:00 (0.197571 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0325446 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.455221 sec)\n\n\t   evaluating residual .......... : 0:00:01 (1.15489 sec)\n\n\t   model update ................. : 0:00:01 (0.817624 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0217171 sec)\n\n\t   time in linear solver ........ : 0:00:05 (5.2564 sec)\n\n\tTotal elapsed time .............. : 0:00:08 (8.12119 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 10.4
+    },
+    {
+      "i": 28,
+      "h_m": 29.0,
+      "load_n": 41245.971908660074,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h29\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h29\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 246\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:18\n\n Peak memory  : 184.0 MB\n\n Elapsed time : 0:00:33\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0427286 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0204461 sec)\n\n\tSolve time ...................... : 0:00:33 (32.8334 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0525178 sec)\n\n\t   serialization ................ : 0:00:00 (0.271207 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0296466 sec)\n\n\t   evaluating stiffness ......... : 0:00:02 (1.99696 sec)\n\n\t   evaluating residual .......... : 0:00:07 (7.08292 sec)\n\n\t   model update ................. : 0:00:05 (4.89825 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0999824 sec)\n\n\t   time in linear solver ........ : 0:00:18 (18.1601 sec)\n\n\tTotal elapsed time .............. : 0:00:33 (32.9199 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 35.0
+    },
+    {
+      "i": 29,
+      "h_m": 30.0,
+      "load_n": 42121.00342498941,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h30\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h30\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 210\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:15\n\n Peak memory  : 183.6 MB\n\n Elapsed time : 0:00:27\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0452747 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0269642 sec)\n\n\tSolve time ...................... : 0:00:27 (26.8195 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0518251 sec)\n\n\t   serialization ................ : 0:00:00 (0.229898 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0368702 sec)\n\n\t   evaluating stiffness ......... : 0:00:02 (1.62048 sec)\n\n\t   evaluating residual .......... : 0:00:06 (5.61238 sec)\n\n\t   model update ................. : 0:00:04 (3.87326 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0904295 sec)\n\n\t   time in linear solver ........ : 0:00:15 (15.0912 sec)\n\n\tTotal elapsed time .............. : 0:00:27 (26.9187 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 29.0
+    },
+    {
+      "i": 30,
+      "h_m": 31.0,
+      "load_n": 42988.21474684958,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h31\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h31\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 132\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:11\n\n Peak memory  : 183.8 MB\n\n Elapsed time : 0:00:18\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0455604 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0268403 sec)\n\n\tSolve time ...................... : 0:00:18 (18.3732 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0519905 sec)\n\n\t   serialization ................ : 0:00:00 (0.26484 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0294763 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.22955 sec)\n\n\t   evaluating residual .......... : 0:00:03 (3.12112 sec)\n\n\t   model update ................. : 0:00:02 (2.19274 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0492101 sec)\n\n\t   time in linear solver ........ : 0:00:11 (11.3147 sec)\n\n\tTotal elapsed time .............. : 0:00:18 (18.4742 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 20.6
+    },
+    {
+      "i": 31,
+      "h_m": 32.0,
+      "load_n": 43844.23701944359,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h32\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h32\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 150\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:11\n\n Peak memory  : 184.8 MB\n\n Elapsed time : 0:00:19\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0749146 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0216006 sec)\n\n\tSolve time ...................... : 0:00:19 (19.0411 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0405643 sec)\n\n\t   serialization ................ : 0:00:00 (0.231022 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0304934 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.18511 sec)\n\n\t   evaluating residual .......... : 0:00:03 (3.464 sec)\n\n\t   model update ................. : 0:00:02 (2.49942 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0562613 sec)\n\n\t   time in linear solver ........ : 0:00:11 (11.3951 sec)\n\n\tTotal elapsed time .............. : 0:00:19 (19.1615 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 21.2
+    },
+    {
+      "i": 32,
+      "h_m": 33.0,
+      "load_n": 44690.57870339744,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h33\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h33\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 192\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:15\n\n Peak memory  : 185.0 MB\n\n Elapsed time : 0:00:25\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0827252 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0224642 sec)\n\n\tSolve time ...................... : 0:00:25 (25.0571 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0473431 sec)\n\n\t   serialization ................ : 0:00:00 (0.269902 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0368462 sec)\n\n\t   evaluating stiffness ......... : 0:00:02 (1.54184 sec)\n\n\t   evaluating residual .......... : 0:00:05 (4.87657 sec)\n\n\t   model update ................. : 0:00:03 (3.36558 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0767387 sec)\n\n\t   time in linear solver ........ : 0:00:15 (14.6394 sec)\n\n\tTotal elapsed time .............. : 0:00:25 (25.1847 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 27.3
+    },
+    {
+      "i": 33,
+      "h_m": 34.0,
+      "load_n": 45527.27136516466,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h34\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h34\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 174\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:12\n\n Peak memory  : 183.8 MB\n\n Elapsed time : 0:00:21\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0566012 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0201465 sec)\n\n\tSolve time ...................... : 0:00:21 (21.4656 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0417712 sec)\n\n\t   serialization ................ : 0:00:00 (0.220467 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0317474 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.28244 sec)\n\n\t   evaluating residual .......... : 0:00:04 (4.48941 sec)\n\n\t   model update ................. : 0:00:03 (3.0015 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0694783 sec)\n\n\t   time in linear solver ........ : 0:00:12 (12.1591 sec)\n\n\tTotal elapsed time .............. : 0:00:22 (21.5623 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 23.5
+    },
+    {
+      "i": 34,
+      "h_m": 35.0,
+      "load_n": 46357.404310768805,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h35\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h35\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 132\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:11\n\n Peak memory  : 183.9 MB\n\n Elapsed time : 0:00:18\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0461918 sec)\n\n\tInitialization time ............. : 0:00:00 (0.020617 sec)\n\n\tSolve time ...................... : 0:00:18 (18.2041 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0381262 sec)\n\n\t   serialization ................ : 0:00:00 (0.302077 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0295855 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.27032 sec)\n\n\t   evaluating residual .......... : 0:00:03 (2.90413 sec)\n\n\t   model update ................. : 0:00:02 (2.05505 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0500178 sec)\n\n\t   time in linear solver ........ : 0:00:11 (11.4231 sec)\n\n\tTotal elapsed time .............. : 0:00:18 (18.2947 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 20.5
+    },
+    {
+      "i": 35,
+      "h_m": 36.0,
+      "load_n": 47177.24331349712,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h36\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h36\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 282\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:24\n\n Peak memory  : 183.9 MB\n\n Elapsed time : 0:00:38\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0483019 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0213614 sec)\n\n\tSolve time ...................... : 0:00:38 (38.4637 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0730208 sec)\n\n\t   serialization ................ : 0:00:00 (0.355543 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0300393 sec)\n\n\t   evaluating stiffness ......... : 0:00:03 (2.72952 sec)\n\n\t   evaluating residual .......... : 0:00:07 (6.50521 sec)\n\n\t   model update ................. : 0:00:05 (4.55463 sec)\n\n\t   QN updates ................... : 0:00:00 (0.118191 sec)\n\n\t   time in linear solver ........ : 0:00:24 (23.814 sec)\n\n\tTotal elapsed time .............. : 0:00:39 (38.5605 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 40.8
+    },
+    {
+      "i": 36,
+      "h_m": 37.0,
+      "load_n": 47989.894504119075,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h37\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h37\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 198\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:18\n\n Peak memory  : 184.9 MB\n\n Elapsed time : 0:00:27\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0446881 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0209996 sec)\n\n\tSolve time ...................... : 0:00:27 (27.4404 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0445133 sec)\n\n\t   serialization ................ : 0:00:00 (0.284611 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0291591 sec)\n\n\t   evaluating stiffness ......... : 0:00:02 (2.02814 sec)\n\n\t   evaluating residual .......... : 0:00:04 (4.2675 sec)\n\n\t   model update ................. : 0:00:03 (2.98925 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0775867 sec)\n\n\t   time in linear solver ........ : 0:00:18 (17.5222 sec)\n\n\tTotal elapsed time .............. : 0:00:28 (27.5256 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 29.7
+    },
+    {
+      "i": 37,
+      "h_m": 38.0,
+      "load_n": 48796.00365688383,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h38\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h38\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 318\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:27\n\n Peak memory  : 183.9 MB\n\n Elapsed time : 0:00:45\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0447635 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0201308 sec)\n\n\tSolve time ...................... : 0:00:45 (45.2245 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0773287 sec)\n\n\t   serialization ................ : 0:00:00 (0.374995 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0275856 sec)\n\n\t   evaluating stiffness ......... : 0:00:03 (3.15043 sec)\n\n\t   evaluating residual .......... : 0:00:08 (8.15751 sec)\n\n\t   model update ................. : 0:00:06 (5.70104 sec)\n\n\t   QN updates ................... : 0:00:00 (0.133022 sec)\n\n\t   time in linear solver ........ : 0:00:27 (27.2616 sec)\n\n\tTotal elapsed time .............. : 0:00:45 (45.3096 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 47.6
+    },
+    {
+      "i": 38,
+      "h_m": 39.0,
+      "load_n": 49591.80202538427,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h39\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h39\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 186\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:12\n\n Peak memory  : 183.9 MB\n\n Elapsed time : 0:00:22\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.049491 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0206267 sec)\n\n\tSolve time ...................... : 0:00:22 (22.2656 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0436653 sec)\n\n\t   serialization ................ : 0:00:00 (0.275568 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0291569 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.29806 sec)\n\n\t   evaluating residual .......... : 0:00:05 (4.72491 sec)\n\n\t   model update ................. : 0:00:03 (3.30032 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0758064 sec)\n\n\t   time in linear solver ........ : 0:00:12 (12.3246 sec)\n\n\tTotal elapsed time .............. : 0:00:22 (22.3559 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 24.4
+    },
+    {
+      "i": 39,
+      "h_m": 40.0,
+      "load_n": 50383.06246661196,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h40\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h40\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 192\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:13\n\n Peak memory  : 184.1 MB\n\n Elapsed time : 0:00:23\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0456828 sec)\n\n\tInitialization time ............. : 0:00:00 (0.021504 sec)\n\n\tSolve time ...................... : 0:00:23 (23.3965 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0426776 sec)\n\n\t   serialization ................ : 0:00:00 (0.23618 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0323433 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.33153 sec)\n\n\t   evaluating residual .......... : 0:00:05 (5.11346 sec)\n\n\t   model update ................. : 0:00:04 (3.66654 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0783668 sec)\n\n\t   time in linear solver ........ : 0:00:13 (12.7001 sec)\n\n\tTotal elapsed time .............. : 0:00:23 (23.485 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 25.4
+    },
+    {
+      "i": 40,
+      "h_m": 41.0,
+      "load_n": 51166.26232460399,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h41\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h41\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 156\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:11\n\n Peak memory  : 184.2 MB\n\n Elapsed time : 0:00:20\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0448203 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0249472 sec)\n\n\tSolve time ...................... : 0:00:20 (19.5655 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.03925 sec)\n\n\t   serialization ................ : 0:00:00 (0.232098 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0298898 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.2203 sec)\n\n\t   evaluating residual .......... : 0:00:04 (3.82728 sec)\n\n\t   model update ................. : 0:00:03 (2.65257 sec)\n\n\t   QN updates ................... : 0:00:00 (0.06142 sec)\n\n\t   time in linear solver ........ : 0:00:11 (11.3548 sec)\n\n\tTotal elapsed time .............. : 0:00:20 (19.6579 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 21.9
+    },
+    {
+      "i": 41,
+      "h_m": 42.0,
+      "load_n": 51942.858594088306,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h42\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h42\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 264\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:23\n\n Peak memory  : 183.6 MB\n\n Elapsed time : 0:00:36\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0847805 sec)\n\n\tInitialization time ............. : 0:00:00 (0.021105 sec)\n\n\tSolve time ...................... : 0:00:36 (36.1269 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0580779 sec)\n\n\t   serialization ................ : 0:00:00 (0.392851 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0302502 sec)\n\n\t   evaluating stiffness ......... : 0:00:03 (2.96044 sec)\n\n\t   evaluating residual .......... : 0:00:05 (5.36689 sec)\n\n\t   model update ................. : 0:00:04 (3.83409 sec)\n\n\t   QN updates ................... : 0:00:00 (0.108869 sec)\n\n\t   time in linear solver ........ : 0:00:23 (23.1101 sec)\n\n\tTotal elapsed time .............. : 0:00:36 (36.2539 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 38.4
+    },
+    {
+      "i": 42,
+      "h_m": 43.0,
+      "load_n": 52713.241649611846,
+      "seconds": 4.7,
+      "ends_stat_mpa": 36.02774652300582,
+      "shaft_stat_mpa": 159.86893155103058,
+      "vm_max_mpa": 722.6714590672239,
+      "ends_ratio": 0.4503468315375727,
+      "shaft_ratio": 0.7266769615955936,
+      "frac": false,
+      "lin_ends_h": 51.71257247145728,
+      "lin_shaft_h": 1477.3541789593667,
+      "lin_frac": true
+    },
+    {
+      "i": 43,
+      "h_m": 44.0,
+      "load_n": 53478.93206031116,
+      "seconds": 4.7,
+      "ends_stat_mpa": 23.705151583738072,
+      "shaft_stat_mpa": 136.73092565121544,
+      "vm_max_mpa": 635.155383912501,
+      "ends_ratio": 0.2963143947967259,
+      "shaft_ratio": 0.6215042075055247,
+      "frac": false,
+      "lin_ends_h": 52.46372758191671,
+      "lin_shaft_h": 1498.8136053318685,
+      "lin_frac": true
+    },
+    {
+      "i": 44,
+      "h_m": 45.0,
+      "load_n": 54235.475226827075,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h45\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h45\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 288\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:22\n\n Peak memory  : 184.4 MB\n\n Elapsed time : 0:00:36\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.044635 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0202344 sec)\n\n\tSolve time ...................... : 0:00:36 (35.6354 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0596228 sec)\n\n\t   serialization ................ : 0:00:00 (0.342421 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0284841 sec)\n\n\t   evaluating stiffness ......... : 0:00:02 (2.43081 sec)\n\n\t   evaluating residual .......... : 0:00:06 (6.30582 sec)\n\n\t   model update ................. : 0:00:04 (4.45744 sec)\n\n\t   QN updates ................... : 0:00:00 (0.124444 sec)\n\n\t   time in linear solver ........ : 0:00:22 (21.6116 sec)\n\n\tTotal elapsed time .............. : 0:00:36 (35.7216 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 38.0
+    },
+    {
+      "i": 45,
+      "h_m": 46.0,
+      "load_n": 54987.20526263988,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h46\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h46\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 102\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:11\n\n Peak memory  : 183.9 MB\n\n Elapsed time : 0:00:18\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0918873 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0192598 sec)\n\n\tSolve time ...................... : 0:00:18 (17.5219 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0386995 sec)\n\n\t   serialization ................ : 0:00:00 (0.223221 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0305999 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (1.41719 sec)\n\n\t   evaluating residual .......... : 0:00:03 (2.89547 sec)\n\n\t   model update ................. : 0:00:02 (2.20097 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0359571 sec)\n\n\t   time in linear solver ........ : 0:00:11 (10.575 sec)\n\n\tTotal elapsed time .............. : 0:00:18 (17.6565 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 19.9
+    },
+    {
+      "i": 46,
+      "h_m": 47.0,
+      "load_n": 55733.249161299376,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h47\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h47\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 90\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:08\n\n Peak memory  : 184.1 MB\n\n Elapsed time : 0:00:12\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0419827 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0204379 sec)\n\n\tSolve time ...................... : 0:00:12 (12.2887 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0300382 sec)\n\n\t   serialization ................ : 0:00:00 (0.195886 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0284269 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (0.872991 sec)\n\n\t   evaluating residual .......... : 0:00:02 (2.0398 sec)\n\n\t   model update ................. : 0:00:01 (1.49449 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0294176 sec)\n\n\t   time in linear solver ........ : 0:00:08 (7.51177 sec)\n\n\tTotal elapsed time .............. : 0:00:12 (12.3718 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 14.4
+    },
+    {
+      "i": 47,
+      "h_m": 48.0,
+      "load_n": 56473.40486428211,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h48\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h48\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 90\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:07\n\n Peak memory  : 184.6 MB\n\n Elapsed time : 0:00:12\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.040482 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0241722 sec)\n\n\tSolve time ...................... : 0:00:12 (11.5935 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0307956 sec)\n\n\t   serialization ................ : 0:00:00 (0.272874 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0288344 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (0.847281 sec)\n\n\t   evaluating residual .......... : 0:00:02 (1.8417 sec)\n\n\t   model update ................. : 0:00:01 (1.23647 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0289472 sec)\n\n\t   time in linear solver ........ : 0:00:07 (7.21908 sec)\n\n\tTotal elapsed time .............. : 0:00:12 (11.6823 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 13.6
+    },
+    {
+      "i": 48,
+      "h_m": 49.0,
+      "load_n": 57209.90977213073,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h49\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h49\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 192\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:13\n\n Peak memory  : 184.2 MB\n\n Elapsed time : 0:00:23\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0385578 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0197259 sec)\n\n\tSolve time ...................... : 0:00:23 (23.451 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0402564 sec)\n\n\t   serialization ................ : 0:00:00 (0.284198 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0270268 sec)\n\n\t   evaluating stiffness ......... : 0:00:02 (1.57193 sec)\n\n\t   evaluating residual .......... : 0:00:05 (4.61044 sec)\n\n\t   model update ................. : 0:00:03 (3.20652 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0736612 sec)\n\n\t   time in linear solver ........ : 0:00:13 (13.4284 sec)\n\n\tTotal elapsed time .............. : 0:00:24 (23.5274 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 25.5
+    },
+    {
+      "i": 49,
+      "h_m": 50.0,
+      "load_n": 57941.31332304486,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h50\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_perheight\\femur_r\\h50\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 126\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:08\n\n Peak memory  : 184.5 MB\n\n Elapsed time : 0:00:16\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0430251 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0203125 sec)\n\n\tSolve time ...................... : 0:00:16 (15.5196 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0308477 sec)\n\n\t   serialization ................ : 0:00:00 (0.225405 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0310782 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (0.945141 sec)\n\n\t   evaluating residual .......... : 0:00:03 (3.24953 sec)\n\n\t   model update ................. : 0:00:02 (2.37262 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0449435 sec)\n\n\t   time in linear solver ........ : 0:00:08 (8.49244 sec)\n\n\tTotal elapsed time .............. : 0:00:16 (15.6002 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 17.3
+    }
+  ],
+  "n_solved": 13,
+  "n_fracture": 8,
+  "first_fracture_h_m": 4.0
+}

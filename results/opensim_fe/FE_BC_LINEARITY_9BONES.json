@@ -1,0 +1,114 @@
+{
+  "source": "frozen BC2 *_fe.json linearity (NOT reproducible, qualitative only)",
+  "expected_ratio": 2.0,
+  "rows": [
+    {
+      "bone": "calcaneus_r",
+      "joint": "subtalar_r",
+      "ref_load_n": 25354.401972520634,
+      "status": "ok",
+      "domain": "calc_cort",
+      "vm_median_at_ref_mpa": 78.17907448078924,
+      "ratio_max": 2.1409582086130783,
+      "ratio_p95": 2.1053832949069036,
+      "ratio_median": 2.1206652562810246,
+      "ratio_mean": 2.0702385113007646
+    },
+    {
+      "bone": "tibia_r",
+      "joint": "ankle_r",
+      "ref_load_n": 5000.0,
+      "status": "ok",
+      "domain": "tibia_cort",
+      "vm_median_at_ref_mpa": 9.83038663524038,
+      "ratio_max": 7.127063520393471,
+      "ratio_p95": 5.619236230573574,
+      "ratio_median": 3.233075029806898,
+      "ratio_mean": 4.747172484389642
+    },
+    {
+      "bone": "fibula_r",
+      "joint": "ankle_r",
+      "ref_load_n": 5000.0,
+      "status": "ok",
+      "domain": "fib_cort",
+      "vm_median_at_ref_mpa": 135.41444253599957,
+      "ratio_max": null,
+      "ratio_p95": null,
+      "ratio_median": null,
+      "ratio_mean": null
+    },
+    {
+      "bone": "femur_r",
+      "joint": "hip_r",
+      "ref_load_n": 15227.651697700654,
+      "status": "ok",
+      "domain": "fem_cort",
+      "vm_median_at_ref_mpa": 60.13409277858595,
+      "ratio_max": 9.80309094110509,
+      "ratio_p95": 9.68758564593197,
+      "ratio_median": 5.785546895112519,
+      "ratio_mean": 8.655998895158733
+    },
+    {
+      "bone": "R_HIPBONE",
+      "joint": "hip_r",
+      "ref_load_n": 15227.651697700654,
+      "status": "ok",
+      "domain": "hip_spon",
+      "vm_median_at_ref_mpa": 0.16648764005597755,
+      "ratio_max": 2.0548557855091425,
+      "ratio_p95": 2.2304823207312836,
+      "ratio_median": 2.3864737041734,
+      "ratio_mean": 2.1756667182560814
+    },
+    {
+      "bone": "L3",
+      "joint": "lumbar",
+      "ref_load_n": 22087.579953288558,
+      "status": "ok",
+      "domain": "l3_spon",
+      "vm_median_at_ref_mpa": 1.7912798112284758,
+      "ratio_max": 2.680452309737835,
+      "ratio_p95": 2.305030204595694,
+      "ratio_median": 2.0024227359050784,
+      "ratio_mean": 2.175336859735764
+    },
+    {
+      "bone": "T6",
+      "joint": "lumbar",
+      "ref_load_n": 10000.0,
+      "status": "ok",
+      "domain": "t6_spon",
+      "vm_median_at_ref_mpa": 1.5928335179685433,
+      "ratio_max": 2.572655056151785,
+      "ratio_p95": 3.4344910488953393,
+      "ratio_median": 3.089177154131426,
+      "ratio_mean": 3.150486989532401
+    },
+    {
+      "bone": "C5",
+      "joint": "lumbar",
+      "ref_load_n": 22087.579953288558,
+      "status": "ok",
+      "domain": "c5_spon",
+      "vm_median_at_ref_mpa": 1.0790683107592778,
+      "ratio_max": 2.351185183229852,
+      "ratio_p95": 2.271093689786757,
+      "ratio_median": 2.0424351364397415,
+      "ratio_mean": 2.169114194825454
+    },
+    {
+      "bone": "parietal_r",
+      "joint": "lumbar",
+      "ref_load_n": 22087.579953288558,
+      "status": "ok",
+      "domain": "par_diploe",
+      "vm_median_at_ref_mpa": 8.192901457771582,
+      "ratio_max": 2.720472227124512,
+      "ratio_p95": 2.5706530241174868,
+      "ratio_median": 2.795673966846718,
+      "ratio_mean": 2.696451724226739
+    }
+  ]
+}
