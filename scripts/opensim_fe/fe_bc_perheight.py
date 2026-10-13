@@ -48,9 +48,15 @@ def statistic(h5: Path, dom: str) -> dict:
     cent = coords[idx].mean(axis=1)
     p = pa.partition_ends_shaft(coords, cent)
     vm = pa.vm_voigt(stress)
+    # G9 诊断量：median(VM)/median(|sigma_zz|)。~1.0 = 自由(单轴应力)；
+    # ~0.571 (nu=0.3) = 全侧向约束(单轴应变)。载荷轴 = z（align_pca 后）。
+    az = np.abs(stress[:, 2])
     return {"ends_stat_mpa": float(np.median(vm[p["ends_mask"]])),
             "shaft_stat_mpa": float(np.median(vm[p["shaft_mask"]])),
-            "vm_max_mpa": float(vm.max())}
+            "vm_max_mpa": float(vm.max()),
+            "abs_szz_median_mpa": float(np.median(az)),
+            "vm_over_abs_szz_median": (float(np.median(vm) / np.median(az))
+                                       if np.median(az) > 0 else None)}
 
 
 def main() -> int:
