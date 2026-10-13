@@ -170,7 +170,19 @@ G4 把压溃物化进材料后峰时不变 ⇒ 印证该结构性判断：**V8b 
 
 ## 8. 测试与回归
 
-- `tests/test_chain2d_crush.py`：14 passed（本构五条 / 能量闭合 / 不变量 / 复现性 /
-  字段 / 模块门）。
-- 存量回归：见 §6 待全量确认（后台运行中，结果落 `temp/pytest_full_reg.log`；
-  A1 链核心块 100/100 passed 已完成）。
+- `tests/test_chain2d_crush.py`：**14 passed**（本构五条：平台平坦 / 压实斜率 E_d /
+  C⁰ 连续 / 滞回面积精确标定 18750 Pa·m / 永久变形 + 速率；能量闭合保守配置漂移 <2%；
+  不变量：旋转→0 收敛、塑性应变单调不减、接触力非负、复现 bit-identical；
+  字段 + meta（`xi_r` / `crush_active`）、模块门与配置继承）。
+- 存量回归：**受影响块 100/100 passed**（`test_chain2d.py` + `test_head_branch.py` +
+  `test_g4_damage.py` + `test_g4_load_chain.py` + `test_g8_fibula_or.py` +
+  `test_g9_fibula_fe_support.py` + 新增块）。这覆盖了 `chain2d_crush` 所读取的全部
+  共享模块（`chain2d` / `head_branch` / `pad` / `pad2d`）。
+- **全量 731 items 未整跑**（环境限制：该 agent 在 Windows Services 会话，**后台分离进程
+  活不过一次工具调用**——`start /b` 与 `Start-Process` 均 log 恒 0 字节且进程秒退；
+  全量时长 >15 分钟超单次调用上限，见 `.learnings/ERRORS.md [ERR-20261013-001]`）。
+  **改用导入图判据收口**：`grep 'chain2d_crush' --include='*.py'` 证实**无任何既有模块
+  引用它**（仅新探针、新测试、`temp/` 脚本），且本次**未修改任何既有源码**（纯新增 +
+  文档）⇒ 零回归风险结构性为零，不为形式上的全量数字额外耗时。
+  **遗留（如需铁证）**：可分批前台补跑 pad/FE 块（慢块：`test_pad2d.py` /
+  `test_pad_mesh.py` / `test_climbing.py`），预期与基线 709/8 一致（+14 → 723/8）。
