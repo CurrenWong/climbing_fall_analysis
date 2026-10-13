@@ -123,34 +123,32 @@ def _tissue_sigma_and_rate(
     """v2 本构：``(σ, dξ_r/dt)``。
 
     ``compression_m ≤ 0`` ⇒ ``(0, 0)``（未接触，slack）。
-    ``u = ξ - ξ_r`` 为可恢复弹性应变；加载沿骨架 ``flow_pa(u)``、
-    卸载沿 ``E₁·u``（回弹到永久残余应变 ⇒ 不回弹）。
-    两处过渡（线性↔致密化、加载↔卸载）用 tanh 带平滑。
+    加载沿骨架、卸载沿 ``E₁``（回弹到永久残余应变 ⇒ 不回弹）。
 
-    **ξ_r 饱和规则（2026-10-13 规则修正，替换首版的 ``ξ_r = ξ - ξ_ref``）**：
-    首版让 ξ_r 无界跟随 ξ ⇒ ``u ≡ ξ_ref`` 恒定 ⇒ σ 恒为 ``E₁·ξ_ref`` =
-    130 kPa 的**无限平台**，垫子可无限塌陷。首跑主判据 183.4 mm（FAIL）即由此暴露。
-    修正：**ξ_r 只在线性区增长且饱和于 ξ_ref**；越过 ξ_ref 后 ξ_r 冻结，
-    ``u`` 继续增长由 ``E_d`` 致密化抵抗 ⇒ 压缩被限制在 ``t·ξ_ref`` 附近。
-    这是**规则修正**（首版物理上荒谬），**不是参数调整**。
+    **门控用总应变 ξ，不是弹性应变 u**（2026-10-13 规则修正 #4）：
+    ``ξ_ref=0.70`` 是 **in-vivo 总应变峰值**（PMC8925218 的 peak strain），
+    故致密化须由**总应变**越过 ξ_ref 触发。首版误用 ``u = ξ - ξ_r`` 门控，
+    于是 ξ_r→0.70 与 u→0.73 可叠加，总应变跑到 **1.43**（变形 22 mm ≈ 目标带 2×），
+    且该错误与输入能量无关（0.05–1.0 m 全部饱和在 22 mm）。
     """
     if compression_m <= 0.0:
         return 0.0, 0.0
     xi = compression_m / p.thickness_m
+    xi_ref = p.xi_ref
     u = max(xi - xi_r, 0.0)
 
     sig_lin = p.E1_pa * u
-    sig_dense = p.flow_pa(u)
-    wb = 0.5 * (1.0 + np.tanh((u - p.xi_ref) / eps_xi))      # 1 = 致密化区
+    # 致密化：σ = E₁·(ξ_ref − ξ_r) + E_d·(ξ − ξ_ref)，在 ξ = ξ_ref 处与线性段衔接
+    sig_dense = p.E1_pa * max(xi_ref - xi_r, 0.0) + p.E_dense_pa * max(xi - xi_ref, 0.0)
+    wb = 0.5 * (1.0 + np.tanh((xi - xi_ref) / eps_xi))       # 1 = 致密化区（总应变门控）
     wv = 0.5 * (1.0 + np.tanh(vz / eps_vel))                  # 1 = 加载
     sig_load = wb * sig_dense + (1.0 - wb) * sig_lin
     sig = wv * sig_load + (1.0 - wv) * sig_lin
 
-    # ξ_r：仅在线性区（u < ξ_ref）且加载时增长，速率 ∝ 剩余容量 → 饱和于 ξ_ref
-    # （cap 用 tanh 平滑饱和：E_d/E_1 = 108× 的陡过渡 + 硬截断会让 Radau 步长坍缩）
+    # ξ_r：仅在**线性区**（总应变 ξ < ξ_ref）且加载时增长，速率 ∝ 剩余容量 → 饱和于 ξ_ref
     wlin = 1.0 - wb
-    cap = 0.5 * (1.0 + np.tanh((p.xi_ref * (1.0 - eps_cap) - xi_r)
-                              / (eps_cap * p.xi_ref)))
+    cap = 0.5 * (1.0 + np.tanh((xi_ref * (1.0 - eps_cap) - xi_r)
+                              / (eps_cap * xi_ref)))
     dr = wv * wlin * cap * max(vz, 0.0) / p.thickness_m
     return float(sig), float(dr)
 
