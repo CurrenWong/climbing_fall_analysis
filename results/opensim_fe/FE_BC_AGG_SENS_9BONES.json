@@ -1,0 +1,353 @@
+{
+  "purpose": "A2 口径敏感性（零新增解算；读冻结 json + 冻结 hdf5）",
+  "stats": [
+    "median",
+    "mean",
+    "p95",
+    "max"
+  ],
+  "per_stat": {
+    "median": {
+      "足部": {
+        "bone": "calcaneus_r",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 38,
+        "target": "阶跃",
+        "hit": true
+      },
+      "胫骨": {
+        "bone": "tibia_r",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 46,
+        "target": "阶跃",
+        "hit": true
+      },
+      "腓骨": {
+        "bone": "fibula_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "渐进",
+        "hit": false
+      },
+      "股骨": {
+        "bone": "femur_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "骨盆": {
+        "bone": "R_HIPBONE",
+        "behav": "常值",
+        "status": "all_zero",
+        "n_fracture": 0,
+        "target": "渐进",
+        "hit": false
+      },
+      "腰椎": {
+        "bone": "L3",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 44,
+        "target": "阶跃",
+        "hit": true
+      },
+      "胸椎": {
+        "bone": "T6",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "颈椎": {
+        "bone": "C5",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 44,
+        "target": "阶跃",
+        "hit": true
+      },
+      "颅骨": {
+        "bone": "parietal_r",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 45,
+        "target": "渐进",
+        "hit": false
+      }
+    },
+    "mean": {
+      "足部": {
+        "bone": "calcaneus_r",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 39,
+        "target": "阶跃",
+        "hit": true
+      },
+      "胫骨": {
+        "bone": "tibia_r",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 49,
+        "target": "阶跃",
+        "hit": true
+      },
+      "腓骨": {
+        "bone": "fibula_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "渐进",
+        "hit": false
+      },
+      "股骨": {
+        "bone": "femur_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "骨盆": {
+        "bone": "R_HIPBONE",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 14,
+        "target": "渐进",
+        "hit": false
+      },
+      "腰椎": {
+        "bone": "L3",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 49,
+        "target": "阶跃",
+        "hit": true
+      },
+      "胸椎": {
+        "bone": "T6",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "颈椎": {
+        "bone": "C5",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 49,
+        "target": "阶跃",
+        "hit": true
+      },
+      "颅骨": {
+        "bone": "parietal_r",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 43,
+        "target": "渐进",
+        "hit": false
+      }
+    },
+    "p95": {
+      "足部": {
+        "bone": "calcaneus_r",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 49,
+        "target": "阶跃",
+        "hit": true
+      },
+      "胫骨": {
+        "bone": "tibia_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "腓骨": {
+        "bone": "fibula_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "渐进",
+        "hit": false
+      },
+      "股骨": {
+        "bone": "femur_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "骨盆": {
+        "bone": "R_HIPBONE",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 43,
+        "target": "渐进",
+        "hit": false
+      },
+      "腰椎": {
+        "bone": "L3",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "胸椎": {
+        "bone": "T6",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "颈椎": {
+        "bone": "C5",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "颅骨": {
+        "bone": "parietal_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "渐进",
+        "hit": false
+      }
+    },
+    "max": {
+      "足部": {
+        "bone": "calcaneus_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "胫骨": {
+        "bone": "tibia_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "腓骨": {
+        "bone": "fibula_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "渐进",
+        "hit": false
+      },
+      "股骨": {
+        "bone": "femur_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "骨盆": {
+        "bone": "R_HIPBONE",
+        "behav": "阶跃",
+        "status": "complete_separation",
+        "n_fracture": 47,
+        "target": "渐进",
+        "hit": false
+      },
+      "腰椎": {
+        "bone": "L3",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "胸椎": {
+        "bone": "T6",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "颈椎": {
+        "bone": "C5",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "阶跃",
+        "hit": false
+      },
+      "颅骨": {
+        "bone": "parietal_r",
+        "behav": "常值",
+        "status": "all_one",
+        "n_fracture": 50,
+        "target": "渐进",
+        "hit": false
+      }
+    }
+  },
+  "summary": {
+    "median": {
+      "step_hits": 4,
+      "step_total": 6,
+      "gradual_hits": 0,
+      "gradual_total": 3,
+      "note": "6 靶逐部位"
+    },
+    "mean": {
+      "step_hits": 4,
+      "step_total": 6,
+      "gradual_hits": 0,
+      "gradual_total": 3,
+      "note": "6 靶逐部位"
+    },
+    "p95": {
+      "step_hits": 1,
+      "step_total": 6,
+      "gradual_hits": 0,
+      "gradual_total": 3,
+      "note": "6 靶逐部位"
+    },
+    "max": {
+      "step_hits": 0,
+      "step_total": 6,
+      "gradual_hits": 0,
+      "gradual_total": 3,
+      "note": "6 靶逐部位"
+    }
+  },
+  "target": {
+    "PAPER_STEP": [
+      "股骨",
+      "胫骨",
+      "胸椎",
+      "腰椎",
+      "足部",
+      "颈椎"
+    ],
+    "PAPER_GRADUAL": [
+      "腓骨",
+      "颅骨",
+      "骨盆"
+    ]
+  },
+  "warning": "本件只测敏感性，不裁定口径；裁定须独立论证"
+}
