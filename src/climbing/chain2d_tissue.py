@@ -287,25 +287,26 @@ def _rhs_tissue(t, y, ctx: _TissueCtx):
 
 
 def _build_tissue_ctx(
-    posture: Posture, on_pad: bool, cfg: TissueChainConfig
+    posture: Posture, on_pad: bool, cfg: TissueChainConfig,
+    segments: tuple = SEGMENTS_6,
 ) -> _TissueCtx:
-    n = len(SEGMENTS_6)
-    m = np.array([cfg.mass_kg * s.mass_frac for s in SEGMENTS_6])
+    n = len(segments)
+    m = np.array([cfg.mass_kg * s.mass_frac for s in segments])
     m *= cfg.mass_kg / m.sum()
-    lengths = np.array([s.length_m for s in SEGMENTS_6])
+    lengths = np.array([s.length_m for s in segments])
     rest = 0.5 * (lengths[:-1] + lengths[1:])
-    k_ax_seg = np.array([s.k_axial_n_per_m for s in SEGMENTS_6])
+    k_ax_seg = np.array([s.k_axial_n_per_m for s in segments])
     k_ax = 1.0 / (1.0 / k_ax_seg[:-1] + 1.0 / k_ax_seg[1:])
-    k_tors = np.array([s.k_torsion_nm_per_rad for s in SEGMENTS_6[:-1]])
-    comp_limit = np.array([s.travel_compress_m for s in SEGMENTS_6[:-1]])
-    ext_limit = np.array([s.travel_extend_m for s in SEGMENTS_6[:-1]])
+    k_tors = np.array([s.k_torsion_nm_per_rad for s in segments[:-1]])
+    comp_limit = np.array([s.travel_compress_m for s in segments[:-1]])
+    ext_limit = np.array([s.travel_extend_m for s in segments[:-1]])
     k_comp_stop = cfg.k_comp_stop_mult * k_ax
     k_ext_stop = cfg.k_ext_stop_mult * k_ax
     m_above = np.array([m[j + 1:].sum() for j in range(n - 1)])
     c_ax = 2.0 * cfg.zeta_joint * np.sqrt(k_ax * m_above)
     if cfg.c_axial_n_s_per_m > 0.0:
         c_ax = c_ax + cfg.c_axial_n_s_per_m
-    area_base = np.array([s.contact_area_m2 for s in SEGMENTS_6])
+    area_base = np.array([s.contact_area_m2 for s in segments])
     return _TissueCtx(
         n_nodes=n, m=m, rest=rest, k_ax=k_ax, k_tors=k_tors,
         comp_limit=comp_limit, ext_limit=ext_limit,
@@ -325,8 +326,13 @@ def simulate_tissue_chain_fall(
     posture: str | Posture = "feet-first-stiff",
     on_pad: bool = False,
     config: TissueChainConfig | None = None,
+    segments: tuple = SEGMENTS_6,
 ) -> PlanarChainResult:
     """模拟一次坠落（6 段平面软关节链 + v2 软组织柔顺层）。
+
+    ``segments`` 是 **G6 旁路入口**（``SEGMENTS_6_SOFT``）；默认 ``SEGMENTS_6``
+    ⇒ **既有行为逐位不变**。段定义只影响链的刚度/几何/观测量分母，
+    接触本构与其余口径完全不变。
 
     返回 ``PlanarChainResult``（与 G1 同容器），``meta`` 增补：
     ``tissue_active`` / ``tissue_params`` / ``xi_r``（永久压实时程 (T,6)）。
@@ -337,7 +343,7 @@ def simulate_tissue_chain_fall(
         cfg = replace(cfg, **PLANAR_TISSUE)
     cfg = replace(cfg, mass_kg=float(mass_kg))
 
-    ctx = _build_tissue_ctx(post, on_pad, cfg)
+    ctx = _build_tissue_ctx(post, on_pad, cfg, segments)
     n = ctx.n_nodes
 
     z0 = np.empty(n)
@@ -457,7 +463,7 @@ def simulate_tissue_chain_fall(
         meta={
             "posture_obj": post,
             "on_pad": on_pad,
-            "segments": SEGMENTS_6,
+            "segments": segments,
             "g": cfg.g,
             "node_mass_kg": ctx.m,
             "impact_window_s": (float(t_out[i0]), float(t_out[i1 - 1])),
