@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "title": "M1 S2b：A_eff 钉死（载荷流口径，share 无关性检验）",
+    "generated_at": "2026-10-13 08:20:09",
+    "method": "A_eff = V_free / L_free（纯几何量；量纲推导见 loadflow_aeff docstring：Σ(σV)=σ·A·L 多乘一个长度 ⇒ 原载流式退化为体积）",
+    "cross_check_g9_section11_7": 76.01,
+    "geometry_from_h5_only": "domains 的 n0..n7 是 nodes 表 0-based 行号（按 id 解释会错行：单单元 383 vs 真值 50.7 mm³）；h5 几何是 align_pca 旋转后的 ⇒ z/体积/σ 全部取自 h5 内部",
+    "why_not_median": "G9 §11.8：同载荷逐位相同的两个解，median|σ_zz| 差 23% 而 mean 差 0.5% ⇒ median 落噪声地板，A_equiv=33 mm² 是坏统计量产物，不可采信",
+    "fixed_frac": 0.3,
+    "bands": [
+      [
+        0.31,
+        0.69
+      ]
+    ],
+    "shares": [
+      0.02,
+      0.05,
+      0.1
+    ],
+    "ref_h_m": 5.0,
+    "ankle_ref_n": 25266.24913009046
+  },
+  "rows": {
+    "0.0200": {
+      "ok": true,
+      "A_eff_mm2": 76.27877254780906,
+      "V_free_mm3": 12203.509346662957,
+      "L_free_mm": 159.9856544494629,
+      "z_span_mm": 399.9641361236572,
+      "sigma_mid_mpa": -5.79631951145405,
+      "vol_total_mm3": 31015.357039478826,
+      "n_elem_free": 308,
+      "n_elem_total": 842,
+      "frac_elems_free": 0.3657957244655582,
+      "share": 0.02,
+      "alloc_n": 505.32498260180915,
+      "R1_volume_matches_grid": true,
+      "R2_sigma_scale_ok": true,
+      "R3_aeff_scale_ok": true
+    },
+    "0.0500": {
+      "ok": true,
+      "A_eff_mm2": 76.27877254780906,
+      "V_free_mm3": 12203.509346662957,
+      "L_free_mm": 159.9856544494629,
+      "z_span_mm": 399.9641361236572,
+      "sigma_mid_mpa": -14.490839347564581,
+      "vol_total_mm3": 31015.357039478826,
+      "n_elem_free": 308,
+      "n_elem_total": 842,
+      "frac_elems_free": 0.3657957244655582,
+      "share": 0.05,
+      "alloc_n": 1263.312456504523,
+      "R1_volume_matches_grid": true,
+      "R2_sigma_scale_ok": true,
+      "R3_aeff_scale_ok": true
+    },
+    "0.1000": {
+      "ok": true,
+      "A_eff_mm2": 76.27877254780906,
+      "V_free_mm3": 12203.509346662957,
+      "L_free_mm": 159.9856544494629,
+      "z_span_mm": 399.9641361236572,
+      "sigma_mid_mpa": -28.98315180010446,
+      "vol_total_mm3": 31015.357039478826,
+      "n_elem_free": 308,
+      "n_elem_total": 842,
+      "frac_elems_free": 0.3657957244655582,
+      "share": 0.1,
+      "alloc_n": 2526.624913009046,
+      "R1_volume_matches_grid": true,
+      "R2_sigma_scale_ok": true,
+      "R3_aeff_scale_ok": true
+    }
+  },
+  "Q1a_A_eff_invariance": {
+    "A_values": [
+      76.27877254780906,
+      76.27877254780906,
+      76.27877254780906
+    ],
+    "A_median": 76.27877254780906,
+    "rel_spread": 0.0,
+    "expectation": "0（纯几何量 V_free/L_free，与载荷无关）",
+    "pass": true
+  },
+  "Q1b_sigma_linearity": {
+    "shares": [
+      0.02,
+      0.05,
+      0.1
+    ],
+    "sigma_mid_abs": [
+      5.79631951145405,
+      14.490839347564581,
+      28.98315180010446
+    ],
+    "ratio_last_first": 5.000268143057182,
+    "share_ratio": 5.0,
+    "rel_err": 5.362861143645148e-05,
+    "pass": true
+  },
+  "Q2_vs_Acort": {
+    "A_cort": 101.93639969518283,
+    "A_eff": 76.27877254780906,
+    "ratio_Aeff_over_Acort": 0.7482976912653678,
+    "within_half_to_full": true
+  },
+  "Q3_vs_g9": {
+    "g9_section11_7_value": 76.01,
+    "recomputed": 76.27877254780906,
+    "abs_diff": 0.2687725478090499,
+    "rel_diff": 0.0035360156270102605
+  },
+  "verdict": {
+    "A_eff_pinned_mm2": 76.27877254780906,
+    "A_equiv_median_rejected": true,
+    "A_cort_not_used": true,
+    "implication": "A_eff 定案 76.3 mm² ⇒ S2 稳健域里 A=76.3 那一列的通过 share 区间即为 DoD-2 的判定区间"
+  },
+  "elapsed_s": 63.98485708236694
+}
