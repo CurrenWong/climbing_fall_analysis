@@ -58,9 +58,13 @@ def main() -> int:
     ap.add_argument("--bone", default="femur_r")
     ap.add_argument("--height-start", type=int, default=0)
     ap.add_argument("--height-end", type=int, default=50)
+    ap.add_argument("--lateral", default="", help="lo,hi 侧向支撑带（空=无）")
+    ap.add_argument("--axial-only", action="store_true")
     args = ap.parse_args()
 
     bone = args.bone
+    LAT = tuple(float(x) for x in args.lateral.split(",")) if args.lateral else None
+    print(f"[ph] lateral={LAT} axial_only={args.axial_only}", flush=True)
     out_dir = ROOT / "temp" / "opensim_fe" / "fe_bc_perheight" / bone
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -123,7 +127,9 @@ def main() -> int:
             try:
                 bf.build_bone_feb(part.spec, feb, load_n=load, top_frac=0.30,
                                   bot_frac=0.30, axis=None, with_shell=True,
-                                  time_steps=1, mesh=mesh, align_pca=True)
+                                  time_steps=1, mesh=mesh, align_pca=True,
+                                  lateral_support=([LAT] if LAT else None),
+                                  bottom_fix_axial_only=args.axial_only)
                 bf.run_bone_feb(feb, workdir=feb.parent, timeout=1800)
                 if feb.with_suffix(".xplt").is_file():
                     bf.post_process(feb.with_suffix(".xplt"), h5,
@@ -173,6 +179,8 @@ def main() -> int:
         "is_long": is_long, "fe_solve_n": fe_solve,
         "thresholds": {"ends": sig_e, "shaft": sig_s, "whole": sig_whole},
         "scaling": "per-height re-solve (no extrapolation)",
+        "lateral_support": list(LAT) if LAT else None,
+        "bottom_fix_axial_only": bool(args.axial_only),
         "rows": rows, "n_solved": len(ok), "n_fracture": nfrac,
         "first_fracture_h_m": next((r["h_m"] for r in ok if r["frac"]), None),
     }, ensure_ascii=False, indent=2), encoding="utf-8")

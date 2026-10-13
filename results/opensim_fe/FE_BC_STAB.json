@@ -1,0 +1,166 @@
+{
+  "bone": "femur_r",
+  "domain": "fem_cort",
+  "joint": "hip_r",
+  "gate": "full-domain convergence (rc=0 at all 50 heights)",
+  "variants": [
+    {
+      "name": "A0_baseline",
+      "axial_only": false,
+      "lateral_support": null,
+      "note": "现状：全 3-DOF 夹持 + 无侧向"
+    },
+    {
+      "name": "A1_axial_only",
+      "axial_only": true,
+      "lateral_support": null,
+      "note": "仅轴向夹持 + 无侧向（可能刚体奇异）"
+    },
+    {
+      "name": "A2_axial_lat_90",
+      "axial_only": true,
+      "lateral_support": [
+        [
+          0.05,
+          0.95
+        ]
+      ],
+      "note": "仅轴向夹持 + 侧向 90%"
+    },
+    {
+      "name": "A3_full_lat_90",
+      "axial_only": false,
+      "lateral_support": [
+        [
+          0.05,
+          0.95
+        ]
+      ],
+      "note": "全 3-DOF 夹持 + 侧向 90%"
+    },
+    {
+      "name": "A4_axial_lat_80",
+      "axial_only": true,
+      "lateral_support": [
+        [
+          0.1,
+          0.9
+        ]
+      ],
+      "note": "仅轴向夹持 + 侧向 80%"
+    },
+    {
+      "name": "A5_axial_lat_full",
+      "axial_only": true,
+      "lateral_support": [
+        [
+          0.02,
+          0.98
+        ]
+      ],
+      "note": "仅轴向夹持 + 侧向 96%"
+    }
+  ],
+  "rows": [
+    {
+      "variant": "A0_baseline",
+      "note": "现状：全 3-DOF 夹持 + 无侧向",
+      "h_no": 50,
+      "h_m": 50.0,
+      "load_n": 57941.31332304486,
+      "axial_only": false,
+      "lateral_support": null,
+      "converged": false,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\femur_r\\A0_baseline_h50\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\femur_r\\A0_baseline_h50\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 126\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:08\n\n Peak memory  : 185.1 MB\n\n Elapsed time : 0:00:14\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0402355 sec)\n\n\tInitialization time ............. : 0:00:00 (0.019074 sec)\n\n\tSolve time ...................... : 0:00:14 (13.7249 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0323349 sec)\n\n\t   serialization ................ : 0:00:00 (0.227672 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0323206 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (0.764107 sec)\n\n\t   evaluating residual .......... : 0:00:03 (2.80167 sec)\n\n\t   model update ................. : 0:00:02 (1.82739 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0461983 sec)\n\n\t   time in linear solver ........ : 0:00:08 (7.86687 sec)\n\n\tTotal elapsed time .............. : 0:00:14 (13.8029 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 18.3
+    },
+    {
+      "variant": "A1_axial_only",
+      "note": "仅轴向夹持 + 无侧向（可能刚体奇异）",
+      "h_no": 50,
+      "h_m": 50.0,
+      "load_n": 57941.31332304486,
+      "axial_only": true,
+      "lateral_support": null,
+      "converged": false,
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\femur_r\\A1_axial_only_h50\\femur_r.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\femur_r\\A1_axial_only_h50\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 343\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:42\n\n Peak memory  : 202.7 MB\n\n Elapsed time : 0:01:04\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0411635 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0196052 sec)\n\n\tSolve time ...................... : 0:01:04 (63.5475 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.140056 sec)\n\n\t   serialization ................ : 0:00:01 (0.785703 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0385802 sec)\n\n\t   evaluating stiffness ......... : 0:00:05 (5.03168 sec)\n\n\t   evaluating residual .......... : 0:00:09 (8.88342 sec)\n\n\t   model update ................. : 0:00:06 (5.97517 sec)\n\n\t   QN updates ................... : 0:00:00 (0.173053 sec)\n\n\t   time in linear solver ........ : 0:00:42 (42.0389 sec)\n\n\tTotal elapsed time .............. : 0:01:04 (63.6268 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 65.6
+    },
+    {
+      "variant": "A2_axial_lat_90",
+      "note": "仅轴向夹持 + 侧向 90%",
+      "h_no": 50,
+      "h_m": 50.0,
+      "load_n": 57941.31332304486,
+      "axial_only": true,
+      "lateral_support": [
+        [
+          0.05,
+          0.95
+        ]
+      ],
+      "converged": true,
+      "seconds": 3.0,
+      "ends_stat_mpa": 13.988458198232031,
+      "shaft_stat_mpa": 81.74203545746136,
+      "vm_max_mpa": 122.40752415170908
+    },
+    {
+      "variant": "A3_full_lat_90",
+      "note": "全 3-DOF 夹持 + 侧向 90%",
+      "h_no": 50,
+      "h_m": 50.0,
+      "load_n": 57941.31332304486,
+      "axial_only": false,
+      "lateral_support": [
+        [
+          0.05,
+          0.95
+        ]
+      ],
+      "converged": true,
+      "seconds": 2.8,
+      "ends_stat_mpa": 13.988458198232031,
+      "shaft_stat_mpa": 81.74203545746136,
+      "vm_max_mpa": 122.40752415170908
+    },
+    {
+      "variant": "A4_axial_lat_80",
+      "note": "仅轴向夹持 + 侧向 80%",
+      "h_no": 50,
+      "h_m": 50.0,
+      "load_n": 57941.31332304486,
+      "axial_only": true,
+      "lateral_support": [
+        [
+          0.1,
+          0.9
+        ]
+      ],
+      "converged": true,
+      "seconds": 2.7,
+      "ends_stat_mpa": 17.14139336300545,
+      "shaft_stat_mpa": 82.74881631881752,
+      "vm_max_mpa": 236.4310763635189
+    },
+    {
+      "variant": "A5_axial_lat_full",
+      "note": "仅轴向夹持 + 侧向 96%",
+      "h_no": 50,
+      "h_m": 50.0,
+      "load_n": 57941.31332304486,
+      "axial_only": true,
+      "lateral_support": [
+        [
+          0.02,
+          0.98
+        ]
+      ],
+      "converged": true,
+      "seconds": 2.8,
+      "ends_stat_mpa": 13.074017561104139,
+      "shaft_stat_mpa": 81.5036697824593,
+      "vm_max_mpa": 122.41298665239492
+    }
+  ]
+}

@@ -815,6 +815,7 @@ def build_bone_feb(
     mesh: dict | None = None,
     align_pca: bool = False,
     lateral_support: list[tuple[float, float]] | None = None,
+    bottom_fix_axial_only: bool = False,
 ) -> dict:
     """Write a ``.feb`` for `spec`.
 
@@ -1027,7 +1028,18 @@ def build_bone_feb(
     st.boundary = fbc.Boundary(
         all_bcs=[
             fbc.BCZeroDisplacement(
-                node_set="bottom_fix", x_dof=1, y_dof=1, z_dof=1
+                node_set="bottom_fix",
+                # FE_BC W4-a (additive, default OFF = byte-identical legacy path):
+                # ``bottom_fix_axial_only=True`` fixes ONLY the load-axis dof at the
+                # bottom band, releasing the two transverse dofs.  A full 3-dof
+                # clamp put a rigid fixed end on the bone and the resulting
+                # fixed-end moment drove the ≥20 kN divergence documented in
+                # ``results/opensim_fe/FE_BC_PERHEIGHT.md`` §3.2.  Lateral
+                # rigid-body motion must then come from ``lateral_support``.
+                **({f"{c}_dof": 1 for c, d in zip("xyz", (1, 2, 3))
+                    if d - 1 == axis_idx}
+                   if bottom_fix_axial_only
+                   else {"x_dof": 1, "y_dof": 1, "z_dof": 1}),
             )
         ]
     )
