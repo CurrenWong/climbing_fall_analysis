@@ -1,0 +1,146 @@
+{
+  "bone": "femur_r",
+  "joint": "hip_r",
+  "domain": "fem_cort",
+  "ref_load_n": 15227.651697700654,
+  "frozen_baseline": {
+    "domain": "fem_cort",
+    "n_elem": 3060,
+    "n_ends": 1814,
+    "load_axis": "Z",
+    "ends_stat_mpa": 14.93858122446266,
+    "shaft_stat_mpa": 426.7738838918742,
+    "vm_max_mpa": 1288.6667515235722,
+    "vm_p99_mpa": 1160.2600593984776
+  },
+  "bc2_contract": {
+    "top_frac": 0.3,
+    "bot_frac": 0.3,
+    "align_pca": true,
+    "axis": null,
+    "with_shell": true,
+    "material": "linear elastic",
+    "source": "scripts/opensim_fe/rerun_matrix_bc2.py::_build_run_bc2"
+  },
+  "criteria": {
+    "ends_sigma_c_mpa": 80.0,
+    "shaft_sigma_c_mpa": 220.0,
+    "long_bone_rule": "(ends_h>=80) | (shaft_h>=220)"
+  },
+  "variants": [
+    {
+      "variant": "V0_control",
+      "top_frac": 0.3,
+      "bot_frac": 0.3,
+      "note": "与 BC2 逐字相同（正对照：必须复现 14.94 / 426.77）",
+      "seconds": 80.6,
+      "domain": "fem_cort",
+      "n_elem": 3060,
+      "n_ends": 1814,
+      "load_axis": "Z",
+      "ends_stat_mpa": 7.0644974078735485,
+      "shaft_stat_mpa": 367.51291399101194,
+      "vm_max_mpa": 1213.901082680232,
+      "vm_p99_mpa": 1048.5066900265108,
+      "fe_record": {
+        "bone": "femur_r",
+        "ref_load_n": 15227.651697700654,
+        "status": "ok",
+        "attempts": [
+          {
+            "load_n": 15227.651697700654,
+            "ok": true
+          },
+          {
+            "load_n": 7613.825848850327,
+            "ok": true,
+            "purpose": "linearity_check"
+          }
+        ],
+        "mesh": {
+          "n_nodes": 8536,
+          "topology": "mixed",
+          "n_id_solid": 8536,
+          "n_id_shell": 0,
+          "n_id_shared": 0,
+          "by_solid": {
+            "fem_spon_end": {
+              "tets": 14030,
+              "hexes": 0
+            },
+            "fem_spon_center": {
+              "tets": 8819,
+              "hexes": 0
+            },
+            "fem_cort": {
+              "tets": 0,
+              "hexes": 3060
+            }
+          },
+          "by_shell": {}
+        },
+        "post": {
+          "label": "femur_r",
+          "domains": {
+            "solid_fem_spon_end": {
+              "n_elem": 14030,
+              "vm_max_mpa": 4.217179172024993,
+              "vm_p99_mpa": 2.7394794851970454,
+              "vm_p95_mpa": 2.4536262563903093,
+              "vm_mean_mpa": 0.8340884306911942,
+              "vm_median_mpa": 0.5246362623751462,
+              "stress_key": "'fem_spon_end'"
+            },
+            "solid_fem_spon_center": {
+              "n_elem": 8819,
+              "vm_max_mpa": 9.574315419492484,
+              "vm_p99_mpa": 3.376323921262836,
+              "vm_p95_mpa": 2.0331267418606496,
+              "vm_mean_mpa": 0.5430162433051906,
+              "vm_median_mpa": 0.26465744094287275,
+              "stress_key": "'fem_spon_center'"
+            },
+            "solid_fem_cort": {
+              "n_elem": 3060,
+              "vm_max_mpa": 1213.901082680232,
+              "vm_p99_mpa": 1048.5066900265108,
+              "vm_p95_mpa": 865.1416687081049,
+              "vm_mean_mpa": 197.53958160329913,
+              "vm_median_mpa": 46.84563349813875,
+              "stress_key": "'fem_cort'"
+            }
+          },
+          "stress_keys": [
+            "fem_cort",
+            "fem_spon_center",
+            "fem_spon_end"
+          ],
+          "mesh_domain_order": [
+            "fem_cort",
+            "fem_spon_center",
+            "fem_spon_end"
+          ]
+        },
+        "fe_solve_load_n": 15227.651697700654,
+        "load_reduction_factor": 1.0,
+        "linearity": {
+          "check_load_n": 7613.825848850327,
+          "ratio_max": 9.234336722780396,
+          "ratio_p95": 8.895685330465367,
+          "ratio_mean": 7.736150651270794,
+          "ratio_median": 4.507054100452812,
+          "expected_ratio": 2.0
+        }
+      },
+      "ends_ratio_vs_80": 0.08830621759841936,
+      "shaft_ratio_vs_220": 1.6705132454136906,
+      "d_ends_vs_frozen": -7.874083816589111,
+      "d_shaft_vs_frozen": -59.26096990086228
+    }
+  ],
+  "reads_frozen_only": true,
+  "writes": [
+    "D:\\Project\\climbing_fall_analysis\\results\\opensim_fe\\FE_BC_PROBE.json",
+    "D:\\Project\\climbing_fall_analysis\\results\\opensim_fe\\FE_BC_PROBE.md"
+  ]
+}

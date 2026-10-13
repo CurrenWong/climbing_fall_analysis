@@ -1,0 +1,71 @@
+{
+  "bone": "femur_r",
+  "domain": "fem_cort",
+  "ref_load_n": 15227.651697700654,
+  "bc": {
+    "top_frac": 0.3,
+    "bot_frac": 0.3,
+    "align_pca": true,
+    "time_steps": 1,
+    "rules": "linear scaling: sigma(h)=sigma_ref*load(h)/ref_load"
+  },
+  "rows": [
+    {
+      "fraction": 1.0,
+      "load_n": 15227.651697700654,
+      "seconds": 30.7,
+      "ends_stat_mpa": 7.0635602953791565,
+      "shaft_stat_mpa": 367.5441241634684,
+      "vm_median_mpa": 46.848285683541235,
+      "vm_p95_mpa": 865.1425876646358,
+      "vm_max_mpa": 1213.8564265432503,
+      "shaft_linear_pred_mpa": 367.5441241634684,
+      "ends_linear_pred_mpa": 7.0635602953791565,
+      "linear_overprediction_shaft": 1.0,
+      "linear_overprediction_ends": 1.0
+    },
+    {
+      "fraction": 0.5,
+      "load_n": 7613.825848850327,
+      "seconds": 3.5,
+      "ends_stat_mpa": 2.7622310460071713,
+      "shaft_stat_mpa": 49.79079224948911,
+      "vm_median_mpa": 10.393847611776456,
+      "vm_p95_mpa": 97.25407729354181,
+      "vm_max_mpa": 131.45514606215644,
+      "shaft_linear_pred_mpa": 183.7720620817342,
+      "ends_linear_pred_mpa": 3.5317801476895783,
+      "linear_overprediction_shaft": 3.6908844744003813,
+      "linear_overprediction_ends": 1.2785969344580341
+    },
+    {
+      "fraction": 0.25,
+      "load_n": 3806.9129244251635,
+      "seconds": 3.1,
+      "ends_stat_mpa": 1.3161527463737024,
+      "shaft_stat_mpa": 17.577584520258107,
+      "vm_median_mpa": 4.320796454302421,
+      "vm_p95_mpa": 36.53873011176524,
+      "vm_max_mpa": 48.36212850807631,
+      "shaft_linear_pred_mpa": 91.8860310408671,
+      "ends_linear_pred_mpa": 1.7658900738447891,
+      "linear_overprediction_shaft": 5.227454940408266,
+      "linear_overprediction_ends": 1.3417060282024367
+    },
+    {
+      "fraction": 0.125,
+      "load_n": 1903.4564622125818,
+      "seconds": 3.1,
+      "ends_stat_mpa": 0.6397085641572405,
+      "shaft_stat_mpa": 7.6296620817873855,
+      "vm_median_mpa": 2.0038166756750857,
+      "vm_p95_mpa": 16.633147823680627,
+      "vm_max_mpa": 21.725331302934926,
+      "shaft_linear_pred_mpa": 45.94301552043355,
+      "ends_linear_pred_mpa": 0.8829450369223946,
+      "linear_overprediction_shaft": 6.021631761399132,
+      "linear_overprediction_ends": 1.3802301335227496
+    }
+  ],
+  "reads_frozen_only": true
+}
