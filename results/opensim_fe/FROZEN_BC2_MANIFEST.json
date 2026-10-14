@@ -1,0 +1,560 @@
+{
+  "what": "冻结 BC2 逐骨 FE（FEBio 输入 + 线性自检 + xplt/hdf5 结果 + 日志）",
+  "why_frozen_not_in_git": "`.gitignore:72` 明确把 *.feb/*.xplt/*.hdf5/*.npz 与 temp/ 归为「Regenerable simulation artefacts (safe to delete — reproduced by scripts)」，仓库对外发布只收 code + docs + 可再生 results ⇒ 入库会违反该政策。但本目录**已实测不可复现**（同条件重跑差 6–22%）。",
+  "why_it_matters": "A2 有 4 个部位（calcaneus_r / R_HIPBONE / L3 / C5）的判定**直接沿用本目录的 h5**；本目录是它们的唯一副本。",
+  "src_dir_local_only": "temp/opensim_fe/fracture_matrix_bc2",
+  "total_files": 83,
+  "total_size_b": 51592718,
+  "total_size_mb": 51.59,
+  "freeze_registered_date": "2026-10-09",
+  "code_at_freeze": {
+    "scripts/opensim_fe/bone_feb.py": {
+      "commit": "37f782bd45d8",
+      "date": "2026-10-09",
+      "subject": "feat: 刚性链标定 + 线2 BC2 工具链 + 动画日期命名"
+    },
+    "scripts/opensim_fe/fracture_matrix.py": {
+      "commit": "392d5f0e4789",
+      "date": "2026-10-06",
+      "subject": "S5 脚-垫接触 FE 整体入库：接触求解器 + 6 项 G7 验证 + 权威可引用清单"
+    },
+    "scripts/opensim_fe/rerun_matrix_bc2.py": {
+      "commit": "37f782bd45d8",
+      "date": "2026-10-09",
+      "subject": "feat: 刚性链标定 + 线2 BC2 工具链 + 动画日期命名"
+    },
+    "scripts/opensim_fe/paper_alignment.py": {
+      "commit": "392d5f0e4789",
+      "date": "2026-10-06",
+      "subject": "S5 脚-垫接触 FE 整体入库：接触求解器 + 6 项 G7 验证 + 权威可引用清单"
+    },
+    "scripts/opensim_fe/s4_alignment_bc2.py": {
+      "commit": "37f782bd45d8",
+      "date": "2026-10-09",
+      "subject": "feat: 刚性链标定 + 线2 BC2 工具链 + 动画日期命名"
+    }
+  },
+  "code_changed_after_freeze": [
+    {
+      "commit": "30d67a2fa0dc",
+      "date": "2026-10-14",
+      "subject": "F 路线 W4-a: BC 稳定性门槛达成(50/50 高度全域可解, 此前 13/50) —— 但翻出可识别性问题: A2-股骨 不可由修 BC 解决 —— (改动, 加法式默认关断) bone_feb.py 新增 bottom_fix_axial_only 参数(底部夹持只约束载荷轴 DOF, 释放横向) + 复用既有 lateral_support(默认 None); (稳定性扫描, 最难高度 h=50/57.9kN) 6 变体: A0_baseline(现状全3DOF+无侧向)=FAIL, A1_axial_only(仅轴向+无侧向)=FAIL, A2_axial_lat90=OK(ends 13.99/shaft 81.74), A3_full_lat90=OK(ends 13.99/shaft 81.74 与A2逐位相同!), A4_axial_lat80=OK(17.14/82.75), A5_axial_latfull=OK(13.07/81.50) => A2 与 A3 逐位相同 => 发散根因是侧向屈曲而非固定端弯矩, 只要侧向支撑覆盖>=80%自由长则底部夹持DOF无关(与 §9.14 腓骨'导向须覆盖自由长>=80%'一致); (全50高度, 侧向90%, 干净重跑——首跑混入上轮无侧向缓存 h=1-7/10/12/13/16, 已把缓存移开为 femur_r_unbraced 后重跑): 50/50 全收敛, shaft 13.90(9.78kN)->81.74(57.94kN), ends 2.34->13.99, sigma(h) 光滑单调无跳变, 判定=全不骨折(all_zero, shaft 始终<220) => 门槛达成; ★核心发现: 三种 BC 给三种分类 — 现状无侧向=all_one; 无侧向+逐高度=屈曲分支(h=10 达 781MPa, h=16 达 531MPa, h=43/44 仅 137-160MPa)分支跳变无定义; 侧向90%+逐高度=all_zero => 股骨在 20-58kN 处屈曲载荷附近, 静力解在分支间跳变, sigma(h) 在现 BC 族下不是良定义的量, 分类由侧向支撑强度这一一阶参数控制 => A2-股骨 不可由'修 BC 修数值'解决, 需先给'坠落中股骨受多少侧向支撑'物理锚定; 诚实边界: 只测股骨/覆盖率是扫描非推导/未与独立参照核对/A2 现行判定 4/6 不变; 建议下一步: 给侧向支撑找物理锚定(可核 g9_fibula_fe_support.py 的 >=80% 论证据否移植), 或锚定后仍不可定义则记【判据核心输入未定】(同 V8b/A4 待遇); 新增 results/opensim_fe/FE_BC_STAB.md + FE_BC_STAB.json + scripts/opensim_fe/fe_bc_stab.py",
+      "module": "scripts/opensim_fe/bone_feb.py",
+      "date_vs_freeze": "2026-10-14"
+    },
+    {
+      "commit": "03858010c879",
+      "date": "2026-10-11",
+      "subject": "feat(线2 OpenSim_FE): 结构件 G1/G3/G4/G8/G9 + [Y25] OR 口径重审 + 文档同步",
+      "module": "scripts/opensim_fe/bone_feb.py",
+      "date_vs_freeze": "2026-10-11"
+    },
+    {
+      "commit": "03858010c879",
+      "date": "2026-10-11",
+      "subject": "feat(线2 OpenSim_FE): 结构件 G1/G3/G4/G8/G9 + [Y25] OR 口径重审 + 文档同步",
+      "module": "scripts/opensim_fe/fracture_matrix.py",
+      "date_vs_freeze": "2026-10-11"
+    }
+  ],
+  "files": [
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/BC2_PROVENANCE.json",
+      "size_b": 511,
+      "mtime": "2026-10-09 15:20:01",
+      "sha256": "4a907e7662b6bdcc75be0b9235d5d42c4934e3115c9b59dca6bd68ead925bb9c"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/C5/C5.feb",
+      "size_b": 142537,
+      "mtime": "2026-10-09 15:22:25",
+      "sha256": "66dbd8c426f42345a31c55621bfcd64ba80ff14aa5eceb3138980a9221a41e8a"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/C5/C5.hdf5",
+      "size_b": 226664,
+      "mtime": "2026-10-09 15:22:26",
+      "sha256": "b993e3f4a467fd2cc685e5bb9957504e9e83f4e27eae6108cbefb2d3e26b889e"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/C5/C5.lincheck.feb",
+      "size_b": 142546,
+      "mtime": "2026-10-09 15:22:26",
+      "sha256": "f6067b900336a749d50a9b07786879058bde117241936cb94b30443d3fae8a05"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/C5/C5.lincheck.hdf5",
+      "size_b": 226664,
+      "mtime": "2026-10-09 15:22:26",
+      "sha256": "dfc6e18e812679bc28ff8fbe57581fbcdcc898ca4f019def1f74202dfd5535db"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/C5/C5.lincheck.log",
+      "size_b": 11893,
+      "mtime": "2026-10-09 15:22:26",
+      "sha256": "9522de1ce17619c2244b79ca57a13d5366be783c9feb28206bd901cafad9aa5c"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/C5/C5.lincheck.xplt",
+      "size_b": 213779,
+      "mtime": "2026-10-09 15:22:26",
+      "sha256": "7acafb3b9ae2e38a172f0357c03ed254452562cc2b6de6a8b46430e110a400aa"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/C5/C5.log",
+      "size_b": 15139,
+      "mtime": "2026-10-09 15:22:26",
+      "sha256": "e500e54f2ef138c836ac35979e570341fdf6ab60d85560c8a8c6f55b5210ed9b"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/C5/C5.xplt",
+      "size_b": 213779,
+      "mtime": "2026-10-09 15:22:26",
+      "sha256": "4b8631685aa9dc17541ff01243cd9ed6b007ba34e272b0c7446120250f10cc5f"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/C5/C5_fe.json",
+      "size_b": 1849,
+      "mtime": "2026-10-09 15:22:26",
+      "sha256": "831ab72f376645a714e0083741959d27047baa518ecfe0f669680d177b6ba9f5"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/calcaneus_r/calcaneus_r.feb",
+      "size_b": 333160,
+      "mtime": "2026-10-09 15:21:09",
+      "sha256": "0427540a5f019856c9414f18ebd1972e5833677dc7823ba022a98b6e85fb280f"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/calcaneus_r/calcaneus_r.hdf5",
+      "size_b": 428500,
+      "mtime": "2026-10-09 15:21:10",
+      "sha256": "7e9c8079fc93e8db272b9510678d51da872b9574bdc3f36a75c24aa71039c2b3"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/calcaneus_r/calcaneus_r.lincheck.feb",
+      "size_b": 333170,
+      "mtime": "2026-10-09 15:21:11",
+      "sha256": "b8519924434554cda6db3313817af02f65e6b593049a864795f01bdcbacbd8cb"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/calcaneus_r/calcaneus_r.lincheck.hdf5",
+      "size_b": 428500,
+      "mtime": "2026-10-09 15:21:11",
+      "sha256": "6d1e5772d9b5c410c62bc4459e12bee66d5d9861c517d6b62dbfaf01aa33ee5d"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/calcaneus_r/calcaneus_r.lincheck.log",
+      "size_b": 11427,
+      "mtime": "2026-10-09 15:21:11",
+      "sha256": "143e1c77b12c7a072674b729dd35cdbceefe89c3e534776ffa9d686750927ada"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/calcaneus_r/calcaneus_r.lincheck.xplt",
+      "size_b": 431435,
+      "mtime": "2026-10-09 15:21:11",
+      "sha256": "4bf476d6b156b60aa92ad47b69beb27d4c29b06b38ebee3eaf82c758f55f8003"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/calcaneus_r/calcaneus_r.log",
+      "size_b": 12344,
+      "mtime": "2026-10-09 15:21:10",
+      "sha256": "a1366c97603ebf7573aa9270c6519cea291428afb2f35eb3af6ac0aed7e0e58e"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/calcaneus_r/calcaneus_r.xplt",
+      "size_b": 431435,
+      "mtime": "2026-10-09 15:21:10",
+      "sha256": "ac840d10ceb313671117470c6478d015c552dfc59d141831225fa9f743bea573"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/calcaneus_r/calcaneus_r_fe.json",
+      "size_b": 1782,
+      "mtime": "2026-10-09 15:21:11",
+      "sha256": "94e0e82bb354305f0e07c79fe85bd8624390cb3eaff711ed54640e8a4d930de9"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r.feb",
+      "size_b": 2087026,
+      "mtime": "2026-10-09 15:30:08",
+      "sha256": "40bc22849a8b7de10ca37aead2878e578ead388ec4cec3eb272c1484d127b858"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r.hdf5",
+      "size_b": 2556000,
+      "mtime": "2026-10-09 17:39:55",
+      "sha256": "154ea90a58daa30bcfd3ff7ab50885c997ce280fa6453e096608e23d2214f4e4"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r.lincheck.feb",
+      "size_b": 2087035,
+      "mtime": "2026-10-09 15:30:18",
+      "sha256": "a38d6e103959dbb40da44ab107ca435569c0d4d84bd7387689a1373c0c0627fb"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r.lincheck.hdf5",
+      "size_b": 2556000,
+      "mtime": "2026-10-09 15:30:19",
+      "sha256": "1bc244fc8c00ff0de0f20e40a2dbafea6545a7e0ff6a29172eeaf6803b9d77ac"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r.lincheck.log",
+      "size_b": 15471,
+      "mtime": "2026-10-09 15:30:19",
+      "sha256": "8399c37ce583beb742de94fde0431b7c7d700a8a4878394006687eb750789e98"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r.lincheck.xplt",
+      "size_b": 2732021,
+      "mtime": "2026-10-09 15:30:19",
+      "sha256": "74fef6933c6f81f9a07e2cb5a8b048885795f68bc1673e77eee84136f5b64bba"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r.log",
+      "size_b": 53705,
+      "mtime": "2026-10-09 15:30:15",
+      "sha256": "8662d068f28c5a6e001b86b6faa13a85fe978f1bc8aa4b80efb9ec78389f119e"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r.xplt",
+      "size_b": 2732021,
+      "mtime": "2026-10-09 15:30:15",
+      "sha256": "f1967680c8ff274cdfe18c5f47a5a64bb929a342903fedb295b7ae6c562daff7"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r_fe.json",
+      "size_b": 2248,
+      "mtime": "2026-10-09 15:30:19",
+      "sha256": "0b65218b59184c916f42eb019b08e190872b93cfef8b6dd25eb0bc855a04c743"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/fibula_r/fibula_r.feb",
+      "size_b": 354270,
+      "mtime": "2026-10-09 15:31:25",
+      "sha256": "caed8d27b328e0f3c294eb57c806b0728773be45c26214cf39a5b6e2e9c4e9cd"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/fibula_r/fibula_r.hdf5",
+      "size_b": 437488,
+      "mtime": "2026-10-09 15:31:26",
+      "sha256": "1ced82ae9d441c8cecd91d4c21c35487954b0c085ecec63727c3e695efd15afa"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/fibula_r/fibula_r.lincheck.feb",
+      "size_b": 354279,
+      "mtime": "2026-10-09 15:31:26",
+      "sha256": "1beec79cd7369bf377e6ad29dacd7a26a4b2d71f49c5913ba7f2585d2c653bed"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/fibula_r/fibula_r.lincheck.log",
+      "size_b": 170286,
+      "mtime": "2026-10-09 15:31:29",
+      "sha256": "c7fa23763111345ebfd4438a5bd2f81646c6f84cbae617617b100661c0bc57d9"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/fibula_r/fibula_r.lincheck.xplt",
+      "size_b": 307626,
+      "mtime": "2026-10-09 15:31:26",
+      "sha256": "b5f2464ce71ee49b4b843f5f1a5c46211796b55ff6e617b850aa1144abbf486c"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/fibula_r/fibula_r.log",
+      "size_b": 27914,
+      "mtime": "2026-10-09 15:31:25",
+      "sha256": "f90df6f87a766235e551b253e8907dc7fae17279b9b451a184b50adf630571b7"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/fibula_r/fibula_r.xplt",
+      "size_b": 436798,
+      "mtime": "2026-10-09 15:31:25",
+      "sha256": "bf1e5b1a1a4e636a0e3659d92ba0049f4383872f724e1d45cb3633c90e9651ea"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/fibula_r/fibula_r_fe.json",
+      "size_b": 6475,
+      "mtime": "2026-10-09 15:31:29",
+      "sha256": "6a3c83d38236e8ec4ea41b5ad936a9a9efc1cf343055a957390d16bdb088db82"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/L3/L3.feb",
+      "size_b": 671895,
+      "mtime": "2026-10-09 15:24:31",
+      "sha256": "83987fe175afd0eff3a4a124b3969d1eca0be331985f9f0d93662055eeec24e4"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/L3/L3.hdf5",
+      "size_b": 943216,
+      "mtime": "2026-10-09 15:24:32",
+      "sha256": "e6090063f1e4708c0bbcf3beb2edb87c4f094bbd31b411f8bd1b76ce9779506f"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/L3/L3.lincheck.feb",
+      "size_b": 671904,
+      "mtime": "2026-10-09 15:24:33",
+      "sha256": "7d19f098a5f7fccc6df7b7eb7aaefb08b8a7a3841caa0f6f83eaf293d94549ea"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/L3/L3.lincheck.hdf5",
+      "size_b": 943216,
+      "mtime": "2026-10-09 15:24:34",
+      "sha256": "833d8085efc1c08237efaddf0950ae89fbb4fe44a6231c3171d9beb181103460"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/L3/L3.lincheck.log",
+      "size_b": 15173,
+      "mtime": "2026-10-09 15:24:34",
+      "sha256": "8a73009fbc0008d3d7ee759c3668366d6ab157e7a0586f33cb551dae9f487d96"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/L3/L3.lincheck.xplt",
+      "size_b": 994211,
+      "mtime": "2026-10-09 15:24:34",
+      "sha256": "cfc12eb07d375a206203bb554b3b644de9a0d77eced41a6f23995a2841b54518"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/L3/L3.log",
+      "size_b": 18937,
+      "mtime": "2026-10-09 15:24:32",
+      "sha256": "52b117519d3fb111629237c45dd7a684b27be089821870c18c2fbf6bd2b90792"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/L3/L3.xplt",
+      "size_b": 994211,
+      "mtime": "2026-10-09 15:24:32",
+      "sha256": "5b0c94cddddb1451d7818d968ee491ad6ee81d2adb2464dd8304bb9be76995ae"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/L3/L3_fe.json",
+      "size_b": 1859,
+      "mtime": "2026-10-09 15:24:34",
+      "sha256": "b273785094ec378a9acf9bd9d7cac8507be40550e6061d553f65b6d96af592cc"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/load_chain.npz",
+      "size_b": 12502,
+      "mtime": "2026-10-04 21:18:39",
+      "sha256": "6c9b15fec0351a4125d7ca800961103dae7d6058ee5a83878c8b6dadf65e24bb"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/parietal_r/parietal_r.feb",
+      "size_b": 479703,
+      "mtime": "2026-10-09 15:26:46",
+      "sha256": "370d8d994c559bdfaf1c0e0f7f3da3bad1b49a9577ac9a13ca3e6ab692ad4287"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/parietal_r/parietal_r.hdf5",
+      "size_b": 535968,
+      "mtime": "2026-10-09 15:26:48",
+      "sha256": "9a8b597334b684fbf677b940aae8806460eeb375ed8d5f3d4c1bdc32197199cc"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/parietal_r/parietal_r.lincheck.feb",
+      "size_b": 479712,
+      "mtime": "2026-10-09 15:26:48",
+      "sha256": "dbc377a252ac6e4f3e8da031e3c14125fd99f07ba22017f97a7daba652494621"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/parietal_r/parietal_r.lincheck.hdf5",
+      "size_b": 535968,
+      "mtime": "2026-10-09 15:26:49",
+      "sha256": "b874eb7344981151ac5a91341bdd776d9b85dc6ed8915d2dcc0f0d553e2d87f2"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/parietal_r/parietal_r.lincheck.log",
+      "size_b": 15054,
+      "mtime": "2026-10-09 15:26:49",
+      "sha256": "94bb4b7702a023247885cbe4f579ec86e59d0ab029136f725d2509a04d474b91"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/parietal_r/parietal_r.lincheck.xplt",
+      "size_b": 538980,
+      "mtime": "2026-10-09 15:26:49",
+      "sha256": "69a69d261162e7a293388a6402b0129eabc3fd90b0caabc18c108a658af68f70"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/parietal_r/parietal_r.log",
+      "size_b": 17398,
+      "mtime": "2026-10-09 15:26:47",
+      "sha256": "6a8f49722cfe373826dc325f42da55ceda58d0bcff6a2cd5aa6cf8a9553c56c9"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/parietal_r/parietal_r.xplt",
+      "size_b": 538980,
+      "mtime": "2026-10-09 15:26:47",
+      "sha256": "bb853a038fb7536265c43167625501fa7fb443b1ddb7006e00abd04a51600d2c"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/parietal_r/parietal_r_fe.json",
+      "size_b": 2405,
+      "mtime": "2026-10-09 15:26:49",
+      "sha256": "ff252fa8cdc709f3645dc2feaeae92607d7dbf13fb8b82efdc804d4c86b082a7"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/R_HIPBONE/R_HIPBONE.feb",
+      "size_b": 957464,
+      "mtime": "2026-10-09 15:25:42",
+      "sha256": "8e32b3720c15c5febe2547cbe4e7f9b72b9d40b053f99492458a74b46d933e5c"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/R_HIPBONE/R_HIPBONE.hdf5",
+      "size_b": 1311116,
+      "mtime": "2026-10-09 15:25:43",
+      "sha256": "717693b5341b87f0eae0cbef5e1abcc2ea044f85b8563ef26dd6b9aab2a4b8d9"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/R_HIPBONE/R_HIPBONE.lincheck.feb",
+      "size_b": 957473,
+      "mtime": "2026-10-09 15:25:44",
+      "sha256": "4c47d96867a88bf555a12972145a4c7803f342e84f34f6f19345fd792f0c5027"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/R_HIPBONE/R_HIPBONE.lincheck.hdf5",
+      "size_b": 1311116,
+      "mtime": "2026-10-09 15:25:45",
+      "sha256": "814392ef5da946a407b855af855ba329e6e926c5759f787258dcf4d5222741a1"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/R_HIPBONE/R_HIPBONE.lincheck.log",
+      "size_b": 14451,
+      "mtime": "2026-10-09 15:25:45",
+      "sha256": "8a17476b234bec0ecec13d7f1c389bdfb8667584d79930828a8df87cd201597c"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/R_HIPBONE/R_HIPBONE.lincheck.xplt",
+      "size_b": 1382350,
+      "mtime": "2026-10-09 15:25:45",
+      "sha256": "acc77a4cb640e90433986d24f7e0ae3f2b974c76d92710ccb67814c27e2cfe64"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/R_HIPBONE/R_HIPBONE.log",
+      "size_b": 17697,
+      "mtime": "2026-10-09 15:25:43",
+      "sha256": "c5e9b6d10bcb9efcdef401e87e9fc328761293660b329c48b43fe272f138dc11"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/R_HIPBONE/R_HIPBONE.xplt",
+      "size_b": 1382350,
+      "mtime": "2026-10-09 15:25:43",
+      "sha256": "eea64ae5bdb0405d96819197b51187540e750c91c77c22de2e150e42b758f2fc"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/R_HIPBONE/R_HIPBONE_fe.json",
+      "size_b": 6183,
+      "mtime": "2026-10-09 15:25:45",
+      "sha256": "ab53a95263012d3bfb11a36a10e0e26be9cf2c1edd244d321da44c05c4deb191"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/run.log",
+      "size_b": 3292,
+      "mtime": "2026-10-09 15:31:41",
+      "sha256": "e56a4319e6015433d0ed57ac9fc261eaa6882dd19811398d55a35b311fee3b74"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/T6/T6.feb",
+      "size_b": 255622,
+      "mtime": "2026-10-09 15:23:28",
+      "sha256": "aedc909b987072f322b1c915085dc80d64f71b3e07790a1e76468ef4e798e237"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/T6/T6.hdf5",
+      "size_b": 385092,
+      "mtime": "2026-10-09 15:23:29",
+      "sha256": "412b359e400a090b769ae1f3c93d201928cd61a1b89e8ff7cfd99b58b057c5a3"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/T6/T6.lincheck.feb",
+      "size_b": 255631,
+      "mtime": "2026-10-09 15:23:30",
+      "sha256": "c86b201afaa265fc97eecd5731490ec785b3b77bcb4617f8fa6065156cc7a894"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/T6/T6.lincheck.hdf5",
+      "size_b": 385092,
+      "mtime": "2026-10-09 15:23:31",
+      "sha256": "ad04cc647d0ef1e8215528bfc8e9267129c9261eb78a4b64afacd19c7d558cc5"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/T6/T6.lincheck.log",
+      "size_b": 13792,
+      "mtime": "2026-10-09 15:23:31",
+      "sha256": "3fcd47b131b7170b8cc931938e7600b9826168b1d13fcd5131d05ebc98be0b30"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/T6/T6.lincheck.xplt",
+      "size_b": 387347,
+      "mtime": "2026-10-09 15:23:31",
+      "sha256": "20f99335cc6eb96d6a0ed599265aa113425a3af9f067026b2435cc4f1d8c3d84"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/T6/T6.log",
+      "size_b": 20784,
+      "mtime": "2026-10-09 15:23:28",
+      "sha256": "0c9fd374b4658a837d6bf8b500383e8fe99050eb558254980262d19722d36d0c"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/T6/T6.xplt",
+      "size_b": 387347,
+      "mtime": "2026-10-09 15:23:28",
+      "sha256": "b35ffcd77123ac1c30b93e47c64281e2bbfc1acf9aa34b9005494bcd52537d59"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/T6/T6_fe.json",
+      "size_b": 4863,
+      "mtime": "2026-10-09 15:23:31",
+      "sha256": "0c0114a809b4d7e39d2c99f291f616e28ba1cb8bf6085a256db2315123381609"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/tibia_r/tibia_r.feb",
+      "size_b": 1840423,
+      "mtime": "2026-10-09 15:28:46",
+      "sha256": "3d510c26d0a2e68b40c6ed78b7d001e191fef7f577e5ddf04c52cf7bdaffa132"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/tibia_r/tibia_r.hdf5",
+      "size_b": 2295384,
+      "mtime": "2026-10-09 15:28:49",
+      "sha256": "24a1425960eeb5556c28102b2034eaafcae444cda4e62a82e00268f0eea1343c"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/tibia_r/tibia_r.lincheck.feb",
+      "size_b": 1840433,
+      "mtime": "2026-10-09 15:28:50",
+      "sha256": "f3ebd1b704e18886496021161b19d532e6a3a7188d0f0abb336a61f2611f77d1"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/tibia_r/tibia_r.lincheck.hdf5",
+      "size_b": 2295384,
+      "mtime": "2026-10-09 15:28:51",
+      "sha256": "221a8331587354be3c56c54e2525daa267d8e139b0b538b4a2955a197909fec6"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/tibia_r/tibia_r.lincheck.log",
+      "size_b": 13143,
+      "mtime": "2026-10-09 15:28:51",
+      "sha256": "c79052ea8c4d737da0777d9e4e4fe96787b243dd1773bf2e46694104ae002eb2"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/tibia_r/tibia_r.lincheck.xplt",
+      "size_b": 2452545,
+      "mtime": "2026-10-09 15:28:51",
+      "sha256": "8881b5b11b128a0ef02c03c46899c1d4e0b7f8763bca2da8bb3bd518523f4d81"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/tibia_r/tibia_r.log",
+      "size_b": 23456,
+      "mtime": "2026-10-09 15:28:48",
+      "sha256": "88d44d12d953af7ba8e9b8a813f1889b8a705b478a6b87d0b383d3afe10cd436"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/tibia_r/tibia_r.xplt",
+      "size_b": 2452545,
+      "mtime": "2026-10-09 15:28:48",
+      "sha256": "9bf396ff90d37bdc49d696ddc96bae0851ef364c08f1ffc4cd1e12d7be66a931"
+    },
+    {
+      "path": "temp/opensim_fe/fracture_matrix_bc2/tibia_r/tibia_r_fe.json",
+      "size_b": 5274,
+      "mtime": "2026-10-09 15:28:51",
+      "sha256": "3fb0fc61f38e80b1aeb9d8065faf6d8417c7525474f4a569e67967f625e713ce"
+    }
+  ]
+}
