@@ -47,7 +47,11 @@ BASE_DIR = ROOT / "temp" / "opensim_fe" / "p5_head_contact" / "femur_r"
 SIGMA_C_MPA = 220.0
 HEIGHTS = [10, 20, 30, 50]
 PLATE_DISP_MM = 0.5   # 板位移压入量（冻结，g4_fe_plate 接触最稳档）
-GAP_MM = 0.2          # 板初始间隙（冻结）
+GAP_MM = -0.3         # 板初始预穿透（2026-10-14 修正：原 +0.2 在 t=0 造成 z 向奇异）
+                      # 原理：t=0 时骨轴向完全自由（bottom_fix 只约束横向），
+                      # 必须由接触提供 z 锚位 ⇒ 接触须在 t=0 已激活且穿透足够。
+                      # 实测 +0.2（间隙）与 -0.05（0.05mm 穿透）均 FAIL，
+                      # -0.3 收敛且接触承载 100.0001% 轴向载荷。
 TOP_FRAC = 0.30       # 髁端 cap 带份额（与 P4 系 fix 带一致）
 CAP_AXDIV_MIN = 0.5   # cap 面法向轴向分量下限（只取真端面，2026-10-14 根因修复）
 
@@ -370,7 +374,9 @@ VARIANTS = {
     "p5_fric": {"fric": 0.5, "anchor": False, "penalty": 0.1,
                 "tag": "fric=0.5 无锚点（摩擦承载横向；复现 g4_fe_plate fric 失效记录）"},
     "p5_free": {"fric": 0.0, "anchor": False, "penalty": 0.1,
-                "tag": "fric=0 无锚点（负对照：预期横向刚体模态失败）"},
+                "tag": "fric=0 无锚点（对照：横向仅靠 lateral_support；注意 2026-10-14 "
+                       "起 lateral_support 对全部变体生效 ⇒ 本变体不再是「无横向支撑」负对照，"
+                       "该角色由诊断期 E 系列承担）"},
 }
 
 
@@ -384,7 +390,9 @@ def _build_one(vname: str, hno: int, load: float, ctx, hj, geom, pg) -> Path:
     bf.build_bone_feb(
         part.spec, feb, load_n=load, top_frac=TOP_FRAC, bot_frac=TOP_FRAC,
         axis=None, with_shell=True, time_steps=10, mesh=mesh, align_pca=True,
-        lateral_support=None,
+        # P4 同款横向导向（2026-10-14）：E6/E7 对照证明「3 节点 anchor」不足以
+        # 替代它 —— 同一 anchor 只补 lateral_support 即收敛，无它则横向失稳。
+        lateral_support=[(0.05, 0.95)],
         bottom_fix_axial_only=(not v["anchor"]),   # anchor: 全固定(后 patch 横向) / 其余: z-only
         load_nodes_override=np.asarray(hj["head_nodes_1based"], dtype=np.int64),
         fix_nodes_override=_anchor_nodes(hj, 3),
