@@ -1,0 +1,36 @@
+{
+  "piece": "I4b · wide50 重复解可复现性检查",
+  "runs": [
+    "bandscan",
+    "rep2",
+    "rep3"
+  ],
+  "noise_baseline_pct": 0.5,
+  "noise_basis": "G9 long95 同条件重跑差约 0.3%（I″：10.53 vs 10.5 MPa）",
+  "combos": {
+    "share_0.100__long95": {
+      "n_samples": 3,
+      "max_rel_diff_pct": 1.2914703811896406,
+      "or_range": 0.00022815885610261155,
+      "reproducible": false
+    },
+    "share_0.100__wide50": {
+      "n_samples": 3,
+      "max_rel_diff_pct": 0.0,
+      "or_range": 0.0,
+      "reproducible": true
+    },
+    "share_0.100__wide70": {
+      "n_samples": 3,
+      "max_rel_diff_pct": 9.634752268087952e-06,
+      "or_range": 0.0,
+      "reproducible": true
+    },
+    "share_0.2241__wide50": {
+      "n_samples": 3,
+      "max_rel_diff_pct": 0.0,
+      "or_range": 0.0,
+      "reproducible": true
+    }
+  }
+}

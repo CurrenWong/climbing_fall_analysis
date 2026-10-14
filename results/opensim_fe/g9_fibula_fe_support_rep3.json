@@ -1,0 +1,887 @@
+{
+  "frozen_loads": {
+    "ankle_ref_n": 25266.24913009046,
+    "heights": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50
+    ]
+  },
+  "combos": {
+    "share_0.100__long95": {
+      "load_n": 2526.624913009046,
+      "lateral_support": [
+        [
+          0.31,
+          0.69
+        ]
+      ],
+      "ok": true,
+      "stage": "ok",
+      "vm_median_mpa": 17.199878255075014,
+      "vm_p95_mpa": 891.3483160769028,
+      "vm_max_mpa": 1245.6984516820032,
+      "share": 0.1,
+      "band": "long95",
+      "bands": [
+        [
+          0.31,
+          0.69
+        ]
+      ],
+      "alloc_n": 2526.624913009046,
+      "sigma_h_median_mpa": [
+        10.520573748747612,
+        13.777849446734914,
+        14.398040187373166,
+        15.514485228171209,
+        17.199878255075014,
+        19.209406593662777,
+        21.344628622779148,
+        23.502051728471116,
+        25.63328088561084,
+        27.66809768155874,
+        29.625913829789553,
+        31.521937321736324,
+        33.31031671519059,
+        35.022795269210455,
+        36.6369213512749,
+        38.183863496955276,
+        39.68235430077805,
+        41.14656885369868,
+        42.578250589495646,
+        43.98013944077016,
+        45.35325337181104,
+        46.70105365614138,
+        48.0242853374663,
+        49.32518463268896,
+        50.603485521852214,
+        51.86032992811812,
+        53.09878479555755,
+        54.31741438285446,
+        55.51917063320688,
+        56.70414390616308,
+        57.87347499109073,
+        59.0264368639138,
+        60.16374168362871,
+        61.28780427905463,
+        62.37684822034717,
+        63.40966331033882,
+        64.43247629244408,
+        65.44462030934126,
+        66.44678855436355,
+        67.43955440650547,
+        68.42154847629723,
+        69.39630718492583,
+        70.36038090160038,
+        71.31537325131397,
+        72.26467274865043,
+        73.20182866593892,
+        74.13419808506579,
+        75.05739424356612,
+        75.97092860770891,
+        76.8792169956153
+      ],
+      "row_weak_sigma_c_70": {
+        "sigma_c_mpa": 70.0,
+        "ratio_min": 0.15029391069639444,
+        "ratio_max": 1.0982745285087898,
+        "ratio_h5": 0.24571254650107163,
+        "n_fractured_h": 8,
+        "first_fracture_h": 43,
+        "all_one": false,
+        "all_zero": false
+      },
+      "linearity": {
+        "load2_n": 5053.249826018092,
+        "expected_ratio": 2.0,
+        "ok": false,
+        "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.100__long95\\fib_g9_x2.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.100__long95\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 353\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:02\n\n Peak memory  : 46.6 MB\n\n Elapsed time : 0:00:03\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.01902 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0133407 sec)\n\n\tSolve time ...................... : 0:00:03 (2.90271 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0357431 sec)\n\n\t   serialization ................ : 0:00:00 (0.026256 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0041009 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.170265 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.431987 sec)\n\n\t   model update ................. : 0:00:00 (0.38292 sec)\n\n\t   QN updates ................... : 0:00:00 (0.01355 sec)\n\n\t   time in linear solver ........ : 0:00:02 (1.78975 sec)\n\n\tTotal elapsed time .............. : 0:00:03 (2.95047 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+        "stage": "build_run"
+      }
+    },
+    "share_0.100__long85": {
+      "load_n": 2526.624913009046,
+      "lateral_support": [
+        [
+          0.33,
+          0.67
+        ]
+      ],
+      "ok": false,
+      "stage": "build_run",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.100__long85\\fib_g9.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.100__long85\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 228\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.0 MB\n\n Elapsed time : 0:00:02\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.014506 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0060088 sec)\n\n\tSolve time ...................... : 0:00:02 (2.0915 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0255386 sec)\n\n\t   serialization ................ : 0:00:00 (0.0253266 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0038905 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.134264 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.267766 sec)\n\n\t   model update ................. : 0:00:00 (0.241731 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0091408 sec)\n\n\t   time in linear solver ........ : 0:00:01 (1.35714 sec)\n\n\tTotal elapsed time .............. : 0:00:02 (2.12108 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "share": 0.1,
+      "band": "long85",
+      "bands": [
+        [
+          0.33,
+          0.67
+        ]
+      ],
+      "alloc_n": 2526.624913009046
+    },
+    "share_0.100__wide70": {
+      "load_n": 2526.624913009046,
+      "lateral_support": [
+        [
+          0.27,
+          0.73
+        ]
+      ],
+      "ok": true,
+      "stage": "ok",
+      "vm_median_mpa": 17.486692223778256,
+      "vm_p95_mpa": 473.14448384873174,
+      "vm_max_mpa": 614.4622621159823,
+      "share": 0.1,
+      "band": "wide70",
+      "bands": [
+        [
+          0.27,
+          0.73
+        ]
+      ],
+      "alloc_n": 2526.624913009046,
+      "sigma_h_median_mpa": [
+        10.696007985267462,
+        14.00759989155843,
+        14.63813252910069,
+        15.773194680336468,
+        17.486692223778256,
+        19.52973014827497,
+        21.70055774942804,
+        23.893956637851666,
+        26.060724784495285,
+        28.129472860198472,
+        30.11993627552838,
+        32.04757662047929,
+        33.86577786405231,
+        35.60681259522144,
+        37.247854792662906,
+        38.820592738149365,
+        40.34407139875437,
+        41.832702240018925,
+        43.2882577680878,
+        44.71352360489396,
+        46.10953468963576,
+        47.479810013779485,
+        48.825107044893876,
+        50.147699289578895,
+        51.44731629190183,
+        52.72511901699171,
+        53.98422555128148,
+        55.22317621196789,
+        56.44497216693135,
+        57.64970528249711,
+        58.838535371093414,
+        60.010723285264206,
+        61.16699305950556,
+        62.30979979074941,
+        63.41700391958875,
+        64.46704156142083,
+        65.50691030672907,
+        66.53593217811338,
+        67.55481192814754,
+        68.56413249712077,
+        69.5625016605163,
+        70.55351481057778,
+        71.53366479271777,
+        72.50458197293543,
+        73.46971137047706,
+        74.42249468953811,
+        75.37041169391132,
+        76.30900247033767,
+        77.23777033861585,
+        78.16120475217421
+      ],
+      "row_weak_sigma_c_70": {
+        "sigma_c_mpa": 70.0,
+        "ratio_min": 0.15280011407524946,
+        "ratio_max": 1.1165886393167745,
+        "ratio_h5": 0.24980988891111794,
+        "n_fractured_h": 9,
+        "first_fracture_h": 42,
+        "all_one": false,
+        "all_zero": false
+      },
+      "linearity": {
+        "load2_n": 5053.249826018092,
+        "expected_ratio": 2.0,
+        "ok": true,
+        "median2_mpa": 37.87239098369768,
+        "ratio_median": 2.165783585542789,
+        "abs_rel_err": 0.08289179277139458,
+        "within_tol": true
+      }
+    },
+    "share_0.100__wide50": {
+      "load_n": 2526.624913009046,
+      "lateral_support": [
+        [
+          0.25,
+          0.75
+        ]
+      ],
+      "ok": true,
+      "stage": "ok",
+      "vm_median_mpa": 16.559564261957362,
+      "vm_p95_mpa": 131.11322559151756,
+      "vm_max_mpa": 261.90319630020235,
+      "share": 0.1,
+      "band": "wide50",
+      "bands": [
+        [
+          0.25,
+          0.75
+        ]
+      ],
+      "alloc_n": 2526.624913009046,
+      "sigma_h_median_mpa": [
+        10.1289157098332,
+        13.264930130389777,
+        13.862032520997674,
+        14.936914745386893,
+        16.559564261957362,
+        18.49428223876919,
+        20.550014603866988,
+        22.62712154783018,
+        24.67900968687553,
+        26.638074686877328,
+        28.523005605511006,
+        30.348444273823045,
+        32.07024619889935,
+        33.718972907424074,
+        35.27300859223835,
+        36.7623614522428,
+        38.20506670828342,
+        39.61477174356342,
+        40.993155087620245,
+        42.34285467133399,
+        43.66485056240091,
+        44.962475178672086,
+        46.23644582749877,
+        47.48891547630098,
+        48.719628008465,
+        49.92968283584152,
+        51.12203272685577,
+        52.29529538971278,
+        53.45231287319689,
+        54.59317217296724,
+        55.71897160928885,
+        56.82901122360803,
+        57.923976662793386,
+        59.00619285684847,
+        60.0546940649665,
+        61.04905969940868,
+        62.03379558264894,
+        63.00825968301077,
+        63.97311938774984,
+        64.92892673020995,
+        65.87436330030776,
+        66.81283386597441,
+        67.74101721865749,
+        68.66045728388549,
+        69.57441642922703,
+        70.4766840735479,
+        71.37434341060512,
+        72.26317098754261,
+        73.14269645767583,
+        74.01717124783822
+      ],
+      "row_weak_sigma_c_70": {
+        "sigma_c_mpa": 70.0,
+        "ratio_min": 0.14469879585476,
+        "ratio_max": 1.0573881606834032,
+        "ratio_h5": 0.23656520374224804,
+        "n_fractured_h": 5,
+        "first_fracture_h": 46,
+        "all_one": false,
+        "all_zero": false
+      },
+      "linearity": {
+        "load2_n": 5053.249826018092,
+        "expected_ratio": 2.0,
+        "ok": true,
+        "median2_mpa": 33.87207403041856,
+        "ratio_median": 2.0454689202320133,
+        "abs_rel_err": 0.02273446011600666,
+        "within_tol": true
+      }
+    },
+    "share_0.2241__long95": {
+      "load_n": 5662.166430053271,
+      "lateral_support": [
+        [
+          0.31,
+          0.69
+        ]
+      ],
+      "ok": false,
+      "stage": "build_run",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.2241__long95\\fib_g9.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.2241__long95\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 216\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.7 MB\n\n Elapsed time : 0:00:02\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0128906 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0039044 sec)\n\n\tSolve time ...................... : 0:00:02 (2.04344 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0210935 sec)\n\n\t   serialization ................ : 0:00:00 (0.0279877 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0039728 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.130141 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.26249 sec)\n\n\t   model update ................. : 0:00:00 (0.264048 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0078609 sec)\n\n\t   time in linear solver ........ : 0:00:01 (1.29922 sec)\n\n\tTotal elapsed time .............. : 0:00:02 (2.06648 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "share": 0.2241,
+      "band": "long95",
+      "bands": [
+        [
+          0.31,
+          0.69
+        ]
+      ],
+      "alloc_n": 5662.166430053271
+    },
+    "share_0.2241__long85": {
+      "load_n": 5662.166430053271,
+      "lateral_support": [
+        [
+          0.33,
+          0.67
+        ]
+      ],
+      "ok": false,
+      "stage": "build_run",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.2241__long85\\fib_g9.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.2241__long85\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 579\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:05\n\n Peak memory  : 47.3 MB\n\n Elapsed time : 0:00:08\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0125495 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0033768 sec)\n\n\tSolve time ...................... : 0:00:08 (7.95007 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0669617 sec)\n\n\t   serialization ................ : 0:00:00 (0.0888663 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0038517 sec)\n\n\t   evaluating stiffness ......... : 0:00:01 (0.529968 sec)\n\n\t   evaluating residual .......... : 0:00:01 (1.27392 sec)\n\n\t   model update ................. : 0:00:01 (1.30133 sec)\n\n\t   QN updates ................... : 0:00:00 (0.031922 sec)\n\n\t   time in linear solver ........ : 0:00:05 (4.55084 sec)\n\n\tTotal elapsed time .............. : 0:00:08 (7.97195 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "share": 0.2241,
+      "band": "long85",
+      "bands": [
+        [
+          0.33,
+          0.67
+        ]
+      ],
+      "alloc_n": 5662.166430053271
+    },
+    "share_0.2241__wide70": {
+      "load_n": 5662.166430053271,
+      "lateral_support": [
+        [
+          0.27,
+          0.73
+        ]
+      ],
+      "ok": false,
+      "stage": "build_run",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.2241__wide70\\fib_g9.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.2241__wide70\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 138\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 45.4 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.015973 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0051635 sec)\n\n\tSolve time ...................... : 0:00:01 (1.32714 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0157807 sec)\n\n\t   serialization ................ : 0:00:00 (0.0261548 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.004104 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0921159 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.135432 sec)\n\n\t   model update ................. : 0:00:00 (0.124423 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0049647 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.908561 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (1.35712 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "share": 0.2241,
+      "band": "wide70",
+      "bands": [
+        [
+          0.27,
+          0.73
+        ]
+      ],
+      "alloc_n": 5662.166430053271
+    },
+    "share_0.2241__wide50": {
+      "load_n": 5662.166430053271,
+      "lateral_support": [
+        [
+          0.25,
+          0.75
+        ]
+      ],
+      "ok": true,
+      "stage": "ok",
+      "vm_median_mpa": 36.74569218926597,
+      "vm_p95_mpa": 206.9463739005144,
+      "vm_max_mpa": 409.7365916869556,
+      "share": 0.2241,
+      "band": "wide50",
+      "bands": [
+        [
+          0.25,
+          0.75
+        ]
+      ],
+      "alloc_n": 5662.166430053271,
+      "sigma_h_median_mpa": [
+        22.476075638028735,
+        29.434895252842097,
+        30.759866146016986,
+        33.1450310411983,
+        36.74569218926597,
+        41.03883361040162,
+        45.600506098664695,
+        50.209608802073426,
+        54.76275094829402,
+        59.10991844195858,
+        63.29258232359603,
+        67.3432328331795,
+        71.16391329003719,
+        74.82243975711647,
+        78.27084673341034,
+        81.57572244687658,
+        84.77708707336576,
+        87.90522417194028,
+        90.96385840157889,
+        93.95884333394591,
+        96.89235374038927,
+        99.77178425996254,
+        102.59872659850517,
+        105.3779581932044,
+        108.10891072099909,
+        110.79402377805347,
+        113.43984956090749,
+        116.04332076247438,
+        118.61074389228328,
+        121.14231199380212,
+        123.64046224096528,
+        126.1036414249351,
+        128.53337099690356,
+        130.93480997922896,
+        133.2614353688891,
+        135.46793385814811,
+        137.65306391838766,
+        139.81540088057733,
+        141.95642567780695,
+        144.07736327270283,
+        146.17528811177002,
+        148.25775537897314,
+        150.3173953087053,
+        152.35763387349428,
+        154.3857102707361,
+        156.38784321373362,
+        158.3797503176,
+        160.35205973557837,
+        162.30372776783335,
+        164.24418833541003
+      ],
+      "row_weak_sigma_c_70": {
+        "sigma_c_mpa": 70.0,
+        "ratio_min": 0.32108679482898195,
+        "ratio_max": 2.3463455476487147,
+        "ratio_h5": 0.5249384598466567,
+        "n_fractured_h": 38,
+        "first_fracture_h": 13,
+        "all_one": false,
+        "all_zero": false
+      },
+      "linearity": {
+        "load2_n": 11324.332860106542,
+        "expected_ratio": 2.0,
+        "ok": false,
+        "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.2241__wide50\\fib_g9_x2.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\g9_fibula_fe_support\\share_0.2241__wide50\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 616\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:04\n\n Peak memory  : 45.6 MB\n\n Elapsed time : 0:00:08\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0109025 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0033781 sec)\n\n\tSolve time ...................... : 0:00:08 (7.50808 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0677012 sec)\n\n\t   serialization ................ : 0:00:00 (0.032143 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.003688 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.469266 sec)\n\n\t   evaluating residual .......... : 0:00:01 (1.30413 sec)\n\n\t   model update ................. : 0:00:01 (1.33229 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0296299 sec)\n\n\t   time in linear solver ........ : 0:00:04 (4.16978 sec)\n\n\tTotal elapsed time .............. : 0:00:08 (7.52842 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+        "stage": "build_run"
+      }
+    }
+  },
+  "g3": {
+    "share_0.100__long95": {
+      "fe_ok": true,
+      "fibula": {
+        "status": "ok",
+        "OR": 1.1293711194371596,
+        "ci95": [
+          1.1238916755083843,
+          1.1348772779563379
+        ],
+        "beta": 0.12166094633158792,
+        "se": 0.002481415105730533,
+        "wald_z": 49.028856981899736,
+        "p": 0.0,
+        "n": 20000,
+        "n_fracture": 2773,
+        "n_safe": 17227,
+        "converged": false
+      },
+      "seed_ors": {
+        "20261003": 1.1293711194371596,
+        "20261004": 1.1219171455099402,
+        "20261005": 1.1172543714253726
+      },
+      "a3": {
+        "targets": {
+          "腓骨": 1.682,
+          "骨盆": 1.236,
+          "颅骨": 1.576
+        },
+        "per_part": {
+          "腓骨": {
+            "target": 1.682,
+            "ours": 1.1293711194371596,
+            "rel_err": 0.3285546257805234,
+            "ci95": [
+              1.1238916755083843,
+              1.1348772779563379
+            ],
+            "within": false
+          },
+          "骨盆": {
+            "target": 1.236,
+            "ours": 1.1471078425186825,
+            "rel_err": 0.07191922126320183,
+            "ci95": [
+              1.138756146644474,
+              1.1555207901579687
+            ],
+            "within": true
+          },
+          "颅骨": {
+            "target": 1.576,
+            "ours": 1.4165461055998183,
+            "rel_err": 0.10117632893412543,
+            "ci95": [
+              1.397511480524602,
+              1.4358399893335883
+            ],
+            "within": true
+          }
+        },
+        "n_within": 2,
+        "n_target": 3,
+        "verdict": "PASS"
+      },
+      "unchanged_other8": true,
+      "max_abs_or_diff": 0.0
+    },
+    "share_0.100__long85": {
+      "fe_ok": false
+    },
+    "share_0.100__wide70": {
+      "fe_ok": true,
+      "fibula": {
+        "status": "ok",
+        "OR": 1.130351451787466,
+        "ci95": [
+          1.125010476406676,
+          1.1357177833925904
+        ],
+        "beta": 0.12252860364872224,
+        "se": 0.0024164569766371834,
+        "wald_z": 50.70589082833035,
+        "p": 0.0,
+        "n": 20000,
+        "n_fracture": 2975,
+        "n_safe": 17025,
+        "converged": false
+      },
+      "seed_ors": {
+        "20261003": 1.130351451787466,
+        "20261004": 1.1213283607934812,
+        "20261005": 1.116265642827717
+      },
+      "a3": {
+        "targets": {
+          "腓骨": 1.682,
+          "骨盆": 1.236,
+          "颅骨": 1.576
+        },
+        "per_part": {
+          "腓骨": {
+            "target": 1.682,
+            "ours": 1.130351451787466,
+            "rel_err": 0.32797178847356356,
+            "ci95": [
+              1.125010476406676,
+              1.1357177833925904
+            ],
+            "within": false
+          },
+          "骨盆": {
+            "target": 1.236,
+            "ours": 1.1471078425186825,
+            "rel_err": 0.07191922126320183,
+            "ci95": [
+              1.138756146644474,
+              1.1555207901579687
+            ],
+            "within": true
+          },
+          "颅骨": {
+            "target": 1.576,
+            "ours": 1.4165461055998183,
+            "rel_err": 0.10117632893412543,
+            "ci95": [
+              1.397511480524602,
+              1.4358399893335883
+            ],
+            "within": true
+          }
+        },
+        "n_within": 2,
+        "n_target": 3,
+        "verdict": "PASS"
+      },
+      "unchanged_other8": true,
+      "max_abs_or_diff": 0.0
+    },
+    "share_0.100__wide50": {
+      "fe_ok": true,
+      "fibula": {
+        "status": "ok",
+        "OR": 1.130392849685044,
+        "ci95": [
+          1.124439321131352,
+          1.1363779001728886
+        ],
+        "beta": 0.12256522689492975,
+        "se": 0.0026942330042446817,
+        "wald_z": 45.491695299490424,
+        "p": 0.0,
+        "n": 20000,
+        "n_fracture": 2352,
+        "n_safe": 17648,
+        "converged": true
+      },
+      "seed_ors": {
+        "20261003": 1.130392849685044,
+        "20261004": 1.1224031047860774,
+        "20261005": 1.1179270444777498
+      },
+      "a3": {
+        "targets": {
+          "腓骨": 1.682,
+          "骨盆": 1.236,
+          "颅骨": 1.576
+        },
+        "per_part": {
+          "腓骨": {
+            "target": 1.682,
+            "ours": 1.130392849685044,
+            "rel_err": 0.3279471761682259,
+            "ci95": [
+              1.124439321131352,
+              1.1363779001728886
+            ],
+            "within": false
+          },
+          "骨盆": {
+            "target": 1.236,
+            "ours": 1.1471078425186825,
+            "rel_err": 0.07191922126320183,
+            "ci95": [
+              1.138756146644474,
+              1.1555207901579687
+            ],
+            "within": true
+          },
+          "颅骨": {
+            "target": 1.576,
+            "ours": 1.4165461055998183,
+            "rel_err": 0.10117632893412543,
+            "ci95": [
+              1.397511480524602,
+              1.4358399893335883
+            ],
+            "within": true
+          }
+        },
+        "n_within": 2,
+        "n_target": 3,
+        "verdict": "PASS"
+      },
+      "unchanged_other8": true,
+      "max_abs_or_diff": 0.0
+    },
+    "share_0.2241__long95": {
+      "fe_ok": false
+    },
+    "share_0.2241__long85": {
+      "fe_ok": false
+    },
+    "share_0.2241__wide70": {
+      "fe_ok": false
+    },
+    "share_0.2241__wide50": {
+      "fe_ok": true,
+      "fibula": {
+        "status": "ok",
+        "OR": 1.2572546999456062,
+        "ci95": [
+          1.249051765381453,
+          1.2655115058842923
+        ],
+        "beta": 0.22893053433744265,
+        "se": 0.0033397237710764667,
+        "wald_z": 68.54774527165559,
+        "p": 0.0,
+        "n": 20000,
+        "n_fracture": 13466,
+        "n_safe": 6534,
+        "converged": false
+      },
+      "seed_ors": {
+        "20261003": 1.2572546999456062,
+        "20261004": 1.2678330406971634,
+        "20261005": 1.2212491287202871
+      },
+      "a3": {
+        "targets": {
+          "腓骨": 1.682,
+          "骨盆": 1.236,
+          "颅骨": 1.576
+        },
+        "per_part": {
+          "腓骨": {
+            "target": 1.682,
+            "ours": 1.2572546999456062,
+            "rel_err": 0.25252395960427687,
+            "ci95": [
+              1.249051765381453,
+              1.2655115058842923
+            ],
+            "within": true
+          },
+          "骨盆": {
+            "target": 1.236,
+            "ours": 1.1471078425186825,
+            "rel_err": 0.07191922126320183,
+            "ci95": [
+              1.138756146644474,
+              1.1555207901579687
+            ],
+            "within": true
+          },
+          "颅骨": {
+            "target": 1.576,
+            "ours": 1.4165461055998183,
+            "rel_err": 0.10117632893412543,
+            "ci95": [
+              1.397511480524602,
+              1.4358399893335883
+            ],
+            "within": true
+          }
+        },
+        "n_within": 3,
+        "n_target": 3,
+        "verdict": "PASS"
+      },
+      "unchanged_other8": true,
+      "max_abs_or_diff": 0.0
+    }
+  },
+  "meta": {
+    "title": "G9 fibula FE lateral support (anti-buckling) -> G3 fibula OR",
+    "generated_at": "2026-10-14 11:50:38",
+    "design_doc": "docs/methods/G9_腓骨FE侧向支撑设计.md",
+    "method": "isolated-fibula FE rebuilt with mid-shaft LATERAL supports (2 transverse dofs fixed) to suppress Euler buckling; solved at allocated ankle share; sigma(h)=median(fib_cort)*load(h)/load_ref (strict linear); fibula row fed to G3 (unchanged).",
+    "seeds": [
+      20261003,
+      20261004,
+      20261005
+    ],
+    "official_seed": 20261003,
+    "n_subj": 400,
+    "cov_primary": {
+      "cov_b": 0.15,
+      "cov_e": 0.1,
+      "cov_a": 0.15
+    },
+    "band_policies": {
+      "mid": [
+        [
+          0.45,
+          0.55
+        ]
+      ],
+      "three": [
+        [
+          0.25,
+          0.35
+        ],
+        [
+          0.45,
+          0.55
+        ],
+        [
+          0.65,
+          0.75
+        ]
+      ]
+    },
+    "bands_run": [
+      "long85",
+      "long95",
+      "wide50",
+      "wide70"
+    ],
+    "amendment": "long95/long85 = D1a′ 候选（docs/methods/G9_...md §11 修订提案，锁定前）；mid/three 为预注册值，未改动",
+    "shares": {
+      "share_0.100": 0.1,
+      "share_0.2241": 0.2241
+    },
+    "a3_targets": {
+      "腓骨": 1.682,
+      "骨盆": 1.236,
+      "颅骨": 1.576
+    },
+    "fibula_window": [
+      1.1773999999999998,
+      2.1866
+    ],
+    "lin_tol": 0.15,
+    "primary": [
+      "share_0.050",
+      "wide50"
+    ]
+  },
+  "verdict": {
+    "primary_key": "share_0.050__wide50",
+    "fe_ok": false,
+    "linearity_within_tol": false,
+    "linearity_ratio": null,
+    "fibula_status": null,
+    "fibula_or": null,
+    "fibula_ci95": null,
+    "fibula_window": [
+      1.1773999999999998,
+      2.1866
+    ],
+    "fibula_within": false,
+    "a3_n_within": null,
+    "a3_verdict": null,
+    "dod1_fe_valid": false,
+    "dod2_fibula_within": false,
+    "dod3_a3_ok": false,
+    "unchanged_other8": null
+  },
+  "elapsed_s": 118.10255241394043
+}
