@@ -1,0 +1,134 @@
+{
+  "piece": "I · 腓骨分担比轴（零 FE；G3/logistic_fit/a3_verdict 零改动）",
+  "premise": "冻结腓骨行按 share=1.0 喂（整条 ankle_r 反力，无胫-腓载荷分配）⇒ σ_fib(h;s) = s·σ_fib_frozen(h)",
+  "target_or": 1.682,
+  "tol": 0.3,
+  "window": [
+    1.1773999999999998,
+    2.1866
+  ],
+  "cov": {
+    "b": 0.15,
+    "e": 0.1,
+    "a": 0.15
+  },
+  "n_subj": 400,
+  "seeds": [
+    20261003,
+    20261004,
+    20261005
+  ],
+  "sigma_c_fibula": 70.0,
+  "share_axis": [
+    {
+      "share": 0.05,
+      "prov": "G8 主设定 / G9 D2 主（G9 at 5% ⇒ all_zero）",
+      "or_per_seed": [
+        1.2252143649471474,
+        1.2379516487127384,
+        1.1965119970479103
+      ],
+      "status_per_seed": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "or_mean": 1.219892670235932,
+      "in_window": true,
+      "window": [
+        1.1773999999999998,
+        2.1866
+      ]
+    },
+    {
+      "share": 0.1,
+      "prov": "G8 F5 敏感性 / G9 D2 敏感（OR=1.130）",
+      "or_per_seed": [
+        1.7087481228405763,
+        1.710545465037292,
+        1.5971941773291425
+      ],
+      "status_per_seed": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "or_mean": 1.6721625884023368,
+      "in_window": true,
+      "window": [
+        1.1773999999999998,
+        2.1866
+      ]
+    },
+    {
+      "share": 0.2241,
+      "prov": "★M1 定案闭式 share（两端栓接轴向并联，G9 §15 / M1 全量 ⇒ OR=1.7548）",
+      "or_per_seed": [
+        2.8362888963981963,
+        2.9982279932244875,
+        2.263248257466756
+      ],
+      "status_per_seed": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "or_mean": 2.6992550490298135,
+      "in_window": false,
+      "window": [
+        1.1773999999999998,
+        2.1866
+      ]
+    },
+    {
+      "share": 0.3,
+      "prov": "G9 §15 通过区间上沿 share∈[0.10,0.30]",
+      "or_per_seed": [
+        4.420795509838168,
+        3.774439908749951,
+        4.556954518279443
+      ],
+      "status_per_seed": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "or_mean": 4.250729978955854,
+      "in_window": false,
+      "window": [
+        1.1773999999999998,
+        2.1866
+      ]
+    }
+  ],
+  "a2_deterministic_behav": [
+    {
+      "share": 0.05,
+      "prov": "G8 主设定 / G9 D2 主（G9 at 5% ⇒ all_zero）",
+      "a2_behav": "阶跃",
+      "a2_status": "complete_separation",
+      "a2_n_frac": 36
+    },
+    {
+      "share": 0.1,
+      "prov": "G8 F5 敏感性 / G9 D2 敏感（OR=1.130）",
+      "a2_behav": "阶跃",
+      "a2_status": "complete_separation",
+      "a2_n_frac": 45
+    },
+    {
+      "share": 0.2241,
+      "prov": "★M1 定案闭式 share（两端栓接轴向并联，G9 §15 / M1 全量 ⇒ OR=1.7548）",
+      "a2_behav": "常值",
+      "a2_status": "all_one",
+      "a2_n_frac": 50
+    },
+    {
+      "share": 0.3,
+      "prov": "G9 §15 通过区间上沿 share∈[0.10,0.30]",
+      "a2_behav": "常值",
+      "a2_status": "all_one",
+      "a2_n_frac": 50
+    }
+  ]
+}
