@@ -816,6 +816,9 @@ def build_bone_feb(
     align_pca: bool = False,
     lateral_support: list[tuple[float, float]] | None = None,
     bottom_fix_axial_only: bool = False,
+    load_nodes_override: np.ndarray | None = None,
+    load_dir_vec: np.ndarray | None = None,
+    fix_nodes_override: np.ndarray | None = None,
 ) -> dict:
     """Write a ``.feb`` for `spec`.
 
@@ -851,6 +854,22 @@ def build_bone_feb(
         Default False = byte-identical to the pre-B1.2 behaviour.  The input
         `mesh` dict is never mutated (the caller may reuse it across
         descending-load retries).
+    load_nodes_override:
+        Optional **1-based** FEBio node indices replacing the ``top_load``
+        bbox band as the load surface (P-b / joint-face loading probe).
+        Default None = band selection (byte-identical legacy path).  Only the
+        node set changes; direction/position semantics are unchanged otherwise.
+    load_dir_vec:
+        Optional 3-D load direction unit vector (any non-zero length is
+        normalized) replacing ``-axis_vec`` as the per-node load direction.
+        Default None = -axis (compression along the load axis, legacy path).
+        Total magnitude stays ``load_n``.
+    fix_nodes_override:
+        Optional **1-based** FEBio node indices replacing the ``bottom_fix``
+        bbox band as the fixed surface.  Default None = band selection
+        (byte-identical legacy path).  Used together with
+        ``load_nodes_override`` for the P-b joint-face loading probe
+        (load at the joint face, fix at the opposite end).
 
     Returns
     -------
@@ -885,6 +904,24 @@ def build_bone_feb(
     axis_idx, a_min, a_max, top_local, bot_local = _select_top_bottom(
         mesh["nodes"], axis=axis, top_frac=top_frac, bot_frac=bot_frac,
     )
+    # P-b probe (additive): replace the top band with caller-supplied nodes
+    # (1-based FEBio indices).  Default None keeps the legacy band selection.
+    if load_nodes_override is not None:
+        top_local = np.asarray(load_nodes_override, dtype=np.int64).ravel()
+        if top_local.size == 0:
+            raise BoneFebError("load_nodes_override 为空")
+        if top_local.min() < 1 or top_local.max() > len(mesh["nodes"]):
+            raise BoneFebError(
+                f"load_nodes_override 越界 [{top_local.min()}, {top_local.max()}] "
+                f"(节点域 1..{len(mesh['nodes'])})")
+    if fix_nodes_override is not None:
+        bot_local = np.asarray(fix_nodes_override, dtype=np.int64).ravel()
+        if bot_local.size == 0:
+            raise BoneFebError("fix_nodes_override 为空")
+        if bot_local.min() < 1 or bot_local.max() > len(mesh["nodes"]):
+            raise BoneFebError(
+                f"fix_nodes_override 越界 [{bot_local.min()}, {bot_local.max()}] "
+                f"(节点域 1..{len(mesh['nodes'])})")
 
     # 2) build the model
     #
@@ -1050,6 +1087,16 @@ def build_bone_feb(
         )
     axis_vec = np.zeros(3, dtype=float)
     axis_vec[axis_idx] = 1.0
+    load_dir_override = None
+    if load_dir_vec is not None:
+        load_dir_override = np.asarray(load_dir_vec, dtype=float).ravel()
+        nrm = float(np.linalg.norm(load_dir_override))
+        if nrm <= 0:
+            raise BoneFebError("load_dir_vec 长度必须 > 0")
+        load_dir_override = load_dir_override / nrm
+        # 语义：load_dir_vec = **力的方向**（压缩方向）。
+        # 默认 -axis_vec 也是压缩方向；两者符号语义一致，直接替换。
+        axis_vec = load_dir_override
     load_vec = -float(load_n) * axis_vec / float(len(top_local))
     st.loads = floads.Loads(
         all_nodal_loads=[
@@ -1077,12 +1124,20 @@ def build_bone_feb(
     model.save(out_feb)
     notes = _fix_febio413(out_feb)
 
-    load_desc = (
-        f"NodalForce {len(top_local)} × "
-        f"({load_vec[0]:+.4f},{load_vec[1]:+.4f},{load_vec[2]:+.4f}) N = "
-        f"{load_n:.1f} N 沿 axis={axis_idx} ({['X','Y','Z'][axis_idx]}) "
-        f"压缩  bbox=[{a_min:.1f}, {a_max:.1f}] mm"
-    )
+    if load_nodes_override is not None:
+        load_desc = (
+            f"NodalForce {len(top_local)} × "
+            f"({load_vec[0]:+.4f},{load_vec[1]:+.4f},{load_vec[2]:+.4f}) N = "
+            f"{load_n:.1f} N 沿 {axis_vec} 压缩  **load_nodes_override 替代 top 带** "
+            f"bbox=[{a_min:.1f}, {a_max:.1f}] mm"
+        )
+    else:
+        load_desc = (
+            f"NodalForce {len(top_local)} × "
+            f"({load_vec[0]:+.4f},{load_vec[1]:+.4f},{load_vec[2]:+.4f}) N = "
+            f"{load_n:.1f} N 沿 axis={axis_idx} ({['X','Y','Z'][axis_idx]}) "
+            f"压缩  bbox=[{a_min:.1f}, {a_max:.1f}] mm"
+        )
     return {
         "axis_idx": axis_idx,
         "axis_label": ["X", "Y", "Z"][axis_idx],
@@ -1093,6 +1148,10 @@ def build_bone_feb(
         "load_per_node_n": float(np.linalg.norm(load_vec)),
         "load_total_n": float(load_n),
         "load_dir_unit": axis_vec.tolist(),
+        "load_nodes_override": (None if load_nodes_override is None
+                                else load_nodes_override.tolist()),
+        "fix_nodes_override": (None if fix_nodes_override is None
+                               else fix_nodes_override.tolist()),
         "load_vec_per_node": load_vec.tolist(),
         "load_desc": load_desc,
         "align_pca": bool(align_pca),

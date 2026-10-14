@@ -1,0 +1,139 @@
+{
+  "bone": "femur_r",
+  "domain": "fem_cort",
+  "joint": "hip_r",
+  "probe": "P4-a head joint-face load (position isolation)",
+  "head_frac": 0.2,
+  "fix_frac": 0.3,
+  "sigma_c_mpa": 220.0,
+  "head_geom": {
+    "axis_idx": 2,
+    "a_min_mm": -246.90633840827675,
+    "a_max_mm": 233.95020561888344,
+    "head_thr_mm": -150.7350296028447,
+    "frac": 0.2,
+    "n_head_nodes": 1801,
+    "n_fix_nodes": 3995,
+    "band_centroid": [
+      -341.0617393096385,
+      130.00694061046275,
+      -201.2221428358377
+    ],
+    "centroid": [
+      -337.89750120548257,
+      139.59319352050136,
+      31.884045281000617
+    ],
+    "band_eccentricity_mm": 10.094981309295026,
+    "load_dir_vec": [
+      -0.0,
+      -0.0,
+      -1.0
+    ]
+  },
+  "n_head_nodes": 1801,
+  "n_fix_nodes": 3995,
+  "band_eccentricity_mm": 10.094981309295026,
+  "prediction": "阶跃形态，跨阈点 h*≈30（e≈9.5mm，预注册 §2.3 补充）；F-3′d 原窗 [10,15] 已后移",
+  "criterion": "主判据：σ_shaft(h) 单调升且存在 h*≤45 从 <220→≥220；次判据：h*≈30 吻合度（如实记录）",
+  "verdict": "证伪：全部 < σ_c（all_zero 或接近），弯曲路径不足",
+  "attribution": "lateral_support 结构性抑制弯曲路径（非弯曲路径不足）：探针载荷带（头端球冠）几乎完全落在 lateral_support=[(0.05,0.95)] 约束带内，载荷节点横向位移被钉死、偏心力矩被约束反力吸收；shaft 域 σ_zz~横向坐标 r²=0.054 vs 基线 0.291、σ_zz max=0.0（无拉伸侧）、A_eff≈408mm²≈几何 A ⇒ 纯轴向响应",
+  "rows": [
+    {
+      "case": "positive_control_ref",
+      "h_no": 20,
+      "ends_stat_mpa": 12.440024642081987,
+      "shaft_stat_mpa": 52.479717652068416,
+      "vm_max_mpa": 347.5182237206783,
+      "source": "A2_axial_lat_90 h20 cached (E′)"
+    },
+    {
+      "case": "P4a_head_load",
+      "h_no": 1,
+      "h_m": 1.0,
+      "load_n": 9783.783403289006,
+      "converged": true,
+      "seconds": 0.0,
+      "ends_stat_mpa": 2.4483750350054505e-10,
+      "shaft_stat_mpa": 14.162963057618729,
+      "vm_max_mpa": 32.88479137290208
+    },
+    {
+      "case": "P4a_head_load",
+      "h_no": 5,
+      "h_m": 5.0,
+      "load_n": 15227.651697700654,
+      "converged": true,
+      "seconds": 0.0,
+      "ends_stat_mpa": 2.449847473552052e-10,
+      "shaft_stat_mpa": 22.028736202030306,
+      "vm_max_mpa": 51.161489615916814
+    },
+    {
+      "case": "P4a_head_load",
+      "h_no": 10,
+      "h_m": 10.0,
+      "load_n": 22923.19634523376,
+      "converged": true,
+      "seconds": 0.0,
+      "ends_stat_mpa": 2.4513482706680356e-10,
+      "shaft_stat_mpa": 33.127863715720565,
+      "vm_max_mpa": 76.97274963053553
+    },
+    {
+      "case": "P4a_head_load",
+      "h_no": 15,
+      "h_m": 15.0,
+      "load_n": 28775.69923608489,
+      "converged": true,
+      "seconds": 0.0,
+      "ends_stat_mpa": 2.4483750350054505e-10,
+      "shaft_stat_mpa": 41.55169652392999,
+      "vm_max_mpa": 96.58340131081978
+    },
+    {
+      "case": "P4a_head_load",
+      "h_no": 20,
+      "h_m": 20.0,
+      "load_n": 33583.15629053101,
+      "converged": true,
+      "seconds": 0.0,
+      "ends_stat_mpa": 2.4483750350054505e-10,
+      "shaft_stat_mpa": 48.460459366811435,
+      "vm_max_mpa": 112.68059967457208
+    },
+    {
+      "case": "P4a_head_load",
+      "h_no": 30,
+      "h_m": 30.0,
+      "load_n": 42121.00342498941,
+      "converged": true,
+      "seconds": 0.0,
+      "ends_stat_mpa": 2.4483750350054505e-10,
+      "shaft_stat_mpa": 60.70763537074647,
+      "vm_max_mpa": 141.24418558148017
+    },
+    {
+      "case": "P4a_head_load",
+      "h_no": 40,
+      "h_m": 40.0,
+      "load_n": 50383.06246661196,
+      "converged": true,
+      "seconds": 0.0,
+      "ends_stat_mpa": 2.4483750350054505e-10,
+      "shaft_stat_mpa": 72.53258711010167,
+      "vm_max_mpa": 168.85824341667188
+    },
+    {
+      "case": "P4a_head_load",
+      "h_no": 50,
+      "h_m": 50.0,
+      "load_n": 57941.31332304486,
+      "converged": true,
+      "seconds": 0.0,
+      "ends_stat_mpa": 2.454578430613005e-10,
+      "shaft_stat_mpa": 83.32822713512537,
+      "vm_max_mpa": 194.10012405764522
+    }
+  ]
+}
