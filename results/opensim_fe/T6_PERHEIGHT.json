@@ -1,0 +1,158 @@
+{
+  "bone": "T6",
+  "cn": "胸椎",
+  "domain": "shell_t6_cort",
+  "bc": {
+    "variant": "A2_axial_lat_90",
+    "bottom_fix_axial_only": true,
+    "lateral_support": [
+      0.05,
+      0.95
+    ],
+    "scaling": "per-height re-solve (no fallback, no extrapolation)"
+  },
+  "sigma_c_mpa": 150.0,
+  "rows": [
+    {
+      "h_no": 1,
+      "h_m": 1.0,
+      "load_n": 14502.744437058635,
+      "shell_median_mpa": 90.94614714472704,
+      "ratio": 0.6063076476315136,
+      "frac": false
+    },
+    {
+      "h_no": 2,
+      "h_m": 2.0,
+      "load_n": 18760.95454099947,
+      "shell_median_mpa": 118.24978762351301,
+      "ratio": 0.7883319174900868,
+      "frac": false
+    },
+    {
+      "h_no": 3,
+      "h_m": 3.0,
+      "load_n": 19248.15552661645,
+      "shell_median_mpa": 121.39266571870698,
+      "ratio": 0.8092844381247132,
+      "frac": false
+    },
+    {
+      "h_no": 4,
+      "h_m": 4.0,
+      "load_n": 20330.913277118932,
+      "shell_median_mpa": 128.3906853192756,
+      "ratio": 0.8559379021285041,
+      "frac": false
+    },
+    {
+      "h_no": 5,
+      "h_m": 5.0,
+      "load_n": 22087.579953288558,
+      "shell_median_mpa": 139.7840959993534,
+      "ratio": 0.9318939733290228,
+      "frac": false
+    },
+    {
+      "h_no": 6,
+      "h_m": 6.0,
+      "load_n": 24177.521548965437,
+      "shell_median_mpa": 153.4012105327243,
+      "ratio": 1.0226747368848286,
+      "frac": true
+    },
+    {
+      "h_no": 7,
+      "h_m": 7.0,
+      "load_n": 26351.93774874782,
+      "shell_median_mpa": 167.6422313838836,
+      "ratio": 1.1176148758925573,
+      "frac": true
+    },
+    {
+      "h_no": 8,
+      "h_m": 8.0,
+      "load_n": 28470.210916356176,
+      "shell_median_mpa": 181.5579340021356,
+      "ratio": 1.210386226680904,
+      "frac": true
+    },
+    {
+      "h_no": 9,
+      "h_m": 9.0,
+      "load_n": 30442.721474094036,
+      "shell_median_mpa": 194.818452777591,
+      "ratio": 1.29878968518394,
+      "frac": true
+    },
+    {
+      "h_no": 10,
+      "h_m": 10.0,
+      "load_n": 32234.40959349035,
+      "shell_median_mpa": 206.87318299834124,
+      "ratio": 1.3791545533222749,
+      "frac": true
+    },
+    {
+      "h_no": 11,
+      "h_m": 11.0,
+      "load_n": 33960.268826282765,
+      "shell_median_mpa": 218.6734617568698,
+      "ratio": 1.4578230783791322,
+      "frac": true
+    },
+    {
+      "h_no": 17,
+      "h_m": 17.0,
+      "load_n": 44193.211923135685,
+      "shell_median_mpa": 289.72852778841224,
+      "ratio": 1.9315235185894148,
+      "frac": true
+    }
+  ],
+  "missing_h": [
+    12,
+    13,
+    14,
+    15,
+    16,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "n_solved": 12,
+  "n_fracture": 7,
+  "first_fracture_h_m": 6.0,
+  "behav": "complete_separation",
+  "paper_target": "阶跃"
+}

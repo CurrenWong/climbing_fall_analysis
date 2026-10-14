@@ -65,212 +65,6 @@
     {
       "variant": "A2_axial_lat_90",
       "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 1,
-      "h_m": 1.0,
-      "load_n": 14502.744437058635,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "ends_stat_mpa": 0.943411148149367,
-      "shaft_stat_mpa": 0.5957873164697406,
-      "vm_max_mpa": 4.399846054013045
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 2,
-      "h_m": 2.0,
-      "load_n": 18760.95454099947,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "seconds": 2.8,
-      "ends_stat_mpa": 1.1429411339615863,
-      "shaft_stat_mpa": 0.6610331775318621,
-      "vm_max_mpa": 6.213305417745696
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 3,
-      "h_m": 3.0,
-      "load_n": 19248.15552661645,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "seconds": 0.7,
-      "ends_stat_mpa": 1.164079945665355,
-      "shaft_stat_mpa": 0.6650388597149703,
-      "vm_max_mpa": 6.433423737282834
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 4,
-      "h_m": 4.0,
-      "load_n": 20330.913277118932,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "seconds": 0.6,
-      "ends_stat_mpa": 1.2146309350144242,
-      "shaft_stat_mpa": 0.6719100265996066,
-      "vm_max_mpa": 6.931084137780645
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 5,
-      "h_m": 5.0,
-      "load_n": 22087.579953288558,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "ends_stat_mpa": 1.3533325792486686,
-      "shaft_stat_mpa": 0.6822411523598653,
-      "vm_max_mpa": 7.77311465985467
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 6,
-      "h_m": 6.0,
-      "load_n": 24177.521548965437,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "ends_stat_mpa": 1.4868654589486678,
-      "shaft_stat_mpa": 0.6894191218680197,
-      "vm_max_mpa": 8.809822686797997
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 7,
-      "h_m": 7.0,
-      "load_n": 26351.93774874782,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "seconds": 0.7,
-      "ends_stat_mpa": 1.6255471992448167,
-      "shaft_stat_mpa": 0.7024960891859005,
-      "vm_max_mpa": 12.997853766527314
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 8,
-      "h_m": 8.0,
-      "load_n": 28470.210916356176,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "seconds": 0.6,
-      "ends_stat_mpa": 1.7438050341147877,
-      "shaft_stat_mpa": 0.7147070773756157,
-      "vm_max_mpa": 20.37076153783432
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 9,
-      "h_m": 9.0,
-      "load_n": 30442.721474094036,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "seconds": 0.6,
-      "ends_stat_mpa": 1.859441654121897,
-      "shaft_stat_mpa": 0.7188633059139878,
-      "vm_max_mpa": 31.29838090857491
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 10,
-      "h_m": 10.0,
-      "load_n": 32234.40959349035,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "seconds": 0.7,
-      "ends_stat_mpa": 2.1671389802436574,
-      "shaft_stat_mpa": 0.7129959296484235,
-      "vm_max_mpa": 42.53132632827245
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 11,
-      "h_m": 11.0,
-      "load_n": 33960.268826282765,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "seconds": 0.6,
-      "ends_stat_mpa": 2.4465829792853353,
-      "shaft_stat_mpa": 0.7141324888613111,
-      "vm_max_mpa": 55.65202107420158
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
       "h_no": 12,
       "h_m": 12.0,
       "load_n": 35783.32548120926,
@@ -282,8 +76,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h12\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h12\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 72\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.2 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0125695 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0040657 sec)\n\n\tSolve time ...................... : 0:00:01 (0.706932 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0094067 sec)\n\n\t   serialization ................ : 0:00:00 (0.02174 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.00333 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.048927 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0383189 sec)\n\n\t   model update ................. : 0:00:00 (0.0569482 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0032476 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.515687 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.730423 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.1
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h12\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h12\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 72\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.7 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0214 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0066813 sec)\n\n\tSolve time ...................... : 0:00:01 (0.76787 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0144103 sec)\n\n\t   serialization ................ : 0:00:00 (0.0220805 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0036363 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.048201 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0387678 sec)\n\n\t   model update ................. : 0:00:00 (0.062686 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0033269 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.565424 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.805246 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 4.1
     },
     {
       "variant": "A2_axial_lat_90",
@@ -299,8 +93,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h13\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h13\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 72\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.3 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0111885 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0039755 sec)\n\n\tSolve time ...................... : 0:00:01 (0.717666 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0123113 sec)\n\n\t   serialization ................ : 0:00:00 (0.0207561 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0029285 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0447607 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0379873 sec)\n\n\t   model update ................. : 0:00:00 (0.0560474 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0031726 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.533621 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.743541 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.0
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h13\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h13\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 72\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.6 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0106071 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0041876 sec)\n\n\tSolve time ...................... : 0:00:01 (0.774766 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0091828 sec)\n\n\t   serialization ................ : 0:00:00 (0.0203618 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034422 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0488139 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.057772 sec)\n\n\t   model update ................. : 0:00:00 (0.0685625 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0032367 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.553904 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.796465 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.1
     },
     {
       "variant": "A2_axial_lat_90",
@@ -316,8 +110,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h14\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h14\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 102\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.7 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0120066 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0042296 sec)\n\n\tSolve time ...................... : 0:00:01 (1.01703 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.015284 sec)\n\n\t   serialization ................ : 0:00:00 (0.0242755 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033246 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0585102 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.101642 sec)\n\n\t   model update ................. : 0:00:00 (0.145825 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0047843 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.65202 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (1.04415 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.4
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h14\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h14\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 102\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.0 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0114187 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0045198 sec)\n\n\tSolve time ...................... : 0:00:01 (1.01319 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0120684 sec)\n\n\t   serialization ................ : 0:00:00 (0.0272235 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034407 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0539476 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.112931 sec)\n\n\t   model update ................. : 0:00:00 (0.17183 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0048899 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.611674 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (1.03691 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.5
     },
     {
       "variant": "A2_axial_lat_90",
@@ -333,8 +127,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h15\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h15\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 78\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.8 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0131523 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0045249 sec)\n\n\tSolve time ...................... : 0:00:01 (0.766594 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0101523 sec)\n\n\t   serialization ................ : 0:00:00 (0.0212765 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0031013 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0480992 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0425892 sec)\n\n\t   model update ................. : 0:00:00 (0.0633968 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0032627 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.565201 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.79248 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.1
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h15\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h15\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 78\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.8 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0121796 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0042661 sec)\n\n\tSolve time ...................... : 0:00:01 (0.716369 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0098813 sec)\n\n\t   serialization ................ : 0:00:00 (0.0231186 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033086 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0457769 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0409341 sec)\n\n\t   model update ................. : 0:00:00 (0.0617619 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0034599 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.518387 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.740862 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.0
     },
     {
       "variant": "A2_axial_lat_90",
@@ -350,27 +144,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h16\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h16\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 120\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.1 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0138734 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0060825 sec)\n\n\tSolve time ...................... : 0:00:01 (1.02196 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0197338 sec)\n\n\t   serialization ................ : 0:00:00 (0.0267875 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0037508 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0486633 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0876988 sec)\n\n\t   model update ................. : 0:00:00 (0.125364 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0059514 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.688977 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (1.05121 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h16\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h16\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 120\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.1 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0133452 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0063928 sec)\n\n\tSolve time ...................... : 0:00:01 (0.947852 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0149218 sec)\n\n\t   serialization ................ : 0:00:00 (0.0219087 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0040524 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0463911 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0872542 sec)\n\n\t   model update ................. : 0:00:00 (0.125604 sec)\n\n\t   QN updates ................... : 0:00:00 (0.005456 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.628881 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.977501 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "seconds": 1.4
-    },
-    {
-      "variant": "A2_axial_lat_90",
-      "note": "仅轴向夹持 + 侧向 90%",
-      "h_no": 17,
-      "h_m": 17.0,
-      "load_n": 44193.211923135685,
-      "axial_only": true,
-      "lateral_support": [
-        [
-          0.05,
-          0.95
-        ]
-      ],
-      "converged": true,
-      "seconds": 0.6,
-      "ends_stat_mpa": 4.059658329905492,
-      "shaft_stat_mpa": 0.7532136238798086,
-      "vm_max_mpa": 239.87147653076218
     },
     {
       "variant": "A2_axial_lat_90",
@@ -386,8 +161,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h18\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h18\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.4 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0122987 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0045061 sec)\n\n\tSolve time ...................... : 0:00:01 (0.687079 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0094252 sec)\n\n\t   serialization ................ : 0:00:00 (0.0253957 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0036797 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.046638 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0347282 sec)\n\n\t   model update ................. : 0:00:00 (0.0539873 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0028102 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.502204 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.712153 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.1
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h18\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h18\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.7 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0111211 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0036928 sec)\n\n\tSolve time ...................... : 0:00:01 (0.691057 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.008398 sec)\n\n\t   serialization ................ : 0:00:00 (0.0240694 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0031411 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0480795 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0364777 sec)\n\n\t   model update ................. : 0:00:00 (0.0563429 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0029625 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.50236 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.713221 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.0
     },
     {
       "variant": "A2_axial_lat_90",
@@ -403,8 +178,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h19\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h19\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.6 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0149777 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0057321 sec)\n\n\tSolve time ...................... : 0:00:01 (0.704152 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0128935 sec)\n\n\t   serialization ................ : 0:00:00 (0.0255264 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0036236 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0462645 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0357038 sec)\n\n\t   model update ................. : 0:00:00 (0.078759 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0027528 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.494024 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.737427 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.0
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h19\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h19\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.6 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0109145 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0034001 sec)\n\n\tSolve time ...................... : 0:00:01 (0.695005 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0088309 sec)\n\n\t   serialization ................ : 0:00:00 (0.0246197 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034233 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0461583 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0356823 sec)\n\n\t   model update ................. : 0:00:00 (0.0580001 sec)\n\n\t   QN updates ................... : 0:00:00 (0.002914 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.506806 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.716513 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.1
     },
     {
       "variant": "A2_axial_lat_90",
@@ -420,8 +195,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h20\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h20\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.6 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0159598 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0077024 sec)\n\n\tSolve time ...................... : 0:00:01 (0.696663 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.01034 sec)\n\n\t   serialization ................ : 0:00:00 (0.0230995 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0031602 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0462563 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0332479 sec)\n\n\t   model update ................. : 0:00:00 (0.0472536 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0027509 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.524387 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.7304 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.2
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h20\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h20\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.6 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0108782 sec)\n\n\tInitialization time ............. : 0:00:00 (0.003073 sec)\n\n\tSolve time ...................... : 0:00:01 (0.733138 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0107325 sec)\n\n\t   serialization ................ : 0:00:00 (0.0234359 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033155 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0511128 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0406815 sec)\n\n\t   model update ................. : 0:00:00 (0.0595664 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0028713 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.532164 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.753914 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.0
     },
     {
       "variant": "A2_axial_lat_90",
@@ -437,8 +212,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h21\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h21\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.2 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0141569 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0056312 sec)\n\n\tSolve time ...................... : 0:00:01 (0.733752 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.010114 sec)\n\n\t   serialization ................ : 0:00:00 (0.0273149 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035604 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0473899 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0404327 sec)\n\n\t   model update ................. : 0:00:00 (0.062724 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0031586 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.530423 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.762198 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.0
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h21\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h21\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.2 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0115932 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0038092 sec)\n\n\tSolve time ...................... : 0:00:01 (0.725424 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0082325 sec)\n\n\t   serialization ................ : 0:00:00 (0.0231544 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0032168 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0487033 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0434786 sec)\n\n\t   model update ................. : 0:00:00 (0.0626526 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0029431 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.523764 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.747221 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.1
     },
     {
       "variant": "A2_axial_lat_90",
@@ -454,8 +229,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h22\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h22\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.4 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0153764 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0043727 sec)\n\n\tSolve time ...................... : 0:00:01 (0.759224 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0102407 sec)\n\n\t   serialization ................ : 0:00:00 (0.0284192 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033421 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0557969 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0393685 sec)\n\n\t   model update ................. : 0:00:00 (0.0646006 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0031833 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.545849 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.787536 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.3
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h22\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h22\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.2 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0131931 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0048321 sec)\n\n\tSolve time ...................... : 0:00:01 (0.723778 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0087939 sec)\n\n\t   serialization ................ : 0:00:00 (0.0251681 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0032329 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.050234 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0375312 sec)\n\n\t   model update ................. : 0:00:00 (0.06106 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0030282 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.525772 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.751817 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.0
     },
     {
       "variant": "A2_axial_lat_90",
@@ -471,8 +246,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h23\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h23\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.4 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0504894 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0049571 sec)\n\n\tSolve time ...................... : 0:00:01 (0.77446 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0137042 sec)\n\n\t   serialization ................ : 0:00:00 (0.0269877 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034351 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0529358 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.040869 sec)\n\n\t   model update ................. : 0:00:00 (0.089215 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0032755 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.538817 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.842474 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.2
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h23\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h23\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.1 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0141755 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0047182 sec)\n\n\tSolve time ...................... : 0:00:01 (0.7316 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0092683 sec)\n\n\t   serialization ................ : 0:00:00 (0.0240541 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034382 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0511557 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0414561 sec)\n\n\t   model update ................. : 0:00:00 (0.0584193 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0030751 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.53175 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.758601 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.1
     },
     {
       "variant": "A2_axial_lat_90",
@@ -488,8 +263,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h24\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h24\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 47.7 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0117955 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0044178 sec)\n\n\tSolve time ...................... : 0:00:01 (0.822051 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.01174 sec)\n\n\t   serialization ................ : 0:00:00 (0.0247802 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034833 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0499074 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0470524 sec)\n\n\t   model update ................. : 0:00:00 (0.0626361 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0030429 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.610855 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.847514 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 1.1
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h24\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h24\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 66\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 46.9 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0124741 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0045001 sec)\n\n\tSolve time ...................... : 0:00:01 (0.70588 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0095719 sec)\n\n\t   serialization ................ : 0:00:00 (0.0249375 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0032756 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0492917 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0388722 sec)\n\n\t   model update ................. : 0:00:00 (0.0589824 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0032508 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.508659 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.73082 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.0
     },
     {
       "variant": "A2_axial_lat_90",
@@ -505,7 +280,7 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h25\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h25\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 42\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0125623 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0043862 sec)\n\n\tSolve time ...................... : 0:00:01 (0.509243 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0079271 sec)\n\n\t   serialization ................ : 0:00:00 (0.0248239 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0037027 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0263952 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0281264 sec)\n\n\t   model update ................. : 0:00:00 (0.0439002 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0021139 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.367268 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.534984 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h25\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h25\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 42\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0133863 sec)\n\n\tInitialization time ............. : 0:00:00 (0.007501 sec)\n\n\tSolve time ...................... : 0:00:00 (0.478232 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.00667 sec)\n\n\t   serialization ................ : 0:00:00 (0.0211466 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034093 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0249487 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0290602 sec)\n\n\t   model update ................. : 0:00:00 (0.0377687 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0019353 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.347548 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.506957 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "seconds": 0.9
     },
     {
@@ -522,8 +297,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h26\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h26\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 42\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.4 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0138164 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0040678 sec)\n\n\tSolve time ...................... : 0:00:00 (0.431478 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0072106 sec)\n\n\t   serialization ................ : 0:00:00 (0.0249472 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035305 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0247177 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0207926 sec)\n\n\t   model update ................. : 0:00:00 (0.0286996 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0018075 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.314144 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.457922 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.7
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h26\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h26\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 42\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.4 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0100252 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0034299 sec)\n\n\tSolve time ...................... : 0:00:00 (0.471796 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0058135 sec)\n\n\t   serialization ................ : 0:00:00 (0.0262955 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0030559 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0261186 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0240183 sec)\n\n\t   model update ................. : 0:00:00 (0.0521547 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0019483 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.326025 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.491442 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.8
     },
     {
       "variant": "A2_axial_lat_90",
@@ -539,7 +314,7 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h27\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h27\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 42\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.011925 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0046428 sec)\n\n\tSolve time ...................... : 0:00:00 (0.433492 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0092115 sec)\n\n\t   serialization ................ : 0:00:00 (0.0197104 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034301 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0204479 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0211727 sec)\n\n\t   model update ................. : 0:00:00 (0.0322888 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0019036 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.322846 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.461291 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h27\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h27\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 42\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0120896 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0043729 sec)\n\n\tSolve time ...................... : 0:00:00 (0.438569 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0065276 sec)\n\n\t   serialization ................ : 0:00:00 (0.0202317 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033885 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0223326 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0200227 sec)\n\n\t   model update ................. : 0:00:00 (0.030246 sec)\n\n\t   QN updates ................... : 0:00:00 (0.001851 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.328849 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.463149 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "seconds": 0.8
     },
     {
@@ -556,7 +331,7 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h28\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h28\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0129263 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0040785 sec)\n\n\tSolve time ...................... : 0:00:00 (0.434267 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0060996 sec)\n\n\t   serialization ................ : 0:00:00 (0.0214278 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034299 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0256175 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0172827 sec)\n\n\t   model update ................. : 0:00:00 (0.0267341 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0015723 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.327236 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.459727 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h28\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h28\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0106397 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0036963 sec)\n\n\tSolve time ...................... : 0:00:00 (0.423518 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0055811 sec)\n\n\t   serialization ................ : 0:00:00 (0.0208893 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0030365 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0219531 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0203787 sec)\n\n\t   model update ................. : 0:00:00 (0.0315497 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0016208 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.313309 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.444126 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "seconds": 0.7
     },
     {
@@ -573,8 +348,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h29\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h29\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0121718 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0039694 sec)\n\n\tSolve time ...................... : 0:00:00 (0.454056 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0087753 sec)\n\n\t   serialization ................ : 0:00:00 (0.0245966 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0070066 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0269206 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0188439 sec)\n\n\t   model update ................. : 0:00:00 (0.0521219 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0015843 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.31195 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.481663 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.9
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h29\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h29\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.6 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0160961 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0055698 sec)\n\n\tSolve time ...................... : 0:00:00 (0.433013 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0062982 sec)\n\n\t   serialization ................ : 0:00:00 (0.0184266 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.003517 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0262421 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0162739 sec)\n\n\t   model update ................. : 0:00:00 (0.0262033 sec)\n\n\t   QN updates ................... : 0:00:00 (0.001521 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.330708 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.463401 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.8
     },
     {
       "variant": "A2_axial_lat_90",
@@ -590,7 +365,7 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h30\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h30\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0112044 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0045562 sec)\n\n\tSolve time ...................... : 0:00:00 (0.419699 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0088786 sec)\n\n\t   serialization ................ : 0:00:00 (0.021268 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.003481 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0218569 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0194667 sec)\n\n\t   model update ................. : 0:00:00 (0.0294985 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0015128 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.311912 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.44507 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h30\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h30\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0106604 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0035124 sec)\n\n\tSolve time ...................... : 0:00:00 (0.432699 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0058434 sec)\n\n\t   serialization ................ : 0:00:00 (0.0223885 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035926 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0259936 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.020672 sec)\n\n\t   model update ................. : 0:00:00 (0.0352422 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0016264 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.312143 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.453478 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "seconds": 0.8
     },
     {
@@ -607,7 +382,7 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h31\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h31\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0135285 sec)\n\n\tInitialization time ............. : 0:00:00 (0.004291 sec)\n\n\tSolve time ...................... : 0:00:00 (0.420228 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0101234 sec)\n\n\t   serialization ................ : 0:00:00 (0.0207125 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.003579 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0239453 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0200349 sec)\n\n\t   model update ................. : 0:00:00 (0.0302436 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0015448 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.309584 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.449992 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h31\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h31\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0138831 sec)\n\n\tInitialization time ............. : 0:00:00 (0.006907 sec)\n\n\tSolve time ...................... : 0:00:00 (0.429113 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0088776 sec)\n\n\t   serialization ................ : 0:00:00 (0.0226262 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035446 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0243737 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0210002 sec)\n\n\t   model update ................. : 0:00:00 (0.0332412 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0016764 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.311849 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.459768 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "seconds": 0.8
     },
     {
@@ -624,8 +399,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h32\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h32\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.011864 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0037181 sec)\n\n\tSolve time ...................... : 0:00:00 (0.413244 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0089796 sec)\n\n\t   serialization ................ : 0:00:00 (0.0212266 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033626 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0233249 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0184096 sec)\n\n\t   model update ................. : 0:00:00 (0.025926 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0014992 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.30889 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.439338 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.8
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h32\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h32\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 36\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.013842 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0051394 sec)\n\n\tSolve time ...................... : 0:00:00 (0.440516 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0066657 sec)\n\n\t   serialization ................ : 0:00:00 (0.0238858 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034447 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0250522 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0215059 sec)\n\n\t   model update ................. : 0:00:00 (0.0342147 sec)\n\n\t   QN updates ................... : 0:00:00 (0.001699 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.3194 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.467636 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.9
     },
     {
       "variant": "A2_axial_lat_90",
@@ -641,8 +416,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h33\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h33\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 30\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0118615 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0043848 sec)\n\n\tSolve time ...................... : 0:00:00 (0.407702 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0054783 sec)\n\n\t   serialization ................ : 0:00:00 (0.0202339 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0038044 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0218253 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0152862 sec)\n\n\t   model update ................. : 0:00:00 (0.0220335 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0012991 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.313999 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.431686 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.8
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h33\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h33\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 30\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0126213 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0043564 sec)\n\n\tSolve time ...................... : 0:00:00 (0.417141 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0060036 sec)\n\n\t   serialization ................ : 0:00:00 (0.0215989 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0046886 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0236731 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.01677 sec)\n\n\t   model update ................. : 0:00:00 (0.0428518 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0014383 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.295983 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.442016 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.7
     },
     {
       "variant": "A2_axial_lat_90",
@@ -658,8 +433,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h34\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h34\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 30\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0103445 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0043294 sec)\n\n\tSolve time ...................... : 0:00:00 (0.423447 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0055256 sec)\n\n\t   serialization ................ : 0:00:00 (0.0205812 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.004661 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0285235 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.020219 sec)\n\n\t   model update ................. : 0:00:00 (0.0260093 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0012717 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.312442 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.445547 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.8
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h34\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h34\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 30\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0124118 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0041546 sec)\n\n\tSolve time ...................... : 0:00:00 (0.423994 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0056499 sec)\n\n\t   serialization ................ : 0:00:00 (0.0226433 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033828 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0350253 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0159397 sec)\n\n\t   model update ................. : 0:00:00 (0.0238124 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0013074 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.311752 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.448348 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 1.0
     },
     {
       "variant": "A2_axial_lat_90",
@@ -675,8 +450,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h35\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h35\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 30\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 47.1 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0140437 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0066626 sec)\n\n\tSolve time ...................... : 0:00:00 (0.423945 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.008929 sec)\n\n\t   serialization ................ : 0:00:00 (0.0205738 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.003392 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0246062 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0159754 sec)\n\n\t   model update ................. : 0:00:00 (0.0231697 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0012534 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.325447 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.45495 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.8
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h35\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h35\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 30\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0100011 sec)\n\n\tInitialization time ............. : 0:00:00 (0.003268 sec)\n\n\tSolve time ...................... : 0:00:00 (0.380052 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0048588 sec)\n\n\t   serialization ................ : 0:00:00 (0.0194713 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0030504 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.020847 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0133285 sec)\n\n\t   model update ................. : 0:00:00 (0.0205528 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0013021 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.292246 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.399256 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.7
     },
     {
       "variant": "A2_axial_lat_90",
@@ -692,8 +467,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h36\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h36\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.7 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0130895 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0042029 sec)\n\n\tSolve time ...................... : 0:00:00 (0.409391 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0061173 sec)\n\n\t   serialization ................ : 0:00:00 (0.021391 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035749 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0231183 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0126294 sec)\n\n\t   model update ................. : 0:00:00 (0.0254356 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010633 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.313772 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.437664 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.8
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h36\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h36\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.010915 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0029665 sec)\n\n\tSolve time ...................... : 0:00:00 (0.381842 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0042084 sec)\n\n\t   serialization ................ : 0:00:00 (0.0218392 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034074 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0239312 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0143616 sec)\n\n\t   model update ................. : 0:00:00 (0.0228514 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009785 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.285978 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.40157 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.9
     },
     {
       "variant": "A2_axial_lat_90",
@@ -709,7 +484,7 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h37\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h37\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0139063 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0048773 sec)\n\n\tSolve time ...................... : 0:00:00 (0.382445 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0089077 sec)\n\n\t   serialization ................ : 0:00:00 (0.0258229 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034946 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0240958 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0137338 sec)\n\n\t   model update ................. : 0:00:00 (0.022039 sec)\n\n\t   QN updates ................... : 0:00:00 (0.001063 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.283468 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.411884 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h37\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h37\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.1 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0143668 sec)\n\n\tInitialization time ............. : 0:00:00 (0.004217 sec)\n\n\tSolve time ...................... : 0:00:00 (0.424078 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0053706 sec)\n\n\t   serialization ................ : 0:00:00 (0.0220734 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0032462 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.024281 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0161826 sec)\n\n\t   model update ................. : 0:00:00 (0.0456173 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0012576 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.302518 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.450782 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "seconds": 0.8
     },
     {
@@ -726,8 +501,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h38\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h38\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0108783 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0039497 sec)\n\n\tSolve time ...................... : 0:00:00 (0.403955 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0065708 sec)\n\n\t   serialization ................ : 0:00:00 (0.0241543 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033042 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0251769 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0168592 sec)\n\n\t   model update ................. : 0:00:00 (0.024639 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009877 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.299509 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.426803 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.7
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h38\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h38\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.5 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0115615 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0040544 sec)\n\n\tSolve time ...................... : 0:00:00 (0.423817 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0047355 sec)\n\n\t   serialization ................ : 0:00:00 (0.0214781 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0032851 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0226234 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0181304 sec)\n\n\t   model update ................. : 0:00:00 (0.0518314 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010171 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.296785 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.445825 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.8
     },
     {
       "variant": "A2_axial_lat_90",
@@ -743,8 +518,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h39\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h39\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.6 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0095494 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0042781 sec)\n\n\tSolve time ...................... : 0:00:00 (0.371165 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0076652 sec)\n\n\t   serialization ................ : 0:00:00 (0.0212282 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035327 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0235951 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0130163 sec)\n\n\t   model update ................. : 0:00:00 (0.0178937 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009175 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.282836 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.394585 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.7
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h39\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h39\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0123347 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0042114 sec)\n\n\tSolve time ...................... : 0:00:00 (0.403774 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0047871 sec)\n\n\t   serialization ................ : 0:00:00 (0.0217241 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0030389 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0240376 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0135501 sec)\n\n\t   model update ................. : 0:00:00 (0.0206054 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009703 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.311494 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.427294 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.8
     },
     {
       "variant": "A2_axial_lat_90",
@@ -760,8 +535,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h40\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h40\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0137318 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0044262 sec)\n\n\tSolve time ...................... : 0:00:00 (0.375371 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.006303 sec)\n\n\t   serialization ................ : 0:00:00 (0.0251573 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034122 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0234688 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0128266 sec)\n\n\t   model update ................. : 0:00:00 (0.0184313 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009909 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.282636 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.402647 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.7
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h40\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h40\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.010261 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0035839 sec)\n\n\tSolve time ...................... : 0:00:00 (0.385698 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0043798 sec)\n\n\t   serialization ................ : 0:00:00 (0.0184117 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.003373 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0367535 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0117944 sec)\n\n\t   model update ................. : 0:00:00 (0.0243259 sec)\n\n\t   QN updates ................... : 0:00:00 (0.000919 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.281781 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.405925 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.8
     },
     {
       "variant": "A2_axial_lat_90",
@@ -777,8 +552,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h41\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h41\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.4 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0128882 sec)\n\n\tInitialization time ............. : 0:00:00 (0.005245 sec)\n\n\tSolve time ...................... : 0:00:00 (0.400413 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0057006 sec)\n\n\t   serialization ................ : 0:00:00 (0.0231458 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0085834 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.034388 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0125234 sec)\n\n\t   model update ................. : 0:00:00 (0.0195213 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009887 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.292609 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.427319 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.7
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h41\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h41\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.1 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0112408 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0037543 sec)\n\n\tSolve time ...................... : 0:00:00 (0.409325 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0065747 sec)\n\n\t   serialization ................ : 0:00:00 (0.0273531 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035911 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0287887 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0151651 sec)\n\n\t   model update ................. : 0:00:00 (0.0370551 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010245 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.287714 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.43273 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.8
     },
     {
       "variant": "A2_axial_lat_90",
@@ -794,8 +569,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h42\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h42\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 45.9 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0093208 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0033455 sec)\n\n\tSolve time ...................... : 0:00:00 (0.376633 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0045908 sec)\n\n\t   serialization ................ : 0:00:00 (0.0236593 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0029731 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0249341 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0116017 sec)\n\n\t   model update ................. : 0:00:00 (0.0178319 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009307 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.285978 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.395386 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.7
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h42\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h42\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.1 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0111131 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0039497 sec)\n\n\tSolve time ...................... : 0:00:00 (0.396231 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0049243 sec)\n\n\t   serialization ................ : 0:00:00 (0.0219171 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.003441 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0242947 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0147082 sec)\n\n\t   model update ................. : 0:00:00 (0.0245871 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009918 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.297705 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.417944 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.8
     },
     {
       "variant": "A2_axial_lat_90",
@@ -811,7 +586,7 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h43\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h43\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.4 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.01149 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0036645 sec)\n\n\tSolve time ...................... : 0:00:00 (0.375077 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0074964 sec)\n\n\t   serialization ................ : 0:00:00 (0.022941 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0031907 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0214412 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0138637 sec)\n\n\t   model update ................. : 0:00:00 (0.0209996 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009927 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.283195 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.399416 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h43\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h43\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0093865 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0033277 sec)\n\n\tSolve time ...................... : 0:00:00 (0.38964 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0043984 sec)\n\n\t   serialization ................ : 0:00:00 (0.0249976 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0032593 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0261705 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0154455 sec)\n\n\t   model update ................. : 0:00:00 (0.0249978 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010022 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.285073 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.408909 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
       "seconds": 0.7
     },
     {
@@ -828,8 +603,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h44\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h44\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0116221 sec)\n\n\tInitialization time ............. : 0:00:00 (0.004443 sec)\n\n\tSolve time ...................... : 0:00:00 (0.407421 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0052693 sec)\n\n\t   serialization ................ : 0:00:00 (0.0227188 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0037083 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0245026 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0200773 sec)\n\n\t   model update ................. : 0:00:00 (0.0215573 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009718 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.305377 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.431956 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.8
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h44\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h44\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0099875 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0034054 sec)\n\n\tSolve time ...................... : 0:00:00 (0.364214 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0042065 sec)\n\n\t   serialization ................ : 0:00:00 (0.0205368 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0031909 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0229478 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0126496 sec)\n\n\t   model update ................. : 0:00:00 (0.0204781 sec)\n\n\t   QN updates ................... : 0:00:00 (0.000925 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.275391 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.383771 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.7
     },
     {
       "variant": "A2_axial_lat_90",
@@ -845,8 +620,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h45\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h45\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0112083 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0041227 sec)\n\n\tSolve time ...................... : 0:00:00 (0.419934 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0097897 sec)\n\n\t   serialization ................ : 0:00:00 (0.0221205 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035486 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0221016 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0313665 sec)\n\n\t   model update ................. : 0:00:00 (0.0314296 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010174 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.298299 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.446393 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.7
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h45\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h45\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 47.1 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0118445 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0054383 sec)\n\n\tSolve time ...................... : 0:00:00 (0.397062 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0069085 sec)\n\n\t   serialization ................ : 0:00:00 (0.020155 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035398 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0216941 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.025305 sec)\n\n\t   model update ................. : 0:00:00 (0.0190845 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009288 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.297669 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.42417 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.8
     },
     {
       "variant": "A2_axial_lat_90",
@@ -862,8 +637,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h46\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h46\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0114017 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0059683 sec)\n\n\tSolve time ...................... : 0:00:00 (0.392236 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0095655 sec)\n\n\t   serialization ................ : 0:00:00 (0.0225775 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0037207 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0258273 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0157327 sec)\n\n\t   model update ................. : 0:00:00 (0.0244788 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010042 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.290632 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.421929 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.8
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h46\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h46\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.3 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0112085 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0033934 sec)\n\n\tSolve time ...................... : 0:00:00 (0.380596 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.004804 sec)\n\n\t   serialization ................ : 0:00:00 (0.0215603 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0031459 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0242653 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0151064 sec)\n\n\t   model update ................. : 0:00:00 (0.0232895 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009998 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.283237 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.401109 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.7
     },
     {
       "variant": "A2_axial_lat_90",
@@ -879,8 +654,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h47\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h47\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0125695 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0044795 sec)\n\n\tSolve time ...................... : 0:00:00 (0.377739 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0080937 sec)\n\n\t   serialization ................ : 0:00:00 (0.0250457 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034382 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.023642 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.012485 sec)\n\n\t   model update ................. : 0:00:00 (0.0213824 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009834 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.282094 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.404657 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.7
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h47\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h47\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0134969 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0043799 sec)\n\n\tSolve time ...................... : 0:00:00 (0.415856 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0052556 sec)\n\n\t   serialization ................ : 0:00:00 (0.0284764 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033216 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0272882 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0155551 sec)\n\n\t   model update ................. : 0:00:00 (0.0391333 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010438 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.292262 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.441136 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.8
     },
     {
       "variant": "A2_axial_lat_90",
@@ -896,8 +671,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h48\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h48\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 47.0 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0116415 sec)\n\n\tInitialization time ............. : 0:00:00 (0.003801 sec)\n\n\tSolve time ...................... : 0:00:00 (0.416632 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0084573 sec)\n\n\t   serialization ................ : 0:00:00 (0.0233551 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0035164 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0234112 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0144287 sec)\n\n\t   model update ................. : 0:00:00 (0.0504303 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010207 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.291832 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.442512 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.8
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h48\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h48\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.6 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0108444 sec)\n\n\tInitialization time ............. : 0:00:00 (0.005125 sec)\n\n\tSolve time ...................... : 0:00:00 (0.398893 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0065051 sec)\n\n\t   serialization ................ : 0:00:00 (0.019194 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033016 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0241142 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0185908 sec)\n\n\t   model update ................. : 0:00:00 (0.0184881 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009059 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.305806 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.423423 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.7
     },
     {
       "variant": "A2_axial_lat_90",
@@ -913,8 +688,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h49\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h49\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.2 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0102507 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0038527 sec)\n\n\tSolve time ...................... : 0:00:00 (0.40832 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0076834 sec)\n\n\t   serialization ................ : 0:00:00 (0.0212245 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0034668 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0221775 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0181799 sec)\n\n\t   model update ................. : 0:00:00 (0.0194416 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009456 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.31429 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.431984 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.7
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h49\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h49\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.1 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.032283 sec)\n\n\tInitialization time ............. : 0:00:00 (0.004169 sec)\n\n\tSolve time ...................... : 0:00:00 (0.386461 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0050929 sec)\n\n\t   serialization ................ : 0:00:00 (0.0236063 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0039244 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0233215 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0153621 sec)\n\n\t   model update ................. : 0:00:00 (0.0232071 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010138 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.287378 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.430898 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.9
     },
     {
       "variant": "A2_axial_lat_90",
@@ -930,8 +705,8 @@
         ]
       ],
       "converged": false,
-      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h50\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h50\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.5 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0109762 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0061325 sec)\n\n\tSolve time ...................... : 0:00:00 (0.38022 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0060034 sec)\n\n\t   serialization ................ : 0:00:00 (0.0240995 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033193 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.0232103 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0144704 sec)\n\n\t   model update ................. : 0:00:00 (0.0204735 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0009047 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.285431 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.405733 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
-      "seconds": 0.8
+      "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h50\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fe_bc_stab\\T6\\A2_axial_lat_90_h50\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 24\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 46.8 MB\n\n Elapsed time : 0:00:00\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0117706 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0057232 sec)\n\n\tSolve time ...................... : 0:00:00 (0.405245 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.007466 sec)\n\n\t   serialization ................ : 0:00:00 (0.0235466 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0033627 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.025938 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0145992 sec)\n\n\t   model update ................. : 0:00:00 (0.0228892 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0010439 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.305121 sec)\n\n\tTotal elapsed time .............. : 0:00:00 (0.43294 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "seconds": 0.7
     }
   ]
 }
