@@ -12,6 +12,7 @@
 """
 from __future__ import annotations
 
+import argparse
 import pathlib
 import sys
 
@@ -21,20 +22,33 @@ sys.path.insert(0, str(ROOT / "src"))
 
 import g9_fibula_fe_support as g9  # noqa: E402
 
-# ★ 纯增量：保留 G9 原两档 + 追加 M1 定案档（不是替换）
-NEW_SHARES = [("share_0.100", 0.10), ("share_0.2241", 0.2241)]
+# ★ 纯增量：保留 G9 原两档 + 追加待测档（不是替换）
+BASE = [("share_0.100", 0.10)]
+
+
+def key_of(s: float) -> str:
+    return f"share_{s:.4f}"
 
 
 def main() -> int:
-    print("原 G9.SHARES =", g9.SHARES)
-    g9.SHARES = NEW_SHARES
-    print("本件 SHARES  =", g9.SHARES, "（0.10 保留作同条件复现检查）")
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--shares", default="0.2241",
+                    help="逗号分隔的待测 share（均追加到 0.10 基准之后）")
+    ap.add_argument("--bands", default="long95")
+    ap.add_argument("--suffix", default="_share02241")
+    a = ap.parse_args()
+
+    shares = [float(x) for x in a.shares.split(",") if x.strip()]
+    g9.SHARES = BASE + [(key_of(s), s) for s in shares]
+
+    print("原 G9.SHARES =", [("share_0.050", 0.05), ("share_0.100", 0.10)])
+    print("本件 SHARES  =", g9.SHARES, "（0.10 保留作基准/复现检查）")
     print("BAND_LONG95  =", g9.BAND_LONG95)
     print(f"LIN_TOL = {g9.LIN_TOL}；FIBULA_WINDOW = {g9.FIBULA_WINDOW}\n")
     rc = g9.main([
-        "--bands", "long95",
-        "--primary-band", "long95",
-        "--out-suffix", "_share02241",
+        "--bands", a.bands,
+        "--primary-band", a.bands.split(",")[0].strip(),
+        "--out-suffix", a.suffix,
     ])
     print(f"\ng9.main rc={rc}")
     return rc
