@@ -1,0 +1,152 @@
+{
+  "piece": "I' · 侧向支撑行(long95)上的腓骨分担比轴（零 FE；G3 零改动）",
+  "sigma_source": "g9_fibula_fe_support_d1a2.json :: combos.share_0.100__long95.sigma_h_median_mpa ÷ 0.10（线性自检 ratio_median=2.106）",
+  "extrapolation": "σ(h;s) = [σ_long95(h;0.10)/0.10]·s",
+  "self_consistency_0p05_vs_0p10": {
+    "rel_median_pct": 5.092524789638085,
+    "rel_max_pct": 5.0925247896381
+  },
+  "control_gate": {
+    "pass": false,
+    "detail": [
+      {
+        "share": 0.05,
+        "g9_status": "all_zero",
+        "my_status": "ok",
+        "status_match": false,
+        "my_or_mean": 2346.9869440835614,
+        "g9_or_at_0p10": 1.13,
+        "my_or_at_0p10": null
+      },
+      {
+        "share": 0.1,
+        "g9_status": "ok",
+        "my_status": "ok",
+        "status_match": true,
+        "my_or_mean": 1.1229306082674106,
+        "g9_or_at_0p10": 1.13,
+        "my_or_at_0p10": null
+      }
+    ]
+  },
+  "target_or": 1.682,
+  "window": [
+    1.1773999999999998,
+    2.1866
+  ],
+  "cov": {
+    "b": 0.15,
+    "e": 0.1,
+    "a": 0.15
+  },
+  "n_subj": 400,
+  "seeds": [
+    20261003,
+    20261004,
+    20261005
+  ],
+  "share_axis": [
+    {
+      "share": 0.05,
+      "prov": "G8 主 / G9 D2 主（G9 已解，作为正对照）",
+      "or_per_seed": [
+        7038.557536526438,
+        1.1811469742609917,
+        1.2221487499855948
+      ],
+      "status_per_seed": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "or_mean": 2346.9869440835614,
+      "in_window": false,
+      "is_control": true
+    },
+    {
+      "share": 0.1,
+      "prov": "G8 F5 / G9 D2 敏感（G9 已解，作为正对照）",
+      "or_per_seed": [
+        1.1294885372783408,
+        1.1219237019881967,
+        1.117379585535694
+      ],
+      "status_per_seed": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "or_mean": 1.1229306082674106,
+      "in_window": false,
+      "is_control": true
+    },
+    {
+      "share": 0.2241,
+      "prov": "★M1 定案闭式（G9 §15）",
+      "or_per_seed": [
+        1.2785685321101439,
+        1.2919376238220344,
+        1.2398097519662394
+      ],
+      "status_per_seed": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "or_mean": 1.270105302632806,
+      "in_window": true,
+      "is_control": false
+    },
+    {
+      "share": 0.3,
+      "prov": "G9 §15 通过区间上沿",
+      "or_per_seed": [
+        1.4774393544344118,
+        1.496263831421501,
+        1.4030346339180257
+      ],
+      "status_per_seed": [
+        "ok",
+        "ok",
+        "ok"
+      ],
+      "or_mean": 1.458912606591313,
+      "in_window": true,
+      "is_control": false
+    }
+  ],
+  "a2_deterministic_behav": [
+    {
+      "share": 0.05,
+      "a2_behav": "常值",
+      "a2_status": "all_zero",
+      "n_frac": 0
+    },
+    {
+      "share": 0.1,
+      "a2_behav": "阶跃",
+      "a2_status": "complete_separation",
+      "n_frac": 8
+    },
+    {
+      "share": 0.2241,
+      "a2_behav": "阶跃",
+      "a2_status": "complete_separation",
+      "n_frac": 39
+    },
+    {
+      "share": 0.3,
+      "a2_behav": "阶跃",
+      "a2_status": "complete_separation",
+      "n_frac": 43
+    }
+  ],
+  "g9_report_json": "g9_fibula_fe_support_d1a2.json",
+  "g9_szz_json": "g9_fibula_fe_support_d1a2_szz.json",
+  "szz_rows_available": [
+    "share_0.050__long95",
+    "share_0.100__long95",
+    "share_0.050__long95__szz",
+    "share_0.100__long95__szz"
+  ]
+}
