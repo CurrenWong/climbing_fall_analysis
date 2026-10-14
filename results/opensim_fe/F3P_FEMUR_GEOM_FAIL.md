@@ -4,6 +4,12 @@
 > **产物**：`results/opensim_fe/F3P_FEMUR_GEOM_PREDICTION.json`
 > **几何源**：`temp/opensim_fe/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5`（已对齐）
 
+> **▶ 更新（2026-10-14）**：本件的两处根因已实证定位并修正 ——
+> ① `signed_volumes` 用非共享对角线 TETS 且**额外 ÷6**；② h5 `domains` 的 **0-based 行号**被当 1-based（`-1` 错行）。
+> **修正执行件**：`F3D_FEMUR_W_MEASURE.md` / `.json` —— `R=17.27/W=3302` 过窗、
+> `A=398.4` 差窗下缘 0.5%（与 G6 锚 500 同量级 0.79×）；用修正量级预测 **阶跃 h≈12 m**（formal_delivery=False）。
+> 本件 §0–§5 的数值（`A=5622.8` / `R=58.35` / `W=120918` / `e=17.24`）**保持作废**，不得引用。
+
 ---
 
 ## 0. 结论（一句话）
