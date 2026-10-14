@@ -1,0 +1,85 @@
+{
+  "must_rerun": [
+    "tibia_r",
+    "fibula_r",
+    "femur_r",
+    "T6",
+    "parietal_r"
+  ],
+  "can_keep_frozen": [
+    "calcaneus_r",
+    "R_HIPBONE",
+    "L3",
+    "C5"
+  ],
+  "new_data_available": {
+    "femur_r": "50/50 stabilized per-height",
+    "T6": "12/50 stabilized per-height"
+  },
+  "current_per_part": [
+    {
+      "cn": "足部",
+      "bone": "calcaneus_r",
+      "behav": "阶跃",
+      "target": "阶跃",
+      "hit": true
+    },
+    {
+      "cn": "胫骨",
+      "bone": "tibia_r",
+      "behav": "阶跃",
+      "target": "阶跃",
+      "hit": true
+    },
+    {
+      "cn": "腓骨",
+      "bone": "fibula_r",
+      "behav": "常值",
+      "target": "渐进",
+      "hit": false
+    },
+    {
+      "cn": "股骨",
+      "bone": "femur_r",
+      "behav": "常值",
+      "target": "阶跃",
+      "hit": false
+    },
+    {
+      "cn": "骨盆",
+      "bone": "R_HIPBONE",
+      "behav": "常值",
+      "target": "渐进",
+      "hit": false
+    },
+    {
+      "cn": "腰椎",
+      "bone": "L3",
+      "behav": "阶跃",
+      "target": "阶跃",
+      "hit": true
+    },
+    {
+      "cn": "胸椎",
+      "bone": "T6",
+      "behav": "常值",
+      "target": "阶跃",
+      "hit": false
+    },
+    {
+      "cn": "颈椎",
+      "bone": "C5",
+      "behav": "阶跃",
+      "target": "阶跃",
+      "hit": true
+    },
+    {
+      "cn": "颅骨",
+      "bone": "parietal_r",
+      "behav": "阶跃",
+      "target": "渐进",
+      "hit": false
+    }
+  ],
+  "note": "口径一致重算需先把 must_rerun 的 5 骨在新 BC 族下跑完"
+}
