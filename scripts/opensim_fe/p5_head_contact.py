@@ -275,9 +275,26 @@ def _inject_plate_contact(text: str, pg: dict, geom: dict, *,
         r'(<nodal_load type="nodal_force" node_set="top_load">.*?<value)(>)([^<]*</value>)',
         r'\1 lc="2"\2\3', text, count=1, flags=re.S)
 
-    # g. reaction var
+    # g. reaction var + 原生 contact force 输出（P5 能力判据的观测量，2026-10-14）
     text = p1b.add_reaction_var(text)
+    text = _add_contact_force_var(text)
     return text
+
+
+def _add_contact_force_var(text: str) -> str:
+    """在 <Output> 段追加 ``<var type="contact force"/>``（FEBio 4.13 原生支持）。
+
+    没有它，`_load_bear_stats` 无从读取接触承载量 —— 已验证：加了才有
+    ``states/{sid}/surface_data/contact force``。
+    """
+    if '<var type="contact force"/>' in text:
+        return text
+    new, n = re.subn(r'([ \t]*)<var type="reaction forces"/>',
+                     r'\1<var type="reaction forces"/>\n\1<var type="contact force"/>',
+                     text, count=1)
+    if n != 1:
+        raise ValueError("未找到 <var type=\"reaction forces\"/>，contact force 注入失败")
+    return new
 
 
 def _anchor_xy_patch(text: str) -> str:
@@ -296,29 +313,46 @@ def _anchor_xy_patch(text: str) -> str:
 def _load_bear_stats(h5: Path, load_n: float) -> dict:
     """接触承载验证 + 横向滑移哨兵（单次开文件）。
 
-    R_z_total = 全部节点 reaction z 求和（静态平衡 ≈ -load_n，头端载荷 +z）
-    R_z_anchor = bottom_fix nodeset 节点 reaction z 求和（锚点只约束横向 ⇒ ≈0）
-    R_z_contact = R_z_total - R_z_anchor（接触承载的轴向反力，应 ≈ -load_n）
-    判定口径：|R_z_contact|/load_n ≈ 1（接触确实承载轴向）+ anchor_share ≈ 0。
+    **2026-10-14 观测量修复**：原口径用 node_data 的 ``reaction`` 求和，
+    但该变量是**逐节点内力**（全域求和按构造 telescoping 恒为 0，平衡要求
+    -load_n 而实测 -0.000），并且 `lat_support_0`(z_dof=0，物理不可能承轴向)
+    竟报 -18226 N 与 BC 直接冲突 ⇒ 口径结构性失效，无法作判据。
+
+    **修复**：改用 FEBio **原生 contact force 输出**
+    （`<var type="contact force"/>` → ``states/{sid}/surface_data/contact force``）。
+
+    ⚠️ 读法要点：`bone_top` 与 `plate_bottom` 是同一对接触的两个面，值互为相反数
+    （牛顿第三定律），**两面相加恒为 0** —— 只可取**单面**值。本函数取
+    `bone_top`（骨侧感受的力，方向 -z，与 +z 载荷反向）。
+
+    判定口径：|R_z_contact|/load_n ≈ 1（接触确实承载轴向）。
     """
     import h5py
     with h5py.File(h5, "r") as h:
         sid = sorted(h["states"].keys(), key=int)[-1]
-        nd = h[f"states/{sid}/node_data"]
-        r = gs._node_var(nd, "reaction")
-        dis = gs._node_var(nd, "displacement")
-        idx_a = np.asarray(h["meshes/0/nodesets/bottom_fix"]).reshape(-1).astype(int)
-    r_z = r[:, 2]
-    r_z_total = float(r_z.sum())
-    r_z_anchor = float(r_z[idx_a].sum())
-    r_z_contact = r_z_total - r_z_anchor
+        sd = h[f"states/{sid}"]
+        dis = np.asarray(sd["node_data/displacement/femur_r_nodes"], dtype=float)
+        if "surface_data" not in sd or "contact force" not in sd["surface_data"]:
+            raise KeyError(
+                f"h5 无原生 contact force 输出（states/{sid}/surface_data/contact force）"
+                " —— .feb 的 <Output> 段必须含 <var type=\"contact force\"/>；"
+                "旧 xplt/h5 需重跑求解")
+        cf = sd["surface_data/contact force"]
+        # 单面读取：bone_top（骨侧）。两面相加恒 0，不可相加。
+        f_bone = np.asarray(cf["bone_top"], dtype=float).sum(axis=0)
+        f_plate = np.asarray(cf["plate_bottom"], dtype=float).sum(axis=0)
+
+    r_z_contact = float(f_bone[2])
+    # 牛顿第三定律自检：两面应互为反号（|sum| ≈ 0）
+    n3_selfcheck = float(np.abs(f_bone + f_plate).max())
     out = {
-        "R_z_total_n": r_z_total,
-        "R_z_anchor_n": r_z_anchor,
         "R_z_contact_n": r_z_contact,
-        "R_axis_check": abs(abs(r_z_total) - load_n) / load_n,
-        "anchor_share": abs(r_z_anchor) / (abs(r_z_total) + 1e-9),
+        "contact_f_bone_n": [float(x) for x in f_bone],
+        "contact_f_plate_n": [float(x) for x in f_plate],
+        "contact_newton3_resid_n": n3_selfcheck,
+        "R_axis_check": abs(abs(r_z_contact) - load_n) / load_n,
         "dis_xy_max_mm": float(np.sqrt(dis[:, 0] ** 2 + dis[:, 1] ** 2).max()),
+        "dis_z_max_mm": float(np.abs(dis[:, 2]).max()),
     }
     return out
 
@@ -387,12 +421,13 @@ def judge(rows: list[dict], p4a_dis50: float | None) -> tuple[str, str, str]:
                                  f"= {ratio:.1f}× P4-a' h50（{p4a_dis50:.3f}mm）剧增")
         if hc.get("dis_xy_max_mm") and hc["dis_xy_max_mm"] > 5.0:
             sentinels.append(f"{vname}: h={hmax_c} 横向滑移 {hc['dis_xy_max_mm']:.3f}mm > 5mm")
-        if hc.get("anchor_share", 0.0) > 0.20:
-            sentinels.append(f"{vname}: h={hmax_c} 锚点吸收轴向 {hc['anchor_share']*100:.0f}% "
-                             "（接触未独立承载）")
+        # 接触两面牛顿第三定律自检（取代已失效的 anchor_share 口径，2026-10-14）
+        if hc.get("contact_newton3_resid_n", 0.0) > 1.0:
+            sentinels.append(f"{vname}: h={hmax_c} 接触两面向量和残差 "
+                             f"{hc['contact_newton3_resid_n']:.2f}N > 1N（接触力读数不自洽）")
     sentinel = "；".join(sentinels) if sentinels else ""
 
-    # 能力主判据：候选变体在最高收敛高度 收敛 + 接触承载轴向（R_contact≈load_n, 锚点 z≈0）
+    # 能力主判据：候选变体在最高收敛高度 收敛 + 接触承载轴向（|R_z_contact|≈load_n）
     proven = []
     for vname in ("p5_anchor", "p5_pen", "p5_fric"):
         conv = [r for r in rows if r["case"] == vname and r.get("converged")
@@ -407,11 +442,12 @@ def judge(rows: list[dict], p4a_dis50: float | None) -> tuple[str, str, str]:
     if proven:
         vname, hmax_c, hc = proven[0]
         verdict = (f"能力成立（主判据）：{vname} 在 h={hmax_c} 收敛，接触承载轴向 "
-                   f"R_z_contact={hc['R_z_contact_n']:.0f}N vs load_n={hc['load_n']:.0f}N "
-                   f"（锚点 z 占比 {hc['anchor_share']*100:.1f}%）"
+                   f"R_z_contact={hc['R_z_contact_n']:.1f}N vs load_n={hc['load_n']:.1f}N"
+                   f"（相对偏差 {hc['R_axis_check']*100:.2f}%）"
                    f"⇒ 髁端接触承压可替代位移固定带承载轴向")
-        attribution = ("法向接触（fric=0）在 h_max_c 提供 |R_contact|≈load_n 的反力且锚点 z 反力≈0："
-                       "轴向力 100% 走接触，未扩散到残余位移约束")
+        attribution = ("法向接触（fric=0）在 h_max_c 提供 |R_contact|≈load_n 的接触力："
+                       "轴向力全部走接触；该量取自 FEBio 原生 contact force 输出"
+                       "（bone_top 单面，两面为作用力/反作用力不可相加）")
     else:
         verdict = ("能力不成立（主判据）：p5_anchor / p5_pen / p5_fric 均未在最高收敛高度实现 "
                    "|R_z_contact|≈load_n（接触未独立承载轴向）")
@@ -494,8 +530,8 @@ def main() -> int:
                   f"{'OK ' if rec.get('converged') else 'FAIL'} "
                   + (f"shaft={rec['shaft_stat_mpa']:8.2f} szzmax={rec.get('szz_max_mpa', float('nan')):7.1f} "
                      f"r2={rec.get('r2_linear', float('nan')):.3f} "
-                     f"Rz={rec.get('R_z_total_n', float('nan')):9.1f} "
-                     f"anchor={rec.get('anchor_share', float('nan')):.2f} "
+                     f"Rz={rec.get('R_z_contact_n', float('nan')):9.1f} "
+                     f"err={rec.get('R_axis_check', float('nan'))*100:5.2f}% "
                      f"xy={rec.get('dis_xy_max_mm')} dz={rec.get('dis_z_max_mm')} "
                      f"[{rec.get('seconds')}s]"
                      if "shaft_stat_mpa" in rec else f"({rec.get('error', '')[:70]})"),
