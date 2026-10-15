@@ -22,6 +22,17 @@ from pathlib import Path
 
 import numpy as np
 
+# --- 缺陷兜底（2026-10-16，见 ``xplt_shim``） ---------------------------
+# 含接触的 deck（如 ``plantar_bc="contact"``）里 FEBio 会多写一个**无名域**
+# （实测：``id=4, etype=5, nelems=573``）⇒ ``pyfebio.xplt.parse_mesh`` 抛
+# ``KeyError: 'name'``（该函数的 nodeset 分支有空名兜底、**domain 分支没有**）
+# ⇒ ``to_hdf5`` 只写出 ``meshes``、无 ``states`` ⇒ 本模块全部入口失效。
+# 兜底放在**模块级**（幂等），确保任何 ``to_hdf5`` 调用点都被覆盖；
+# 默认 ``plantar_bc="fixed"`` 的 deck 无无名域 ⇒ **行为逐位不变**。
+from .xplt_shim import patch_unnamed_domains as _patch_unnamed_domains
+
+_patch_unnamed_domains()
+
 __all__ = [
     "peak_von_mises",
     "run_and_peak",

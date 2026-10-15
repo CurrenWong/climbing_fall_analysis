@@ -102,8 +102,13 @@ def _read_domain_vm(xplt: Path, domain: str, hdf5: Path) -> np.ndarray:
     import h5py
 
     from climbing.coupling import fe_post
+    from climbing.coupling.xplt_shim import patch_unnamed_domains
     from pyfebio import xplt as xplt_mod
 
+    # 含接触的 deck 里 FEBio 会多写一个**无名域** ⇒ pyfebio 的 parse_mesh 抛
+    # KeyError('name')（其 nodeset 分支有空名兜底、domain 分支没有）。默认
+    # ``plantar_bc="fixed"`` 无无名域，故此处补丁对默认路径**无影响**。
+    patch_unnamed_domains()
     if not Path(hdf5).is_file():
         xplt_mod.to_hdf5(str(xplt), str(hdf5))
     with h5py.File(hdf5, "r") as h5:
@@ -122,11 +127,20 @@ def _solve_case(
     gauge_mm: float,
     workdir: Path,
     plantar_bc: str = "fixed",
+    contact_gap_mm: float | None = None,
+    contact_hold_spring_k: float | None = None,
+    contact_swap_pair: bool = False,
 ) -> dict:
     """Build -> solve -> post one ``(h, a)`` case; returns the CSV/JSON row.
 
     ``f_sub``/``t1`` come from ``_load_at(h)`` (once per height, shared by all
     activations) — exactly the loop shape of ``s3_achilles_sweep.py``.
+
+    ``contact_hold_spring_k``（**2026-10-16 新增**）：跖面接触是单边约束，gap 未
+    闭合前骨无切向支撑 ⇒ 欠约束（FEBio 手册 §8.1.3 / §8.3.1.5）⇒ 负 Jacobian。
+    ``plantar_bc.py`` 自带弱 hold 弹簧开关（默认 ``None``＝关）。**实测 k≥10 N/mm
+    即收敛，且 k∈[10,1000] 时 σ 只动 0.3% ⇒ 该弹簧不承载、纯消刚体模态**
+    （见 ``results/opensim_fe/PLANTAR_CONTACT_FIX_20261016.md``）。
     """
     from climbing.coupling import fe_post
     from climbing.coupling.febio_run import run_febio
@@ -141,8 +155,16 @@ def _solve_case(
         if stale.exists():
             stale.unlink()
 
-    # 默认路径逐位不变：只有非 "fixed" 时才把 plantar_bc 传进 builder。
-    _extra = {} if plantar_bc == "fixed" else {"plantar_bc": plantar_bc}
+    # 默认路径逐位不变：只有非 "fixed" 时才把 plantar_bc 传进 builder；
+    # 接触参数也只在显式给出时才追加。
+    _extra: dict = {} if plantar_bc == "fixed" else {"plantar_bc": plantar_bc}
+    if plantar_bc != "fixed":
+        if contact_gap_mm is not None:
+            _extra["contact_gap_mm"] = float(contact_gap_mm)
+        if contact_hold_spring_k is not None:
+            _extra["contact_hold_spring_k"] = float(contact_hold_spring_k)
+        if contact_swap_pair:
+            _extra["contact_swap_pair"] = True
     T.build_thums_feb(
         mesh,
         feb,
@@ -198,6 +220,10 @@ def _solve_case(
     }
     if plantar_bc != "fixed":      # 默认路径 JSON 逐位不变
         row["plantar_bc"] = str(plantar_bc)
+        if plantar_bc == "contact":
+            row["contact_hold_spring_k"] = contact_hold_spring_k
+            row["contact_gap_mm"] = contact_gap_mm
+            row["contact_swap_pair"] = bool(contact_swap_pair)
     return row
 
 
@@ -435,6 +461,14 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--plantar-bc", type=str, default="fixed",
                     choices=("fixed", "roller", "roller_free", "spring", "contact"),
                     help="跖面 BC（默认 fixed = 现状口径；contact = 真实接触）")
+    ap.add_argument("--contact-hold-spring-k", type=float, default=None,
+                    help="仅 --plantar-bc contact：弱 hold 弹簧 k (N/mm)，消 gap 未闭合"
+                         "前的刚体模态（手册 §8.1.3/§8.3.1.5）。实测 ≥10 才收敛，"
+                         "且 [10,1000] 内 σ 只动 0.3%%（不承载）")
+    ap.add_argument("--contact-gap-mm", type=float, default=None,
+                    help="仅 contact：对偶面初始间隙（默认 0.5 mm）")
+    ap.add_argument("--contact-swap-pair", action="store_true",
+                    help="仅 contact：交换 primary/secondary")
     ap.add_argument("--tag", type=str, default="",
                     help="输出文件名后缀（如 _anat），保持旧输出不变；默认空 = 旧行为")
     args = ap.parse_args(argv)
@@ -472,7 +506,10 @@ def main(argv: list[str] | None = None) -> int:
         for a in acts:
             row = _solve_case(
                 mesh, cort_centroids, cort_vol, h, a, f_sub, t1, args.gauge_mm, workdir,
-                args.plantar_bc
+                args.plantar_bc,
+                contact_gap_mm=args.contact_gap_mm,
+                contact_hold_spring_k=args.contact_hold_spring_k,
+                contact_swap_pair=bool(args.contact_swap_pair),
             )
             rows.append(row)
             n_solves += 1
