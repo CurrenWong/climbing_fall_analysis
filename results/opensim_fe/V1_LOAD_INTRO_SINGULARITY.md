@@ -118,37 +118,58 @@
 
 ---
 
-## §6 · S5 实施进展（`joint_bc="contact"`）—— **已实现并跑通，但未验收**
+## §6 · S5/S7 实施进展 —— **接触跑通了；但结果证伪了本件的修复假设（H3）**
 
-**代码**：新增 `src/climbing/coupling/joint_contact.py`（`_build_talus_cap` /
-`_apply_cap_hold_spring` / `apply_joint_contact`）；`thums_feb.build_thums_feb` 新增
-opt-in kwarg `joint_bc="contact"`（**默认 `"pressure"` ⇒ deck 逐位不变**）、
-`joint_contact_mu` / `joint_contact_gap_mm` / `joint_cap_ndiv` / `joint_cap_hold_k`；
-新增 `_build_thums_joint_quads`（距下关节 quad4 facet 重建）。
+**代码**：新增 `src/climbing/coupling/joint_contact.py`（`_nodal_normals` /
+`_build_conforming_cap` / `_build_talus_cap`(平面) / `_apply_cap_hold_spring` /
+`apply_joint_contact`）；`thums_feb.build_thums_feb` 新增 opt-in kwarg
+`joint_bc="contact"`（**默认 `"pressure"` ⇒ deck 逐位不变**）、`joint_contact_mu` /
+`joint_contact_gap_mm` / `joint_cap_ndiv` / `joint_cap_hold_k`；
+新增 `_build_thums_joint_quads`（距下关节 quad4 facet 重建，**119 quad / 2496.3 mm²**，
+与 `registration_anat.json` 的 2495.33 mm² 吻合）。
 
-**修掉的 4 个真 bug**（每一个都使求解失败或结果无效）
+**修掉的 5 个真 bug**（每个都使求解失败或结果无效）
 
 | # | 现象 | 根因 | 修法 |
 |---|---|---|---|
 | 1 | `A surface with name "subtalar_joint" was already defined` | builder 已建过同名 Surface | `create_bone_surface=False` 复用 |
-| 2 | 初始化 `Negative jacobian` | 帽 hex8 节点序把 y 小的一侧放前 4 位（镜像） | 改与前 4 = y 大的一侧（同 `_build_pad_floor`） |
-| 3 | 求解中 16 个单元负 Jacobian | 帽底 quad 法向算成 **+Y（朝内）** | 反序 ⇒ 叉积得 −Y（朝骨） |
-| 4 | **BC 静默丢失**（帽 150 dof 全自由 ⇒ 位移 1e13、弹簧无效） | `st.boundary = fbc.Boundary(all_bcs=bcs)` 在 `apply_joint_contact(..., bcs)` **之前**执行 | 把 joint 分支移到 `st.boundary` 绑定**之前** |
+| 2 | 初始化 `Negative jacobian` | 帽 hex8 节点序镜像 | 前 4 = y 大的一侧（同 `_build_pad_floor`） |
+| 3 | 求解中单元负 Jacobian | 帽底 quad 法向算成 **+Y（朝内）** | 反序 ⇒ −Y（朝骨） |
+| 4 | **BC 静默丢失**（帽 150 dof 全自由 ⇒ 位移 1e13） | `st.boundary = fbc.Boundary(all_bcs=bcs)` 在 `apply_joint_contact(..., bcs)` **之前** | joint 分支移到绑定**之前** |
+| 5 | **接触"传力 ~0"**（σ_max 0.46–9.0 MPa） | **`hold_k` 太大**：平面帽 50×100=5000、共形帽 296×100=**29600 N/mm**，比骨侧接触路径更硬 ⇒ 帽坐在弹簧上、没压到骨 | 降到 **k=0.01 N/mm/节点**（总 ~3 N/mm，可忽略） |
 
-**当前状态（未验收）**
+> 第 5 条是**本轮最强的一条**：它同时解释了我先前的「平面/共形」误判 —— 几何换对了
+> （`A_cap` 2493.9 vs 真值 2496.3 mm²）σ 仍 ≈0，因为**载荷被弹簧吃掉了**。
 
-* ✅ 修正后 **y/μ/two_pass/gap 各组合全部收敛**（不再奇异）
-* ❌ **接触只传 ~5% 的载荷**：`joint_bc="contact"` 下 σ_max = **4.7–9.0 MPa**，
-  而 `joint_bc="pressure"`（anatframe + fixed）为 **185.64 MPa**
-* **根因（已定位）**：`_build_thums_joint_quads` 给出的关节面**纵向跨 34.0 mm**
-  （y ∈ [−20.421, 13.457]，与 `registration_anat.json` 的 `superior_extent` 逐位一致）
-  ⇒ 面是**凹的**，而帽底是**一张平面** ⇒ **只有一个最高点接触** ⇒ 无有效载荷路径
-* **正解（下一步）**：帽底**沿各 facet 节点法向偏移**（共形帽），而非取 `y.max()` 平面
-* **零回归已验**：`pytest -k "thums or plantar or contact or bone_feb or joint"`
-  ⇒ **76 passed / 2 skipped**；`j0_pressure` 复现 185.64 MPa 逐位不变
+**结果（h=2 m，anatframe，F_sub = 22723.6 N，同一网格/材料/后处理）**
 
-**⇒ 判据 H1/H2/H3 尚未裁定**：`SC` 之所以是 0.5–0.99 而非 2–5，是**载荷没进去**的
-伪低值，**不得用作证据**。本件 §3 的奇异诊断（不依赖 S5）仍然成立。
+| 载荷路径 | `σ_max` (MPa) | `p_avg` (MPa) | **SC** | vs pressure |
+|---|---|---|---|---|
+| `joint_bc="pressure"`（现行 V1 口径） | **185.64** | 9.106 | 20.39 | 1.00 |
+| `joint_bc="contact"`（平坦帽 + hold k=100） | 4.7–9.0 | 9.106 | 0.5–1.0 | ~0.03（**弹簧偷载荷，无效**） |
+| `joint_bc="contact"`（共形帽 + hold k=100） | 0.46–1.30 | 9.106 | 0.05–0.14 | ~0.007（同上，无效） |
+| **`joint_bc="contact"`（共形帽 + hold k=0.01）** | **454.43** | 9.106 | **49.90** | **2.45** |
+
+### ⇒ **H3 触发：本件的修复假设被证伪**
+
+`§4` 预注册的 **H2**（接触路径下 `σ_max` 再降）**不成立** —— 真实接触把峰值**抬高 2.45×**。
+`§4` 的 **H1**（SC 落到 2–5）同样**不成立**（SC 升到 **49.90**）。
+
+**物理上说得通，而且方向可预期**：均匀 `PressureLoad` 把力**摊平**在整个关节面上；
+而**刚性距骨压在凹关节面上会把力集中在最高点** ⇒ **真实接触比均匀压力更狠**。
+
+**⇒ 因此**：「补片边界奇异主导 V1 首折」这一诊断**被本实验证伪**。
+`§3` 的观测（`σ_max` 不 ∝ `p_avg`）仍然成立，但它**不能**推出「换成接触就会降」。
+**高 SC 不是载荷施加方式的产物，而是「骨网格分辨率 + 刚性/曲面配偶面」的固有属性。**
+
+**⇒ 下一个归因对象（`§4` H3 已预注册）**：**皮质/松质模量比 15000/73.4 = 204× 的界面**，
+以及**接触罚刚度的网格相关放大**（`penalty=0.1`、`auto_penalty=0`、`node_reloc=0`）。
+
+**零回归已验**：`pytest -k "thums or plantar or contact or bone_feb or joint"`
+⇒ **76 passed / 2 skipped**；`j0_pressure` 复现 **185.64 MPa** 逐位不变。
+
+**⚠️ 交付边界**：上面 454.43 MPa 是在 **`hold_k=0.01` 这一窄窗口**内取得的
+（`1e-3` 不收敛、`1.0` 被弹簧偷载荷）。**窗口窄本身是未解风险**，交付时必须一并报告。
 
 ---
 

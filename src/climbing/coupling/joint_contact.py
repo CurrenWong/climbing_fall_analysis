@@ -56,6 +56,146 @@ def _local_to_fe(local) -> list[int]:
     return [int(i) + 1 for i in local]
 
 
+def _nodal_normals(nodes: np.ndarray, quads: np.ndarray) -> np.ndarray:
+    """由 quad4 集算**逐节点**面积加权法向（单位化）。
+
+    关节面是**凹面**（实测纵向跨 34 mm），平面帽只能单点接触 ⇒ 必须让帽底
+    贴合各节点法向。法向取自 quad 的右手法则（`_build_thums_joint_quads`
+    已保证朝外）。
+    """
+    n_acc = np.zeros((len(nodes), 3), dtype=np.float64)
+    for q in np.asarray(quads, dtype=np.int64):
+        p = nodes[q]
+        nv = np.cross(p[1] - p[0], p[2] - p[0])
+        for v in q:
+            n_acc[int(v)] += nv
+    norm = np.linalg.norm(n_acc, axis=1, keepdims=True)
+    norm[norm == 0.0] = 1.0
+    return n_acc / norm
+
+
+def _gid_to_xyz(model, gid: int) -> np.ndarray:
+    """按 FEBio 全局节点 id 从 model 的网格里取坐标（共形帽算面积用）。"""
+    for nd in model.mesh_.nodes[0].all_nodes:
+        if int(nd.id) == int(gid):
+            xyz = [float(x) for x in str(nd.text).split(',')]
+            return np.asarray(xyz, dtype=np.float64)
+    raise KeyError(f"节点 id {gid} 不在 model 网格中")
+
+
+def _hex8_signed_volume(p: np.ndarray) -> float:
+    """hex8 的**有符号**体积（中心点 8 个四面体之和）。负号 ⇒ 节点序需反转。"""
+    c = p.mean(axis=0)
+    faces = ((0, 1, 2, 3), (4, 5, 6, 7), (0, 1, 5, 4),
+             (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7))
+    vol = 0.0
+    for idx in faces:
+        a, b, d, e = (p[i] for i in idx)
+        for tri in ((a, b, d), (a, d, e)):
+            vol += float(np.dot(tri[0] - c, np.cross(tri[1] - c, tri[2] - c))) / 6.0
+    return vol
+
+
+def _build_conforming_cap(
+    model,
+    nodes: np.ndarray,
+    joint_quads: np.ndarray,
+    *,
+    gap_mm: float,
+    thickness_mm: float,
+    mat_id: int,
+    mat_name: str,
+    e_mpa: float,
+    nu: float,
+) -> dict:
+    """**共形**距骨帽：底面逐节点沿关节面法向偏移 ``gap_mm``，顶面再偏 ``thickness_mm``。
+
+    与平面版（`_build_talus_cap`）的区别：平面版在凹关节面上只有**一个最高点**
+    接触 ⇒ 接触只传 ~5% 载荷；共形版贴合整个面 ⇒ 接触区延展整个关节面。
+
+    每个 facet quad 生成 1 个 hex8（``bot`` 4 节点 + ``top`` 4 节点）；**节点序按
+    有符号体积自动定向**（负体积即反转），不靠人工推导。
+    """
+    from pyfebio import material as fmat
+    from pyfebio import mesh as fmesh
+    from pyfebio import meshdomains as fdom
+
+    q4 = np.asarray(joint_quads, dtype=np.int64).reshape(-1, 4)
+    nrm = _nodal_normals(nodes, q4)
+
+    used = np.unique(q4)
+    bot_id: dict[int, int] = {}
+    top_id: dict[int, int] = {}
+    node_domain = model.mesh_.nodes[0]
+    next_id = int(node_domain.all_nodes[-1].id) + 1
+    for li in used:
+        li = int(li)
+        p = np.asarray(nodes, dtype=np.float64)[li]
+        n = nrm[li]
+        for store, off in ((bot_id, float(gap_mm)),
+                           (top_id, float(gap_mm) + float(thickness_mm))):
+            q = p + off * n
+            store[li] = next_id
+            node_domain.add_node(fmesh.Node(
+                id=next_id, text=f"{q[0]:.10e},{q[1]:.10e},{q[2]:.10e}"))
+            next_id += 1
+
+    elems: list[list[int]] = []
+    bot_quads: list[list[int]] = []
+    top_quads: list[list[int]] = []
+    flipped = 0
+    for q in q4:
+        b = [bot_id[int(v)] for v in q]
+        t = [top_id[int(v)] for v in q]
+        row = b + t
+        pts = np.array([np.asarray(nodes, dtype=np.float64)[int(v)] for v in q])
+        # 定向：用 offset 后的真实节点坐标算有符号体积
+        allp = np.vstack([pts + float(gap_mm) * nrm[q],
+                          pts + (float(gap_mm) + float(thickness_mm)) * nrm[q]])
+        if _hex8_signed_volume(allp) < 0.0:
+            row = t[::-1] + b[::-1]
+            flipped += 1
+        elems.append(row)
+        # 接触面 = bot 面；法向须朝 **−n**（朝骨）⇒ 相对 hex 的 b 序反一下
+        bot_quads.append(list(reversed(b)))
+        top_quads.append(list(b))   # 顶面法向朝 +n（承载面）
+
+    elems_arr = np.asarray(elems, dtype=np.int64)
+    last_elem_id = int(model.mesh_.elements[-1].all_elements[-1].id)
+    model.mesh_.add_element_domain(
+        fmesh.numpy_to_elements(elems_arr, "hex8", name="talus_cap",
+                                offset=last_elem_id))
+    model.material_.add_material(fmat.IsotropicElastic(
+        name=mat_name, id=int(mat_id),
+        density=fmat.MaterialParameter(text=1.0e-9),
+        E=fmat.MaterialParameter(text=float(e_mpa)),
+        v=fmat.MaterialParameter(text=float(nu))))
+    model.meshdomains_.add_solid_domain(
+        fdom.SolidDomain(name="talus_cap", mat=mat_name))
+
+    cap_ids = sorted(bot_id.values()) + sorted(top_id.values())
+    model.mesh_.add_node_set(fmesh.NodeSet(
+        name="talus_cap_set", text=",".join(str(i) for i in cap_ids)))
+    bot_nodes = [(int(bot_id[int(li)]),
+                  tuple(np.asarray(nodes, dtype=np.float64)[int(li)]
+                        + float(gap_mm) * nrm[int(li)]))
+                 for li in used]
+
+    return {
+        "bot_surface": bot_quads,
+        "top_surface": top_quads,
+        "cap_set": cap_ids,
+        "bot_nodes": bot_nodes,
+        "n_elems": int(len(elems)),
+        "n_cap_nodes": int(len(cap_ids)),
+        "n_quads": int(len(q4)),
+        "n_flipped": int(flipped),
+        "gap_mm": float(gap_mm),
+        "thickness_mm": float(thickness_mm),
+        "conforming": True,
+    }
+
+
 def _build_talus_cap(
     model,
     nodes: np.ndarray,
@@ -287,13 +427,23 @@ def apply_joint_contact(
     from pyfebio import boundary as fbc
 
     joint_local = np.asarray(joint_local, dtype=np.int64)
-    cap = _build_talus_cap(
-        model, nodes, joint_local,
-        gap_mm=float(gap_mm), thickness_mm=float(cap_thickness_mm),
-        margin_mm=float(cap_margin_mm), ndiv=int(cap_ndiv),
-        mat_id=int(len(model.material_.all_materials)) + 1,
-        mat_name="talus_cap_mat", e_mpa=float(cap_e_mpa), nu=float(cap_nu),
-    )
+    # **共形帽**：给了 joint_quads 就走共形（逐节点沿法向偏移），
+    # 否则回落平面帽（合成网格 / 单域测试用）。
+    if joint_quads is not None:
+        cap = _build_conforming_cap(
+            model, nodes, joint_quads,
+            gap_mm=float(gap_mm), thickness_mm=float(cap_thickness_mm),
+            mat_id=int(len(model.material_.all_materials)) + 1,
+            mat_name="talus_cap_mat", e_mpa=float(cap_e_mpa), nu=float(cap_nu),
+        )
+    else:
+        cap = _build_talus_cap(
+            model, nodes, joint_local,
+            gap_mm=float(gap_mm), thickness_mm=float(cap_thickness_mm),
+            margin_mm=float(cap_margin_mm), ndiv=int(cap_ndiv),
+            mat_id=int(len(model.material_.all_materials)) + 1,
+            mat_name="talus_cap_mat", e_mpa=float(cap_e_mpa), nu=float(cap_nu),
+        )
 
     # --- 帽的 BC：只放开 y（上/下压），x = z = 0 ------------------------------
     bcs.append(fbc.BCZeroDisplacement(node_set="talus_cap_set", x_dof=1, z_dof=1))
@@ -342,29 +492,48 @@ def apply_joint_contact(
     model.mesh_.add_surface(cap_surf)
 
     # --- 3. 帽顶 Surface（PressureLoad 施加于此） ---------------------------
-    # 顶面是规则 (ndiv+1)² 网格 ⇒ 按同一分格重建 quad4（top_ids 为 (i,k) 网格序）。
-    nd = int(cap["ndiv"])
-    top_ids = cap["top_ids"]
-    top_quads: list[list[int]] = []
-    for i in range(nd):
-        for k in range(nd):
-            a = i * (nd + 1) + k
-            top_quads.append([top_ids[a], top_ids[a + 1],
-                              top_ids[a + nd + 2], top_ids[a + nd + 1]])
-    cap_top = fmesh.Surface(name="talus_cap_top")
-    for i, quad in enumerate(top_quads):
-        cap_top.add_quad4(fmesh.Quad4Element(
-            id=i + 1, text=",".join(str(j) for j in quad)))
-    model.mesh_.add_surface(cap_top)
+    # 共形帽：顶面 quad 直接由 `cap["top_surface"]` 给出（与 bot 同拓扑）。
+    # 平面帽：按 (ndiv+1)² 分格重建。
+    if cap.get("conforming"):
+        cap_top = fmesh.Surface(name="talus_cap_top")
+        for i, quad in enumerate(cap["top_surface"]):
+            cap_top.add_quad4(fmesh.Quad4Element(
+                id=i + 1, text=",".join(str(j) for j in quad)))
+        model.mesh_.add_surface(cap_top)
+    else:
+        nd = int(cap["ndiv"])
+        top_ids = cap["top_ids"]
+        top_quads: list[list[int]] = []
+        for i in range(nd):
+            for k in range(nd):
+                a = i * (nd + 1) + k
+                top_quads.append([top_ids[a], top_ids[a + 1],
+                                  top_ids[a + nd + 2], top_ids[a + nd + 1]])
+        cap_top = fmesh.Surface(name="talus_cap_top")
+        for i, quad in enumerate(top_quads):
+            cap_top.add_quad4(fmesh.Quad4Element(
+                id=i + 1, text=",".join(str(j) for j in quad)))
+        model.mesh_.add_surface(cap_top)
 
     # 帽顶面积（mm²）⇒ p = F/A_cap_top
-    from pyfebio import mesh as _fm  # noqa: F401
-    pts_bot = np.asarray(nodes, dtype=np.float64)[joint_local]
-    dx = (float(pts_bot[:, 0].max()) - float(pts_bot[:, 0].min())
-          + 2.0 * float(cap_margin_mm))
-    dz = (float(pts_bot[:, 2].max()) - float(pts_bot[:, 2].min())
-          + 2.0 * float(cap_margin_mm))
-    a_cap = max(dx * dz, 1e-12)
+    # 共形帽：直接对各 top quad 求面积（贴合关节面，不是包围盒）；
+    # 平面帽：包围盒 + margin（保持原口径）。
+    if cap.get("conforming"):
+        a_cap = 0.0
+        for quad in cap["top_surface"]:
+            pts = np.array([_gid_to_xyz(model, g) for g in quad])
+            a_cap += 0.5 * float(np.linalg.norm(
+                np.cross(pts[1] - pts[0], pts[2] - pts[0])))
+            a_cap += 0.5 * float(np.linalg.norm(
+                np.cross(pts[2] - pts[0], pts[3] - pts[0])))
+    else:
+        pts_bot = np.asarray(nodes, dtype=np.float64)[joint_local]
+        dx = (float(pts_bot[:, 0].max()) - float(pts_bot[:, 0].min())
+              + 2.0 * float(cap_margin_mm))
+        dz = (float(pts_bot[:, 2].max()) - float(pts_bot[:, 2].min())
+              + 2.0 * float(cap_margin_mm))
+        a_cap = dx * dz
+    a_cap = max(float(a_cap), 1e-12)
     p_cap = float(load_n) / a_cap
 
     # --- 4. SurfacePair + Contact -----------------------------------------
@@ -399,8 +568,11 @@ def apply_joint_contact(
         "pressure_mpa": float(p_cap),
         "a_cap_mm2": float(a_cap),
         "gap_mm": float(gap_mm),
-        "bot_y_mm": float(cap["bot_y_mm"]),
-        "top_y_mm": float(cap["top_y_mm"]),
+        "bot_y_mm": float(cap.get("bot_y_mm", float("nan"))),
+        "top_y_mm": float(cap.get("top_y_mm", float("nan"))),
+        "conforming": bool(cap.get("conforming", False)),
+        "n_quads": int(cap.get("n_quads", 0)),
+        "n_flipped": int(cap.get("n_flipped", 0)),
         "n_cap_nodes": int(cap["n_cap_nodes"]),
         "n_cap_elems": int(cap["n_elems"]),
         "mu": float(mu),
