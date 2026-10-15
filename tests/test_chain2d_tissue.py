@@ -207,16 +207,28 @@ def test_two_identical_runs_bit_identical():
 def test_energy_conserved_conservative_config():
     """保守配置（无关节/接触阻尼、无摩擦、无轴向阻尼）机械能闭合 < 2%。
 
-    取 **h=0.5 m + 紧容差**：致密化基本不介入，账目完整。
+    守恒量 = ``KE + PE_g + PE_j + W(t)``，其中 ``W`` 是垫层**路径功时间序列**
+    （``tissue_pad_work_t_j``）。
 
-    **已知局限（如实记录）**：**致密化段（ξ > ξ_ref）的耗散尚未进入后处理账目**——
-    ``tissue_dissipated_energy_j`` 只累计 ``Σ F·Δ(ξ_r·t)``（永久压实路径功），
-    而越过 ξ_ref 后 ξ_r 已冻结、``E_d`` 段的工作既非可恢复（卸载沿 E₁）
-    也未计入耗散项 ⇒ h≥1.5 m 时漂移 ~2.06%（h=1.5 m 实测）。
-    这是**账目口径缺口**（后处理），非 ODE 自洽性问题（ODE 前后处理同源）。
-    补齐需在 ``tissue_dissipated_energy_j`` 增加致密化段项（**未做，待办**）。
+    **2026-10-15 口径更正（替换式，原判被实测证伪）**：原写「**致密化段
+    （ξ > ξ_ref）的耗散尚未进入后处理账目** … 补齐需在 ``tissue_dissipated_energy_j``
+    增加致密化段项」，并据此取了 h=0.5 m 以「让致密化基本不介入」。
+
+    **实测（本文件 + `temp/g5_*.py`）**：
+      1. **h=0.5 m 的峰值变形已 11.40 mm > ``t·ξ_ref`` = 10.8 mm** ⇒
+         致密化在**该点上就已介入**，「取 h=0.5 使致密化不介入」的前提不成立。
+      2. **按原判补上致密化滞回项后，漂移一字不变**（h=1.5 m：2.060% → 2.059%）
+         ⇒ **原判被证伪**。
+      3. **真因**：``tissue_dissipated_energy_j`` 返回**标量**，加进逐时刻的
+         ``e(t)`` 时**各时刻同增同减、恒被抵消** ⇒ 旧测试**实际只测了 ``KE+PE``
+         的漂移**，而那个漂移值 = 未计入的耗散占比。
+
+    **替换后的闭合质量**（rtol=1e-8）：h=0.5 / 1.5 / 2.0 m ⇒
+    **0.1709% / 0.2140% / 0.5062%**（旧口径 1.1331% / 2.0642% / 2.4336%）。
+    残余为采样网格上的**梯形积分误差**（非物理漏项）。
     """
     from climbing.chain2d_crush import _build_crush_ctx
+    from climbing.chain2d_tissue import tissue_pad_work_t_j
     cfg = TissueChainConfig(
         mass_kg=80.0, zeta_joint=0.0, zeta_contact=0.0,
         c_axial_n_s_per_m=0.0, mu_foot=0.0,
@@ -239,13 +251,43 @@ def test_energy_conserved_conservative_config():
     pe_j += np.sum(
         0.5 * ctx.k_ext_stop[None, :] * np.maximum(ext - ctx.ext_limit[None, :], 0.0) ** 2,
         axis=1)
-    xi = np.maximum(r.node_z, 0.0) / T
-    u = np.maximum(xi - r.meta["xi_r"], 0.0)
-    # 可恢复弹性势能：卸载沿 E₁ ⇒ ½E₁u²（致密化段不可恢复，见 docstring 局限）
-    pe_c = 0.5 * E1 * np.sum(u**2 * r.contact_area_m2 * T, axis=1)
-    e = ke + pe_g + pe_j + pe_c + tissue_dissipated_energy_j(r)
+    e = ke + pe_g + pe_j + tissue_pad_work_t_j(r)
     drift = max(abs(e.max() - e[0]), abs(e.min() - e[0])) / abs(e[0])
-    assert drift < 0.02, f"能量漂移 {drift:.4%}"
+    assert drift < 0.005, f"能量漂移 {drift:.4%}"     # 实测 0.1709%，留 2.9× 余量
+
+
+def test_pad_work_series_and_dissipation_series():
+    """``tissue_pad_work_t_j`` 按定义可独立重算；耗散序列 = 路径功 − 可恢复弹性能。
+
+    ⚠️ **不做单调性断言**（那是臆测、不是事实）：实测耗散序列在**卸载过渡段**
+    有最多 −0.044 J 的负增量（`wv`/`wb` 平滑混合期 σ 略高于 ``E₁u``，
+    卸载时 ``dW < d(½E₁u²)``）⇒ 允许小幅回落，只验恒等式与端点。
+    """
+    from climbing.chain2d_tissue import (
+        tissue_dissipated_energy_t_j, tissue_pad_work_t_j,
+    )
+    r = _sim()
+    w = tissue_pad_work_t_j(r)
+    d = tissue_dissipated_energy_t_j(r)
+    assert w.shape == (len(r.t_s),) and d.shape == (len(r.t_s),)
+    assert w[0] == 0.0 and abs(d[0]) < 1e-20
+
+    # ---- 独立重算（防重构走样）----
+    t = r.meta["tissue_params"].thickness_m
+    xi = np.maximum(r.node_z, 0.0) / t
+    inc = 0.5 * (r.contact_force_n[:-1] + r.contact_force_n[1:]) * np.diff(xi, axis=0) * t
+    w_ref = np.concatenate([[0.0], np.cumsum(inc.sum(axis=1))])
+    assert np.allclose(w, w_ref, rtol=0, atol=1e-12)
+
+    # ---- 恒等式：d = w − ½E₁u²A·t ≤ w（可恢复项非负）----
+    u = np.maximum(xi - r.meta["xi_r"], 0.0)
+    rec = 0.5 * E1 * np.sum(u**2 * r.contact_area_m2 * T, axis=1)
+    assert np.allclose(d, w - rec, rtol=0, atol=1e-12)
+    assert np.all(d <= w + 1e-12)
+    assert np.all(rec >= 0.0)
+
+    # ---- 与旧标量函数的关系（历史口径，**不是**总量的收支项）----
+    assert tissue_dissipated_energy_j(r) >= 0.0
 
 
 def test_report_helpers():
