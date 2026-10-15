@@ -150,4 +150,57 @@ FEBio 为含接触的模型多写域（实测 id=4, etype=5, nelems=573，**无 
 | 接触实现 | `src/climbing/coupling/plantar_bc.py::_apply_contact`（`hold_spring_k` 默认 `None`） |
 | sweep 接口 | `scripts/opensim_fe/s2_thums_sweep.py`（`--contact-hold-spring-k/--contact-gap-mm/--contact-swap-pair`） |
 | 手册 | `temp/thums/febio_manual.txt` §8.1.3(L15765) · §8.2(L15783) · §8.3.1.4/.5(L15832) · §8.5.3(L15980) |
-| 前序 | `results/opensim_fe/V1_RERUN_20261015.md`（`plantar_bc="contact"` 不收敛、6 个皮质 hex8） |
+| 前序 | `results/opensim_fe/V1_RERUN_20261015.md`（`plantar_bc="contact"` 不收敛、6 个皮质 hex8） |
+
+
+---
+
+## §7 · 续做（2026-10-15 下半场）：**手册 §8.5.3 的两步法已实现，Step 1 通过、Step 2 卡住**
+
+> **探针**：`scripts/opensim_fe/two_step_pretouch_probe.py`（对 deck 做最小 XML 手术）
+
+### 7.1 手册依据（§6.1 / §6.1.1 / §6.1.2）
+
+> **§6.1.2 Relative Boundary Conditions**：*"…**This makes it possible, for example, to switch
+> between load and displacement controlled boundary conditions in multi-step analyses.**"*
+> **§6.1.1**：放在**第一个 Step 之前**的 `Boundary`/`Loads`/`Contact` 是 **global**（各步都生效）；
+> 放在 Step 内的只对那一步生效。
+
+**⇒ 两步法 =** `Contact`＋pad 固定 BC 保持 **global**；**Step 1** 用 prescribed displacement 把
+跖面压到接触；**Step 2** 去掉 prescribe、换上力载荷（＝"replace the displacement with a force"）。
+
+### 7.2 **三个 FEBio 4.13 语法事实**（每一个都花了一次失败运行换来）
+
+| # | 事实 | 证据 |
+|---|---|---|
+| 1 | **`<Steps>` 不被识别** | `tag "Steps" : unrecognized tag` ⇒ 容器只能用 **`<Step>`** |
+| 2 | **`<Step>` 容器内必须以 `<step>` 开头**；全局段必须在**容器之外**（顶层） | `tag "Boundary" : missing tag "step"` |
+| 3 | **prescribed displacement 的标签是 `<bc type="prescribed displacement">`**（手册 §3.11.6），**不是 `<prescribe>`** | `tag "prescribe" : unrecognized tag`；语法二次确认自本仓库 `scripts/opensim_fe/g4_fe_stab.py:221` |
+| 4 | **`<min_residual>` 不被接受**（顶层与 step 级 Control 都报 `unrecognized tag`）—— 手册 §8.3.2.1 的「零残差」处方**在本版本不可用** | 两次失败运行；探针里已降级为 `None`（不写） |
+
+### 7.3 **关键诊断：只控 `y` 不够**
+
+**第一版只 prescribe `y`** ⇒ 14–44 个负 Jacobian全失败 —— 因为 **x/z 的刚体模态仍在**
+（这正是 §8.5.3 要消除的东西）。§8.5.3 的目标是让问题**良约束**。
+
+**⇒ 改成三向全控**（`x`/`z` = 0、`y` = −pretouch）后：**负 Jacobian 消失**，
+失败模式从「单元倒置」变成「**不收敛**」 ⇒ **这是实质进展**。
+
+### 7.4 **当前状态（可复现）**
+
+| 步 | 结果 |
+|---|---|
+| **Step 1（pretouch, −0.6 mm, 20 步）** | ✅ **通过** —— 日志 `Number of time steps completed : 1` |
+| **Step 2（force）** | ❌ **不收敛**（time 1.16667 → 2 各退一步皆失败），**无负 Jacobian**，`xplt` 0 B |
+
+**残差签名**（step 2）：`residual ≈ 1e-16`（**实质为零**）、`REQUIRED 0.000000e+00`
+⇒ 疑为手册 §8.3.2.1 的「无载荷」情形，但该节给的处方（`<min_residual>`）**在 4.13 不生效**。
+
+**⇒ ② 仍**未收口**，但缺口已**收窄到一个具体问题**：**Step 2 的载荷/收敛口径**，
+而非模型或接触本身（Step 1 已证接触能闭合、且预压步稳定）。
+
+### 7.5 下一步（按价值）
+
+1. **查 Step 2 的载荷是否真的进了求解**（`-g2` 导出非收敛态；或临时给 Step 2 加一条已知的小载荷做**正对照**）
+2. 查 FEBio 4.13 里「零残差判定阈值」的**正确标签**（SDK 头文件 / `febio4.exe` 字符串）
+3. 若 Step 2 通了 ⇒ 用 `s2_thums_sweep`（接口已就绪）跑 **V1 全高度**，得新首折并与 `2 m` 对照
