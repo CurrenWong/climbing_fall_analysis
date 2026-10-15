@@ -1,0 +1,36 @@
+{
+ "fix": "surface pressure on end face (replace nodal band force)",
+ "face": {
+  "area_mm2": 75.80377480521807,
+  "n_nodes": 22,
+  "axis_idx": 2,
+  "a_min": 268.44585638570226,
+  "a_max": 331.756498364562,
+  "n_band": 82,
+  "n_face": 18,
+  "bot_band_z": [
+   268.44585638570226,
+   280.9378782877018
+  ]
+ },
+ "rows": [
+  {
+   "h_no": 10,
+   "load_n": 19675.88361586651,
+   "P_mpa": -259.5633748639137,
+   "sign": -1.0,
+   "converged": false,
+   "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\p2_pressure\\T6\\h10\\T6.feb",
+   "seconds": 0.8
+  },
+  {
+   "h_no": 30,
+   "load_n": 38257.2531077998,
+   "P_mpa": -504.68796845676746,
+   "sign": -1.0,
+   "converged": false,
+   "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\p2_pressure\\T6\\h30\\T6.feb",
+   "seconds": 0.6
+  }
+ ]
+}
