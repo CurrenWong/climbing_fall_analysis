@@ -94,4 +94,55 @@
 | 审计脚本 | `scripts/opensim_fe/consistency_probe_vs_sweep{,_step2}.py` |
 | **同链基线**（应用） | `s2_thums_height_sweep_refixed_now.*` · `..._anat_refixed_now.*` |
 | **旧链产物**（标注、勿直接比） | `s2_thums_height_sweep.json` · `s2_thums_height_sweep_anat.json` |
-| 书面证据 | `V1_CALIB_TODO.md:18` · `ALIGN_A3_RERUN_TODO.md:14` |
+| 书面证据 | `V1_CALIB_TODO.md:18` · `ALIGN_A3_RERUN_TODO.md:14` |
+
+
+---
+
+## §6 · **工具已落地**：载荷链指纹（闸门 10 的日常工具）
+
+### 6.1 新增件
+
+| 件 | 作用 |
+|---|---|
+| `src/climbing/coupling/loadchain.py` | **纯函数**：`fingerprint()`（sha256 前 16 hex，6 位有效数字归一 ⇒ 吸收浮点末位噪声）· `table_from_json()`（读 sweep JSON 的载荷列，`_kN` 自动归一到 N）· `compare()`（**先在共有高度上**比指纹 + 逐高度比值跨度） |
+| `scripts/opensim_fe/loadchain_audit.py` | CLI：扫 `results/opensim_fe/*sweep*.json`，逐份判 ✅同链 / ⚠️常数缩放 / ⛔形状不同。**带磁盘缓存** `LOADCHAIN_CURRENT.json`（`_load_at` 每高度跑一次 OpenSim ⇒ 必须缓存，且**增量落盘**可中断续跑） |
+| `tests/test_loadchain.py` | 8 个单测，**含正/负对照**（纪律 4）与**真实数据回归锚** |
+
+### 6.2 **审计结果（`loadchain_audit.py`，当前链指纹 `06cee88a51412a3c`）**
+
+| 文件 | 载荷指纹 | 比值跨度 | 判定 |
+|---|---|---|---|
+| `s2_thums_height_sweep.json` | `538abf07260d11c3` | 17.49% | ⛔ **异链·形状不同**（0.9400 → 1.1202） |
+| `s2_thums_height_sweep_anat.json` | `538abf07260d11c3` | 17.49% | ⛔ **异链·形状不同**（同上） |
+| **`s2_thums_height_sweep_plantar_bc_base.json`** | `c7349f65f3afcaf8` | 0.00% | ⚠️ **异链·常数缩放 ×1.0810** ← **本件新发现** |
+| `s2_thums_height_sweep_anat_contact_hold100.json` | `b5fdb95d1026d678` | 0.00% | ✅ 同链 |
+| `s2_thums_height_sweep_anat_refixed_now.json` | `b5fdb95d1026d678` | 0.00% | ✅ 同链 |
+| `s2_thums_height_sweep_contact_hold100.json` | `7fa3e02c69cc06e0` | 0.00% | ✅ 同链 |
+| `s2_thums_height_sweep_refixed_now.json` | `7fa3e02c69cc06e0` | 0.00% | ✅ 同链 |
+| `s2_thums_height_sweep_v1rerun20261015.json` | `3d796dc1a40b898f` | 0.00% | ✅ 同链 |
+
+**读法**
+
+1. **⛔ 形状不同** ⇒ 不能只乘一个系数修正；**必须同链重跑**（§2 的那两份）。
+2. **⚠️ 常数缩放 ×1.081** ⇒ `..._plantar_bc_base.json` **也是标定前的**，但它只是**整体 ×1.081**
+   （＝标定因子 +8.1%）⇒ 若某处只关心**比值**（同一文件内的相对比较），它可能仍可用；
+   若关心**绝对值**，须 ×1.081 或重跑。
+3. **✅ 同链** ⇒ 可安全用作基线（本件新落的 `*_refixed_now` 与 `*_contact_hold100` 都在此列
+   ⇒ **验证了上一轮补救的正确性**）。
+
+**⚠️ 指纹可比性 caveat**：指纹建在**该文件与当前链的共有高度集**上 ⇒
+**只有高度覆盖相同的两份文件才共享指纹**（如 `anat_*` 两份都是 h=1..6 ⇒ 同 `b5fdb95d…`）。
+**判定看 ✅/⚠️/⛔，不要把不同覆盖的指纹直接等值比较。**
+
+### 6.3 载荷链变更的**形状**（`loadcurve_shape_audit.py`）
+
+`current / archived` 比值**不是常数**：**1.1202（h=1）→ 0.9400（h=10）→ 1.0117（h=50）**，
+**两次穿过 1.0**；归一化曲线在中段明显更平（h=8：归档 1.7149 vs 当前 1.5509）。
+
+**⇒ 这不是「一个标定系数」，是**另一张载荷-高度表** ⇒ 佐证闸门 10 必须查**形状**而不只是均值。
+
+### 6.4 建议（仍未做，属拍板）
+
+1. 用 `loadchain_audit.py` 把 §2 的 5 个活脚本**逐个判定**（它们读的正是 ⛔ 那两份）。
+2. 在需要长期依赖的产物上加**指纹字段**（而非只靠外部审计）。
