@@ -148,17 +148,25 @@ def _combined_elems_all(mesh: dict, spec) -> list[list[int]]:
     return elems
 
 
-def cap_geom(mesh: dict, spec, top_frac: float = TOP_FRAC) -> dict:
+def cap_geom(mesh: dict, spec, top_frac: float = TOP_FRAC,
+             include_shell: bool = True) -> dict:
     """`p5_head_contact.cap_geom` 的壳扩展版 —— **筛选口径逐字相同**。
 
     口径不变：`band_facets` 取端带 → `axdiv = normal·axis` →
     只保留 `axdiv > CAP_AXDIV_MIN`（10-14 根因修复，只取真端面）。
     仅把**候选单元集**从「只有 solid」扩为「solid + shell」。
+
+    `include_shell=False` 时退回 `p5` 原口径（solid-only），用于
+    **单变量对照**（2026-10-15 T6 诊断）。
     """
     nodes_rot = bf._align_pca_rotate(mesh["nodes"])
     axis_idx, a_min, a_max, top_local, _bot = bf._select_top_bottom(
         nodes_rot, axis=None, top_frac=top_frac, bot_frac=top_frac)
-    facets = p1b.oriented_facets(nodes_rot, _combined_elems_all(mesh, spec))
+    if include_shell:
+        elems = _combined_elems_all(mesh, spec)
+    else:
+        elems = p5._combined_elems(mesh, spec)
+    facets = p1b.oriented_facets(nodes_rot, elems)
     band = p1b.band_facets(facets, top_local)
     axis = np.zeros(3)
     axis[axis_idx] = 1.0
@@ -273,11 +281,13 @@ def domain_stat(h5: Path, dom: str) -> dict:
 # ---------------------------------------------------------------------------
 # 构建 / 运行 / 判定
 # ---------------------------------------------------------------------------
-def build_one(bone: str, feb: Path, load: float, ctx, en, geom, pg, penalty: float) -> Path:
+def build_one(bone: str, feb: Path, load: float, ctx, en, geom, pg, penalty: float,
+              with_shell: bool = True) -> Path:
     part, mesh, solid_names, shell_specs, dom, joint, loads, heights = ctx
     bf.build_bone_feb(
         part.spec, feb, load_n=load, top_frac=TOP_FRAC, bot_frac=TOP_FRAC,
-        axis=None, with_shell=True, time_steps=TIME_STEPS, mesh=mesh, align_pca=True,
+        axis=None, with_shell=with_shell, time_steps=TIME_STEPS, mesh=mesh,
+        align_pca=True,
         lateral_support=LATERAL,
         # ⚠️ 必须 False（逐字承 P5.0 `p5_pen`）：先生成**全固定** bottom_fix，
         #    再由 `_anchor_xy_patch` 只把 z_dof 置 0 ⇒ 锚点只约束 x/y、轴向走接触。
@@ -318,13 +328,15 @@ def judge_case(rec: dict) -> dict:
             "bend_ok": bool(bend)}
 
 
-def run_bone(bone: str, heights: list[int], force_loads: list[float] | None = None) -> dict:
-    print(f"\n{'='*92}\n[part] {bone}\n{'='*92}", flush=True)
+def run_bone(bone: str, heights: list[int], force_loads: list[float] | None = None,
+             with_shell: bool = True) -> dict:
+    tag = "" if with_shell else "   <<< no-shell 对照（与股骨同构）"
+    print(f"\n{'='*92}\n[part] {bone}{tag}\n{'='*92}", flush=True)
     ctx = p4_pb_probe.load_ctx(bone)
     part, mesh, solid_names, shell_specs, dom, joint, joint_loads, h_arr = ctx
     share = LOAD_SHARE[bone]
-    print(f"[{bone}] mesh={mesh['n_nodes']} nodes dom={dom} joint={joint} share={share:.4f}",
-          flush=True)
+    print(f"[{bone}] mesh={mesh['n_nodes']} nodes dom={dom} joint={joint} "
+          f"share={share:.4f} with_shell={with_shell}", flush=True)
 
     if force_loads:
         # 诊断模式：显式载荷（不按高度取）。仅用于**判别 BC 形式 vs 载荷/网格上限**，
@@ -335,10 +347,12 @@ def run_bone(bone: str, heights: list[int], force_loads: list[float] | None = No
                 for hno in heights]
 
     en = end_nodes(mesh)
-    geom = cap_geom(mesh, part.spec, top_frac=TOP_FRAC)
+    geom = cap_geom(mesh, part.spec, top_frac=TOP_FRAC, include_shell=with_shell)
     pg = p5.plate_geom_from_mesh(bf._align_pca_rotate(mesh["nodes"]), geom)
     dom_official, dom_kind = official_domain(bone)
-    stat_dom = dom_official or dom
+    # no-shell 对照里 shell 域不存在，判定域必须退回 solid 域
+    stat_dom = (dom_official or dom) if with_shell else dom
+    shells_for_post = shell_specs if with_shell else []
     f_max = float(joint_loads[max(heights) - 1]) * share
     pen = penalty_for(f_max)
     print(f"[{bone}] cap={geom['n_cap_facets']}f "
@@ -348,8 +362,10 @@ def run_bone(bone: str, heights: list[int], force_loads: list[float] | None = No
           f"| 判定域={stat_dom}({dom_kind}) solid域={dom}", flush=True)
 
     rows = []
+    run_tag = "" if with_shell else "_noshell"
     for hno, h_m, load in plan:
-        d = BASE / bone / (f"diag{int(load)}N" if force_loads else f"h{hno:02d}")
+        d = BASE / bone / (f"diag{int(load)}N{run_tag}" if force_loads
+                           else f"h{hno:02d}{run_tag}")
         d.mkdir(parents=True, exist_ok=True)
         feb = d / f"{bone}.feb"
         h5 = feb.with_suffix(".hdf5")
@@ -359,12 +375,13 @@ def run_bone(bone: str, heights: list[int], force_loads: list[float] | None = No
         if not h5.is_file():
             t = time.time()
             try:
-                build_one(bone, feb, load, ctx, en, geom, pg, rec["penalty"])
+                build_one(bone, feb, load, ctx, en, geom, pg, rec["penalty"],
+                          with_shell=with_shell)
                 bf.run_bone_feb(feb, workdir=feb.parent, timeout=1800)
                 if feb.with_suffix(".xplt").is_file():
                     bf.post_process(feb.with_suffix(".xplt"), h5,
                                     solid_names=solid_names,
-                                    shell_specs=shell_specs, label=bone)
+                                    shell_specs=shells_for_post, label=bone)
                 rec["converged"] = True
             except Exception as exc:  # noqa: BLE001
                 rec["converged"] = False
@@ -375,7 +392,7 @@ def run_bone(bone: str, heights: list[int], force_loads: list[float] | None = No
             rec["seconds"] = 0.0
         if h5.is_file():
             try:
-                rec.update(domain_stat(h5, dom))
+                rec.update(domain_stat(h5, stat_dom))
                 rec.update(load_bear_stats(h5, load, bone))
             except Exception as exc:  # noqa: BLE001
                 rec["post_error"] = f"{type(exc).__name__}: {exc}"
@@ -400,11 +417,15 @@ def main() -> int:
     ap.add_argument("--loads", nargs="*", type=float, default=None,
                     help="诊断模式：显式关节载荷 N（乘 share 后求解）。"
                          "仅用于判别 BC 形式 vs 载荷/网格上限，不得用于凑判据。")
+    ap.add_argument("--no-shell", action="store_true",
+                    help="单变量对照：把皮质壳整个从 .feb 去掉（with_shell=False），"
+                         "cap 退回 solid-only 口径 ⇒ T6 变成与股骨同构的单一 solid 域。")
     args = ap.parse_args()
     t0 = time.time()
     out = []
     for b in args.bones:
-        out.append(run_bone(b, HEIGHTS, force_loads=args.loads))
+        out.append(run_bone(b, HEIGHTS, force_loads=args.loads,
+                            with_shell=not args.no_shell))
     doc = {"probe": "P2 端部 BC + 载荷分配 · 能力门",
            "prereg": "docs/methods/P2_端部BC与载荷分配_预注册.md",
            "frozen": {"gap_mm": GAP_MM, "top_frac": TOP_FRAC,
