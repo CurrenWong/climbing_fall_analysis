@@ -1,4 +1,4 @@
-# FE 求解前闸门（Pre-solve gates）—— 九条闸门 + 两条纪律
+# FE 求解前闸门（Pre-solve gates）—— **十条闸门** + 两条纪律
 
 > **立此件的直接原因**：2026-10-15 定位到 **T6 压板 z 注册 bug**（压板悬空 1.2342 mm ⇒
 > **全程零接触** ⇒ z 向纯刚体模态 ⇒ 负 Jacobian）。该 bug 让「T6 能力门 0/4」
@@ -260,6 +260,29 @@ that of the solid element**; otherwise a negative Jacobian error will be **autom
 
 ---
 
+## 闸门 10 · **基线同链**（比数字之前，先证同链）
+
+> **触发**（2026-10-15，真实犯错）：`V1_PLANTAR_BC_SENSITIVITY.md` **v1** 拿
+> **归档基线**（`s2_thums_height_sweep_anat.json`，**标定前载荷链**）去比**新跑结果**，
+> 得出「anat `contact/fixed` = 0.842–0.919」与「**两条网格比值符号相反**」——
+> **两条都错**。同链重跑后是 **0.807–0.822**、且**符号一致**。→ 见
+> `results/opensim_fe/STALE_LOADCHAIN_AUDIT.md`。
+
+**规矩**
+
+1. **任何「A 与 B 相比 ⇒ 差 x%」的结论，必须给出**同一链内**的双侧数值**。
+   「基线」若来自**旧产物**（旧载荷链 / 旧标定 / 旧网格），**必须先同链重跑**，再比。
+2. **跨链比较一律作废重跑**；不得用「数值差不多」当同链的证据。
+3. **归档产物要带「链指纹」**（载荷、标定版本、网格哈希任一可判定者），
+   使用处**断言指纹匹配**。
+4. **判定同链的硬手段**：比对**两路的产物 sha256**（deck/输入），或比对**中间量**
+   （如载荷列）；若「A/B 的比值」与「载荷 A/B 的比值」相等 ⇒ 差异**纯由载荷解释**。
+
+**为什么它必须是闸门而不是纪律**：这次的错误**不是「忘了验检查器」**，而是
+**「信了一个看起来可信的旧文件」** ⇒ 与闸门 9（报数字带口径）同族：**都是「数字的出处」问题**。
+
+---
+
 ## 纪律 4 · **检查器自身必须有已知正对照**
 
 > 「**没跑过对照的判据不算证据**」（本项目既有规矩）
@@ -292,10 +315,11 @@ that of the solid element**; otherwise a negative Jacobian error will be **autom
 | 有壳 + 实体（皮质壳 / 松质 tet） | **闸门 7**（壳厚 vs 壳下实体单元高；带同款架构对照） |
 | **单元倒置 / 负 Jacobian** | **闸门 8**（`-output_negative_jacobians` → 域归属 → **每节点集中力**） |
 | **要报任何数字型结论** | **闸门 9**（统计量/定义 + 域与BC + 模型与载荷链 + 多口径表） |
+| **要拿两个数相比（含与"基线"比）** | **闸门 10** —— 先证**同链**；旧产物必先**同链重跑** |
 | 新造任何判据 / 指标 | **纪律 4** —— 先在已知好 / 坏两例上验 |
 | 出现推翻性证据 | **纪律 5** —— **替换式**更正，不叠加 |
 
-**一句话**：**「0 步 / 首步倒置」先查加载时序（4）→ 再查注册（1）→ 再查壳厚（7）→ 最后才谈步长（6）；报数字带口径（9）。**
+**一句话**：**「0 步 / 首步倒置」先查加载时序（4）→ 再查注册（1）→ 再查壳厚（7）→ 最后才谈步长（6）；报数字带口径（9）；比数字先证同链（10）。**
 
 ---
 
@@ -310,6 +334,7 @@ that of the solid element**; otherwise a negative Jacobian error will be **autom
 | **闸门 7 工具/依据（壳厚）** | `scripts/opensim_fe/shell_solid_ratio_audit.py` → `SHELL_SOLID_RATIO_AUDIT.json` |
 | **闸门 8 依据（载荷施加）** | `results/opensim_fe/P2_H50_FIX_FROM_MANUAL.md` |
 | **闸门 9 依据（口径）** | `results/opensim_fe/V1V2_CALIBER_RULING.md` · `A2_AGGREGATION_RULING.md` §2.1 |
+| **闸门 10 依据（基线同链）** | `results/opensim_fe/STALE_LOADCHAIN_AUDIT.md` · `V1_PLANTAR_BC_SENSITIVITY.md` §3/§5 · 审计脚本 `scripts/opensim_fe/consistency_probe_vs_sweep{,_step2}.py` |
 | T6 根因件 | `results/opensim_fe/P2_T6_ROOTCAUSE.md` |
 | V1 实跑/热点 | `results/opensim_fe/V1_RERUN_20261015.md` |
 | 穿透/σ 病件 | `results/opensim_fe/P2_V2_PEN_SIGMA_ROOTCAUSE.md` |
