@@ -92,10 +92,7 @@ TMPL = """<?xml version="1.0" encoding="ISO-8859-1"?>
     <step id="1" name="pretouch">
       <Control><time_steps>2</time_steps><step_size>0.5</step_size><solver/></Control>
       <Boundary>
-        <bc name="push" type="prescribed displacement" node_set="setAright">
-          <dof>x</dof><value>0.15</value>
-        </bc>
-      </Boundary>
+{PRESCRIBE}      </Boundary>
     </step>
     <step id="2" name="force">
       <Control><time_steps>2</time_steps><step_size>0.5</step_size><solver/></Control>
@@ -110,11 +107,23 @@ TMPL = """<?xml version="1.0" encoding="ISO-8859-1"?>
 </febio_spec>
 """
 
+BC1 = ('        <bc name="push" type="prescribed displacement" '
+       'node_set="setAright">\n'
+       '          <dof>{d}</dof><value>{v}</value>\n'
+       '        </bc>\n')
+
 VARIANTS = {
-    # B 左面 (x=2.1) 的 quad4 节点序；primary/secondary 两种配对
-    "c0_A_prim":  dict(BLEFT="9,10,12,11", PRIM="Aright", SEC="Bleft"),
-    "c1_B_prim":  dict(BLEFT="9,10,12,11", PRIM="Bleft", SEC="Aright"),
-    "c2_rev":     dict(BLEFT="9,11,12,10", PRIM="Aright", SEC="Bleft"),
+    "c0_A_prim":  dict(BLEFT="9,10,12,11", PRIM="Aright", SEC="Bleft",
+                       PRESCRIBE=BC1.format(d="x", v=0.15)),
+    "c1_B_prim":  dict(BLEFT="9,10,12,11", PRIM="Bleft", SEC="Aright",
+                       PRESCRIBE=BC1.format(d="x", v=0.15)),
+    "c2_rev":     dict(BLEFT="9,11,12,10", PRIM="Aright", SEC="Bleft",
+                       PRESCRIBE=BC1.format(d="x", v=0.15)),
+    # ★ 新：**三向 prescribe ＋ contact**（跟骨 deck 的真实组合，此前从未同测）
+    "c3_3dof":    dict(BLEFT="9,10,12,11", PRIM="Aright", SEC="Bleft",
+                       PRESCRIBE=(BC1.format(d="x", v=0.15)
+                                  + BC1.format(d="y", v=0)
+                                  + BC1.format(d="z", v=0))),
 }
 
 

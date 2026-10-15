@@ -62,6 +62,17 @@ DROP_ROOT_CONTROL = False
 #: （`<time_steps>`＋`<solver/>`）—— 最小复现器 `min_two_step_load_test.py` 用的就是它，
 #: 且**载荷确实生效**（Step 2 初始残差 38.9）。
 MINIMAL_CTRL = False
+#: ★ **真·正对照**：Step 2 放什么载荷。
+#:   `"pressure"`＝原压力载荷（现状）；`"nodal"`＝**只放独立集中力**；
+#:   `"both"`＝两者都放。用途：切开「载荷未进求解」vs「进了但残差本征小」。
+STEP2_LOAD = "pressure"
+#: 集中力**每节点**值（N）。FEBio `nodal_force` 的 `<value>` 是**逐节点**施加
+#: （手册 §3.13.1.1），故总量 = 该值 × 节点集规模。
+PROBE_F_NODE = 100.0
+#: 正对照用的节点集（deck 内已有：`subtalar_joint` 29 / `plantar` 191 / `achilles` 84）。
+PROBE_NODE_SET = "subtalar_joint"
+#: 正对照力的方向（沿 −y 压向垫）。
+PROBE_DIR = (0.0, -1.0, 0.0)
 #: Step 2 的时间步数。
 FORCE_STEPS = 1
 
@@ -231,6 +242,16 @@ def _surgery(t: str) -> str:
         + '      </Boundary>\r\n'
         + '    </step>\r\n'
     )
+    # ---- 真·正对照：组装 Step 2 的 <Loads> ----
+    _inner = re.search(r'<Loads>([\s\S]*?)</Loads>', loads).group(1)
+    _fv = ','.join('%.10g' % (PROBE_F_NODE * c) for c in PROBE_DIR)
+    _nodal = ('          <nodal_load type="nodal_force" node_set="%s">\r\n'
+              '            <relative>0</relative>\r\n'
+              '            <value>%s</value>\r\n'
+              '          </nodal_load>\r\n' % (PROBE_NODE_SET, _fv))
+    _parts = {'pressure': _inner, 'nodal': _nodal,
+              'both': _inner + _nodal}[STEP2_LOAD]
+    loads = '<Loads>\r\n' + _parts + '        </Loads>'
     _c2 = _block('Control', after=i_step)
     if MINIMAL_CTRL:
         _c2 = ('<Control>\r\n        <time_steps>%d</time_steps>\r\n'
@@ -277,6 +298,10 @@ def main(argv=None):
     ap.add_argument('--loads-global', action='store_true')
     ap.add_argument('--drop-root-control', action='store_true')
     ap.add_argument('--minimal-ctrl', action='store_true')
+    ap.add_argument('--step2-load', type=str, default=STEP2_LOAD,
+                    choices=('pressure', 'nodal', 'both'))
+    ap.add_argument('--probe-f-node', type=float, default=PROBE_F_NODE)
+    ap.add_argument('--probe-node-set', type=str, default=PROBE_NODE_SET)
     ap.add_argument('--out-name', type=str, default='m_2step.feb')
     args = ap.parse_args(argv)
     globals()['PRETOUCH_MM'] = float(args.pretouch_mm)
@@ -286,6 +311,9 @@ def main(argv=None):
     globals()['LOADS_GLOBAL'] = bool(args.loads_global)
     globals()['DROP_ROOT_CONTROL'] = bool(args.drop_root_control)
     globals()['MINIMAL_CTRL'] = bool(args.minimal_ctrl)
+    globals()['STEP2_LOAD'] = str(args.step2_load)
+    globals()['PROBE_F_NODE'] = float(args.probe_f_node)
+    globals()['PROBE_NODE_SET'] = str(args.probe_node_set)
 
     t = Path(args.deck).read_bytes().decode('iso-8859-1', errors='replace')
     if args.dump:
