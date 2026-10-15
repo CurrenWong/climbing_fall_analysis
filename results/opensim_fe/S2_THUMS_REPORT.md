@@ -4,7 +4,7 @@
 > **已归因为配准伪影，非物理** —— 旧 foot-frame ICP 把距下关节载荷斑块压缩到 **222 mm²（14 面）**，
 > `PressureLoad p=F/A` 在小斑块上打出数值量级应力（`registration_anatomical.py` 自述
 > "non-physical fracture at <= 1 m"）。**解剖配准**（2495 mm²，119 面）修复后：
-> a=0 首折 **3 m**（内插 2.02 m，gauge 156.6）、+跖面接触 BC **5 m**（外推 5.43 m）、
+> a=0 首折 **3 m**（内插 2.02 m，gauge 156.6）、⛔~~+跖面接触 BC 5 m（外推 5.43 m）~~（**10-16 作废：假产物** — `_plantar_bc_base` 与 `fixed` 逐位相同、该脚本当时无 plantar_bc 通道；`contact` 真跑不收敛。见 `V1_RERUN_20261016.md`）、
 > a=1 满激活仍 1 m（246.6，如实保留）。详见 `S2_THUMS_REPORT_ANAT.md`。
 > **本报告数值仅作历史记录，引用请以 ANAT / PLANTAR_BC_BASE 报告为准。**
 

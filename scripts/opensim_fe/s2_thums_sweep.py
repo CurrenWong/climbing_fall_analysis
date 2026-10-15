@@ -121,6 +121,7 @@ def _solve_case(
     t1: float,
     gauge_mm: float,
     workdir: Path,
+    plantar_bc: str = "fixed",
 ) -> dict:
     """Build -> solve -> post one ``(h, a)`` case; returns the CSV/JSON row.
 
@@ -140,6 +141,8 @@ def _solve_case(
         if stale.exists():
             stale.unlink()
 
+    # 默认路径逐位不变：只有非 "fixed" 时才把 plantar_bc 传进 builder。
+    _extra = {} if plantar_bc == "fixed" else {"plantar_bc": plantar_bc}
     T.build_thums_feb(
         mesh,
         feb,
@@ -149,7 +152,20 @@ def _solve_case(
         achilles_dir=spec.achilles_dir,
         use_rigid=False,          # PressureLoad p=F/A: same convention as old pipeline
         time_steps=1,
+        **_extra,
     )
+    # 闸门 3（patch 生效验证）：直接读 .feb 确认 plantar BC 真的进了 deck。
+    _deck = feb.read_bytes().decode("iso-8859-1", errors="replace")
+    _n_contact = _deck.count("<Contact")
+    _n_surface = _deck.count("<Surface ")
+    if plantar_bc == "contact" and _n_contact == 0:
+        raise RuntimeError(
+            f"plantar_bc=contact 但 .feb 无 <Contact>（h={h} a={a}）—— 通道未生效"
+        )
+    if plantar_bc == "fixed" and _n_contact != 0:
+        raise RuntimeError(f"plantar_bc=fixed 却出现 <Contact>（h={h} a={a}）")
+    print(f"    [gate3] plantar_bc={plantar_bc}  <Contact>×{_n_contact} "
+          f"<Surface>×{_n_surface}", flush=True)
     rc = run_febio(feb, workdir=feb.parent, timeout=1800)  # raises on rc != 0
     if rc != 0:  # defensive: run_febio already raises, but be explicit
         raise RuntimeError(f"FEBio rc={rc} for h={h} a={a}")
@@ -180,6 +196,8 @@ def _solve_case(
         "mean": float(vm.mean()),
         "gauge_max": float(gauge.max()),
     }
+    if plantar_bc != "fixed":      # 默认路径 JSON 逐位不变
+        row["plantar_bc"] = str(plantar_bc)
     return row
 
 
@@ -414,6 +432,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--mesh", type=Path, default=None,
                     help="替代配准网格 .npz（默认 temp/.../calcaneus_r_calcnframe.npz）；"
                          "解剖配准用 calcaneus_r_anatframe.npz")
+    ap.add_argument("--plantar-bc", type=str, default="fixed",
+                    choices=("fixed", "roller", "roller_free", "spring", "contact"),
+                    help="跖面 BC（默认 fixed = 现状口径；contact = 真实接触）")
     ap.add_argument("--tag", type=str, default="",
                     help="输出文件名后缀（如 _anat），保持旧输出不变；默认空 = 旧行为")
     args = ap.parse_args(argv)
@@ -450,7 +471,8 @@ def main(argv: list[str] | None = None) -> int:
         f_sub, t1 = _load_at(h)
         for a in acts:
             row = _solve_case(
-                mesh, cort_centroids, cort_vol, h, a, f_sub, t1, args.gauge_mm, workdir
+                mesh, cort_centroids, cort_vol, h, a, f_sub, t1, args.gauge_mm, workdir,
+                args.plantar_bc
             )
             rows.append(row)
             n_solves += 1
