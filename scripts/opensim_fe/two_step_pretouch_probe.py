@@ -51,7 +51,17 @@ PRETOUCH_STEPS = 10
 #: `<min_residual>`（手册 §8.3.2.1）。**实测 FEBio 4.13 不认此标签**
 #: （顶层/step 级 Control 都报 `unrecognized tag`）⇒ 默认 `None`＝不写。
 #: 留作记录：手册给出的「零残差卡住」处方在本版本不可用。
-MIN_RESIDUAL = None
+MIN_RESIDUAL = 1e-15
+#: **诊断开关**：`True` ⇒ `<Loads>` 留在**全局**（两步都生效）。
+#: 用途＝单变量判定「Step 2 残差 ~1e-16」到底是**载荷没进求解**还是别的。
+LOADS_GLOBAL = False
+#: **诊断开关**：`True` ⇒ 删掉**顶层 `<Control>`**（手册 §6.1：多步分析里 Control
+#: 不再定义在文件顶部；pyfebio 的 deck 却有，是唯一剩下的结构偏离）。
+DROP_ROOT_CONTROL = False
+#: **诊断开关**：`True` ⇒ Step 2 的 `<Control>` 换成**最简形式**
+#: （`<time_steps>`＋`<solver/>`）—— 最小复现器 `min_two_step_load_test.py` 用的就是它，
+#: 且**载荷确实生效**（Step 2 初始残差 38.9）。
+MINIMAL_CTRL = False
 #: Step 2 的时间步数。
 FORCE_STEPS = 1
 
@@ -95,9 +105,23 @@ def _ctrl_with(ctrl: str, n_steps: int, min_residual: float | None = None) -> st
     out = re.sub(r'<time_steps>\s*\d+\s*</time_steps>',
                  '<time_steps>%d</time_steps>' % int(n_steps), ctrl, count=1)
     if min_residual is not None:
-        # ⚠️ 实测：FEBio 4.13 的 **step 级 `<Control>` 不认 `<min_residual>`**
-        # （`unrecognized tag`）⇒ 由 `_root_ctrl` 放到**顶层 `<Control>`**（FEBio 读它）。
-        pass
+        # ★ 关键：`min_residual` **不是 `<Control>` 的子标签**（FEBio 4.13 报
+        # `unrecognized tag`），而是 **`<solver>` 块的参数** —— 依据＝FEBio 运行日志把它
+        # 印在 **`SOLVER PARAMETERS`** 标题下；SDK 侧对应 `FENewtonSolver::m_Rmin`
+        # （`FECore/FENewtonSolver.h:229`）。手册 §8.3.2.1 说「Control section」是**误导**。
+        # deck 的 Control 里正好是空的 `<solver/>` ⇒ 展开它。
+        blk = out
+        if re.search(r'<solver\s*/>', blk):
+            blk = re.sub(r'<solver\s*/>',
+                         '<solver>\r\n          <min_residual>%g</min_residual>\r\n'
+                         '        </solver>' % float(min_residual), blk, count=1)
+        elif re.search(r'<solver>', blk):
+            blk = re.sub(r'(<solver>)',
+                         r'\1\r\n          <min_residual>%g</min_residual>'
+                         % float(min_residual), blk, count=1)
+        else:
+            raise AssertionError('步内 Control 找不到 <solver>')
+        out = blk
     return out
 
 
@@ -120,6 +144,18 @@ def _root_ctrl(t: str, min_residual: float | None) -> str:
     else:
         blk2 = blk + '    <min_residual>%g</min_residual>\r\n  ' % float(min_residual)
     return t[:i] + blk2 + t[j:]
+
+
+def _drop_root_control(t: str) -> str:
+    """删除**顶层 `<Control>`**（手册 §6.1：多步分析里它不该存在）。"""
+    i = t.find('<Control>')
+    assert i > 0, '找不到顶层 <Control>'
+    j = t.find('</Control>', i)
+    assert j > i, '找不到顶层 </Control>'
+    j += len('</Control>')
+    while j < len(t) and t[j] in '\r\n':
+        j += 1
+    return t[:i] + t[j:]
 
 
 def _surgery(t: str) -> str:
@@ -195,13 +231,16 @@ def _surgery(t: str) -> str:
         + '      </Boundary>\r\n'
         + '    </step>\r\n'
     )
+    _c2 = _block('Control', after=i_step)
+    if MINIMAL_CTRL:
+        _c2 = ('<Control>\r\n        <time_steps>%d</time_steps>\r\n'
+               '        <solver/>\r\n      </Control>' % int(FORCE_STEPS))
     step2 = (
         '    <step id="2" name="force">\r\n'
-        + _ind(_ctrl_with(_block('Control', after=i_step), FORCE_STEPS,
-                          min_residual=MIN_RESIDUAL))
+        + _ind(_ctrl_with(_c2, FORCE_STEPS, min_residual=MIN_RESIDUAL))
         + '\r\n'
-        + _ind(loads)
-        + '\r\n    </step>\r\n'
+        + ('' if LOADS_GLOBAL else _ind(loads) + '\r\n')
+        + '    </step>\r\n'
     )
     # 实测：FEBio 4.13 **不认 `<Steps>`**（`unrecognized tag`）；且 `<Step>` 容器内
     # **必须**以 `<step>` 开头（`missing tag "step"`）⇒ 全局段放**顶层**、容器用 `<Step>`。
@@ -216,12 +255,15 @@ def _surgery(t: str) -> str:
         '    </load_controller>\r\n'
         '  </LoadData>\r\n'
     )
-    return _root_ctrl(head
+    if DROP_ROOT_CONTROL:
+        head = _drop_root_control(head)
+    return (head
             + '\r\n  ' + bc + '\r\n'
             + '\r\n  ' + contact + '\r\n'
+            + (('\r\n  ' + loads + '\r\n') if LOADS_GLOBAL else '')
             + '\r\n' + ramp
             + '\r\n  <Step>\r\n' + step1 + step2 + '  </Step>'
-            + tail, MIN_RESIDUAL)
+            + tail)
 
 
 def main(argv=None):
@@ -232,11 +274,18 @@ def main(argv=None):
     ap.add_argument('--pretouch-mm', type=float, default=PRETOUCH_MM)
     ap.add_argument('--pretouch-steps', type=int, default=PRETOUCH_STEPS)
     ap.add_argument('--min-residual', type=float, default=MIN_RESIDUAL)
+    ap.add_argument('--loads-global', action='store_true')
+    ap.add_argument('--drop-root-control', action='store_true')
+    ap.add_argument('--minimal-ctrl', action='store_true')
+    ap.add_argument('--out-name', type=str, default='m_2step.feb')
     args = ap.parse_args(argv)
     globals()['PRETOUCH_MM'] = float(args.pretouch_mm)
     globals()['PRETOUCH_STEPS'] = int(args.pretouch_steps)
     globals()['MIN_RESIDUAL'] = (None if args.min_residual is None
                                  else float(args.min_residual))
+    globals()['LOADS_GLOBAL'] = bool(args.loads_global)
+    globals()['DROP_ROOT_CONTROL'] = bool(args.drop_root_control)
+    globals()['MINIMAL_CTRL'] = bool(args.minimal_ctrl)
 
     t = Path(args.deck).read_bytes().decode('iso-8859-1', errors='replace')
     if args.dump:
@@ -246,7 +295,7 @@ def main(argv=None):
 
     if args.run:
         OUT_DIR.mkdir(parents=True, exist_ok=True)
-        out = OUT_DIR / 'm_2step.feb'
+        out = OUT_DIR / args.out_name
         for s in ('.xplt', '.log', '.hdf5'):
             p = out.with_suffix(s)
             if p.exists():
