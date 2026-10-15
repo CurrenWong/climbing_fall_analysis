@@ -544,6 +544,54 @@ def _build_thums_plantar_quads(mesh: dict) -> np.ndarray:
     return np.asarray(quads, dtype=np.int64)
 
 
+def _build_thums_joint_quads(mesh: dict) -> np.ndarray:
+    """从 THUMS 两域网格的 boundary 多边形里重建**距下关节面** quad4 facet。
+
+    与 :func:`_build_thums_plantar_quads` 同构、同理由（`docs/S5_contact_facet_fix.md`
+    §1.3）：距下关节面的节点也全部落在 **CORT hex8 域** 上，而
+    ``mesh['surfaces']['subtalar_joint']`` 把 quad 切成了 tri3（119 quad → 238 tri3）
+    ⇒ 挂在 hex8 域上 FEBio 报 ``invalid facets`` ⇒ **接触不承载**
+    （实测量级：帽的 y 位移爆到 7.18e12 = 完全无支撑）。
+
+    分类判据**逐字**沿用 :func:`_classify_surfaces_poly` 的 ``joint`` 分支：
+    ``dist(centroid, JOINT_CENTER_MM) < JOINT_RADIUS_MM`` 且
+    ``normal.y > JOINT_NORMAL_Y_MIN``。仅取 **CORT 属主**的 4 节点 poly，并按
+    **右手法则朝外**重排节点序（FEBio 从节点序而非存储法向算接触法向）。
+    """
+    if "elements_cort" not in mesh or "boundary_polys" not in mesh:
+        raise ValueError(
+            "mesh 不是 THUMS 两域网格（缺少 elements_cort 或 boundary_polys）。")
+    nodes = np.asarray(mesh["nodes"], dtype=np.float64)
+    polys = mesh["boundary_polys"]
+    owners = np.asarray(mesh["boundary_owners"], dtype=np.int64)
+    normals = np.asarray(mesh["boundary_normals"], dtype=np.float64)
+    cents = np.asarray(mesh["boundary_centroids"], dtype=np.float64)
+    n_cort = int(len(np.asarray(mesh["elements_cort"], dtype=np.int64)))
+
+    dist = np.linalg.norm(
+        cents - np.asarray(meshing.JOINT_CENTER_MM, dtype=float), axis=1)
+    mask = (dist < meshing.JOINT_RADIUS_MM) & (
+        normals[:, 1] > meshing.JOINT_NORMAL_Y_MIN)
+
+    quads: list[list[int]] = []
+    for i in np.flatnonzero(mask):
+        if int(owners[int(i)]) >= n_cort:
+            continue
+        poly = polys[int(i)]
+        if len(poly) != 4:
+            continue
+        q = [int(v) for v in poly]
+        p = nodes[q]
+        n_raw = np.cross(p[1] - p[0], p[2] - p[0])
+        if float(np.dot(n_raw, normals[int(i)])) < 0.0:
+            q = q[::-1]
+        quads.append(q)
+    if not quads:
+        raise ValueError(
+            "THUMS 网格距下关节 quad4 集为空（joint mask 未命中任何 CORT hex 面）。")
+    return np.asarray(quads, dtype=np.int64)
+
+
 #: G7 求解器配方（`docs/S5_contact_udg.md` §7 实测验证）。
 #: 全部 opt-in —— 默认 None ⇒ 字节级保留旧版控制块。
 _G7_TIME_STEPS = 2400
@@ -682,6 +730,11 @@ def build_thums_feb(
     contact_node_reloc: int = 0,
     contact_swap_pair: bool = False,
     contact_hold_spring_k: float | None = None,
+    joint_bc: str = "pressure",
+    joint_contact_mu: float = 0.5,
+    joint_contact_gap_mm: float = 0.5,
+    joint_cap_ndiv: int = 4,
+    joint_cap_hold_k: float | None = None,
 ) -> Path:
     """Write the two-domain THUMS calcaneus ``.feb`` (mm-N-MPa-s).
 
@@ -1056,8 +1109,58 @@ def build_thums_feb(
             load_desc += (f" + RigidMomentLoad |M|={np.linalg.norm(moment_vec):.2f} N·m "
                           f"({moment_vec[0]:.3f},{moment_vec[1]:.3f},{moment_vec[2]:.3f})")
     else:
+        # ⚠️ 顺序敏感：``st.boundary`` 必须在**所有** bcs 追加完成之后才绑定。
+        # ``apply_joint_contact`` 会往 ``bcs`` 里追加两条 BC（帽的 x/z 固定、
+        # 帽 hold 弹簧的锚点固定）⇒ 必须**先**跑它、**再**写 ``st.boundary``，
+        # 否则那两条 BC 不会出现在 deck 的 ``<Boundary>`` 里
+        # （实测：帽 150 dof 全自由 ⇒ 1e13 位移 + 8 个单元负 Jacobian）。
+        if joint_bc == "contact":
+            # --- opt-in：距下关节改「刚性距骨帽 + 真实接触」 -------------------
+            # 动因与预注册判据见 results/opensim_fe/V1_LOAD_INTRO_SINGULARITY.md §4。
+            # 载荷路径与 [Y25] 的面面接触（μ=0.5）一致；补片边界奇异被接触的
+            # KKT 条件消掉（接触牵引在边界连续过渡到 0）。
+            from climbing.coupling.joint_contact import apply_joint_contact
+
+            joint_local = np.asarray(
+                mesh["node_sets"].get(joint_face, []), dtype=np.int64)
+            joint_tris = np.asarray(
+                mesh.get("surfaces", {}).get(joint_face, []), dtype=np.int64)
+            # 接触必须用 **quad4** facet（tri3 挂在 CORT hex8 域上 ⇒
+            # FEBio ``invalid facets`` ⇒ 接触不承载）。
+            joint_q4 = _build_thums_joint_quads(mesh)
+            jc = apply_joint_contact(
+                model, nodes, joint_local, bcs,
+                joint_surface_name=joint_face,
+                load_n=float(load_n),
+                joint_tris=(joint_tris if joint_tris.size else None),
+                joint_quads=joint_q4,
+                joint_surface_name_q4=f"{joint_face}_q4",
+                mu=float(joint_contact_mu),
+                gap_mm=float(joint_contact_gap_mm),
+                cap_ndiv=int(joint_cap_ndiv),
+                penalty=float(contact_kw.get("penalty", 0.1)),
+                create_bone_surface=False,
+                cap_hold_spring_k=joint_cap_hold_k,
+            )
+            st.contact = jc["contact"]
+            surface_loads.append(
+                floads.PressureLoad(
+                    surface=jc["cap_top_surface"],
+                    pressure=floads.Scale(lc=lc_ref, text=float(jc["pressure_mpa"])),
+                )
+            )
+            load_desc = (
+                f"**刚性距骨帽 + 接触**：cap {jc['n_cap_nodes']} 节点 / "
+                f"{jc['n_cap_elems']} hex8，A_cap={jc['a_cap_mm2']:.1f} mm²，"
+                f"p_cap={jc['pressure_mpa']:.4f} MPa（F={load_n:.1f} N），"
+                f"gap={jc['gap_mm']} mm，μ={jc['mu']}，"
+                f"hold_k={jc['hold_spring_k_n_per_mm']}，"
+                f"pair={jc['pair_primary']}→{jc['pair_secondary']}"
+            )
         st.boundary = fbc.Boundary(all_bcs=bcs)
-        if wrench:
+        if joint_bc == "contact":
+            pass
+        elif wrench:
             frame = joint_face_frame(mesh, joint_face)
             fv = force_vec if force_vec is not None else load_n * d
             f_n = float(fv @ frame["normal_unit"])

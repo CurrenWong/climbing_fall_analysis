@@ -118,7 +118,41 @@
 
 ---
 
-## §6 · 溯源
+## §6 · S5 实施进展（`joint_bc="contact"`）—— **已实现并跑通，但未验收**
+
+**代码**：新增 `src/climbing/coupling/joint_contact.py`（`_build_talus_cap` /
+`_apply_cap_hold_spring` / `apply_joint_contact`）；`thums_feb.build_thums_feb` 新增
+opt-in kwarg `joint_bc="contact"`（**默认 `"pressure"` ⇒ deck 逐位不变**）、
+`joint_contact_mu` / `joint_contact_gap_mm` / `joint_cap_ndiv` / `joint_cap_hold_k`；
+新增 `_build_thums_joint_quads`（距下关节 quad4 facet 重建）。
+
+**修掉的 4 个真 bug**（每一个都使求解失败或结果无效）
+
+| # | 现象 | 根因 | 修法 |
+|---|---|---|---|
+| 1 | `A surface with name "subtalar_joint" was already defined` | builder 已建过同名 Surface | `create_bone_surface=False` 复用 |
+| 2 | 初始化 `Negative jacobian` | 帽 hex8 节点序把 y 小的一侧放前 4 位（镜像） | 改与前 4 = y 大的一侧（同 `_build_pad_floor`） |
+| 3 | 求解中 16 个单元负 Jacobian | 帽底 quad 法向算成 **+Y（朝内）** | 反序 ⇒ 叉积得 −Y（朝骨） |
+| 4 | **BC 静默丢失**（帽 150 dof 全自由 ⇒ 位移 1e13、弹簧无效） | `st.boundary = fbc.Boundary(all_bcs=bcs)` 在 `apply_joint_contact(..., bcs)` **之前**执行 | 把 joint 分支移到 `st.boundary` 绑定**之前** |
+
+**当前状态（未验收）**
+
+* ✅ 修正后 **y/μ/two_pass/gap 各组合全部收敛**（不再奇异）
+* ❌ **接触只传 ~5% 的载荷**：`joint_bc="contact"` 下 σ_max = **4.7–9.0 MPa**，
+  而 `joint_bc="pressure"`（anatframe + fixed）为 **185.64 MPa**
+* **根因（已定位）**：`_build_thums_joint_quads` 给出的关节面**纵向跨 34.0 mm**
+  （y ∈ [−20.421, 13.457]，与 `registration_anat.json` 的 `superior_extent` 逐位一致）
+  ⇒ 面是**凹的**，而帽底是**一张平面** ⇒ **只有一个最高点接触** ⇒ 无有效载荷路径
+* **正解（下一步）**：帽底**沿各 facet 节点法向偏移**（共形帽），而非取 `y.max()` 平面
+* **零回归已验**：`pytest -k "thums or plantar or contact or bone_feb or joint"`
+  ⇒ **76 passed / 2 skipped**；`j0_pressure` 复现 185.64 MPa 逐位不变
+
+**⇒ 判据 H1/H2/H3 尚未裁定**：`SC` 之所以是 0.5–0.99 而非 2–5，是**载荷没进去**的
+伪低值，**不得用作证据**。本件 §3 的奇异诊断（不依赖 S5）仍然成立。
+
+---
+
+## §7 · 溯源
 
 | 项 | 位置 |
 |---|---|
