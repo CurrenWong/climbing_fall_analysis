@@ -256,73 +256,199 @@ FEBio 为含接触的模型多写域（实测 id=4, etype=5, nelems=573，**无 
 
 2. 查 FEBio 4.13 里「零残差判定阈值」的**正确标签**（SDK 头文件 / `febio4.exe` 字符串）
 
-3. 若 Step 2 通了 ⇒ 用 `s2_thums_sweep`（接口已就绪）跑 **V1 全高度**，得新首折并与 `2 m` 对照
+3. 若 Step 2 通了 ⇒ 用 `s2_thums_sweep`（接口已就绪）跑 **V1 全高度**，得新首折并与 `2 m` 对照
+
+
+
+
+
+---
+
+
+
+## §8 · 续做（同日第三段）：**最小复现器证明「两步法机制有效」；跟骨 deck 的 Step 2 仍不加载**
+
+
+
+### 8.1 为什么需要最小复现器
+
+
+
+跟骨 2 步 deck：Step 1 通过、**Step 2 残差恒 ~1e-16**。在跟骨模型上换了 **4 种**放置都无效：
+
+
+
+| 变体 | 结果 |
+
+|---|---|
+
+| `<Loads>` 放 step 内（原） | Step 2 残差 ~1e-16 ❌ |
+
+| `<Loads>` 放**全局** | 同上 ❌ |
+
+| **删掉顶层 `<Control>`**（手册 §6.1：多步分析里不该有它） | 同上 ❌ |
+
+| Step 2 的 `<Control>` 换**最简形式**（只 `time_steps` + `solver`） | 同上 ❌ |
+
+
+
+⇒ 必须**离开跟骨模型**做隔离。
+
+
+
+### 8.2 ✅ **决定性正对照**：`min_two_step_load_test.py`（手册 §6.2 的单单元模型扩成两步）
+
+
+
+```
+
+[deck] min2step.feb   steps=2  prescribed=1  Loads=1  surfaces=1
+
+[solve] rc = 0        Number of time steps completed : 4      （2 步 × 2 增量）
+
+   Step 1（prescribe）  residual 4.160503e+02  →  5.607475e-17   ✅
+
+   Step 2（force）      residual 3.885663e+01  →  2.726570e-11   ✅★ 非零初残差！
+
+```
+
+
+
+**★★ Step 2 的「初始残差」是 38.9（载荷量级），不是 ~1e-16** ⇒
+
+**「`<Loads>` 放进 `<step>`」在 FEBio 4.13 里是生效的**，两步法机制成立。
+
+
+
+### 8.3 本段又查出两条 FEBio 4.13 语法事实
+
+
+
+| # | 事实 | 报错 |
+
+|---|---|---|
+
+| 5 | **多步模式下，每个 step 的 `<Control>` 必须带 `<solver>`** | `Component "" needs to have property "solver" defined` |
+
+| 6 | `<NodeSet>` 必须是**逗号列表**（`<NodeSet name="x">1,2,3</NodeSet>`），**不是** `<node>` 子元素 | `tag "NodeSet" : invalid value` |
+
+| 7 | `<zero displacement>` 的子标签是 `<x_dof>1</x_dof>`…，**不是 `<dofs>x,y,z</dofs>`**（手册 §6.2 示例用的是后者，4.13 不认） | `tag "dofs" : unrecognized tag` |
+
+
+
+（6/7 与仓库 `scripts/ankle_fe/ankle_lig_feb.py:1372-1374` 既有记录一致。）
+
+
+
+### 8.4 `min_residual` 的正确位置（**修正手册**）
+
+
+
+手册 §8.3.2.1 说它是 **Control section** 的参数 —— **在 FEBio 4.13 里不对**：
+
+
+
+- `<Control><min_residual>` ⇒ `unrecognized tag`（step 级、顶层都报）
+
+- **正确位置是 `<solver>` 块** —— 依据：FEBio 运行日志把它印在 **`SOLVER PARAMETERS`**
+
+  标题下；SDK 侧对应 **`FENewtonSolver::m_Rmin`**（`sdk/include/FECore/FENewtonSolver.h:229`）
+
+- 改到 `<solver>` 后**日志确认读到**：`min_residual ... : 1e-15`
+
+
+
+**但它没能解决 Step 2**（残差 1.6e-16 本已低于阈值）⇒ 说明 §8.3.2.1 的「零残差」判据
+
+**不是**这里卡住的原因。
+
+
+
+### 8.5 结论与下一步（**bisection，现在很便宜**）
+
+
+
+**已确认**：① 两步法机制在 4.13 里**有效**（§8.2 正对照）；② 跟骨 Step 1 稳定；
+
+③ 跟骨 Step 2 **载荷未进求解**（残差 ~1e-16，4 种放置皆然）。
+
+
+
+**⇒ 下一步 = 用最小复现器做 bisection**（它 0.0 s 跑完，成本可忽略）：
+
+逐个把跟骨 deck 的特征加进 `min2step`，**加到哪一步开始坏，那里就是根因**。候选增量（按怀疑度）：
+
+
+
+1. **`<Contact>` 块**（单边约束 + `pad_floor` 域）
+
+2. **`<LoadData>` + `lc="1"`**（跟骨 deck 有，最小复现器没有）
+
+3. **prescribe 三向 + 释放**（最小复现器只控 `x` 一个 dof）
+
+4. **gauge 级网格规模**（1544 节点 vs 8 节点）
+
+
+
+**替代路径**（若 bisection 指向 Contact）：回到 §3 的 `hold_spring_k` 路线 ——
+
+它**能收敛**且 σ 与 `fixed` 差 1.3%，只是 k 是自由旋钮；把它限定为**诊断口径**
+
+（而非交付口径）也许是更实际的进展。
 
 
 ---
 
-## §8 · 续做（同日第三段）：**最小复现器证明「两步法机制有效」；跟骨 deck 的 Step 2 仍不加载**
+## §9 · bisection 两轮（**6 项特征逐项加，无一项复现失败**）
 
-### 8.1 为什么需要最小复现器
+> **方法**：最小复现器（0.0 s/次）逐项吸收跟骨 deck 才有特征，**单变量**加进去，
+> 看「力步初残差」是否仍为**载荷量级**（~1e1）还是塌成 ~1e-16。
+> **脚本**：`min_two_step_bisect.py`（第一轮）、`min_two_step_contact_bisect.py`（第二轮）。
 
-跟骨 2 步 deck：Step 1 通过、**Step 2 残差恒 ~1e-16**。在跟骨模型上换了 **4 种**放置都无效：
+### 9.1 第一轮：`min_two_step_bisect.py`
 
-| 变体 | 结果 |
-|---|---|
-| `<Loads>` 放 step 内（原） | Step 2 残差 ~1e-16 ❌ |
-| `<Loads>` 放**全局** | 同上 ❌ |
-| **删掉顶层 `<Control>`**（手册 §6.1：多步分析里不该有它） | 同上 ❌ |
-| Step 2 的 `<Control>` 换**最简形式**（只 `time_steps` + `solver`） | 同上 ❌ |
+| 变体 | 加什么 | rc | **力步初残差** | 结论 |
+|---|---|---:|---:|---|
+| `v0_base` | —（已知 ✅） | 0 | **3.885663e+01** | ✅ 载荷有效 |
+| `v1_ldata` | 顶层 `<LoadData>`（lc=1，曲线 0→1） | 0 | 3.885663e+01 | ✅ |
+| `v2_3dof` | Step 1 prescribe **三向** | 0 | 6.572883e+02 | ✅ |
+| `v3_lc_load` | 压力载荷挂 `lc="1"` | 0 | 3.885663e+01 | ✅ |
+| `v4_ldata_3dof` | v1＋v2 | 0 | 6.572883e+02 | ✅ |
 
-⇒ 必须**离开跟骨模型**做隔离。
+### 9.2 第二轮：`min_two_step_contact_bisect.py`
 
-### 8.2 ✅ **决定性正对照**：`min_two_step_load_test.py`（手册 §6.2 的单单元模型扩成两步）
+两块 hex8（A 在 x∈[−2,2]、B 在 x∈[2.1,3.1]，**初始间隙 0.1**），A 右面 ⇄ B 左面 组成
+`<SurfacePair>`，`<Contact>` 放**全局**（§6.1.1）；Step 1 用 prescribed displacement 把 A
+压过去（+0.15 > 间隙）；Step 2 换力载荷。
 
-```
-[deck] min2step.feb   steps=2  prescribed=1  Loads=1  surfaces=1
-[solve] rc = 0        Number of time steps completed : 4      （2 步 × 2 增量）
-   Step 1（prescribe）  residual 4.160503e+02  →  5.607475e-17   ✅
-   Step 2（force）      residual 3.885663e+01  →  2.726570e-11   ✅★ 非零初残差！
-```
+| 变体 | primary/secondary | rc | **力步初残差** | 结论 |
+|---|---|---:|---:|---|
+| `c0_A_prim` | Aright / Bleft | 0 | **3.728475e+02** | ✅ 载荷有效 |
+| `c1_B_prim` | Bleft / Aright | 0 | 3.728475e+02 | ✅ |
+| `c2_rev` | Aright / Bleft（节点序反） | 1 | 3.728475e+02 | ❌ 失败（法向/配对面方向错） |
 
-**★★ Step 2 的「初始残差」是 38.9（载荷量级），不是 ~1e-16** ⇒
-**「`<Loads>` 放进 `<step>`」在 FEBio 4.13 里是生效的**，两步法机制成立。
+### 9.3 **结论：6 项特征全部排除 ⇒ 根因在「模型的几何/网格本体」，不在配方/结构**
 
-### 8.3 本段又查出两条 FEBio 4.13 语法事实
+**已排除**（逐项单变量，皆不破坏两步法机制）：
 
-| # | 事实 | 报错 |
-|---|---|---|
-| 5 | **多步模式下，每个 step 的 `<Control>` 必须带 `<solver>`** | `Component "" needs to have property "solver" defined` |
-| 6 | `<NodeSet>` 必须是**逗号列表**（`<NodeSet name="x">1,2,3</NodeSet>`），**不是** `<node>` 子元素 | `tag "NodeSet" : invalid value` |
-| 7 | `<zero displacement>` 的子标签是 `<x_dof>1</x_dof>`…，**不是 `<dofs>x,y,z</dofs>`**（手册 §6.2 示例用的是后者，4.13 不认） | `tag "dofs" : unrecognized tag` |
+1. `<Loads>` 放 step 内 ↔ 放全局
+2. 顶层 `<Control>` 有无
+3. Step 2 的 `<Control>` 简繁
+4. `<LoadData>` + `lc="1"`
+5. Step 1 prescribe 的 DOF 数（1 ↔ 3）
+6. **`<Contact>` + 第二块 + `<SurfacePair>`**（含 primary/secondary 两种配对）
 
-（6/7 与仓库 `scripts/ankle_fe/ankle_lig_feb.py:1372-1374` 既有记录一致。）
+**⇒ 剩下的是跟骨 deck 自身的几何/网格**：1544 节点、**cort hex8 634 + spon tet4 3323**（两域）
+＋ pad 16、真实三维形状、以及 Step 1 后留下的**已接触状态**。
 
-### 8.4 `min_residual` 的正确位置（**修正手册**）
+**⚠️ 本结果也削弱了「Step 2 载荷未进求解」这一解释的确定性** —— 6 项结构特征都不复现，
+也可能是**载荷进了但残差本征很小**（例如 Step 1 后骨已压在垫上、Step 2 的压力被垫反力部分抵消）。
+**⇒ 下一轮应先做「真·正对照」**：在跟骨 Step 2 里放一个**独立的小集中力**
+（与接触/压力面无关），看残差是否响应 —— 这能一刀切开「没进求解」与「进了但小」。
 
-手册 §8.3.2.1 说它是 **Control section** 的参数 —— **在 FEBio 4.13 里不对**：
+### 9.4 若上述仍不收敛 ⇒ **转用 `hold_spring_k` 路线**（§3）
 
-- `<Control><min_residual>` ⇒ `unrecognized tag`（step 级、顶层都报）
-- **正确位置是 `<solver>` 块** —— 依据：FEBio 运行日志把它印在 **`SOLVER PARAMETERS`**
-  标题下；SDK 侧对应 **`FENewtonSolver::m_Rmin`**（`sdk/include/FECore/FENewtonSolver.h:229`）
-- 改到 `<solver>` 后**日志确认读到**：`min_residual ... : 1e-15`
-
-**但它没能解决 Step 2**（残差 1.6e-16 本已低于阈值）⇒ 说明 §8.3.2.1 的「零残差」判据
-**不是**这里卡住的原因。
-
-### 8.5 结论与下一步（**bisection，现在很便宜**）
-
-**已确认**：① 两步法机制在 4.13 里**有效**（§8.2 正对照）；② 跟骨 Step 1 稳定；
-③ 跟骨 Step 2 **载荷未进求解**（残差 ~1e-16，4 种放置皆然）。
-
-**⇒ 下一步 = 用最小复现器做 bisection**（它 0.0 s 跑完，成本可忽略）：
-逐个把跟骨 deck 的特征加进 `min2step`，**加到哪一步开始坏，那里就是根因**。候选增量（按怀疑度）：
-
-1. **`<Contact>` 块**（单边约束 + `pad_floor` 域）
-2. **`<LoadData>` + `lc="1"`**（跟骨 deck 有，最小复现器没有）
-3. **prescribe 三向 + 释放**（最小复现器只控 `x` 一个 dof）
-4. **gauge 级网格规模**（1544 节点 vs 8 节点）
-
-**替代路径**（若 bisection 指向 Contact）：回到 §3 的 `hold_spring_k` 路线 ——
-它**能收敛**且 σ 与 `fixed` 差 1.3%，只是 k 是自由旋钮；把它限定为**诊断口径**
-（而非交付口径）也许是更实际的进展。
+`hold_spring_k` **能收敛**、且 h=5/h=2 下 σ/σ_fixed = **0.987**（k=100）；
+它的缺点只是 **k 是自由旋钮**。把它**限定为诊断口径**（明确声明「k 用于消刚体模态，
+不承载，且已在 k∈[100,1e5] 上验 σ 对 k 的敏感性」）——
+比继续追一个只在跟骨几何上出现、且已排除 6 项结构因素的现象**更可能是正路**。
