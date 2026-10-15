@@ -735,6 +735,7 @@ def build_thums_feb(
     joint_contact_gap_mm: float = 0.5,
     joint_cap_ndiv: int = 4,
     joint_cap_hold_k: float | None = None,
+    joint_cap_e_mpa: float | None = None,
 ) -> Path:
     """Write the two-domain THUMS calcaneus ``.feb`` (mm-N-MPa-s).
 
@@ -1141,6 +1142,8 @@ def build_thums_feb(
                 penalty=float(contact_kw.get("penalty", 0.1)),
                 create_bone_surface=False,
                 cap_hold_spring_k=joint_cap_hold_k,
+                **({} if joint_cap_e_mpa is None
+                   else {"cap_e_mpa": float(joint_cap_e_mpa)}),
             )
             st.contact = jc["contact"]
             surface_loads.append(
