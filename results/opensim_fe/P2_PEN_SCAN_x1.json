@@ -1,0 +1,55 @@
+{
+ "pen_mult": 1.0,
+ "heights": [
+  10
+ ],
+ "baseline_penetration": {
+  "h10": {
+   "z_plate": 329.72234473606744,
+   "z_cap_def_min": 331.3178611987733,
+   "z_cap_def_max": 340.15729632755915,
+   "pen_max_mm": 10.43495159149171,
+   "pen_median_mm": 8.327896919791385,
+   "pen_mean_mm": 7.684635473646292,
+   "pen_frac_contact": 1.0
+  },
+  "h30": {
+   "z_plate": 329.72234473606744,
+   "z_cap_def_min": 331.6458994144105,
+   "z_cap_def_max": 339.8938412717515,
+   "pen_max_mm": 10.17149653568407,
+   "pen_median_mm": 8.358500038715647,
+   "pen_mean_mm": 7.812780241195595,
+   "pen_frac_contact": 1.0
+  }
+ },
+ "regfix": {
+  "z_cap_top": 330.52234473606745,
+  "a_max": 331.756498364562,
+  "shift_mm": 1.2341536284945391
+ },
+ "rows": [
+  {
+   "h_no": 10,
+   "load_n": 19675.88361586651,
+   "penalty": 16.979152707884108,
+   "converged": true,
+   "error": null,
+   "pen": {
+    "z_plate": 329.72234473606744,
+    "z_cap_def_min": 331.3178611987733,
+    "z_cap_def_max": 340.15729632755915,
+    "pen_max_mm": 10.43495159149171,
+    "pen_median_mm": 8.327896919791385,
+    "pen_mean_mm": 7.684635473646292,
+    "pen_frac_contact": 1.0
+   },
+   "domain": "__unnamed_2",
+   "sigma_median": 209.62644010382894,
+   "sigma_p95": 897.585902802153,
+   "sigma_max": 1421.3964161364572,
+   "szz_min": -686.7243041992188,
+   "bear_frac": 1.000001845203458
+  }
+ ]
+}

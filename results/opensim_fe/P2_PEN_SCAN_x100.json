@@ -1,0 +1,64 @@
+{
+ "pen_mult": 100.0,
+ "heights": [
+  10,
+  50
+ ],
+ "baseline_penetration": {
+  "h10": {
+   "z_plate": 329.72234473606744,
+   "z_cap_def_min": 331.3178611987733,
+   "z_cap_def_max": 340.15729632755915,
+   "pen_max_mm": 10.43495159149171,
+   "pen_median_mm": 8.327896919791385,
+   "pen_mean_mm": 7.684635473646292,
+   "pen_frac_contact": 1.0
+  },
+  "h30": {
+   "z_plate": 329.72234473606744,
+   "z_cap_def_min": 331.6458994144105,
+   "z_cap_def_max": 339.8938412717515,
+   "pen_max_mm": 10.17149653568407,
+   "pen_median_mm": 8.358500038715647,
+   "pen_mean_mm": 7.812780241195595,
+   "pen_frac_contact": 1.0
+  }
+ },
+ "regfix": {
+  "z_cap_top": 330.52234473606745,
+  "a_max": 331.756498364562,
+  "shift_mm": 1.2341536284945391
+ },
+ "rows": [
+  {
+   "h_no": 10,
+   "load_n": 19675.88361586651,
+   "penalty": 1697.9152707884107,
+   "converged": true,
+   "error": null,
+   "pen": {
+    "z_plate": 329.72234473606744,
+    "z_cap_def_min": 322.51829659878246,
+    "z_cap_def_max": 330.6481810859376,
+    "pen_max_mm": 0.9258363498701669,
+    "pen_median_mm": -0.597210499699429,
+    "pen_mean_mm": -1.2876961034033443,
+    "pen_frac_contact": 0.3888888888888889
+   },
+   "domain": "__unnamed_2",
+   "sigma_median": 217.30500120045104,
+   "sigma_p95": 897.5859090251831,
+   "sigma_max": 1421.398082319827,
+   "szz_min": -692.5381469726562,
+   "bear_frac": 0.999997378282088
+  },
+  {
+   "h_no": 50,
+   "load_n": 52618.615041279685,
+   "penalty": 4540.682987892892,
+   "converged": false,
+   "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\p2_pen_scan_m100\\T6\\h50\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\p2_pen_scan_m100\\T6\\h50\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 54\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:01\n\n Peak memory  : 51.9 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.0184632 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0052344 sec)\n\n\tSolve time ...................... : 0:00:01 (1.24217 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0159587 sec)\n\n\t   serialization ................ : 0:00:00 (0.0652582 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0917824 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.366398 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.0616385 sec)\n\n\t   model update ................. : 0:00:00 (0.0762646 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0023143 sec)\n\n\t   time in linear solver ........ : 0:00:01 (0.553636 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (1.27443 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+   "pen": null
+  }
+ ]
+}
