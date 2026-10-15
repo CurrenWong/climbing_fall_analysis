@@ -125,11 +125,15 @@ T6 h=10 → penalty 仅 **16.98**（股骨 h=50 为 50，且股骨的接触域�
 **与 ×1（0 步）比是巨大改善**，但**残差仍是负 Jacobian（局部元素倒置）**，属 auditlab 页所说
 「跑了一段后因变形过大而失败」那一类。候选（**均未验证**）：
 
-1. **皮质壳过厚** —— FEBio 手册 **§8.3.1.4 + L1981**：
+1. ~~**皮质壳过厚**~~ ⛔ **【已作废 —— 几何前提不成立，见 `P2_H50_RESIDUAL.md` §4】** —— FEBio 手册 **§8.3.1.4 + L1981**：
    > 「When a shell gets **too thick** it can create negative Jacobians in the out-of-plane integration points, especially in areas of high curvature… you may need to **remesh the affected area, adjust the shell thickness** or even **replace the shells with solid elements**.」
    > 「It is the user's responsibility to ensure that the **shell thickness is less than that of the solid element**; otherwise a negative Jacobian error will be automatically generated.」
 
-   **T6 实测**：皮质 **1.5 mm** vs 实体单元特征边长 **1.72 mm**（比 **0.87**）⇒ **正落在「同一量级」的告警区间**（b1 闸门 3 已量）。
+   ~~**T6 实测**：皮质 **1.5 mm** vs 实体单元特征边长 **1.72 mm**（比 **0.87**）⇒ **正落在「同一量级」的告警区间**（b1 闸门 3 已量）。~~
+   **更正（10-15 晚）**：1.72 mm ＝ 中位单元体积 5.06 mm³ 的**立方根**（等效立方体），
+   对四面体**系统性偏小**；按手册要求的量（**壳下实体单元高**）实测 **中位 2.965 mm**
+   ⇒ 比值 **0.506**（**不在**告警区间），违例 **34/1418 = 2.4%**，且腰椎 L3 同款架构 **0.487**。
+   ⇒ **该候选不成立**。
    **且这是 T6 独有的**（股骨皮质是 solid，无此风险）⇒ **可能是 h=50 残差的主因**。
 
 2. **步长** —— 手册 §8.3.1.2：减小初始/最小步长。
@@ -234,6 +238,6 @@ T6 h=10 → penalty 仅 **16.98**（股骨 h=50 为 50，且股骨的接触域�
 | 接触注入 | `scripts/opensim_fe/p5_head_contact.py:213-226` |
 | 载荷带 | `scripts/opensim_fe/p2_head_contact.py:86-110`（`end_nodes`，`LOAD_FRAC=0.20`） |
 | 横向支撑实现（硬 Dirichlet 带） | `scripts/opensim_fe/bone_feb.py:996-1020` |
-| 皮质 1.5 mm vs 单元 1.72 mm | `P2_BC_SCOPE_INVENTORY.md` §5quater 闸门 3 |
+| ~~皮质 1.5 mm vs 单元 1.72 mm~~ ⛔**已作废** | `P2_H50_RESIDUAL.md` §4（旧记 `P2_BC_SCOPE_INVENTORY.md` §5quater 闸门 3 口径错） |
 | P1-a 1054 MPa 点载荷伪影（同类） | `P2_BC_SCOPE_INVENTORY.md` §5bis |
 | 股骨穿透 0.060 mm（正对照） | `P2_BC_SCOPE_INVENTORY.md` §6.2 假设③ |
