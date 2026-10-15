@@ -99,6 +99,31 @@ tags: [FE, FEBio, BC, 屈曲, sigma口径, 陷阱, G4, G9, 腓骨]
 | **FEBio 弹簧接地面**：偏移 d 必须 ≫ 位移 | 长度 ≈ `d − ux + (uy²+uz²)/(2d)`；d=1e-3 mm 时刚弹簧变**刚性系绳**、把骨轴向夹死（vm 0.1 MPa、\|u\|≈0）。取 d=1000 mm 可忽略 |
 | 6-tet 体积只是**符号代理**，强翘曲面片会骗过它 | 真判据 = 三线性 hex8 的 **detJ>0**（8 角点 + 2×2×2 Gauss） |
 
+### 6b. pyfebio / deck 构造的约定坑（2026-10-15 新增，5 条全部实测踩到）
+
+> 来源：S5/S7/S10「距下关节改刚性距骨+真实接触」与「细化两域模型」两轮实现。
+> 每条都**实际导致求解失败或结果无效**，且**报错信息不指向真因**。
+
+| # | 坑 | 判据 / 修法 |
+|---|---|---|
+| **B1** | 🔴 **双 `<Control>` 块**：pyfebio 会**同时**发射 top-level `Model.control_` 与 **step 内 `<Control>`**，而 **FEBio 取 step 级** | ⇒ ①`pyfebio.control.Control(...)` 传 `time_steps`/`step_size`/`opt_iter`/`time_stepper` 可能**被静默忽略**；②**后处理改 deck 必须改「所有」`<Control>` 块**（非贪婪 `re.search` 只改第一块 = 完全无效）。**判据**：FEBio 日志 `CONTROL DATA` 段的 `time_steps` / `step_size` 是否等于你意图的值。见 `thums_feb.py:964-969` 注释 |
+| **B2** | **重名 `<Surface>`**：builder 已建过同名面后再建 ⇒ FEBio 直接拒绝 | `A surface with name "X" was already defined` ⇒ 复用已有面（`create_bone_surface=False`），不要重复 `add_surface` |
+| **B3** | **hex8 节点序镜像** ⇒ 初始化即报 `Negative jacobian detected during mesh initialization` | 前 4 个节点 = 一个面、后 4 = 另一面；**与 `plantar_bc._build_pad_floor` 同款**（那里前 4 = y 较大的一侧）。**数值判据**：算 hex8 有符号体积，负则反转（`joint_contact._hex8_signed_volume`） |
+| **B4** | 🔴 **`st.boundary` 绑定过早** ⇒ 之后 `bcs.append(...)` **静默无效** | `st.boundary = fbc.Boundary(all_bcs=bcs)` 之后追加的 BC **不会进 deck**。**判据**：数 deck 里 `<bc ` 的个数是否等于你追加的条数（本案例：应为 3、实际 1）。修法：把追加 BC 的调用移到绑定**之前**。**症状极具误导性**——帽 150 个 DOF 全自由 ⇒ 位移爆到 **1e13**、弹簧看起来"完全无效"、单元倒置 |
+| **B5** | **接触面法向必须朝配偶面**；朝反 ⇒ 求解中单元倒置（`N negative jacobians detected`） | 用叉积复算：quad `[v1,v2,v3,v4]` 的法向 = `(v2−v1)×(v3−v1)`。**朝骨/朝板要显式算，不能靠"看起来对"**——本案例第一版写反，导致 16 个帽单元全部倒置 |
+
+**配套两条（接触专属）**
+
+* **C1 · tri3 facet 挂在 hex8 域上 ⇒ FEBio `invalid facets` ⇒ 接触完全不承载**（老坑，见
+  `docs/S5_contact_facet_fix.md` §1.3）。修法 = **按 boundary_polys 重建 quad4 facet**
+  （`_build_thums_joint_quads` / `_build_thums_plantar_quads`）。
+  **判据**：接触路径下"接触力/总载荷"应 ≈1；若 ≈0 且位移爆 1e12 ⇒ 先查这条。
+* **C2 · 单向接触 + 某个 DOF 无支撑 ⇒ 刚度矩阵奇异**（位移爆 1e12~1e13）。
+  修法 = 给该 DOF 挂**很弱**的 hold 弹簧。**但 k 有窗口**：k **太大**会"**偷**"载荷
+  —— 帽 296 节点 × 100 N/mm = **29600 N/mm**（比骨侧接触路径更硬）⇒ 帽坐在弹簧上、
+  压根没压到骨（σ_max≈0）。实测窗口：**k=0.01 N/mm/节点可用；1e-3 不收敛；1.0 偷载荷**。
+  **判据**：报「弹簧总反力 / 总载荷」之比，须 ≪1。
+
 ## 7. 三条纪律（本轮全部踩到并靠它们纠错）
 
 1. **每个判据都要有正对照**：k→∞ 必须复现硬 BC 结果（实测 31.7 vs 31.6 MPa ✓）；
@@ -118,3 +143,14 @@ tags: [FE, FEBio, BC, 屈曲, sigma口径, 陷阱, G4, G9, 腓骨]
 - 脚本：`scripts/opensim_fe/g4_fe_areascan.py`、`g4_fe_pilot_guided.py`
 - 结果 json：`results/opensim_fe/G4_FE_AREASCAN_{full,valid100,loadsweep,lin100,bcscan,latscan,latarea,kscan}.json`、
   `G4_FE_PILOT_GUIDED_{ctrl2,full_phys,full_frozen,guidesweep,sharefull,sharefull_g60}.json`
+
+**§6b（deck 构造 5 条 + 接触 2 条）的证据索引（2026-10-15）**
+
+- 实现：`src/climbing/coupling/joint_contact.py`（`_build_talus_cap` / `_build_conforming_cap` /
+  `_hex8_signed_volume` / `_apply_cap_hold_spring` / `apply_joint_contact`）、
+  `scripts/opensim_fe/thums_feb.py`（`joint_bc="contact"` 分支、`_build_thums_joint_quads`）
+- 提交：`76d3330`（S5 首版 + B1~B5 逐个修）、`e1c5cd4`（S7b 找到 C2 的 k 窗口）
+- 报告：`results/opensim_fe/V1_LOAD_INTRO_SINGULARITY.md` **§6**（5 bug 表 + 结果表）、**§8**（S10）
+- 相关闸门：`docs/notes/FE_PRESOLVE_GATES.md` **闸门 3**（D1~D4 同款坑）
+- 老坑交叉：`docs/S5_contact_facet_fix.md` §1.3（C1：tri3 挂 hex8 ⇒ `invalid facets`）
+

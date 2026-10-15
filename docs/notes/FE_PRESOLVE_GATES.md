@@ -97,6 +97,20 @@ patch 根本没生效**（日志里 `载荷端 n=59` 未变即证据）。
 2. 若「结果没变」，**先证 patch 生效**，再解释为「无影响」
 3. 默认参数（`def f(x=GLOBAL)`）**不可**通过改 `GLOBAL` 覆盖 —— 须 wrap 函数本身
 
+**同款坑（2026-10-15 新增，deck 层）——四个变体，全部实测**
+
+| 变体 | 症状 | 判据 |
+|---|---|---|
+| **D1 · 双 `<Control>` 块**：pyfebio 同时发射 top-level `Model.control_` 与 **step 内 `<Control>`**，**FEBio 取 step 级** | ①`Control(time_steps=…, cutback=…)` 被**静默忽略**（跑的是默认 10 步 / `opt_iter=11`）；②后处理改 deck 时**只改了第一块** ⇒ 完全无效 | **看 FEBio 日志 `CONTROL DATA` 段**的 `time_steps`/`step_size` 是否等于意图值；改 deck 时用 `finditer` 改**所有** `<Control>`（`thums_feb.py:964-969`） |
+| **D2 · `st.boundary` 绑定过早** | 之后 `bcs.append(...)` **静默无效** ⇒ 该 node set 的 DOF 全自由，位移爆 **1e13**、挂的弹簧「看起来完全无效」、单元倒置 | **数 deck 里 `<bc ` 的个数**是否等于追加条数（本案例应为 3、实际 1）；修法 = 追加 BC 的调用移到 `st.boundary = …` **之前** |
+| **D3 · 重名 `<Surface>`** | FEBio 直接拒绝：`A surface with name "X" was already defined` | 复用已有面（`create_bone_surface=False`），不要重复 `add_surface` |
+| **D4 · hex8 节点序镜像** | 初始化即 `Negative jacobian detected during mesh initialization` | 前 4 节点 = 一个面、后 4 = 另一面（同 `plantar_bc._build_pad_floor`）；**数值判据** = hex8 有符号体积为负则反转 |
+
+**⇒ 一般化**：**闸门 3 的「打印受控量」必须延伸到 deck 层** ——
+「你传的参数」≠「deck 里写的」≠「FEBio 读到的」是**三个**不同的东西，
+**每一跳都要有证据**（对象字段 → deck 文本 → 求解器日志）。同类清单见
+`docs/notes/FE_BC_GOTCHAS.md` **§6b**。
+
 ---
 
 ## 闸门 4 · **加载时序自检** —— `lc(0)` 到底是不是 0
