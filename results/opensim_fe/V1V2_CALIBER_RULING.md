@@ -1,6 +1,6 @@
 # V1 / V2 口径**裁定**（生效）
 
-> **日期**：2026-10-16 ｜ **性质**：**口径裁定**（记口径，不记 PASS/FAIL；与
+> **日期**：2026-10-15 ｜ **性质**：**口径裁定**（记口径，不记 PASS/FAIL；与
 > `A2_CONVENTION_RULING.md` / `A2_AGGREGATION_RULING.md` 同级）
 > **经用户拍板「按推荐落库」**（原提案件：`V1V2_CALIBER_PREREG_DRAFT.md`，已被本件取代）
 > **机读依据**：`results/opensim_fe/V1V2_CALIBER_TABLE.json`（`scripts/opensim_fe/v1v2_caliber_table.py`）
@@ -56,7 +56,7 @@
 
 S2 `gauge_max` 的峰值单元 **h=1..5 恒为同一单元 #378**，质心 (33.36, −0.94, −16.67)，
 距**跖面**（三向全固定）**2.99 mm** ⇒ **固定端夹持边缘人造热点**，非解剖骨折部位
-（`results/opensim_fe/V1_RERUN_20261016.md` §0bis(1)）。
+（`results/opensim_fe/V1_RERUN_20261015.md` §0bis(1)）。
 
 **⇒ 修跖面 BC 是唯一能同时去掉伪影、并把 V1 推向真实值的路径**（裁定 4）。
 
@@ -133,7 +133,7 @@ S2 `gauge_max` 的峰值单元 **h=1..5 恒为同一单元 #378**，质心 (33.3
 | `docs/methods/方案更新_v2.md` | 同上（V1/V2 两行） |
 | `docs/reports/最终结论_2026-10-10.md` | §八.1（V1）+ V2 相关行 |
 | `docs/paper/论文v2_出处索引.md` | V1/V2 两行 |
-| `results/opensim_fe/V1_RERUN_20261016.md` | §0bis(4) 指向本件 |
+| `results/opensim_fe/V1_RERUN_20261015.md` | §0bis(4) 指向本件 |
 | 本件取代 | `V1V2_CALIBER_PREREG_DRAFT.md`（提案，留档） |
 
 ## §6 · 溯源与边界
@@ -144,7 +144,7 @@ S2 `gauge_max` 的峰值单元 **h=1..5 恒为同一单元 #378**，质心 (33.3
 | [Y25] 判据口径 | `docs/reports/对齐_Y25_假设与结论.md` §1 ③ |
 | 失效模式 ↔ 口径 | `A2_AGGREGATION_RULING.md` §2.1 |
 | V2 现用依据 | `scripts/validate_vs_fem.py:206-215`、`results/vs_fem_thresholds.txt` |
-| V1 实跑 / 热点 | `results/opensim_fe/V1_RERUN_20261016.md` |
+| V1 实跑 / 热点 | `results/opensim_fe/V1_RERUN_20261015.md` |
 | 冻结矩阵 | `results/opensim_fe/fracture_matrix_bc2.json` |
 
 **边界**：①「首折」用**逐高度二值**（σ>σ_c 的首个高度），未做内插；

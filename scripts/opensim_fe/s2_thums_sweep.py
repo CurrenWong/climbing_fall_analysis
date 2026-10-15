@@ -136,11 +136,11 @@ def _solve_case(
     ``f_sub``/``t1`` come from ``_load_at(h)`` (once per height, shared by all
     activations) — exactly the loop shape of ``s3_achilles_sweep.py``.
 
-    ``contact_hold_spring_k``（**2026-10-16 新增**）：跖面接触是单边约束，gap 未
+    ``contact_hold_spring_k``（**2026-10-15 新增**）：跖面接触是单边约束，gap 未
     闭合前骨无切向支撑 ⇒ 欠约束（FEBio 手册 §8.1.3 / §8.3.1.5）⇒ 负 Jacobian。
     ``plantar_bc.py`` 自带弱 hold 弹簧开关（默认 ``None``＝关）。**实测 k≥10 N/mm
     即收敛，且 k∈[10,1000] 时 σ 只动 0.3% ⇒ 该弹簧不承载、纯消刚体模态**
-    （见 ``results/opensim_fe/PLANTAR_CONTACT_FIX_20261016.md``）。
+    （见 ``results/opensim_fe/PLANTAR_CONTACT_FIX_20261015.md``）。
     """
     from climbing.coupling import fe_post
     from climbing.coupling.febio_run import run_febio

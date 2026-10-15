@@ -1,4 +1,4 @@
-# 跖面接触 BC 修复探针（②）—— 2026-10-16
+# 跖面接触 BC 修复探针（②）—— 2026-10-15
 
 > **触发**：口令「按推荐落库」后的待办 ②「**修跖面 BC**（手册 §8.1.3 / §8.5）」。
 > **工具**：`scripts/opensim_fe/plantar_contact_fix_probe.py`
@@ -150,4 +150,4 @@ FEBio 为含接触的模型多写域（实测 id=4, etype=5, nelems=573，**无 
 | 接触实现 | `src/climbing/coupling/plantar_bc.py::_apply_contact`（`hold_spring_k` 默认 `None`） |
 | sweep 接口 | `scripts/opensim_fe/s2_thums_sweep.py`（`--contact-hold-spring-k/--contact-gap-mm/--contact-swap-pair`） |
 | 手册 | `temp/thums/febio_manual.txt` §8.1.3(L15765) · §8.2(L15783) · §8.3.1.4/.5(L15832) · §8.5.3(L15980) |
-| 前序 | `results/opensim_fe/V1_RERUN_20261016.md`（`plantar_bc="contact"` 不收敛、6 个皮质 hex8） |
+| 前序 | `results/opensim_fe/V1_RERUN_20261015.md`（`plantar_bc="contact"` 不收敛、6 个皮质 hex8） |

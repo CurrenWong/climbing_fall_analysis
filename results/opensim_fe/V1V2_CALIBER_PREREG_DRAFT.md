@@ -1,13 +1,13 @@
 # V1 / V2 口径预注册（提案 · **已被裁定件取代**）
 
-> ⛔ **2026-10-16：本件已被 `V1V2_CALIBER_RULING.md` 取代**（用户拍板「按推荐落库」）。
+> ⛔ **2026-10-15：本件已被 `V1V2_CALIBER_RULING.md` 取代**（用户拍板「按推荐落库」）。
 > 现行裁定：**V1 = ❌【口径不可复现】**（报口径表）；**V2 的 ✅ 限定为「1D 截面 × 组 A」并并列记「FE 线未通过」**；**不接受**以 `median` 判 V1；**继续**修跖面 BC。
 > 本件**留档为提案历史**，勿据以引用判定。
 
-> **日期**：2026-10-16 ｜ **性质**：**提案**（不自行改判；判据口径须拍板后生效）
+> **日期**：2026-10-15 ｜ **性质**：**提案**（不自行改判；判据口径须拍板后生效）
 > **缘起**：用户二问「为什么 V1 是按照 max，在论文确认过吗，V2 也确认」⇒ 追查发现
 > **V1/V2 的口径从未被裁定**（A2 有 `A2_AGGREGATION_RULING.md`，V1/V2 没有）。
-> **前件**：`results/opensim_fe/V1_RERUN_20261016.md` §0bis(4)、
+> **前件**：`results/opensim_fe/V1_RERUN_20261015.md` §0bis(4)、
 > `docs/reports/对齐_Y25_假设与结论.md` §1 ③、`results/opensim_fe/A2_AGGREGATION_RULING.md` §2.1
 > **产物**：`results/opensim_fe/V1V2_CALIBER_TABLE.json`（本件全部数字的机读源）
 
@@ -54,7 +54,7 @@
 | 1D 截面（`validate_vs_fem`） | **>40 m** | `results/vs_fem_thresholds.txt`（自述高估 17–34×） |
 | 矩阵 BC2 `max` / `p95` | 1 m / 2 m | 表 1.1 |
 | 矩阵 BC2 `mean` / `median` | 12 m / **13 m** | 表 1.1 |
-| **S2 单骨 `gauge_max`（ℓ=4 mm）** | **3 m（旧链）→ 2 m（当前链）** | `S2_THUMS_REPORT_ANAT.md` / `V1_RERUN_20261016.md` |
+| **S2 单骨 `gauge_max`（ℓ=4 mm）** | **3 m（旧链）→ 2 m（当前链）** | `S2_THUMS_REPORT_ANAT.md` / `V1_RERUN_20261015.md` |
 | 1D 纯轴向 + 子区域强度 | 足 **8 m** / 腓 7 m | `场景探索结论.md:23` |
 | 旧整足 FE（gauge ℓ=4 mm） | 26.5 m | `OpenSim_FE交接.md:160` |
 
@@ -153,7 +153,7 @@
 | [Y25] 判据口径 | `docs/reports/对齐_Y25_假设与结论.md` §1 ③ |
 | 失效模式 ↔ 口径 | `results/opensim_fe/A2_AGGREGATION_RULING.md` §2.1 |
 | A2 口径裁定（**仅 A2**） | `results/opensim_fe/A2_AGGREGATION_RULING.md` §0、`A2_CONVENTION_RULING.md` |
-| V1 实跑与热点 | `results/opensim_fe/V1_RERUN_20261016.md` |
+| V1 实跑与热点 | `results/opensim_fe/V1_RERUN_20261015.md` |
 | V2 现用依据 | `scripts/validate_vs_fem.py:206-215`、`results/vs_fem_thresholds.txt` |
 | 冻结矩阵 | `results/opensim_fe/fracture_matrix_bc2.json` |
 

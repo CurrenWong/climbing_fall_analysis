@@ -1,4 +1,4 @@
-# S2-THUMS · AM50 跟骨刚性地面全高度扫描（Option C） · v1rerun20261016
+# S2-THUMS · AM50 跟骨刚性地面全高度扫描（Option C） · v1rerun20261015
 
 **模型**：`temp\opensim_fe\thums_calcaneus\calcaneus_r_anatframe.npz`（AM50 THUMS 右跟骨，mm，OpenSim `calcn_r` 帧；原点 = 距下关节面质心）。
 双材料域：皮质 `calcaneus`（hex8，E=15000 MPa，ν=0.30）+ 松质 `trabecular`（tet4，E=73.4 MPa，ν=0.45）。
@@ -51,6 +51,6 @@ h -> ground_reaction(h) -> run_dead_drop(grf) -> subtalar_reaction(fall, grf, si
 
 ## 产物
 
-- `s2_thums_height_sweep_v1rerun20261016.json` / `.csv`
-- `s2_thums_height_sweep_v1rerun20261016.png`
-- `S2_THUMS_REPORT_V1RERUN20261016.md`（本文件）
+- `s2_thums_height_sweep_v1rerun20261015.json` / `.csv`
+- `s2_thums_height_sweep_v1rerun20261015.png`
+- `S2_THUMS_REPORT_V1RERUN20261015.md`（本文件）

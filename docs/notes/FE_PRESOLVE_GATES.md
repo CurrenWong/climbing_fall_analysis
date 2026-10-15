@@ -236,14 +236,14 @@ that of the solid element**; otherwise a negative Jacobian error will be **autom
 
 ## 闸门 9 · **报数字必须带口径标签**（与统计量、域、BC 一起报）
 
-> **2026-10-16 立。起因：同一小时内我犯了两次同一个错**（见下），故从 `learnings/` **升格为闸门**。
+> **2026-10-15 立。起因：同一小时内我犯了两次同一个错**（见下），故从 `learnings/` **升格为闸门**。
 
 **反例（真实发生）**：
 1. 报「实体单元特征边长 **1.72 mm**」—— 实为**中位单元体积的立方根**；换成正解要用的量
    （**壳下实体单元高**）后是 **2.965 mm ⇒ 比值 0.51 而非 0.87**，结论反转（`LRN-114`）。
 2. 报「跟骨**首折 2 m**」—— 未说这是 **`max`/`gauge_max` 家族**；按项目现行口径 **`median` 是 13 m**。
    用户立刻反问「跟 V2 不矛盾吗」⇒ **若真按 2 m，V2（<7 m 无骨折）就被违反**。
-   （`LRN-126` + `results/opensim_fe/V1_RERUN_20261016.md` §0bis）
+   （`LRN-126` + `results/opensim_fe/V1_RERUN_20261015.md` §0bis）
 
 **规矩**：任何**数字型结论**，必须在**同一句**里给出：
 1. **统计量 / 定义**（`median` / `max` / `p95` / `gauge_max` / `V^(1/3)` / 棱长 / 法向高度…）；
@@ -311,7 +311,7 @@ that of the solid element**; otherwise a negative Jacobian error will be **autom
 | **闸门 8 依据（载荷施加）** | `results/opensim_fe/P2_H50_FIX_FROM_MANUAL.md` |
 | **闸门 9 依据（口径）** | `results/opensim_fe/V1V2_CALIBER_RULING.md` · `A2_AGGREGATION_RULING.md` §2.1 |
 | T6 根因件 | `results/opensim_fe/P2_T6_ROOTCAUSE.md` |
-| V1 实跑/热点 | `results/opensim_fe/V1_RERUN_20261016.md` |
+| V1 实跑/热点 | `results/opensim_fe/V1_RERUN_20261015.md` |
 | 穿透/σ 病件 | `results/opensim_fe/P2_V2_PEN_SIGMA_ROOTCAUSE.md` |
 | FEBio 手册依据 | §8.1.1（首步前负 Jacobian）· §8.1.3（过约束）· §8.3.1.4 + L1981（壳厚）· §8.3.1.5（刚体模态）· §8.5（接触）· L4557/L13929（罚语义） |
 | 判据出处 | `docs/notes/FE_BC_GOTCHAS.md`（本仓库既有陷阱集） |
