@@ -1,0 +1,59 @@
+{
+ "probe": "T6 regfix 指定高度实测",
+ "heights": [
+  5,
+  6,
+  17
+ ],
+ "sigma_c_mpa": 150.0,
+ "rows": [
+  {
+   "h_no": 5,
+   "load_n": 13482.258803487337,
+   "penalty": 11.634411726598588,
+   "converged": true,
+   "error": null,
+   "domain_h5": "__unnamed_2",
+   "sigma_median": 143.7328476208209,
+   "sigma_p95": 608.4011081305887,
+   "sigma_max": 957.0885715809665,
+   "szz_min": -477.3451232910156,
+   "szz_max": 18.198726654052734,
+   "fracture": false,
+   "bear_frac": 1.000000433528999,
+   "R_axis_check": 4.335289989758602e-07
+  },
+  {
+   "h_no": 6,
+   "load_n": 14757.959153488504,
+   "penalty": 12.735267549648094,
+   "converged": true,
+   "error": null,
+   "domain_h5": "__unnamed_2",
+   "sigma_median": 157.33186286428702,
+   "sigma_p95": 667.3073777727525,
+   "sigma_max": 1050.7569393232916,
+   "szz_min": -521.0136108398438,
+   "szz_max": 20.323972702026367,
+   "fracture": true,
+   "bear_frac": 1.0000001870566226,
+   "R_axis_check": 1.870566226227689e-07
+  },
+  {
+   "h_no": 17,
+   "load_n": 26975.536557882024,
+   "penalty": 23.278332172286454,
+   "converged": true,
+   "error": null,
+   "domain_h5": "__unnamed_2",
+   "sigma_median": 288.85142339499663,
+   "sigma_p95": 1261.1914702033525,
+   "sigma_max": 2018.8425321183674,
+   "szz_min": -924.4205322265625,
+   "szz_max": 44.18173599243164,
+   "fracture": true,
+   "bear_frac": 1.000002337358252,
+   "R_axis_check": 2.337358252019842e-06
+  }
+ ]
+}
