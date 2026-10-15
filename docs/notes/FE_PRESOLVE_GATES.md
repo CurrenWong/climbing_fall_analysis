@@ -9,6 +9,37 @@
 
 ---
 
+## §0 · **先查手册与网络，再下「不可修」结论**（2026-10-15 立的规矩）
+
+> **起因**：`h=50` 不收敛，我连试 9 条修法无效后写下「**这是模型承载能力上限，不是求解器缺口**」。
+> 用户一句「**从网页和手册找办法**」把它推翻了 —— 真因是**载荷施加方式**（59 个 891.8 N 点力），
+> 铺开即成 **4/4**。**手册第 8 章整章就是为这类问题写的，我该先查。**
+
+**规矩（遇到任何 FEBio 问题，按此顺序）**：
+
+1. **查本地手册**（§8 Troubleshooting 优先）：
+   - 文本：`temp/thums/febio_manual.txt`（18593 行，可 grep）
+   - PDF：`D:\Program\FEBioStudio\doc\{FEBio_User_Manual,FEBio_Theory_Manual,FEBioStudio_User_Manual}.pdf`
+   - **关键章节**：§8.1 跑之前（网格/材料/BC）· §8.2 调试（`-g`/`-g2`）· **§8.3 常见问题**
+     （倒置/不收敛/接触）· §8.4 动力学（false transient）· §8.5 接触（罚 / AUGLAG / 初始分离）·
+     §2.3 命令行 · §2.5 + §9 配置项 · §3.3 求解器参数 · **§3.9 网格自适应（erosion / mmg_remesh /
+     tet_refine / hex_refine + 判据 max_damage / stress / contact_gap）**
+2. **查网络**：FEBio 官方文档（`febio.org` 手册在线版）/ audilab FEBio FAQ /
+   **FEBio 官方论坛 `forums.febio.org`** / FEBio Studio webinar / GIBBON 等开源项目 issue
+3. **查完再列候选，逐条单变量实跑**
+4. **只有把「几何 / 材料 / 载荷施加 / 约束 / 接触 / 求解器 / 网格」七个环节逐个划掉**，
+   才允许下「模型上限」这类**不可修**结论
+5. **新坑写回本件 + `MEMORY.md` + `.learnings/`**
+
+**核心工具（手册 §8.3.1 / §2.3）**：
+
+```text
+febio4 -i x.feb -output_negative_jacobians=200      # 逐条打印倒置单元
+febio4 -i x.feb -g2                                 # 只输出导致失败的那个非收敛状态
+```
+
+---
+
 ## 闸门 1 · 接触注册自检 —— **压板到底压没压到**
 
 **工具**：`scripts/opensim_fe/contact_registration_audit.py`（**零 FE、只读、自带正对照**）
