@@ -1,0 +1,100 @@
+{
+ "probe": "P2 修法1 单变量 · 能力门正式判定",
+ "fix": "压板 z 注册基准: a_max(顶带节点集) -> 保留 cap 面片自身最高点（下移 1.2342 mm）",
+ "harness_gotcha": "official_domain=shell_t6_cort 但 h5 键=__unnamed_2（.feb 域名与 post_process 命名不符）⇒ domain_stat 直接 KeyError",
+ "criteria": {
+  "bear": [
+   0.8,
+   1.2
+  ],
+  "r2_min": 0.2,
+  "bend": "(r2>=R2_MIN) OR (szz_max>0)"
+ },
+ "n_converged": 3,
+ "n_pass": 3,
+ "n_total": 4,
+ "rows": [
+  {
+   "dir": "h10",
+   "load_n": 19675.88361586651,
+   "penalty": 16.979152707884108,
+   "converged": true,
+   "domain_h5": "__unnamed_2",
+   "domain_official": "shell_t6_cort",
+   "median_mpa": 209.62644010382894,
+   "p95_mpa": 897.585902802153,
+   "max_mpa": 1421.3964161364572,
+   "szz_min_mpa": -686.7243041992188,
+   "szz_max_mpa": 29.162132263183594,
+   "r2_linear": 0.09858372369814927,
+   "bear_frac": 1.000001845203458,
+   "R_axis_check": 1.8452034581010815e-06,
+   "contact_newton3_resid_n": 0.0,
+   "dis_z_max_mm": 15.771080017089844,
+   "dis_xy_max_mm": 0.5362927733001013,
+   "judge": {
+    "pass": true,
+    "reasons": [],
+    "bear_ok": true,
+    "bend_ok": true
+   }
+  },
+  {
+   "dir": "h20",
+   "load_n": 29794.058861567744,
+   "penalty": 25.71055435550095,
+   "converged": true,
+   "domain_h5": "__unnamed_2",
+   "domain_official": "shell_t6_cort",
+   "median_mpa": 319.76775677082253,
+   "p95_mpa": 1410.7350066694028,
+   "max_mpa": 2276.9125866249087,
+   "szz_min_mpa": -1013.3108520507812,
+   "szz_max_mpa": 52.68558883666992,
+   "r2_linear": 0.06714436457210471,
+   "bear_frac": 1.0000024820697508,
+   "R_axis_check": 2.482069750861495e-06,
+   "contact_newton3_resid_n": 0.0,
+   "dis_z_max_mm": 19.6270751953125,
+   "dis_xy_max_mm": 0.8057573434618867,
+   "judge": {
+    "pass": true,
+    "reasons": [],
+    "bear_ok": true,
+    "bend_ok": true
+   }
+  },
+  {
+   "dir": "h30",
+   "load_n": 38257.2531077998,
+   "penalty": 33.01380285547597,
+   "converged": true,
+   "domain_h5": "__unnamed_2",
+   "domain_official": "shell_t6_cort",
+   "median_mpa": 416.2532939320695,
+   "p95_mpa": 1919.9252677077097,
+   "max_mpa": 3298.892931279354,
+   "szz_min_mpa": -1268.7034912109375,
+   "szz_max_mpa": 89.7269058227539,
+   "r2_linear": 0.034385299897284005,
+   "bear_frac": 1.0000031861200243,
+   "R_axis_check": 3.1861200242828566e-06,
+   "contact_newton3_resid_n": 0.0,
+   "dis_z_max_mm": 23.93543815612793,
+   "dis_xy_max_mm": 1.0226234498834632,
+   "judge": {
+    "pass": true,
+    "reasons": [],
+    "bear_ok": true,
+    "bend_ok": true
+   }
+  },
+  {
+   "dir": "h50",
+   "load_n": 52618.615041279685,
+   "penalty": 45.40682987892892,
+   "converged": false,
+   "note": "无 h5（求解未产生产物）"
+  }
+ ]
+}

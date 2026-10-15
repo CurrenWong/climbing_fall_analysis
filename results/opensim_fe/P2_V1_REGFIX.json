@@ -1,0 +1,123 @@
+{
+ "probe": "P2 V1 修法1 单变量（压板注册基准修正）",
+ "single_variable": "z_wall 基准: a_max(顶带节点集) -> cap 面片自身最高点",
+ "frozen_else": {
+  "GAP_MM": -0.3,
+  "PLATE_DISP_MM": 0.5,
+  "TOP_FRAC": 0.3,
+  "LOAD_FRAC": 0.2,
+  "CAP_AXDIV_MIN": 0.5,
+  "penalty_formula": "50 * F_ref / 57941.3",
+  "fric": 0.0,
+  "lateral_support": [
+   [
+    0.05,
+    0.95
+   ]
+  ],
+  "n_anchor": 3
+ },
+ "regfix": {
+  "z_cap_top": 330.52234473606745,
+  "a_max": 331.756498364562,
+  "shift_mm": 1.2341536284945391
+ },
+ "loads_joint_n": null,
+ "share": 0.6104,
+ "criteria": {
+  "bear": [
+   0.8,
+   1.2
+  ],
+  "r2_min": 0.2
+ },
+ "rows": [
+  {
+   "load_n": 19675.88361586651,
+   "penalty": 16.979152707884108,
+   "converged": true,
+   "bear_frac": null,
+   "r2_linear": null,
+   "szz_max_mpa": null,
+   "median_mpa": null,
+   "p95_mpa": null,
+   "max_mpa": null,
+   "judge": {
+    "pass": false,
+    "reasons": [
+     "无接触承载读数",
+     "弯曲路径缺失 r2=nan szz_max=nan"
+    ],
+    "bear_ok": false,
+    "bend_ok": false
+   },
+   "error": null
+  },
+  {
+   "load_n": 29794.058861567744,
+   "penalty": 25.71055435550095,
+   "converged": true,
+   "bear_frac": null,
+   "r2_linear": null,
+   "szz_max_mpa": null,
+   "median_mpa": null,
+   "p95_mpa": null,
+   "max_mpa": null,
+   "judge": {
+    "pass": false,
+    "reasons": [
+     "无接触承载读数",
+     "弯曲路径缺失 r2=nan szz_max=nan"
+    ],
+    "bear_ok": false,
+    "bend_ok": false
+   },
+   "error": null
+  },
+  {
+   "load_n": 38257.2531077998,
+   "penalty": 33.01380285547597,
+   "converged": true,
+   "bear_frac": null,
+   "r2_linear": null,
+   "szz_max_mpa": null,
+   "median_mpa": null,
+   "p95_mpa": null,
+   "max_mpa": null,
+   "judge": {
+    "pass": false,
+    "reasons": [
+     "无接触承载读数",
+     "弯曲路径缺失 r2=nan szz_max=nan"
+    ],
+    "bear_ok": false,
+    "bend_ok": false
+   },
+   "error": null
+  },
+  {
+   "load_n": 52618.615041279685,
+   "penalty": 45.40682987892892,
+   "converged": false,
+   "bear_frac": null,
+   "r2_linear": null,
+   "szz_max_mpa": null,
+   "median_mpa": null,
+   "p95_mpa": null,
+   "max_mpa": null,
+   "judge": {
+    "pass": false,
+    "reasons": [
+     "不收敛",
+     "无接触承载读数",
+     "弯曲路径缺失 r2=nan szz_max=nan"
+    ],
+    "bear_ok": false,
+    "bend_ok": false
+   },
+   "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\p2_t6_gate\\T6\\h50\\T6.feb\n工作目录: D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\p2_t6_gate\\T6\\h50\n退出码: 1\n\n---- 输出（尾部）----\n\n\tTotal calls to linear solver ........ : 18\n\n\tAvg iterations per solve ............ : 1\n\n\tTime in linear solver: 0:00:00\n\n Peak memory  : 50.9 MB\n\n Elapsed time : 0:00:01\n\n T I M I N G   I N F O R M A T I O N\n\n\tInput time ...................... : 0:00:00 (0.020249 sec)\n\n\tInitialization time ............. : 0:00:00 (0.0074548 sec)\n\n\tSolve time ...................... : 0:00:01 (0.622727 sec)\n\n\t   IO-time (plot, dmp, data) .... : 0:00:00 (0.0069914 sec)\n\n\t   serialization ................ : 0:00:00 (0.0341005 sec)\n\n\t   reforming stiffness .......... : 0:00:00 (0.0353695 sec)\n\n\t   evaluating stiffness ......... : 0:00:00 (0.13197 sec)\n\n\t   evaluating residual .......... : 0:00:00 (0.071162 sec)\n\n\t   model update ................. : 0:00:00 (0.069436 sec)\n\n\t   QN updates ................... : 0:00:00 (0.0007988 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.2697 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.660732 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+  }
+ ],
+ "verdict": "FAIL",
+ "elapsed_s": 132.6
+}
