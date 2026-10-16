@@ -110,39 +110,53 @@ k_eff = k_n × A(κ)          # A(κ) = Posture.contact_schedule 的接触面积
 
 ---
 
-## 6. 🔴🔴 **软接触下 `pad.py` 能量不守恒**（`absorbed_fraction` 可达 **1.58**）
+## 6. 🔴 `absorbed_fraction` / `energy_residual_j` 是**口径混乱量** —— 不得当「能量守恒判据」
 
-**`absorbed_fraction = (energy_into_pad_j + energy_into_flex_j) / impact_energy_j`**
-（`pad.py:479-482`）—— 这个量**物理上不可能 > 1**。
+**现象**：`absorbed_fraction = (energy_into_pad_j + energy_into_flex_j) / impact_energy_j`
+在软接触下可达 **1.583**（>1），表面上"违反能量守恒"。
 
-**实测（@0.42 m、80 kg、`anchored-*`，`temp/v1_contactA_selfcheck.py`）**：
+**根因（读码 `pad.py:733-741` 定案：是账的口径，不是物理缺陷）**：
 
-| 接触设定 | `k_eff` | soft | self | stiff |
-|---|---:|---:|---:|---:|
-| `None`（= 1.0e7，现行刚性） | 548 kN/m | 0.276 ✅ | 0.289 ✅ | 0.329 ✅ |
-| `k_n=3.0e6` | 177 kN/m | 0.584 ✅ | 0.624 ✅ | **1.358 ❌** |
-| `k_n=2.1e6` | 128 kN/m | **1.568 ❌** | **1.513 ❌** | **1.376 ❌** |
-| `k_n=1.6e6` | 100 kN/m | **1.583 ❌** | **1.526 ❌** | **1.391 ❌** |
+- **分子** = `cumtrapz(f_flex · d(xf)/dt, t)`，而 `f_flex = k·xf（+`k_stop` 段） + c_flex·rate`
+  ⇒ **含不可恢复的阻尼耗散**（`c_flex = 400 N·s/m`），且符号变号的弹性项被积掉
+  ⇒ 分子 ≈ **阻尼耗散累积 + 净弹性功**，随身体**继续下沉**而增长，**不受 `mgh` 约束**；
+- **分母** `impact_energy_j = m·g·h` 只对应**首次接触那一刻**的能量。
 
-**⇒ 接触层越软越容易越界；且同一设定下随 `k_flex` 而变。**
+⇒ **不同物理量 + 不同时间基准 ⇒ `>1` 完全正常。**（`pad.py` 注释自承历史上有过
+「`E_pad + E_flex > m·g·h`（吸能超过输入能量）这种自相矛盾的结果」的读法 —— 他们改过实现，
+但**根本口径问题仍在**：阻尼混入 + 时间基准不一致。）
 
-**症状二（同源）**：越界区的 `F_flex(h)` **非单调** —— `anchored-self`、`k_n=2.1e6`：
-**2 m 给 9.31 kN，5 m 给 7.78 kN**（同档在 `k_n=None` 下是 5.03→7.91 单调 ✓）
-⇒ **该区的 `h*`（首折内插）不可引用**。
+**实测（@0.42 m、`anchored-*`）**：`None` 档 0.276 / 0.289 / 0.329；`k_n=2.1e6` 档 **1.568 / 1.513 / 1.376**。
 
-**后果**：**`results/FP_CONTACT_REPORT.md` 的判定已按此撤回**（判定档 `2.1e6` 正落在越界区）。
-**`LEG_K_ANCHOR`（`FP_ANCHOR_REPORT.md`，门关）不受影响**（`absorbed` 0.276–0.329、`resid` >0）。
-
-**用法纪律**：
-1. **任何 `pad.py` 结果在引用前先查 `absorbed_fraction ≤ 1` 且 `energy_residual_j > 0`**；
-2. **软接触（`k_eff` ≲ 200 kN/m）区目前不可用于定量结论**，直到缺陷定位并修复；
-3. 嫌疑机制（**均未定案，待查**）：`A(κ)` 渐进接触面积随压缩增长 / `k_stop=3.0e5` 止挡 /
-   初始速度与落高是否双重计入 / `energy_into_flex_j` 的积分口径。
+**⇒ 用法纪律**：
+1. ⛔ **不得**用 `absorbed_fraction > 1` 判「数值不物理」（2026-10-16 曾据此误撤 `FP_CONTACT` 判定）；
+2. ⛔ **不得**把 `energy_residual_j` 当「必须由组织损伤承担的能量」（**同源污染**；越界区被夹到 0）；
+3. ✅ 要判能量守恒，须**沿轨迹**算 `E_mech(t) = KE + PE_grav + E_elastic` 并检查**非增**：
+   参照 `E_mech(0)=0`，`PE_grav = −[m_low·g·z_foot + m_up·g·(z_torso + leg_ext0)]`，
+   `E_elastic = ∫F_pad dx + 分段弹簧能`。
+   ⚠️ **`result.t_s` 只覆盖冲击窗，窗起点速度是 `v_impact = √(2gh)`（不是 0）**
+   ⇒ 速度重建**必须带这个偏移**（`result.impact_speed_ms`），否则检验无效（已踩过一次）。
 
 ---
 
-**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → **`FP_CONTACT` 判定撤回**）。
+## 6b. 🟡 软接触下 `F_flex(h)` **收敛地非单调**（模型结构性行为，**未定案**）
+
+`anchored-self`、`k_n = 2.1e6`：
+
+| h | 2 m | 5 m | 9 m |
+|---|---:|---:|---:|
+| `F_flex` (kN) | **9.309** | **7.781** | 25.979 |
+
+**三种解算器设置**（`1e-8/1e-11/1e-4`、`1e-9/1e-12/3e-5`、`1e-10/1e-13/1e-5`）**逐位一致**
+⇒ **不是积分精度问题，是模型的结构性行为**；同档 `k_n=None` 单调（5.032 → 7.914 → 10.593）✓。
+
+**⇒ 后果**：**软接触区的 `h*`（首折内插）不可直接引用**，须先定性。
+**可疑点（均未定案）**：接触面积 `A(κ)` 随压缩增长 / `k_stop` 止段 / 阻尼项 `c_flex·rate` 在峰值中的占比。
+
+---
+
+**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → **更正：非能量缺陷，是账的口径**）。
 **锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `hard_surface` /
-`absorbed_fraction` / `_anchored_posture`）、`scripts/fp_anchor_probe.py`、`scripts/fp_contact_probe.py`、
-`tests/test_climbing.py`、`results/FP_ANCHOR_REPORT.md`、`results/FP_CONTACT_REPORT.md`（撤回）、
-`temp/v1_contactA_selfcheck.py`
+`absorbed_fraction` / `:733-741` 能量账）、`scripts/fp_anchor_probe.py`、`scripts/fp_contact_probe.py`、
+`results/FP_ANCHOR_REPORT.md`、`results/FP_CONTACT_REPORT.md`、
+`temp/v1_energy_verdict.py`、`temp/v1_emechan.py`、`temp/v1_conv_check.py`
