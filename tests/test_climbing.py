@@ -292,6 +292,54 @@ class TestEnergyAudit:
 
 
 # ==========================================================================
+# L4/B1 行程门（STROKE_ANCHOR）
+# ==========================================================================
+class TestStrokeAnchor:
+    """`x_flex_max` 可被外部锚定（实测 COM 深度）；默认 `None` ⇒ 既有路径逐位不变。
+
+    见 `docs/methods/…`、`results/FP_STROKE_REPORT.md`、`docs/notes/PAD_GOTCHAS.md` §6b。
+    """
+
+    def test_default_is_none(self):
+        from climbing.pad import STROKE_ANCHOR
+        assert STROKE_ANCHOR == {"x_flex_max_m": None, "k_stop_n_per_m": None}
+
+    def test_override_is_recorded_and_changes_result(self):
+        """⚠️ 必须选「行程确实会被用满」的用例：刚性接触下 @2 m 的窗口 `xf` 峰只有 0.10 m
+        ⇒ 若把 `x_flex_max` 设成 0.37 根本不触发止段 ⇒ 峰值不变（那是**正确行为**，
+        2026-10-16 首版测试就错在这里）。这里设 0.05 m 保证触发。"""
+        from climbing.pad import STROKE_ANCHOR
+        p0, p1 = STROKE_ANCHOR["x_flex_max_m"], STROKE_ANCHOR["k_stop_n_per_m"]
+        try:
+            base = simulate_boulder_fall(height_m=2.0, mass_kg=80.0, on_pad=False,
+                                         posture="anchored-self")
+            STROKE_ANCHOR["x_flex_max_m"] = 0.05
+            short = simulate_boulder_fall(height_m=2.0, mass_kg=80.0, on_pad=False,
+                                          posture="anchored-self")
+        finally:
+            STROKE_ANCHOR["x_flex_max_m"], STROKE_ANCHOR["k_stop_n_per_m"] = p0, p1
+        assert short.meta["x_flex_max"] == pytest.approx(0.05)
+        assert base.meta["x_flex_max"] == pytest.approx(0.40)     # 默认不变
+        assert short.meta["f_flex_peak_n"] > base.meta["f_flex_peak_n"], \
+            "更短行程 ⇒ 进止段 ⇒ 峰值应当更高"
+
+    def test_k_stop_override(self):
+        from climbing.pad import STROKE_ANCHOR
+        p0, p1 = STROKE_ANCHOR["x_flex_max_m"], STROKE_ANCHOR["k_stop_n_per_m"]
+        try:
+            STROKE_ANCHOR["x_flex_max_m"] = 0.05         # 保证触发止段
+            STROKE_ANCHOR["k_stop_n_per_m"] = 1.0e7      # 更硬止挡 ⇒ 峰值更高
+            hard = simulate_boulder_fall(height_m=2.0, mass_kg=80.0, on_pad=False,
+                                         posture="anchored-self")
+            STROKE_ANCHOR["k_stop_n_per_m"] = 3.0e5
+            soft = simulate_boulder_fall(height_m=2.0, mass_kg=80.0, on_pad=False,
+                                         posture="anchored-self")
+        finally:
+            STROKE_ANCHOR["x_flex_max_m"], STROKE_ANCHOR["k_stop_n_per_m"] = p0, p1
+        assert hard.meta["f_flex_peak_n"] > soft.meta["f_flex_peak_n"]
+
+
+# ==========================================================================
 # 绳索本构
 # ==========================================================================
 class TestRopeModel:

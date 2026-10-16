@@ -534,6 +534,18 @@ RIGID_STANDING_CHAIN: dict = {"kf_mult": 2.0, "x_max": 0.015, "k_stop": None}
 RIGID_CONTACT: dict = {"k_n_per_m": None}
 
 
+# L4/B1 门：**屈曲行程上限**与**止挡刚度**。
+# 背景（`results/FP_CONTACT_REPORT.md` + `docs/notes/PAD_GOTCHAS.md` §6b）：
+#   `Posture.x_flex_max`（`controlled-drop` 继承 0.40 m）与硬编码 `k_stop = 3.0e5`
+#   都是**未标定**的；实测证明软接触下腿会跨过 `x_flex_max` 进止段，
+#   把峰值顶起（`anchored-self`@2.1e6：h=2 m `xf@峰`=0.4191 = `3.3+3e5×0.0191 = 9.03 kN`
+#   ≈ 实测 9.165 kN）⇒ 在 `h*` 内插上制造**假台阶**。
+# 外部锚（`PMC9465758`「Drop jump depth」列 = 实测 COM 深度）：
+#   soft 0.43 / self-selected 0.37 / stiff 0.23 m（与三档 `k_flex` 同源、一一对应）。
+# ⚠️ 门默认 `None` ⇒ **既有路径逐位不变**；设值只用于标定性探针。
+STROKE_ANCHOR: dict = {"x_flex_max_m": None, "k_stop_n_per_m": None}
+
+
 def simulate_boulder_fall(
     *,
     height_m: float = 3.0,
@@ -596,6 +608,15 @@ def simulate_boulder_fall(
     # "腿屈完之后的**渐进**塌陷"而不是刚性止挡，剩余能量继续由垫承担。
     # 真正正确的解法是 Phase B-3 的多刚体接触（躯干直接接触垫面）。
     k_stop = 3.0e5
+    # L4/B1 门（`STROKE_ANCHOR`，默认 None ⇒ 上面两个默认值不变）：
+    #   `x_flex_max` 可被外部锚定（实测 COM 深度）；
+    #   `k_stop` 是**未标定**的硬编码值，需要时可覆盖以便做标定性探针。
+    _xm_ov = STROKE_ANCHOR.get("x_flex_max_m")
+    if _xm_ov is not None:
+        x_flex_max = float(_xm_ov)
+    _ks_ov = STROKE_ANCHOR.get("k_stop_n_per_m")
+    if _ks_ov is not None:
+        k_stop = float(_ks_ov)
 
     # 屈曲阻尼 (N·s/m)，代表肌腱/肌肉的粘性损耗。
     # 早期版本取 3.0e3，这是个**虚高的人为参数**：冲击时屈曲速率可达

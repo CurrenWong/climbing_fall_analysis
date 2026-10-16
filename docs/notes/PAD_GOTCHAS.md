@@ -182,7 +182,32 @@ k_eff = k_n × A(κ)          # A(κ) = Posture.contact_schedule 的接触面积
 
 ---
 
-**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → 更正：**账的口径** → **审计通过 + 非单调机制定案**）。
-**锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `hard_surface` /
-`absorbed_fraction` / `:733-741`）、`scripts/pad_energy_check.py`、`scripts/fp_contact_probe.py`、
-`results/FP_CONTACT_REPORT.md`、`temp/v1_arrdump.py`、`temp/v1_window_decomp.py`、`temp/v1_conv_check.py`
+## 6d. 🔧 L4/B1 门 `STROKE_ANCHOR` + `h*` 内插的**跨无效格**陷阱
+
+**门**（`pad.py`，默认 `None` ⇒ 既有路径逐位不变；§6b 的「要修的是先标定 `x_flex_max`/`k_stop`」即此）：
+
+```python
+STROKE_ANCHOR = {"x_flex_max_m": None, "k_stop_n_per_m": None}
+```
+用于把 `x_flex_max` 锚定到**实测 COM 深度**（`PMC9465758`「Drop jump depth」列，与三档 `k_flex` 同源一一对应）：
+**soft 0.43 / self 0.37 / stiff 0.23 m**；`k_stop` 是**未标定**的硬编码值，可覆盖以便标定性探针。
+⚠️ **L2 门排在 L4 门之后** ⇒ 对 `feet-first-stiff` 键由 L2 覆盖；`anchored-*` 不受 L2 影响。
+
+**实测结论**（`results/FP_STROKE_REPORT.md`）：
+- **刚性口径：止段从不触发 ⇒ B1 对 `LEG_K_ANCHOR` 的 `h*`（3.418 / 3.216 / 2.244 m）逐位零影响**；
+- **实测跟垫口径：止段在 `stiff`@1 m、`self`@2 m 就触发** ⇒ 峰值被顶起（`stiff`@1 m 3.64 → **6.51 kN**，假台阶）
+  ⇒ `self`/`stiff` 在**有效范围内跨不过 6.2 kN ⇒ `h*` 不可定**；仅 `soft` 可定 = **3.657 m**。
+  ⇒ **`k_stop`（未标定）已是软接触区的主控瓶颈。**
+
+**⇒ ⇒ ★ 内插陷阱（我踩了一次）**：算 `h*` 时**不能**「先滤掉止段污染格、再在剩下的格之间内插」——
+那会**跨过**无效格：实测因此把 `anchored-self` 报成 **3.506 m 的假首折**
+（真正的跨越段是 1 m → 5 m，中间夹着被污染的 2 m 格）。
+**正确做法**：只在**原网格上相邻、且两端都未触发止段**的格之间内插
+（`scripts/fp_stroke_probe.py::_hstar`）。
+
+---
+
+**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → 更正：账的口径 → 审计通过 + 非单调定案 → **B1 行程锚定**）。
+**锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `STROKE_ANCHOR` / `hard_surface` /
+`absorbed_fraction` / `:733-741`）、`scripts/pad_energy_check.py`、`scripts/fp_stroke_probe.py`、
+`results/FP_STROKE_REPORT.md`、`results/FP_CONTACT_REPORT.md`、`temp/v1_b1_preview.py`、`temp/v1_window_decomp.py`
