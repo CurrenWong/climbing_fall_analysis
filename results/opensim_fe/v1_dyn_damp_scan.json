@@ -1,0 +1,20 @@
+{
+  "h_m": 5.0,
+  "f_sub_n": 26383.133775894516,
+  "rows": [
+    {
+      "gap": 0.5,
+      "tag": "g+0.5_dyn+damp",
+      "rc": "ERR",
+      "msg": "0:00:01 (1.22734 sec)\n\n\t   reforming stiffness .......... : 0:00:10 (9.68711 sec)\n\n\t   evaluating stiffness ......... : 0:00:13 (13.2599 sec)\n\n\t   evaluating residual .......... : 0:00:14 (14.2007 sec)\n\n\t   model update ................. : 0:00:12 (11.901 sec)\n\n\t   QN updates ................... : 0:00:00 (0.363332 sec)\n\n\t   time in linear solver ........ : 0:01:07 (66.605 sec)\n\n\tTotal elapsed time .............. : 0:01:60 (119.555 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "s": 119.64439225196838
+    },
+    {
+      "gap": -0.2,
+      "tag": "g-0.2_dyn+damp",
+      "rc": "ERR",
+      "msg": "0:00:01 (1.28538 sec)\n\n\t   reforming stiffness .......... : 0:00:10 (9.57343 sec)\n\n\t   evaluating stiffness ......... : 0:00:14 (14.256 sec)\n\n\t   evaluating residual .......... : 0:00:16 (16.1205 sec)\n\n\t   model update ................. : 0:00:13 (13.4859 sec)\n\n\t   QN updates ................... : 0:00:00 (0.373709 sec)\n\n\t   time in linear solver ........ : 0:01:08 (67.8401 sec)\n\n\tTotal elapsed time .............. : 0:02:05 (125.29 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------",
+      "s": 125.38474869728088
+    }
+  ]
+}

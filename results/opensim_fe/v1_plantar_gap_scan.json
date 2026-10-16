@@ -1,0 +1,38 @@
+{
+  "h_m": 5.0,
+  "f_sub_n": 26383.133775894516,
+  "hold_spring_k": null,
+  "ref_fixed_gauge_max": 186.7563689967737,
+  "rows": [
+    {
+      "gap_mm": 0.5,
+      "rc": "ERROR",
+      "error": "FebioRunError",
+      "elapsed_s": 0.5576860904693604
+    },
+    {
+      "gap_mm": 0.0,
+      "rc": "ERROR",
+      "error": "FebioRunError",
+      "elapsed_s": 0.5981519222259521
+    },
+    {
+      "gap_mm": -0.05,
+      "rc": "ERROR",
+      "error": "FebioRunError",
+      "elapsed_s": 0.5793073177337646
+    },
+    {
+      "gap_mm": -0.2,
+      "rc": "ERROR",
+      "error": "FebioRunError",
+      "elapsed_s": 0.5871908664703369
+    },
+    {
+      "gap_mm": -0.5,
+      "rc": "ERROR",
+      "error": "FebioRunError",
+      "elapsed_s": 0.5564892292022705
+    }
+  ]
+}

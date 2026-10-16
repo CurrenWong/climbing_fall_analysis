@@ -1,0 +1,19 @@
+h=5.0 m  F_sub=26383 N  hold_spring_k=None
+参照 fixed = 186.7564 MPa
+
+### gap=+0.5 dyn+damp
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': None, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=0, flip_secondary=0, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+    deck: DYNAMIC×2  rhoi×2
+    → ❌ ERR  120s
+      )  	   model update ................. : 0:00:12 (11.901 sec)  	   QN updates ................... : 0:00:00 (0.363332 sec)  	   time in linear solver ........ : 0:01:07 (66.605 sec)  	Total elapsed time .............. : 0:01:60 (119.555 sec)    E R R O R   T E R M I N A T I O N  ---------------------
+### gap=-0.2 dyn+damp
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': None, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=0, flip_secondary=0, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.00677375526861, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': -0.2, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+    deck: DYNAMIC×2  rhoi×2
+    → ❌ ERR  125s
+        	   model update ................. : 0:00:13 (13.4859 sec)  	   QN updates ................... : 0:00:00 (0.373709 sec)  	   time in linear solver ........ : 0:01:08 (67.8401 sec)  	Total elapsed time .............. : 0:02:05 (125.29 sec)    E R R O R   T E R M I N A T I O N  ---------------------
+
+-> D:\Project\climbing_fall_analysis\results\opensim_fe\v1_dyn_damp_scan.json

@@ -1,0 +1,64 @@
+{
+  "h_m": 5.0,
+  "f_sub_n": 26383.133775894516,
+  "hold_spring_k": null,
+  "ref_fixed_gauge_max": 186.7563689967737,
+  "rows": [
+    {
+      "variant": "g+0.5_base",
+      "gap": 0.5,
+      "rc": "ERR",
+      "err": "FebioRunError",
+      "s": 0.5559341907501221
+    },
+    {
+      "variant": "g+0.5_sym_solver_0",
+      "gap": 0.5,
+      "rc": "ERR",
+      "err": "FebioRunError",
+      "s": 0.7511458396911621
+    },
+    {
+      "variant": "g+0.5_sym_ctl_3",
+      "gap": 0.5,
+      "rc": "ERR",
+      "err": "FebioRunError",
+      "s": 0.03605246543884277
+    },
+    {
+      "variant": "g+0.5_sym_both",
+      "gap": 0.5,
+      "rc": "ERR",
+      "err": "FebioRunError",
+      "s": 0.1355421543121338
+    },
+    {
+      "variant": "g-0.2_base",
+      "gap": -0.2,
+      "rc": "ERR",
+      "err": "FebioRunError",
+      "s": 0.5609426498413086
+    },
+    {
+      "variant": "g-0.2_sym_solver_0",
+      "gap": -0.2,
+      "rc": "ERR",
+      "err": "FebioRunError",
+      "s": 0.7042748928070068
+    },
+    {
+      "variant": "g-0.2_sym_ctl_3",
+      "gap": -0.2,
+      "rc": "ERR",
+      "err": "FebioRunError",
+      "s": 0.0496218204498291
+    },
+    {
+      "variant": "g-0.2_sym_both",
+      "gap": -0.2,
+      "rc": "ERR",
+      "err": "FebioRunError",
+      "s": 0.049601078033447266
+    }
+  ]
+}

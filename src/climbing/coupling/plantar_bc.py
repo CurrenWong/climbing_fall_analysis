@@ -433,8 +433,21 @@ def _apply_contact(
         raise ValueError(f"search_radius 必须有限且 > 0，得到 {search_radius!r}")
     if not (np.isfinite(tolerance) and tolerance > 0.0):
         raise ValueError(f"tolerance 必须有限且 > 0，得到 {tolerance!r}")
-    if not (np.isfinite(gap_mm) and gap_mm > 0.0):
-        raise ValueError(f"gap_mm 必须有限且 > 0（接触搜索需严格正间隙），得到 {gap_mm!r}")
+    # 2026-10-16 放宽：原护栏要求 ``gap_mm > 0``（强制**初始分离**），但那正是
+    # FEBio 手册 §8.12.4 / §8.5.3 与官方 webinar 点名的 **force-driven contact 病根**：
+    #   「When there is an initial separation … the initial contact force is zero, which is
+    #    equivalent to having no contact enforcement, and thus the model is under-constrained.
+    #    Therefore, for force-driven contact problems it is important to have **some initial
+    #    contact** before starting the analysis.」
+    # ⇒ 允许 ``gap_mm <= 0``（= 初始过盈/预接触）。**默认值不提**（仍 0.5）⇒ 原路径逐位不变。
+    # 注：`anchor_offset_mm` 等其它量不动。**默认路径零回归已验**
+    # （`pytest -k "plantar or contact or thums"`）。
+    if not np.isfinite(gap_mm):
+        raise ValueError(f"gap_mm 必须有限，得到 {gap_mm!r}")
+    if gap_mm < 0.0 and abs(gap_mm) > 0.5 * float(pad_thickness_mm):
+        raise ValueError(
+            f"gap_mm={gap_mm!r} 的初始过盈超过薄板厚度的一半 "
+            f"{0.5 * float(pad_thickness_mm)!r} mm ⇒ 板会翻转，拒绝")
     if str(contact_type) != "sliding-elastic":
         raise ValueError(f"contact 只写 sliding-elastic 对偶面，得到 {contact_type!r}")
     fric = float(mu if fric_coeff is None else fric_coeff)
