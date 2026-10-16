@@ -1,0 +1,248 @@
+{
+  "positive_control": true,
+  "m_ecc_nm": 540.0,
+  "s_hard_m": [
+    0.49,
+    0.56
+  ],
+  "config": "C1 (B2a + saturated eccentric)",
+  "pad_kn": 2100000.0,
+  "h_grid_m": [
+    0.5,
+    1.0,
+    2.0,
+    5.0,
+    9.0
+  ],
+  "grid": {
+    "soft": [
+      {
+        "h_m": 0.5,
+        "f_flex_n": 1727.3358746096194,
+        "s_peak_m": 0.1012162940778839,
+        "theta_peak_deg": 56.492429310012795,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 1.0,
+        "f_flex_n": 3291.094264683913,
+        "s_peak_m": 0.1555449676201287,
+        "theta_peak_deg": 70.42762331668035,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 2.0,
+        "f_flex_n": 5371.26956457283,
+        "s_peak_m": 0.20923323384867676,
+        "theta_peak_deg": 82.15120343737969,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 5.0,
+        "f_flex_n": 9220.728077751051,
+        "s_peak_m": 0.30176310803339523,
+        "theta_peak_deg": 99.6709615010333,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 9.0,
+        "f_flex_n": 12563.665902851604,
+        "s_peak_m": 0.37259486333989356,
+        "theta_peak_deg": 111.65960395737686,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      }
+    ],
+    "self": [
+      {
+        "h_m": 0.5,
+        "f_flex_n": 1853.8478780997934,
+        "s_peak_m": 0.1012162940778839,
+        "theta_peak_deg": 56.492429310012795,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 1.0,
+        "f_flex_n": 3516.905071889598,
+        "s_peak_m": 0.1555449676201287,
+        "theta_peak_deg": 70.42762331668035,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 2.0,
+        "f_flex_n": 5728.218794940111,
+        "s_peak_m": 0.20923323384867676,
+        "theta_peak_deg": 82.15120343737969,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 5.0,
+        "f_flex_n": 9801.020463420116,
+        "s_peak_m": 0.30176310803339523,
+        "theta_peak_deg": 99.6709615010333,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 9.0,
+        "f_flex_n": 13264.964165938633,
+        "s_peak_m": 0.37259472496529644,
+        "theta_peak_deg": 111.65958141037254,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": true,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      }
+    ],
+    "stiff": [
+      {
+        "h_m": 0.5,
+        "f_flex_n": 2610.073466939222,
+        "s_peak_m": 0.1012162940778839,
+        "theta_peak_deg": 56.492429310012795,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 1.0,
+        "f_flex_n": 4896.99554678648,
+        "s_peak_m": 0.1555449676201287,
+        "theta_peak_deg": 70.42762331668035,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 2.0,
+        "f_flex_n": 7868.861271524909,
+        "s_peak_m": 0.20923323384867676,
+        "theta_peak_deg": 82.15120343737969,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": false,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 5.0,
+        "f_flex_n": 11948.616195076207,
+        "s_peak_m": 0.3154791497354926,
+        "theta_peak_deg": 102.06962905775862,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": true,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      },
+      {
+        "h_m": 9.0,
+        "f_flex_n": 14734.196225275453,
+        "s_peak_m": 0.3806556818744248,
+        "theta_peak_deg": 112.96800585639227,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": true,
+        "s_over_hard": {
+          "0.49": false,
+          "0.56": false
+        }
+      }
+    ]
+  },
+  "verdict": {
+    "soft": {
+      "h_star_m": 2.6458548125068218,
+      "monotone": true,
+      "s_peak_at_or_below_hstar_m": 0.20923323384867676,
+      "s_peak_max_m": 0.37259486333989356,
+      "exhausted_at": []
+    },
+    "self": {
+      "h_star_m": 2.3475110575929126,
+      "monotone": true,
+      "s_peak_at_or_below_hstar_m": 0.20923323384867676,
+      "s_peak_max_m": 0.37259472496529644,
+      "exhausted_at": [
+        9.0
+      ]
+    },
+    "stiff": {
+      "h_star_m": 1.4384466102781963,
+      "monotone": true,
+      "s_peak_at_or_below_hstar_m": 0.1555449676201287,
+      "s_peak_max_m": 0.3806556818744248,
+      "exhausted_at": [
+        5.0,
+        9.0
+      ]
+    }
+  },
+  "C2_J1": {
+    "soft": true,
+    "self": true,
+    "stiff": true
+  },
+  "C2_J2": {
+    "soft": true,
+    "self": true,
+    "stiff": true
+  },
+  "C2_J3": {
+    "soft": true,
+    "self": true,
+    "stiff": true
+  }
+}
