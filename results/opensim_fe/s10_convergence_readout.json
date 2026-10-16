@@ -1,0 +1,14 @@
+{
+  "_SUPERSEDED": "⚠️ 本件是**朴素分层**（质心距 ≤1.40mm 固定阈值）下的单点对比，已被 `s10_mesh_convergence_volmatched.json` 取代。其 refined_gauge_max=691.295 主要反映**皮质体积从 18324 掉到 1789.7 mm³**，不是纯网格效应 ⇒ 不得引用为「细化使其升高」。",
+  "_see": "results/opensim_fe/S10_MESH_CONVERGENCE.md",
+  "mode": "fixed @ F=22723.586 N (h=2 m), anat",
+  "reg_mm": 4.0,
+  "coarse_gauge_max_mpa": 161.402,
+  "coarse_max_mpa": 172.167,
+  "note": "粗 1544/634hex8",
+  "refined_gauge_max_mpa": 691.2948980244142,
+  "refined_max_mpa": 868.3510292334654,
+  "refined_mean_mpa": 103.50452064438397,
+  "refined_p95_mpa": 293.43420993641234,
+  "n_cort_tet": 627
+}
