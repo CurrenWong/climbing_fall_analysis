@@ -730,6 +730,8 @@ def build_thums_feb(
     contact_pad_e_mpa: float | None = None,
     contact_pad_thickness_mm: float | None = None,
     contact_auto_penalty: int = 0,
+    contact_penalty: float | None = None,
+    contact_pad_fix_bottom_only: bool | None = None,
     contact_node_reloc: int = 0,
     contact_swap_pair: bool = False,
     contact_hold_spring_k: float | None = None,
@@ -1059,6 +1061,19 @@ def build_thums_feb(
     # **默认 0 ⇒ 原路径逐位不变。**
     if int(contact_auto_penalty) != 0:
         contact_kw["contact_auto_penalty"] = int(contact_auto_penalty)
+    # ``contact_penalty``（2026-10-16，opt-in）：接触罚因子 ε。手册 §3.14 comment 2 给出
+    # 正解 ``ε_i = E·A/V``（auto 计算），且 **auto_penalty=1 时 penalty 只是它的缩放因子**。
+    # 本项目历史配方是 **0.1**；皮质 E=15000 MPa、单元 ~3 mm ⇒ ``E/h ≈ 5000``
+    # ⇒ 历史值**比正解小约 5 万倍**（这很可能是「跖面接触欠约束」的量级根因）。
+    # **不传 ⇒ 沿用 ``DEFAULT_CONTACT_PENALTY``（原路径逐位不变）。**
+    if contact_penalty is not None:
+        contact_kw["contact_penalty"] = float(contact_penalty)
+    # ``contact_pad_fix_bottom_only``（2026-10-16，opt-in）：`_build_pad_floor` 原先把
+    # 对偶板的**上、下两排全部固定** ⇒ 板是**完全刚体块**、`pad_e_mpa` 形同无效。
+    # 置 True 只固定**底面** ⇒ 板成为「可变形层 + 刚性地基」= 真正的跟垫层。
+    # **不传 ⇒ 原路径逐位不变。**
+    if contact_pad_fix_bottom_only is not None:
+        contact_kw["contact_pad_fix_bottom_only"] = bool(contact_pad_fix_bottom_only)
     if int(contact_node_reloc) != 0:
         contact_kw["contact_node_reloc"] = int(contact_node_reloc)
     if bool(contact_swap_pair):

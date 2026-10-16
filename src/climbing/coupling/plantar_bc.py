@@ -255,6 +255,7 @@ def _build_pad_floor(
     mat_name: str,
     e_mpa: float,
     nu: float,
+    bottom_only: bool = False,
 ) -> dict:
     """在跖面下方建一块**固定薄板**（``hex8``）作为接触对偶面（数值刚性壁）。
 
@@ -333,7 +334,16 @@ def _build_pad_floor(
     )
     model.meshdomains_.add_solid_domain(fdom.SolidDomain(name="pad_floor", mat=mat_name))
 
-    node_ids = sorted(top_ids.values()) + sorted(bot_ids.values())
+    # 2026-10-16：原实现把**上、下两排全部固定**
+    #   ``node_ids = sorted(top_ids.values()) + sorted(bot_ids.values())``
+    # ⇒ 板成为**完全刚体块**（`pad_e_mpa` 形同无效 —— 实测 0.185 MPa 跟垫与 200 GPa
+    #   刚性板给出**逐位相同**的失败签名）。这使「把刚性地面换成真实跟垫」无法实现。
+    # ``bottom_only=True``（opt-in，**默认 False ⇒ 原路径逐位不变**）只固定**底面**，
+    # 上表面自由 ⇒ 板成为「可变形层 + 刚性地基」= 真正的跟垫层。
+    if bottom_only:
+        node_ids = sorted(bot_ids.values())
+    else:
+        node_ids = sorted(top_ids.values()) + sorted(bot_ids.values())
     model.mesh_.add_node_set(
         fmesh.NodeSet(name="pad_floor_fixed", text=",".join(str(i) for i in node_ids))
     )
@@ -369,6 +379,7 @@ def _apply_contact(
     pad_thickness_mm: float = 5.0,
     pad_margin_mm: float = 20.0,
     pad_ndiv: int = 4,
+    pad_fix_bottom_only: bool = False,
     plantar_quads: np.ndarray | None = None,
     swap_pair: bool = False,
     hold_spring_k: float | None = None,
@@ -473,6 +484,7 @@ def _apply_contact(
         margin_mm=float(pad_margin_mm), ndiv=int(pad_ndiv),
         mat_id=n_materials + 1, mat_name="pad_floor_mat",
         e_mpa=float(pad_e_mpa), nu=float(pad_nu),
+        bottom_only=bool(pad_fix_bottom_only),
     )
     bcs.append(
         fbc.BCZeroDisplacement(node_set="pad_floor_fixed", x_dof=1, y_dof=1, z_dof=1)
@@ -571,6 +583,7 @@ def apply_plantar_bc(
     contact_pad_e_mpa: float = 200_000.0,
     contact_pad_thickness_mm: float | None = None,
     contact_auto_penalty: int = 0,
+    contact_pad_fix_bottom_only: bool = False,
     contact_plantar_quads: np.ndarray | None = None,
     contact_node_reloc: int = 0,
     contact_swap_pair: bool = False,
@@ -663,6 +676,7 @@ def apply_plantar_bc(
             swap_pair=bool(contact_swap_pair),
             hold_spring_k=contact_hold_spring_k,
             hold_anchor_offset_mm=float(contact_hold_anchor_offset_mm),
+            pad_fix_bottom_only=bool(contact_pad_fix_bottom_only),
         )
         meta["n_plantar_nodes"] = int(len(local))
         return meta
