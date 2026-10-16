@@ -124,6 +124,72 @@ tags: [FE, FEBio, BC, 屈曲, sigma口径, 陷阱, G4, G9, 腓骨]
   压根没压到骨（σ_max≈0）。实测窗口：**k=0.01 N/mm/节点可用；1e-3 不收敛；1.0 偷载荷**。
   **判据**：报「弹簧总反力 / 总载荷」之比，须 ≪1。
 
+## 6c. 🔴 多步静态分析**必须**挂 load ramp curve（2026-10-16 新增，S10 三轮 BLOCKED 的真因）
+
+**症状**：`time_steps=N (N>1)` 的多步 STATIC 分析，**第 1 步成功、第 2 步起判据退化**：
+
+```
+ Number of time steps completed .................... : 1
+ ------- failed to converge at time : 0.0004...        (≈ dt×1.05)
+ convergence norms :     INITIAL         CURRENT         REQUIRED
+    residual            4.359361e-17    3.726064e-18    0.000000e+00   ← 要求恒零！
+ ...
+ * Max nr of iterations reached. *  /  * Max nr of reformations reached. *
+ E R R O R   T E R M I N A T I O N
+```
+
+**机理**：无 `lc`（load curve）时载荷**在第 1 步就加满**；第 2 步载荷增量 = 0 ⇒
+残差 ≈ 机器零、`REQUIRED = rtol×R0 = 0` ⇒ Newton 永远不满足 ⇒ 报"不收敛"。
+**这不是物理不收敛，是判据退化。**
+
+**修法**（`thums_feb.py:1019` 早有注释，见 `load_ramp_time_s`）：给载荷挂一条
+`0→1` 的线性 ramp curve，`PressureLoad(..., pressure=Scale(lc=1, text=p))`：
+
+```python
+model.loaddata_.add_load_curve(fld.LoadCurve(
+    id=1, interpolate="LINEAR", extend="CONSTANT",
+    points=fld.CurvePoints(points=["0.0,0.0", "1.0,1.0"])))
+```
+
+**⚠️ 陷阱放大**：载荷**越小**每步迭代越多 ⇒ 在固定 `max_retries` 内走得越**少** ⇒
+表现为「载荷小 100 倍反而更早失败」的**非物理**现象（实测 t=0.0129 vs 0.0032）。
+**看到"非单调于载荷"的失败，先怀疑判据/预算，不要先归因大变形。**
+
+**同族症状**：`nonvertical_s5_contact_wave5.py:8-11` 的「判据退化为零残差」、
+`3a9c857` 的「载荷没进骨（σ≈7e-11）」。
+
+**另外两处 FEBio 4.13 适配**（新写 deck 时必做，否则 FEBio 直接拒绝读文件）：
+- `<solver type="...">` → 必须替换成 `<solver/>`（调 `febio_model._fix_febio413`）
+- 非多步路径 `control.Control(..., time_stepper=None)`，否则落盘
+  `<time_stepper type="default">` ⇒ `invalid attribute "type"`
+
+---
+
+## 6d. 🔴 两域分层**必须体积守恒**，否则网格对比被混淆（同上，2026-10-16）
+
+**症状**：按「单元质心到表面距离 ≤ 固定阈值 t」分皮/松两域时，**网格越细皮质体积越大**：
+
+| mesh | 单元边长中位 | 皮质体积 (mm³) |
+|---|---|---|
+| cl=3.0 | 3.847 mm | 1789.7 |
+| cl=2.5 | 3.220 mm | 6823.0 |
+| cl=2.0 | 2.585 mm | 13470.4 |
+
+**⇒ 7.5 倍**。此时 σ 的任何"细化趋势"都混了材质分布的变化 ⇒ **不是纯网格效应**。
+（朴素阈值下 `cl=4.5` 甚至只剩 **4 个**皮质单元 ⇒ 退化。）
+
+**修法**：**逐档二分解出阈值 t**，使 `ΣV(质心距 ≤ t) = t_target × A_ref` 为**常数**
+（本项目取 `t_target = 1.40 mm`、`A_ref = 13088.876 mm²` ⇒ 目标 **18324.4 mm³**）。
+实测解出 2.7212 / 2.0474 / 1.8253 / 1.6197 mm。
+
+**两种结果都要报**：朴素阈值下同序列给**下降**趋势（691→417→223 MPa），
+守恒阈值下给**平坦**（183.8/189.6/179.7/170.6）——**只报后者是选择性报告。**
+
+**⇒ 由此得到的判决**（`S10_MESH_CONVERGENCE.md`）：`gauge_max`(ℓ=4 mm) **收敛 ±5%**
+（tet 数变 10 倍），裸 `max` **发散 +74%**，热点恒在皮/松界面（**S9b 坐实**）。
+
+---
+
 ## 7. 三条纪律（本轮全部踩到并靠它们纠错）
 
 1. **每个判据都要有正对照**：k→∞ 必须复现硬 BC 结果（实测 31.7 vs 31.6 MPa ✓）；

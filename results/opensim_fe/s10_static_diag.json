@@ -1,0 +1,12 @@
+{
+  "nodes": 3721,
+  "tets": 17059,
+  "components": 1,
+  "comp_sizes": [
+    3721
+  ],
+  "min_vol": 0.2606767245355008,
+  "max_ratio": 3.4827227782336183,
+  "n_bad_ratio20": 0,
+  "n_dup_groups": 0
+}
