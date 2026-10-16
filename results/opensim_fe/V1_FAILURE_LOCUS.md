@@ -114,8 +114,8 @@
    `gauge_max`（ℓ=4 mm）** 这一口径。
 2. **`d_spon`（到最近松质的距离）在皮质域内没有区分力** —— 实测 634 个 CORT 单元的
    `d_spon` 只有 **1.09–3.16 mm（0.23–0.67 h）** ⇒ **每个皮质单元都贴着界面**。
-   ⇒ 「离界面近」这个统计量**不能**用来证明「界面主导」；**界面主导的证据只有 S9b 的消融（×0.179）**，
-   而它的网格细化验证 **S10 三轮 BLOCKED**（未坐实）。
+   ⇒ 「离界面近」这个统计量**不能**用来证明「界面主导」；**界面主导的证据 = S9b 的消融（×0.179）＋ S10 网格判决**。
+   ✅ **S10 已于 2026-10-16 解除 BLOCKED 并给出判决**（`S10_MESH_CONVERGENCE.md`）：真因是 deck 缺陷（多步配方未挂 load ramp curve ⇒ 判据退化为零残差；并漏 FEBio 4.13 适配），**非模型能力**；**判据 `gauge_max`（ℓ=4 mm）网格收敛 ±5%**（tet 数 5390→55915）、**裸 `max` 发散 +74%**、**热点在所有网格下都贴皮质/松质界面** ⇒ **界面主导坐实**。
 3. **`contact+hold` 只是「较诚实的 BC」，不是物理真值**（`contact` 需 `hold_spring_k` 自由旋钮；
    且「力步不加载」的问题未收口）。
 4. **首折反查用实测曲线内插**（`contact+hold`：131.79@2 / 140.42@3 / 163.54@5 ⇒ **≈3.74 m**），
@@ -133,6 +133,6 @@
 | 数据（`contact+hold`） | `temp/opensim_fe/thums_sweep_anat_contact_hold100/s2_thums_h{1..8}_a0.*` |
 | gauge 定义 | `thums_feb.gauge_von_mises_mixed`（体积平均 ℓ=4 mm） |
 | 已落账的 −18.1~−19.3% | `V1_FIXABILITY_ASSESSMENT.md` §3.1 |
-| 界面消融 ×0.179（识别用） | `V1_LOAD_INTRO_SINGULARITY.md` §7（S9b）；S10 网格验证 **BLOCKED** |
+| 界面消融 ×0.179（识别用） | `V1_LOAD_INTRO_SINGULARITY.md` §7（S9b）；**S10 网格验证已于 2026-10-16 完成（原 BLOCKED 解除）** ⇒ `S10_MESH_CONVERGENCE.md`（`gauge_max` 收敛 ±5%／裸 `max` 发散 +74%／热点恒贴界面） |
 | 跖面 BC 与载荷路径 | `V1_LOAD_PATH_FACTS.md` |
 | 裸 max 的热点位置 | `JOINT_LOAD_REPORT.md`（#377，距跖面 2.99 mm） |
