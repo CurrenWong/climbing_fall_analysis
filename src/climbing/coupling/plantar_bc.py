@@ -382,6 +382,8 @@ def _apply_contact(
     pad_fix_bottom_only: bool = False,
     plantar_quads: np.ndarray | None = None,
     swap_pair: bool = False,
+    flip_primary: int = 0,
+    flip_secondary: int = 0,
     hold_spring_k: float | None = None,
     hold_anchor_offset_mm: float = 1.0,
 ) -> dict:
@@ -524,6 +526,8 @@ def _apply_contact(
             tolerance=float(tolerance),
             search_radius=float(search_radius),
             fric_coeff=float(fric),
+            flip_primary=int(flip_primary),
+            flip_secondary=int(flip_secondary),
         )
     )
 
@@ -587,6 +591,8 @@ def apply_plantar_bc(
     contact_plantar_quads: np.ndarray | None = None,
     contact_node_reloc: int = 0,
     contact_swap_pair: bool = False,
+    contact_flip_primary: int = 0,
+    contact_flip_secondary: int = 0,
     contact_hold_spring_k: float | None = None,
     contact_hold_anchor_offset_mm: float = 1.0,
 ) -> dict:
@@ -674,6 +680,8 @@ def apply_plantar_bc(
             plantar_quads=contact_plantar_quads,
             node_reloc=int(contact_node_reloc),
             swap_pair=bool(contact_swap_pair),
+            flip_primary=int(contact_flip_primary),
+            flip_secondary=int(contact_flip_secondary),
             hold_spring_k=contact_hold_spring_k,
             hold_anchor_offset_mm=float(contact_hold_anchor_offset_mm),
             pad_fix_bottom_only=bool(contact_pad_fix_bottom_only),

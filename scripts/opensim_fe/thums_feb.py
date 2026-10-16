@@ -732,6 +732,8 @@ def build_thums_feb(
     contact_auto_penalty: int = 0,
     contact_penalty: float | None = None,
     contact_pad_fix_bottom_only: bool | None = None,
+    contact_flip_primary: int | None = None,
+    contact_flip_secondary: int | None = None,
     contact_node_reloc: int = 0,
     contact_swap_pair: bool = False,
     contact_hold_spring_k: float | None = None,
@@ -1074,6 +1076,18 @@ def build_thums_feb(
     # **不传 ⇒ 原路径逐位不变。**
     if contact_pad_fix_bottom_only is not None:
         contact_kw["contact_pad_fix_bottom_only"] = bool(contact_pad_fix_bottom_only)
+    # ``contact_flip_primary`` / ``contact_flip_secondary``（2026-10-16，opt-in）
+    # ★ **跖面接触失效的真机制修正**：两个接触面的**面片绕向（法向）**不满足 FEBio
+    # ``sliding-elastic`` 约定时，FEBio **恒算出正值（= 分离）的间隙 ⇒ 接触永不啮合**
+    # （表现为「接触被认出却完全不传力」+「全部接触参数免疫」）。
+    # 实测：同时把 primary 与 secondary 都置 1 ⇒ 接触生效（不再逐位等于 ``spring``；
+    # 且所需 ``hold_spring_k`` 从 ≥100 降到 ~1）。见
+    # ``results/opensim_fe/V1_PLANTAR_CONTACT_WINDING_FIX.md``。
+    # **默认 0 ⇒ 原路径逐位不变。**
+    if contact_flip_primary is not None:
+        contact_kw["contact_flip_primary"] = int(contact_flip_primary)
+    if contact_flip_secondary is not None:
+        contact_kw["contact_flip_secondary"] = int(contact_flip_secondary)
     if int(contact_node_reloc) != 0:
         contact_kw["contact_node_reloc"] = int(contact_node_reloc)
     if bool(contact_swap_pair):
