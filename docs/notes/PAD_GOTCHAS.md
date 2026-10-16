@@ -110,7 +110,39 @@ k_eff = k_n × A(κ)          # A(κ) = Posture.contact_schedule 的接触面积
 
 ---
 
-**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT`）。
-**锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `hard_surface` / `_anchored_posture`）、
-`scripts/fp_anchor_probe.py`、`scripts/fp_contact_probe.py`、`tests/test_climbing.py`、
-`results/FP_ANCHOR_REPORT.md`、`results/FP_CONTACT_REPORT.md`
+## 6. 🔴🔴 **软接触下 `pad.py` 能量不守恒**（`absorbed_fraction` 可达 **1.58**）
+
+**`absorbed_fraction = (energy_into_pad_j + energy_into_flex_j) / impact_energy_j`**
+（`pad.py:479-482`）—— 这个量**物理上不可能 > 1**。
+
+**实测（@0.42 m、80 kg、`anchored-*`，`temp/v1_contactA_selfcheck.py`）**：
+
+| 接触设定 | `k_eff` | soft | self | stiff |
+|---|---:|---:|---:|---:|
+| `None`（= 1.0e7，现行刚性） | 548 kN/m | 0.276 ✅ | 0.289 ✅ | 0.329 ✅ |
+| `k_n=3.0e6` | 177 kN/m | 0.584 ✅ | 0.624 ✅ | **1.358 ❌** |
+| `k_n=2.1e6` | 128 kN/m | **1.568 ❌** | **1.513 ❌** | **1.376 ❌** |
+| `k_n=1.6e6` | 100 kN/m | **1.583 ❌** | **1.526 ❌** | **1.391 ❌** |
+
+**⇒ 接触层越软越容易越界；且同一设定下随 `k_flex` 而变。**
+
+**症状二（同源）**：越界区的 `F_flex(h)` **非单调** —— `anchored-self`、`k_n=2.1e6`：
+**2 m 给 9.31 kN，5 m 给 7.78 kN**（同档在 `k_n=None` 下是 5.03→7.91 单调 ✓）
+⇒ **该区的 `h*`（首折内插）不可引用**。
+
+**后果**：**`results/FP_CONTACT_REPORT.md` 的判定已按此撤回**（判定档 `2.1e6` 正落在越界区）。
+**`LEG_K_ANCHOR`（`FP_ANCHOR_REPORT.md`，门关）不受影响**（`absorbed` 0.276–0.329、`resid` >0）。
+
+**用法纪律**：
+1. **任何 `pad.py` 结果在引用前先查 `absorbed_fraction ≤ 1` 且 `energy_residual_j > 0`**；
+2. **软接触（`k_eff` ≲ 200 kN/m）区目前不可用于定量结论**，直到缺陷定位并修复；
+3. 嫌疑机制（**均未定案，待查**）：`A(κ)` 渐进接触面积随压缩增长 / `k_stop=3.0e5` 止挡 /
+   初始速度与落高是否双重计入 / `energy_into_flex_j` 的积分口径。
+
+---
+
+**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → **`FP_CONTACT` 判定撤回**）。
+**锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `hard_surface` /
+`absorbed_fraction` / `_anchored_posture`）、`scripts/fp_anchor_probe.py`、`scripts/fp_contact_probe.py`、
+`tests/test_climbing.py`、`results/FP_ANCHOR_REPORT.md`、`results/FP_CONTACT_REPORT.md`（撤回）、
+`temp/v1_contactA_selfcheck.py`
