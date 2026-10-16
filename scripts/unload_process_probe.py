@@ -76,7 +76,10 @@ def _one(job) -> dict:
     sh = np.sin(0.5 * np.maximum(th, 1e-9))
     rate = np.maximum(0.0, np.gradient(s, t))
     r_arm = R_REF * np.minimum(1.0, th / RAMP)
-    el = np.where(sh > 1e-9, np.interp(th, TAB_TH, TAB_M) / (L * sh), 0.0)
+    # ★ 与 pad.py 对齐：弹性项也要乘 r(θ) 归零因子（否则 θ→0 发散；见 commit a319b36）
+    el = np.where(sh > 1e-9,
+                  (np.interp(th, TAB_TH, TAB_M) * np.minimum(1.0, th / RAMP)) / (L * sh),
+                  0.0)
     cap = np.where(sh > 1e-9, (M_ECC * (r_arm / R_REF)) / (L * sh), 0.0)
     rt = cap * rate / (rate + V_REF)
     tot = el + rt

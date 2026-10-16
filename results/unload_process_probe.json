@@ -241,9 +241,9 @@
         "h_m": 0.5,
         "on_d1": true,
         "f_flex_n": 1759.646630174078,
-        "elastic_peak_n": 5006043.603377571,
+        "elastic_peak_n": 2135.5175026693664,
         "rate_peak_n": 4285.038577281848,
-        "share_elastic": 1.0,
+        "share_elastic": 0.3326063157267201,
         "s_peak_m": 0.1037844714641557,
         "theta_peak_deg": 57.219711096617644,
         "over_s_hard": false
@@ -253,9 +253,9 @@
         "h_m": 1.0,
         "on_d1": true,
         "f_flex_n": 3432.010027784937,
-        "elastic_peak_n": 4877234.432590269,
+        "elastic_peak_n": 2137.46013792515,
         "rate_peak_n": 4865.192968953907,
-        "share_elastic": 1.0,
+        "share_elastic": 0.3052357592617883,
         "s_peak_m": 0.15315726854308087,
         "theta_peak_deg": 69.86744670590076,
         "over_s_hard": false
@@ -265,9 +265,9 @@
         "h_m": 2.0,
         "on_d1": true,
         "f_flex_n": 5623.066414720992,
-        "elastic_peak_n": 1492598.5289271767,
+        "elastic_peak_n": 2139.175114427241,
         "rate_peak_n": 5292.926578798626,
-        "share_elastic": 0.9999992074857333,
+        "share_elastic": 0.2878290963614012,
         "s_peak_m": 0.20759750769626473,
         "theta_peak_deg": 81.81502087926512,
         "over_s_hard": false
@@ -277,9 +277,9 @@
         "h_m": 5.0,
         "on_d1": true,
         "f_flex_n": 9579.759628567095,
-        "elastic_peak_n": 673418.6457780085,
+        "elastic_peak_n": 2131.611274794004,
         "rate_peak_n": 5685.963253970349,
-        "share_elastic": 0.9999946644288081,
+        "share_elastic": 0.2726691337512489,
         "s_peak_m": 0.30172813353239414,
         "theta_peak_deg": 99.66479142418653,
         "over_s_hard": false
@@ -291,9 +291,9 @@
         "h_m": 0.5,
         "on_d1": true,
         "f_flex_n": 1891.6183466385505,
-        "elastic_peak_n": 5006043.603377571,
+        "elastic_peak_n": 2135.5175026693664,
         "rate_peak_n": 4285.038577281848,
-        "share_elastic": 1.0,
+        "share_elastic": 0.3326063157267201,
         "s_peak_m": 0.1037844714641557,
         "theta_peak_deg": 57.219711096617644,
         "over_s_hard": false
@@ -303,9 +303,9 @@
         "h_m": 1.0,
         "on_d1": true,
         "f_flex_n": 3674.209354273288,
-        "elastic_peak_n": 4877234.432590269,
+        "elastic_peak_n": 2137.46013792515,
         "rate_peak_n": 4865.192968953907,
-        "share_elastic": 1.0,
+        "share_elastic": 0.3052357592617883,
         "s_peak_m": 0.15315726854308087,
         "theta_peak_deg": 69.86744670590076,
         "over_s_hard": false
@@ -315,9 +315,9 @@
         "h_m": 2.0,
         "on_d1": true,
         "f_flex_n": 6012.632209869719,
-        "elastic_peak_n": 1492598.5289271767,
+        "elastic_peak_n": 2139.175114427241,
         "rate_peak_n": 5292.926578798626,
-        "share_elastic": 0.9999992074857333,
+        "share_elastic": 0.2878290963614012,
         "s_peak_m": 0.20759750769626473,
         "theta_peak_deg": 81.81502087926512,
         "over_s_hard": false
@@ -327,9 +327,9 @@
         "h_m": 5.0,
         "on_d1": true,
         "f_flex_n": 10160.322221228153,
-        "elastic_peak_n": 673418.6457780085,
+        "elastic_peak_n": 2131.611274794004,
         "rate_peak_n": 5685.963253970349,
-        "share_elastic": 0.9999946644288081,
+        "share_elastic": 0.2726691337512489,
         "s_peak_m": 0.30172813353239414,
         "theta_peak_deg": 99.66479142418653,
         "over_s_hard": false
@@ -341,9 +341,9 @@
         "h_m": 0.5,
         "on_d1": true,
         "f_flex_n": 2680.4216390775064,
-        "elastic_peak_n": 5006043.603377571,
+        "elastic_peak_n": 2135.5175026693664,
         "rate_peak_n": 4285.038577281848,
-        "share_elastic": 1.0,
+        "share_elastic": 0.3326063157267201,
         "s_peak_m": 0.1037844714641557,
         "theta_peak_deg": 57.219711096617644,
         "over_s_hard": false
@@ -353,9 +353,9 @@
         "h_m": 1.0,
         "on_d1": true,
         "f_flex_n": 5164.714249726781,
-        "elastic_peak_n": 4877234.432590269,
+        "elastic_peak_n": 2137.46013792515,
         "rate_peak_n": 4865.192968953907,
-        "share_elastic": 1.0,
+        "share_elastic": 0.3052357592617883,
         "s_peak_m": 0.15315726854308087,
         "theta_peak_deg": 69.86744670590076,
         "over_s_hard": false
@@ -365,9 +365,9 @@
         "h_m": 2.0,
         "on_d1": true,
         "f_flex_n": 8173.038184670819,
-        "elastic_peak_n": 1492598.5289271767,
+        "elastic_peak_n": 2139.175114427241,
         "rate_peak_n": 5292.926578798626,
-        "share_elastic": 0.9999992074857333,
+        "share_elastic": 0.2878290963614012,
         "s_peak_m": 0.20759750769626473,
         "theta_peak_deg": 81.81502087926512,
         "over_s_hard": false
@@ -377,9 +377,9 @@
         "h_m": 5.0,
         "on_d1": true,
         "f_flex_n": 12164.17347348797,
-        "elastic_peak_n": 673418.6457780085,
+        "elastic_peak_n": 2131.611274794004,
         "rate_peak_n": 5685.963253970349,
-        "share_elastic": 0.9999946644288081,
+        "share_elastic": 0.2726691337512489,
         "s_peak_m": 0.30832497194254527,
         "theta_peak_deg": 100.82368193474345,
         "over_s_hard": false
@@ -390,29 +390,29 @@
     "soft": {
       "h_star_m": 2.4374361777102753,
       "monotone": true,
-      "share_elastic_at_hstar": 1.0,
-      "share_elastic_max": 1.0,
+      "share_elastic_at_hstar": 0.3326063157267201,
+      "share_elastic_max": 0.3326063157267201,
       "over_s_hard_at": []
     },
     "self": {
       "h_star_m": 2.135522030058062,
       "monotone": true,
-      "share_elastic_at_hstar": 1.0,
-      "share_elastic_max": 1.0,
+      "share_elastic_at_hstar": 0.3326063157267201,
+      "share_elastic_max": 0.3326063157267201,
       "over_s_hard_at": []
     },
     "stiff": {
       "h_star_m": 1.344140382705321,
       "monotone": true,
-      "share_elastic_at_hstar": 1.0,
-      "share_elastic_max": 1.0,
+      "share_elastic_at_hstar": 0.3326063157267201,
+      "share_elastic_max": 0.3326063157267201,
       "over_s_hard_at": []
     }
   },
   "D1_J1": {
-    "soft": true,
-    "self": true,
-    "stiff": true
+    "soft": false,
+    "self": false,
+    "stiff": false
   },
   "D1_J2": {
     "soft": true,
