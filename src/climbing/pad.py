@@ -546,6 +546,18 @@ RIGID_CONTACT: dict = {"k_n_per_m": None}
 STROKE_ANCHOR: dict = {"x_flex_max_m": None, "k_stop_n_per_m": None}
 
 
+# B2a 门：**两段腿「等效单关节」**（把线性腿弹簧换成几何屈曲的刚度）。
+# 设计定理（`docs/methods/P3_两段腿等效关节_预注册.md` §1.1）：
+#   两段腿（股/胫各长 l）腿长 `L(θ) = 2l·cos(θ/2)` ⇒ `s(θ) = 2l(1−cos(θ/2))`
+#   ⇒ `θ(s) = 2·arccos(1 − s/(2l))`；关节力矩 `M = k_θ·θ`
+#   ⇒ **等效轴向力 `F(s) = k_θ·θ / (l·sin(θ/2))`**
+#   ⇒ 关节准静态时**与单自由度框架完全等价**（无需新增自由度）。
+# 性质：`s ∝ θ²`（小角）而 `F` 有限 ⇒ `dF/ds → ∞`（直腿抗屈曲刚度无穷大）；`θ → θ_max` 时**硬化**。
+# ⚠️ 门默认 `None`/`False` ⇒ **既有路径逐位不变**；`theta_max_rad` 由实测 COM 深度反解。
+TWO_SEG_LEG: dict = {"k_theta_nm_per_rad": None, "segment_l_m": None,
+                     "theta_max_rad": None}
+
+
 def simulate_boulder_fall(
     *,
     height_m: float = 3.0,
@@ -618,6 +630,17 @@ def simulate_boulder_fall(
     if _ks_ov is not None:
         k_stop = float(_ks_ov)
 
+    # B2a 门（`TWO_SEG_LEG`，默认 `None` ⇒ 既有路径逐位不变；见模块顶注释）
+    _k_th = TWO_SEG_LEG.get("k_theta_nm_per_rad")
+    _l = TWO_SEG_LEG.get("segment_l_m")
+    _th_max = TWO_SEG_LEG.get("theta_max_rad")
+    if _k_th is not None:
+        if _l is None or float(_l) <= 0.0:
+            raise ValueError("TWO_SEG_LEG: segment_l_m 必须为正")
+        _l = float(_l)
+        _k_th = float(_k_th)
+        _th_max = None if _th_max is None else float(_th_max)
+
     # 屈曲阻尼 (N·s/m)，代表肌腱/肌肉的粘性损耗。
     # 早期版本取 3.0e3，这是个**虚高的人为参数**：冲击时屈曲速率可达
     # 5-8 m/s，单这一项就产生 15-24 kN，占了"屈膝缓冲"总峰值力的
@@ -654,11 +677,29 @@ def simulate_boulder_fall(
         return leg_ext0 - (z_foot - z_torso)
 
     def flex_force(z_foot, z_torso, vz_foot, vz_torso):
-        """返回 ``(力的大小, 屈曲量)``。力的大小恒为非负，方向由调用方按牛顿第三定律分配。"""
+        """返回 ``(力的大小, 屈曲量)``。力的大小恒为非负，方向由调用方按牛顿第三定律分配。
+
+        B2a 门（`TWO_SEG_LEG`）开启时把线性弹簧换成**两段腿几何屈曲**的等效轴向力
+        `F(s) = k_θ·θ / (l·sin(θ/2))`（`θ(s) = 2·arccos(1 − s/(2l))`）；
+        行程耗尽改按**等效屈曲角** `θ > θ_max` 判定（`θ_max` 由实测 COM 深度反解）。
+        """
         xf = flex_disp(z_foot, z_torso)
         if xf <= 0.0:
             return 0.0, 0.0
-        if xf <= x_flex_max:
+        if _k_th is not None:
+            _L0 = 2.0 * _l
+            _c = min(1.0, max(-1.0, 1.0 - xf / _L0))
+            th = 2.0 * float(np.arccos(_c))
+            _half = 0.5 * th
+            _s = float(np.sin(_half))
+            f_el = (_k_th * th / (_l * _s)) if _s > 1e-9 else 0.0
+            if _th_max is not None and th > _th_max:
+                _tm = _th_max
+                _sm = float(np.sin(0.5 * _tm))
+                _fm = (_k_th * _tm / (_l * _sm)) if _sm > 1e-9 else 0.0
+                f_el = _fm + k_stop * _l * (th - _tm)   # 行程耗尽：按等效位移线性加力
+            f = f_el
+        elif xf <= x_flex_max:
             f = k_flex * xf
         else:
             f = k_flex * x_flex_max + k_stop * (xf - x_flex_max)

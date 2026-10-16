@@ -340,6 +340,57 @@ class TestStrokeAnchor:
 
 
 # ==========================================================================
+# B2a 门：两段腿「等效单关节」（TWO_SEG_LEG）
+# ==========================================================================
+class TestTwoSegmentLeg:
+    """`F(s) = k_θ·θ/(l·sin(θ/2))`、`θ(s)=2·arccos(1−s/(2l))` —— 设计定理 + 硬化。
+
+    见 `docs/methods/P3_两段腿等效关节_预注册.md`、`results/LEG2SEG_REPORT.md`。
+    """
+
+    KEYS = ("k_theta_nm_per_rad", "segment_l_m", "theta_max_rad")
+
+    def test_default_is_none(self):
+        from climbing.pad import TWO_SEG_LEG
+        assert all(TWO_SEG_LEG[k] is None for k in self.KEYS)
+
+    @staticmethod
+    def _analytic(s, k_th=350.0, l=0.425):
+        import math
+        th = 2.0 * math.acos(min(1.0, max(-1.0, 1.0 - s / (2.0 * l))))
+        return k_th * th / (l * math.sin(th / 2.0))
+
+    def test_analytic_law_is_hardening(self):
+        """设计定理自检：`F(s)` 单调且 `dF/ds` 随 s 上升（硬化）。"""
+        ss = [0.005, 0.02, 0.05, 0.10, 0.20, 0.30, 0.42]
+        fs = [self._analytic(s) for s in ss]
+        assert all(fs[i] < fs[i + 1] for i in range(len(fs) - 1))
+        slopes = [(fs[i + 1] - fs[i]) / (ss[i + 1] - ss[i]) for i in range(len(fs) - 1)]
+        assert all(slopes[i] < slopes[i + 1] for i in range(len(slopes) - 1)), slopes
+
+    def test_gate_on_changes_result_and_keeps_finite(self):
+        """门开 ⇒ 结果改变且有限；门关 ⇒ 回到默认值。"""
+        from climbing.pad import TWO_SEG_LEG
+        prev = {k: TWO_SEG_LEG[k] for k in self.KEYS}
+        try:
+            base = simulate_boulder_fall(height_m=2.0, mass_kg=80.0, on_pad=False,
+                                         posture="anchored-stiff")
+            TWO_SEG_LEG.update({"k_theta_nm_per_rad": 350.0, "segment_l_m": 0.425,
+                                "theta_max_rad": 1.507})       # 86.3°
+            two = simulate_boulder_fall(height_m=2.0, mass_kg=80.0, on_pad=False,
+                                        posture="anchored-stiff")
+        finally:
+            for k, v in prev.items():
+                TWO_SEG_LEG[k] = v
+        assert np.isfinite(two.meta["f_flex_peak_n"])
+        assert two.meta["f_flex_peak_n"] != base.meta["f_flex_peak_n"]
+        back = simulate_boulder_fall(height_m=2.0, mass_kg=80.0, on_pad=False,
+                                     posture="anchored-stiff")
+        assert back.meta["f_flex_peak_n"] == pytest.approx(base.meta["f_flex_peak_n"],
+                                                           rel=0.0, abs=0.0)
+
+
+# ==========================================================================
 # 绳索本构
 # ==========================================================================
 class TestRopeModel:

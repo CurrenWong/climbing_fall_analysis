@@ -207,7 +207,37 @@ STROKE_ANCHOR = {"x_flex_max_m": None, "k_stop_n_per_m": None}
 
 ---
 
-**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → 更正：账的口径 → 审计通过 + 非单调定案 → **B1 行程锚定**）。
-**锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `STROKE_ANCHOR` / `hard_surface` /
-`absorbed_fraction` / `:733-741`）、`scripts/pad_energy_check.py`、`scripts/fp_stroke_probe.py`、
-`results/FP_STROKE_REPORT.md`、`results/FP_CONTACT_REPORT.md`、`temp/v1_b1_preview.py`、`temp/v1_window_decomp.py`
+## 6e. 🔧 B2a 门 `TWO_SEG_LEG`（两段腿 = 非线性硬化弹簧；零新增自由度）
+
+```python
+TWO_SEG_LEG = {"k_theta_nm_per_rad": None, "segment_l_m": None, "theta_max_rad": None}
+```
+
+**设计定理**：两段腿 `L(θ)=2l·cos(θ/2)` ⇒ `θ(s)=2·arccos(1−s/(2l))`；`M=k_θ·θ`
+⇒ **等效轴向力 `F(s) = k_θ·θ/(l·sin(θ/2))`** ⇒ **准静态关节下与单自由度框架完全等价**（不用加自由度）。
+自检：`dF/ds` 随 s 上升 **649 → 1015 N/m**（硬化）✓。
+
+**冻结值**：`l = 0.425 m`（2l = 0.85 = `leg_ext0`）｜`k_θ = 350 N·m/rad`
+（0.08 N·m/kg/deg × 76 kg；Shamaei 2013 膝 ~400）｜`θ_max` 由实测 COM 深度反解 ⇒ **120.8 / 111.2 / 86.3°**。
+
+**实测收益/局限**（`results/LEG2SEG_REPORT.md`）：
+- ✅ 软接触下 **`F_flex(h)` 三档全部单调**（线性模型在此**非单调**，因 `k_stop` 假台阶）；
+  `θ ≤ θ_max` 是**几何约束**，不再需要 `k_stop` 造力；
+- ✅ **`self` 档从「不可定」→ 可定（3.302 m）**（B1 下不可定）；
+- ❌ **`stiff` 仍不可定**（`θ_max` = 86.3° 在 h=1 m 就被用尽）⇒ **「行程耗尽之后」仍缺物理机制**。
+
+**⚠️ 两个必须记住的读数**：
+1. **`F(θ→0) → 2k_θ/l ≈ 1.65 kN` 是有限的** —— 线性力矩律的产物；小角段偏「恒力弹簧」，
+   **与真实直腿的无穷抗屈曲刚度极限不一致**（量级对、极限不对）；
+2. **两段腿的**弹性**力量级偏低**：全程仅 **1.65–1.99 kN**（stiff 档线性弹簧在 0.42 m 是 7.77 kN）
+   ⇒ 软接触口径下输出的 `F_flex` **由阻尼项主导**。
+
+**⚠️ 算力**：`h=0.20 m` + 实测跟垫口径 **~186 s/格**（软化非线性律 ⇒ 长时振铃、`settled` 不触发）
+⇒ 探针网格跑前缩为 `{0.50…9.00}`（跑前选择，非事后裁剪）。
+
+---
+
+**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → 账的口径 → 审计 + 非单调定案 → **B1 行程锚定** → **B2a 两段腿**）。
+**锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `STROKE_ANCHOR` / `TWO_SEG_LEG`）、
+`scripts/pad_energy_check.py`、`scripts/fp_stroke_probe.py`、`scripts/leg2seg_probe.py`、
+`results/FP_STROKE_REPORT.md`、`results/LEG2SEG_REPORT.md`、`temp/v1_b2a_timing.py`
