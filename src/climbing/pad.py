@@ -713,6 +713,9 @@ def simulate_boulder_fall(
             # D1：力-长关系 `M(θ)`（表格，单位 N·m）取代常数 `k_θ·θ`
             if _m_tab is not None:
                 _m_el = float(np.interp(th, _m_tab[0], _m_tab[1]))
+                # ★ 同样乘 r(θ) 归零因子：`M(0°)≠0` 而 `l·sin(θ/2)→0` ⇒ 否则 θ→0 发散
+                #   （物理上：全伸展时伸肌力矩**不能**产生轴向力，载荷直接走骨性关节面）
+                _m_el *= min(1.0, th / 0.349)
             else:
                 _m_el = _k_th * th
             f_el = (_m_el / (_l * _s)) if _s > 1e-9 else 0.0
