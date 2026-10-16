@@ -555,7 +555,13 @@ STROKE_ANCHOR: dict = {"x_flex_max_m": None, "k_stop_n_per_m": None}
 # 性质：`s ∝ θ²`（小角）而 `F` 有限 ⇒ `dF/ds → ∞`（直腿抗屈曲刚度无穷大）；`θ → θ_max` 时**硬化**。
 # ⚠️ 门默认 `None`/`False` ⇒ **既有路径逐位不变**；`theta_max_rad` 由实测 COM 深度反解。
 TWO_SEG_LEG: dict = {"k_theta_nm_per_rad": None, "segment_l_m": None,
-                     "theta_max_rad": None}
+                     "theta_max_rad": None,
+                     # C1：Hill 型**饱和**肌肉离心力（替换无上限的粘性 `c_flex·rate`）
+                     # `f_muscle = f_ecc_max·rate/(rate + v_ref)`；`rate→∞` 时饱和到 `f_ecc_max`。
+                     # 锚：Ruas 2023/2024 实测膝伸肌**离心 MVC = 270 ± 55 N·m**
+                     #     ⇒ 轴向 `f_ecc_max = M_ecc/(l·sin(θ/2))`（θ 相关，实时算）。
+                     # `v_ref` 是**弱锚**（默认 1.0 m/s），须做敏感性扫描。
+                     "m_ecc_max_nm": None, "ecc_rate_ref_ms": None}
 
 
 def simulate_boulder_fall(
@@ -640,6 +646,11 @@ def simulate_boulder_fall(
         _l = float(_l)
         _k_th = float(_k_th)
         _th_max = None if _th_max is None else float(_th_max)
+    # C1 门（可与 B2a 独立开启；默认 None ⇒ 既有路径逐位不变）
+    _m_ecc = TWO_SEG_LEG.get("m_ecc_max_nm")
+    _m_ecc = None if _m_ecc is None else float(_m_ecc)
+    _v_ref = TWO_SEG_LEG.get("ecc_rate_ref_ms")
+    _v_ref = 1.0 if _v_ref is None else float(_v_ref)
 
     # 屈曲阻尼 (N·s/m)，代表肌腱/肌肉的粘性损耗。
     # 早期版本取 3.0e3，这是个**虚高的人为参数**：冲击时屈曲速率可达
@@ -705,7 +716,18 @@ def simulate_boulder_fall(
             f = k_flex * x_flex_max + k_stop * (xf - x_flex_max)
         # dxf/dt = -(vz_foot - vz_torso)：躯干朝静止的脚砸下去时为正
         rate = vz_torso - vz_foot
-        f_damp = c_flex * max(0.0, rate)     # 只在加载（塌陷）时耗能
+        rate_pos = max(0.0, rate)
+        if _m_ecc is not None:
+            # C1：Hill 型**饱和**律（有上限）替代无上限粘性
+            #   `f = f_ecc_max·rate/(rate+v_ref)`，`f_ecc_max = M_ecc/(l·sin(θ/2))`（θ 相关）
+            if _k_th is not None:
+                _sh = float(np.sin(0.5 * max(th, 1e-9)))
+                _f_ecc_max = (_m_ecc / (_l * _sh)) if _sh > 1e-9 else 0.0
+            else:
+                _f_ecc_max = c_flex * 1e6          # 未开两段腿时：等价于「几乎无上限」
+            f_damp = _f_ecc_max * rate_pos / (rate_pos + _v_ref)
+        else:
+            f_damp = c_flex * max(0.0, rate)       # 只在加载（塌陷）时耗能
         return f + f_damp, xf
 
     def rhs(_t, y):

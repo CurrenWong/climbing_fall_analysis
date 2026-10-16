@@ -237,7 +237,30 @@ TWO_SEG_LEG = {"k_theta_nm_per_rad": None, "segment_l_m": None, "theta_max_rad":
 
 ---
 
-**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → 账的口径 → 审计 + 非单调定案 → **B1 行程锚定** → **B2a 两段腿**）。
-**锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `STROKE_ANCHOR` / `TWO_SEG_LEG`）、
+## 6f. ⚠️ 「门」是**临时脚手架** —— 已实际咬过人，须定期收编
+
+`pad.py` 现有四个「门」（模块级 dict / 按姿势键判定 ⇒ **运行时开关**，默认态 = 原逻辑）：
+
+| 门 | 档位 | 作用 | 默认识别 |
+|---|---|---|---|
+| `RIGID_STANDING_CHAIN` | L2 | 刚性+直立的标定链（`k_flex`×2、行程限 15 mm） | **按姿势键** == `feet-first-stiff` |
+| `RIGID_CONTACT` | L3 | 刚性地面接触刚度 `k_n` | `None` → `1.0e7` |
+| `STROKE_ANCHOR` | L4 | 覆盖 `x_flex_max` / `k_stop` | `None` → 沿用姿势值 |
+| `TWO_SEG_LEG` | B2a/C1 | 两段腿非线性弹簧 / 离心饱和律 | `None` → 线性 `k_flex` + 粘性阻尼 |
+
+**风险（已实际咬过）**：**L2 门按姿势的「键」判定** ⇒ 传 `Posture` **对象**会**静默绕门**，
+同一姿势两种调用差 **13.4%**（§2）；且 `pad.py` 自己的 docstring 曾把 `hard_surface` 的
+`k_n` 写成总刚度（实为「模量 × 面积」，差 18×，§5）。
+
+**纪律**：
+1. 门**只用于标定性探针**；探针必须 `finally` 恢复，且**「门关态逐位正对照」是提交的前提**；
+2. **新门必须在 gotcha 里登记**（档位/作用/默认/生效条件）；
+3. **标定定稿后应收编** —— 把值写进 `Posture` 字段并删门；否则门越积越多，
+   而「按键判定」这类**隐式**行为会随重构**静默改变数值**。
+
+---
+
+**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → 账的口径 → 审计 → B1 → B2a → **C1（BLOCKED：力矩臂换算错）**）。
+**锚点**：`src/climbing/pad.py`（四个门 + `flex_force` + 能力账 `:733-741`）、
 `scripts/pad_energy_check.py`、`scripts/fp_stroke_probe.py`、`scripts/leg2seg_probe.py`、
-`results/FP_STROKE_REPORT.md`、`results/LEG2SEG_REPORT.md`、`temp/v1_b2a_timing.py`
+`scripts/ecc_muscle_probe.py`、`results/{FP_STROKE,LEG2SEG,ECC_MUSCLE}_REPORT.md`
