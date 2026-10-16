@@ -1,0 +1,106 @@
+{
+  "current_fingerprint": "06cee88a51412a3c",
+  "heights": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0,
+    9.0,
+    10.0,
+    12.0,
+    14.0,
+    16.0,
+    18.0,
+    20.0,
+    25.0,
+    30.0,
+    40.0,
+    50.0
+  ],
+  "files": [
+    {
+      "file": "s2_thums_height_sweep.json",
+      "fp": "538abf07260d11c3",
+      "same": false,
+      "const_scale": false,
+      "ratio_min": 0.9399776445413591,
+      "ratio_max": 1.12015851523257,
+      "span_pct": 17.492132239548972,
+      "n_common": 19
+    },
+    {
+      "file": "s2_thums_height_sweep_anat.json",
+      "fp": "538abf07260d11c3",
+      "same": false,
+      "const_scale": false,
+      "ratio_min": 0.9399776445413591,
+      "ratio_max": 1.12015851523257,
+      "span_pct": 17.492132239548972,
+      "n_common": 19
+    },
+    {
+      "file": "s2_thums_height_sweep_anat_contact_hold100.json",
+      "fp": "b5fdb95d1026d678",
+      "same": true,
+      "const_scale": true,
+      "ratio_min": 1.0,
+      "ratio_max": 1.0,
+      "span_pct": 0.0,
+      "n_common": 6
+    },
+    {
+      "file": "s2_thums_height_sweep_anat_refixed_now.json",
+      "fp": "b5fdb95d1026d678",
+      "same": true,
+      "const_scale": true,
+      "ratio_min": 1.0,
+      "ratio_max": 1.0,
+      "span_pct": 0.0,
+      "n_common": 6
+    },
+    {
+      "file": "s2_thums_height_sweep_contact_hold100.json",
+      "fp": "7fa3e02c69cc06e0",
+      "same": true,
+      "const_scale": true,
+      "ratio_min": 1.0,
+      "ratio_max": 1.0,
+      "span_pct": 0.0,
+      "n_common": 7
+    },
+    {
+      "file": "s2_thums_height_sweep_plantar_bc_base.json",
+      "fp": "c7349f65f3afcaf8",
+      "same": false,
+      "const_scale": true,
+      "ratio_min": 1.0810166829883556,
+      "ratio_max": 1.0810166829883556,
+      "span_pct": 0.0,
+      "n_common": 1
+    },
+    {
+      "file": "s2_thums_height_sweep_refixed_now.json",
+      "fp": "7fa3e02c69cc06e0",
+      "same": true,
+      "const_scale": true,
+      "ratio_min": 1.0,
+      "ratio_max": 1.0,
+      "span_pct": 0.0,
+      "n_common": 7
+    },
+    {
+      "file": "s2_thums_height_sweep_v1rerun20261015.json",
+      "fp": "3d796dc1a40b898f",
+      "same": true,
+      "const_scale": true,
+      "ratio_min": 1.0,
+      "ratio_max": 1.0,
+      "span_pct": 0.0,
+      "n_common": 5
+    }
+  ]
+}
