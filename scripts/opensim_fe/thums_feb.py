@@ -727,6 +727,9 @@ def build_thums_feb(
     load_ramp_time_s: float | None = None,
     load_ramp_lc_id: int = 1,
     contact_gap_mm: float | None = None,
+    contact_pad_e_mpa: float | None = None,
+    contact_pad_thickness_mm: float | None = None,
+    contact_auto_penalty: int = 0,
     contact_node_reloc: int = 0,
     contact_swap_pair: bool = False,
     contact_hold_spring_k: float | None = None,
@@ -1042,6 +1045,20 @@ def build_thums_feb(
     contact_kw: dict = {}
     if contact_gap_mm is not None:
         contact_kw["contact_gap_mm"] = float(contact_gap_mm)
+    # ``contact_pad_e_mpa`` / ``contact_pad_thickness_mm``（2026-10-16 新增，opt-in）：
+    # 对偶薄板的杨氏模量与厚度。**默认走 ``apply_plantar_bc`` 的原值
+    # （``200_000 MPa`` = 数值刚性、``5.0 mm``）⇒ 不传时原路径逐位不变。**
+    # 用途：把「刚性地面」换成**真实跟垫**（E≈0.185 MPa / t≈15.4 mm，G5 已标定）
+    # —— 即 FEBio 手册 §8.12.4「force-driven contact 必须有初始接触/支撑」的物理实现。
+    if contact_pad_e_mpa is not None:
+        contact_kw["contact_pad_e_mpa"] = float(contact_pad_e_mpa)
+    if contact_pad_thickness_mm is not None:
+        contact_kw["contact_pad_thickness_mm"] = float(contact_pad_thickness_mm)
+    # ``contact_auto_penalty``（2026-10-16，opt-in）：手册 §8.5.1 —— penalty 取软会让
+    # 跖面**深深陷入**对偶面；``auto_penalty=1`` 让 FEBio 按单元尺寸与初始材料刚度估算。
+    # **默认 0 ⇒ 原路径逐位不变。**
+    if int(contact_auto_penalty) != 0:
+        contact_kw["contact_auto_penalty"] = int(contact_auto_penalty)
     if int(contact_node_reloc) != 0:
         contact_kw["contact_node_reloc"] = int(contact_node_reloc)
     if bool(contact_swap_pair):

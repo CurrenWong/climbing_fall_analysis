@@ -1,0 +1,43 @@
+{
+  "h_m": 5.0,
+  "f_sub_n": 26383.133775894516,
+  "pad_t_mm": 15.4,
+  "ref_fixed": 186.7563689967737,
+  "rows": [
+    {
+      "pad_e": 200000.0,
+      "gap": 0.5,
+      "rc": "ERR",
+      "s": 0.7404725551605225,
+      "msg": "c)\n\n\t   model update ................. : 0:00:00 (0.0105883 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.391986 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.572271 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    },
+    {
+      "pad_e": 0.185,
+      "gap": 0.5,
+      "rc": "ERR",
+      "s": 0.587388277053833,
+      "msg": "c)\n\n\t   model update ................. : 0:00:00 (0.0078036 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.378041 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.545133 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    },
+    {
+      "pad_e": 200000.0,
+      "gap": -0.05,
+      "rc": "ERR",
+      "s": 0.6006598472595215,
+      "msg": "c)\n\n\t   model update ................. : 0:00:00 (0.0072296 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.397618 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.566194 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    },
+    {
+      "pad_e": 0.185,
+      "gap": -0.05,
+      "rc": "ERR",
+      "s": 0.657752275466919,
+      "msg": "ec)\n\n\t   model update ................. : 0:00:00 (0.009203 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.415633 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.611043 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    },
+    {
+      "pad_e": 5.0,
+      "gap": -0.05,
+      "rc": "ERR",
+      "s": 0.6092150211334229,
+      "msg": "c)\n\n\t   model update ................. : 0:00:00 (0.0099495 sec)\n\n\t   QN updates ................... : 0:00:00 (0 sec)\n\n\t   time in linear solver ........ : 0:00:00 (0.396613 sec)\n\n\tTotal elapsed time .............. : 0:00:01 (0.567353 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    }
+  ]
+}

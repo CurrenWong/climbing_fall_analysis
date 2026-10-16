@@ -1,0 +1,43 @@
+{
+  "h_m": 5.0,
+  "f_sub_n": 26383.133775894516,
+  "pad_t_mm": 15.4,
+  "ref_fixed": 186.7563689967737,
+  "rows": [
+    {
+      "pad_e": 200000.0,
+      "gap": -0.05,
+      "rc": "ERR",
+      "s": 110.83347773551941,
+      "msg": "fness ......... : 0:00:13 (12.8567 sec)\n\n\t   evaluating residual .......... : 0:00:14 (13.9006 sec)\n\n\t   model update ................. : 0:00:11 (11.3228 sec)\n\n\t   QN updates ................... : 0:00:00 (0.346118 sec)\n\n\t   time in linear solver ........ : 0:01:00 (60.4378 sec)\n\n\tTotal elapsed time .............. : 0:01:51 (110.772 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    },
+    {
+      "pad_e": 0.185,
+      "gap": -0.05,
+      "rc": "ERR",
+      "s": 114.31711769104004,
+      "msg": "ffness ......... : 0:00:13 (12.8388 sec)\n\n\t   evaluating residual .......... : 0:00:15 (15.4333 sec)\n\n\t   model update ................. : 0:00:12 (11.7767 sec)\n\n\t   QN updates ................... : 0:00:00 (0.354628 sec)\n\n\t   time in linear solver ........ : 0:01:01 (61.375 sec)\n\n\tTotal elapsed time .............. : 0:01:54 (114.246 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    },
+    {
+      "pad_e": 200000.0,
+      "gap": -0.05,
+      "rc": "ERR",
+      "s": 117.63419675827026,
+      "msg": "fness ......... : 0:00:13 (12.9563 sec)\n\n\t   evaluating residual .......... : 0:00:15 (15.4074 sec)\n\n\t   model update ................. : 0:00:12 (12.3432 sec)\n\n\t   QN updates ................... : 0:00:00 (0.394363 sec)\n\n\t   time in linear solver ........ : 0:01:03 (63.4411 sec)\n\n\tTotal elapsed time .............. : 0:01:58 (117.545 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    },
+    {
+      "pad_e": 0.185,
+      "gap": -0.05,
+      "rc": "ERR",
+      "s": 124.18106651306152,
+      "msg": "iffness ......... : 0:00:14 (13.8745 sec)\n\n\t   evaluating residual .......... : 0:00:16 (15.7423 sec)\n\n\t   model update ................. : 0:00:13 (12.7615 sec)\n\n\t   QN updates ................... : 0:00:00 (0.414878 sec)\n\n\t   time in linear solver ........ : 0:01:08 (67.6369 sec)\n\n\tTotal elapsed time .............. : 0:02:04 (124.1 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    },
+    {
+      "pad_e": 0.185,
+      "gap": 0.5,
+      "rc": "ERR",
+      "s": 116.05154323577881,
+      "msg": "ffness ......... : 0:00:14 (13.5247 sec)\n\n\t   evaluating residual .......... : 0:00:14 (14.3433 sec)\n\n\t   model update ................. : 0:00:12 (11.7147 sec)\n\n\t   QN updates ................... : 0:00:00 (0.361307 sec)\n\n\t   time in linear solver ........ : 0:01:03 (63.2123 sec)\n\n\tTotal elapsed time .............. : 0:01:56 (115.96 sec)\n\n\n E R R O R   T E R M I N A T I O N\n\n---------------------"
+    }
+  ]
+}
