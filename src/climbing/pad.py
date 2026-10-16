@@ -719,10 +719,19 @@ def simulate_boulder_fall(
         rate_pos = max(0.0, rate)
         if _m_ecc is not None:
             # C1：Hill 型**饱和**律（有上限）替代无上限粘性
-            #   `f = f_ecc_max·rate/(rate+v_ref)`，`f_ecc_max = M_ecc/(l·sin(θ/2))`（θ 相关）
+            #   `f = f_ecc_max·rate/(rate + v_ref)`
+            # ★ 轴向上限的换算（2026-10-16 修正）：关节力矩由**肌腱**产生，力矩臂 `r` 是独立解剖量
+            #   —— **不是**肢体力臂 `l·sin(θ/2)`。膝伸肌力矩臂：全伸展 ≈0、**20° 以后约 3–4 cm 平台**
+            #   ⇒ `r(θ) = r_ref·min(1, θ/θ_ramp)`；可达到的力矩 `M_ach(θ) = F_mt_max·r(θ)`，
+            #   其中 `F_mt_max = M_ecc/r_ref`（由实测离心 MVC 力矩反推）。
+            #   ⇒ `f_ecc_max(θ) = M_ach(θ)/(l·sin(θ/2))`，`θ→0` 时 `r→0` 抵消 `sin(θ/2)` ⇒ **有限**。
+            #   （先前直接用 `M_ecc/(l·sin(θ/2))` ⇒ θ→0 发散 ⇒ ODE 变刚 ⇒ 积分器崩。）
+            _r_ref, _th_ramp = 0.040, 0.349          # 4 cm 平台；20° 以下线性归零
+            _r_arm = _r_ref * min(1.0, th / _th_ramp)
             if _k_th is not None:
                 _sh = float(np.sin(0.5 * max(th, 1e-9)))
-                _f_ecc_max = (_m_ecc / (_l * _sh)) if _sh > 1e-9 else 0.0
+                _m_ach = _m_ecc * (_r_arm / _r_ref)
+                _f_ecc_max = (_m_ach / (_l * _sh)) if _sh > 1e-9 else 0.0
             else:
                 _f_ecc_max = c_flex * 1e6          # 未开两段腿时：等价于「几乎无上限」
             f_damp = _f_ecc_max * rate_pos / (rate_pos + _v_ref)

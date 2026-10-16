@@ -1,0 +1,275 @@
+{
+  "positive_control": true,
+  "l_seg_m": 0.425,
+  "k_theta": 350.0,
+  "m_ecc_nm": 270.0,
+  "v_ref_ms": 1.0,
+  "pad_kn": 2100000.0,
+  "grid": {
+    "soft": [
+      {
+        "label": "soft",
+        "h_m": 0.5,
+        "f_flex_n": 2343.7625777084495,
+        "f_flex_bw": 2.9874658748253093,
+        "theta_peak_deg": 61.94480419602756,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "f_muscle_peak_n": 16703627.534004802,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 1.314637352213341e-05
+      },
+      {
+        "label": "soft",
+        "h_m": 1.0,
+        "f_flex_n": 3774.8308990061323,
+        "f_flex_bw": 4.811570336208252,
+        "theta_peak_deg": 71.37104406383474,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "f_muscle_peak_n": 19332352.03822623,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 1.5215277067122498e-05
+      },
+      {
+        "label": "soft",
+        "h_m": 2.0,
+        "f_flex_n": 5719.002926117292,
+        "f_flex_bw": 7.28970000728752,
+        "theta_peak_deg": 82.33978641683613,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "f_muscle_peak_n": 49916650.36452405,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 3.928625260170875e-05
+      },
+      {
+        "label": "soft",
+        "h_m": 5.0,
+        "f_flex_n": 9412.789067432688,
+        "f_flex_bw": 11.997967026753134,
+        "theta_peak_deg": 99.70010355487373,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "f_muscle_peak_n": 2054400.5017831482,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 1.6168892838108114e-06
+      },
+      {
+        "label": "soft",
+        "h_m": 7.0,
+        "f_flex_n": 11197.973938756064,
+        "f_flex_bw": 14.273444472317337,
+        "theta_peak_deg": 107.38721797470426,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "f_muscle_peak_n": 105286936.89398761,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 8.286471885174953e-05
+      },
+      {
+        "label": "soft",
+        "h_m": 9.0,
+        "f_flex_n": 12681.130386811206,
+        "f_flex_bw": 16.163942817898068,
+        "theta_peak_deg": 111.90859451032746,
+        "theta_max_deg": 120.77683239444393,
+        "exhausted": false,
+        "f_muscle_peak_n": 855666703.5967833,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 0.0006734413870900611
+      }
+    ],
+    "self": [
+      {
+        "label": "self",
+        "h_m": 0.5,
+        "f_flex_n": 2513.527275797218,
+        "f_flex_bw": 3.2038556436158347,
+        "theta_peak_deg": 61.94480419602756,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": false,
+        "f_muscle_peak_n": 16703627.534004802,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 1.314637352213341e-05
+      },
+      {
+        "label": "self",
+        "h_m": 1.0,
+        "f_flex_n": 4039.8217751452303,
+        "f_flex_bw": 5.1493397020710825,
+        "theta_peak_deg": 71.37104406383474,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": false,
+        "f_muscle_peak_n": 19332352.03822623,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 1.5215277067122498e-05
+      },
+      {
+        "label": "self",
+        "h_m": 2.0,
+        "f_flex_n": 6112.893322920302,
+        "f_flex_bw": 7.791770536982944,
+        "theta_peak_deg": 82.33978641683613,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": false,
+        "f_muscle_peak_n": 49916650.36452405,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 3.928625260170875e-05
+      },
+      {
+        "label": "self",
+        "h_m": 5.0,
+        "f_flex_n": 9993.573727666764,
+        "f_flex_bw": 12.73826144461509,
+        "theta_peak_deg": 99.70010355487373,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": false,
+        "f_muscle_peak_n": 2054400.5017831482,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 1.6168892838108114e-06
+      },
+      {
+        "label": "self",
+        "h_m": 7.0,
+        "f_flex_n": 11865.271970581518,
+        "f_flex_bw": 15.124012749743184,
+        "theta_peak_deg": 107.38721797470426,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": false,
+        "f_muscle_peak_n": 105286936.89398761,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 8.286471885174953e-05
+      },
+      {
+        "label": "self",
+        "h_m": 9.0,
+        "f_flex_n": 13379.179932509238,
+        "f_flex_bw": 17.05370836691077,
+        "theta_peak_deg": 111.90850674206176,
+        "theta_max_deg": 111.23626050243942,
+        "exhausted": true,
+        "f_muscle_peak_n": 855666703.5967833,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 0.0006734413870900611
+      }
+    ],
+    "stiff": [
+      {
+        "label": "stiff",
+        "h_m": 0.5,
+        "f_flex_n": 3552.2727271133945,
+        "f_flex_bw": 4.52788761594606,
+        "theta_peak_deg": 61.94480419602756,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": false,
+        "f_muscle_peak_n": 16703627.534004802,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 1.314637352213341e-05
+      },
+      {
+        "label": "stiff",
+        "h_m": 1.0,
+        "f_flex_n": 5651.17665126757,
+        "f_flex_bw": 7.203245567124822,
+        "theta_peak_deg": 71.37104406383474,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": false,
+        "f_muscle_peak_n": 19332352.03822623,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 1.5215277067122498e-05
+      },
+      {
+        "label": "stiff",
+        "h_m": 2.0,
+        "f_flex_n": 8300.030934782098,
+        "f_flex_bw": 10.57959514051957,
+        "theta_peak_deg": 82.33978641683613,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": false,
+        "f_muscle_peak_n": 49916650.36452405,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 3.928625260170875e-05
+      },
+      {
+        "label": "stiff",
+        "h_m": 5.0,
+        "f_flex_n": 12069.143998167669,
+        "f_flex_bw": 15.383877264621034,
+        "theta_peak_deg": 102.88009005419627,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": true,
+        "f_muscle_peak_n": 2054400.5017831482,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 1.6168892838108114e-06
+      },
+      {
+        "label": "stiff",
+        "h_m": 7.0,
+        "f_flex_n": 13518.516223069837,
+        "f_flex_bw": 17.231312710086826,
+        "theta_peak_deg": 111.02823210707881,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": true,
+        "f_muscle_peak_n": 105286936.89398761,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 8.286471885174953e-05
+      },
+      {
+        "label": "stiff",
+        "h_m": 9.0,
+        "f_flex_n": 14719.533094866552,
+        "f_flex_bw": 18.762183180375757,
+        "theta_peak_deg": 114.48391019707513,
+        "theta_max_deg": 86.32579428058332,
+        "exhausted": true,
+        "f_muscle_peak_n": 855666703.5967833,
+        "f_ecc_cap_at_peak_n": 1270588235294.1174,
+        "saturation": 0.0006734413870900611
+      }
+    ]
+  },
+  "verdict": {
+    "soft": {
+      "h_star_m": 2.3906536996032637,
+      "monotone": true,
+      "sat_hi": 0.0006734413870900611,
+      "exhausted_at": []
+    },
+    "self": {
+      "h_star_m": 2.067338714860279,
+      "monotone": true,
+      "sat_hi": 0.0006734413870900611,
+      "exhausted_at": [
+        9.0
+      ]
+    },
+    "stiff": {
+      "h_star_m": 1.2071927293804343,
+      "monotone": true,
+      "sat_hi": 0.0006734413870900611,
+      "exhausted_at": [
+        5.0,
+        7.0,
+        9.0
+      ]
+    }
+  },
+  "C1_J1": {
+    "soft": true,
+    "self": true,
+    "stiff": true
+  },
+  "C1_J1_all": true,
+  "C1_J2": {
+    "soft": true,
+    "self": true,
+    "stiff": true
+  },
+  "C1_J2_all": true,
+  "C1_J3": {
+    "soft": false,
+    "self": false,
+    "stiff": false
+  }
+}
