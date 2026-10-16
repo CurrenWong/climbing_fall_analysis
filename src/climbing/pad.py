@@ -825,12 +825,20 @@ def simulate_boulder_fall(
     rate_flex = np.maximum(0.0, np.gradient(xf, t_out))
     vz_f = np.gradient(zf, t_out)
     vz_t = np.gradient(zt, t_out)
-    f_flex = np.where(
-        xf > 0.0,
-        np.where(xf <= x_flex_max, k_flex * xf, k_flex * x_flex_max + k_stop * (xf - x_flex_max))
-        + c_flex * rate_flex,
-        0.0,
+    # ★★ 单一真相源（修 `results/SECOND_CONTACT_REPORT.md` §4，2026-10-16）：
+    #   旧实现用**线性** `k_flex·xf + c_flex·rate` 算 `f_flex`，
+    #   **完全不含两段腿门的 `k_θ·θ` / `M(θ)`** ⇒ 门开启时 `h*` 与判据全建在
+    #   一个与 ODE 动力学无关的观测量上。实测反证：`controlled-drop`@0.5 m 报
+    #   28.185 kN，恰等于 `2.2e5×0.12 + 400×rate`（即纯线性公式）⇒ 定性确认。
+    #   现在**直接调用 `rhs` 用的同一个 `flex_force`** ⇒ 口径自洽。
+    #   注入方式：闭包内部 `rate = vz_torso − vz_foot`，故传 (0, d(xf)/dt)。
+    #   ⚠️ 门关闭（默认）时本式与原式**逐位等价**（同一公式、同一运算顺序）。
+    _rate_flex = np.gradient(xf, t_out)
+    f_flex = np.array(
+        [flex_force(zf[i], zt[i], 0.0, _rate_flex[i])[0] for i in range(xf.size)],
+        dtype=float,
     )
+    # （上面旧变量 `rate_flex` 保留：可能被后续统计使用；不再用于 f_flex 的力律）
 
     # 悬挂/减速方向朝上为正。屈曲力对下段质量是**向下**的（牛顿第三定律），
     # 早期版本写成 +，导致 a_leg 被严重高估（实测 1000+ g）。
