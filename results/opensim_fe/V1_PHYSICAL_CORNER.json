@@ -1,4 +1,6 @@
 {
+  "_SUPERSEDED": "⛔ 作废（2026-10-16 自查）：本件把 cl=3.0 的 **per-node k=5** 当作「物理点」，但 cl=3.0 有 479 个跖面节点 ⇒ 总刚度 2395 N/mm = 实测的 17.4×。现行认值见 V1_CORRECTION_PER_NODE_K.md：实测锚点在两网格均不可解；可解最软点（粗网格总 875 N/mm）首折 3.05 m ⇒ 物理首折 < 3.05 m。",
+  "_see": "results/opensim_fe/V1_CORRECTION_PER_NODE_K.md",
   "note": "最物理可辩护配置：spring k=5（可解最软点，实测 100–175 N/mm 不可解）× 界面锐度 δ",
   "cl_mm": 3.0,
   "threshold_mpa": 150.0,
