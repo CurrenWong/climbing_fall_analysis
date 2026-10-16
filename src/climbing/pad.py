@@ -564,6 +564,35 @@ TWO_SEG_LEG: dict = {"k_theta_nm_per_rad": None, "segment_l_m": None,
                      "m_ecc_max_nm": None, "ecc_rate_ref_ms": None}
 
 
+def _parse_m_theta_table(tbl) -> tuple[np.ndarray, np.ndarray]:
+    """校验并转换 D1 门的力-长表（**模块级以便单测**，见 `CANONICAL.md` §0）。
+
+    契约：``[[θ_deg, M_Nm], ...]`` —— 2 维、两列、θ 用**度数**、严格升序。
+
+    ⚠️ 2026-10-17 事故：曾因不清楚本契约，误判「探针传错了表」并来回返工三次
+    （`results/SECOND_CONTACT_REPORT.md` §0c/§0d）。本函数就是为了让那次错误
+    **当场报错而不是静默算错**：传 ``(x_array, y_array)`` 元组会被 ``np.asarray``
+    变成 2×N ⇒ ``[:, 0]`` 取到整行 x ⇒ 二次 ``radians`` ⇒ ``np.interp`` 对真实 θ
+    (~0.5–1.8 rad) 全部撞到末端 ⇒ 力矩被钉成常数（实测 222.4 N·m）。
+    """
+    arr = np.asarray(tbl, dtype=float)
+    if arr.ndim != 2 or arr.shape[1] != 2 or arr.shape[0] < 2:
+        raise ValueError(
+            f"TWO_SEG_LEG['m_theta_table'] 必须是 2 维、两列、≥2 行的 "
+            f"[[θ_deg, M_Nm], ...]；当前 shape={arr.shape}。"
+            "若传的是 (x_array, y_array) 元组，它会被转成 2×N 数组并被误读成废表"
+            "（力矩被钉成常数，静默算错）。"
+        )
+    if np.any(np.diff(arr[:, 0]) <= 0.0):
+        raise ValueError("m_theta_table 的 θ 列必须严格升序。")
+    if float(arr[:, 0].max()) > 180.0 + 1e-9:
+        raise ValueError(
+            f"m_theta_table 的 θ 列以**度数**给出（契约），当前最大值 "
+            f"{float(arr[:, 0].max()):.3f} > 180 ⇒ 你可能传了弧度。"
+        )
+    return np.radians(arr[:, 0]), arr[:, 1]
+
+
 def simulate_boulder_fall(
     *,
     height_m: float = 3.0,
@@ -651,13 +680,19 @@ def simulate_boulder_fall(
     _m_ecc = None if _m_ecc is None else float(_m_ecc)
     _v_ref = TWO_SEG_LEG.get("ecc_rate_ref_ms")
     _v_ref = 1.0 if _v_ref is None else float(_v_ref)
-    # D1 门：力-长表 `M(θ)`，形如 [[θ_deg, M_Nm], ...]（按 θ 升序）
+    # D1 门：力-长表 `M(θ)`
+    #
+    # ★★★ **契约（唯一正确格式，2026-10-17 写死）**：
+    #     `[[θ_deg, M_Nm], ...]` —— 2 维、**两列**、θ 以**度数**给出、按 θ 升序。
+    #     例：`[[0.0, 104.0], [15.0, 143.2], ...]`
+    # ⚠️⚠️ **不要**传 `(x_rad_array, y_array)` 这种「两个一维数组」的元组！
+    #     它会被 `np.asarray` 变成 2×N 数组 ⇒ `_mt[:,0]` 取到的是**整行 x** ⇒
+    #     再 `np.radians` 一次 ⇒ 角度被压成 0~0.04 rad ⇒ `np.interp` 对真实 θ(~0.5–1.8 rad)
+    #     **全部撞到末端** ⇒ 力矩被钉成常数（实测 222.4 N·m）⇒ **静默算错**。
+    #     2026-10-17 事故：我因为不清楚本契约而误判「探针传错了表」，来回返工三次
+    #     （详见 `results/SECOND_CONTACT_REPORT.md` §0c/§0d）。⇒ 已加下面的硬校验。
     _mt = TWO_SEG_LEG.get("m_theta_table")
-    if _mt:
-        _mt = np.asarray(_mt, dtype=float)
-        _m_tab = (np.radians(_mt[:, 0]), _mt[:, 1])
-    else:
-        _m_tab = None
+    _m_tab = _parse_m_theta_table(_mt) if _mt else None
 
     # 屈曲阻尼 (N·s/m)，代表肌腱/肌肉的粘性损耗。
     # 早期版本取 3.0e3，这是个**虚高的人为参数**：冲击时屈曲速率可达

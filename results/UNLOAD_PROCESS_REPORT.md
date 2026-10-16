@@ -1,5 +1,11 @@
 # UNLOAD_PROCESS 判定件 —— D1：卸力过程最小物理化（力-长 `M(θ)`）
 
+> ⛔⛔ **本件全部数字已作废，禁止引用**（2026-10-17）：
+> ① 后处理曾用线性 `k_flex·xf` 而非真实力律（已修 `e19e758`）；
+> ② 本探针当年传入的表格式与 `pad.py` 契约不符的争议已澄清 —— 契约是 `[[θ_deg, M_Nm], ...]`。
+> **现行数字以 `CANONICAL.md` §1 为准**（`h*` = 0.402 m，`results/hstar_canonical.json`）。
+> 事故全链见 `results/SECOND_CONTACT_REPORT.md` §0b/§0c/§0d。
+
 > **状态**：**已跑 · 如实判定**（2026-10-16）｜预注册 `docs/methods/P3_卸力过程最小物理化_预注册.md`
 > 脚本 `scripts/unload_process_probe.py`｜产物 `results/unload_process_probe.json`
 > **实现**：门 `TWO_SEG_LEG["m_theta_table"]`（默认 `None` ⇒ 既有路径逐位不变）
