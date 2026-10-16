@@ -651,6 +651,13 @@ def simulate_boulder_fall(
     _m_ecc = None if _m_ecc is None else float(_m_ecc)
     _v_ref = TWO_SEG_LEG.get("ecc_rate_ref_ms")
     _v_ref = 1.0 if _v_ref is None else float(_v_ref)
+    # D1 门：力-长表 `M(θ)`，形如 [[θ_deg, M_Nm], ...]（按 θ 升序）
+    _mt = TWO_SEG_LEG.get("m_theta_table")
+    if _mt:
+        _mt = np.asarray(_mt, dtype=float)
+        _m_tab = (np.radians(_mt[:, 0]), _mt[:, 1])
+    else:
+        _m_tab = None
 
     # 屈曲阻尼 (N·s/m)，代表肌腱/肌肉的粘性损耗。
     # 早期版本取 3.0e3，这是个**虚高的人为参数**：冲击时屈曲速率可达
@@ -703,7 +710,12 @@ def simulate_boulder_fall(
             th = 2.0 * float(np.arccos(_c))
             _half = 0.5 * th
             _s = float(np.sin(_half))
-            f_el = (_k_th * th / (_l * _s)) if _s > 1e-9 else 0.0
+            # D1：力-长关系 `M(θ)`（表格，单位 N·m）取代常数 `k_θ·θ`
+            if _m_tab is not None:
+                _m_el = float(np.interp(th, _m_tab[0], _m_tab[1]))
+            else:
+                _m_el = _k_th * th
+            f_el = (_m_el / (_l * _s)) if _s > 1e-9 else 0.0
             if _th_max is not None and th > _th_max:
                 _tm = _th_max
                 _sm = float(np.sin(0.5 * _tm))
