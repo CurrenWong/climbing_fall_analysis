@@ -246,6 +246,52 @@ class TestRigidContactGate:
 
 
 # ==========================================================================
+# 能量守恒审计（scripts/pad_energy_check.py）
+# ==========================================================================
+class TestEnergyAudit:
+    """`pad.py` 结果的有效性判据：沿轨迹 `E_mech` 非增。
+
+    背景：`pad.py` 自带的 `absorbed_fraction` **不能**当有效性判据 ——
+    其分子含**阻尼耗散**（不受 `mgh` 约束）、分母 `mgh` 只对应首次接触
+    ⇒ `>1` 是预期行为。详见 `docs/notes/PAD_GOTCHAS.md` §6。
+    """
+
+    @staticmethod
+    def _audit(h: float, posture: str = "anchored-self"):
+        import sys
+        from pathlib import Path
+        root = Path(__file__).resolve().parents[1]
+        if str(root) not in sys.path:
+            sys.path.insert(0, str(root))
+        from scripts.pad_energy_check import audit_energy
+        from climbing.pad import POSTURES
+        r = simulate_boulder_fall(height_m=h, mass_kg=80.0, on_pad=False,
+                                  posture=posture)
+        return r, audit_energy(r, POSTURES[posture], 80.0)
+
+    def test_mechanical_energy_conserved(self):
+        """@0.42 m（刚性口径）：无能量创造。"""
+        _, a = self._audit(0.42)
+        assert a["pass"], f"violation={a['violation_j']:.2f} J > tol={a['tolerance_j']:.2f}"
+        assert a["e0_j"] == pytest.approx(0.0, abs=1e-9), "t=0 应为静止参考点（E=0）"
+
+    def test_compression_semantics_locked(self):
+        """回归守卫：审计器算出的最大压缩量必须等于 `pad.py` 自报的 `max_compression_m`。
+
+        2026-10-16 曾把 `comp` 写成 `z_foot − z_foot[0]`（= 整个下落量）⇒ 报 435.7 mm
+        而真值 15.7 mm，导致所有审计假 FAIL（`violation ≈ 2·mgh`）。这条锁死该口径。
+        """
+        r, a = self._audit(0.42)
+        assert a["max_comp_m"] == pytest.approx(float(r.max_compression_m), rel=1e-6)
+
+    def test_audit_catches_windowing_and_soft_contact(self):
+        """软接触 + 深行程（会进 `k_stop` 止段）下仍然守恒。"""
+        _, a = self._audit(2.0)
+        assert a["pass"], f"violation={a['violation_j']:.2f} J"
+        assert a["max_xf_m"] > 0.35, "该例应当压到接近 x_flex_max（止段前）"
+
+
+# ==========================================================================
 # 绳索本构
 # ==========================================================================
 class TestRopeModel:

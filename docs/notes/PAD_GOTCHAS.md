@@ -139,24 +139,50 @@ k_eff = k_n × A(κ)          # A(κ) = Posture.contact_schedule 的接触面积
 
 ---
 
-## 6b. 🟡 软接触下 `F_flex(h)` **收敛地非单调**（模型结构性行为，**未定案**）
+## 6b. 🟡 软接触下 `F_flex(h)` **收敛地非单调** —— 机制已定案：**进 `k_stop` 止段**
 
-`anchored-self`、`k_n = 2.1e6`：
+`anchored-self`、`k_n = 2.1e6`（`k_flex = 8.2 kN/m`、`x_flex_max = 0.40 m`、`k_stop = 3.0e5 N/m`）：
 
-| h | 2 m | 5 m | 9 m |
-|---|---:|---:|---:|
-| `F_flex` (kN) | **9.309** | **7.781** | 25.979 |
+| h | **冲击窗长度** | `F_flex` 峰 | 弹簧峰 | 阻尼峰 | **`xf@峰`** | **`> x_flex_max`?** |
+|---|---:|---:|---:|---:|---:|---|
+| 1 m | 143 ms | 3.548 kN | 2.710 | 2.613 | 0.1298 m | 否 |
+| **2 m** | **252 ms** | **9.309** | **9.165** | 3.711 | **0.4191 m** | **是** |
+| 3 m | 43 ms | 6.051 | 2.463 | 4.568 | 0.2052 m | 否 |
+| 5 m | 40 ms | 7.781 | 2.966 | 5.949 | 0.2532 m | 否 |
 
-**三种解算器设置**（`1e-8/1e-11/1e-4`、`1e-9/1e-12/3e-5`、`1e-10/1e-13/1e-5`）**逐位一致**
-⇒ **不是积分精度问题，是模型的结构性行为**；同档 `k_n=None` 单调（5.032 → 7.914 → 10.593）✓。
+**⇒ 机制（不可翻转的二重证据）**：软接触 ⇒ 腿压得更深 ⇒ **恰在 h=2 m 跨过 `x_flex_max = 0.40 m`
+进入 `k_stop` 止段** ⇒ 峰值被顶起：`3.3 kN + 3.0e5×(0.4191−0.40) = 9.03 kN` ≈ 实测弹簧峰 **9.165 kN** ✓。
+同档 `k_n = None`（刚性）窗口只有 17–18 ms、`xf ≤ 0.140 m` ⇒ **永不进止段 ⇒ 单调** ✓。
 
-**⇒ 后果**：**软接触区的 `h*`（首折内插）不可直接引用**，须先定性。
-**可疑点（均未定案）**：接触面积 `A(κ)` 随压缩增长 / `k_stop` 止段 / 阻尼项 `c_flex·rate` 在峰值中的占比。
+**⇒ 定性**：**不是积分误差**（三段解算器设置逐位一致）、**不是能量缺陷**
+（沿轨迹 `E_mech` 审计 `violation = 0.00 J`，见 §6），而是
+**未标定字段 `x_flex_max` / `k_stop`（从 `controlled-drop` 继承）**的产物。
+
+**⇒ 后果与纪律**：
+1. ⛔ **软接触区的 `h*`（首折内插）不可直接引用** —— 止段会制造假台阶；
+2. ⚠️ 冲击窗长度随接触刚度剧变（40 / 143 / 252 ms）⇒ 峰值对窗口定义敏感；
+3. ✅ 要修的是**先标定/冻结 `x_flex_max` 与 `k_stop`**（或把窗口限定在 `xf ≤ x_flex_max` 内），
+   而不是改接触层。
 
 ---
 
-**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → **更正：非能量缺陷，是账的口径**）。
+## 6c. 🔴 `pad.py` 结果数组的**口径**（审计必需，2026-10-16 实测钉死）
+
+| 量 | 口径 |
+|---|---|
+| `result.t_s` | 从 **t = 0（释放瞬间）** 起，**不是**接触时刻；`meta["impact_window_s"]` 才是冲击窗 |
+| 窗首速度 | **0**（`t=0` 静止）；`impact_speed_ms` 是**接触瞬间**的速度 —— 拿它当窗首偏移会给系统性 ≈2·mgh 的假 FAIL |
+| 接触压缩量 | `max(0, z_foot − result.height_m)`；**不是** `z_foot − z_foot[0]`（那样会把整个下落量当压缩，报 435.7 mm 而真值 15.7 mm） |
+| `z_torso` 初值 | `−leg_ext0 = −0.85` ⇒ 重力势参考点取 `t=0` 时 `PE=0` |
+| 加速度符号 | `accel_*_g` 以**向上减速为正** ⇒ `az_down = −g·accel_*_g` |
+| `f_flex_peak_n` | 只在**冲击窗内**取 `max` ⇒ 与全轨迹 `max` 不可比（全轨迹峰值可大 4–8×） |
+
+**⇒ 现成工具**：`scripts/pad_energy_check.audit_energy(result, posture, mass_kg)`
+（回归守卫：`tests/test_climbing.py::TestEnergyAudit`）。
+
+---
+
+**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → 更正：**账的口径** → **审计通过 + 非单调机制定案**）。
 **锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `hard_surface` /
-`absorbed_fraction` / `:733-741` 能量账）、`scripts/fp_anchor_probe.py`、`scripts/fp_contact_probe.py`、
-`results/FP_ANCHOR_REPORT.md`、`results/FP_CONTACT_REPORT.md`、
-`temp/v1_energy_verdict.py`、`temp/v1_emechan.py`、`temp/v1_conv_check.py`
+`absorbed_fraction` / `:733-741`）、`scripts/pad_energy_check.py`、`scripts/fp_contact_probe.py`、
+`results/FP_CONTACT_REPORT.md`、`temp/v1_arrdump.py`、`temp/v1_window_decomp.py`、`temp/v1_conv_check.py`
