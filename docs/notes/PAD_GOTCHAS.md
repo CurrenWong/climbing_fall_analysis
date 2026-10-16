@@ -80,6 +80,37 @@ posture_key = posture if isinstance(posture, str) else None
 
 ---
 
-**最近更新**：2026-10-16（`LEG_K_ANCHOR`）。
-**锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `_anchored_posture`）、
-`scripts/fp_anchor_probe.py`、`tests/test_climbing.py`、`results/FP_ANCHOR_REPORT.md`
+## 5. 🔴 `hard_surface` 的 `k_n` **不是**总刚度 —— 有效刚度 = `k_n × A(κ)`
+
+`CrashPad.force_n(compression, area) = stress_pa(xi) × area`，而
+`hard_surface(k_n_per_m=...)` 把该形参喂给 **`linear_modulus_pa`（Pa）**、`thickness=1`
+⇒ **有效总刚度**
+
+```
+k_eff = k_n × A(κ)          # A(κ) = Posture.contact_schedule 的接触面积
+```
+
+**实测（`anchored-stiff` @0.42 m、80 kg）**：
+
+| `k_n` | `F_pad` (kN) | `x` (mm) | **实测 `k_eff` = F/x** | `k_eff/k_n` |
+|---|---:|---:|---:|---:|
+| 1.0e7 | 8.625 | 15.728 | **548.4 kN/m** | 0.055 |
+| 3.0e6 | 5.194 | 29.333 | 177.1 kN/m | 0.059 |
+| 1.0e6 | 3.870 | 57.236 | 67.6 kN/m | 0.068 |
+
+**⇒ `hard_surface` docstring 声称的「默认 1.0e7 N/m（动态人体等效刚度）」比**实际**硬 ~18×。**
+
+**用法纪律**：
+1. **引用硬地面接触硬度时必须报实测 `k_eff`（= `F_pad/max_compression_m`），不得引用 `k_n` 本身。**
+2. 想调接触硬度就调 `RIGID_CONTACT["k_n_per_m"]`（**L3 门**，默认 `None` = 1.0e7）——
+   ⚠️ **`k_eff` 是 `k_n` 的非线性函数**（`A(κ)` 随压缩变化，`k_eff/k_n` 在 0.055–0.16 间漂移），
+   所以**不能**按 `k_eff` 直接线性反解；须实测。
+3. 特征化/守卫测试：`tests/test_climbing.py::TestRigidContactGate`。
+4. 锚点与实测见 `results/FP_CONTACT_REPORT.md`、`docs/methods/P3_足部接触柔度_预注册.md`。
+
+---
+
+**最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT`）。
+**锚点**：`src/climbing/pad.py`（`RIGID_STANDING_CHAIN` / `RIGID_CONTACT` / `hard_surface` / `_anchored_posture`）、
+`scripts/fp_anchor_probe.py`、`scripts/fp_contact_probe.py`、`tests/test_climbing.py`、
+`results/FP_ANCHOR_REPORT.md`、`results/FP_CONTACT_REPORT.md`

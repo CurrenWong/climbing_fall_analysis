@@ -199,6 +199,53 @@ class TestAnchoredPostures:
 
 
 # ==========================================================================
+# L3 刚性接触门（RIGID_CONTACT / hard_surface 语义）
+# ==========================================================================
+class TestRigidContactGate:
+    """`RIGID_CONTACT["k_n_per_m"]` 门 + `hard_surface` 的 `k_eff = k_n × A(κ)` 语义。
+
+    见 `docs/notes/PAD_GOTCHAS.md`、`docs/methods/P3_足部接触柔度_预注册.md`。
+    """
+
+    def test_gate_default_is_none(self):
+        from climbing.pad import RIGID_CONTACT
+        assert RIGID_CONTACT["k_n_per_m"] is None, \
+            "门默认必须是 None（= 沿用 hard_surface 默认 1.0e7）"
+
+    def test_hard_surface_k_n_is_modulus_not_stiffness(self):
+        """**特征化测试**：`k_n` 被乘面积 ⇒ 有效刚度远小于 `k_n`（实测 ≈0.055×）。"""
+        from climbing.pad import RIGID_CONTACT
+        prev = RIGID_CONTACT["k_n_per_m"]
+        try:
+            RIGID_CONTACT["k_n_per_m"] = 1.0e7
+            r = simulate_boulder_fall(height_m=0.42, mass_kg=80.0, on_pad=False,
+                                      posture="anchored-stiff")
+        finally:
+            RIGID_CONTACT["k_n_per_m"] = prev
+        k_eff = r.peak_force_n / max(float(r.max_compression_m), 1e-12)
+        ratio = k_eff / 1.0e7
+        assert 0.03 < ratio < 0.20, (
+            f"k_eff/k_n = {ratio:.4f} 越出预期（hard_surface 语义可能被改）")
+        assert k_eff < 1.0e6, f"有效接触刚度 {k_eff:.3g} N/m 竟接近 k_n"
+
+    def test_gate_monotone_f_pad(self):
+        """门开时 `F_pad` 随 `k_n` 下降而单调下降（接触层是真杠杆）。"""
+        from climbing.pad import RIGID_CONTACT
+        prev = RIGID_CONTACT["k_n_per_m"]
+        vals = []
+        try:
+            for kn in (1.0e7, 3.0e6, 2.1e6, 1.6e6):
+                RIGID_CONTACT["k_n_per_m"] = kn
+                r = simulate_boulder_fall(height_m=0.42, mass_kg=80.0, on_pad=False,
+                                          posture="anchored-stiff")
+                vals.append(float(r.peak_force_n))
+        finally:
+            RIGID_CONTACT["k_n_per_m"] = prev
+        assert all(vals[i] > vals[i + 1] for i in range(len(vals) - 1)), vals
+        assert vals[0] / vals[-1] > 1.4, f"接触杠杆太小：{vals}"
+
+
+# ==========================================================================
 # 绳索本构
 # ==========================================================================
 class TestRopeModel:
