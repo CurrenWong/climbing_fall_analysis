@@ -116,6 +116,89 @@ class TestPostures:
 
 
 # ==========================================================================
+# 力台锚定档（LEG_K_ANCHOR 预注册 v2）
+# ==========================================================================
+class TestAnchoredPostures:
+    """`anchored-*` 三档：k 冻结值 + 其余字段不得搭车 + L2 门不得生效。
+
+    锚点 = `PMC9465758`（该表口径 `Stiffness = GRFmax/Depth`，`GRFmax` 以 N·kg⁻¹
+    报 ⇒ 表值量纲是 **N·kg⁻¹·m⁻¹**）⇒ 物理刚度 = 表值 × 76 kg。
+    """
+
+    FROZEN_K = {"soft": 6.3e3, "self": 8.2e3, "stiff": 1.85e4}
+
+    def test_frozen_k_exact(self):
+        for label, k in self.FROZEN_K.items():
+            p = POSTURES[f"anchored-{label}"]
+            assert p.k_flex == pytest.approx(k, rel=0.0, abs=0.0), \
+                f"anchored-{label} 的 k_flex 必须是冻结值 {k}"
+
+    def test_other_fields_copied_from_controlled_drop(self):
+        """预注册 §2/§7-2：未标定量不得借本件搭车。"""
+        base = POSTURES["controlled-drop"]
+        for label in self.FROZEN_K:
+            p = POSTURES[f"anchored-{label}"]
+            assert p.m_low_frac == base.m_low_frac
+            assert p.x_flex_max == base.x_flex_max
+            assert p.contact_schedule == base.contact_schedule
+            assert p.collapse_ref_m == base.collapse_ref_m
+            assert p.first_contact == base.first_contact
+            assert p.first_contact_is_head is False
+
+    def test_l2_rigid_gate_not_applied_to_anchored(self):
+        """回归锚点：锚定档的**键**不是 `feet-first-stiff` ⇒ L2 刚性门不生效。
+
+        门的语义是「k_flex ×2.0」，若哪天有人把锚定档改名成受门控的键，
+        `k_flex` 会被静默翻倍 —— 这条测试就是拦这个。
+        """
+        from dataclasses import replace
+        for label in self.FROZEN_K:
+            key = f"anchored-{label}"
+            rk = simulate_boulder_fall(height_m=1.0, mass_kg=80.0,
+                                      on_pad=False, posture=key)
+            ro = simulate_boulder_fall(height_m=1.0, mass_kg=80.0, on_pad=False,
+                                      posture=replace(POSTURES[key], name="obj"))
+            assert rk.meta["f_flex_peak_n"] == pytest.approx(
+                ro.meta["f_flex_peak_n"], rel=1e-9)
+            assert rk.peak_force_n == pytest.approx(ro.peak_force_n, rel=1e-9)
+
+    def test_l2_rigid_gate_key_vs_object_differs(self):
+        """**特征化测试**：`pad.py` 的 L2 刚性门按姿势的**键**判定。
+
+        门只在 `on_pad=False` 且键 == `"feet-first-stiff"` 时把 `k_flex` ×2.0、
+        行程限 15 mm；传 `Posture` **对象** 时 `posture_key=None` ⇒ **静默绕门**。
+        同姿势两种调用实测差 ~13.4%（@1 m `F_flex` 31.10 vs 27.43 kN）。
+        如实锁定这个语义，避免日后被误当 bug"修掉"时无声改变既有数字。
+        """
+        from dataclasses import replace
+        rk = simulate_boulder_fall(height_m=1.0, mass_kg=80.0, on_pad=False,
+                                  posture="feet-first-stiff")
+        ro = simulate_boulder_fall(
+            height_m=1.0, mass_kg=80.0, on_pad=False,
+            posture=replace(POSTURES["feet-first-stiff"], name="ungated"))
+        ratio = rk.meta["f_flex_peak_n"] / ro.meta["f_flex_peak_n"]
+        assert 1.10 < ratio < 1.18, f"L2 门语义变了：ratio={ratio}"
+        assert rk.meta["f_flex_peak_n"] > ro.meta["f_flex_peak_n"]
+
+    def test_f_pad_insensitive_to_k_flex(self):
+        """观测量纪律：硬地面下 `peak_force_n`（`F_pad`）对 `k_flex` 几乎不敏感。
+
+        它是 `hard_surface(k_n=1e7)` × `m_low` 的刚性接触尖峰 ⇒ **不能**用来判腿刚度。
+        腿刚度的观测量是 `meta["f_flex_peak_n"]`（下方同时锁定它有响应）。
+        """
+        f_pad, f_flex = [], []
+        for label in self.FROZEN_K:
+            r = simulate_boulder_fall(height_m=0.42, mass_kg=80.0, on_pad=False,
+                                      posture=f"anchored-{label}")
+            f_pad.append(r.peak_force_n)
+            f_flex.append(r.meta["f_flex_peak_n"])
+        spread_pad = max(f_pad) / min(f_pad) - 1.0
+        spread_flex = max(f_flex) / min(f_flex) - 1.0
+        assert spread_pad < 0.01, f"F_pad 竟然对 k_flex 敏感了：{spread_pad:.1%}"
+        assert spread_flex > 0.20, f"F_flex 应当对 k_flex 敏感：{spread_flex:.1%}"
+
+
+# ==========================================================================
 # 绳索本构
 # ==========================================================================
 class TestRopeModel:

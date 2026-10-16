@@ -370,6 +370,73 @@ POSTURES: dict[str, Posture] = {
 
 
 # --------------------------------------------------------------------------
+# ★ 力台锚定档（LEG_K_ANCHOR 预注册 v2 —— `docs/methods/P3_腿刚度力台锚定_预注册.md`）
+# --------------------------------------------------------------------------
+#: 换算用体重 (kg)：`PMC9465758` 的被试量级。
+#:
+#: ⚠️ **单位陷阱（预注册 §1.1）**：该文表头写 "Stiffness, N/m"，但其口径逐字是
+#: ``Stiffness = GRFmax / Depth``，而 ``GRFmax`` 以 **N·kg⁻¹** 报 ⇒ 表值量纲实为
+#: **N·kg⁻¹·m⁻¹**，**不是**刚度。复算 33.13/0.43=77.05、36.26/0.37=98.00、
+#: 52.55/0.23=228.48，与表值 82.36/107.71/243.28 在 7–10% 内吻合 ⇒ 确认。
+#: 物理刚度 = 表值 × 体重。
+_ANCHOR_BODY_MASS_KG: float = 76.0
+
+#: 该文三档落地（soft / self-selected / stiff）的**表值**（N·kg⁻¹·m⁻¹）。
+_ANCHOR_TABLE_STIFFNESS: dict[str, float] = {
+    "soft": 82.36,
+    "self": 107.71,
+    "stiff": 243.28,
+}
+
+#: 冻结的锚定 ``k_flex`` (N/m) —— 预注册 §3/§7-1 签字值。
+#: 独立交叉：能量法 ``k = F_peak²/(2E)`` 对 stiff 档给 17.4–25.5 kN/m ✓。
+_ANCHORED_K_FLEX_N_PER_M: dict[str, float] = {
+    "soft": 6.3e3,
+    "self": 8.2e3,
+    "stiff": 1.85e4,
+}
+
+
+def _anchored_posture(label: str) -> Posture:
+    """力台锚定档：**只换 ``k_flex``**，其余字段逐字复制 ``controlled-drop``。
+
+    未标定量（``m_low_frac`` / ``x_flex_max`` / ``contact_schedule`` /
+    ``collapse_ref_m`` / ``first_contact``）**不得借本件搭车**（预注册 §2/§7-2）。
+    """
+    k = _ANCHORED_K_FLEX_N_PER_M[label]
+    return replace(
+        POSTURES["controlled-drop"],
+        name=f"锚定-{label}（力台 k_flex {k / 1e3:.1f} kN/m）",
+        k_flex=k,
+        note=(
+            f"力台锚定档：`PMC9465758` {label} landing，表值 "
+            f"{_ANCHOR_TABLE_STIFFNESS[label]:g} N·kg⁻¹·m⁻¹ × "
+            f"{_ANCHOR_BODY_MASS_KG:g} kg ⇒ {k / 1e3:.1f} kN/m（预注册 §3）。"
+            "其余字段复制 controlled-drop。"
+            "⚠️ 观测量用 meta['f_flex_peak_n']；peak_force_n 对 k_flex 不敏感。"
+        ),
+    )
+
+
+#: ★ 观测量纪律（预注册 §1.3/§1.5，实测）：硬地面下 ``peak_force_n``（= ``F_pad``）
+#: 由 ``hard_surface(k_n=1e7)`` × ``m_low`` 的**刚性接触尖峰**决定，对 ``k_flex``
+#: 几乎不敏感（k 变 2.9× 而 ``F_pad`` 只动 0.2%：8.61/8.61/8.63 kN）
+#: ⇒ **不得**用它当腿刚度 / 地面反力（GRF）的观测量。腿刚度看 ``meta["f_flex_peak_n"]``。
+#:
+#: ⚠️ **锚定档不要用 ``"feet-first-stiff"`` 这个键去跑**：``simulate_boulder_fall`` 的
+#: **L2 刚性门**（``RIGID_STANDING_CHAIN``，见下方「求解」段）只在 ``on_pad=False``
+#: **且姿势的*键* == ``"feet-first-stiff"``** 时生效，会把 ``k_flex`` **×2.0**、
+#: 行程限到 15 mm。而门用**键**判定（``posture_key = posture if isinstance(posture, str)``）
+#: ⇒ **传 ``Posture`` 对象（如 ``replace(...)`` 造出来的）会静默绕门**。
+#: 实测同一姿势两种调用差 **13.4%**（@1 m：传键 ⇒ `F_pad` 37.46 / `F_flex` 31.10 kN；
+#: 传对象 ⇒ 33.65 / 27.43 kN）。锚定档的键是 ``anchored-*`` ⇒ **门不生效**
+#: （= 预注册 §4 冻结口径：本件比的就是 `k_flex` 本身）。
+POSTURES["anchored-soft"] = _anchored_posture("soft")
+POSTURES["anchored-self"] = _anchored_posture("self")
+POSTURES["anchored-stiff"] = _anchored_posture("stiff")
+
+
+# --------------------------------------------------------------------------
 # 结果容器
 # --------------------------------------------------------------------------
 @dataclass
