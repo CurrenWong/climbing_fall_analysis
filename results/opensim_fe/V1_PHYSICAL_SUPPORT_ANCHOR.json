@@ -1,0 +1,438 @@
+{
+  "note": "跖面支撑刚度的**实测锚定**扫描（spring BC, anat 粗网格, 单步, gauge_max ℓ=4mm）",
+  "n_plantar": 175,
+  "threshold_mpa": 150.0,
+  "literature": {
+    "Bennett_Ker_1990_Ker_1996": "in-vivo 跟垫刚度 100–175 N/mm（总量）",
+    "PMC8925218": "E=185 kPa, 峰值应变 0.70, 厚 15.4 mm, A≈2500 mm²",
+    "implied_k_per_node": [
+      0.5714285714285714,
+      1.0
+    ]
+  },
+  "rows": [
+    {
+      "k": 0.5,
+      "h": 1.0,
+      "k_total_n_per_mm": 87.5,
+      "rc": 0,
+      "gauge_max": 115.17256608265956
+    },
+    {
+      "k": 0.5,
+      "h": 2.0,
+      "k_total_n_per_mm": 87.5,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.5,
+      "h": 3.0,
+      "k_total_n_per_mm": 87.5,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.5,
+      "h": 5.0,
+      "k_total_n_per_mm": 87.5,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.5,
+      "h": 6.0,
+      "k_total_n_per_mm": 87.5,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.5,
+      "h": 8.0,
+      "k_total_n_per_mm": 87.5,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.5,
+      "fold": null,
+      "k_total_n_per_mm": 87.5
+    },
+    {
+      "k": 0.75,
+      "h": 1.0,
+      "k_total_n_per_mm": 131.25,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.75,
+      "h": 2.0,
+      "k_total_n_per_mm": 131.25,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.75,
+      "h": 3.0,
+      "k_total_n_per_mm": 131.25,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.75,
+      "h": 5.0,
+      "k_total_n_per_mm": 131.25,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.75,
+      "h": 6.0,
+      "k_total_n_per_mm": 131.25,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.75,
+      "h": 8.0,
+      "k_total_n_per_mm": 131.25,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 0.75,
+      "fold": null,
+      "k_total_n_per_mm": 131.25
+    },
+    {
+      "k": 1.0,
+      "h": 1.0,
+      "k_total_n_per_mm": 175.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 1.0,
+      "h": 2.0,
+      "k_total_n_per_mm": 175.0,
+      "rc": 0,
+      "gauge_max": 226.8649289394507
+    },
+    {
+      "k": 1.0,
+      "h": 3.0,
+      "k_total_n_per_mm": 175.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 1.0,
+      "h": 5.0,
+      "k_total_n_per_mm": 175.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 1.0,
+      "h": 6.0,
+      "k_total_n_per_mm": 175.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 1.0,
+      "h": 8.0,
+      "k_total_n_per_mm": 175.0,
+      "rc": 0,
+      "gauge_max": 174.26455963423084
+    },
+    {
+      "k": 1.0,
+      "fold": null,
+      "k_total_n_per_mm": 175.0
+    },
+    {
+      "k": 2.0,
+      "h": 1.0,
+      "k_total_n_per_mm": 350.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 2.0,
+      "h": 2.0,
+      "k_total_n_per_mm": 350.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 2.0,
+      "h": 3.0,
+      "k_total_n_per_mm": 350.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 2.0,
+      "h": 5.0,
+      "k_total_n_per_mm": 350.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 2.0,
+      "h": 6.0,
+      "k_total_n_per_mm": 350.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 2.0,
+      "h": 8.0,
+      "k_total_n_per_mm": 350.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 2.0,
+      "fold": null,
+      "k_total_n_per_mm": 350.0
+    },
+    {
+      "k": 5.0,
+      "h": 1.0,
+      "k_total_n_per_mm": 875.0,
+      "rc": 0,
+      "gauge_max": 109.54500888355405
+    },
+    {
+      "k": 5.0,
+      "h": 2.0,
+      "k_total_n_per_mm": 875.0,
+      "rc": 0,
+      "gauge_max": 137.1735371472593
+    },
+    {
+      "k": 5.0,
+      "h": 3.0,
+      "k_total_n_per_mm": 875.0,
+      "rc": 0,
+      "gauge_max": 148.9597089742983
+    },
+    {
+      "k": 5.0,
+      "h": 5.0,
+      "k_total_n_per_mm": 875.0,
+      "rc": 0,
+      "gauge_max": 184.24433470842476
+    },
+    {
+      "k": 5.0,
+      "h": 6.0,
+      "k_total_n_per_mm": 875.0,
+      "rc": 0,
+      "gauge_max": 205.17499255592372
+    },
+    {
+      "k": 5.0,
+      "h": 8.0,
+      "k_total_n_per_mm": 875.0,
+      "rc": 0,
+      "gauge_max": 251.18023616579677
+    },
+    {
+      "k": 5.0,
+      "fold": 3.050590351935814,
+      "k_total_n_per_mm": 875.0
+    },
+    {
+      "k": 10.0,
+      "h": 1.0,
+      "k_total_n_per_mm": 1750.0,
+      "rc": 0,
+      "gauge_max": 108.37762966660783
+    },
+    {
+      "k": 10.0,
+      "h": 2.0,
+      "k_total_n_per_mm": 1750.0,
+      "rc": 0,
+      "gauge_max": 135.5580082373455
+    },
+    {
+      "k": 10.0,
+      "h": 3.0,
+      "k_total_n_per_mm": 1750.0,
+      "rc": 0,
+      "gauge_max": 144.5288310746576
+    },
+    {
+      "k": 10.0,
+      "h": 5.0,
+      "k_total_n_per_mm": 1750.0,
+      "rc": 0,
+      "gauge_max": 168.58240894054936
+    },
+    {
+      "k": 10.0,
+      "h": 6.0,
+      "k_total_n_per_mm": 1750.0,
+      "rc": 0,
+      "gauge_max": 181.53476189176286
+    },
+    {
+      "k": 10.0,
+      "h": 8.0,
+      "k_total_n_per_mm": 1750.0,
+      "rc": 0,
+      "gauge_max": 206.24336643114057
+    },
+    {
+      "k": 10.0,
+      "fold": 3.393646470210018,
+      "k_total_n_per_mm": 1750.0
+    },
+    {
+      "k": 30.0,
+      "h": 1.0,
+      "k_total_n_per_mm": 5250.0,
+      "rc": 0,
+      "gauge_max": 106.9111995105085
+    },
+    {
+      "k": 30.0,
+      "h": 2.0,
+      "k_total_n_per_mm": 5250.0,
+      "rc": 1,
+      "gauge_max": null
+    },
+    {
+      "k": 30.0,
+      "h": 3.0,
+      "k_total_n_per_mm": 5250.0,
+      "rc": 0,
+      "gauge_max": 142.33622955475448
+    },
+    {
+      "k": 30.0,
+      "h": 5.0,
+      "k_total_n_per_mm": 5250.0,
+      "rc": 0,
+      "gauge_max": 165.8950408890655
+    },
+    {
+      "k": 30.0,
+      "h": 6.0,
+      "k_total_n_per_mm": 5250.0,
+      "rc": 0,
+      "gauge_max": 178.4540987806605
+    },
+    {
+      "k": 30.0,
+      "h": 8.0,
+      "k_total_n_per_mm": 5250.0,
+      "rc": 0,
+      "gauge_max": 202.3767823340509
+    },
+    {
+      "k": 30.0,
+      "fold": 3.5734067729579624,
+      "k_total_n_per_mm": 5250.0
+    },
+    {
+      "k": 100.0,
+      "h": 1.0,
+      "k_total_n_per_mm": 17500.0,
+      "rc": 0,
+      "gauge_max": 105.60154535066788
+    },
+    {
+      "k": 100.0,
+      "h": 2.0,
+      "k_total_n_per_mm": 17500.0,
+      "rc": 0,
+      "gauge_max": 131.79191506583754
+    },
+    {
+      "k": 100.0,
+      "h": 3.0,
+      "k_total_n_per_mm": 17500.0,
+      "rc": 0,
+      "gauge_max": 140.41500557220493
+    },
+    {
+      "k": 100.0,
+      "h": 5.0,
+      "k_total_n_per_mm": 17500.0,
+      "rc": 0,
+      "gauge_max": 163.5425857245412
+    },
+    {
+      "k": 100.0,
+      "h": 6.0,
+      "k_total_n_per_mm": 17500.0,
+      "rc": 0,
+      "gauge_max": 175.6668981345151
+    },
+    {
+      "k": 100.0,
+      "h": 8.0,
+      "k_total_n_per_mm": 17500.0,
+      "rc": 0,
+      "gauge_max": 199.27922085196184
+    },
+    {
+      "k": 100.0,
+      "fold": 3.7428345129542717,
+      "k_total_n_per_mm": 17500.0
+    },
+    {
+      "k": 1000.0,
+      "h": 1.0,
+      "k_total_n_per_mm": 175000.0,
+      "rc": 0,
+      "gauge_max": 98.8842161603773
+    },
+    {
+      "k": 1000.0,
+      "h": 2.0,
+      "k_total_n_per_mm": 175000.0,
+      "rc": 0,
+      "gauge_max": 123.65585330101894
+    },
+    {
+      "k": 1000.0,
+      "h": 3.0,
+      "k_total_n_per_mm": 175000.0,
+      "rc": 0,
+      "gauge_max": 131.8267006373922
+    },
+    {
+      "k": 1000.0,
+      "h": 5.0,
+      "k_total_n_per_mm": 175000.0,
+      "rc": 0,
+      "gauge_max": 153.7720667001898
+    },
+    {
+      "k": 1000.0,
+      "h": 6.0,
+      "k_total_n_per_mm": 175000.0,
+      "rc": 0,
+      "gauge_max": 165.5570068076194
+    },
+    {
+      "k": 1000.0,
+      "h": 8.0,
+      "k_total_n_per_mm": 175000.0,
+      "rc": 0,
+      "gauge_max": 188.21170104911792
+    },
+    {
+      "k": 1000.0,
+      "fold": 4.604556166504248,
+      "k_total_n_per_mm": 175000.0
+    }
+  ]
+}
