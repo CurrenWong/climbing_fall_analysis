@@ -678,6 +678,10 @@ def simulate_boulder_fall(
     # C1 门（可与 B2a 独立开启；默认 None ⇒ 既有路径逐位不变）
     _m_ecc = TWO_SEG_LEG.get("m_ecc_max_nm")
     _m_ecc = None if _m_ecc is None else float(_m_ecc)
+    # C1 独立于 B2a：`_k_th` 缺省时弹性仍走 `k_flex`（力台锚定），
+    # 肌肉的几何角由同一屈曲关系反推 ⇒ 只换阻尼项，不动弹性路径。
+    _l_m = (_l if _k_th is not None
+            else float(TWO_SEG_LEG.get("segment_l_m") or 0.425))
     _v_ref = TWO_SEG_LEG.get("ecc_rate_ref_ms")
     _v_ref = 1.0 if _v_ref is None else float(_v_ref)
     # D1 门：力-长表 `M(θ)`
@@ -777,13 +781,17 @@ def simulate_boulder_fall(
             #   ⇒ `f_ecc_max(θ) = M_ach(θ)/(l·sin(θ/2))`，`θ→0` 时 `r→0` 抵消 `sin(θ/2)` ⇒ **有限**。
             #   （先前直接用 `M_ecc/(l·sin(θ/2))` ⇒ θ→0 发散 ⇒ ODE 变刚 ⇒ 积分器崩。）
             _r_ref, _th_ramp = 0.040, 0.349          # 4 cm 平台；20° 以下线性归零
-            _r_arm = _r_ref * min(1.0, th / _th_ramp)
-            if _k_th is not None:
-                _sh = float(np.sin(0.5 * max(th, 1e-9)))
-                _m_ach = _m_ecc * (_r_arm / _r_ref)
-                _f_ecc_max = (_m_ach / (_l * _sh)) if _sh > 1e-9 else 0.0
-            else:
-                _f_ecc_max = c_flex * 1e6          # 未开两段腿时：等价于「几乎无上限」
+            # ★ C1 可独立于 B2a 开启：弹性仍走 `k_flex`（力台锚定），
+            #   肌肉几何角由同一屈曲关系 `θ(xf)=2·arccos(1−xf/2l)` 反推。
+            #   （此前 `_k_th is None` 时退化为 `c_flex*1e6` ⇒ 等价无上限，属占位实现。）
+            # ★ θ 上限为 π（腿完全折叠）：`xf > 2l` 时**不得**让 arccos 越过 π/2，
+            #   否则 sin(θ/2)→0 会把肌肉上限错误地压到 0（大腿折叠超出几何可行域）。
+            _th_m = th if _k_th is not None else 2.0 * float(np.arccos(
+                min(1.0, max(0.0, 1.0 - xf / (2.0 * _l_m)))))
+            _r_arm = _r_ref * min(1.0, _th_m / _th_ramp)
+            _sh = float(np.sin(0.5 * max(_th_m, 1e-9)))
+            _m_ach = _m_ecc * (_r_arm / _r_ref)
+            _f_ecc_max = (_m_ach / (_l_m * _sh)) if _sh > 1e-9 else 0.0
             f_damp = _f_ecc_max * rate_pos / (rate_pos + _v_ref)
         else:
             f_damp = c_flex * max(0.0, rate)       # 只在加载（塌陷）时耗能
