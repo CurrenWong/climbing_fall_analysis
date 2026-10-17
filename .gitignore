@@ -76,7 +76,7 @@ CONV_TODO.md
 #
 # ~$*  SolidWorks lock files (auto-created while a document is open).
 temp/
-paper/
+/paper/
 model/
 .codegraph/
 .learnings/
