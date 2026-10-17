@@ -1,5 +1,6 @@
 """Phase B-1 —— 抱石坠落 1D 模型（软垫 + 渐进接触 + 屈膝缓冲）。
 
+
 为什么不是"质点 + 双线性弹簧"
 ------------------------------
 方案初稿把攀岩者当作质点压在软垫上。这会漏掉抱石伤害的**核心机制**：
@@ -25,6 +26,7 @@
 """
 
 from __future__ import annotations
+import os
 
 from dataclasses import dataclass, field, replace
 
@@ -678,11 +680,19 @@ def simulate_boulder_fall(
     # C1 门（可与 B2a 独立开启；默认 None ⇒ 既有路径逐位不变）
     _m_ecc = TWO_SEG_LEG.get("m_ecc_max_nm")
     _m_ecc = None if _m_ecc is None else float(_m_ecc)
+    # 环境变量门（跨多进程）：CLIMB_MECC / CLIMB_VREF。
+    # 未设置 ⇒ 完全不改变既有行为（默认路径逐位不变）。
+    _env_mecc = os.environ.get("CLIMB_MECC")
+    if _env_mecc is not None:
+        _m_ecc = float(_env_mecc)
+    _env_vref = os.environ.get("CLIMB_VREF")
     # C1 独立于 B2a：`_k_th` 缺省时弹性仍走 `k_flex`（力台锚定），
     # 肌肉的几何角由同一屈曲关系反推 ⇒ 只换阻尼项，不动弹性路径。
     _l_m = (_l if _k_th is not None
             else float(TWO_SEG_LEG.get("segment_l_m") or 0.425))
-    _v_ref = TWO_SEG_LEG.get("ecc_rate_ref_ms")
+    _v_ref = 1.0 if _env_vref is None else float(_env_vref)
+    _v_ref = TWO_SEG_LEG.get("ecc_rate_ref_ms") if _env_vref is None else _v_ref
+    _v_ref = 1.0 if _v_ref is None else float(_v_ref)
     _v_ref = 1.0 if _v_ref is None else float(_v_ref)
     # D1 门：力-长表 `M(θ)`
     #
