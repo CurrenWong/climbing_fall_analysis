@@ -35,6 +35,11 @@ CAND = {
 
 #: 自动候选：`docs/notes/*_TODO.md` 中早于该日期的旧会话草稿
 TODO_CUTOFF = time.mktime(time.strptime('2026-10-10', '%Y-%m-%d'))
+#: 自动候选：`docs/` 下早于该日期的阶段性产物（阶段报告 / 一次性说明）
+DOCS_CUTOFF = time.mktime(time.strptime('2026-10-08', '%Y-%m-%d'))
+#: ⛔ 白名单：**永不**纳入自动归档（项目规则保护 / 活跃踩坑手册 / 入口）
+DOCS_KEEP = ('*结论*', 'README.md', 'FE_BC_GOTCHAS.md', 'FE_PRESOLVE_GATES.md',
+             'PAD_GOTCHAS.md', 'FEBIO_GOTCHAS.md', '阶段总结.md')
 #: 自动候选：`temp/` **顶层** .py 草稿区（子目录产物不动）
 TEMP_TOP = True
 
@@ -63,6 +68,18 @@ def build_candidates():
                 p = os.path.join(nd, f)
                 if os.stat(p).st_mtime < TODO_CUTOFF:
                     cand.setdefault('docs_stale', []).append(rel(p))
+    # docs/ 下早于 DOCS_CUTOFF 的阶段性产物（白名单 + 引用守卫双重保护）
+    import fnmatch
+    for dp, dns, fs in os.walk(os.path.join(BASE, 'docs')):
+        dns[:] = [d for d in dns if d not in SKIP_DIRS and d != 'archive']
+        for f in fs:
+            if not f.endswith('.md'):
+                continue
+            relp = rel(os.path.join(dp, f))
+            if any(fnmatch.fnmatch(f, pat) for pat in DOCS_KEEP):
+                continue
+            if os.stat(os.path.join(dp, f)).st_mtime < DOCS_CUTOFF:
+                cand.setdefault('docs_old', []).append(relp)
     # temp/ 顶层草稿
     td = os.path.join(BASE, 'temp')
     if TEMP_TOP and os.path.isdir(td):
