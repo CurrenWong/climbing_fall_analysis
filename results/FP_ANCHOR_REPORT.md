@@ -126,3 +126,17 @@
 **锚点**：`results/fp_anchor_probe.json`、`docs/methods/P3_腿刚度力台锚定_预注册.md`、
 `scripts/fp_anchor_probe.py`、`src/climbing/pad.py`（`_anchored_posture` / `RIGID_STANDING_CHAIN`）、
 `PMC9465758`、`PMC5717375`、`results/opensim_fe/V1_WHY_20KN_AND_GAP_LOCUS.md` §3
+
+---
+
+## ⚠️ 变更记录 2026-10-17（提交 `15b49b0`）—— **观测量修正，锚已重建**
+
+* **改了什么**：`pad.py` 后处理由 `np.gradient(轨迹, t_out)` 改为 **dense-output 解析速度**
+  （`sol.sol(t_out)` 的 `vz_foot`/`vz_torso`）。
+* **为什么**：`np.gradient` 是**对输出采样做数值微分** ⇒ 观测量**依赖 `dt_sample`**（实测 1.4%）。
+  改后 **`dt_sample` 2e-4 与 1e-4 给出同一值 7286.348 N ⇒ 已收敛**。
+* **对本锚的影响**：`f_flex_n` 位移 **+0.18~0.22 N（+0.008~0.010%）**；
+  **J0 正对照仍 PASS**（`POSCTRL_TOL_KN=0.05 kN` ≫ 位移）；
+  **`main_rows`/`grid`/`h_star` 已重建**（本报告下方数字即为新锚）；**`POSCTRL` 常量未改**。
+* **旧值留档**：`results/fp_anchor_probe.json.prefix20261017`。
+* **幅度 0.01% ⇒ 本次修正的价值在**正确性/稳健性**，不在数值。**
