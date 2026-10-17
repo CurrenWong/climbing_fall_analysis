@@ -847,7 +847,13 @@ def simulate_boulder_fall(
     t_out = t_out[t_out <= sol.t[-1] + 1e-12]
     if t_out.size < 4 or t_out[-1] < sol.t[-1] - 1e-9:
         t_out = np.append(t_out, sol.t[-1])
-    zf, zt = sol.sol(t_out)[0], sol.sol(t_out)[2]
+    # ★★ 用 **dense output 的解析导数**（`sol.sol` 的 1/3 分量 = vz_foot / vz_torso），
+    #   **不要** `np.gradient(轨迹, t_out)` —— 后者是**对输出采样做数值微分**，
+    #   结果依赖 `dt_sample`（实测 1e-3→1e-4 使 `f_flex_peak` 变 1.4%，
+    #   而同期 `F_pad` 只动 0.03%）⇒ 观测量变成**采样依赖的伪量**。
+    #   见 `results/STRUCT_AUDIT_2026-10-17.md` §④「25 处 np.gradient」。
+    _Y = sol.sol(t_out)
+    zf, vz_f, zt, vz_t = _Y[0], _Y[1], _Y[2], _Y[3]
 
     comp = np.maximum(0.0, zf - height_m)
     kappa = comp / post.collapse_ref_m
@@ -855,11 +861,9 @@ def simulate_boulder_fall(
     f_pad = np.where(comp > 0.0, pad.force_n(comp, np.maximum(area, 1e-9)), 0.0)
     f_pad = np.maximum(f_pad, 0.0)
 
-    # 与 rhs() 用同一套几何/牛顿第三定律约定
+    # 与 rhs() 用同一套几何/牛顿第三定律约定（速度取自 dense output，见上）
     xf = np.maximum(0.0, leg_ext0 - (zf - zt))
-    rate_flex = np.maximum(0.0, np.gradient(xf, t_out))
-    vz_f = np.gradient(zf, t_out)
-    vz_t = np.gradient(zt, t_out)
+    rate_flex = np.maximum(0.0, vz_t - vz_f)
     # ★★ 单一真相源（修 `results/SECOND_CONTACT_REPORT.md` §4，2026-10-16）：
     #   旧实现用**线性** `k_flex·xf + c_flex·rate` 算 `f_flex`，
     #   **完全不含两段腿门的 `k_θ·θ` / `M(θ)`** ⇒ 门开启时 `h*` 与判据全建在
@@ -868,7 +872,7 @@ def simulate_boulder_fall(
     #   现在**直接调用 `rhs` 用的同一个 `flex_force`** ⇒ 口径自洽。
     #   注入方式：闭包内部 `rate = vz_torso − vz_foot`，故传 (0, d(xf)/dt)。
     #   ⚠️ 门关闭（默认）时本式与原式**逐位等价**（同一公式、同一运算顺序）。
-    _rate_flex = np.gradient(xf, t_out)
+    _rate_flex = rate_flex
     f_flex = np.array(
         [flex_force(zf[i], zt[i], 0.0, _rate_flex[i])[0] for i in range(xf.size)],
         dtype=float,
