@@ -1,0 +1,100 @@
+# 第二轮清理 MANIFEST（2026-10-17）
+
+> **只 move，不删。** 守卫排除清理/审计产物。
+
+## 已移动（7）
+
+- `results/opensim_fe/JOINT_REACTIONS_REPORT.md.bak_precal_20261009` → `archive/2026-10-17_cleanup/round2_bak_backup/JOINT_REACTIONS_REPORT.md.bak_precal_20261009`
+- `results/opensim_fe/joint_reactions_summary.json.bak_precal_20261009` → `archive/2026-10-17_cleanup/round2_bak_backup/joint_reactions_summary.json.bak_precal_20261009`
+- `results/opensim_fe/nonvertical_s5_contact.json.bak_20261008` → `archive/2026-10-17_cleanup/round2_bak_backup/nonvertical_s5_contact.json.bak_20261008`
+- `results/opensim_fe/NONVERTICAL_S5_CONTACT_REPORT.md.bak_20261008` → `archive/2026-10-17_cleanup/round2_bak_backup/NONVERTICAL_S5_CONTACT_REPORT.md.bak_20261008`
+- `results/opensim_fe/nonvertical_s5_contact_wave5.json.bak_20261008` → `archive/2026-10-17_cleanup/round2_bak_backup/nonvertical_s5_contact_wave5.json.bak_20261008`
+- `results/opensim_fe/NONVERTICAL_S5_CONTACT_WAVE5_REPORT.md.bak_20261008` → `archive/2026-10-17_cleanup/round2_bak_backup/NONVERTICAL_S5_CONTACT_WAVE5_REPORT.md.bak_20261008`
+- `results/opensim_fe/s1_h5_opensim.json.bak_prerebase_20261009` → `archive/2026-10-17_cleanup/round2_bak_backup/s1_h5_opensim.json.bak_prerebase_20261009`
+
+## 拒移（84）
+
+- `results/opensim_fe/fracture_matrix_prebugfix_backup.csv` ← results/opensim_fe/MATRIX_SCALING_FIX_REPORT.md
+- `results/opensim_fe/fracture_matrix_prebugfix_backup.json` ← results/opensim_fe/MATRIX_SCALING_FIX_REPORT.md
+- `results/opensim_fe/fracture_matrix_prebugfix_backup.png` ← results/opensim_fe/MATRIX_SCALING_FIX_REPORT.md
+- `results/opensim_fe/FRACTURE_MATRIX_REPORT_prebugfix_backup.md` ← results/opensim_fe/MATRIX_SCALING_FIX_REPORT.md
+- `results/opensim_fe/joint_reactions_summary.csv.bak_precal_20261009` ← docs/paper/论文v2_出处索引.md
+- `results/opensim_fe/fracture_matrix_prebugfix_backup.csv` ← results/opensim_fe/MATRIX_SCALING_FIX_REPORT.md
+- `results/opensim_fe/fracture_matrix_prebugfix_backup.json` ← results/opensim_fe/MATRIX_SCALING_FIX_REPORT.md
+- `results/opensim_fe/FRACTURE_MATRIX_REPORT_prebugfix_backup.md` ← results/opensim_fe/MATRIX_SCALING_FIX_REPORT.md
+- `docs/rigid_vtarget_2026-10-08.md` ← src/climbing/pad2d.py, docs/README.md, docs/methods/G3_被试级变异_统计层设计.md
+- `results/opensim_fe/rerun_20261008/nonvertical_s5_contact.json` ← tests/test_nonvertical_s5_contact.py, docs/reports/OpenSim_FE交接.md, docs/reports/总体进度.md
+- `results/opensim_fe/rerun_20261008/NONVERTICAL_S5_CONTACT_REPORT.md` ← tests/test_nonvertical_s5_contact.py, docs/reports/OpenSim_FE交接.md, docs/reports/总体进度.md
+- `results/opensim_fe/rerun_20261008/nonvertical_s5_contact_wave5.json` ← docs/reports/总体进度.md, docs/s5-contact/S5_wave4_impl.md, docs/s5-contact/S5_wave5_matrix.md
+- `results/opensim_fe/rerun_20261008/NONVERTICAL_S5_CONTACT_WAVE5_REPORT.md` ← docs/reports/S5_QUOTABLE.md, docs/reports/总体进度.md, docs/s5-contact/S5_contact_contract.md
+- `scripts/make_ascii_flowchart.py` ← tests/test_climbing.py, docs/methods/方案更新_v2.md, docs/notes/阶段总结.md
+- `scripts/make_flowchart.py` ← docs/notes/阶段总结.md
+- `scripts/pad_energy_check.py` ← tests/test_climbing.py, docs/notes/PAD_GOTCHAS.md, docs/reports/总体进度.md
+- `scripts/verify_b3.py` ← src/climbing/bodies.py
+- `scripts/verify_rope.py` ← docs/methods/方案更新_v2.md
+- `scripts/ankle_fe/thums_extract.py` ← docs/methods/踝关节FE建模交接.md, docs/notes/FE_PIPELINE_TODO.md
+- `scripts/ankle_fe/thums_materials.py` ← docs/methods/踝关节FE建模交接.md, docs/notes/FE_PIPELINE_TODO.md
+- `scripts/ankle_fe/thums_verify.py` ← docs/methods/踝关节FE建模交接.md, docs/notes/FE_PIPELINE_TODO.md
+- `scripts/opensim_fe/a1_anchor_diag.py` ← results/opensim_fe/A1_SOLUTION_PATH.md
+- `scripts/opensim_fe/a1_boundary_convention.py` ← results/opensim_fe/A1_BOUNDARY_CONVENTION_REPORT.md, STEP2_A1_TODO.md
+- `scripts/opensim_fe/a1_boundary_window.py` ← docs/reports/总体进度.md, results/opensim_fe/a1_boundary_window.json, results/opensim_fe/A1_BOUNDARY_WINDOW_REPORT.md
+- `scripts/opensim_fe/a1_calcaneus_stat.py` ← results/opensim_fe/A1_SOLUTION_PATH.md, results/opensim_fe/V1_RERUN_20261015.md
+- `scripts/opensim_fe/a1_gauge_check.py` ← results/opensim_fe/LOADCHAIN_RESIDUAL_CLOSURE.md, results/opensim_fe/STALE_LOADCHAIN_AUDIT.md
+- `scripts/opensim_fe/a1_margin.py` ← results/opensim_fe/A1_SOLUTION_PATH.md
+- `scripts/opensim_fe/fe_bc_agg_9bones.py` ← results/opensim_fe/A2_AGGREGATION_RULING.md, results/opensim_fe/H_GRADUAL_DECIDABILITY.md
+- `scripts/opensim_fe/fe_bc_agg_sens.py` ← results/opensim_fe/A2_AGGREGATION_RULING.md, results/opensim_fe/FE_BC_STAB.md
+- `scripts/opensim_fe/fe_bc_lin9.py` ← results/opensim_fe/FE_BC_PERHEIGHT.md, FE_BC_TODO.md
+- `scripts/opensim_fe/fe_bc_linearity.py` ← results/opensim_fe/FE_BC_PERHEIGHT.md, results/opensim_fe/FE_BC_PROBE.md
+- `scripts/opensim_fe/fe_bc_perheight.py` ← results/opensim_fe/FE_BC_PERHEIGHT.md, results/opensim_fe/FE_BC_STAB.md
+- `scripts/opensim_fe/fe_bc_probe.py` ← results/opensim_fe/FE_BC_PROBE.md
+- `scripts/opensim_fe/fe_bc_stab.py` ← results/opensim_fe/A2_RECOMPUTE_RESULT.md, results/opensim_fe/FE_BC_STAB.md, results/opensim_fe/FROZEN_BC2_MANIFEST.json
+- `scripts/opensim_fe/g4_damage_evolution.py` ← tests/test_g4_damage.py, docs/methods/G4_损伤演化设计.md, results/ENGINE_ATTRIBUTION.md
+- `scripts/opensim_fe/g4_fe_areascan.py` ← docs/methods/G4_FE全量_工作计划.md, docs/methods/G9_腓骨FE侧向支撑设计.md, docs/notes/FE_BC_GOTCHAS.md
+- `scripts/opensim_fe/g4_fe_erosion.py` ← docs/methods/G4_FE全量_工作计划.md, results/opensim_fe/G4_FE_EROSION_REPORT.md
+- `scripts/opensim_fe/g4_fe_p1b.py` ← docs/methods/G4_FE全量_工作计划.md, results/ENGINE_ATTRIBUTION.md, results/opensim_fe/G4_FE_P1B_REPORT.md
+- `scripts/opensim_fe/g4_fe_pad.py` ← docs/methods/G4_FE全量_工作计划.md, G4_PAD_SPIKE_TODO.md
+- `scripts/opensim_fe/g4_fe_pilot.py` ← docs/methods/G4_FE全量_工作计划.md, results/opensim_fe/G4_FE_PILOT_REPORT.md
+- `scripts/opensim_fe/g4_fe_pilot_guided.py` ← docs/methods/G4_FE全量_工作计划.md, docs/methods/G9_腓骨FE侧向支撑设计.md, docs/notes/FE_BC_GOTCHAS.md
+- `scripts/opensim_fe/g4_fe_plate.py` ← docs/methods/G4_FE全量_工作计划.md, docs/reports/P5_BC_DIAG_2026-10-14.md, results/ENGINE_ATTRIBUTION.md
+- `scripts/opensim_fe/g4_fe_spike.py` ← docs/methods/G4_FE全量_工作计划.md, results/opensim_fe/G4_FE_SPIKE_REPORT.md, results/opensim_fe/G4_FE_STAB_REPORT.md
+- `scripts/opensim_fe/g4_fe_stab.py` ← scripts/opensim_fe/two_step_pretouch_probe.py, docs/methods/G4_FE全量_工作计划.md, results/ENGINE_ATTRIBUTION.md
+- `scripts/opensim_fe/g4_fe_viz.py` ← docs/methods/G4_FE全量_工作计划.md, results/opensim_fe/g4_fe_viz/README.md
+- `scripts/opensim_fe/g4_fe_viz2.py` ← docs/methods/G4_FE全量_工作计划.md, results/opensim_fe/g4_fe_viz/README.md
+- `scripts/opensim_fe/g4_load_chain_compliant.py` ← scripts/opensim_fe/a4_time_domain_dualpath.py, tests/test_g4_load_chain.py, docs/methods/A4_时间域双路径_预注册.md
+- `scripts/opensim_fe/m1_aeff_pinned.py` ← docs/methods/G9_腓骨FE侧向支撑设计.md, docs/reports/总体进度.md
+- `scripts/opensim_fe/m1_dod2_final.py` ← docs/methods/G9_腓骨FE侧向支撑设计.md, docs/reports/总体进度.md
+- `scripts/opensim_fe/m1_g3_or_precheck.py` ← docs/methods/G9_腓骨FE侧向支撑设计.md, docs/reports/总体进度.md
+- `scripts/opensim_fe/m1_precheck_progressive.py` ← docs/methods/G9_腓骨FE侧向支撑设计.md, docs/reports/总体进度.md
+- `scripts/opensim_fe/m1_robust_region.py` ← docs/methods/G9_腓骨FE侧向支撑设计.md, docs/reports/总体进度.md
+- `scripts/opensim_fe/m1_spike_share_estimate.py` ← docs/methods/G9_腓骨FE侧向支撑设计.md, docs/reports/总体进度.md
+- `scripts/opensim_fe/make_fall_animation.py` ← docs/reports/OpenSim_FE交接.md, docs/s5-contact/S5_contact_contract.md, results/opensim_fe/figures/FIGURE_CAPTIONS.md
+- `scripts/opensim_fe/make_fracture_figures.py` ← docs/reports/OpenSim_FE交接.md, results/opensim_fe/B1_KICKOFF.md, results/opensim_fe/FOOT_MODELS_INVENTORY.md
+- `scripts/opensim_fe/make_model_figures.py` ← docs/reports/OpenSim_FE交接.md
+- `scripts/opensim_fe/make_pad_paradox_figure.py` ← docs/reports/OpenSim_FE交接.md, results/opensim_fe/figures/FIGURE_CAPTIONS.md
+- `scripts/opensim_fe/make_paper_figures.py` ← docs/reports/OpenSim_FE交接.md, results/opensim_fe/figures/FIGURE_CAPTIONS.md
+- `scripts/opensim_fe/make_scenario_animations.py` ← docs/reports/OpenSim_FE交接.md, results/opensim_fe/figures/FIGURE_CAPTIONS.md
+- `scripts/opensim_fe/nonvertical_s1.py` ← scripts/opensim_fe/ankle_ligament_criterion.py, tests/test_nonvertical_s2.py, tests/test_nonvertical_s3.py
+- `scripts/opensim_fe/nonvertical_s2.py` ← scripts/opensim_fe/ankle_ligament_criterion.py, tests/test_nonvertical_s3.py, results/opensim_fe/ANKLE_LIGAMENT_CRITERION_REPORT.md
+- `scripts/opensim_fe/nonvertical_s3_posture.py` ← src/climbing/coupling/opensim_fall.py, results/opensim_fe/nonvertical_s3.json, results/opensim_fe/NONVERTICAL_S3_POSTURE_REPORT.md
+- `scripts/opensim_fe/nonvertical_s4.py` ← tests/test_nonvertical_s4.py, docs/s5-contact/S5_contact_facet_fix.md, docs/s5-contact/S5_wave3_contact.md
+- `scripts/opensim_fe/nonvertical_s5_contact.py` ← scripts/opensim_fe/run_sink_closure_20261010.py, tests/test_nonvertical_s5_contact.py, docs/reports/OpenSim_FE交接.md
+- `scripts/opensim_fe/nonvertical_s5_contact_wave5.py` ← docs/notes/FE_BC_GOTCHAS.md, docs/reports/总体进度.md, docs/s5-contact/S5_wave5_matrix.md
+- `scripts/opensim_fe/nonvertical_s5_supination.py` ← docs/s5-contact/S5_wave4_design.md, docs/s5-contact/S5_wave4_impl.md, results/opensim_fe/nonvertical_s5.json
+- `scripts/opensim_fe/nonvertical_s6_external_rotation.py` ← docs/s5-contact/S5_wave4_design.md, results/opensim_fe/ankle_external_rotation.json, results/opensim_fe/ANKLE_EXTERNAL_ROTATION_REPORT.md
+- `scripts/opensim_fe/p2_a2_combo.py` ← results/opensim_fe/P2_A2_REGFIX_IMPACT.md
+- `scripts/opensim_fe/p2_head_contact.py` ← docs/reports/总体进度.md, results/opensim_fe/AXIAL_LOAD_AUDIT.md, results/opensim_fe/P2_A2_REGFIX_IMPACT.md
+- `scripts/opensim_fe/p2_pressure_load.py` ← results/opensim_fe/A1_SOLUTION_PATH.md, results/opensim_fe/P2_V2_PEN_SIGMA_ROOTCAUSE.md
+- `scripts/opensim_fe/p2_t6_heights.py` ← results/opensim_fe/A2_VERDICT_4OF5.md
+- `scripts/opensim_fe/p2_t6_regfix.py` ← results/opensim_fe/P2_V1_REGFIX_REPORT.md
+- `scripts/opensim_fe/p2_t6_threshold.py` ← results/opensim_fe/P2_A2_REGFIX_IMPACT.md
+- `scripts/opensim_fe/pad_stiffness.py` ← results/opensim_fe/PAD_STIFFNESS_REPORT.md, results/opensim_fe/PAD_SUPINATION_TRADEOFF_REPORT.md
+- `scripts/opensim_fe/pad_supination_tradeoff.py` ← scripts/opensim_fe/ankle_ligament_criterion.py, docs/paper/汇总报告_骨与韧带损伤建模.md, results/opensim_fe/ANKLE_LIGAMENT_CRITERION_REPORT.md
+- `scripts/opensim_fe/thums_feb.py` ← src/climbing/coupling/plantar_bc.py, scripts/opensim_fe/s2_thums_sweep.py, docs/methods/OpenSim_FE复现方案.md
+- `scripts/opensim_fe/thums_feb_run.py` ← docs/methods/OpenSim_FE复现方案.md, docs/reports/OpenSim_FE交接.md, docs/reports/总体进度.md
+- `scripts/p5_cond/pad_stiffness_h20.py` ← docs/methods/G1_多段链设计.md, docs/notes/P5_CONDITION_ALIGN.md, docs/paper/论文v2_出处索引.md
+- `scripts/p5_cond/pad_stiffness_sweep.py` ← docs/methods/G1_多段链设计.md, docs/notes/P5_CONDITION_ALIGN.md, docs/paper/论文v2_出处索引.md
+- `scripts/p5_cond/verify_index_linehits.py` ← docs/reports/文档处置说明.md
+- `scripts/p5_cond/verify_paper_chain.py` ← docs/reports/文档处置说明.md
+- `scripts/p5_cond/verify_paper_crossloc.py` ← docs/reports/文档处置说明.md
+- `scripts/p5_cond/verify_paper_links.py` ← docs/reports/文档处置说明.md
+- `scripts/p5_cond/verify_paper_numbers.py` ← docs/reports/文档处置说明.md
