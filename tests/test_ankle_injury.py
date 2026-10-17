@@ -274,7 +274,7 @@ def _load_p1_module():
     """从脚本模块里加载 ``phase_p1_montecarlo``，失败时 pytest.skip。"""
     import importlib.util
     import pathlib
-    script = pathlib.Path(__file__).resolve().parents[1] / "scripts" / "phase_p1_montecarlo.py"
+    script = pathlib.Path(__file__).resolve().parents[1] / "scripts" / "paper" / "phase_p1_montecarlo.py"
     if not script.is_file():
         pytest.skip(f"脚本未找到: {script}")
     spec = importlib.util.spec_from_file_location("phase_p1_montecarlo", script)

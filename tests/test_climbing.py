@@ -263,7 +263,14 @@ class TestEnergyAudit:
         root = Path(__file__).resolve().parents[1]
         if str(root) not in sys.path:
             sys.path.insert(0, str(root))
-        from scripts.pad_energy_check import audit_energy
+        # ⚠️ 不能写 `from scripts.1d.pad_energy_check import ...` —— `1d` 以数字开头，
+        #   不是合法包名（SyntaxError）。故按**文件路径**加载。
+        import importlib.util as _ilu
+        _spec = _ilu.spec_from_file_location(
+            "pad_energy_check", root / "scripts" / "1d" / "pad_energy_check.py")
+        _mod = _ilu.module_from_spec(_spec)
+        _spec.loader.exec_module(_mod)
+        audit_energy = _mod.audit_energy
         from climbing.pad import POSTURES
         r = simulate_boulder_fall(height_m=h, mass_kg=80.0, on_pad=False,
                                   posture=posture)
@@ -1095,7 +1102,7 @@ class TestAsciiFlowchart:
     def _mod():
         import importlib.util
         import pathlib
-        p = pathlib.Path(__file__).resolve().parents[1] / "scripts" / "make_ascii_flowchart.py"
+        p = pathlib.Path(__file__).resolve().parents[1] / "scripts" / "figures" / "make_ascii_flowchart.py"
         spec = importlib.util.spec_from_file_location("_asciifc", p)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
