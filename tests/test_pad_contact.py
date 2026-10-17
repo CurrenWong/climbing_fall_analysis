@@ -56,12 +56,17 @@ REL_TOL = 0.02
 # 1. deck 结构（不依赖 FEBio）
 # ---------------------------------------------------------------------------
 class TestDeckStructure:
-    @pytest.fixture
-    def deck_text(self, tmp_path):
+    # ★ scope="class"（原为默认 function）：网格构建 + deck 写盘对**每个用例**重做一次，
+    #   在并行下单个 setup 就吃掉 200–455 s 量级（见 temp/_full.log 的 durations）。
+    #   ⇒ 同一 deck 只构建一次；**不改任何断言、不改任何数值**。
+    #   （因此不能用函数级的 tmp_path，改用 tmp_path_factory。）
+    @pytest.fixture(scope="class")
+    def deck_text(self, tmp_path_factory):
         pad = pad_block_tet(3, 3, 2, (300.0, 300.0, 200.0))
         ind = indenter_block_tet(2, 2, 1, (200.0, 300.0, 5.0),
                                  offset_mm=(50.0, 0.0, 200.5))
-        out = build_pad_contact_feb(tmp_path / "c.feb", pad_mesh=pad, indenter_mesh=ind,
+        out = build_pad_contact_feb(tmp_path_factory.mktemp("deck") / "c.feb",
+                                    pad_mesh=pad, indenter_mesh=ind,
                                     mu=0.6, penalty=1000.0,
                                     load={"mode": "displacement", "sinkage_mm": 10.0})
         assert isinstance(out, Path) and out.is_file()
