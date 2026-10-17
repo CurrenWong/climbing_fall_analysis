@@ -32,7 +32,7 @@
 | 观测量 | ① `meta["f_flex_peak_n"]`（腿内力，**主**）② `F_pad` 峰（**报告用**） |
 | 姿态 | `anchored-self`（= `controlled-drop` + 力台 `k_flex`）、`controlled-drop`、`tuck-roll` |
 
-**⚠️ 死参数声明**：D1 路径下 `k_flex`/`x_flex_max` 不参与计算 ⇒ 姿态间有效差异只有
+**⚠️ 死参数声明（❌ 后被证为**部分错误**：对**弹性项**成立，但**后处理**曾按 `k_flex` 线性放大；门路径下三档同值见 `CANONICAL.md` §1）**：D1 路径下 `k_flex`/`x_flex_max` 不参与计算 ⇒ 姿态间有效差异只有
 `m_low_frac`（0.18 ↔ 0.20）、`contact_schedule`、`collapse_ref_m`。
 
 ---
@@ -53,7 +53,7 @@
 
 ### Q3 姿态对比（实跑）
 **问**：`tuck-roll` vs `controlled-drop`，在同锚定链下 `h*` 变多少？
-**预测 H3**：**变化 < 10%** —— 因为 `k_flex` 是死参数，唯一有效差异是 `m_low_frac` 0.18→0.20
+**预测 H3**：**变化 < 10%** —— 因为 `k_flex` 在弹性项里不参与（⚠️ 该预测后来被后处理缺陷掩盖而失真，见文末更正），唯一有效差异是 `m_low_frac` 0.18→0.20
 与面积表，而面积表对 `f_flex` 无直接影响。**并预测 `F_pad` 升高**（面积 ↑ ⇒ 判据错配显形）。
 
 ---

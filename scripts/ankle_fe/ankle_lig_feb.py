@@ -247,7 +247,7 @@ CARTS = ["tibiotalar_tibia", "tibiotalar_talus"]
 #     SUBTALAR=auto   ⇒ **t=0 崩溃**（11 负 Jacobian，首步 residual 4.93e+21）
 #   ⇒ 接入尚未收敛验证，故**默认必须关**，接入改为**显式 opt-in**（SUBTALAR=1），
 #     否则任何未显式传参的运行都会拿到崩溃的基线。
-#   A1 执行结果（2026-10-06；**几何预检已交付**，详见 docs/A1_距下关节_交接报告.md）：
+#   A1 执行结果（2026-10-06；**几何预检已交付**，详见 docs/archive/2026-10-17_cleanup/docs_old/A1_距下关节_交接报告.md）：
 #     ① 预检（只测不改，`temp/pyfebio_demo/a1_subtalar_gap.py`）：subtalar 两面最近距离
 #        中位 **0.66 mm**（能跑通的正对照 tibiotalar 1.00 mm）、法向 dot 中位 −0.96
 #        ⇒ **比正对照更贴合**；但 17/584、17/688 个面片穿透 >0.1 mm（最大 −0.56/−0.79 mm，
