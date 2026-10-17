@@ -5,7 +5,7 @@
 > 甲板：`model/AM50_V71_Occupant/main_THUMS_AM50_V71.k`
 > → `THUMS_model/THUMS_AM50_V71_Occupant_202411.k`（230 MB，ASCII）。
 > 实测：1834 个 `*PART`（带 `$HMNAME COMPS` 名称）。
-> 机器可读索引：`temp/opensim_fe/parts/parts_index.json`、`temp/opensim_fe/parts/_all_names.txt`。
+> 机器可读索引：`temp/fe_out/parts/parts_index.json`、`temp/fe_out/parts/_all_names.txt`。
 
 **9 部位锁定**（与 [Y25]、`docs/OpenSim_FE交接.md` §7 一致）：
 足部 / 胫骨 / 腓骨 / 股骨 / 骨盆 / 腰椎 / 胸椎 / 颈椎 / 颅骨。
@@ -44,7 +44,7 @@
 
 | # | 部位 | 来源（首选 THUMS PID，右/左） | 名称 | 已有独立几何（可直接用） | 合并 / 取代表策略 |
 |---|------|------------------------------|------|--------------------------|-------------------|
-| 1 | **足部** | 见 §2（跟骨已做） | talus/calcaneus/navicular/cuboid/cuneiform×3/metatarsal×5/phalanx×14 | `model/Model/Geometry/{calcaneus_r, talus_r, midfoot_r, metatarsal_*, toes_*}.stl`；`model/FootwithinLowerlimbModel/FootModel_*.stl` | 跟骨**已单骨**（`temp/opensim_fe/thums_calcaneus/`）；整足=按骨逐个或合并 |
+| 1 | **足部** | 见 §2（跟骨已做） | talus/calcaneus/navicular/cuboid/cuneiform×3/metatarsal×5/phalanx×14 | `model/Model/Geometry/{calcaneus_r, talus_r, midfoot_r, metatarsal_*, toes_*}.stl`；`model/FootwithinLowerlimbModel/FootModel_*.stl` | 跟骨**已单骨**（`temp/fe_out/thums_calcaneus/`）；整足=按骨逐个或合并 |
 | 2 | **胫骨** | 81000600 / 81000601 / 81000700 ‖ 82000600/01/00 | `right_tibia_end_spon` / `right_tibia_center_spon` / `R_TIBIA_CORT` | `model/opensim/FullBodyModel-4.0/Geometry/r_tibia.vtp`；`model/Model/Geometry/OK_tibia.obj` | **合并 3 PID** 成一根骨（已试点） |
 | 3 | **腓骨** | 81000800 / 81000801 / 81000900 ‖ 82000800/01/09 | `right_fibula_end_spon` / `…center_spon` / `R_FIBULA_CORT` | `…/r_fibula.vtp` | 合并 3 PID |
 | 4 | **股骨** | 81000000 / 81000001 / 81000100 ‖ 82000000/01/00 | `right_femur_end_spon` / `…center_spon` / `R_FEMUR_CORT` | `…/r_femur.vtp`；`OK_femur.obj` | 合并 3 PID |
@@ -159,7 +159,7 @@ $env:PYTHONPATH="src"
 
 # 1) 甲板 *PART 全量索引（PID + 名称）
 & .venv\Scripts\python.exe scripts\opensim_fe\scout_parts.py `
-    --out temp\opensim_fe\parts\parts_index.json
+    --out temp/fe_out\parts\parts_index.json
 
 # 2) 任意骨抽取（可分部位落盘）
 & .venv\Scripts\python.exe scripts\opensim_fe\extract_part.py `
@@ -174,5 +174,5 @@ $env:PYTHONPATH="src"
     --name apex --pids 81000000,81000001,81000100 --report-only
 ```
 
-产物：`temp/opensim_fe/parts/<name>/{*_surface.stl, *_volume.vtk, *_elements.npz,
+产物：`temp/fe_out/parts/<name>/{*_surface.stl, *_volume.vtk, *_elements.npz,
 node_ids.npy, nodes_xyz.npy, surface_nodes.npy, *_mesh.npz, summary.json}`。

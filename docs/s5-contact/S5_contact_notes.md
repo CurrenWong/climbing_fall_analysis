@@ -449,7 +449,7 @@ from pathlib import Path
 import os, math, numpy as np
 
 # ---- 0. 单位：mm - N - MPa - s ----
-WORK = Path(r"D:\Project\climbing_fall_analysis\temp\opensim_fe\pad_contact\pad_contact.feb")
+WORK = Path(r"D:\Project\climbing_fall_analysis\temp/fe_out\pad_contact\pad_contact.feb")
 WORK.parent.mkdir(parents=True, exist_ok=True)
 
 # ---- 1. 网格（占位：用 meshing.vtp_to_tet / pad_mesh.py 输出） ----

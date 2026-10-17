@@ -251,7 +251,7 @@ D symmetric_stiffness / E auto_penalty），本轮全部试过，无一条使跖
 | 项 | 位置 |
 |---|---|
 | 护栏放宽（本件，零回归 72 passed） | `src/climbing/coupling/plantar_bc.py`（原 `:436-437`） |
-| gap 扫描（处方 A） | `temp/v1_gap_scan.py`；产物 `temp/opensim_fe/v1_gap/`；`results/opensim_fe/v1_plantar_gap_scan.json` |
+| gap 扫描（处方 A） | `temp/v1_gap_scan.py`；产物 `temp/fe_out/v1_gap/`；`results/opensim_fe/v1_plantar_gap_scan.json` |
 | symmetric_stiffness（处方 D） | `temp/v1_sym_scan.py`；`results/opensim_fe/v1_symmetric_stiffness_scan.json` |
 | False Transient（处方 C） | `temp/v1_dyn_scan.py`、`temp/v1_dyn2.py`；`results/opensim_fe/v1_dynamic_scan.json`、`v1_dyn_damp_scan.json` |
 | 手册 | `temp/thums/febio_manual.txt`（§8.3.1.5 / §8.4.1–8.4.2 / §8.5.1–8.5.3 / §8.12.4；note 6 在 L1932-1942） |

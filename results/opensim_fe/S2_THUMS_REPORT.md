@@ -8,7 +8,7 @@
 > a=1 满激活仍 1 m（246.6，如实保留）。详见 `S2_THUMS_REPORT_ANAT.md`。
 > **本报告数值仅作历史记录，引用请以 ANAT / PLANTAR_BC_BASE 报告为准。**
 
-**模型**：`temp/opensim_fe/thums_calcaneus/calcaneus_r_calcnframe.npz`（AM50 THUMS 右跟骨，mm，OpenSim `calcn_r` 帧；原点 = 距下关节中心）。
+**模型**：`temp/fe_out/thums_calcaneus/calcaneus_r_calcnframe.npz`（AM50 THUMS 右跟骨，mm，OpenSim `calcn_r` 帧；原点 = 距下关节中心）。
 双材料域：皮质 `calcaneus`（hex8，E=15000 MPa，ν=0.30）+ 松质 `trabecular`（tet4，E=73.4 MPa，ν=0.45）。
 
 - 单元：CORT hex8 = 634，SPON tet4 = 3323；节点 1544。

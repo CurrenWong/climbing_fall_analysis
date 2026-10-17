@@ -1,14 +1,14 @@
 # 冻结 BC2 数据保全 —— 清单与恢复路径
 
 > **日期**：2026-10-13 ｜ **机器可读**：`FROZEN_BC2_MANIFEST.json`
-> **本地路径（不入库）**：`temp/opensim_fe/fracture_matrix_bc2/`
+> **本地路径（不入库）**：`temp/fe_out/fracture_matrix_bc2/`
 > **体量**：83 文件 / **51.59 MB**
 
 ---
 
 ## 1. 为什么它不在 git 里（**政策 vs 实测的冲突**）
 
-> `temp/opensim_fe/fracture_matrix_bc2/` 是 4 个沿用部位判定的唯一数据副本。
+> `temp/fe_out/fracture_matrix_bc2/` 是 4 个沿用部位判定的唯一数据副本。
 > 但 `.gitignore:72` 明确把 `*.feb`/`*.xplt`/`*.hdf5`/`*.npz` 与 `temp/` 归为
 > 「**Regenerable simulation artefacts (safe to delete — reproduced by scripts)**」，
 > 理由是仓库**对外发布**、只收 code + docs + **可再生** results。
@@ -48,7 +48,7 @@
 
 ## 4. 建议（**待拍板**）
 
-- 把 `temp/opensim_fe/fracture_matrix_bc2/` 另存到**仓库外**（或私有仓库），本清单入 git 作校验基准
+- 把 `temp/fe_out/fracture_matrix_bc2/` 另存到**仓库外**（或私有仓库），本清单入 git 作校验基准
 - 恢复后，**重跑并与本清单逐文件比对**，差异本身是有价值的证据（可定位是哪一段代码漂移造成）
 
 ## 5. 溯源

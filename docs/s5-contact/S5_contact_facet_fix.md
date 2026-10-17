@@ -32,7 +32,7 @@
 7. **Step 7** — 跑 proof case：`h2.0_contact_rigid_mu0.6_pad` 单独；捕获 `end_t`,
    `neg_jacobians`, `invalid facets`, `F_n`, `penetration`, `contact_area`,
    `friction_cone_ratio`, `force_balance`；把 `.feb` 归档到
-   `temp\opensim_fe\s5_contact\`。
+   `temp/fe_out\s5_contact\`。
 8. **Step 8** — 跑全部硬门槛（93 / 19+1 / 11 / 11 / 13 / new tests）。
 9. **Step 9** — 在 `docs\S5_wave4_impl.md` 末尾追加 `## 5. correction section`，
    把波4 的诊断（7/7 失败 / `292 invalid facets`）订正为「根因 #1 修好后的实测」。

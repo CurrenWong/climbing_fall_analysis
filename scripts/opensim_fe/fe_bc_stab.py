@@ -17,7 +17,7 @@
   A4  axial_lat_80        : 仅轴向夹持                   + 侧向 [0.10,0.90]
   A5  axial_lat_full      : 仅轴向夹持                   + 侧向 [0.02,0.98]
 
-纪律：冻结输入只读；输出只在 `temp/opensim_fe/fe_bc_stab/` + 一个 results json。
+纪律：冻结输入只读；输出只在 `temp/fe_out/fe_bc_stab/` + 一个 results json。
 """
 from __future__ import annotations
 

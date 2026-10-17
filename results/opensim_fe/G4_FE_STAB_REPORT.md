@@ -375,7 +375,7 @@ $env:PYTHONPATH="src"
 ```
 
 - `results/opensim_fe/G4_FE_STAB_REPORT.md`（本文件）
-- `temp/opensim_fe/g4_fe_stab/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_stab.json`）
+- `temp/fe_out/g4_fe_stab/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_stab.json`）
 
 **未改任何既有模块**：本脚本只 import `g4_fe_spike` / `bone_feb` 并复用其注入/求解/后处理；`g4_fe_spike.py` 语义未改（Dmax 仅对其产出的文本做 `<Dmax>` 文本替换）。
 

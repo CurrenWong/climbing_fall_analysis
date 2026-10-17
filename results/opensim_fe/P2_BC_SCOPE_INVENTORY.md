@@ -11,9 +11,9 @@
 
 > **状态**：侦察完成，**未开跑 FE、未改任何冻结输入、未动 A1/A2 判定**。
 > **日期**：2026-10-15 ｜ **依据 P2 节**：`docs/methods/G4_FE全量_工作计划.md:136-186`
-> **探针**：`temp/opensim_fe/p2_scope_inventory.py`（几何，零 FE）、
-> `temp/opensim_fe/p2_loadshare_audit.py` + `p2_loadshare_quant.py`（载荷，零 FE）
-> **数据**：`temp/opensim_fe/p2_scope_inventory.json`、`p2_loadshare_quant.json`
+> **探针**：`temp/fe_out/p2_scope_inventory.py`（几何，零 FE）、
+> `temp/fe_out/p2_loadshare_audit.py` + `p2_loadshare_quant.py`（载荷，零 FE）
+> **数据**：`temp/fe_out/p2_scope_inventory.json`、`p2_loadshare_quant.json`
 
 ---
 
@@ -192,7 +192,7 @@ P2 必须由**一件**扩为**两件**：
 
 **原理**：σ(h) 随载荷线性缩放（`fracture_matrix.py:606`），BC2 已验线性度
 （ends 2.76%/s、shaft 0.53%/s）⇒ 缺陷 B 的修复对**全高度**σ(h) 是同一常数因子
-⇒ 可在既有 BC2 曲线上直接乘 `share`。探针 `temp/opensim_fe/p2_defectB_predict.py`。
+⇒ 可在既有 BC2 曲线上直接乘 `share`。探针 `temp/fe_out/p2_defectB_predict.py`。
 
 | 部位 | σ_c | 现 σ@1m / σ@50m | 现状态 | 目标 | ⇒ 修 B 后 σ@1m / σ@50m | 修 B 后 | 判定 |
 |---|---:|---:|---:|---:|---:|---:|---|
@@ -270,8 +270,8 @@ M1 的 share **0.2241** 已在库（G9 §15 入账），但**只用于 `A_eff` �
 
 ## 5quater. (b) / b1 可行性评估 —— **可行，但不需要重网格**
 
-评估件（只读 + 网格化试跑，产出落 `temp/opensim_fe/parts_scale`，未入 git）：
-`temp/opensim_fe/p2_b1_feasibility.py`、`p2_a1_design.py`、`p2_connectivity_check.py`、
+评估件（只读 + 网格化试跑，产出落 `temp/fe_out/parts_scale`，未入 git）：
+`temp/fe_out/p2_b1_feasibility.py`、`p2_a1_design.py`、`p2_connectivity_check.py`、
 `p2_t6_cap_diag.py`、`p2_plate_geom_check.py`。
 
 ### 三道闸门

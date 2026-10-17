@@ -107,7 +107,7 @@ FEBio 日志第一次报出 **`Auto time stepper activated ... : yes`** —— �
 **1.72 mm = 5.06^(1/3) = 1.717 mm** —— 即**中位单元体积的立方根**（等效立方体边长）。
 对四面体而言，这个量**系统性小于**真实单元尺度。
 
-### 4.2 零 FE 实测（`temp/opensim_fe/h50_shell_vs_solid.py`）
+### 4.2 零 FE 实测（`temp/fe_out/h50_shell_vs_solid.py`）
 
 按 FEBio 手册 **§8.3.1.4 + L1981** 要求的量（**壳厚 < 壳下实体单元高**）重测：
 
@@ -170,10 +170,10 @@ FEBio 日志第一次报出 **`Auto time stepper activated ... : yes`** —— �
 
 | 项 | 位置 |
 |---|---|
-| 候选扫描（ramp / 罚 / 壳） | `temp/opensim_fe/h50_candidates.py` → `h50_candidates.json` |
-| **ramp 单变量** | `temp/opensim_fe/h50_ramp_test.py` → `h50_ramp.json` |
-| **罚扫描** | `temp/opensim_fe/h50_pen_scan.py` → `h50_pen_scan.json` |
-| **壳/实体几何** | `temp/opensim_fe/h50_shell_vs_solid.py` → `h50_shell_vs_solid.json` |
+| 候选扫描（ramp / 罚 / 壳） | `temp/fe_out/h50_candidates.py` → `h50_candidates.json` |
+| **ramp 单变量** | `temp/fe_out/h50_ramp_test.py` → `h50_ramp.json` |
+| **罚扫描** | `temp/fe_out/h50_pen_scan.py` → `h50_pen_scan.json` |
+| **壳/实体几何** | `temp/fe_out/h50_shell_vs_solid.py` → `h50_shell_vs_solid.json` |
 | V1 官方数字（σ / dis_z_max） | `results/opensim_fe/P2_V1_GATE_VERDICT.json` |
 | ramp 起点设计出处 | `scripts/opensim_fe/p5_head_contact.py:259-273` |
 | FEBio 依据 | §8.3.1.4 + L1981（壳厚）、§8.4.2（false transient）、L4557（罚语义） |

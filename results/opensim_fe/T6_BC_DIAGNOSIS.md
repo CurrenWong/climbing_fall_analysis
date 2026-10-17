@@ -146,7 +146,7 @@
 |---|---|
 | 稳定性脚本（含 T6） | `scripts/opensim_fe/fe_bc_stab.py` |
 | 稳定性产物 | `results/opensim_fe/FE_BC_STAB.json` |
-| T6 冻结记录 | `temp/opensim_fe/fracture_matrix_bc2/T6/T6_fe.json` |
+| T6 冻结记录 | `temp/fe_out/fracture_matrix_bc2/T6/T6_fe.json` |
 | 降载 + 线性放回 | `scripts/opensim_fe/fracture_matrix.py`（`_load_candidates` / `load_reduction_factor` / `L606`） |
 | 判据域选择 | `fracture_matrix_bc2.json` `parts[].main_domain`（T6 = `shell_t6_cort`） |
 | 壳域未命名坑 | `scripts/opensim_fe/bone_feb.py`（`_xplt_to_hdf5_patched`） |

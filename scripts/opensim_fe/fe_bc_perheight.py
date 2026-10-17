@@ -8,7 +8,7 @@
 判据不变：`m[i] = (ends_h(i) >= sigma_c_ends) | (shaft_h(i) >= sigma_c_shaft)`
 （σ_c 取自 `paper_alignment.REGIONS` 的 `_sc`，与 S4 同源）
 
-纪律：冻结输入只读；输出只在 `temp/opensim_fe/fe_bc_perheight/` + 一个 results json。
+纪律：冻结输入只读；输出只在 `temp/fe_out/fe_bc_perheight/` + 一个 results json。
 BC 固定 BC2 条件（`top_frac=0.30, bot_frac=0.30, align_pca=True, time_steps=1`）——
 **本件只改「要不要外推」，不改 BC、不改判据。**
 """

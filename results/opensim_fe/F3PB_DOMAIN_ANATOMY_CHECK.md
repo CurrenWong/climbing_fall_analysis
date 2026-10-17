@@ -83,7 +83,7 @@
 | 项 | 来源 |
 |---|---|
 | `partition_ends_shaft` 实现 | `scripts/opensim_fe/paper_alignment.py:142-146` |
-| 股骨 bbox span / PCA | `temp/opensim_fe/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5`（本件核对） |
+| 股骨 bbox span / PCA | `temp/fe_out/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5`（本件核对） |
 | `ends` 14.94 MPa | `results/opensim_fe/A2_MISS_DIAGNOSIS.md` |
 | `shaft` 426.77 / 93.26 | 同上 / `results/opensim_fe/FE_BC_PERHEIGHT.md` |
 | `REGIONS` 标称「股骨颈/股骨骨干」 | `scripts/opensim_fe/paper_alignment.py:86-99` |

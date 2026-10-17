@@ -7,7 +7,7 @@
 >
 > 本报告**不覆盖**任何既有产物：只新增
 > `scripts/opensim_fe/bone_feb.py`、`scripts/opensim_fe/bone_feb_validate.py`、
-> `temp/opensim_fe/bone_feb/**` 与本报告。`l3_shell_feb.py` / `thums_feb.py` /
+> `temp/fe_out/bone_feb/**` 与本报告。`l3_shell_feb.py` / `thums_feb.py` /
 > `kmesh_io.py` / `shell_io.py` / `meshing.py` / `febio_run.py` **均未改动**。
 
 ---
@@ -299,7 +299,7 @@ sliver。它保留为对其它甲板/退化的兜底（修复前它在 tibia COR
 # 仓库根、PowerShell、PYTHONPATH=src
 $env:PYTHONPATH = "src"
 
-# 4 块骨一键构建 + FEBio + σ_vm（写 temp/opensim_fe/bone_feb/**）
+# 4 块骨一键构建 + FEBio + σ_vm（写 temp/fe_out/bone_feb/**）
 & .venv\Scripts\python.exe scripts\opensim_fe\bone_feb_validate.py
 
 # 回归套件（应保持 19 passed / 1 skipped）
@@ -309,12 +309,12 @@ $env:PYTHONPATH = "src"
 单骨复现（示例：L3 无壳对照，属 §4.2）见运行日志中 `[post:L3_noshell]`。
 输出（实测）：
 
-- `temp/opensim_fe/bone_feb/L3/{L3.feb,.xplt,.hdf5,.log,L3_result.json}`
-- `temp/opensim_fe/bone_feb/L3_noshell/{L3_noshell.feb,...,L3_noshell_result.json}`
-- `temp/opensim_fe/bone_feb/tibia_r/{...}`
-- `temp/opensim_fe/bone_feb/parietal_r/{...}`
-- `temp/opensim_fe/bone_feb/R_HIPBONE/{...}`
-- `temp/opensim_fe/bone_feb/_summary.json`、`_run.log`
+- `temp/fe_out/bone_feb/L3/{L3.feb,.xplt,.hdf5,.log,L3_result.json}`
+- `temp/fe_out/bone_feb/L3_noshell/{L3_noshell.feb,...,L3_noshell_result.json}`
+- `temp/fe_out/bone_feb/tibia_r/{...}`
+- `temp/fe_out/bone_feb/parietal_r/{...}`
+- `temp/fe_out/bone_feb/R_HIPBONE/{...}`
+- `temp/fe_out/bone_feb/_summary.json`、`_run.log`
 
 ---
 
@@ -324,8 +324,8 @@ $env:PYTHONPATH = "src"
 |------|------|
 | `scripts/opensim_fe/bone_feb.py` | **新模块**（通用 builder） |
 | `scripts/opensim_fe/bone_feb_validate.py` | **新**验证驱动（4 骨定义 + 构建 + 求解 + 报告 JSON） |
-| `temp/opensim_fe/bone_feb/{L3,tibia_r,parietal_r,R_HIPBONE,L3_noshell}/**` | **新目录**，每骨 `.feb/.xplt/.hdf5/.log/_result.json` |
-| `temp/opensim_fe/bone_feb/_summary.json` / `_run.log` | 汇总 / 完整 stdout |
+| `temp/fe_out/bone_feb/{L3,tibia_r,parietal_r,R_HIPBONE,L3_noshell}/**` | **新目录**，每骨 `.feb/.xplt/.hdf5/.log/_result.json` |
+| `temp/fe_out/bone_feb/_summary.json` / `_run.log` | 汇总 / 完整 stdout |
 | `results/opensim_fe/BONE_FEB_BUILDER_REPORT.md` | 本报告 |
 
 未改动：`l3_shell_feb.py`、`thums_feb.py`、`kmesh_io.py`、`shell_io.py`、`meshing.py`、

@@ -96,7 +96,7 @@ $env:PYTHONPATH="src"
 # 产物（纯增量）：
 #   results/opensim_fe/g9_fibula_fe_support.json   (机器可读；含本次运行的数值)
 #   results/opensim_fe/G9_FIBULA_FE_SUPPORT_REPORT.md (本件)
-#   temp/opensim_fe/g9_fibula_fe_support/          (.feb/.xplt/.hdf5)
+#   temp/fe_out/g9_fibula_fe_support/          (.feb/.xplt/.hdf5)
 ```
 
 > ⚠️ **复现者注意**：主设定 `share_0.050__mid` 的 median@alloc **在重跑间会在 ~18 与 ~167 MPa 两支间跳变**（分叉）；这是**已记录的发现**，非脚本缺陷。

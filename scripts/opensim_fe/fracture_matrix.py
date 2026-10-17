@@ -31,7 +31,7 @@ Method (all numbers measured; nothing fabricated)
     bulk; all four are reported).
 
 Outputs (new files only):
-    temp/opensim_fe/fracture_matrix/            (febs, per-bone JSON, load chain)
+    temp/fe_out/fracture_matrix/            (febs, per-bone JSON, load chain)
     results/opensim_fe/fracture_matrix.{json,csv,png}
     results/opensim_fe/FRACTURE_MATRIX_REPORT.md
 
@@ -298,7 +298,7 @@ class Log:
 def run_load_chain(log: Log, *, reuse: bool) -> dict:
     """Return load-chain results (heights, per-joint longitudinal peaks).
 
-    Cached in ``temp/opensim_fe/fracture_matrix/load_chain.npz`` (reused when
+    Cached in ``temp/fe_out/fracture_matrix/load_chain.npz`` (reused when
     ``reuse`` and the cache covers exactly ``HEIGHTS`` × ``JOINTS``).
     """
     cache = OUT_TEMP / "load_chain.npz"
@@ -409,7 +409,7 @@ def solve_bone_fe(part: Part, ref_load_n: float, log: Log, *, reuse: bool,
     strict linear elasticity.  A two-load linearity self-check is recorded
     whenever a second load also converges.
 
-    Cached in ``temp/opensim_fe/fracture_matrix/<bone>/<bone>_fe.json``.
+    Cached in ``temp/fe_out/fracture_matrix/<bone>/<bone>_fe.json``.
     On total failure the exception text is recorded verbatim.
     """
     bone_dir = OUT_TEMP / part.bone
@@ -1024,7 +1024,7 @@ def write_report(mat: dict, parts: list[Part], loads: dict, fe: dict,
     A("- `results/opensim_fe/fracture_matrix.csv`（宽表：行=部位，列=h1..h50，主口径）")
     A("- `results/opensim_fe/fracture_matrix.png`（左：二值骨折矩阵；右：利用率+等值线）")
     A("- `results/opensim_fe/FRACTURE_MATRIX_REPORT.md`（本文件）")
-    A("- `temp/opensim_fe/fracture_matrix/`（每骨 .feb/.xplt/.hdf5/.log + per-bone JSON；"
+    A("- `temp/fe_out/fracture_matrix/`（每骨 .feb/.xplt/.hdf5/.log + per-bone JSON；"
       "`load_chain.npz`；`run.log`）")
     A("")
     A(f"_生成时间：{meta['generated_at']}；总耗时 {meta['total_seconds']:.0f} s。_")

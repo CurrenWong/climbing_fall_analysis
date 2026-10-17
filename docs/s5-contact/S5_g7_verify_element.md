@@ -117,7 +117,7 @@ the **Δ between elements (%)**.
 **Failure is data:** if `udg-hex` NANs before a target ξ, I record where it dies and
 read the highest ξ it did reach.
 
-**Run dir:** `temp\opensim_fe\s5_t9\g7verify_c\` (new; collides with nobody).
+**Run dir:** `temp/fe_out\s5_t9\g7verify_c\` (new; collides with nobody).
 Harness reuses `udg_contact_sweep2.py` machinery (the previous agent's harness that
 already knows `pad_domain_type="udg-hex"`).
 
@@ -129,7 +129,7 @@ _(appended one block per run, reading the real `.log`/`.xplt` tail — nothing h
 
 ### 3.1 — G7 anchors (sink 170) reproduce the two quoted numbers, and expose the matched-ξ states
 
-Harness: `temp\opensim_fe\s5_t9\g7verify_c\run.py` (ledger `g7verify_results.txt`,
+Harness: `temp/fe_out\s5_t9\g7verify_c\run.py` (ledger `g7verify_results.txt`,
 per-run `<tag>.summary.json`). Both runs use `search_radius=20`, `penalty=0.1`,
 `laugon=PENALTY`, `node_reloc=0`, 2400 steps — the exact §7 recipe.
 
@@ -306,7 +306,7 @@ gap in the load-bearing range.
 * **Force balance** was computed for every run (indenter-BC z-reaction vs pad-top
   z-reaction): all **≤ 1.6e-06** relative — consistent with the prior agent's
   7.80e-07 on the tet4 G7 run.
-* **Artifacts:** harness `temp/opensim_fe/s5_t9/g7verify_c/run.py`; ledger
+* **Artifacts:** harness `temp/fe_out/s5_t9/g7verify_c/run.py`; ledger
   `g7verify_results.txt`; per-run `*.summary.json`, `*.feb`, `*.log`, `*.xplt`.
 * **Not used:** `docs/S5_contact_udg.md` was read only (never modified);
   `docs/S5_g7_verify_anchors.md` / `S5_g7_verify_mesh.md` untouched.

@@ -10,8 +10,8 @@ records *but still calls* ``find_febio(verify=True)`` + ``probe_febio`` to fill
 the metadata, which launches the FEBio executable.  This driver instead replays
 the matrix computation purely from cache:
 
-    temp/opensim_fe/fracture_matrix/load_chain.npz          (per-height loads)
-    temp/opensim_fe/fracture_matrix/<bone>/<bone>_fe.json   (FE solves)
+    temp/fe_out/fracture_matrix/load_chain.npz          (per-height loads)
+    temp/fe_out/fracture_matrix/<bone>/<bone>_fe.json   (FE solves)
 
 and reuses the solver metadata (``febio_exe`` / ``febio_version`` / ...) already
 stored in ``results/opensim_fe/fracture_matrix.json``, so FEBio is never invoked.

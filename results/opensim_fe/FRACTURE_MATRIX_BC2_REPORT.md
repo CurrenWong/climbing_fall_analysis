@@ -2,7 +2,7 @@
 
 > **⚠️ BC2 版横幅（2026-10-09 B1.3）**：本报告由 `scripts/opensim_fe/rerun_matrix_bc2.py --finalize`
 > 生成——**新 BC（`align_pca=True`，B1.2 patch test P1–P5 PASS）+ 主统计量 `median`**，独立根
-> `temp/opensim_fe/fracture_matrix_bc2/`（载荷链拷贝自 legacy 缓存，`fracture_matrix.py` 磁盘零改动，
+> `temp/fe_out/fracture_matrix_bc2/`（载荷链拷贝自 legacy 缓存，`fracture_matrix.py` 磁盘零改动，
 > 溯源 `BC2_PROVENANCE.json`）。**§9 复现命令与 §10 产物列表为生成器模板原文，指向 legacy 驱动/文件名，
 > 本版不适用**——复现请用 `rerun_matrix_bc2.py --init/--bone/--finalize/--diff`，产物为
 > `fracture_matrix_bc2.{json,csv,png}` + `B13_MATRIX_BC2_DIFF.md`。9 骨 FE status 全 ok
@@ -126,13 +126,13 @@
 本次运行 **9/9 骨全部成功**（`run_bone_feb` rc=0，`post_process` 取到主域）。无失败需记录。
 
 > 以下为**降载搜索中被 FEBio 拒绝的尝试**（原文），供复现与审计：
-> - `tibia_r` load=25266 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\tibia_r\tibia_r.feb 工作目录: D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\tibia_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 162  	Avg iterations per solve ............ : 1  	Time in linear solver
-> - `tibia_r` load=10000 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\tibia_r\tibia_r.feb 工作目录: D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\tibia_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 300  	Avg iterations per solve ............ : 1  	Time in linear solver
-> - `fibula_r` load=25266 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\fibula_r\fibula_r.feb 工作目录: D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\fibula_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 102  	Avg iterations per solve ............ : 1  	Time in linear sol
-> - `fibula_r` load=10000 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\fibula_r\fibula_r.feb 工作目录: D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\fibula_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 216  	Avg iterations per solve ............ : 1  	Time in linear sol
-> - `fibula_r` load=2500 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\fibula_r\fibula_r.lincheck.feb 工作目录: D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\fibula_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 305  	Avg iterations per solve ............ : 1  	Time in l
-> - `T6` load=22088 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\T6\T6.feb 工作目录: D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\T6 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 66  	Avg iterations per solve ............ : 1  	Time in linear solver: 0:00:01   Peak
-> - `T6` load=20000 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\T6\T6.lincheck.feb 工作目录: D:\Project\climbing_fall_analysis\temp\opensim_fe\fracture_matrix_bc2\T6 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 72  	Avg iterations per solve ............ : 1  	Time in linear solver: 0:00:
+> - `tibia_r` load=25266 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\tibia_r\tibia_r.feb 工作目录: D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\tibia_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 162  	Avg iterations per solve ............ : 1  	Time in linear solver
+> - `tibia_r` load=10000 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\tibia_r\tibia_r.feb 工作目录: D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\tibia_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 300  	Avg iterations per solve ............ : 1  	Time in linear solver
+> - `fibula_r` load=25266 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\fibula_r\fibula_r.feb 工作目录: D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\fibula_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 102  	Avg iterations per solve ............ : 1  	Time in linear sol
+> - `fibula_r` load=10000 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\fibula_r\fibula_r.feb 工作目录: D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\fibula_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 216  	Avg iterations per solve ............ : 1  	Time in linear sol
+> - `fibula_r` load=2500 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\fibula_r\fibula_r.lincheck.feb 工作目录: D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\fibula_r 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 305  	Avg iterations per solve ............ : 1  	Time in l
+> - `T6` load=22088 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\T6\T6.feb 工作目录: D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\T6 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 66  	Avg iterations per solve ............ : 1  	Time in linear solver: 0:00:01   Peak
+> - `T6` load=20000 N: BoneFebError: FEBio 失败 FEBio 运行失败（非 0 退出码）。 命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\T6\T6.lincheck.feb 工作目录: D:\Project\climbing_fall_analysis\temp/fe_out\fracture_matrix_bc2\T6 退出码: 1  ---- 输出（尾部）----  	Total calls to linear solver ........ : 72  	Avg iterations per solve ............ : 1  	Time in linear solver: 0:00:
 
 ## 9. 复现命令
 
@@ -157,6 +157,6 @@ $env:PYTHONPATH="src"
 - `results/opensim_fe/fracture_matrix.csv`（宽表：行=部位，列=h1..h50，主口径）
 - `results/opensim_fe/fracture_matrix.png`（左：二值骨折矩阵；右：利用率+等值线）
 - `results/opensim_fe/FRACTURE_MATRIX_REPORT.md`（本文件）
-- `temp/opensim_fe/fracture_matrix/`（每骨 .feb/.xplt/.hdf5/.log + per-bone JSON；`load_chain.npz`；`run.log`）
+- `temp/fe_out/fracture_matrix/`（每骨 .feb/.xplt/.hdf5/.log + per-bone JSON；`load_chain.npz`；`run.log`）
 
 _生成时间：2026-10-09 15:31:39；总耗时 0 s。_

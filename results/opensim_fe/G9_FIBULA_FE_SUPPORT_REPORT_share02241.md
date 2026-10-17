@@ -81,6 +81,6 @@ $env:PYTHONPATH="src"
 # 产物（纯增量）：
 #   results/opensim_fe/g9_fibula_fe_support.json
 #   results/opensim_fe/G9_FIBULA_FE_SUPPORT_REPORT.md
-#   temp/opensim_fe/g9_fibula_fe_support/
+#   temp/fe_out/g9_fibula_fe_support/
 ```
 

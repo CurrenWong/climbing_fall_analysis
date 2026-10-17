@@ -336,12 +336,12 @@ class ShellDomain(type Literal["elastic-shell","three-field-shell","rigid-shell"
 # 仓库根，PYTHONPATH=src
 $env:PYTHONPATH="src"
 & .venv\Scripts\python.exe scripts\opensim_fe\shell_scout.py `
-    --parts-index temp\opensim_fe\parts\parts_index.json `
-    --outdir temp\opensim_fe\shells `
+    --parts-index temp/fe_out\parts\parts_index.json `
+    --outdir temp/fe_out\shells `
     --report results\opensim_fe\SHELL_SCOUT_REPORT.md
 ```
 
-产物：`temp/opensim_fe/shells/{shell_pid_stats.json,.csv, shell_sections.json, shell_connectivity.json, pelvis_variants.json, pelvis_overlap.json, scout_summary.json}`。
+产物：`temp/fe_out/shells/{shell_pid_stats.json,.csv, shell_sections.json, shell_connectivity.json, pelvis_variants.json, pelvis_overlap.json, scout_summary.json}`。
 
 ## 7. 诚实边界
 

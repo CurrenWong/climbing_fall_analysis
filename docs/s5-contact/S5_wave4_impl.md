@@ -28,7 +28,7 @@
 | 3 | μ ∈ {0.0,0.3,0.6} | 3 contact μ rows at h=2.0; μ=0.6 at all 4 heights |
 | 4 | G1 + G7 both reported, distinct codes | `g1_pad_stress_reproduced → N/A_minimum_version`; `g7_penetration_window → RETIRED_by_contract_条6-8` |
 | 5 | calcaneus only | single bone, THUMS path |
-| 6 | `.feb`→temp, report+JSON→results | `temp\opensim_fe\s5_contact\`; `results\opensim_fe\` |
+| 6 | `.feb`→temp, report+JSON→results | `temp/fe_out\s5_contact\`; `results\opensim_fe\` |
 | 7 | `hard_surface` rows in scope | 2 hard-surface rows (fixed + contact μ=0.0) at h=2.0 for G2/G5 |
 | 8 | only avg/max/p95 σ_contact | `sigma_contact_avg_mpa` (=F_n/60000), `_max_mpa`, `_p95_mpa` |
 | 9 | `friction_cone_ratio_max` scalar time-max | one number per run |

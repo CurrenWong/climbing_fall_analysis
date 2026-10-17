@@ -537,7 +537,7 @@ def write_report(res: dict, suffix: str = "") -> None:
     A("# 产物（纯增量）：")
     A("#   results/opensim_fe/g9_fibula_fe_support.json")
     A("#   results/opensim_fe/G9_FIBULA_FE_SUPPORT_REPORT.md")
-    A("#   temp/opensim_fe/g9_fibula_fe_support/")
+    A("#   temp/fe_out/g9_fibula_fe_support/")
     A("```")
     A("")
     OUT_REPORT.with_name(OUT_REPORT.stem + suffix + OUT_REPORT.suffix).write_text(

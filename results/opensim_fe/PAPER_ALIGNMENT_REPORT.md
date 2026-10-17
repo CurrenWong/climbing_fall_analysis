@@ -63,7 +63,7 @@
 | σ_c（各子区域 70/80/150/160/180/200/220）| `bone.py::MATERIAL_STRENGTH_MPA`（[Y25] Table 1）| **assumed**（材料强度，非整体骨失效载荷）|
 | Route-1D σ_total(h) | `risk_1d_bending.json`（梁弯曲）| **derived**（F/A/L measured + 模型假设）|
 | 关节反力 load(h) | `fracture_matrix.json::loads_n` | **measured**（OpenSim 逐高度载荷链）|
-| FE 逐单元应力 | `temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5` | **measured**（FE 解）|
+| FE 逐单元应力 | `temp/fe_out/fracture_matrix/<b>/<b>.hdf5` | **measured**（FE 解）|
 | FE 应力随高度缩放 | σ(h)=σ_solve·load(h)/fe_solve | **assumed**（严格线弹性）|
 | ends/shaft 分区（各 25%）| 本脚本几何规则 | **assumed**（规则选择，非论文给出）|
 | 聚类/Logistic | scipy | **derived**（本脚本计算）|
@@ -226,7 +226,7 @@ $env:PYTHONPATH="src"
 #   results/opensim_fe/fracture_matrix.json        (loads_n / FE util / p95)
 #   results/opensim_fe/bc_robust_metric_route1.json(solid_dom)
 #   src/climbing/bone.py MATERIAL_STRENGTH_MPA     (σ_c)
-#   temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5   (逐单元应力)
+#   temp/fe_out/fracture_matrix/<b>/<b>.hdf5   (逐单元应力)
 # 产物：
 #   results/opensim_fe/paper_alignment.json
 #   results/opensim_fe/paper_alignment_1d_matrix.{json,csv}

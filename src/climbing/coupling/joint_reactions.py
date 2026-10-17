@@ -66,7 +66,7 @@
 （``PrescribedForce``）按 ``state.getTime()`` 求值，于是所有帧都用
 ``GRF(t=0)`` —— 得到与真实轨迹**不一致**的加速度。
 
-实测（``temp/opensim_fe/joint_reactions/_probe_fixtime.py``，@5 m dead-drop）：
+实测（``temp/fe_out/joint_reactions/_probe_fixtime.py``，@5 m dead-drop）：
 把 ``findStationAccelerationInGround``（骨盆 COM 的 a_y）与由
 ``pelvis_ty/speed`` 列做数值微分得到的 ``d(speed)/dt`` 对比：
 

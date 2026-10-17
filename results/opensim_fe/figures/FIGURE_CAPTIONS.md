@@ -108,7 +108,7 @@
 
 **图注（中文）**：**J 后方观**（后侧）。基于真实下肢体网格（THUMS AM50 右下肢：胫骨 / 腓骨 / 距骨 / 跟骨 / 足骨）渲染的三踝骨折（trimalleolar）机制图。足部被摆在 **SER 受伤体位 = 内翻（旋后，脚心向内）28° + 外旋 20°**；胫腓骨保持不动（论文初稿 §3.6 / §4.2）。红色 **骨折线**由骨网格平面切片生成、贴合骨面：**后踝骨折**（胫骨远端后缘，PITFL 撕脱 / 距骨楔入）、**内踝骨折**（内踝基部）、**外踝骨折**（腓骨远端斜形，SER-II 位）。机制箭头以真 3D 弧线表示：**内翻**（绕足长轴、足跟下方大弧，表示脚心向内翻转）+ **外旋**（脚掌下方水平弧，箭头朝外，表示足绕小腿长轴外旋）+ **轴向载荷**（蓝色向下直箭头，软垫主要卸载的分量）。
 
-- **数据源 / 几何**：`temp/opensim_fe/parts_*/…/*_surface.stl`（THUMS AM50 真实骨网格；胫骨用 gmsh 流形面 + Taubin 平滑）；骨折线 = 网格平面切片（`_fracture_v9.py`）；**无仿真实测数值**。
+- **数据源 / 几何**：`temp/fe_out/parts_*/…/*_surface.stl`（THUMS AM50 真实骨网格；胫骨用 gmsh 流形面 + Taubin 平滑）；骨折线 = 网格平面切片（`_fracture_v9.py`）；**无仿真实测数值**。
 - **受伤体位依据（关键）**：三踝 / 后踝骨折最常见的机制是 **旋后-外旋 SER**——`supination = inversion（脚心内翻）`、`pronation = eversion（脚心外翻）` [Lauge-Hansen 1950]；队列数据：三踝骨折 SER **66.7%** vs PER 30.7%（1000 例 CT 队列）；后踝骨折中三踝-SER **71.0%**（472 例）；SER 占全部踝骨折 40–70%。故本图取**内翻 + 外旋**位，而非外翻。
 - **标签**：距骨 / 胫骨远端 / 跟骨（黑色，引线指骨）；内翻 / 外旋 / 轴向载荷（机制箭头）；三条踝骨折红线（骨折部位）。
 - **诚实边界**：本图为**机制示意**（真实几何 + 姿态），不携带量化"是否越阈"判断；定量见 **图 4（R1 旋后/内翻，冠状面弯曲+剪切）**与 **图 7（S6 外旋，横截面扭转 `risk=σ_vm/σ_c`）**；后踝臂 / 内踝臂由文献 [26,27] 支撑、未建模（论文 §5.2 第 3 条）。
@@ -120,7 +120,7 @@
 
 **图注（中文）**：**G 内侧观**。与图 8 同源的真实骨几何渲染；足部被摆在 **强制背屈位（绕踝背屈轴 +ml 转动 24°）**，用于说明抱石落地（强制背屈 + 轴向撞击）下**距骨骨折**（距骨颈 / 体）的力学机制（论文 §3.6）。红色 **骨折线**为距骨网格**冠状面**切片生成、贴合骨面（A/G 视角呈竖线、D/J 呈环）。机制箭头：**轴向撞击**（蓝色向下直箭头，胫→距→跟载荷柱）+ **背屈**（绕踝横轴的真实 3D 弧箭头，趾端向上）。
 
-- **数据源 / 几何**：`temp/opensim_fe/parts/talus_r/*` 等真实骨网格；骨折线 = 网格切片；背屈 = 距骨/跟骨/足绕踝横轴（+ml）旋转（`_fracture_v9.py`）；**无仿真实测数值**。
+- **数据源 / 几何**：`temp/fe_out/parts/talus_r/*` 等真实骨网格；骨折线 = 网格切片；背屈 = 距骨/跟骨/足绕踝横轴（+ml）旋转（`_fracture_v9.py`）；**无仿真实测数值**。
 - **与其他图对照**：图 4 / 6 / 7 / 8 走**腓骨远端**链（旋后 / 内翻 / 外旋 → 弯曲 + 剪切 + 扭转）；本图走**距骨**的**胫–距–跟轴向载荷柱**链。**机制互补**：图 4 / 7 解释单脚踝为何绕开轴向模型；本图解释距骨骨折为何绕开旋后模型。
 - **文献**：[28] Hawkins 1970 / [29] Canale & Kelly 1978（距骨颈骨折机制"飞行员距骨"）；[30] Peterson 1976（距骨 = 载荷柱唯一悬臂）；[31] Wong 2016（阈值 ≈ 6–10 kN）。
 - **诚实边界**：本图为**机制示意**，不携带任何量化结论；箭头方向即力学作用方向。凡未在正文引用的数字 / 阈值，均不应被引用。
@@ -216,13 +216,13 @@ $env:PYTHONPATH="src"
 **数据源 / 复现**：
 - 地面反力 `pad.py` 1D 双质点 → `ground_reaction(height_m, mass_kg, on_pad)`（`src/climbing/coupling/opensim_grf.py`）；
 - 正动力学 `run_dead_drop(grf, scale_mass_kg=77)`（`src/climbing/coupling/opensim_fall.py`）：把 GRF 以 `PrescribedForce` 注入，RungeKuttaMerson 积分，**下肢关节锁死**（[Y25] 的"直立绷直腿"刚性柱近似）；
-- 渲染脚本 `scripts/opensim_fe/make_fall_animation.py`（= `temp/opensim_fe/_fall_anim.py`）。
+- 渲染脚本 `scripts/opensim_fe/make_fall_animation.py`（= `temp/fe_out/_fall_anim.py`）。
 
 ```powershell
 $env:PYTHONPATH="src"
 .venv\Scripts\python.exe scripts\opensim_fe\make_fall_animation.py --height 2.0 --on-pad --fps 25
 .venv\Scripts\python.exe scripts\opensim_fe\make_fall_animation.py --height 2.0 --on-pad --passive --fps 25
-.venv\Scripts\python.exe temp\opensim_fe\probe_sink.py      # 诊断：下沉量 / 冲量-动量
+.venv\Scripts\python.exe temp/fe_out\probe_sink.py      # 诊断：下沉量 / 冲量-动量
 ```
 
 **诚实边界**：

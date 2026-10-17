@@ -139,7 +139,7 @@ def compute_compliant_loads(*, reuse: bool) -> dict:
     ``reuse=True`` 且既有 JSON 的 meta 与本次期望（heights/mass/preset）一致时**直接复用**
     （免 20 min OpenSim）；``reuse=False`` 强制重算。
 
-    **断点续跑**：逐高度写增量检查点 ``temp/opensim_fe/g4_loadchain/partial_loads.json``；
+    **断点续跑**：逐高度写增量检查点 ``temp/fe_out/g4_loadchain/partial_loads.json``；
     进程中断后再次运行自动从首个未完成高度续跑（同一预设/质量）。
     """
     if reuse and OUT_LOADS_JSON.is_file():

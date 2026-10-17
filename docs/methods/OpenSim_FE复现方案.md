@@ -410,12 +410,12 @@ cl=2 上明显偏离（LEARNINGS-026），无法做网格收敛/正则化验证�
 - [ ] S3.2 实现 `load_transfer.py`：关节 wrench → 压力 + 力偶 + CSA 分配。
 - [x] **S3.2b 跟腱力 —— ✅ 已实现并检验（结论：非主因）** —— 后足三点载荷
       （跖面↑ ＋ **跟腱↑** ＋ 距下关节↓）已补全。实现：`load_transfer.transfer` 给
-      `F_ach = a·F_max(triceps)`（F_max = **10885 N**，`temp/opensim_fe/probe_achilles.py`
+      `F_ach = a·F_max(triceps)`（F_max = **10885 N**，`temp/fe_out/probe_achilles.py`
       实测）；`meshing` 选后上结节 `achilles` 面（x<−25, y>0）；`febio_model` 用
       `TractionLoad` 沿 ≈**(0.15, 0.99, 0)** 施加。
       **检验**（`scripts/opensim_fe/s3_achilles_sweep.py`，h=5/10/20，a=0 vs 1）：
       gauge_max **逐位相同**（26.31 / 42.58 / 68.39 MPa），仅体平均 +6~7%。
-      诊断（`temp/opensim_fe/smoke_achilles_diag.py`）：后上区 σ_vm 随 a 显著升
+      诊断（`temp/fe_out/smoke_achilles_diag.py`）：后上区 σ_vm 随 a 显著升
       （a=0/1/5 → **0.2 / 20 / 101 MPa**），但**峰值恒在距下关节面棱边**
       （gauge argmax c≈(18,10,−2)），只由距下关节压力决定。
       **⇒ 跟腱在生理范围内（a≤1，≤10.9 kN）不改变跟骨峰值应力 → 它不是
@@ -437,7 +437,7 @@ cl=2 上明显偏离（LEARNINGS-026），无法做网格收敛/正则化验证�
 **不修动力学/BC**。
 
 - **抽取**（`scripts/opensim_fe/kmesh_io.py` + `extract_thums_calcaneus.py`
-  → `temp/opensim_fe/thums_calcaneus/`）：THUMS 甲板是 ASCII；右跟骨 = 两个独立 part：
+  → `temp/fe_out/thums_calcaneus/`）：THUMS 甲板是 ASCII；右跟骨 = 两个独立 part：
   - `R_CALCANEUS_SPON` pid **81001200** —— 3323 单元（塌缩六面体记法的**四面体**），
     `*MAT_ELASTIC` RO=1e-9、E=**73.4** MPa、ν=**0.45**；
   - `R_CALCANEUS_CORT` pid **81001300** —— 634 **六面体**，
@@ -627,7 +627,7 @@ results/opensim_fe/                 # 报告 / 矩阵 / 图
   抽取 + 解剖配准 + 双材料 FE + 全高度扫描（**38/38 rc=0**）。新增脚本
   `scripts/opensim_fe/{kmesh_io.py, extract_thums_calcaneus.py, registration.py,
   register_calcaneus.py, registration_anatomical.py, thums_feb.py, thums_feb_run.py,
-  s2_thums_sweep.py}`；产物 `temp/opensim_fe/thums_calcaneus/`、`results/opensim_fe/*anat*`。
+  s2_thums_sweep.py}`；产物 `temp/fe_out/thums_calcaneus/`、`results/opensim_fe/*anat*`。
   **a=0 首次骨折 ≈2.0-3 m**（gauge 1m=114.9 / 2m=149.9 / 3m=156.6 MPa）；**未复现
   [Y25] 足部骨折簇 7-9 m**（首折 ≈2–3 m，**低于** 7–9 m ~3-4× ⇒ **骨折偏早**；与平滑 gmsh 线 26.5 m **偏高**方向相反 ⇒ 绝对高度不可移植）。残余差距在 **BC 层面**（跖面全固定奇异 /
   150 MPa 判据 / 跟腱 TractionLoad 边缘 / 多体 F_subt 量级），超出 C 的"不修动力学/BC"边界。

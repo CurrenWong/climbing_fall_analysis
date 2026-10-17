@@ -1,7 +1,7 @@
 # 腓骨 FE 量级审计 —— 胫-腓载荷分配（spec §5 四项）
 
 > 生成 2026-10-11 11:37:24；仓库 `D:\Project\climbing_fall_analysis`。
-> **新增产物**：本件 + `results/opensim_fe/fibula_fe_audit_matrix.json` + `temp/opensim_fe/fibula_fe_audit/`。**不改**任何冻结输入、不重跑 G3、不调 σc、不回解分担比凑靶。
+> **新增产物**：本件 + `results/opensim_fe/fibula_fe_audit_matrix.json` + `temp/fe_out/fibula_fe_audit/`。**不改**任何冻结输入、不重跑 G3、不调 σc、不回解分担比凑靶。
 > FE 条件：`align_pca=True (BC2 opt-in), time_steps=1`；FEBio `4.13.0` (D:\Program\FEBioStudio\bin\febio4.exe)；ankle_r @5m = 25266.2 N。
 
 ---
@@ -139,6 +139,6 @@ $env:PYTHONPATH="src"
 
 - 本报告：`results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md`
 - 机器可读：`results/opensim_fe/fibula_fe_audit_matrix.json`
-- FE 缓存/日志：`temp/opensim_fe/fibula_fe_audit/`
+- FE 缓存/日志：`temp/fe_out/fibula_fe_audit/`
 - 改动脚本（additive）：`scripts/opensim_fe/fracture_matrix.py`
 

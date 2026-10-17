@@ -1,7 +1,7 @@
 # P2 · V2 —— 穿透 / σ 幅值 / h=50 的根因（**两个独立病**）
 
 > **日期**：2026-10-15 ｜ **性质**：只读量测 + 单变量复跑（零改冻结输入）
-> **脚本**：`temp/opensim_fe/p2_gap_probe.py`、`p2_band_probe.py`、`p2_pen_scan.py`（只读/单变量）
+> **脚本**：`temp/fe_out/p2_gap_probe.py`、`p2_band_probe.py`、`p2_pen_scan.py`（只读/单变量）
 > **产物**：`results/opensim_fe/P2_PEN_SCAN_x1.json`、`P2_PEN_SCAN_x100.json`
 > **前置**：`P2_T6_ROOTCAUSE.md`（注册 bug）、`P2_V1_REGFIX_REPORT.md`（0/4 → 3/4）
 > **依据**：FEBio User Manual §8.3.1.2/§8.3.1.4/§8.3.2.4/§8.4.2、**L4551/L4557/L4569/L13745-13747/L13929**；FEBio 官方 Contact Modeling 教程

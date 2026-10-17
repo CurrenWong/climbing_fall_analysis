@@ -2,7 +2,7 @@
 
 For each bone we (re-)build the ``.feb`` with the new generic builder, run
 FEBio, and write a per-bone JSON + a top-level summary.  Numbers go to
-``temp/opensim_fe/bone_feb/<bone>/...`` and the report goes to
+``temp/fe_out/bone_feb/<bone>/...`` and the report goes to
 ``results/opensim_fe/BONE_FEB_BUILDER_REPORT.md`` (built separately by hand
 or by ``main()``).
 

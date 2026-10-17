@@ -1,7 +1,7 @@
 {
   "meta": {
     "study": "plantar BC sensitivity (fixed/roller/spring)",
-    "mesh": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\thums_calcaneus\\calcaneus_r_anatframe.npz",
+    "mesh": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\thums_calcaneus\\calcaneus_r_anatframe.npz",
     "mesh_kind": "anat (direction C)",
     "gauge_radius_mm": 4.0,
     "threshold_mpa": 150.0,
@@ -47,8 +47,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_fixed.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_fixed.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_fixed.xplt"
     },
     {
       "tag": "roller",
@@ -78,8 +78,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_roller.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_roller.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_roller.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_roller.xplt"
     },
     {
       "tag": "roller_free_k1",
@@ -109,8 +109,8 @@
       "dist_any_named_node_mm": 3.529794971288574,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_roller_free_k1.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_roller_free_k1.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_roller_free_k1.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_roller_free_k1.xplt"
     },
     {
       "tag": "spring_k10",
@@ -140,8 +140,8 @@
       "dist_any_named_node_mm": 8.7930822524104,
       "location_class": "内部 (interior)",
       "at_boundary": false,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k10.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k10.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k10.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k10.xplt"
     },
     {
       "tag": "spring_k100",
@@ -171,8 +171,8 @@
       "dist_any_named_node_mm": 2.482362904658868,
       "location_class": "关节面边缘 (joint rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k100.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k100.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k100.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k100.xplt"
     },
     {
       "tag": "spring_k1000",
@@ -202,8 +202,8 @@
       "dist_any_named_node_mm": 2.4960245355045902,
       "location_class": "关节面边缘 (joint rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k1000.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k1000.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k1000.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k1000.xplt"
     },
     {
       "tag": "spring_k10000",
@@ -233,8 +233,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k10000.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k10000.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k10000.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k10000.xplt"
     },
     {
       "tag": "spring_k100000",
@@ -264,8 +264,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k100000.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k100000.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k100000.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k100000.xplt"
     },
     {
       "tag": "spring_k1e+06",
@@ -295,8 +295,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k1e+06.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\plantar_bc\\plantar_spring_k1e+06.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k1e+06.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\plantar_bc\\plantar_spring_k1e+06.xplt"
     }
   ],
   "spring_scan": {

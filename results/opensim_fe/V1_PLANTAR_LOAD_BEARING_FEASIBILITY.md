@@ -146,7 +146,7 @@ A_node（跖面 175 节点分摊） = 2953.78 / 175 = 16.88 mm²
 | 项 | 位置 |
 |---|---|
 | 本件新增 | `temp/v1_pad_k.py`（算 k_phys）、`temp/v1_padk_run.py`（补跑软端） |
-| 本轮失败产物 | `temp/opensim_fe/plantar_bc/plantar_padk{0.05,0.2028,0.5,2}_h5.{feb,log}` |
+| 本轮失败产物 | `temp/fe_out/plantar_bc/plantar_padk{0.05,0.2028,0.5,2}_h5.{feb,log}` |
 | `spring` 实现 | `src/climbing/coupling/plantar_bc.py:147-215`（每节点每方向一根，E=k N/mm） |
 | 既有 k 扫描 | `results/opensim_fe/plantar_bc_summary.json`（`spring_scan`，k=10…1e6） |
 | `contact` 不收敛根因 | `results/opensim_fe/PLANTAR_CONTACT_FIX_20261015.md` §1–§3（欠约束；`hold_k` 是旋钮） |

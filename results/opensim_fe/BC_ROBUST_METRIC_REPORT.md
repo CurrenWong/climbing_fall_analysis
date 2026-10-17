@@ -44,7 +44,7 @@ first_fracture_height = 最小的 h 使 risk(h) ≥ 1（否则 > 50 m）
 |---|---|---|
 | `F_joint(h)` | `results/opensim_fe/fracture_matrix.json` → `loads_n[<joint>]`（逐高度实测） | **measured** |
 | `σ_c` | `src/climbing/bone.py` `MATERIAL_STRENGTH_MPA` 的**压缩**强度（元组第 2 项） | **assumed（[Y25] 表1）** |
-| `A_section` | `temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5` 的实体域体积 ÷ bbox 最长轴长度 | 4 长骨 **measured**；5 中轴骨 **estimated** |
+| `A_section` | `temp/fe_out/fracture_matrix/<b>/<b>.hdf5` 的实体域体积 ÷ bbox 最长轴长度 | 4 长骨 **measured**；5 中轴骨 **estimated** |
 
 - **σ_c 映射**：`calcaneus_r→calcaneus(150)`、`tibia_r→tibia_shaft(200)`、`fibula_r→fibula_shaft(160)`、`femur_r→femur_shaft(220)`、`R_HIPBONE→pelvis(180)`、`L3/T6/C5→spine(150)`、`parietal_r→skull(160)`。与矩阵 JSON 的 `sigma_c_mpa` 逐骨一致。
 - **A_section 来源（关键）**：4 长骨的 CORT 是 THUMS 实体 hex，V/L **精确复现** `MESH_FIX_REPORT` §2.3 的实测值（calc 216.0 / tibia 362.6 / fibula 101.9 / femur 404.9 mm²，误差 <0.05%）。5 中轴骨的 CORT 在 THUMS 中是**壳单元（0 实体）**，无法取 V/L；故取**实体体（SPON 椎体/髋骨体、颅骨 diploë）的 V/L** 作为承载截面 —— 明确标注 **estimate**。
@@ -77,7 +77,7 @@ first_fracture_height = 最小的 h 使 risk(h) ≥ 1（否则 > 50 m）
 
 对每个存储的 hdf5：读末 state 的 per-element Voigt 应力 → von Mises → **剔除沿加载轴（bbox 最长轴）顶/底各 30% 的夹持带**（`bone_feb` 的 `top_frac=bot_frac=0.30`），并计算**体积加权平均**（实体按 tet/hex 体积，壳按面积）。**不重跑 FEBio**。
 
-### 3.2 干净 remesh（4 长骨，主 BC = 斜向加载；`temp/opensim_fe/fracture_matrix_remesh/`）
+### 3.2 干净 remesh（4 长骨，主 BC = 斜向加载；`temp/fe_out/fracture_matrix_remesh/`）
 
 | 骨 | 状态 | σ_nom(A_cort) (MPa) | 全域 p95 | **端带剔除 p95 (mid)** | **体积平均 volavg** | 全域 median | mid median |
 |---|---|---:|---:|---:|---:|---:|---:|
@@ -204,8 +204,8 @@ $env:PYTHONPATH="src"
 
 数据来源（只读复用，未修改）：
 - `results/opensim_fe/fracture_matrix.json`（`loads_n`、`sigma_vm_ref_mpa`、`first_fracture_*`）
-- `temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5` + `<b>_fe.json`（原始 9 骨 per-element 应力 / 主域 / 折回因子）
-- `temp/opensim_fe/fracture_matrix_remesh/<b>/*.hdf5`（干净 remesh：calc/tibia/femur + 3 轴向诊断；fibula 发散）
+- `temp/fe_out/fracture_matrix/<b>/<b>.hdf5` + `<b>_fe.json`（原始 9 骨 per-element 应力 / 主域 / 折回因子）
+- `temp/fe_out/fracture_matrix_remesh/<b>/*.hdf5`（干净 remesh：calc/tibia/femur + 3 轴向诊断；fibula 发散）
 - `src/climbing/bone.py::MATERIAL_STRENGTH_MPA`
 
 ---

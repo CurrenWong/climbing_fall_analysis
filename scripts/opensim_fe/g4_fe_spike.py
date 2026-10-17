@@ -946,7 +946,7 @@ def _write_report(args, part, main_mesh, main_pid, main_mat, mats, a, pt,
     A("")
     if not (damaged and damaged.get("ok")):
         A("**受损模型未收敛**：逐次尝试原文见 §4 表；完整 FEBio 日志在 "
-          "`temp/opensim_fe/g4_fe_spike/`。")
+          "`temp/fe_out/g4_fe_spike/`。")
     else:
         A(f"受损模型在记录载荷下收敛（rc=0）；**唯一阻塞/风险** = §4.3 的收敛"
           f"非确定性（软化本构在力控制下处于稳定性边界）。"
@@ -962,7 +962,7 @@ def _write_report(args, part, main_mesh, main_pid, main_mat, mats, a, pt,
     A("产物：")
     A("")
     A("- `results/opensim_fe/G4_FE_SPIKE_REPORT.md`（本文件）")
-    A("- `temp/opensim_fe/g4_fe_spike/`（`_parse_test.feb/.log`、"
+    A("- `temp/fe_out/g4_fe_spike/`（`_parse_test.feb/.log`、"
       "`*_elastic.feb`、`*_damage_*.feb`、`injected_material.xml`、"
       "`.xplt/.hdf5/.log`、`g4_fe_spike.json`）")
     A("")

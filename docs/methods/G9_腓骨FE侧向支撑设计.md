@@ -130,7 +130,7 @@ tags:
 | `results/opensim_fe/g9_fibula_fe_support.json` | FE 收敛/线性 + σ(h) + 腓骨 OR/CI/status ×(分担比×支撑带) + 混合矩阵 meta |
 | `results/opensim_fe/G9_FIBULA_FE_SUPPORT_REPORT.md` | 判定补录（DoD 逐条 + 诚实风险） |
 | `tests/test_g9_fibula_fe_support.py` | 支撑 BC 构造 + 默认零漂移 + 混合矩阵 + 判定接口锁 |
-| `temp/opensim_fe/g9_fibula_fe_support/` | .feb/.xplt/.hdf5/日志 |
+| `temp/fe_out/g9_fibula_fe_support/` | .feb/.xplt/.hdf5/日志 |
 | 文档同步 | `最终结论_2026-10-10.md`、`目标重构` §三、`总体进度.md`、`docs/README.md` 按结果更新 |
 
 ---

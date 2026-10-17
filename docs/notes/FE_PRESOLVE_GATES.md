@@ -61,7 +61,7 @@ febio4 -i x.feb -g2                                 # 只输出导致失败的�
 
 ## 闸门 2 · 穿透量测 —— **接触是否被充分执行**
 
-**工具**：`temp/opensim_fe/p2_pen_scan.py` 的 `penetration()`（从位移场算）
+**工具**：`temp/fe_out/p2_pen_scan.py` 的 `penetration()`（从位移场算）
 
 **做法**：`surface_data` 只输出 `contact force`、**无 gap** ⇒ 从位移场算：
 

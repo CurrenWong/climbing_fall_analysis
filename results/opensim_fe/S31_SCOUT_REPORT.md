@@ -75,7 +75,7 @@
 | 网格节点 / tet | 7892 / **38209**（**≤5万 ✓**） |
 | 网格体积 / 误差 | 353162 mm³ / **+2.03%** |
 | `min_jacobian` / `J<0.3` 占比 | 1.02e-3 / **17.41%** |
-| 产物 | `temp/opensim_fe/parts/tibia_r/`（`tibia_r_surface.stl`、`tibia_r_volume.vtk`、`tibia_r_mesh.npz`、`tibia_r_elements.npz`、`summary.json`） |
+| 产物 | `temp/fe_out/parts/tibia_r/`（`tibia_r_surface.stl`、`tibia_r_volume.vtk`、`tibia_r_mesh.npz`、`tibia_r_elements.npz`、`summary.json`） |
 
 ### 3.2 颅骨（不规则/壳多）——`skull_r_parietal`（取右顶骨 diploë）
 
@@ -93,7 +93,7 @@
 | 网格节点 / tet | 7187 / **30714**（≤5万 ✓） |
 | 网格体积 | 119465 mm³（≈119 cm³，**偏大**：顶骨薄板 ~40 cm³，体素把板增厚） |
 | `min_jacobian` / `J<0.3` | 1.26e-3 / **17.55%** |
-| 产物 | `temp/opensim_fe/parts/skull_r_parietal/` |
+| 产物 | `temp/fe_out/parts/skull_r_parietal/` |
 
 > ⚠️ 颅骨是**薄壳穹顶**：`free_surface` 的"包络体积"= 整个颅腔（实测整 5 块颅顶合并 → 2020 cm³）。
 > 因此 `volume_error_pct` 对颅骨**无意义**（96.5% 是参照错，不是过填 96.5%）。几何保真只能靠
@@ -115,9 +115,9 @@
 | 网格节点 / tet | 8600 / **44181**（≤5万 ✓） |
 | 网格体积 / 误差 | 51103 mm³ / **+94.7%（过填）** |
 | `min_jacobian` / `J<0.3` | 1.96e-3 / **17.16%** |
-| 产物 | `temp/opensim_fe/parts/lumbar_L3/` |
+| 产物 | `temp/fe_out/parts/lumbar_L3/` |
 
-### 3.4 抽取可用性普查（`temp/opensim_fe/parts/_verify/summary.json`）
+### 3.4 抽取可用性普查（`temp/fe_out/parts/_verify/summary.json`）
 
 跨 6 部位 22 个代表 PID 一次扫描：**59830 solid 单元**，全部可抽；确认中轴骨/颅骨
 **CORT = 0 solid（壳）**。

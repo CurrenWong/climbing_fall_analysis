@@ -189,7 +189,7 @@ _(appended one block per experiment, as each finishes — nothing is held only i
 
 Every outcome below was read from the real `.log` tail (`converged at time :`,
 `failed to converge at time :`, `NAN detected`, `negative jacobians detected`).
-Probe driver: `temp\opensim_fe\s5_t9\udg_contact\udg_contact_probe.py`
+Probe driver: `temp/fe_out\s5_t9\udg_contact\udg_contact_probe.py`
 (raw run ledger: `probe_results.txt` / `probe_stdout.txt`).
 
 ### 6.0 — Baseline deck forensics (pre-existing decks, read from disk)
@@ -269,7 +269,7 @@ Cheap control, not diagnostic — **dropped**; EXP-4a already gives the control.
 
 ### §6.NEW — ranked new experiments (§4.2)
 
-Driver: `temp\opensim_fe\s5_t9\udg_contact\udg_contact_sweep2.py`
+Driver: `temp/fe_out\s5_t9\udg_contact\udg_contact_sweep2.py`
 (ledger: `sweep2_results.txt`). All cases: pad `pad_block_hex(6,6,4,(300,300,200))`,
 indenter `indenter_block_tet(2,2,1,(200,300,5))`, hardened control (cutback 0.125,
 max_retries 20, `dtmax=1/nsteps`, BFGS max_ups 10), sink=50, `nsteps=2400`,

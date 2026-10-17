@@ -39,11 +39,11 @@ Usage (repo root)::
 
     $env:PYTHONPATH="src"
     & .venv\\Scripts\\python.exe scripts\\opensim_fe\\gmsh_size_probe.py `
-        --stl temp\\opensim_fe\\parts\\tibia_r\\tibia_r_surface.stl `
+        --stl temp/fe_out\\parts\\tibia_r\\tibia_r_surface.stl `
         --ref-volume-mm3 346130.49 --surfaces raw,iso-dec `
         --chars 3,4,5,6,8,10
 
-Outputs ``temp/opensim_fe/parts_gmsh/gmsh_size_probe_<label>.json`` plus a
+Outputs ``temp/fe_out/parts_gmsh/gmsh_size_probe_<label>.json`` plus a
 console table.  Failures/errors are recorded verbatim (never swallowed).
 """
 from __future__ import annotations

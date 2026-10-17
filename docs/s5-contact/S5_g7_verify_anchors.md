@@ -14,7 +14,7 @@ decides whether the recipe change moves the curve.
 
 Units: mm–N–MPa–s. FEBio binary: `D:\Program\FEBioStudio\bin\febio4.exe` (v4.13.0).
 
-Reproducibility dir (NEW, collides with nobody): `temp\opensim_fe\s5_t9\g7verify_a\`.
+Reproducibility dir (NEW, collides with nobody): `temp/fe_out\s5_t9\g7verify_a\`.
 
 ---
 
@@ -53,7 +53,7 @@ Transcribed verbatim from `docs\S5_contact_convergence.md`.
 
 ### 1.3 Which element / mesh / steps produced the anchors
 
-The §3.1 table is the output of `temp\opensim_fe\s5_t9\envelope.py`
+The §3.1 table is the output of `temp/fe_out\s5_t9\envelope.py`
 (evidence: §3.1 lists `sink=40` and the `sink=60/70 → negJac=53/20` failures; those
 exact negJac values appear only in `envelope\env_sink60.log` / `env_sink70.log`, and
 `envelope.py` is the only 20–70 sweep). `envelope.py` fixes:
@@ -107,8 +107,8 @@ The G7 point to be placed on the curve (`S5_contact_udg.md` §7, tet4 fallback,
 
 _(appended one block per run, from the real `.log` tail / `.xplt` read-back.)_
 
-Driver: `temp\opensim_fe\s5_t9\g7verify_a\run_recipe_ab.py`
-(ledger: `temp\opensim_fe\s5_t9\g7verify_a\results.txt`).
+Driver: `temp/fe_out\s5_t9\g7verify_a\run_recipe_ab.py`
+(ledger: `temp/fe_out\s5_t9\g7verify_a\results.txt`).
 
 ### anc_new_s20 — recipe **NEW**, sink = 20 mm
 
@@ -496,15 +496,15 @@ NEW-recipe result and explicitly retract cross-comparison with the OLD anchors.
 
 ```powershell
 $env:PYTHONPATH="src"
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\g7verify_a\run_recipe_ab.py anc_new_s20
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\g7verify_a\run_recipe_ab.py anc_new_s30
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\g7verify_a\run_recipe_ab.py anc_new_s40
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\g7verify_a\run_recipe_ab.py anc_new_s50
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\g7verify_a\run_recipe_ab.py anc_old_s50
+.venv\Scripts\python.exe temp/fe_out\s5_t9\g7verify_a\run_recipe_ab.py anc_new_s20
+.venv\Scripts\python.exe temp/fe_out\s5_t9\g7verify_a\run_recipe_ab.py anc_new_s30
+.venv\Scripts\python.exe temp/fe_out\s5_t9\g7verify_a\run_recipe_ab.py anc_new_s40
+.venv\Scripts\python.exe temp/fe_out\s5_t9\g7verify_a\run_recipe_ab.py anc_new_s50
+.venv\Scripts\python.exe temp/fe_out\s5_t9\g7verify_a\run_recipe_ab.py anc_old_s50
 # OLD at the other sinks + the stepper/contact isolation controls:
-.venv\Scripts\python.exe -c "import sys; sys.path.insert(0,'temp/opensim_fe/s5_t9/g7verify_a'); import run_recipe_ab as r; [r.run_case(t, recipe='old', sink=s, nsteps=1200, timeout=1200) for t,s in [('anc_old_s20',20.0),('anc_old_s30',30.0),('anc_old_s40',40.0)]]"
-.venv\Scripts\python.exe -c "import sys; sys.path.insert(0,'temp/opensim_fe/s5_t9/g7verify_a'); import run_recipe_ab as r; r.run_case('anc_new_s50_oldstep', recipe='new', stepper='old', sink=50.0, nsteps=1200, timeout=1200); r.run_case('anc_old_s50_newstep', recipe='old', stepper='new', sink=50.0, nsteps=2400, timeout=1200)"
+.venv\Scripts\python.exe -c "import sys; sys.path.insert(0,'temp/fe_out/s5_t9/g7verify_a'); import run_recipe_ab as r; [r.run_case(t, recipe='old', sink=s, nsteps=1200, timeout=1200) for t,s in [('anc_old_s20',20.0),('anc_old_s30',30.0),('anc_old_s40',40.0)]]"
+.venv\Scripts\python.exe -c "import sys; sys.path.insert(0,'temp/fe_out/s5_t9/g7verify_a'); import run_recipe_ab as r; r.run_case('anc_new_s50_oldstep', recipe='new', stepper='old', sink=50.0, nsteps=1200, timeout=1200); r.run_case('anc_old_s50_newstep', recipe='old', stepper='new', sink=50.0, nsteps=2400, timeout=1200)"
 ```
 
-Ledger: `temp\opensim_fe\s5_t9\g7verify_a\results.txt`. Decks `*.feb` + logs kept.
+Ledger: `temp/fe_out\s5_t9\g7verify_a\results.txt`. Decks `*.feb` + logs kept.
 

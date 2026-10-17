@@ -3,7 +3,7 @@
 > **日期**：2026-10-15 ｜ **性质**：只读审计（**零改冻结输入、零改判据、零 FE**）
 > **动机**：T6 的 σ 主因在**载荷**不在 BC（`P2_A2_REGFIX_IMPACT.md` §4）——
 > σ∝F 严格线性、`A_eff≈93.9 mm²`；要 A1 的窗口打开需把胸椎载荷降 **1.87×**
-> **脚本**：`temp/opensim_fe/audit_loadshare.py`、`audit_grf_pad.py`、`temp/find_grf.py`（只读，未提交）
+> **脚本**：`temp/fe_out/audit_loadshare.py`、`audit_grf_pad.py`、`temp/find_grf.py`（只读，未提交）
 
 ---
 
@@ -210,15 +210,15 @@ Stage-1 的 mandate 是「用**刚性地面**文献数据证明模型有效」�
 | `ground_reaction` 签名与默认 | `src/climbing/coupling/opensim_grf.py:254-266` |
 | `on_pad=False` ⇒ hard_surface | `src/climbing/pad.py:502`；标签 `:723`；说明 `:491` |
 | 姿势表 | `src/climbing/pad.py:260`（`POSTURES`） |
-| 载荷链缓存（GRF/lumbar） | `temp/opensim_fe/fe_bc_probe/load_chain.npz` |
+| 载荷链缓存（GRF/lumbar） | `temp/fe_out/fe_bc_probe/load_chain.npz` |
 | 文献锚点（落体峰值 vGRF） | CliffsNotes 生物力学实验数据表（0.3/0.5 m, 65/70 kg） |
 | 上游动机 | `results/opensim_fe/P2_A2_REGFIX_IMPACT.md` §4 |
-| 审计脚本 | `temp/opensim_fe/audit_loadshare.py`、`audit_grf_pad.py`（只读，未提交） |
+| 审计脚本 | `temp/fe_out/audit_loadshare.py`、`audit_grf_pad.py`（只读，未提交） |
 
 **复现**：
 
 ```powershell
 cd D:\Project\climbing_fall_analysis
-& .venv\Scripts\python.exe temp\opensim_fe\audit_loadshare.py    # LOAD_SHARE 来源 + F_lumbar/GRF
-& .venv\Scripts\python.exe temp\opensim_fe\audit_grf_pad.py      # 硬地面 vs 软垫峰值 GRF
+& .venv\Scripts\python.exe temp/fe_out\audit_loadshare.py    # LOAD_SHARE 来源 + F_lumbar/GRF
+& .venv\Scripts\python.exe temp/fe_out\audit_grf_pad.py      # 硬地面 vs 软垫峰值 GRF
 ```

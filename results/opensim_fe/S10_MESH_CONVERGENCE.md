@@ -46,7 +46,7 @@
 在固定预算内走得越少。**
 
 **⚠️ 项目级影响**：`load_ramp_time_s` **在整个项目里从未与 G7 一起使用**
-（全库唯一提及处是 `temp/opensim_fe/s5_contact/_deckcheck.py`）⇒ **这是一条
+（全库唯一提及处是 `temp/fe_out/s5_contact/_deckcheck.py`）⇒ **这是一条
 从未被触发的真 bug**，且与 `nonvertical_s5_contact_wave5.py` 记的
 「判据退化为零残差」以及 `3a9c857` 记的「载荷没进骨（σ≈7e-11）」**同族症状**。
 
@@ -173,7 +173,7 @@
 | 项 | 位置 |
 |---|---|
 | Deck 构造器（本件新建，含守恒分层） | `temp/s10_tet2domain.py` |
-| 网格序列生成（已验证生成器） | `temp/meshseq2.py` → `temp/opensim_fe/meshseq2/calc_cl*.npz` |
+| 网格序列生成（已验证生成器） | `temp/meshseq2.py` → `temp/fe_out/meshseq2/calc_cl*.npz` |
 | 序列读数 | `temp/s10_seq2.py` → `results/opensim_fe/s10_mesh_convergence_volmatched.json` |
 | 朴素分层对照 | `temp/s10_seq_run.py` → `results/opensim_fe/s10_mesh_convergence_sequence.json` |
 | 静态诊断（连通性/质量） | `temp/s10_static.py` → `results/opensim_fe/s10_static_diag.json` |

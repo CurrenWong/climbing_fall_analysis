@@ -13,11 +13,11 @@
 
 1. **旧矩阵为什么不可信（已钉死，见 A 节 + 红线报告）**：BC = 斜置骨沿 bbox 最长轴加载 + 顶/底 30% 坐标带 + 底带三向固定 + 顶带等分 NodalForce + 主统计量 p95 ⇒ 排序不可信（ρ=0.22，`BC_ROBUST_METRIC_REPORT.md` §6.1）、二值矩阵 8/9@1m；端带剔除 p95 反升 ⇒ **中段弯曲主导、端夹持假设证伪**（§6.2）。折算 bug 已修（现代码 `fracture_matrix.py:575-576` 已乘 `load_reduction_factor`，修复说明见 `regenerate_fracture_matrix.py:1-15`），**方向与统计量未修**。
 2. **BC 代码入口唯一**：`scripts/opensim_fe/bone_feb.py::build_bone_feb`（:709）——固定 = 底带节点集 `bottom_fix` 上 `BCZeroDisplacement(x,y,z dof=1)` 三向（:887-894）；载荷 = 顶带节点集 `top_load` 上**等分** `NodalForce`（:879、:895-905）；方向 = bbox 最长轴或显式 `axis∈{0,1,2}`（`_select_top_bottom` :655-691）。**无面压力、无反力输出**（plotfile 仅 displacement+stress，:912-918）。
-3. **「旋转网格 → 骨轴」已有可运行实现，但只在 temp 脚本**：`temp/opensim_fe/fracture_matrix_remesh/run_remesh_fe.py:44`（`align_pca`）+ `:81`（`--align-pca`）；`scripts/` 内 grep 无任何 axis/rotate/PCA 开关，`fracture_matrix.py:360-361` 仍是 `axis=None` 裸调。MESH_FIX §6 实测该轴向对齐把胫骨 p95 94.6×→26.2×、股骨 59.8×→16.9×、跟骨 1.5×（**但端夹持奇异性仍在**）。
+3. **「旋转网格 → 骨轴」已有可运行实现，但只在 temp 脚本**：`temp/fe_out/fracture_matrix_remesh/run_remesh_fe.py:44`（`align_pca`）+ `:81`（`--align-pca`）；`scripts/` 内 grep 无任何 axis/rotate/PCA 开关，`fracture_matrix.py:360-361` 仍是 `axis=None` 裸调。MESH_FIX §6 实测该轴向对齐把胫骨 p95 94.6×→26.2×、股骨 59.8×→16.9×、跟骨 1.5×（**但端夹持奇异性仍在**）。
 4. **最小侵入两候选（详见 §B.3）**：(a) `build_bone_feb` 加 opt-in 参数（`align_pca=False` + `load_mode="nodal_equal"` 默认不变）——改动仅 `bone_feb.py`，推荐；(b) 同目录新 builder 函数（复用 helpers）——零触碰现函数，但有 writer 代码分叉风险。**决策留 B1.1（待主会话/用户拍板）**。统计量用现成 `--stat median`（`fracture_matrix.py:1021`），不改 `PRIMARY_STAT="p95"` 默认（:93）。
 5. **正对照方案已设计（§C）**：30° 斜置方形棱柱（10×10×40 mm，E=1000、ν=0.3、F=1000 N → σ_nom=F/A=10.0 MPa）双工况——新 BC 必须命中解析解（中段 |σ̄_zz−σ_nom|/σ_nom ≤5%），旧 BC 作为阴性对照记录；脚本建议 `scripts/opensim_fe/bc_patch_test.py`，全程 ≤10 min。**PASS 前不准上矩阵**（ALIGN_B 红线）。
 6. **S4 输入路线（待拍板，详见 §D.2）**：甲（1D risk(h)）现成——`risk_1d_loadshare.py` 与 `risk_1d_bending.py` 均已覆盖 9 部位 × 50 高度（`risk_by_height` 实测 50 元素），BC_ROBUST §6.3 明确推荐；但 `PAPER_ALIGNMENT_REPORT.md` §4.1/4.2 实测 1D 低高度饱和 ⇒ 完全分离无 OR（A3 结构性不可算）、聚类仅 3 类。**建议：甲先跑通管线、正式 A1–A4 用乙（B1.3 新 BC 矩阵）** —— 待拍板。
-7. **E 节关键事实（已验证）**：甲原生网格 9 骨全部 ≤5 万（最大 femur 25,909 solid 单元，见 §E.1 表）；`temp/opensim_fe/fracture_matrix/load_chain.npz` 存在且 heights=1..50 精确 + 4 关节齐全 ⇒ **可免重跑**（省实测 ~21 min：fd 617 s + 关节反力 637 s）；但 `fracture_matrix.OUT_TEMP` 固定（:83），新 BC 重跑**必须换独立 temp 根**，否则 `--force-fe` 会覆盖旧 BC 的 `<b>_fe.json`（:390-394）。
+7. **E 节关键事实（已验证）**：甲原生网格 9 骨全部 ≤5 万（最大 femur 25,909 solid 单元，见 §E.1 表）；`temp/fe_out/fracture_matrix/load_chain.npz` 存在且 heights=1..50 精确 + 4 关节齐全 ⇒ **可免重跑**（省实测 ~21 min：fd 617 s + 关节反力 637 s）；但 `fracture_matrix.OUT_TEMP` 固定（:83），新 BC 重跑**必须换独立 temp 根**，否则 `--force-fe` 会覆盖旧 BC 的 `<b>_fe.json`（:390-394）。
 
 ---
 
@@ -49,9 +49,9 @@
 
 - 调用（已核实与任务描述一致）：`fracture_matrix.py:360-361`
   `build_bone_feb(part.spec, feb, load_n=load, top_frac=0.30, bot_frac=0.30, axis=None, with_shell=True, time_steps=time_steps, mesh=mesh)` —— **全程 `axis=None`，无任何对齐参数**。
-- 周边事实：`OUT_TEMP = temp/opensim_fe/fracture_matrix`（:83，**常量**）；`HEIGHTS=1..50`（:89）；`STATS=("max","p95","mean","median")`、`PRIMARY_STAT="p95"`（:92-93）；载荷链缓存复用判断（:280-284）；逐骨 FE 缓存 `<b>_fe.json`（:390-394，`reuse=not --force-fe`）；CLI（:1017-1025，含 `--stat`、`--force-fe`、`--time-steps` 及其发散警告）。
+- 周边事实：`OUT_TEMP = temp/fe_out/fracture_matrix`（:83，**常量**）；`HEIGHTS=1..50`（:89）；`STATS=("max","p95","mean","median")`、`PRIMARY_STAT="p95"`（:92-93）；载荷链缓存复用判断（:280-284）；逐骨 FE 缓存 `<b>_fe.json`（:390-394，`reuse=not --force-fe`）；CLI（:1017-1025，含 `--stat`、`--force-fe`、`--time-steps` 及其发散警告）。
 - **旋转/PCA 开关是否已进代码：没有。** `scripts/opensim_fe/` 下 grep `align-pca|align_pca|run_remesh_fe` 零命中；`bone_feb.py` 内仅 `_select_top_bottom` 的 `axis` 全局轴选择；PCA 相关代码全在**配准/1D 分析**（`registration*.py`、`risk_1d_bending.py`）与**图件旋转**（`make_fracture_figures.py:139`），与 BC 无关。
-  - 唯一可运行的「PCA 长轴→+Z 再 build」实现：`temp/opensim_fe/fracture_matrix_remesh/run_remesh_fe.py:44-64`（`align_pca`，绕质心旋转）+ `:81`（`--align-pca` 开关）+ `:92-93`（先转 mesh 再走原 builder）+ `:130-133`（build 仍 `axis=None`——转完后 bbox 最长轴=骨轴）。**它在 temp/（易失、非 scripts/），MESH_FIX 报告 §9 自述为"新驱动/诊断脚本，不改既有模块"。**
+  - 唯一可运行的「PCA 长轴→+Z 再 build」实现：`temp/fe_out/fracture_matrix_remesh/run_remesh_fe.py:44-64`（`align_pca`，绕质心旋转）+ `:81`（`--align-pca` 开关）+ `:92-93`（先转 mesh 再走原 builder）+ `:130-133`（build 仍 `axis=None`——转完后 bbox 最长轴=骨轴）。**它在 temp/（易失、非 scripts/），MESH_FIX 报告 §9 自述为"新驱动/诊断脚本，不改既有模块"。**
   - 结果基线（MESH_FIX §6 表）：轴向后 p95/名义 = 跟骨 1.5×、胫骨 26.2×、股骨 16.9× —— 方向修正**有效但不够**（端夹持奇异性残留），median 始终物理（≈0.3–0.7×）。
 - 折算状态：BC_ROBUST §5 指出的「少乘 lrf」**已在现代码修复**（fracture_matrix.py:575-576 与 :581-583 均乘 `lrf`；`regenerate_fracture_matrix.py` 即为该修复后的缓存重放驱动）。**引用红线时注意：§5 描述的是修复前状态。**
 
@@ -111,13 +111,13 @@ def build_bone_feb(spec, out_feb, *, load_n, top_frac=0.30, bot_frac=0.30,
 | P6（可选） | 反力平衡 \|ΣR − F\|/F | ≤1% | 仅当新 BC 同时 opt-in reaction 输出时启用（bone_feb.py:916 加 plot var）；否则跳过并注明 |
 
 - **跑多久**：4000 hex 静力解 FEBio 秒级–1 分钟级（参照 BONE_FEB_BUILDER_REPORT 同量级网格、`run_bone_feb` 默认 timeout 900 s）；两工况 + 网格生成 + 出 JSON **合计 ≤10 min**（估算，未验证）。
-- **落盘**：原始输出 tee → `temp/opensim_fe/b1/logs/patch_test_<variant>.log`；结果 JSON → `temp/opensim_fe/b1/patch_test.json`；PASS/FAIL 汇总行 → `results/opensim_fe/B1_LOG.md`。脚本 FAIL 时非零退出（将来可选挂 pytest，**新增**测试文件不违反「不改现有测试」红线——是否加留 B1.1）。
+- **落盘**：原始输出 tee → `temp/fe_out/b1/logs/patch_test_<variant>.log`；结果 JSON → `temp/fe_out/b1/patch_test.json`；PASS/FAIL 汇总行 → `results/opensim_fe/B1_LOG.md`。脚本 FAIL 时非零退出（将来可选挂 pytest，**新增**测试文件不违反「不改现有测试」红线——是否加留 B1.1）。
 - **通过后**才能进入 B1.3 矩阵重跑。
 
 ### C.2 辅方案（回归锚，非已知解）：calcaneus 新旧 BC 对比
 
 - **脚本**：并入 `bc_patch_test.py` 的第二子命令，或新建 `scripts/opensim_fe/bc_calcaneus_ab.py`。
-- **对象**：跟骨 = 旧矩阵里唯一 p95 物理者（0.37×，`MESH_FIX_REPORT.md` §5）；甲原生网格现成（`temp/opensim_fe/fracture_matrix/calcaneus_r/`，1544 节点/3957 solid 单元，混拓扑，历史 2 attempts 收敛于 25354 N）。
+- **对象**：跟骨 = 旧矩阵里唯一 p95 物理者（0.37×，`MESH_FIX_REPORT.md` §5）；甲原生网格现成（`temp/fe_out/fracture_matrix/calcaneus_r/`，1544 节点/3957 solid 单元，混拓扑，历史 2 attempts 收敛于 25354 N）。
 - **做法**：同一 `extract_mesh` 结果跑两遍——旧 BC（现状参数）与新 BC（`align_pca`+`load_mode`），载荷取 `load_chain.npz` 中 subtalar_r @5 m（25354 N，历史 ref），**写入新 temp 根不覆盖旧缓存**。
 - **判据（回归性质，无解析真值，标注为合理性锚）**：新 BC median/σ_nom ∈ [0.3, 1.0]（MESH_FIX §6 median≈0.3–0.7× 基线）；新旧 median 相对差 ≤30%；新 BC p95/σ_nom ≤2×。任一越界 ⇒ 新 BC 在紧凑骨上引入了新偏差，回 B1.1 复盘。
 - **跑多久**：单骨双解，估 ≤15 min（历史 attempts 少；未验证）。
@@ -126,16 +126,16 @@ def build_bone_feb(spec, out_feb, *, load_n, top_frac=0.30, bot_frac=0.30,
 
 ## D. 执行序建议（B1.1→B1.5 可执行展开）
 
-> 日志约定（沿 ALIGN_B）：进度行追加 `results/opensim_fe/B1_LOG.md`；原始输出 tee 到 `temp/opensim_fe/b1/logs/*.log`（目录本次已建）。
+> 日志约定（沿 ALIGN_B）：进度行追加 `results/opensim_fe/B1_LOG.md`；原始输出 tee 到 `temp/fe_out/b1/logs/*.log`（目录本次已建）。
 
 ### D.1 步骤表
 
 | 步骤 | 可执行内容 | 谁做 | 预估 | 日志 |
 |---|---|---|---|---|
-| **B1.1 BC 设计评审（拍板会）** | 读本报告 §B/§C，四选一拍板：① 候选 (a) vs (b)；② `load_mode` 取值（tributary/prescribed/维持 equal）；③ 底带 fixed 是否换 roller/spring（参考 PLANTAR_BC 结论：法向刚度主导）；④ 统计量 = `--stat median`（既有 flag，不改默认）+ 新 BC 重跑的 temp/结果命名（建议 `temp/opensim_fe/fracture_matrix_bc2/` + `results/opensim_fe/fracture_matrix_bc2.*`） | **主会话 + 用户** | 0.5–1 h | 决策行 → `B1_LOG.md`；决策同时补进 `ALIGN_B_TODO.md` 决策记录（主会话执行） |
-| **B1.2 BC 实现 + 正对照** | 按拍板实现 opt-in（或新 builder）→ 写 `bc_patch_test.py` → 跑 C.1 双工况判据 P1–P5（+P6 可选）→ 跑 C.2 calcaneus A/B → 全量回归 `tests/`（`.venv\Scripts\python.exe -n auto --dist load`，MEMORY §🧪 红律；现有测试必须全绿） | **子代理**（主会话复核 PASS 行） | 2–4 h | `temp/opensim_fe/b1/logs/bc_impl_*.log`、`patch_test_*.log`、`calcaneus_ab_*.log`；PASS/FAIL → `B1_LOG.md` |
-| **B1.3 9×50 矩阵重跑（新 BC）** | 新驱动（建议 `scripts/opensim_fe/rerun_matrix_bc2.py`，模式参考 `run_remesh_fe.py`/`regenerate_fracture_matrix.py`，**不改** `fracture_matrix.py`）：设独立 `OUT_TEMP` 副本根 → **拷贝 `load_chain.npz` 进新根**（12.5 KB，heights/joints 校验通过即命中 :280-284 复用，免 ~21 min 载荷链）→ 9 骨 FE 全新跑（新根无旧缓存）→ `--stat median` 出 `fracture_matrix_bc2.{json,csv,png}` + 报告 → 与旧矩阵 diff（排序 Spearman、首折 p95/median 对照、逐骨 σ 比值表） | **子代理**（长任务，可后台） | 载荷链 0 min（缓存）；FE 估 0.5–2 h（**未验证**——旧 `_fe.json` 不记时长，fibula 历史 7 attempts 是尾部风险）；diff+报告 +0.5 h | `temp/opensim_fe/b1/logs/matrix_bc2_*.log`（驱动 stdout）；进度/完成行 → `B1_LOG.md` |
-| **B1.4 S4 对标** | 输入按 §D.2 拍板结果 → **复用** `paper_alignment.py:161-229`（`logistic_fit` 含完全分离检测 + Jaccard 平均联结聚类）与 :499-507（A3 OR 排序判定）→ **新增 A4 PCA 双路径**（grep 证实 `paper_alignment.py` 无 PCA/协方差代码，S4.3 需补写，估 +2–4 h）→ 按 A1(±2 m)/A2(≥4/5)/A3(±30%)/A4(可分) 出判定表（判据原文：`docs/methods/OpenSim_FE复现方案.md` §六 表，A5/A6 参考位） | **子代理**写码 + **主会话**核判定 | 0.5–1 天（含 PCA 新增与试跑） | `temp/opensim_fe/b1/logs/s4_*.log`；判定行 → `B1_LOG.md` |
+| **B1.1 BC 设计评审（拍板会）** | 读本报告 §B/§C，四选一拍板：① 候选 (a) vs (b)；② `load_mode` 取值（tributary/prescribed/维持 equal）；③ 底带 fixed 是否换 roller/spring（参考 PLANTAR_BC 结论：法向刚度主导）；④ 统计量 = `--stat median`（既有 flag，不改默认）+ 新 BC 重跑的 temp/结果命名（建议 `temp/fe_out/fracture_matrix_bc2/` + `results/opensim_fe/fracture_matrix_bc2.*`） | **主会话 + 用户** | 0.5–1 h | 决策行 → `B1_LOG.md`；决策同时补进 `ALIGN_B_TODO.md` 决策记录（主会话执行） |
+| **B1.2 BC 实现 + 正对照** | 按拍板实现 opt-in（或新 builder）→ 写 `bc_patch_test.py` → 跑 C.1 双工况判据 P1–P5（+P6 可选）→ 跑 C.2 calcaneus A/B → 全量回归 `tests/`（`.venv\Scripts\python.exe -n auto --dist load`，MEMORY §🧪 红律；现有测试必须全绿） | **子代理**（主会话复核 PASS 行） | 2–4 h | `temp/fe_out/b1/logs/bc_impl_*.log`、`patch_test_*.log`、`calcaneus_ab_*.log`；PASS/FAIL → `B1_LOG.md` |
+| **B1.3 9×50 矩阵重跑（新 BC）** | 新驱动（建议 `scripts/opensim_fe/rerun_matrix_bc2.py`，模式参考 `run_remesh_fe.py`/`regenerate_fracture_matrix.py`，**不改** `fracture_matrix.py`）：设独立 `OUT_TEMP` 副本根 → **拷贝 `load_chain.npz` 进新根**（12.5 KB，heights/joints 校验通过即命中 :280-284 复用，免 ~21 min 载荷链）→ 9 骨 FE 全新跑（新根无旧缓存）→ `--stat median` 出 `fracture_matrix_bc2.{json,csv,png}` + 报告 → 与旧矩阵 diff（排序 Spearman、首折 p95/median 对照、逐骨 σ 比值表） | **子代理**（长任务，可后台） | 载荷链 0 min（缓存）；FE 估 0.5–2 h（**未验证**——旧 `_fe.json` 不记时长，fibula 历史 7 attempts 是尾部风险）；diff+报告 +0.5 h | `temp/fe_out/b1/logs/matrix_bc2_*.log`（驱动 stdout）；进度/完成行 → `B1_LOG.md` |
+| **B1.4 S4 对标** | 输入按 §D.2 拍板结果 → **复用** `paper_alignment.py:161-229`（`logistic_fit` 含完全分离检测 + Jaccard 平均联结聚类）与 :499-507（A3 OR 排序判定）→ **新增 A4 PCA 双路径**（grep 证实 `paper_alignment.py` 无 PCA/协方差代码，S4.3 需补写，估 +2–4 h）→ 按 A1(±2 m)/A2(≥4/5)/A3(±30%)/A4(可分) 出判定表（判据原文：`docs/methods/OpenSim_FE复现方案.md` §六 表，A5/A6 参考位） | **子代理**写码 + **主会话**核判定 | 0.5–1 天（含 PCA 新增与试跑） | `temp/fe_out/b1/logs/s4_*.log`；判定行 → `B1_LOG.md` |
 | **B1.5 收尾** | mesh 收敛声明（A2 移交项，若适用）+ 论文/交接文档/出处索引同步（`OpenSim_FE交接.md`、MEMORY 索引）+ 经验落盘（`.learnings/LEARNINGS.md`：BC 设计结论、patch test 判据） | **主会话** | 1–2 h | 完成行 → `B1_LOG.md` |
 
 ### D.2 S4 输入路线建议（甲 vs 乙）——**待主会话/用户拍板**
@@ -157,7 +157,7 @@ def build_bone_feb(spec, out_feb, *, load_n, top_frac=0.30, bot_frac=0.30,
 
 ## E. 风险 / 不确定点
 
-1. **甲原生网格 ≤5 万约束：已满足（实测）**。逐骨规模（读自 `temp/opensim_fe/fracture_matrix/<b>/<b>_fe.json` 的 mesh 块，9 骨 status 全 ok）：
+1. **甲原生网格 ≤5 万约束：已满足（实测）**。逐骨规模（读自 `temp/fe_out/fracture_matrix/<b>/<b>_fe.json` 的 mesh 块，9 骨 status 全 ok）：
 
    | 骨 | 节点 | solid 单元 | shell 单元 | 骨 | 节点 | solid | shell |
    |---|---:|---:|---:|---|---:|---:|---:|
@@ -168,9 +168,9 @@ def build_bone_feb(spec, out_feb, *, load_n, top_frac=0.30, bot_frac=0.30,
    | fibula_r | 1,837 | 3,820 | 0 | | | | |
 
    上限来源：`extract_part.py:59-61`（`HDF5_TET_LIMIT = 50_000`，xplt→hdf5 attribute 上限）+ `S31_SCOUT_REPORT.md:146-147`（LRN-027 坑 4）。最大 25,909 ≪ 50,000，且 9 个 `.hdf5` 均已存在（写成功即证通过）——**满足**。
-2. **S3.1 批量网格化（scout 体素路线）在新方案里：原则上不需要**。新方案仍是「甲优先」（ALIGN_B 约定），9 骨原生直读网格现成；S3.1 的批量前提 gmsh 尺寸控制失效**仍未解决**（`S31_SCOUT_REPORT.md:129-131`【阻塞级】：`Mesh.MeshSizeMax` 不生效，任何真骨 >5 万 tet）。乙路线降级为**按需单骨兜底**，且 MESH_FIX 的干净 remesh 网格可直接复用（`temp/opensim_fe/fracture_matrix_remesh/meshes/`）。触发兜底的条件：某骨甲网格在新 BC 下不收敛且旧 remesh 也不行（现实里腓骨是唯一高危者，见 6）。
+2. **S3.1 批量网格化（scout 体素路线）在新方案里：原则上不需要**。新方案仍是「甲优先」（ALIGN_B 约定），9 骨原生直读网格现成；S3.1 的批量前提 gmsh 尺寸控制失效**仍未解决**（`S31_SCOUT_REPORT.md:129-131`【阻塞级】：`Mesh.MeshSizeMax` 不生效，任何真骨 >5 万 tet）。乙路线降级为**按需单骨兜底**，且 MESH_FIX 的干净 remesh 网格可直接复用（`temp/fe_out/fracture_matrix_remesh/meshes/`）。触发兜底的条件：某骨甲网格在新 BC 下不收敛且旧 remesh 也不行（现实里腓骨是唯一高危者，见 6）。
 3. **`extract_part.py` / `shell_io.py` 的角色**：`extract_part.py` = 乙路线 scout 工具（任意 PID → STL → tet，三条网格路径、体素 Delaunay 兜底 :180/:227-232，内建 5 万上限）——新方案中**仅兜底时用**；`shell_io.py` = THUMS `*ELEMENT_SHELL` 流式读取器（中轴骨/颅骨皮质壳，`shell_io.py:1-35`），是甲路线 `bone_feb.extract_mesh` 的直接依赖（`bone_feb.py:33,75-76`）——B1.3 重跑会继续经由它，**与 BC 改动正交，不需要动**（9 骨壳域读取历史成功，见上表 shell 列）。
-4. **50 高度载荷链缓存：可复用（已实证）**。`temp/opensim_fe/fracture_matrix/load_chain.npz` 存在（2026-10-04，12,502 B），实测 `heights` = 1..50 精确、4 关节 `__vert/__abs/__t_ms` 全齐 ⇒ 命中 `fracture_matrix.py:280-284` 复用分支，免重跑省实测 617 s（FD）+ 637 s（关节反力）≈ **21 min**。⚠️ 换新 temp 根时须**手工拷贝**该文件进新根，否则新根 miss 会重跑整条载荷链（`--force-loads` 语义同）。
+4. **50 高度载荷链缓存：可复用（已实证）**。`temp/fe_out/fracture_matrix/load_chain.npz` 存在（2026-10-04，12,502 B），实测 `heights` = 1..50 精确、4 关节 `__vert/__abs/__t_ms` 全齐 ⇒ 命中 `fracture_matrix.py:280-284` 复用分支，免重跑省实测 617 s（FD）+ 637 s（关节反力）≈ **21 min**。⚠️ 换新 temp 根时须**手工拷贝**该文件进新根，否则新根 miss 会重跑整条载荷链（`--force-loads` 语义同）。
 5. **FE 缓存碰撞（新 BC vs 旧产物）**：`OUT_TEMP` 是常量（`fracture_matrix.py:83`），FE 缓存路径 `<b>/<b>_fe.json`（:390-394）。若图省事在原根上 `--force-fe`，会**覆盖旧 BC 的 9 份 FE 记录**（MESH_FIX §8.6「未覆盖既有产物」的自我约束即破）。⇒ B1.3 必须走独立根/新驱动（D.1 已列入）；`--force-fe` 只在新根内使用。
 6. **腓骨收敛/屈曲**：旧 BC 下 7 条 attempt 记录，主口径降载到 **1000 N** 才收敛（`fe_solve_load_n=1000`、降载因子 25.27；500 N 为线性自检工况，自检比值 1.71–1.89 ≠ 期望 2.0，实测非线性）；MESH_FIX §7 轴向对齐后**全候选载荷仍发散**（细杆屈曲 + 数值脆弱，同一 1 kN 两次结果不一致）。新 BC 若仍发散，回退策略 = `solve_bone_fe` 既有降载 + 线性折回（`fracture_matrix.py:377` 起的候选循环，折回现已乘对）或转乙 remesh；**腓骨在 B1.3 的结果状态要单独如实报告**（未验证能否过）。
 7. **统计量切换的下游耦合**：主统计量 p95 是 `PRIMARY_STAT` 默认（:93），改默认被红线禁止 ⇒ 用 `--stat median`（:1021-1022，opt-in 合法）；但 `paper_alignment.py` Route-FE **写死 p95**（:336-362、:425、:453），`PAPER_ALIGNMENT` 判据表也基于 p95 ⇒ B1.4 需同步给它加 stat 参数（子代理小改，新参数不破坏默认）。

@@ -75,7 +75,7 @@ $env:PYTHONPATH="src"
 ```
 
 - `results/opensim_fe/G4_FE_P1B_REPORT.md`（本文件）
-- `temp/opensim_fe/g4_fe_p1b/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_p1b.json`）
+- `temp/fe_out/g4_fe_p1b/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_p1b.json`）
 - `scripts/opensim_fe/g4_fe_p1b.py`（本脚本）
 
 **未改任何既有模块**：`bone_feb` / `g4_fe_spike` / `g4_fe_stab` / `kmesh_io` 均只 import 复用。

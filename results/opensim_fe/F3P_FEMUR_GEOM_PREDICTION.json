@@ -1,6 +1,6 @@
 {
   "piece": "F-3′ 股骨几何 + 载荷偏心实测与预测（零 FE）",
-  "h5": "temp/opensim_fe/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5",
+  "h5": "temp/fe_out/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5",
   "domain": "fem_cort",
   "joint": "hip_r",
   "load_fraction": 1.0,

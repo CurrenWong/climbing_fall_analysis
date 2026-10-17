@@ -164,12 +164,12 @@ ls docs\S5_contact_convergence.md     # §3.1 trusted anchors, §3.2 G7 failure
 ls docs\S5_contact_contract.md        # §G7 G7' correction
 
 # the cross-recipe isolation in temp\ (the recipe/stepper cross at sink 50)
-ls temp\opensim_fe\s5_t9\g7verify_a\  # anc_old_s50, anc_old_s20/30/40, anc_new_s20/30/40/50, anc_old_s50_newstep, anc_new_s50_oldstep
-ls temp\opensim_fe\s5_t9\g7verify_b\  # sink=170 sweep (3,3,2)/(6,6,4)/(12,12,8)
-ls temp\opensim_fe\s5_t9\fixb\        # fixed-ξ grid
-ls temp\opensim_fe\s5_t9\fixa\        # NEW-anchor mesh x-grid
-ls temp\opensim_fe\s5_t9\g7verify_c\  # matched-ξ element runs
-ls temp\opensim_fe\s5_t9\fixmetric\   # interior-margin metric (3 runs @ sink 170, 5 margins each)
+ls temp/fe_out\s5_t9\g7verify_a\  # anc_old_s50, anc_old_s20/30/40, anc_new_s20/30/40/50, anc_old_s50_newstep, anc_new_s50_oldstep
+ls temp/fe_out\s5_t9\g7verify_b\  # sink=170 sweep (3,3,2)/(6,6,4)/(12,12,8)
+ls temp/fe_out\s5_t9\fixb\        # fixed-ξ grid
+ls temp/fe_out\s5_t9\fixa\        # NEW-anchor mesh x-grid
+ls temp/fe_out\s5_t9\g7verify_c\  # matched-ξ element runs
+ls temp/fe_out\s5_t9\fixmetric\   # interior-margin metric (3 runs @ sink 170, 5 margins each)
 ```
 
 ---
@@ -213,7 +213,7 @@ ls temp\opensim_fe\s5_t9\fixmetric\   # interior-margin metric (3 runs @ sink 17
 | 140 | 17.450 | 0.2908 | 14.91 | 12.46 | **−49.86 %** | ❌ NOT-CLOSED |
 | 150 | 21.810 | 0.3635 | 16.44 | 13.31 | **−37.33 %** | ❌ NOT-CLOSED |
 
-`F_contact` 口径 = `|Σ_z F_reaction(indenter)|` = the wave-5 corrected 口径 `applied load − hold-spring force` in the **no-hold-spring** special case (`F_hold_spring_n = 0`); `σ_contact = F_contact / 60 000 mm²` (same basis as §0 row #2). Source: `results/opensim_fe/SINK_130_140_150_CLOSURE_REPORT.md` + `results/opensim_fe/sink130_140_150_closure.json`; driver `scripts/opensim_fe/run_sink_closure_20261010.py`; run logs `temp/opensim_fe/sink_closure_20261010/sink{130,140,150}/*.log`.
+`F_contact` 口径 = `|Σ_z F_reaction(indenter)|` = the wave-5 corrected 口径 `applied load − hold-spring force` in the **no-hold-spring** special case (`F_hold_spring_n = 0`); `σ_contact = F_contact / 60 000 mm²` (same basis as §0 row #2). Source: `results/opensim_fe/SINK_130_140_150_CLOSURE_REPORT.md` + `results/opensim_fe/sink130_140_150_closure.json`; driver `scripts/opensim_fe/run_sink_closure_20261010.py`; run logs `temp/fe_out/sink_closure_20261010/sink{130,140,150}/*.log`.
 
 **Verdict — the 『1.1 % closure』 does NOT hold at the corrected window: it BREAKS.** (It neither holds nor improves.) All three rows are individually valid fixed-sink FE measurements, but none reproduces the line-1 dynamics peak.
 

@@ -184,7 +184,7 @@
 5. [assumed] 不引用任何 σ/σ_law 比值；只报绝对量 σ_contact（MPa）。
 6. [assumed] 只引 docs/S5_QUOTABLE.md 的 QUOTABLE 行；禁止跨配方对比（QUOTABLE §4 #3）。
 7. [assumed] 对偶面 = 全节点固定 hex8 薄板（FEBio 4.13 无 rigid_wall）；不建泡沫实体。
-8. [measured] 骨 + 跖面面片来自 THUMS AM50 跟骨网格（temp/opensim_fe/thums_calcaneus/）。
+8. [measured] 骨 + 跖面面片来自 THUMS AM50 跟骨网格（temp/fe_out/thums_calcaneus/）。
 9. [measured] contact 行 7 条，收敛 0 条。未收敛行的诊断记于 runs[*].diagnostics（FEBio negJac / invalid facets 计数）。
 10. [measured] 所有 FEBio 调用经 climbing.coupling.febio_run.run_febio（契约 §5）；.feb 段序 Loads→Boundary→Contact；跖面对偶为真实单元面。
 11. [assumed] 硬门槛 G0 是「默认路径逐位不变」的唯一数值证据。
@@ -216,5 +216,5 @@ $env:PYTHONPATH="src"
 
 - `results\opensim_fe\nonvertical_s5_contact.json`（机器可读）
 - `results\opensim_fe\NONVERTICAL_S5_CONTACT_REPORT.md`（本报告）
-- `temp\opensim_fe\s5_contact\*.feb/.log/.xplt`（每次求解输入/结果，可再生）
+- `temp/fe_out\s5_contact\*.feb/.log/.xplt`（每次求解输入/结果，可再生）
 

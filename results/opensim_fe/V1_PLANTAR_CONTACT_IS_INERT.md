@@ -143,5 +143,5 @@ h=5 m，`hold_spring_k=None`，STATIC：
 | 参考构型 det J | `temp/v1_padjac.py` |
 | 接触法向 | `temp/v1_normal.py` |
 | 前件 | `V1_CONTACT_UNCONVERGED_ADDENDUM.md`、`V1_UNDERCONSTRAINT_METHODS_SURVEY.md`、`V1_PLANTAR_LOAD_BEARING_FEASIBILITY.md` |
-| 已知收敛基线 | `temp/opensim_fe/thums_sweep_anat_contact_hold100/` |
+| 已知收敛基线 | `temp/fe_out/thums_sweep_anat_contact_hold100/` |
 | 铁律 | `[MEMORY gotcha #26]`；`docs/notes/FE_PRESOLVE_GATES.md` **闸门 3**「你传的参数 ≠ deck 里写的 ≠ FEBio 读到的」 |

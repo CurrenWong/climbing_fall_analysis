@@ -20,8 +20,8 @@ Discipline
 * Read-only w.r.t. every frozen input: never writes to
   ``results/opensim_fe/fracture_matrix*.json``, ``s4_alignment_bc2.json``,
   ``bc_robust_metric_route1.json``, ``g3_*`` or the frozen per-bone
-  ``temp/opensim_fe/fracture_matrix_bc2/*/*_fe.json``.
-* New artifacts only: ``temp/opensim_fe/fibula_fe_audit/``,
+  ``temp/fe_out/fracture_matrix_bc2/*/*_fe.json``.
+* New artifacts only: ``temp/fe_out/fibula_fe_audit/``,
   ``results/opensim_fe/fibula_fe_audit_matrix.json`` and
   ``results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md``.
 * FE built with ``align_pca=True`` (the BC2 opt-in) so results are comparable
@@ -354,12 +354,12 @@ def build_audit(policies: tuple[float, ...], *, solve_tibia: bool,
             "febio": _febio_probe(),
             "frozen_inputs_read_only": [
                 "results/opensim_fe/fracture_matrix_bc2.json",
-                "temp/opensim_fe/fracture_matrix_bc2/load_chain.npz",
-                "temp/opensim_fe/fracture_matrix_bc2/<b>/<b>_fe.json"],
+                "temp/fe_out/fracture_matrix_bc2/load_chain.npz",
+                "temp/fe_out/fracture_matrix_bc2/<b>/<b>_fe.json"],
             "new_outputs": [
                 "results/opensim_fe/fibula_fe_audit_matrix.json",
                 "results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md",
-                "temp/opensim_fe/fibula_fe_audit/"],
+                "temp/fe_out/fibula_fe_audit/"],
             "policies": [float(s) for s in policies],
             "notes": [
                 "Default load_fraction=1.0 path re-verified bit-identical vs frozen BC2.",
@@ -483,7 +483,7 @@ def write_report(res: dict) -> None:
     A("")
     A(f"> 生成 {m['generated_at']}；仓库 `D:\\Project\\climbing_fall_analysis`。")
     A("> **新增产物**：本件 + `results/opensim_fe/fibula_fe_audit_matrix.json` + "
-      "`temp/opensim_fe/fibula_fe_audit/`。**不改**任何冻结输入、不重跑 G3、"
+      "`temp/fe_out/fibula_fe_audit/`。**不改**任何冻结输入、不重跑 G3、"
       "不调 σc、不回解分担比凑靶。")
     A(f"> FE 条件：`{m['fe_conditions']}`；FEBio `{m['febio'].get('version')}` "
       f"({m['febio'].get('exe')})；ankle_r @5m = {res['ankle_ref_load_n']:.1f} N。")
@@ -729,7 +729,7 @@ def write_report(res: dict) -> None:
     A("")
     A("- 本报告：`results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md`")
     A("- 机器可读：`results/opensim_fe/fibula_fe_audit_matrix.json`")
-    A("- FE 缓存/日志：`temp/opensim_fe/fibula_fe_audit/`")
+    A("- FE 缓存/日志：`temp/fe_out/fibula_fe_audit/`")
     A("- 改动脚本（additive）：`scripts/opensim_fe/fracture_matrix.py`")
     A("")
     OUT_REPORT.write_text("\n".join(L) + "\n", encoding="utf-8")

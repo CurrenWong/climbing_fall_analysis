@@ -158,8 +158,8 @@ ratio = load_h / ref_load          # 然后 σ(h) = σ_ref · ratio
 | BC 构造（病根） | `scripts/opensim_fe/bone_feb.py:1027-1051` |
 | BC2 条件 | `scripts/opensim_fe/rerun_matrix_bc2.py::_build_run_bc2` |
 | 线性外推点 | `scripts/opensim_fe/fracture_matrix.py:606` |
-| 冻结记录（含线性自检） | `temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r_fe.json` |
-| BC2 冻结时间 | `temp/opensim_fe/fracture_matrix_bc2/BC2_PROVENANCE.json`（`created_at: 2026-10-09 15:20:01`） |
+| 冻结记录（含线性自检） | `temp/fe_out/fracture_matrix_bc2/femur_r/femur_r_fe.json` |
+| BC2 冻结时间 | `temp/fe_out/fracture_matrix_bc2/BC2_PROVENANCE.json`（`created_at: 2026-10-09 15:20:01`） |
 | 10-11 纯加法改动 | `git show 0385801 -- scripts/opensim_fe/bone_feb.py scripts/opensim_fe/fracture_matrix.py`（153+/2−） |
 | A2 诊断 | `results/opensim_fe/A2_MISS_DIAGNOSIS.md` |
 

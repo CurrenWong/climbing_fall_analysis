@@ -4,7 +4,7 @@
     "study": "Phase-S4 — 3D wrench 上 FE + 跖面弹性支撑（opt-in，默认回归不变）",
     "plan_doc": "docs/非垂直落地扩展方案.md",
     "units": "mm-N-MPa-s",
-    "mesh": "temp\\opensim_fe\\thums_calcaneus\\calcaneus_r_anatframe.npz",
+    "mesh": "temp/fe_out\\thums_calcaneus\\calcaneus_r_anatframe.npz",
     "mesh_kind": "anat (direction C registration)",
     "gauge_radius_mm": 4.0,
     "threshold_mpa": 150.0,
@@ -156,8 +156,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_plantar_rim": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_axial_baseline_fixed.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_axial_baseline_fixed.xplt",
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_axial_baseline_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_axial_baseline_fixed.xplt",
       "wall_s": 0.47000575065612793
     },
     {
@@ -191,8 +191,8 @@
       "dist_any_named_node_mm": 2.482362904658868,
       "location_class": "关节面边缘 (joint rim)",
       "at_plantar_rim": false,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_axial_baseline_spring.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_axial_baseline_spring.xplt",
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_axial_baseline_spring.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_axial_baseline_spring.xplt",
       "wall_s": 0.3381233215332031
     },
     {
@@ -230,8 +230,8 @@
       "dist_any_named_node_mm": 3.3155995575354638,
       "location_class": "关节面边缘 (joint rim)",
       "at_plantar_rim": false,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_axial_fixed.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_axial_fixed.xplt",
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_axial_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_axial_fixed.xplt",
       "wall_s": 0.28397607803344727
     },
     {
@@ -269,8 +269,8 @@
       "dist_any_named_node_mm": 3.17886470122794,
       "location_class": "关节面边缘 (joint rim)",
       "at_plantar_rim": false,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_axial_spring.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_axial_spring.xplt",
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_axial_spring.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_axial_spring.xplt",
       "wall_s": 0.3375394344329834
     },
     {
@@ -312,8 +312,8 @@
       "dist_any_named_node_mm": 2.5356256318197032,
       "location_class": "跖面边缘 (plantar rim)",
       "at_plantar_rim": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_fixed.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_fixed.xplt",
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_tilt_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_tilt_fixed.xplt",
       "wall_s": 0.30269694328308105
     },
     {
@@ -355,8 +355,8 @@
       "dist_any_named_node_mm": 3.4910849087650053,
       "location_class": "achilles 边缘",
       "at_plantar_rim": false,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_spring.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_spring.xplt",
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_tilt_spring.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_tilt_spring.xplt",
       "wall_s": 0.4414792060852051
     },
     {
@@ -394,8 +394,8 @@
       "dist_any_named_node_mm": 3.3155995575354638,
       "location_class": "关节面边缘 (joint rim)",
       "at_plantar_rim": false,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_nomoment_fixed.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_rigid_tilt_nomoment_fixed.xplt",
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_tilt_nomoment_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_rigid_tilt_nomoment_fixed.xplt",
       "wall_s": 0.28411102294921875
     },
     {
@@ -437,8 +437,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_plantar_rim": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_pressure_tilt_fixed.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s4_nonvertical\\s4_pressure_tilt_fixed.xplt",
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_pressure_tilt_fixed.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s4_nonvertical\\s4_pressure_tilt_fixed.xplt",
       "wall_s": 0.37032532691955566
     }
   ],

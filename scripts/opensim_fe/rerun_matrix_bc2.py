@@ -1,7 +1,7 @@
 """rerun_matrix_bc2.py -- B1.3: rerun the 9x50 fracture matrix under the NEW BC.
 
 B1.1 decision 4): isolated roots, NEVER overwrite the old BC products:
-  temp root    : temp/opensim_fe/fracture_matrix_bc2/     (FE caches, run.log)
+  temp root    : temp/fe_out/fracture_matrix_bc2/     (FE caches, run.log)
   results root : results/opensim_fe/bc2/                  (renamed to
                  fracture_matrix_bc2.{json,csv,png} + FRACTURE_MATRIX_BC2_REPORT.md
                  at --finalize)

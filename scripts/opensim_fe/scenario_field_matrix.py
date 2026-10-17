@@ -50,7 +50,7 @@
 * ``results/opensim_fe/fracture_matrix.json``          -> 不存在时无需（本脚本自跑）
 * ``results/opensim_fe/bc_robust_metric_route1.json``  -> ``A_section_mm2`` / ``sigma_c_mpa``
 * ``results/opensim_fe/risk_1d_loadshare.json``        -> 载荷分配倍率 + mass-above
-* ``temp/opensim_fe/fracture_matrix/load_chain.npz``   -> 复用竖直基准的整档缓存
+* ``temp/fe_out/fracture_matrix/load_chain.npz``   -> 复用竖直基准的整档缓存
 * ``src/climbing/coupling/{opensim_grf,opensim_fall,joint_reactions}.py``（现行 API）
 * ``src/climbing/bone.py::MATERIAL_STRENGTH_MPA``      -> 弱子区域 σ_c
 
@@ -58,7 +58,7 @@
 --------------
 * ``results/opensim_fe/scenario_field_matrix.json``
 * ``results/opensim_fe/SCENARIO_FIELD_MATRIX_REPORT.md``
-* ``temp/opensim_fe/scenario_field_matrix/scenario_load_chain.npz``（本脚本缓存）
+* ``temp/fe_out/scenario_field_matrix/scenario_load_chain.npz``（本脚本缓存）
 * ``tests/test_scenario_field_matrix.py``（回归）
 
 复现（仓库根）::
@@ -401,7 +401,7 @@ def run_grid(*, reuse: bool, force: bool, no_compute: bool = False) -> dict:
 
     * 复用本脚本缓存 ``CACHE_NPZ``；
     * 竖直对称基准在**整数高度**（2/3 m 命中）复用既有
-      ``temp/opensim_fe/fracture_matrix/load_chain.npz`` 整档；
+      ``temp/fe_out/fracture_matrix/load_chain.npz`` 整档；
     * ``no_compute=True``（``--no-run``）：只读缓存，缺失的高度**跳过**，不跑载荷链。
     """
     TEMP.mkdir(parents=True, exist_ok=True)
@@ -481,7 +481,7 @@ def _baseline_value(sid: str, h: float, baseline: dict | None):
         "grf_impulse_rel_err": float(baseline["grf_impulse_rel_err"][idx]),
         "loaded_sides": ["l", "r"],
         "model_mass_kg": MODEL_MASS_KG,
-        "reused_from": "temp/opensim_fe/fracture_matrix/load_chain.npz",
+        "reused_from": "temp/fe_out/fracture_matrix/load_chain.npz",
     }
 
 
@@ -802,7 +802,7 @@ def build(*, reuse: bool, force: bool, no_run: bool) -> dict:
             "model_mass_kg": MODEL_MASS_KG,
             "heights_m": list(HEIGHTS),
             "joints": list(JOINTS),
-            "cache_reused_from": "temp/opensim_fe/fracture_matrix/load_chain.npz（仅竖直对称基准整档）",
+            "cache_reused_from": "temp/fe_out/fracture_matrix/load_chain.npz（仅竖直对称基准整档）",
             "scenario_cache": grid_result,
         },
         "load_share": {
@@ -855,7 +855,7 @@ def build(*, reuse: bool, force: bool, no_run: bool) -> dict:
             "readonly_inputs": [
                 "results/opensim_fe/bc_robust_metric_route1.json",
                 "results/opensim_fe/risk_1d_loadshare.json",
-                "temp/opensim_fe/fracture_matrix/load_chain.npz",
+                "temp/fe_out/fracture_matrix/load_chain.npz",
                 "src/climbing/coupling/opensim_grf.py",
                 "src/climbing/coupling/opensim_fall.py",
                 "src/climbing/coupling/joint_reactions.py",
@@ -864,7 +864,7 @@ def build(*, reuse: bool, force: bool, no_run: bool) -> dict:
             "outputs": [
                 "results/opensim_fe/scenario_field_matrix.json",
                 "results/opensim_fe/SCENARIO_FIELD_MATRIX_REPORT.md",
-                "temp/opensim_fe/scenario_field_matrix/scenario_load_chain.npz",
+                "temp/fe_out/scenario_field_matrix/scenario_load_chain.npz",
             ],
         },
     }

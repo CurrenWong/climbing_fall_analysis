@@ -156,7 +156,7 @@ def result(tmp_path_factory):
     # Convergence regime for the fitted-Ogden + tet4 contact: penalty=1,
     # auto_penalty=0 (enforced in ``pad_contact.py::_emit_contact``), and
     # ``n_solver_steps ≥ 1000``.  See
-    # ``temp/opensim_fe/s5_t7/probe28_pensweep.py`` for the convergence map.
+    # ``temp/fe_out/s5_t7/probe28_pensweep.py`` for the convergence map.
     return run_pad_contact(
         workdir / "c.feb", pad_mesh=pad, indenter_mesh=ind,
         mu=DEFAULT_MU, pad_mat=fit_pad_material(), penalty=1.0,

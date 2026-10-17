@@ -71,7 +71,7 @@
 ### 3.1 ★ 决定性诊断：**倒置单元的空间位置**
 
 用 `-output_negative_jacobians=200` 取得清单，再映射到网格域 + 沿轴位置
-（`temp/opensim_fe/negjac_probe.py` / `negjac_map.py` / `negjac_spatial.py`）：
+（`temp/fe_out/negjac_probe.py` / `negjac_map.py` / `negjac_spatial.py`）：
 
 **第一次大失败（首步 t=0.1）归属**：
 
@@ -160,7 +160,7 @@
    写在 `<Control>` 下报 `tag "rhoi" (line 5827) : unrecognized tag`。
    正确写法：`<Control><solver><rhoi>-2</rhoi><gamma>1.5</gamma><beta>1</beta></solver></Control>`
 
-3. **false transient 实跑 ⇒ 无效**（`temp/opensim_fe/h50_dyn.py`）：
+3. **false transient 实跑 ⇒ 无效**（`temp/fe_out/h50_dyn.py`）：
 
    | 配置 | rc | 步数 | 覆盖 t | negJ |
    |---|---:|---:|---|---|
@@ -230,12 +230,12 @@
 
 | 项 | 位置 |
 |---|---|
-| **倒置单元清单（决定性）** | `temp/opensim_fe/negjac_probe.py` → `negjac_D1_h50_ramp0.txt` |
-| **域归属映射** | `temp/opensim_fe/negjac_map.py` / `negjac_attempts.py` |
-| **空间分布** | `temp/opensim_fe/negjac_spatial.py` |
-| **能力门 × LOAD_FRAC** | `temp/opensim_fe/h50_gate_lf.py` → `h50_gate_lf.json` |
-| **平滑衰减（σ 保全试验）** | `temp/opensim_fe/h50_taper.py` → `h50_taper.json` |
-| **手册修法扫描** | `temp/opensim_fe/h50_manual_fixes.py` → `h50_fixes.json` |
+| **倒置单元清单（决定性）** | `temp/fe_out/negjac_probe.py` → `negjac_D1_h50_ramp0.txt` |
+| **域归属映射** | `temp/fe_out/negjac_map.py` / `negjac_attempts.py` |
+| **空间分布** | `temp/fe_out/negjac_spatial.py` |
+| **能力门 × LOAD_FRAC** | `temp/fe_out/h50_gate_lf.py` → `h50_gate_lf.json` |
+| **平滑衰减（σ 保全试验）** | `temp/fe_out/h50_taper.py` → `h50_taper.json` |
+| **手册修法扫描** | `temp/fe_out/h50_manual_fixes.py` → `h50_fixes.json` |
 | **壳/实体几何** | `scripts/opensim_fe/shell_solid_ratio_audit.py`（闸门 7） |
 | 手册 | `temp/thums/febio_manual.txt`（§8 / §2.3 / §2.5 / §9.1） |
 | 网页 | audilab FEBio FAQ、GIBBON issue #51、FEBio 官方调试教程、FEBio Studio Contact Modeling webinar ×2 |

@@ -9,17 +9,17 @@
 Usage (repo root, PYTHONPATH=src)::
 
     python scripts/opensim_fe/shell_scout.py \
-        --parts-index temp/opensim_fe/parts/parts_index.json \
-        --outdir temp/opensim_fe/shells \
+        --parts-index temp/fe_out/parts/parts_index.json \
+        --outdir temp/fe_out/shells \
         --report results/opensim_fe/SHELL_SCOUT_REPORT.md
 
 Products (all new, nothing overwritten):
-    temp/opensim_fe/shells/shell_pid_stats.json / .csv
-    temp/opensim_fe/shells/shell_sections.json
-    temp/opensim_fe/shells/shell_connectivity.json
-    temp/opensim_fe/shells/pelvis_variants.json
-    temp/opensim_fe/shells/pelvis_overlap.json
-    temp/opensim_fe/shells/scout_summary.json
+    temp/fe_out/shells/shell_pid_stats.json / .csv
+    temp/fe_out/shells/shell_sections.json
+    temp/fe_out/shells/shell_connectivity.json
+    temp/fe_out/shells/pelvis_variants.json
+    temp/fe_out/shells/pelvis_overlap.json
+    temp/fe_out/shells/scout_summary.json
     results/opensim_fe/SHELL_SCOUT_REPORT.md
 
 Every number is measured from the deck; nothing is invented.
@@ -792,12 +792,12 @@ def _write_report(report_path, summary, pid_records, region_totals, sections, co
     a("# 仓库根，PYTHONPATH=src")
     a('$env:PYTHONPATH="src"')
     a("& .venv\\Scripts\\python.exe scripts\\opensim_fe\\shell_scout.py `")
-    a("    --parts-index temp\\opensim_fe\\parts\\parts_index.json `")
-    a("    --outdir temp\\opensim_fe\\shells `")
+    a("    --parts-index temp/fe_out\\parts\\parts_index.json `")
+    a("    --outdir temp/fe_out\\shells `")
     a("    --report results\\opensim_fe\\SHELL_SCOUT_REPORT.md")
     a("```")
     a("")
-    a("产物：`temp/opensim_fe/shells/{shell_pid_stats.json,.csv, shell_sections.json, "
+    a("产物：`temp/fe_out/shells/{shell_pid_stats.json,.csv, shell_sections.json, "
       "shell_connectivity.json, pelvis_variants.json, pelvis_overlap.json, scout_summary.json}`。")
     a("")
     a("## 7. 诚实边界\n")

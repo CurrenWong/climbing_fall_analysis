@@ -265,7 +265,7 @@
 ## `S5_contact_hybrid.md`  （1 条）
 归档位置：`archive/2026-10-17_cleanup/docs_old/S5_contact_hybrid.md`
 
-- `temp/opensim_fe/s5_t9/udg_contact.py:6` — and docs/S5_contact_hybrid.md).  Does it also fix the contact?
+- `temp/fe_out/s5_t9/udg_contact.py:6` — and docs/S5_contact_hybrid.md).  Does it also fix the contact?
 
 ## `SUBTALAR_A1_TODO.md`  （1 条）
 归档位置：`archive/2026-10-17_cleanup/docs_stale/SUBTALAR_A1_TODO.md`

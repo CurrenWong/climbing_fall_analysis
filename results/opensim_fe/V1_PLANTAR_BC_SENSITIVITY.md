@@ -141,11 +141,11 @@
 
 ```
 .venv\Scripts\python.exe scripts\opensim_fe\s2_thums_sweep.py ^
-  --mesh temp\opensim_fe\thums_calcaneus\calcaneus_r_anatframe.npz ^
+  --mesh temp/fe_out\thums_calcaneus\calcaneus_r_anatframe.npz ^
   --heights 1 2 3 4 5 6 --acts 0 --plantar-bc fixed --tag _anat_refixed_now
 
 .venv\Scripts\python.exe scripts\opensim_fe\s2_thums_sweep.py ^
-  --mesh temp\opensim_fe\thums_calcaneus\calcaneus_r_anatframe.npz ^
+  --mesh temp/fe_out\thums_calcaneus\calcaneus_r_anatframe.npz ^
   --heights 1 2 3 4 5 6 --acts 0 ^
   --plantar-bc contact --contact-hold-spring-k 100 --tag _anat_contact_hold100
 ```

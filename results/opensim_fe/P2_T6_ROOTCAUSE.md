@@ -3,7 +3,7 @@
 > **性质**：只读诊断（**零 FE**，不改冻结输入、不改判据、不回溯任何判定）
 > **触发**：用户要求「结合 FEBio 手册 + 网络 + 文献 + 既有试错，给一条真正可行的路径」
 > **脚本**：`scripts/opensim_fe/contact_registration_audit.py`（**新增，可复用**）
-> **探针**：`temp/opensim_fe/t6_contact_discriminate.py`、`t6_amax_audit.py`（只读、未提交）
+> **探针**：`temp/fe_out/t6_contact_discriminate.py`、`t6_amax_audit.py`（只读、未提交）
 > **前序**：`P2_BC_SCOPE_INVENTORY.md` §5ter/§6（结案「不可交付」、5 条假设全证伪、根因未定位）
 
 ---

@@ -44,7 +44,7 @@ GUESS = {
     'docs/archive': '已归档文档',
     'results': '产物（报告 + json）',
     'results/opensim_fe': '⚠️ **最大杂堆**（FE 产物 300+）',
-    'temp': '⚠️ **草稿区**，但 `temp/opensim_fe` 有 **12,593** 个 FE 产物',
+    'temp': '⚠️ **草稿区**，但 `temp/fe_out` 有 **12,593** 个 FE 产物',
     'model': 'FE 模型输入',
     'paper': '论文源（LaTeX/图表）',
     'video': '短视频线（独立）',
@@ -54,7 +54,7 @@ GUESS = {
 for d in ('src/climbing', 'src/climbing/coupling', 'scripts', 'scripts/opensim_fe',
           'scripts/ankle_fe', 'scripts/p5_cond', 'tests', 'docs/methods', 'docs/notes',
           'docs/reports', 'docs/paper', 'docs/s5-contact', 'docs/archive', 'results',
-          'results/opensim_fe', 'temp', 'temp/opensim_fe', 'model', 'paper', 'video',
+          'results/opensim_fe', 'temp', 'temp/fe_out', 'model', 'paper', 'video',
           'legacy', 'archive'):
     p = os.path.join(BASE, d.replace('/', os.sep))
     if not os.path.isdir(p):

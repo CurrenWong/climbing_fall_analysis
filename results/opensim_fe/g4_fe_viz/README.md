@@ -7,8 +7,8 @@ _生成时间：2026-10-11 22:05:28。脚本：`scripts/opensim_fe/g4_fe_viz.py`
 | 项 | 值 |
 |---|---|
 | 运行配置 | **位移控制** `disp_d2.0x1000` = P1-a 的 `disp@-397.858`, `Dmax=1.0`（ramped prescribed z-displacement，∂ 输入位移 −397.858 mm） |
-| `.feb` | `D:\Project\climbing_fall_analysis\temp\opensim_fe\g4_fe_stab\disp_d2.0x1000.feb` |
-| `.xplt` | `D:\Project\climbing_fall_analysis\temp\opensim_fe\g4_fe_stab\disp_d2.0x1000.xplt` |
+| `.feb` | `D:\Project\climbing_fall_analysis\temp/fe_out\g4_fe_stab\disp_d2.0x1000.feb` |
+| `.xplt` | `D:\Project\climbing_fall_analysis\temp/fe_out\g4_fe_stab\disp_d2.0x1000.xplt` |
 | **导出 state 索引** | **92**（共 93 个写入 state；FEBio 在**收敛增量**才写 state，故 state 92 = **发散前最后一个收敛态**） |
 | 节点数 / 单元块 | 1837 / fib_spon_end(tet4,762)、fib_spon_center(tet4,2216)、fib_cort(hex8,842) |
 | **max\|u\|** | **217.846 mm** |

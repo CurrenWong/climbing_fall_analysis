@@ -9,7 +9,7 @@ Run from the repo root with the project venv::
 
     & .venv\\Scripts\\python.exe scripts\\opensim_fe\\thums_feb_run.py
 
-Outputs (under ``temp/opensim_fe/thums_calcaneus/``)::
+Outputs (under ``temp/fe_out/thums_calcaneus/``)::
 
     thums_calcaneus.feb          two-domain FEBio model
     thums_calcaneus.xplt         FEBio results

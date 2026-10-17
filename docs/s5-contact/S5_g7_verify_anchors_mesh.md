@@ -19,8 +19,8 @@ mesh-sensitive; no clean σ/σ_law curve may be quoted (only mesh-bounded bands,
    **ξ ≤ 0.25** (sink ≤ 50)?
 
 **Units:** mm–N–MPa–s. FEBio binary `D:\Program\FEBioStudio\bin\febio4.exe` (4.13.0).
-**Run dir (new; collides with nobody):** `temp\opensim_fe\s5_t9\fixa\`.
-**Harness:** `temp\opensim_fe\s5_t9\fixa\run_anchor_mesh.py` (extends the proven
+**Run dir (new; collides with nobody):** `temp/fe_out\s5_t9\fixa\`.
+**Harness:** `temp/fe_out\s5_t9\fixa\run_anchor_mesh.py` (extends the proven
 `g7verify_a\run_recipe_ab.py`; one case per invocation; appends to this doc + `results.txt`
 after **each** run).
 
@@ -624,12 +624,12 @@ step both disclosed. The 1D-law σ is the only mesh-independent quantity here.
 ```powershell
 $env:PYTHONPATH="src"
 # whole grid (crash-resumable; skips tags already in results.txt, appends doc after each run)
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\fixa\run_anchor_mesh.py
+.venv\Scripts\python.exe temp/fe_out\s5_t9\fixa\run_anchor_mesh.py
 # single case:
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\fixa\run_anchor_mesh.py fxa_12x12x8_s40
+.venv\Scripts\python.exe temp/fe_out\s5_t9\fixa\run_anchor_mesh.py fxa_12x12x8_s40
 ```
 
-Ledger: `temp\opensim_fe\s5_t9\fixa\results.txt`. Decks `*.feb` + logs + state files kept in
-`temp\opensim_fe\s5_t9\fixa\`. Coarse column reproduces `docs\S5_g7_verify_anchors.md` §3 to
+Ledger: `temp/fe_out\s5_t9\fixa\results.txt`. Decks `*.feb` + logs + state files kept in
+`temp/fe_out\s5_t9\fixa\`. Coarse column reproduces `docs\S5_g7_verify_anchors.md` §3 to
 ≤0.05 % (the ≤0.1 % noise floor established there).
 

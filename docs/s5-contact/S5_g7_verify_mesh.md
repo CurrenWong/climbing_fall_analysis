@@ -7,8 +7,8 @@ as it finished; verdict in §3: **FAIL — the G7 `σ/σ_law` is not mesh-conver
 mesh**) is **mesh-converged** at sink = 170 mm, so it can be quoted.
 **Units:** mm–N–MPa–s. FEBio binary `D:\Program\FEBioStudio\bin\febio4.exe` (4.13.0).
 **Recipe source (do not re-derive):** `docs\S5_contact_udg.md` §7 (NEW recipe).
-**Run dir:** `temp\opensim_fe\s5_t9\g7verify_b\` (new; collides with nothing).
-**Harness:** `temp\opensim_fe\s5_t9\g7verify_b\g7verify.py` (one mesh per invocation; appends
+**Run dir:** `temp/fe_out\s5_t9\g7verify_b\` (new; collides with nothing).
+**Harness:** `temp/fe_out\s5_t9\g7verify_b\g7verify.py` (one mesh per invocation; appends
 to this doc + `ledger.txt` after **each** mesh).
 
 ---
@@ -17,7 +17,7 @@ to this doc + `ledger.txt` after **each** mesh).
 
 ### 1.1 Deck
 
-Produced by `temp\opensim_fe\s5_t9\udg_contact\udg_contact_sweep2.py` (group `tet`), deck family
+Produced by `temp/fe_out\s5_t9\udg_contact\udg_contact_sweep2.py` (group `tet`), deck family
 `udg_contact\n7_tet4_s170.feb` — byte-identical twins `n7b_tet4_s170.feb` (reproducibility run),
 `n7c_tet4_s170_fb.feb`, `n7d_tet4_s170_fb.feb` (force-balance runs).
 

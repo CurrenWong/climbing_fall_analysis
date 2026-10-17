@@ -26,12 +26,12 @@ sigma_zz is read from the hdf5 Voigt stress (zz = component index 2), the same
 source post_process uses; sigma_vm is NEVER compared against F/A.
 
 Outputs:
-  temp/opensim_fe/b1/patch_test.json          (both conditions, verdicts)
-  temp/opensim_fe/b1/patch_test/{old,new}/    (.feb/.xplt/.hdf5 per condition)
+  temp/fe_out/b1/patch_test.json          (both conditions, verdicts)
+  temp/fe_out/b1/patch_test/{old,new}/    (.feb/.xplt/.hdf5 per condition)
 
 Run (repo root, PYTHONPATH=src):
   & .venv\\Scripts\\python.exe scripts\\opensim_fe\\bc_patch_test.py
-  # tee raw output to temp/opensim_fe/b1/logs/patch_test_<variant>.log
+  # tee raw output to temp/fe_out/b1/logs/patch_test_<variant>.log
 """
 from __future__ import annotations
 

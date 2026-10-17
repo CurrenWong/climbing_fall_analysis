@@ -2,7 +2,7 @@
 
 > **日期**：2026-10-13 ｜ **驱动**：`scripts/opensim_fe/i3_fibula_real_solve.py`（纯增量，**未改** G9 预注册常量）
 > **产物**：`results/opensim_fe/g9_fibula_fe_support_share02241.json`、`G9_FIBULA_FE_SUPPORT_REPORT_share02241.md`
-> **FEBio 日志**：`temp/opensim_fe/g9_fibula_fe_support/share_0.2241__long95/fib_g9.log`
+> **FEBio 日志**：`temp/fe_out/g9_fibula_fe_support/share_0.2241__long95/fib_g9.log`
 
 ---
 
@@ -101,6 +101,6 @@ share=0.2241__long95: FAIL (build_run) BoneFebError: FEBio 失败（退出码 1�
 | 本件驱动（纯增量） | `scripts/opensim_fe/i3_fibula_real_solve.py` |
 | 被复用的 G9 逻辑（零改动） | `scripts/opensim_fe/g9_fibula_fe_support.py`（`SHARES` 常量原样，仅运行时追加） |
 | 本件产物 | `results/opensim_fe/g9_fibula_fe_support_share02241.json`、`G9_FIBULA_FE_SUPPORT_REPORT_share02241.md` |
-| FEBio 失败日志 | `temp/opensim_fe/g9_fibula_fe_support/share_0.2241__long95/fib_g9.log` |
+| FEBio 失败日志 | `temp/fe_out/g9_fibula_fe_support/share_0.2241__long95/fib_g9.log` |
 | 前两件 | `I_FIBULA_SHARE_AXIS.md`（冻结行）、`I2_FIBULA_SHARE_AXIS_SUPPORTED.md`（侧向支撑行） |
 | 同族失败签名 | 踝 tied 罚线（MEMORY）、`FE_BC_STAB.md`、`T6_BC_DIAGNOSIS.md` |

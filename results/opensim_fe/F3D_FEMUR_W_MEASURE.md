@@ -2,7 +2,7 @@
 
 > **日期**：2026-10-14 ｜ **脚本**：`scripts/opensim_fe/f3d_femur_W_measure.py`（零新增 FE）
 > **产物**：`results/opensim_fe/F3D_FEMUR_W_MEASURE.json`
-> **几何源**：`temp/opensim_fe/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5`（已对齐）
+> **几何源**：`temp/fe_out/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5`（已对齐）
 > **前置**：`F3P_FEMUR_GEOM_FAIL.md`（f3p 的 A/W/R 全部作废；本件是它的修正执行件）
 
 ---

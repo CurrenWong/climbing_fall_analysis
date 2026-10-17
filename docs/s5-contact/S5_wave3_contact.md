@@ -188,7 +188,7 @@ $env:PYTHONPATH="src"
 # → --plantar-bc {fixed,roller,roller_free,spring,contact}   (rc=0)
 
 # FEBio 语法冒烟（合成 cube + contact deck）
-& "D:\Program\FEBioStudio\bin\febio4.exe" -i temp\opensim_fe\w3_smoke\calc_contact.feb
+& "D:\Program\FEBioStudio\bin\febio4.exe" -i temp/fe_out\w3_smoke\calc_contact.feb
 # → 解析通过（无 unrecognized tag / invalid value）；求解因合成网格几何不对齐而 negJac
 ```
 

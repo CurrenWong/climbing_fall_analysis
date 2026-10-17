@@ -202,7 +202,7 @@ $env:PYTHONPATH="src"
 #   results/opensim_fe/s4_alignment_bc2.json         :: detail_yi (route-乙 ends/shaft)
 #   results/opensim_fe/bc_robust_metric_route1.json  :: A_section_mm2
 #   results/opensim_fe/g3_probability_matrix.json    :: G3 主设定 p[h][site]
-#   temp/opensim_fe/fracture_matrix_bc2/<b>/<b>_fe.json  :: fe_solve/lrf/linearity
+#   temp/fe_out/fracture_matrix_bc2/<b>/<b>_fe.json  :: fe_solve/lrf/linearity
 #   scripts/opensim_fe/paper_alignment.py           :: REGIONS / _sc
 #   src/climbing/bone.py                            :: MATERIAL_STRENGTH_MPA
 # 产物（纯增量）：

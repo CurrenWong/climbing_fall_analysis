@@ -161,7 +161,7 @@
 3. **模型是实心皮质骨（E=18000）**，整骨 union 外表面成体，非"皮质壳"；A_fe 是整截面，A_cort 是原始 CORT 体积/长估的皮质承载面积；两种名义都给出，任务主用 A_cort。
 4. **腓骨发散有物理成分**（细杆屈曲 + 不独担载荷）；但也含数值脆弱性（同一 1 kN 两次运行结果不一致）。
 5. **线性折回误差**：tibia 在 1–10 kN 折回值散布 ±20%（1,984 / 2,294 / 2,363 MPa），非严格线性；旧报告已记录同类 ±8–33%。
-6. **未改任何既有模块默认/签名**；未碰 `scripts/ankle_fe/`、`temp/pyfebio_demo/`、`temp/ankle_*`、`FE_PIPELINE_TODO.md`；未覆盖既有 `temp/opensim_fe/fracture_matrix/`、`bone_feb/`、`parts/`。
+6. **未改任何既有模块默认/签名**；未碰 `scripts/ankle_fe/`、`temp/pyfebio_demo/`、`temp/ankle_*`、`FE_PIPELINE_TODO.md`；未覆盖既有 `temp/fe_out/fracture_matrix/`、`bone_feb/`、`parts/`。
 7. **载荷方向**：旧报告边界 #5 已指出"关节反力是全局纵向，FE 却沿 bbox 最长轴施加"；本报告用 PCA 夹角量化了它（胫/腓 42°），并证明它是 p95 虚高的主因。
 
 ---
@@ -169,7 +169,7 @@
 ## 9. 产物
 
 - 本报告：`results/opensim_fe/MESH_FIX_REPORT.md`
-- 新产物根目录：`temp/opensim_fe/fracture_matrix_remesh/`
+- 新产物根目录：`temp/fe_out/fracture_matrix_remesh/`
   - `parts_extract/<b>_cort/`：CORT 外表面 STL + summary（含 tibia 的 `*_surface_dedup.stl`）
   - `parts_extract/<b>_union/`：整骨 union 外表面 STL + summary（含 tibia 去重 STL）
   - `meshes/<b>_cort/`、`meshes/<b>/`：干净网格 npz + summary（`gmsh-reparam` 产物）
@@ -183,12 +183,12 @@
 ```powershell
 $env:PYTHONPATH="src"
 # 1) 抽 CORT / union 外表面（report-only）
-& .venv\Scripts\python.exe scripts\opensim_fe\extract_part.py --name tibia_cort --pids 81000700 --report-only --out temp\opensim_fe\fracture_matrix_remesh\parts_extract\tibia_cort
+& .venv\Scripts\python.exe scripts\opensim_fe\extract_part.py --name tibia_cort --pids 81000700 --report-only --out temp/fe_out\fracture_matrix_remesh\parts_extract\tibia_cort
 # 2) 干净网格
-& .venv\Scripts\python.exe scripts\opensim_fe\part_meshing.py --name tibia_r --stl temp\opensim_fe\fracture_matrix_remesh\parts_extract\tibia_r_union\tibia_r_union_surface_dedup.stl --char-len 4 --out-dir temp\opensim_fe\fracture_matrix_remesh\meshes\tibia_r --ref-volume-mm3 354506.0
+& .venv\Scripts\python.exe scripts\opensim_fe\part_meshing.py --name tibia_r --stl temp/fe_out\fracture_matrix_remesh\parts_extract\tibia_r_union\tibia_r_union_surface_dedup.stl --char-len 4 --out-dir temp/fe_out\fracture_matrix_remesh\meshes\tibia_r --ref-volume-mm3 354506.0
 # 3) FE（主口径 / 轴向诊断）
-& .venv\Scripts\python.exe temp\opensim_fe\fracture_matrix_remesh\run_remesh_fe.py --bone tibia_r --cort-pid 81000700 --load 25266 --a-cort 362.6 --temp-base temp\opensim_fe\fracture_matrix_remesh
-& .venv\Scripts\python.exe temp\opensim_fe\fracture_matrix_remesh\run_remesh_fe.py --bone tibia_r --cort-pid 81000700 --load 25266 --a-cort 362.6 --align-pca --temp-base temp\opensim_fe\fracture_matrix_remesh
+& .venv\Scripts\python.exe temp/fe_out\fracture_matrix_remesh\run_remesh_fe.py --bone tibia_r --cort-pid 81000700 --load 25266 --a-cort 362.6 --temp-base temp/fe_out\fracture_matrix_remesh
+& .venv\Scripts\python.exe temp/fe_out\fracture_matrix_remesh\run_remesh_fe.py --bone tibia_r --cort-pid 81000700 --load 25266 --a-cort 362.6 --align-pca --temp-base temp/fe_out\fracture_matrix_remesh
 ```
 
 回归（保持 19 passed / 1 skipped 不变）：

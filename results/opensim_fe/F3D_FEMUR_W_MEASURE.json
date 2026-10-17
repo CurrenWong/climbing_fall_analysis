@@ -1,6 +1,6 @@
 {
   "piece": "F-3′d 股骨 W 测对（切片截面二阶矩，零 FE 解算）",
-  "h5": "temp/opensim_fe/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5",
+  "h5": "temp/fe_out/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5",
   "domain": "fem_cort",
   "joint": "hip_r",
   "load_fraction": 1.0,

@@ -1,5 +1,5 @@
 {
- "patched": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fm_bc2_t6regfix.json",
+ "patched": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fm_bc2_t6regfix.json",
  "sigma_c_mpa": 150.0,
  "t6_first_fracture_m": 6,
  "baseline": {

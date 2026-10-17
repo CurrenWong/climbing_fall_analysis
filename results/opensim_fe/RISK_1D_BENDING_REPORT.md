@@ -44,7 +44,7 @@ risk(h) = σ(h)/σ_c       first_fracture = 最小的 h 使 risk ≥ 1（否则 
 r = sqrt(A_section/π) ;  I = π·r⁴/4 ;  c = r
 ```
 
-**替代 —— 真实中段皮质截面**（4 长骨，若可行）：从干净 CORT remesh `temp/opensim_fe/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz` 取 PCA 长轴中点 ±slab 内的四面体，以**体积加权质心矩**求截面 A、I₁/I₂、极值纤维距离 c，取弱轴 I 与其对应 c（偏保守）。方法同为 Riemann 切片，对皮质壳网格采样的是**皮质环**。
+**替代 —— 真实中段皮质截面**（4 长骨，若可行）：从干净 CORT remesh `temp/fe_out/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz` 取 PCA 长轴中点 ±slab 内的四面体，以**体积加权质心矩**求截面 A、I₁/I₂、极值纤维距离 c，取弱轴 I 与其对应 c（偏保守）。方法同为 Riemann 切片，对皮质壳网格采样的是**皮质环**。
 
 ### 1.3 θ 的取法
 
@@ -196,7 +196,7 @@ Spearman 秩相关（9 骨）：
 **B. θ**
 
 - 4 长骨用 `MESH_FIX_REPORT.md` §5 的 measured 值（calc 25.0、tibia 42.4、fibula 42.8、femur 23.5°）；与「从 FE 网格 PCA 重算」一致到 1–3°。
-- 其余 5 骨由 FE 网格 node PCA 计算（`temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5`）。**C5（0°）与 L3（90°）是近各向同性骨的数值伪影**，其弯曲项不可信，中轴骨结论应以纯轴向为准。
+- 其余 5 骨由 FE 网格 node PCA 计算（`temp/fe_out/fracture_matrix/<b>/<b>.hdf5`）。**C5（0°）与 L3（90°）是近各向同性骨的数值伪影**，其弯曲项不可信，中轴骨结论应以纯轴向为准。
 
 **C. 截面**
 
@@ -224,8 +224,8 @@ $env:PYTHONPATH="src"
 #   results/opensim_fe/risk_1d_loadshare.json        (force_multiplier, 纯轴向)
 #   results/opensim_fe/bc_robust_metric_route1.json  (A_section / L / sigma_c)
 #   src/climbing/bone.py MATERIAL_STRENGTH_MPA
-#   temp/opensim_fe/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz
-#   temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5    (PCA)
+#   temp/fe_out/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz
+#   temp/fe_out/fracture_matrix/<b>/<b>.hdf5    (PCA)
 # 产物：
 #   results/opensim_fe/risk_1d_bending.json
 #   results/opensim_fe/RISK_1D_BENDING_REPORT.md

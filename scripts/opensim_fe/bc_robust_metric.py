@@ -19,7 +19,7 @@ Route 1 (FE-free, 1D strength cross-section)
     * sigma_c      : ``climbing.bone.MATERIAL_STRENGTH_MPA`` (compression), mapped
                      per bone (see ``SIGMA_KEY``).
     * A_section    : solid-domain volume / bbox-longest-axis length, read from the
-                     per-bone ``temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5``.
+                     per-bone ``temp/fe_out/fracture_matrix/<b>/<b>.hdf5``.
                      For the 4 limb bones this is the CORT solid (reproduces the
                      measured V_cort of ``MESH_FIX_REPORT.md`` section 2.3 exactly).
                      For the 5 axial bones (CORT is a shell, no solid) it is the
@@ -269,7 +269,7 @@ def route1(loads: dict, heights: list[float]) -> dict:
         method="risk(h) = F_joint(h) / (A_section * sigma_c); first h with risk>=1",
         sigma_c_source="src/climbing/bone.py MATERIAL_STRENGTH_MPA (compression)",
         a_section_source=("V_solid_domain / bbox-longest-axis from "
-                          "temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5"),
+                          "temp/fe_out/fracture_matrix/<b>/<b>.hdf5"),
         a_caveat=("limb bones = measured THUMS CORT solid; axial bones = estimated "
                   "body cross-section (SPON/diploe) because THUMS CORT is a shell"),
         rows=rows,

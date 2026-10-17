@@ -161,7 +161,7 @@ cl=3.0 tet / anatframe / 体积守恒分层 / `gauge_max` ℓ=4 mm：
 | 项 | 位置 |
 |---|---|
 | 跟垫 in-vivo 锚点（既有） | `docs/methods/G4_后续路线建议.md` §一、`G4_压缩相本构设计.md`（PMC8925218 / Miller-Young 2002 / Bennett & Ker 1990 / Ker 1996） |
-| 皮质壳厚与面积 | `temp/opensim_fe/parts_gmsh/calcaneus_r/calcaneus_r_summary.json` |
+| 皮质壳厚与面积 | `temp/fe_out/parts_gmsh/calcaneus_r/calcaneus_r_summary.json` |
 | `spring_k` 语义 | `src/climbing/coupling/plantar_bc.py::_apply_spring` |
 | 实测支撑扫描 | `temp/v1_phys_spring.py` → `results/opensim_fe/V1_PHYSICAL_SUPPORT_ANCHOR.json` |
 | 最物理端配置 | `temp/v1_phys_corner.py` → `results/opensim_fe/V1_PHYSICAL_CORNER.json` |

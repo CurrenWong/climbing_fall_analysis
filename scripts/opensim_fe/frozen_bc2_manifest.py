@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """J · 冻结 BC2 数据保全（合规形式）：定位冻结期代码提交 + 生成 sha256 清单。
 
-背景：`temp/opensim_fe/fracture_matrix_bc2/`（51.6 MB / 83 文件）是 4 个沿用部位
+背景：`temp/fe_out/fracture_matrix_bc2/`（51.6 MB / 83 文件）是 4 个沿用部位
 （calcaneus_r / R_HIPBONE / L3 / C5）的**唯一数据副本**，且**已实测不可复现**（差 6–22%）。
 但 `.gitignore:72` 明确把 `*.feb *.xplt *.hdf5 *.npz` 与 `temp/` 归为
 「regenerable simulation artefacts (safe to delete)」，仓库**对外发布**只收

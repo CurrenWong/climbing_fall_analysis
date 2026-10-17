@@ -42,7 +42,7 @@ build_pad_contact_feb(..., laugon="AUGLAG", penalty=1.0,
 
 - FEBio 4.13 **没有** `<augtol>` 标签 —— 增广容差就是 `<tolerance>` 本身。
 - 库已暴露：常量 `pad_contact.AUGLAG_CONVERGENT_CONTROLS`，参数 `tolerance=` / `aug_controls=`（`build_pad_contact_feb` 与 `run_pad_contact` 都有）。**默认行为不变**（不传 = 逐字同旧输出）。
-- 验证：`temp/opensim_fe/s5_t9/verify_lib.py`（纯库路径，无裸 XML 注入）。
+- 验证：`temp/fe_out/s5_t9/verify_lib.py`（纯库路径，无裸 XML 注入）。
 
 ## 3. 证据
 
@@ -102,12 +102,12 @@ build_pad_contact_feb(..., laugon="AUGLAG", penalty=1.0,
 
 ```powershell
 $env:PYTHONPATH="src"
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\verify_lib.py     # 配方生效 + 可靠区间
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\envelope.py      # 区间边界
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\repro.py         # G7 不可复现（3 次）
+.venv\Scripts\python.exe temp/fe_out\s5_t9\verify_lib.py     # 配方生效 + 可靠区间
+.venv\Scripts\python.exe temp/fe_out\s5_t9\envelope.py      # 区间边界
+.venv\Scripts\python.exe temp/fe_out\s5_t9\repro.py         # G7 不可复现（3 次）
 ```
 
-产物在 `temp/opensim_fe/s5_t9/`（`finish/`、`mesh_refine/`、`repro/`、`envelope/`、`verify_lib/`、`h2_auglag/`）。
+产物在 `temp/fe_out/s5_t9/`（`finish/`、`mesh_refine/`、`repro/`、`envelope/`、`verify_lib/`、`h2_auglag/`）。
 
 ## 6. 与早前结论的关系（避免误引）
 
@@ -148,9 +148,9 @@ $env:PYTHONPATH="src"
 
 **复现**：
 ```powershell
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\hex_probe.py     # 带接触：hex 早早反演
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\hex_diag.py      # 小压入量扫描 + tet 对照
-.venv\Scripts\python.exe temp\opensim_fe\s5_t9\hex_uniaxial.py  # 无接触单轴：hex ξ=0.5 反演
+.venv\Scripts\python.exe temp/fe_out\s5_t9\hex_probe.py     # 带接触：hex 早早反演
+.venv\Scripts\python.exe temp/fe_out\s5_t9\hex_diag.py      # 小压入量扫描 + tet 对照
+.venv\Scripts\python.exe temp/fe_out\s5_t9\hex_uniaxial.py  # 无接触单轴：hex ξ=0.5 反演
 ```
 
 > 踩坑记录：手写最小 FEBio deck 必须用

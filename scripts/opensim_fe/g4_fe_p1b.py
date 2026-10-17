@@ -746,7 +746,7 @@ def _write_report(R: dict) -> None:
     A("```")
     A("")
     A("- `results/opensim_fe/G4_FE_P1B_REPORT.md`（本文件）")
-    A("- `temp/opensim_fe/g4_fe_p1b/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_p1b.json`）")
+    A("- `temp/fe_out/g4_fe_p1b/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_p1b.json`）")
     A("- `scripts/opensim_fe/g4_fe_p1b.py`（本脚本）")
     A("")
     A("**未改任何既有模块**：`bone_feb` / `g4_fe_spike` / `g4_fe_stab` / `kmesh_io` 均只 import 复用。")

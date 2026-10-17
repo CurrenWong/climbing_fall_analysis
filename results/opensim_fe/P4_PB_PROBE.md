@@ -88,7 +88,7 @@ all_zero 形态不变。这与 F-3′d 根因「现模型 all_zero 根因 = BC �
 ```
 set PYTHONPATH=src
 .venv\Scripts\python.exe scripts\opensim_fe\p4_pb_probe.py
-# 产物：temp\opensim_fe\p4_pb_probe\femur_r\head_load_h{h}\femur_r.{feb,hdf5}
+# 产物：temp/fe_out\p4_pb_probe\femur_r\head_load_h{h}\femur_r.{feb,hdf5}
 #       results\opensim_fe\P4_PB_PROBE.json
 # 诊断（归因证据）：temp\p4_diag_check.py / temp\p4_bend_check.py
 ```

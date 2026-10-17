@@ -106,5 +106,5 @@ $env:PYTHONPATH="src"
 
 - `results\opensim_fe\NONVERTICAL_S4_REPORT.md`（本报告）
 - `results\opensim_fe\nonvertical_s4.json`（机器可读）
-- `temp\opensim_fe\s4_nonvertical/s4_*.feb/.xplt`（每次求解输入/结果）
+- `temp/fe_out\s4_nonvertical/s4_*.feb/.xplt`（每次求解输入/结果）
 

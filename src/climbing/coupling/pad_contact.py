@@ -44,13 +44,13 @@ therefore uses the **same scheme as ``pad_foam.write_uniaxial_feb``**:
 * pad ``x = 0`` face — ``x`` fixed (symmetry, removes the lateral rigid mode);
 * pad ``y = 0`` face — ``y`` fixed (symmetry).
 
-G7 stress-ratio root cause (measured 2026-10-06; ``temp/opensim_fe/s5_t8``)
+G7 stress-ratio root cause (measured 2026-10-06; ``temp/fe_out/s5_t8``)
 --------------------------------------------------------------------------
 At matched indentation the contact FE stress exceeds ``pad_stress_pa(xi)`` by
 ≈2.6–3.5×.  This is **not** a units or material defect.  A homogeneous
 free-lateral FE deck with the **same emitted Ogden** (same ``c/k`` ratio; only the
 absolute stress scale differs by 10⁶) reproduces the 1D law to ≤0.5 % over
-``xi ∈ [0.08, 0.80]`` — see ``temp/opensim_fe/s5_t8/probe2_homogeneous.py``.  The
+``xi ∈ [0.08, 0.80]`` — see ``temp/fe_out/s5_t8/probe2_homogeneous.py``.  The
 excess is the physics of a **large-strain flat-punch indentation**:
 
 * frictionless contact (``mu = 0``) already gives ≈1.6–1.9× — 3D indentation
@@ -76,10 +76,10 @@ then leaves 9–17 mm of penetration.  Supplying explicit augmentation controls
 (:data:`AUGLAG_CONVERGENT_CONTROLS` + ``tolerance=0.005``) removes that
 penetration — but the solve is reliable **only over the envelope**
 ``xi <= 0.25`` (sink <= 50 mm), where the contact FE / 1D-law stress ratio is a
-smooth **1.56 → 1.64** at ~0 penetration (``temp/opensim_fe/s5_t9/envelope.py``,
+smooth **1.56 → 1.64** at ~0 penetration (``temp/fe_out/s5_t9/envelope.py``,
 ``verify_lib.py``).  At the G7 sink (``xi ~ 0.85``) the tet4 foam **inverts** and
 the solve is **non-reproducible** (three identical runs gave negJac 27 / 3 / 15,
-all failed — ``temp/opensim_fe/s5_t9/repro.py``).  The ≈2.6–3.5× figures above
+all failed — ``temp/fe_out/s5_t9/repro.py``).  The ≈2.6–3.5× figures above
 therefore came from *outside the convergence envelope* and must **not** be
 quoted; the trustworthy flat-punch enhancement is **≈1.6**.
 
@@ -213,7 +213,7 @@ DEFAULT_MU = 0.6
 #: while the residual was ~10⁻¹ N, the linear solver produces a non-physical
 #: step, and the elements invert (negative-Jacobian failure).  Empirically the
 #: only convergent regime is ``penalty ≈ 1`` with ``auto_penalty = 0`` and many
-#: time steps (≥ 1000); see ``temp/opensim_fe/s5_t7/probe28_pensweep.py``.
+#: time steps (≥ 1000); see ``temp/fe_out/s5_t7/probe28_pensweep.py``.
 #: Measured consequence (see module docstring "G7 stress-ratio root cause"):
 #: at this penalty the contact is soft — the pad surface does not fully follow
 #: the indenter (≈9–17 mm mean penetration, up to ≈65 mm ``u_z`` spread under the
@@ -490,7 +490,7 @@ def _emit_contact(lines, *, name, surface_pair, mu, penalty, contact_type,
     # bulk modulus of the underlying element stiffness; with the fitted Ogden
     # the auto-scaled value re-creates the stiff-residual penalty (6e7 N/mm)
     # that Newton cannot tolerate.  Empirically see
-    # ``temp/opensim_fe/s5_t7/probe28_pensweep.py``.
+    # ``temp/fe_out/s5_t7/probe28_pensweep.py``.
     lines.append(f"      <auto_penalty>0</auto_penalty>")
     lines.append("      <two_pass>0</two_pass>")
     lines.append(f"      <node_reloc>{int(bool(node_reloc))}</node_reloc>")
@@ -1158,7 +1158,7 @@ def _main() -> int:
 
     # ---- G3: load-driven, applied 580 kPa, check residual ----------------
     # The fitted-Ogden + tet4 contact system does NOT converge in pressure mode
-    # (see ``temp/opensim_fe/s5_t7/probe30_pressure.py`` / probe31: every
+    # (see ``temp/fe_out/s5_t7/probe30_pressure.py`` / probe31: every
     # configuration we tried fails with 22 negative Jacobians at the first
     # Newton step).  Therefore we use displacement-driven with the
     # corresponding reaction force on the indenter BC as the
@@ -1238,7 +1238,7 @@ def _main() -> int:
     g7_result = None
     g7_attempts = []
     # Attempt 1: pure pressure mode.  Expected to fail (Newton's first step
-    # produces 22 negative Jacobians — see ``temp/opensim_fe/s5_t7/probe30_*``
+    # produces 22 negative Jacobians — see ``temp/fe_out/s5_t7/probe30_*``
     # and ``probe31_*``).  Reported honestly.
     try:
         res_p = run_pad_contact(

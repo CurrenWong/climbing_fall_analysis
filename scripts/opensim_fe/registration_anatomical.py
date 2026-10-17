@@ -55,7 +55,7 @@ Let ``V`` / ``F`` be the raw THUMS surface vertices / triangles (THUMS global mm
 
 Units: mm-N-MPa-s; all lengths mm.
 
-Outputs (``temp/opensim_fe/thums_calcaneus/``)
+Outputs (``temp/fe_out/thums_calcaneus/``)
 ----------------------------------------------
     calcaneus_r_anatframe.stl    transformed outer surface, ASCII, mm
     calcaneus_r_anatframe.vtk    transformed solid (3323 tet + 634 hex)

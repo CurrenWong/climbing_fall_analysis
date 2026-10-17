@@ -40,7 +40,7 @@ axis along which the joint reaction is applied).  For the 4 limb bones the
 MESH_FIX_REPORT.md section 5 measured values are used verbatim
 (calcaneus 25.0, tibia 42.4, fibula 42.8, femur 23.5 deg).  For the other 5
 bones the PCA axis is computed from the FE-mesh node coordinates
-(``temp/opensim_fe/fracture_matrix/<bone>/<bone>.hdf5``); this reproduces the
+(``temp/fe_out/fracture_matrix/<bone>/<bone>.hdf5``); this reproduces the
 limb angles from the same meshes to within ~1-3 deg (validation reported).
 
 Inputs (read-only)
@@ -49,8 +49,8 @@ Inputs (read-only)
 * ``results/opensim_fe/fracture_matrix.json``          -> loads_n, heights, FE util
 * ``results/opensim_fe/bc_robust_metric_route1.json``  -> A_section, L_bbox, sigma_c
 * ``src/climbing/bone.py`` MATERIAL_STRENGTH_MPA        -> sigma_c
-* ``temp/opensim_fe/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz``
-* ``temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5``      -> node coords for PCA
+* ``temp/fe_out/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz``
+* ``temp/fe_out/fracture_matrix/<b>/<b>.hdf5``      -> node coords for PCA
 
 Outputs (NEW files only)
 ------------------------
@@ -637,7 +637,7 @@ def _write_report(path: Path, res: dict, ts: str) -> None:
     A("```")
     A("")
     A("**替代 —— 真实中段皮质截面**（4 长骨，若可行）：从干净 CORT remesh "
-      "`temp/opensim_fe/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz` "
+      "`temp/fe_out/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz` "
       "取 PCA 长轴中点 ±slab 内的四面体，以**体积加权质心矩**求截面 A、I₁/I₂、极值纤维距离 c，"
       "取弱轴 I 与其对应 c（偏保守）。方法同为 Riemann 切片，对皮质壳网格采样的是**皮质环**。")
     A("")
@@ -810,7 +810,7 @@ def _write_report(path: Path, res: dict, ts: str) -> None:
     A("")
     A("- 4 长骨用 `MESH_FIX_REPORT.md` §5 的 measured 值（calc 25.0、tibia 42.4、"
       "fibula 42.8、femur 23.5°）；与「从 FE 网格 PCA 重算」一致到 1–3°。")
-    A("- 其余 5 骨由 FE 网格 node PCA 计算（`temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5`）。"
+    A("- 其余 5 骨由 FE 网格 node PCA 计算（`temp/fe_out/fracture_matrix/<b>/<b>.hdf5`）。"
       "**C5（0°）与 L3（90°）是近各向同性骨的数值伪影**，其弯曲项不可信，"
       "中轴骨结论应以纯轴向为准。")
     A("")
@@ -845,8 +845,8 @@ def _write_report(path: Path, res: dict, ts: str) -> None:
     A("#   results/opensim_fe/risk_1d_loadshare.json        (force_multiplier, 纯轴向)")
     A("#   results/opensim_fe/bc_robust_metric_route1.json  (A_section / L / sigma_c)")
     A("#   src/climbing/bone.py MATERIAL_STRENGTH_MPA")
-    A("#   temp/opensim_fe/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz")
-    A("#   temp/opensim_fe/fracture_matrix/<b>/<b>.hdf5    (PCA)")
+    A("#   temp/fe_out/fracture_matrix_remesh/meshes/<b>_cort/<b>_cort_mesh.npz")
+    A("#   temp/fe_out/fracture_matrix/<b>/<b>.hdf5    (PCA)")
     A("# 产物：")
     A("#   results/opensim_fe/risk_1d_bending.json")
     A("#   results/opensim_fe/RISK_1D_BENDING_REPORT.md")

@@ -223,5 +223,5 @@ strong_ref=**426.8** ⇒ **all_one = 常值** ✅ 与 BC2 记录一致。
   `paper_alignment.py:104/142/336-337`、`p4c_probe.py:76`、`src/climbing/bone.py:75-91`
 - 既有裁定：`results/opensim_fe/A2_AGGREGATION_RULING.md`（维持 median）、
   `A2_CONVENTION_RULING.md`（严格/逐部位）、`A2_MISS_DIAGNOSIS.md`
-- 正对照数据：`temp/opensim_fe/fracture_matrix_bc2/femur_r/femur_r.hdf5`
-- 新 BC 数据：`temp/opensim_fe/p5_head_contact/femur_r/p5_{pen,free}_h{10,20,30,50}/femur_r.hdf5`
+- 正对照数据：`temp/fe_out/fracture_matrix_bc2/femur_r/femur_r.hdf5`
+- 新 BC 数据：`temp/fe_out/p5_head_contact/femur_r/p5_{pen,free}_h{10,20,30,50}/femur_r.hdf5`

@@ -24,7 +24,7 @@ Usage (repo root, PYTHONPATH=src)::
     python scripts/opensim_fe/extract_part.py --name skull_pilot \
         --pids 88000001,88000002,88000003 --report-only
 
-Outputs under ``temp/opensim_fe/parts/<name>/``:
+Outputs under ``temp/fe_out/parts/<name>/``:
     <name>_surface.stl      raw outer surface (mm, THUMS frame)
     <name>_volume.vtk       solid elements as unstructured grid
     <name>_elements.npz     eid / pid / connectivity

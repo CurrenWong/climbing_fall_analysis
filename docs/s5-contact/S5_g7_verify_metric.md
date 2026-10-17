@@ -14,8 +14,8 @@ boundary — to see whether the contamination by the flat-punch edge singularity
 
 **Units:** mm–N–MPa–s. FEBio binary `D:\Program\FEBioStudio\bin\febio4.exe` (4.13.0).
 **Recipe source (verbatim, not re-derived):** `docs\S5_contact_udg.md` §7 (NEW recipe).
-**Run dir:** `temp\opensim_fe\s5_t9\fixmetric\` (new; collides with nobody).
-**Harness:** `temp\opensim_fe\s5_t9\fixmetric\run.py` (one mesh per invocation; appends to this
+**Run dir:** `temp/fe_out\s5_t9\fixmetric\` (new; collides with nobody).
+**Harness:** `temp/fe_out\s5_t9\fixmetric\run.py` (one mesh per invocation; appends to this
 doc + `fixmetric\ledger.txt` after **each** mesh). **Only 3 FEBio runs total — every margin is a
 post-processing pass over the *same* facet field**.
 
@@ -452,7 +452,7 @@ fitted compressible Ogden; symmetry BCs; PARDISO.
 
 ### 6.4 Artifacts
 
-* Harness `temp\opensim_fe\s5_t9\fixmetric\run.py`; ledger `fixmetric\ledger.txt`;
+* Harness `temp/fe_out\s5_t9\fixmetric\run.py`; ledger `fixmetric\ledger.txt`;
   per-mesh `*.summary.json`, `*.feb`, `*.log`. Large `*.xplt`/`*.hdf5` deleted after their
   outcomes were transcribed.
 * **Read-only, untouched:** `docs\S5_contact_udg.md`, `docs\S5_contact_convergence.md`,

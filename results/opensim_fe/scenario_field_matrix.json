@@ -17,9 +17,9 @@
       "hip_r",
       "lumbar"
     ],
-    "cache_reused_from": "temp/opensim_fe/fracture_matrix/load_chain.npz（仅竖直对称基准整档）",
+    "cache_reused_from": "temp/fe_out/fracture_matrix/load_chain.npz（仅竖直对称基准整档）",
     "scenario_cache": {
-      "cache_path": "temp\\opensim_fe\\scenario_field_matrix\\scenario_load_chain.npz",
+      "cache_path": "temp/fe_out\\scenario_field_matrix\\scenario_load_chain.npz",
       "skipped": []
     }
   },
@@ -2469,7 +2469,7 @@
     "readonly_inputs": [
       "results/opensim_fe/bc_robust_metric_route1.json",
       "results/opensim_fe/risk_1d_loadshare.json",
-      "temp/opensim_fe/fracture_matrix/load_chain.npz",
+      "temp/fe_out/fracture_matrix/load_chain.npz",
       "src/climbing/coupling/opensim_grf.py",
       "src/climbing/coupling/opensim_fall.py",
       "src/climbing/coupling/joint_reactions.py",
@@ -2478,7 +2478,7 @@
     "outputs": [
       "results/opensim_fe/scenario_field_matrix.json",
       "results/opensim_fe/SCENARIO_FIELD_MATRIX_REPORT.md",
-      "temp/opensim_fe/scenario_field_matrix/scenario_load_chain.npz"
+      "temp/fe_out/scenario_field_matrix/scenario_load_chain.npz"
     ]
   }
 }

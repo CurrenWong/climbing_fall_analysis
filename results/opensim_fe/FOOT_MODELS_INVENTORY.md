@@ -27,7 +27,7 @@
 
 ## §2 · 手上「已经有」但**没组装**的足部骨块（THUMS AM50，同一 deck）
 
-`temp/opensim_fe/parts/` —— 全部来自 **同一个** `model\AM50_V71_Occupant\main_THUMS_AM50_V71.k`，
+`temp/fe_out/parts/` —— 全部来自 **同一个** `model\AM50_V71_Occupant\main_THUMS_AM50_V71.k`，
 帧 = **`THUMS global, mm`**：
 
 | part | 节点 | 单元 | 三角片 | 含哪些骨（PID） |
@@ -126,11 +126,11 @@
 
 | 项 | 位置 |
 |---|---|
-| V1 单骨模型 | `temp/opensim_fe/thums_calcaneus/calcaneus_r_anatframe.npz`（1544 节点） |
+| V1 单骨模型 | `temp/fe_out/thums_calcaneus/calcaneus_r_anatframe.npz`（1544 节点） |
 | 载荷路径与跖面 BC | `results/opensim_fe/V1_LOAD_PATH_FACTS.md` |
 | 刚性帽（≠距骨） | `src/climbing/coupling/joint_contact.py:47`（`DEFAULT_CAP_E_MPA = 200_000.0`） |
 | 多骨踝+后足 | `scripts/ankle_fe/ankle_lig_feb.py:13-17`；`temp/thums/thums_lowerlimb.npz` |
-| **THUMS `foot_r`（中足+前足，hex8）** | `temp/opensim_fe/parts/foot_r/{summary.json, foot_r_elements.npz, foot_r_volume.vtk}` |
+| **THUMS `foot_r`（中足+前足，hex8）** | `temp/fe_out/parts/foot_r/{summary.json, foot_r_elements.npz, foot_r_volume.vtk}` |
 | `foot_r` 仅用于画图 | `scripts/opensim_fe/make_fracture_figures.py:33` |
 | **旧「整足」管线与 26.5 m** | `scripts/opensim_fe/s2_thums_sweep.py:421-424`（`OLD_FIRST_FRACTURE_M = 26.5`）；`thums_feb.py:3-4` |
 | `r_foot.vtp` 身份（calcn_r body） | `scripts/opensim_fe/registration.py:12,133,536` |

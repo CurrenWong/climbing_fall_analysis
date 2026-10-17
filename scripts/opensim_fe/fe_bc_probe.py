@@ -19,7 +19,7 @@
 
 纪律
 ----
-* 冻结输入**只读**；输出全部在 `temp/opensim_fe/fe_bc_probe/`。
+* 冻结输入**只读**；输出全部在 `temp/fe_out/fe_bc_probe/`。
 * 统计量与 `s4_alignment_bc2.py:159-171` **逐字相同**（median of von Mises over
   `pa.partition_ends_shaft` 的 ends/shaft mask，main solid domain）。
 * `V0_control` 用**与 BC2 完全相同的参数**重建重解 ⇒ 它必须复现冻结的

@@ -427,7 +427,7 @@ def _write_report(path: Path, res: dict) -> None:
       "`calcn`，腿关节锁死、肌肉关闭；**模型内没有地面接触单元** | 载荷边界（刚性） |")
     A("| FE 跖面 BC | `src/climbing/coupling/plantar_bc.py::apply_plantar_bc` | `fixed`/`roller`/`spring`(Winkler k)；"
       "`spring` 是可参数化的柔性支承 | **可柔性**（仅 FE 探针用） |")
-    A("| 载荷链数据 | `temp/opensim_fe/fracture_matrix/load_chain.npz` | 50 高度的 `grf_peak_n` + 逐关节 "
+    A("| 载荷链数据 | `temp/fe_out/fracture_matrix/load_chain.npz` | 50 高度的 `grf_peak_n` + 逐关节 "
       "`vert/abs` 峰值；全部由**刚性地面**链产生 | **刚性** |")
     A("")
     A("**结论**：冻结基线（`risk_1d_loadshare` / `AXIAL_SUBREGION_REPORT` / `load_chain.npz`）"

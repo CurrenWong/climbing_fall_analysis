@@ -931,7 +931,7 @@ def _assumptions(n_contact: int, n_contact_ok: int) -> list[str]:
         "[assumed] 不引用任何 σ/σ_law 比值；只报绝对量 σ_contact（MPa）。",
         "[assumed] 只引 docs/S5_QUOTABLE.md 的 QUOTABLE 行；禁止跨配方对比（QUOTABLE §4 #3）。",
         "[assumed] 对偶面 = 全节点固定 hex8 薄板（FEBio 4.13 无 rigid_wall）；不建泡沫实体。",
-        "[measured] 骨 + 跖面面片来自 THUMS AM50 跟骨网格（temp/opensim_fe/thums_calcaneus/）。",
+        "[measured] 骨 + 跖面面片来自 THUMS AM50 跟骨网格（temp/fe_out/thums_calcaneus/）。",
         f"[measured] contact 行 {n_contact} 条，收敛 {n_contact_ok} 条。未收敛行的诊断记于 "
         "runs[*].diagnostics（FEBio negJac / invalid facets 计数）。",
         "[measured] 所有 FEBio 调用经 climbing.coupling.febio_run.run_febio（契约 §5）；.feb 段序 "

@@ -42,7 +42,7 @@ CLI (repo root, PYTHONPATH=src)::
 
     & .venv\\Scripts\\python.exe scripts\\opensim_fe\\part_meshing.py `
         --name tibia_r `
-        --stl temp\\opensim_fe\\parts\\tibia_r\\tibia_r_surface.stl `
+        --stl temp/fe_out\\parts\\tibia_r\\tibia_r_surface.stl `
         --char-len 4 --ref-volume-mm3 346130.49
 """
 from __future__ import annotations

@@ -111,7 +111,7 @@ $env:PYTHONPATH="src"
 ```
 
 - `results/opensim_fe/G4_FE_PILOT_REPORT.md`（本文件）
-- `temp/opensim_fe/g4_fe_pilot/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_pilot.json`）
+- `temp/fe_out/g4_fe_pilot/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_pilot.json`）
 - `scripts/opensim_fe/g4_fe_pilot.py`（本脚本；只 import 既有模块）
 
 **未改任何既有模块**：`g4_fe_p1b` / `g4_fe_spike` / `g4_fe_stab` / `bone_feb` 均只 import 复用。

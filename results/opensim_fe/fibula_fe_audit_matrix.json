@@ -10,13 +10,13 @@
     },
     "frozen_inputs_read_only": [
       "results/opensim_fe/fracture_matrix_bc2.json",
-      "temp/opensim_fe/fracture_matrix_bc2/load_chain.npz",
-      "temp/opensim_fe/fracture_matrix_bc2/<b>/<b>_fe.json"
+      "temp/fe_out/fracture_matrix_bc2/load_chain.npz",
+      "temp/fe_out/fracture_matrix_bc2/<b>/<b>_fe.json"
     ],
     "new_outputs": [
       "results/opensim_fe/fibula_fe_audit_matrix.json",
       "results/opensim_fe/FIBULA_FE_AUDIT_REPORT.md",
-      "temp/opensim_fe/fibula_fe_audit/"
+      "temp/fe_out/fibula_fe_audit/"
     ],
     "policies": [
       0.05,

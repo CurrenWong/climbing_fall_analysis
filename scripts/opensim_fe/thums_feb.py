@@ -10,7 +10,7 @@ carries:
 
 Source mesh (mm, OpenSim ``calcn_r`` frame, origin = subtalar joint centre)::
 
-    temp/opensim_fe/thums_calcaneus/calcaneus_r_calcnframe.npz
+    temp/fe_out/thums_calcaneus/calcaneus_r_calcnframe.npz
         node_ids (1544,)   global THUMS node ids
         nodes_xyz (1544,3) coordinates, calcn frame, mm
         conn (3957,8)      per-element connectivity (global ids)

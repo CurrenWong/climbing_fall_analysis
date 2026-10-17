@@ -1,7 +1,7 @@
 {
   "meta": {
     "study": "plantar fascia load path sensitivity (experiment ④b)",
-    "mesh": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\thums_calcaneus\\calcaneus_r_anatframe.npz",
+    "mesh": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\thums_calcaneus\\calcaneus_r_anatframe.npz",
     "mesh_kind": "anat (direction C)",
     "gauge_radius_mm": 4.0,
     "threshold_mpa": 150.0,
@@ -96,8 +96,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n0kN.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n0kN.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n0kN.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n0kN.xplt"
     },
     {
       "tag": "n0.5kN",
@@ -139,8 +139,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n0.5kN.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n0.5kN.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n0.5kN.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n0.5kN.xplt"
     },
     {
       "tag": "n1kN",
@@ -182,8 +182,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n1kN.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n1kN.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n1kN.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n1kN.xplt"
     },
     {
       "tag": "n2kN",
@@ -225,8 +225,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n2kN.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n2kN.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n2kN.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n2kN.xplt"
     },
     {
       "tag": "n5kN",
@@ -268,8 +268,8 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n5kN.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n5kN.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n5kN.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n5kN.xplt"
     }
   ],
   "spring_cases": [
@@ -313,8 +313,8 @@
       "dist_any_named_node_mm": 2.4960245355045902,
       "location_class": "关节面边缘 (joint rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n0kN_springk1000.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n0kN_springk1000.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n0kN_springk1000.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n0kN_springk1000.xplt"
     },
     {
       "tag": "n0.5kN_springk1000",
@@ -356,8 +356,8 @@
       "dist_any_named_node_mm": 2.4960245355045902,
       "location_class": "关节面边缘 (joint rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n0.5kN_springk1000.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n0.5kN_springk1000.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n0.5kN_springk1000.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n0.5kN_springk1000.xplt"
     },
     {
       "tag": "n1kN_springk1000",
@@ -399,8 +399,8 @@
       "dist_any_named_node_mm": 2.4960245355045902,
       "location_class": "关节面边缘 (joint rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n1kN_springk1000.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n1kN_springk1000.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n1kN_springk1000.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n1kN_springk1000.xplt"
     },
     {
       "tag": "n2kN_springk1000",
@@ -442,8 +442,8 @@
       "dist_any_named_node_mm": 2.4960245355045902,
       "location_class": "关节面边缘 (joint rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n2kN_springk1000.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n2kN_springk1000.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n2kN_springk1000.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n2kN_springk1000.xplt"
     },
     {
       "tag": "n5kN_springk1000",
@@ -485,8 +485,8 @@
       "dist_any_named_node_mm": 2.4960245355045902,
       "location_class": "关节面边缘 (joint rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n5kN_springk1000.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\fascia\\fascia_n5kN_springk1000.xplt"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n5kN_springk1000.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\fascia\\fascia_n5kN_springk1000.xplt"
     }
   ],
   "conclusion": {

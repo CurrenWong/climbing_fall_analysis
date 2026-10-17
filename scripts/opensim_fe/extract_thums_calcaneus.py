@@ -13,7 +13,7 @@ Run from the repo root (or anywhere) with::
     D:\\Project\\climbing_fall_analysis\\.venv\\Scripts\\python.exe \
         scripts/opensim_fe/extract_thums_calcaneus.py
 
-Outputs (all under temp/opensim_fe/thums_calcaneus/):
+Outputs (all under temp/fe_out/thums_calcaneus/):
     calcaneus_r_surface.stl      outer surface, mm, THUMS global coords
     calcaneus_r_volume.vtk       solid elements as unstructured grid
     node_ids.npy / nodes_xyz.npy volumes nodes + coords (aligned)

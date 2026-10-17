@@ -256,7 +256,7 @@
     "calcaneus_r": {
       "kind": "real_midshaft",
       "status": "ok",
-      "path": "temp\\opensim_fe\\fracture_matrix_remesh\\meshes\\calcaneus_cort\\calcaneus_cort_mesh.npz",
+      "path": "temp/fe_out\\fracture_matrix_remesh\\meshes\\calcaneus_cort\\calcaneus_cort_mesh.npz",
       "n_tets": 1924,
       "L_axis_mm": 89.83515345755524,
       "slab_half_mm": 8.0,
@@ -274,7 +274,7 @@
     "tibia_r": {
       "kind": "real_midshaft",
       "status": "ok",
-      "path": "temp\\opensim_fe\\fracture_matrix_remesh\\meshes\\tibia_cort\\tibia_cort_mesh.npz",
+      "path": "temp/fe_out\\fracture_matrix_remesh\\meshes\\tibia_cort\\tibia_cort_mesh.npz",
       "n_tets": 1588,
       "L_axis_mm": 403.2846366608561,
       "slab_half_mm": 24.197078199651365,
@@ -292,7 +292,7 @@
     "fibula_r": {
       "kind": "real_midshaft",
       "status": "ok",
-      "path": "temp\\opensim_fe\\fracture_matrix_remesh\\meshes\\fibula_cort\\fibula_cort_mesh.npz",
+      "path": "temp/fe_out\\fracture_matrix_remesh\\meshes\\fibula_cort\\fibula_cort_mesh.npz",
       "n_tets": 1768,
       "L_axis_mm": 402.8864430182848,
       "slab_half_mm": 24.173186581097088,
@@ -310,7 +310,7 @@
     "femur_r": {
       "kind": "real_midshaft",
       "status": "ok",
-      "path": "temp\\opensim_fe\\fracture_matrix_remesh\\meshes\\femur_cort\\femur_cort_mesh.npz",
+      "path": "temp/fe_out\\fracture_matrix_remesh\\meshes\\femur_cort\\femur_cort_mesh.npz",
       "n_tets": 1477,
       "L_axis_mm": 480.6605866744745,
       "slab_half_mm": 28.839635200468468,

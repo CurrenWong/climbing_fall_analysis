@@ -10,9 +10,9 @@
 ----
 1. ``climbing.coupling.meshing.vtp_to_tet``：读 ``r_foot.vtp``（calcn_r 几何）→
    mm tet 网格 + 具名面（``subtalar_joint`` / ``plantar``），写
-   ``temp/opensim_fe/meshes/calcaneus_<char>mm.msh``。
+   ``temp/fe_out/meshes/calcaneus_<char>mm.msh``。
 2. 网格自检：T7（体积误差 < 2%）、T5（min Jacobian > 0）。失败即报，不带病求解。
-3. ``build_calcaneus_feb``：写 ``temp/opensim_fe/calcaneus.feb``（mm–N–MPa–s）。
+3. ``build_calcaneus_feb``：写 ``temp/fe_out/calcaneus.feb``（mm–N–MPa–s）。
    默认"幽灵刚体"加载；若 FEBio 不收敛则自动改用面压 p=F/A。
 4. ``run_febio`` 求解（非 0 退出码会抛错，绝不静默）。
 5. ``peak_von_mises`` 读 ``.xplt`` → 峰值 σ_vm（MPa），并写节点平均 ``.vtu``。

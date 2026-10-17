@@ -1,7 +1,7 @@
 # V1 求解：**首折高度由「载荷引入奇异」决定** —— 实测证明（2026-10-15）
 
 > **触发**：用户要求「想办法解决 V1」。本件是一次**零调参**的归因实验。
-> **产物**：`temp/opensim_fe/v1solve/ab_frame.json`（A/B 原始数据）。
+> **产物**：`temp/fe_out/v1solve/ab_frame.json`（A/B 原始数据）。
 
 ---
 
@@ -337,10 +337,10 @@ h=2 m、anatframe、`PressureLoad p=F/A`、`plantar=fixed`：
 
 | 项 | 位置 |
 |---|---|
-| A/B 原始数据 | `temp/opensim_fe/v1solve/ab_frame.json` |
+| A/B 原始数据 | `temp/fe_out/v1solve/ab_frame.json` |
 | A/B 脚本 | `temp/e3.py`（草稿区） |
 | 旧帧面积/面数记载 | `scripts/opensim_fe/registration_anatomical.py:11-14` |
-| 解剖帧产物 | `temp/opensim_fe/thums_calcaneus/registration_anat.json`（`joint_face_area_mm2 = 2495.33`） |
+| 解剖帧产物 | `temp/fe_out/thums_calcaneus/registration_anat.json`（`joint_face_area_mm2 = 2495.33`） |
 | 默认帧 | `scripts/opensim_fe/thums_feb.py`（`DEFAULT_NPZ = calcaneus_r_calcnframe.npz`） |
 | 载荷日志 | deck 内 `[thums_feb] 载荷：PressureLoad p=… （F=… / A=… mm²）` |
 | 跖面接触先例 | `scripts/opensim_fe/thums_feb.py`（`plantar_bc="contact"` 分支） |

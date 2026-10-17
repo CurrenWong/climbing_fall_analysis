@@ -16,8 +16,8 @@ sigma_nom uses the A_cort nominal from MESH_FIX_REPORT section 2.3:
 Any FAIL -> exit 1.  This is a REGRESSION anchor, not an analytic solution.
 
 Outputs:
-  temp/opensim_fe/b1/calcaneus_ab/{old,new}/   .feb/.xplt/.hdf5
-  temp/opensim_fe/b1/calcaneus_ab/calcaneus_ab.json
+  temp/fe_out/b1/calcaneus_ab/{old,new}/   .feb/.xplt/.hdf5
+  temp/fe_out/b1/calcaneus_ab/calcaneus_ab.json
 
 Run (repo root, PYTHONPATH=src):
   & .venv\\Scripts\\python.exe scripts\\opensim_fe\\bc_calcaneus_ab.py

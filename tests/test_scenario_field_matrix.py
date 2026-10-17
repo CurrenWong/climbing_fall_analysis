@@ -9,7 +9,7 @@
 * 临床分桶覆盖 9 部位；空 analyses 下临床/R5 聚合不崩。
 
 OpenSim 正动力学很慢，本测试**不**跑载荷链（那属于脚本主流程，缓存于
-``temp/opensim_fe/scenario_field_matrix/``）。
+``temp/fe_out/scenario_field_matrix/``）。
 """
 from __future__ import annotations
 

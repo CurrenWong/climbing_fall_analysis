@@ -757,7 +757,7 @@ def _select_top_bottom(
 
 # ---------------------------------------------------------------------------
 # opt-in PCA long-axis alignment (B1.1 决策①; ported verbatim from
-# temp/opensim_fe/fracture_matrix_remesh/run_remesh_fe.py:44-64)
+# temp/fe_out/fracture_matrix_remesh/run_remesh_fe.py:44-64)
 # ---------------------------------------------------------------------------
 def _align_pca_rotate(nodes: np.ndarray) -> np.ndarray:
     """Rotate `nodes` about their centroid so the largest PCA axis -> +Z.

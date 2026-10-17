@@ -30,7 +30,7 @@ G3（`scripts/opensim_fe/g3_subject_variability.py`，2026-10-10）把 S4 的确
 * `results/opensim_fe/s4_alignment_bc2.json`         （route-乙 ends/shaft 子区域统计）
 * `results/opensim_fe/bc_robust_metric_route1.json`  （逐骨截面 A_section_mm2）
 * `results/opensim_fe/g3_probability_matrix.json`    （G3 主设定 p[h][site]）
-* `temp/opensim_fe/fracture_matrix_bc2/<b>/<b>_fe.json`（fe_solve/lrf/linearity）
+* `temp/fe_out/fracture_matrix_bc2/<b>/<b>_fe.json`（fe_solve/lrf/linearity）
 
 产物（**新文件**）
 ------------------

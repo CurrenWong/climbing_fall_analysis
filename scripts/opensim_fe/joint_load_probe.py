@@ -27,7 +27,7 @@
 
 产物
 ----
-``temp/opensim_fe/joint_load/``         每次运行的 .feb/.xplt/.hdf5/.log
+``temp/fe_out/joint_load/``         每次运行的 .feb/.xplt/.hdf5/.log
 ``results/opensim_fe/joint_load_summary.{json,csv}``
 ``results/opensim_fe/JOINT_LOAD_REPORT.md``
 

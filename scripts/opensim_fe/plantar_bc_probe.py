@@ -19,7 +19,7 @@ h=5 m, a=0（无跟腱）经 OpenSim 多体链真跑得到距下峰力 F_subt≈
 
 产物
 ----
-``temp/opensim_fe/plantar_bc/``         每次运行的 .feb/.xplt/.hdf5/.log
+``temp/fe_out/plantar_bc/``         每次运行的 .feb/.xplt/.hdf5/.log
 ``results/opensim_fe/plantar_bc_summary.{json,csv}``
 ``results/opensim_fe/plantar_bc_gauge_k.png``
 ``results/opensim_fe/PLANTAR_BC_REPORT.md``

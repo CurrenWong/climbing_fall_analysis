@@ -451,7 +451,7 @@ project-specific ones but cannot remove these):
 7. `[assumed]` Pad geometry: rigid wall only; no foam solid; `pad_stress_pa(ξ)` is a
    material function (QUOTABLE §3 #3), not a FE result.
 8. `[measured]` Bone + cartesian + plantar facet come from the THUMS calcaneus mesh used
-   by sibling `nonvertical_s4.json` (path: `temp\opensim_fe\thums_calcaneus\calcaneus_r_anatframe.npz`).
+   by sibling `nonvertical_s4.json` (path: `temp/fe_out\thums_calcaneus\calcaneus_r_anatframe.npz`).
 9. `[modeled]` The default-regression baseline (`plantar_bc="fixed"`) reproduces
    `nonvertical_s4.json::cases[axial_baseline_fixed]` (`max=213.50 MPa`,
    `gauge_max=186.76 MPa`) bit-for-bit; this is G0.
@@ -633,8 +633,8 @@ JSON this script writes, which goes to `files_written`.
       "febio_rc":           0,
       "febio_end_t":       1.0,
       "wall_s":            {"value": 0.32, "label": "measured", "unit": "s"},
-      "feb_path":          "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_mu0.6.feb",
-      "xplt_path":         "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\s5_contact\\h2.0_contact_mu0.6.xplt",
+      "feb_path":          "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s5_contact\\h2.0_contact_mu0.6.feb",
+      "xplt_path":         "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\s5_contact\\h2.0_contact_mu0.6.xplt",
       "F_n_n":             {"value": 34395.0, "label": "measured", "unit": "N",
                             "source": "FEBio .xplt contact pressure integral (QUOTABLE §3 #1 row)"},
       "F_t_n":             {"value": 4120.0, "label": "measured", "unit": "N"},
@@ -702,7 +702,7 @@ JSON this script writes, which goes to `files_written`.
     "commands":      [".venv\\Scripts\\python.exe scripts\\opensim_fe\\nonvertical_s5_contact.py"],
     "files_read":    ["results\\opensim_fe\\s1_h5_opensim.json",
                       "results\\opensim_fe\\nonvertical_s4.json",
-                      "temp\\opensim_fe\\thums_calcaneus\\calcaneus_r_anatframe.npz"],
+                      "temp/fe_out\\thums_calcaneus\\calcaneus_r_anatframe.npz"],
     "files_written": ["results\\opensim_fe\\nonvertical_s5_contact.json",
                       "results\\opensim_fe\\NONVERTICAL_S5_CONTACT_REPORT.md"],
     "venv":          ".venv\\Scripts\\python.exe",
@@ -945,11 +945,11 @@ The implementer cannot decide these alone. Each is a fork the user must resolve 
    attempt a 9-bone sweep? The latter would significantly expand the run matrix.
 
 6. **Where does the .feb / .xplt land?**, §1.9 `feb_path` / `xplt_path` point to
-   `temp\opensim_fe\s5_contact\…`. `nonvertical_s4.py` puts its data under
-   `temp\opensim_fe\s4_nonvertical\…`. The s5 sibling (supination) writes nothing to disk
+   `temp/fe_out\s5_contact\…`. `nonvertical_s4.py` puts its data under
+   `temp/fe_out\s4_nonvertical\…`. The s5 sibling (supination) writes nothing to disk
    because it's a non-FEBio script. Wave 4 is the first s5-family script that touches
    FEBio, so the directory naming convention has no prior in the s5 family. The §1.9
-   proposal is `temp\opensim_fe\s5_contact\…`. Acceptable, or should it be `s5_wave4`,
+   proposal is `temp/fe_out\s5_contact\…`. Acceptable, or should it be `s5_wave4`,
    `s5c`, or another tag?
 
 7. **Hard-surface label**, `pad_scenario="hard_surface"` is in the §1.7 axis but not
@@ -987,7 +987,7 @@ scope-shaping and the user may delegate them.
 | **3** | **μ ∈ {0.0, 0.3, 0.6}`，3 点** | G6 单调性**最少 3 点**；已含 G2 极限自检所需的 `μ=0.0` 与 QUOTABLE 基准 `μ=0.6`。`0.8` 超出 QUOTABLE 设定、对任何门禁无增益，却把 run 数抬高 40% —— 在时间顶棚下不划算。 |
 | **4** | **两者都报，且分码**：`G1 → N/A_minimum_version`；`G7 → RETIRED_by_contract_条6-8`；**一律不省略** | 省掉门禁看起来像藏。G1 是**范围**问题（最小版无泡沫 ⇒ 无 ξ 曲线可复现）；G7 是**政策退役**（契约条 6–8），两者语义不同，**不能共用一个码**，否则丢掉追溯链。 |
 | **5** | **跟骨单骨**（沿 `NONVERTICAL_S5_SUPINATION_REPORT.md` 的腓骨单骨先例） | 9 骨扫描会让矩阵爆炸，且距下/胫骨等的跖面 BC 语义需各自定义。本波是**接触能力**验证，不是 9 骨覆盖。 |
-| **6** | `.feb`/`.xplt` 落 `temp\opensim_fe\s5_contact\`，**报告与 JSON 落 `results\opensim_fe\`** | `temp/` 已整目录 ignore（可再生），`results/opensim_fe/` 才是入库产物 —— 这正好把"可再生的求解产物"与"要留档的结论"分开。 |
+| **6** | `.feb`/`.xplt` 落 `temp/fe_out\s5_contact\`，**报告与 JSON 落 `results\opensim_fe\`** | `temp/` 已整目录 ignore（可再生），`results/opensim_fe/` 才是入库产物 —— 这正好把"可再生的求解产物"与"要留档的结论"分开。 |
 | **7** | ✅ **`pad_scenario="hard_surface"` 确认在范围内** | G2 极限自检（刚性地面）与 G5 的 A7 参照**都必须有硬地面行**，缺了这两门就无从判定。 |
 | **8** | 只带 3 个：`σ_contact_avg`（= `F_n/60000`，QUOTABLE 口径）、`max`、`p95`；**其余分位数不进 JSON** | QUOTABLE 只引用全足迹平均值；列越多越容易被下游误引。`max`/`p95` 保留作边缘奇异诊断（G5 需要）。 |
 | **9** | **标量时间最大值**（`friction_cone_ratio_max`），不存时程 | G4 判据是"**任一时刻** \|F_t\| ≤ μ·F_n"⇒ 正确诊断就是时域最大值。存时程会让 JSON 膨胀且无人消费。 |

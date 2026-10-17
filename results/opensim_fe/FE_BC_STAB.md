@@ -47,7 +47,7 @@
 ## 3. 全 50 高度（侧向 90%，**干净重跑**）
 
 > ⚠️ 首次跑时混入了上一轮**无侧向**的缓存（h=1–7/10/12/13/16）⇒ 已把缓存移开
-> （`temp/opensim_fe/fe_bc_perheight/femur_r_unbraced/`）后**干净重跑**。下表为纯侧向数据。
+> （`temp/fe_out/fe_bc_perheight/femur_r_unbraced/`）后**干净重跑**。下表为纯侧向数据。
 
 | | 值 |
 |---|---|

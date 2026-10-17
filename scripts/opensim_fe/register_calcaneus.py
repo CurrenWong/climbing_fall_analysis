@@ -5,7 +5,7 @@ Run from the repo root::
 
     & .venv\\Scripts\\python.exe scripts\\opensim_fe\\register_calcaneus.py
 
-Inputs (already extracted & validated, ``temp/opensim_fe/thums_calcaneus/``):
+Inputs (already extracted & validated, ``temp/fe_out/thums_calcaneus/``):
     calcaneus_r_surface.stl   outer surface, mm, THUMS global frame (1268 tris)
     node_ids.npy / nodes_xyz.npy   volume nodes, mm, THUMS global frame
     calcaneus_elements.npz    eid / pid / conn (3957 x 8)

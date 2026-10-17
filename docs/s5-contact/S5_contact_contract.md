@@ -177,7 +177,7 @@ HDF5 路径：`states/{last}/node_data/displacement/all` 与 `.../node_data/reac
 
 **结论（须写进 S5 报告与论文）— 2026-10-06 更新，详见 `docs/S5_contact_convergence.md`**：
 1. **可靠区间**：接触解仅在名义应变 **ξ ≤ 0.25**（压头下沉 ≤ 50 mm）稳健 —— `rc=0`、**穿透 ≈ 0**（<0.25 mm）、**FE σ / 1D 律 σ = 1.56 → 1.64** 平滑单调。
-2. **G7 工况（ξ≈0.85）不可解**【**旧 AUGLAG 配方下成立** —— 新 PENALTY 配方已使「不可复现」**解除**、但 σ/σ_law **仍不收敛**，现行口径见**条 6–7**】：2 m 坠落要求压掉 85% 垫厚，超出 `hex→tet4` 泡沫的稳健域 → **3 次完全相同配置给出 3 个不同结果（negJac 27 / 3 / 15，全部失败）**，即该解**不可复现**；细化网格 (6,6,4)/(8,8,6)/(10,10,8) 与提高 penalty 同样反演（`temp/opensim_fe/s5_t9/repro.py`、`mesh_refine.py`）。
+2. **G7 工况（ξ≈0.85）不可解**【**旧 AUGLAG 配方下成立** —— 新 PENALTY 配方已使「不可复现」**解除**、但 σ/σ_law **仍不收敛**，现行口径见**条 6–7**】：2 m 坠落要求压掉 85% 垫厚，超出 `hex→tet4` 泡沫的稳健域 → **3 次完全相同配置给出 3 个不同结果（negJac 27 / 3 / 15，全部失败）**，即该解**不可复现**；细化网格 (6,6,4)/(8,8,6)/(10,10,8) 与提高 penalty 同样反演（`temp/fe_out/s5_t9/repro.py`、`mesh_refine.py`）。
 3. ⚠️ **因此 15.14 cm / 2.70× 一律不得引用**（既非标定值、也非可复现值）。**此前「2.70× = 大应变平冲头物理」的结论作废** —— 它取自收敛包线**之外**的解；T8 的**材料验证**（同一 Ogden 的均质自由侧面 FE ≡ 1D 律 ≤0.5%）**仍成立**，作废的只是其对高 sink 接触比值的推断。
 4. **验收口径**：同边界条件下 **FE vs FE**；可靠区间内可信的平冲头增强为 **≈1.6**。
 5. **收敛配方（已固化进库）**：`laugon="AUGLAG"` + `penalty=1` + `tolerance=0.005` + `aug_controls=AUGLAG_CONVERGENT_CONTROLS`（`gaptol=0.001/minaug=3/maxaug=200/smooth_aug=1`；FEBio 4.13 的 AUGLAG 默认子参数会发散）。默认参数不传 ⇒ 行为逐字不变。
@@ -210,7 +210,7 @@ HDF5 路径：`states/{last}/node_data/displacement/all` 与 `.../node_data/reac
 - 解释器 `D:\Project\climbing_fall_analysis\.venv\Scripts\python.exe`；`$env:PYTHONPATH="src"`；
   cwd = 仓库根；PowerShell（用 `;` 不用 `&&`）。
 - FEBio：`D:\Program\FEBioStudio\bin\febio4.exe`；**用 `febio_run.run_febio`**，不要自己起 subprocess。
-- 新增产物一律写进 `results/opensim_fe/` 或 `temp/opensim_fe/`，不要污染其它目录。
+- 新增产物一律写进 `results/opensim_fe/` 或 `temp/fe_out/`，不要污染其它目录。
 - `.feb` 段落顺序：**Loads → Boundary → Contact**（顺序错 = `unrecognized tag`）。
 - 接触面必须是**真实单元面**（tet facet），不能是 npz 里的四边形。
 - 不要 `as any` / `@ts-ignore` / 空 catch；失败必须显式抛错。

@@ -19,7 +19,7 @@ Reuse (import only -- no existing module is modified)
 * ``g4_fe_p1b`` -- the ``V7`` BC builder (``build_variant``), ``Setup``,
   ``run_and_post``, ``pca_axis``.
 * ``climbing.bone.MATERIAL_STRENGTH_MPA`` -- sigma_c(fibula_shaft) = 160 MPa.
-* load chain ``temp/opensim_fe/fracture_matrix/load_chain.npz`` key
+* load chain ``temp/fe_out/fracture_matrix/load_chain.npz`` key
   ``ankle_r__vert`` (h = 1..50).
 
 THUMS parameters (E=18500, nu=0.3, sigma_y=37, E_t=16700) and Dmax (0.9 / 1.0)
@@ -402,7 +402,7 @@ def _write_report(R: dict) -> None:
     A("```")
     A("")
     A("- `results/opensim_fe/G4_FE_PILOT_REPORT.md`（本文件）")
-    A("- `temp/opensim_fe/g4_fe_pilot/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_pilot.json`）")
+    A("- `temp/fe_out/g4_fe_pilot/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_pilot.json`）")
     A("- `scripts/opensim_fe/g4_fe_pilot.py`（本脚本；只 import 既有模块）")
     A("")
     A("**未改任何既有模块**：`g4_fe_p1b` / `g4_fe_spike` / `g4_fe_stab` / `bone_feb` "

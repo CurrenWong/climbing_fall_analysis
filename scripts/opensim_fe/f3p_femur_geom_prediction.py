@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """F-3′ · 从**已有 h5 的已对齐几何**量出股骨的 `A` / `W` / `e`，给出可证伪的首次跨越预测。
 
-**零新增 FE 解算**：几何取自 `temp/opensim_fe/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5`
+**零新增 FE 解算**：几何取自 `temp/fe_out/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5`
 （`align_pca=True` ⇒ 载荷轴 = z；几何与坠落高度无关）。
 
 **定义（事先写明）**

@@ -32,9 +32,9 @@ MEMORY 记「**5 个活脚本**仍读它们」。本次逐库检索（`temp/`、
 
 | 命中 | 性质 |
 |---|---|
-| **`temp/opensim_fe/a1_gauge_check.py`** | **唯一**真正**读取**异链表的脚本；且是**探索性探针**（自述「零 FE」、what-if：能否把 A1 的 #2 推到 16–18 m） |
+| **`temp/fe_out/a1_gauge_check.py`** | **唯一**真正**读取**异链表的脚本；且是**探索性探针**（自述「零 FE」、what-if：能否把 A1 的 #2 推到 16–18 m） |
 | `temp/a3_report_regen/NONVERTICAL_S5_CONTACT_REPORT.md` | 仅**正文文字提及** |
-| `temp/opensim_fe/{smoke,thums_smoke,v1regress,v1rerun}/S2_THUMS_REPORT*.md` | 仅**正文文字提及** |
+| `temp/fe_out/{smoke,thums_smoke,v1regress,v1rerun}/S2_THUMS_REPORT*.md` | 仅**正文文字提及** |
 | `s2_thums_height_sweep_plantar_bc_base.json` 的读者 | **无** |
 
 **⇒ 「5 个活脚本」应更正为「1 个探索性探针（+4 处文字提及）」。**
@@ -95,5 +95,5 @@ MEMORY 记「**5 个活脚本**仍读它们」。本次逐库检索（`temp/`、
 | 审计工具 | `scripts/opensim_fe/loadchain_audit.py`；链定义 `src/climbing/coupling/loadchain.py` |
 | 审计输出 | `temp/loadchain_audit.json` |
 | 影响量化 | `temp/loadchain_impact.py` → `temp/loadchain_impact.json` |
-| 唯一读者 | `temp/opensim_fe/a1_gauge_check.py` |
+| 唯一读者 | `temp/fe_out/a1_gauge_check.py` |
 | 原始记录 | `STALE_LOADCHAIN_AUDIT.md`；`[MEMORY gotcha #1/#10 表]` |

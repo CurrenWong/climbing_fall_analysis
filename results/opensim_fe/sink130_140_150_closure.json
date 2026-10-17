@@ -20,7 +20,7 @@
       "contact": "mu=0.6, penalty=0.1, laugon=PENALTY, tolerance=0.005, aug_controls=None, node_reloc=0, search_radius=20.0, contact_type=sliding-elastic",
       "pad_material": "fit_pad_material() — compressible Ogden, K=1 MPa, pm=2",
       "control": "G7: 2400 steps, dtmax=step_size=1/2400, cutback=0.125, max_retries=20, opt_iter=15, BFGS, max_refs=25, reform_each=1, pardiso",
-      "source": "temp/opensim_fe/s5_t9/udg_contact/udg_contact_sweep2.py::run_case('n7_tet4_s170', pad_kind='tet', ...) — QUOTABLE anchor recipe, bit-identical"
+      "source": "temp/fe_out/s5_t9/udg_contact/udg_contact_sweep2.py::run_case('n7_tet4_s170', pad_kind='tet', ...) — QUOTABLE anchor recipe, bit-identical"
     },
     "f_n_correction": "F_contact = applied load − hold-spring force (wave 5 correction). Standalone-pad G7 anchor has no hold spring ⇒ F_hold_spring_n = 0 and F_contact = indenter z-reaction (Newton-3rd equivalent on the contact pair).",
     "closure_definition": "line-1 dynamics fixes the sink (12.96 cm ⇒ 130–150 mm admissible window) ⇒ FE reads back F_contact ⇒ compare to the line-1 dynamics force peak (34.8 kN). This is a closed verification loop, explicitly NOT an independent prediction.",
@@ -31,8 +31,8 @@
   "runs": [
     {
       "sink_mm": 130.0,
-      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\sink_closure_20261010\\sink130\\sink130.feb",
-      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\sink_closure_20261010\\sink130\\sink130.xplt",
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\sink_closure_20261010\\sink130\\sink130.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\sink_closure_20261010\\sink130\\sink130.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "febio_wall_s": 41.122639417648315,
@@ -59,8 +59,8 @@
     },
     {
       "sink_mm": 140.0,
-      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\sink_closure_20261010\\sink140\\sink140.feb",
-      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\sink_closure_20261010\\sink140\\sink140.xplt",
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\sink_closure_20261010\\sink140\\sink140.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\sink_closure_20261010\\sink140\\sink140.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "febio_wall_s": 40.17481017112732,
@@ -87,8 +87,8 @@
     },
     {
       "sink_mm": 150.0,
-      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\sink_closure_20261010\\sink150\\sink150.feb",
-      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\sink_closure_20261010\\sink150\\sink150.xplt",
+      "feb_path": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\sink_closure_20261010\\sink150\\sink150.feb",
+      "xplt_path": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\sink_closure_20261010\\sink150\\sink150.xplt",
       "febio_rc": 0,
       "febio_end_t": 1.0,
       "febio_wall_s": 40.093557357788086,

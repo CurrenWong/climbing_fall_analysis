@@ -12,7 +12,7 @@ runs the same minimal baseline (tet4 standalone pad / sliding-elastic / mu=0.6 /
 NEW PENALTY 0.1 / G7 control) at sink in {130, 140, 150} mm and reports
 the corrected closure delta.
 
-Recipe (verbatim from `temp/opensim_fe/s5_t9/udg_contact/udg_contact_sweep2.py`
+Recipe (verbatim from `temp/fe_out/s5_t9/udg_contact/udg_contact_sweep2.py`
 `run_case("n7_tet4_s170", ...)` — the exact case that produced 34.4 kN / 0.574
 MPa at sink=170 mm and is the QUOTABLE anchor):
 
@@ -186,7 +186,7 @@ DEFAULT_SINKS_MM = (130.0, 140.0, 150.0)
 
 # ---------------------------------------------------------------------------
 # Control / stepper hardening — identical regex to
-# temp/opensim_fe/s5_t9/udg_contact/udg_contact_sweep2.py:harden
+# temp/fe_out/s5_t9/udg_contact/udg_contact_sweep2.py:harden
 # ---------------------------------------------------------------------------
 _HARDEN_RE = re.compile(r"(?s)<Control>.*?</Control>")
 _HARDEN_TEMPLATE = (
@@ -420,7 +420,7 @@ def _annotate(rows: list[RunRow], ts: str) -> AnnotatedClosure:
                 "control": ("G7: 2400 steps, dtmax=step_size=1/2400, " +
                             "cutback=0.125, max_retries=20, opt_iter=15, " +
                             "BFGS, max_refs=25, reform_each=1, pardiso"),
-                "source": ("temp/opensim_fe/s5_t9/udg_contact/udg_contact_sweep2.py::" +
+                "source": ("temp/fe_out/s5_t9/udg_contact/udg_contact_sweep2.py::" +
                            "run_case('n7_tet4_s170', pad_kind='tet', ...) — QUOTABLE " +
                            "anchor recipe, bit-identical"),
             },

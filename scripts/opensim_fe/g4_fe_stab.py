@@ -720,7 +720,7 @@ def _write_report(setup: Setup, R: dict, args) -> None:
     A("```")
     A("")
     A("- `results/opensim_fe/G4_FE_STAB_REPORT.md`（本文件）")
-    A("- `temp/opensim_fe/g4_fe_stab/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_stab.json`）")
+    A("- `temp/fe_out/g4_fe_stab/`（各 `.feb`/`.xplt`/`.hdf5`/`.log` + `g4_fe_stab.json`）")
     A("")
     A("**未改任何既有模块**：本脚本只 import `g4_fe_spike` / `bone_feb` 并复用其注入/求解/"
       "后处理；`g4_fe_spike.py` 语义未改（Dmax 仅对其产出的文本做 `<Dmax>` 文本替换）。")

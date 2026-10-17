@@ -329,7 +329,7 @@ def _write_report(
             t += f"（线性内插 ≈ {s['h_interp_m']:.2f} m）"
         return t
 
-    src = source_npz or "temp/opensim_fe/thums_calcaneus/calcaneus_r_calcnframe.npz"
+    src = source_npz or "temp/fe_out/thums_calcaneus/calcaneus_r_calcnframe.npz"
     tag_txt = tag.strip("_")
     title = "S2-THUMS · AM50 跟骨刚性地面全高度扫描（Option C）"
     if tag_txt:

@@ -86,8 +86,8 @@ row["utilization_at_5m"] = (main["stats"][primary_stat] * lrf
 
 正常入口 `fracture_matrix.main` 虽复用缓存 FE，但仍会调用 `find_febio(verify=True)` + `probe_febio` 去**启动 FEBio 可执行文件**取版本号。为严格遵守「不调用 FEBio」，新增**纯缓存重放驱动** `scripts/opensim_fe/regenerate_fracture_matrix.py`（additive，不改既有 CLI 语义）：
 
-- 载荷：直接复用缓存 `temp/opensim_fe/fracture_matrix/load_chain.npz`（逐高度实测关节纵向峰值，**不重跑 OpenSim**）。
-- FE：直接读缓存 `temp/opensim_fe/fracture_matrix/<bone>/<bone>_fe.json`（**不重跑 FEBio**）。
+- 载荷：直接复用缓存 `temp/fe_out/fracture_matrix/load_chain.npz`（逐高度实测关节纵向峰值，**不重跑 OpenSim**）。
+- FE：直接读缓存 `temp/fe_out/fracture_matrix/<bone>/<bone>_fe.json`（**不重跑 FEBio**）。
 - 求解器元数据（`febio_exe` / `febio_version` / `time_steps`）从既有 `fracture_matrix.json` 的 `meta` 复用，**不启动 FEBio**。
 - 随后调用 `compute_matrix(...)` → `write_outputs(...)` → `write_report(...)`，写出与主入口相同的产物。
 
@@ -97,7 +97,7 @@ row["utilization_at_5m"] = (main["stats"][primary_stat] * lrf
 cd D:\Project\climbing_fall_analysis
 $env:PYTHONPATH="src"
 & .venv\Scripts\python.exe scripts\opensim_fe\regenerate_fracture_matrix.py
-# 实测耗时 ~3.1 s；日志：temp/opensim_fe/fracture_matrix/regen_run.log
+# 实测耗时 ~3.1 s；日志：temp/fe_out/fracture_matrix/regen_run.log
 ```
 
 **载荷来源**：`load_chain.npz`（逐高度 `ground_reaction → run_dead_drop → joint_reaction` 的实测关节纵向峰值；`ref_idx`=h=5 m）。@5 m 参考载荷：`ankle_r`=25,266.25 N、`subtalar_r`=25,354.40 N、`hip_r`=15,227.65 N、`lumbar`=22,087.58 N。
@@ -180,7 +180,7 @@ $env:PYTHONPATH="src"
 | `results/opensim_fe/MATRIX_SCALING_FIX_REPORT.md` | **新增** | 本报告 |
 | `scripts/opensim_fe/fracture_matrix.py` | **被编辑** | 仅 `compute_matrix` 的缩放（§2） |
 | `scripts/opensim_fe/regenerate_fracture_matrix.py` | **新增** | 纯缓存重放驱动（无 FEBio） |
-| `temp/opensim_fe/fracture_matrix/regen_run.log` | **新增** | 本次重放日志（未覆盖既有 `run.log`） |
+| `temp/fe_out/fracture_matrix/regen_run.log` | **新增** | 本次重放日志（未覆盖既有 `run.log`） |
 
 > 备份在任何写入之前完成（`Copy-Item` 到 `*_prebugfix_backup.*`，同目录）。未触碰 `scripts/ankle_fe/`、`temp/pyfebio_demo/`、`temp/ankle_*`、`FE_PIPELINE_TODO.md`。
 

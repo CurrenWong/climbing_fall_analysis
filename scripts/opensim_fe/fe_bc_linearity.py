@@ -10,7 +10,7 @@
 本脚本：对股骨在同一网格上解一条**载荷阶梯**，把**实测 σ(L)** 与
 **线性外推预测 σ(ref)·(L/ref)** 并排，量出误差倍数。
 
-纪律：冻结输入只读；输出只在 `temp/opensim_fe/fe_bc_linearity/` + 一个 results json。
+纪律：冻结输入只读；输出只在 `temp/fe_out/fe_bc_linearity/` + 一个 results json。
 BC 固定为 BC2 条件（`top_frac=0.30, bot_frac=0.30, align_pca=True, time_steps=1`），
 **本脚本不改任何 BC** —— 只测「线性外推」这一个假设。
 """

@@ -66,7 +66,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
     的跟腱附着点 (−110,46,79) mm 落在 STL 之外。故跟腱**位置/方向按 IITD STL 解剖确定**，
     不映射 Rajagopal 路径。
 - **S3.C（方向 C：借 THUMS AM50 跟骨几何+材料）✅ 完成，未复现绝对高度** ——
-  - **抽取**：`kmesh_io.py` + `extract_thums_calcaneus.py` → `temp/opensim_fe/thums_calcaneus/`。
+  - **抽取**：`kmesh_io.py` + `extract_thums_calcaneus.py` → `temp/fe_out/thums_calcaneus/`。
     THUMS 甲板 ASCII；右跟骨 = `R_CALCANEUS_SPON`（pid 81001200，3323 塌缩六面体记法
     四面体，`*MAT_ELASTIC` RO=1e-9、E=73.4 MPa、ν=0.45）+ `R_CALCANEUS_CORT`
     （pid 81001300，634 hex，`*MAT_PIECEWISE_LINEAR_PLASTICITY` E=15000 MPa、ν=0.3、
@@ -179,7 +179,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
 | `scripts/opensim_fe/s2_plot.py` | σ_vm(h) 图 |
 | `scripts/opensim_fe/meshing_driver.py` | VTP/STL→tet→.feb→FEBio→σ_vm 单命令 |
 | `scripts/opensim_fe/kmesh_io.py` | THUMS `.k` 甲板 ASCII 解析（节点/单元/材料） |
-| `scripts/opensim_fe/extract_thums_calcaneus.py` | 抽右跟骨两 part（SPON/CORT）→ `temp/opensim_fe/thums_calcaneus/` |
+| `scripts/opensim_fe/extract_thums_calcaneus.py` | 抽右跟骨两 part（SPON/CORT）→ `temp/fe_out/thums_calcaneus/` |
 | `scripts/opensim_fe/registration.py` | ICP 配准到 OpenSim `r_foot.vtp`（发现：该 VTP 是整足网格） |
 | `scripts/opensim_fe/register_calcaneus.py` | 跟骨配准入口 |
 | `scripts/opensim_fe/registration_anatomical.py` | 解剖配准：距下关节面质心→原点、跖面→−Y、前突→+X |
@@ -199,7 +199,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
 | `scripts/opensim_fe/make_pad_paradox_figure.py` | **图 10「垫子悖论」**：`pad_supination_tradeoff.json` → `total_risk(k)` 曲线 + risk=1 阈值 + 刚性极限 |
 | `scripts/opensim_fe/make_scenario_animations.py` | **危险姿势演示动画**：`--scenario ser/talus`（三踝 SER / 距骨背屈），垫 vs 刚性 GRF 对比 + 踝部特写内嵌 + 实时 `M_inv`/risk 读数 |
 
-探测/复现脚本在 `temp/opensim_fe/probe_*.py`（`gauge_family` / `linearity` / `decimate` / `gmsh_remesh`）。
+探测/复现脚本在 `temp/fe_out/probe_*.py`（`gauge_family` / `linearity` / `decimate` / `gmsh_remesh`）。
 
 ---
 
@@ -224,7 +224,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
 > ⚠️ **动画 ≠ 计算的部分**（画面已标注）：① 自由落体段是纯运动学插值，非 FD；② 垫子压缩是**渲染约定**（FD 无接触约束，16 cm 是自由行程）；③ SER 的「内翻/外旋」**不是模型自由度**，画面足部为中立位；④ 右侧刚性虚线仅作**载荷**对比，姿态仍是垫工况解。
 > 完整审计表见 `results/opensim_fe/figures/FIGURE_CAPTIONS.md` §附 2。
 
-**图 8/9 的做法（可复用）**：THUMS AM50 真实骨网格（`temp/opensim_fe/parts*/…/*_surface.stl`；**胫骨用 gmsh 流形面 + 多遍 Taubin**，其余不平滑以免足趾起刺）→ 用 `pyvista` 渲染；**骨折线 = 对骨网格做平面切片**（随视角正确遮挡）、向外偏 1.3–3.4 mm 避免共面打架；**机制箭头 = 真 3D 弧线**（Rodrigues 旋转，方向按物理判据）；**标注 = 空白感知自适应放置**（逐像素采样背景、避让已放标签、引线短）。四方位（A 外侧 / D 前方 / G 内侧 / J 后方）任选。
+**图 8/9 的做法（可复用）**：THUMS AM50 真实骨网格（`temp/fe_out/parts*/…/*_surface.stl`；**胫骨用 gmsh 流形面 + 多遍 Taubin**，其余不平滑以免足趾起刺）→ 用 `pyvista` 渲染；**骨折线 = 对骨网格做平面切片**（随视角正确遮挡）、向外偏 1.3–3.4 mm 避免共面打架；**机制箭头 = 真 3D 弧线**（Rodrigues 旋转，方向按物理判据）；**标注 = 空白感知自适应放置**（逐像素采样背景、避让已放标签、引线短）。四方位（A 外侧 / D 前方 / G 内侧 / J 后方）任选。
 
 **受伤体位的临床依据（关键，勿再写反）**：
 - 三踝/后踝骨折最常见机制 = Lauge-Hansen **旋后-外旋（SER）**；**旋后（supination）= 内翻 = 脚心向内**，**外旋**是其**致伤力矩** → **脚位是内翻，不是外翻**（论文 §3.4/§3.6 已改正）。
@@ -265,7 +265,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
   > 🔄 **同日晚间修订**：换成 `laugon="PENALTY"` + `penalty=0.1`（**保留 `search_radius=20`，大而非小**）后 G7 **可复现 ×4**、`rc=0 NORMAL / end_t=1 / negJac=0`、力平衡 ≈1e-7、`F_n ≈ 34.4 kN` 跨 3 网格漂移 **<0.6 %** ⇒ **「不可复现」已解除**；但 **σ/σ_law 仍不网格收敛**（4 项 FAIL）。现行口径见 `docs/S5_QUOTABLE.md` 与 `S5_contact_contract.md` §4 **条 6–8**。
 - ⚠️ **因此 15.14 cm / 2.70× 一律不得引用**。此前「2.70× = 大应变平冲头物理」的结论**作废**（它取自收敛包线**之外**的解）；T8 的**材料验证**（同一 Ogden 的均质自由侧面 FE ≡ 1D 律 ≤0.5%）**仍成立**，作废的只是其对高 sink 接触比值的推断。
 - **收敛配方已固化进库**：`laugon="AUGLAG"` + `penalty=1` + `tolerance=0.005` + `aug_controls=AUGLAG_CONVERGENT_CONTROLS`（FEBio 4.13 的 AUGLAG **默认子参数会发散**；不传 ⇒ 默认行为**逐字不变**）。
-- **探针**：`temp/opensim_fe/s5_t9/{verify_lib,envelope,repro,finish,mesh_refine}.py`。
+- **探针**：`temp/fe_out/s5_t9/{verify_lib,envelope,repro,finish,mesh_refine}.py`。
 
 > **⚠️ 引用限定（2026-10-06，针对本节提及的 1.56/1.59/1.62/1.64 与 34.6 kN/2.205 对）**
 >
@@ -340,7 +340,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
 
 > **S3.1 步① 侦察 ✅ 完成（2026-10-04）** —— 9 部位 PID 全部实测定位 + 3 骨试点 rc=0：
 > tibia_r **38209 tet / 体积 +2.03%**；skull_r_parietal 30714；lumbar_L3 44181。产物
-> `results/opensim_fe/{PARTS_MAPPING.md,S31_SCOUT_REPORT.md}`、`temp/opensim_fe/parts/`。
+> `results/opensim_fe/{PARTS_MAPPING.md,S31_SCOUT_REPORT.md}`、`temp/fe_out/parts/`。
 > 🔴 **两个阻塞坑（S3.1 批量前须定案）**：① **gmsh 尺寸控制失效**（`Mesh.MeshSizeMax` 不生效，
 > 真骨恒 >5 万 tet）→ 只能走体素 `_delaunay_tet`，质量 `J<0.3`≈17%（差于跟骨 gmsh 6.2%）；
 > ② **皮质壳缺失**（中轴骨/颅骨 `*_CORT`/`_external_`/`_shell` 是**壳单元**，`kmesh_io` 只读 solid
@@ -361,7 +361,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
 > `results/opensim_fe/SHELL_SCOUT_REPORT.md`。
 >
 > **坑② 步②（L3 shell+solid FE）✅ 完成（2026-10-04）** —— pyfebio `ShellDomain` 共节点路径**端到端跑通**
-> （`scripts/opensim_fe/l3_shell_feb.py`；`temp/opensim_fe/l3_shell/`）。L3 SPON tet4(E=73.4)+CORT quad4 壳
+> （`scripts/opensim_fe/l3_shell_feb.py`；`temp/fe_out/l3_shell/`）。L3 SPON tet4(E=73.4)+CORT quad4 壳
 > (E=15000,t=1.39) **100% 共节点、无 tie**；FEBio 4.13 **rc=0**。**皮质效应：去壳后松质 σ_vm 升 16–27×**
 > （max 26.6× / p95 19.2× / mean 15.9×）⇒ **纯松质严重失真、坑② 必须解决**（壳吸收 ~95% 内力）。
 > 报告 `L3_SHELL_FEB_REPORT.md`。⚠️ 坑：FEBio 4.13 `.xplt` 省略壳域 `PLT_DOM_NAME` → pyfebio `to_hdf5`
@@ -513,7 +513,7 @@ GRF(pad.py) → OpenSim 正动力学(关节反力) → load_transfer(关节 wren
 - **🔴 不要碰**（并发脚踝 FE 会话拥有）：`scripts/ankle_fe/`、`temp/pyfebio_demo/`、
   `temp/ankle_*`、`.learnings/*` 的 **LRN-010~019**（本项目占用 **020~027**）、
   `FE_PIPELINE_TODO.md`。
-- 本项目自留目录：`src/climbing/coupling/`、`scripts/opensim_fe/`、`temp/opensim_fe/`、
+- 本项目自留目录：`src/climbing/coupling/`、`scripts/opensim_fe/`、`temp/fe_out/`、
   `results/opensim_fe/`、`docs/OpenSim_FE复现方案.md`、`docs/OpenSim_FE交接.md`。
 
 ---

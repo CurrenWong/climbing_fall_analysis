@@ -93,7 +93,7 @@
 |---|---|
 | 范围取证脚本 | `scripts/opensim_fe/a2_recompute_scope.py` |
 | 范围取证产物 | `results/opensim_fe/A2_RECOMPUTE_SCOPE.json` |
-| 冻结逐骨记录（lrf / linearity） | `temp/opensim_fe/fracture_matrix_bc2/<b>/<b>_fe.json` |
+| 冻结逐骨记录（lrf / linearity） | `temp/fe_out/fracture_matrix_bc2/<b>/<b>_fe.json` |
 | 逐部位判定 | `results/opensim_fe/FE_BC_AGG_SENS_9BONES.json` |
 | 股骨新数据 | `results/opensim_fe/FE_BC_PERHEIGHT.json` |
 | T6 新数据 | `results/opensim_fe/T6_PERHEIGHT.json`、`T6_BC_DIAGNOSIS.md` |

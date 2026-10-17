@@ -175,7 +175,7 @@ $env:PYTHONPATH="src"
 ```
 
 - `results/opensim_fe/G4_FE_EROSION_REPORT.md`（本文件）
-- `temp/opensim_fe/g4_fe_erosion/`（各 `.feb` / `.xplt` / `.hdf5` / `.log` + `g4_fe_erosion.json`）
+- `temp/fe_out/g4_fe_erosion/`（各 `.feb` / `.xplt` / `.hdf5` / `.log` + `g4_fe_erosion.json`）
 - `scripts/opensim_fe/g4_fe_erosion.py`（本脚本；只 import 既有模块）
 
 **未改任何既有模块**：`bone_feb` / `g4_fe_spike` / `g4_fe_stab` / `febio_run` 均只 import 复用。

@@ -1,6 +1,6 @@
 # S2-THUMS · AM50 跟骨刚性地面全高度扫描（Option C） · contact_hold100
 
-**模型**：`D:\Project\climbing_fall_analysis\temp\opensim_fe\thums_calcaneus\calcaneus_r_calcnframe.npz`（AM50 THUMS 右跟骨，mm，OpenSim `calcn_r` 帧；原点 = 距下关节面质心）。
+**模型**：`D:\Project\climbing_fall_analysis\temp/fe_out\thums_calcaneus\calcaneus_r_calcnframe.npz`（AM50 THUMS 右跟骨，mm，OpenSim `calcn_r` 帧；原点 = 距下关节面质心）。
 双材料域：皮质 `calcaneus`（hex8，E=15000 MPa，ν=0.30）+ 松质 `trabecular`（tet4，E=73.4 MPa，ν=0.45）。
 
 - 单元：CORT hex8 = 634，SPON tet4 = 3323；节点 1544。

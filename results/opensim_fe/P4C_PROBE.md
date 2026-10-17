@@ -81,7 +81,7 @@ P4-c 验证：**只改 lateral_support**（载荷/固定/方向 = P4-a′ 执行
 ```
 set PYTHONPATH=src
 .venv\Scripts\python.exe scripts\opensim_fe\p4c_probe.py
-# 产物：temp\opensim_fe\p4c_probe\femur_r\p4c_{narrow,none}_h{h}\femur_r.{feb,hdf5}
+# 产物：temp/fe_out\p4c_probe\femur_r\p4c_{narrow,none}_h{h}\femur_r.{feb,hdf5}
 #       results\opensim_fe\P4C_PROBE.json（含 verdict/attribution/sentinel）
 # 诊断：temp\p4c_disp_check.py（屈曲模态）
 ```

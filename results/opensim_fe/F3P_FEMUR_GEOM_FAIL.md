@@ -2,7 +2,7 @@
 
 > **日期**：2026-10-13 ｜ **脚本**：`scripts/opensim_fe/f3p_femur_geom_prediction.py`（零新增 FE）
 > **产物**：`results/opensim_fe/F3P_FEMUR_GEOM_PREDICTION.json`
-> **几何源**：`temp/opensim_fe/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5`（已对齐）
+> **几何源**：`temp/fe_out/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5`（已对齐）
 
 > **▶ 更新（2026-10-14）**：本件的两处根因已实证定位并修正 ——
 > ① `signed_volumes` 用非共享对角线 TETS 且**额外 ÷6**；② h5 `domains` 的 **0-based 行号**被当 1-based（`-1` 错行）。
@@ -97,7 +97,7 @@
 | 项 | 来源 |
 |---|---|
 | 本件脚本 / 产物 | `scripts/opensim_fe/f3p_femur_geom_prediction.py`、`F3P_FEMUR_GEOM_PREDICTION.json` |
-| 几何源（已对齐） | `temp/opensim_fe/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5` |
+| 几何源（已对齐） | `temp/fe_out/fe_bc_stab/femur_r/A2_axial_lat_90_h50/femur_r.hdf5` |
 | `A ≈ 500 mm²` 锚 | G6 线（`references/fe-bc-closure.md`：模型 500 vs 文献 505 mm²） |
 | `e` / `F(h)` | 本件；`fracture_matrix_bc2.json`（`parts[*].load_fraction`、`loads_n["hip_r"]`） |
 | 上游探针 | `results/opensim_fe/F3_FEMUR_LOADPATH_PROBE.md` |

@@ -229,14 +229,14 @@ $env:PYTHONPATH = "src"
 ```
 
 输出（实测）：
-- `temp/opensim_fe/l3_shell/l3_with_shell.feb`  （A：有壳）
-- `temp/opensim_fe/l3_shell/l3_with_shell.xplt` （A 结果）
-- `temp/opensim_fe/l3_shell/l3_with_shell.hdf5` （A 转换后）
-- `temp/opensim_fe/l3_shell/l3_no_shell.feb`    （B：无壳）
-- `temp/opensim_fe/l3_shell/l3_no_shell.xplt`   （B 结果）
-- `temp/opensim_fe/l3_shell/l3_no_shell.hdf5`   （B 转换后）
-- `temp/opensim_fe/l3_shell/l3_shell_feb_result.json`（汇总）
-- `temp/opensim_fe/l3_shell/run.log`            （完整 stdout）
+- `temp/fe_out/l3_shell/l3_with_shell.feb`  （A：有壳）
+- `temp/fe_out/l3_shell/l3_with_shell.xplt` （A 结果）
+- `temp/fe_out/l3_shell/l3_with_shell.hdf5` （A 转换后）
+- `temp/fe_out/l3_shell/l3_no_shell.feb`    （B：无壳）
+- `temp/fe_out/l3_shell/l3_no_shell.xplt`   （B 结果）
+- `temp/fe_out/l3_shell/l3_no_shell.hdf5`   （B 转换后）
+- `temp/fe_out/l3_shell/l3_shell_feb_result.json`（汇总）
+- `temp/fe_out/l3_shell/run.log`            （完整 stdout）
 
 注：脚本启动时会清掉上述旧产物（仅本目录）；不触碰任何既有产物。
 
@@ -245,8 +245,8 @@ $env:PYTHONPATH = "src"
 | 文件 | 说明 |
 |------|------|
 | `scripts/opensim_fe/l3_shell_feb.py` | 本脚本（新增）|
-| `temp/opensim_fe/l3_shell/l3_with_shell.feb` / `.xplt` / `.hdf5` | CASE A 有壳 |
-| `temp/opensim_fe/l3_shell/l3_no_shell.feb`   / `.xplt` / `.hdf5` | CASE B 无壳 |
-| `temp/opensim_fe/l3_shell/l3_shell_feb_result.json` | 全部数值 |
-| `temp/opensim_fe/l3_shell/run.log` | 完整 stdout |
+| `temp/fe_out/l3_shell/l3_with_shell.feb` / `.xplt` / `.hdf5` | CASE A 有壳 |
+| `temp/fe_out/l3_shell/l3_no_shell.feb`   / `.xplt` / `.hdf5` | CASE B 无壳 |
+| `temp/fe_out/l3_shell/l3_shell_feb_result.json` | 全部数值 |
+| `temp/fe_out/l3_shell/run.log` | 完整 stdout |
 | `results/opensim_fe/L3_SHELL_FEB_REPORT.md` | 本报告 |

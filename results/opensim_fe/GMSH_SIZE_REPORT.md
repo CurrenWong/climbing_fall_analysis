@@ -94,7 +94,7 @@ gmsh 参考手册 t10 明确：网格尺寸优先级里，若 `MeshSizeFromPoint
 * `iso-dec`：marching-cubes 等值面 → decimate 0.70 → clean（修复自交/非流形，
   与 `extract_part.mesh_stl` 路径 2 一致）。
 
-参考体积取 `temp/opensim_fe/parts/tibia_r/summary.json` 的
+参考体积取 `temp/fe_out/parts/tibia_r/summary.json` 的
 `surface.enclosed_volume_mm3 = 346130.49 mm³`（散度定理，可信参照）。
 
 ## 4. 配置对比表（胫骨，iso-dec 面，实测）
@@ -255,23 +255,23 @@ cl=4→7517/J3.06/0.91%；cl=5→4071/J3.07/1.36%。跟骨 `raw` 干净，无需
 
 # 2) 修复 helper：胫骨 cl=4 / 顶骨 cl=3 / 跟骨对照 cl=3
 & .venv\Scripts\python.exe scripts\opensim_fe\part_meshing.py `
-    --name tibia_r --stl temp\opensim_fe\parts\tibia_r\tibia_r_surface.stl `
+    --name tibia_r --stl temp/fe_out\parts\tibia_r\tibia_r_surface.stl `
     --char-len 4 --ref-volume-mm3 346130.49
 
 & .venv\Scripts\python.exe scripts\opensim_fe\part_meshing.py `
     --name skull_r_parietal `
-    --stl temp\opensim_fe\parts\skull_r_parietal\skull_r_parietal_surface.stl `
+    --stl temp/fe_out\parts\skull_r_parietal\skull_r_parietal_surface.stl `
     --char-len 3
 
 & .venv\Scripts\python.exe scripts\opensim_fe\part_meshing.py `
-    --name calcaneus_r --stl temp\opensim_fe\thums_calcaneus\calcaneus_r_anatframe.stl `
+    --name calcaneus_r --stl temp/fe_out\thums_calcaneus\calcaneus_r_anatframe.stl `
     --char-len 3 --ref-volume-mm3 96205.19
 ```
 
 产物（**新目录**，未覆盖既有产物）：
 
 ```
-temp/opensim_fe/parts_gmsh/
+temp/fe_out/parts_gmsh/
   gmsh_size_probe_tibia_r.json                # 探针原始记录（含每条报错原文）
   tibia_r/{tibia_r_mesh.npz, tibia_r_summary.json, tibia_r_surface_used.stl}
   skull_r_parietal/{...}

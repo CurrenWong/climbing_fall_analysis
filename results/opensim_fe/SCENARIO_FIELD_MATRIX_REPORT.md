@@ -325,7 +325,7 @@ $env:PYTHONPATH="src"
 
 - `results/opensim_fe/bc_robust_metric_route1.json`
 - `results/opensim_fe/risk_1d_loadshare.json`
-- `temp/opensim_fe/fracture_matrix/load_chain.npz`
+- `temp/fe_out/fracture_matrix/load_chain.npz`
 - `src/climbing/coupling/opensim_grf.py`
 - `src/climbing/coupling/opensim_fall.py`
 - `src/climbing/coupling/joint_reactions.py`
@@ -342,6 +342,6 @@ $env:PYTHONPATH="src"
 
 - `results/opensim_fe/scenario_field_matrix.json`
 - `results/opensim_fe/SCENARIO_FIELD_MATRIX_REPORT.md`
-- `temp/opensim_fe/scenario_field_matrix/scenario_load_chain.npz`
+- `temp/fe_out/scenario_field_matrix/scenario_load_chain.npz`
 - 新测试：`tests/test_scenario_field_matrix.py`
 

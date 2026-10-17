@@ -553,7 +553,7 @@ def _write_report(R: dict) -> None:
     A("```")
     A("")
     A("- `results/opensim_fe/G4_FE_EROSION_REPORT.md`（本文件）")
-    A("- `temp/opensim_fe/g4_fe_erosion/`（各 `.feb` / `.xplt` / `.hdf5` / `.log` + `g4_fe_erosion.json`）")
+    A("- `temp/fe_out/g4_fe_erosion/`（各 `.feb` / `.xplt` / `.hdf5` / `.log` + `g4_fe_erosion.json`）")
     A("- `scripts/opensim_fe/g4_fe_erosion.py`（本脚本；只 import 既有模块）")
     A("")
     A("**未改任何既有模块**：`bone_feb` / `g4_fe_spike` / `g4_fe_stab` / `febio_run` 均只 import 复用。")

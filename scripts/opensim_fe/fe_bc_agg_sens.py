@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """FE_BC · 任务①②：口径敏感性 + 修好的「侧向约束」诊断（**零新增解算**）。
 
-读 `temp/opensim_fe/fe_bc_perheight/femur_r/h*/femur_r.hdf5`（G9 口径侧向 `[(0.31,0.69)]`
+读 `temp/fe_out/fe_bc_perheight/femur_r/h*/femur_r.hdf5`（G9 口径侧向 `[(0.31,0.69)]`
 的逐高度真解），对每个高度算**多种聚合口径**，看 A2-股骨的判定对口径有多敏感。
 
 ① 口径敏感性（候选 1：`fem_cort` shaft-median 对**弯曲主导**部位是否系统性偏低）

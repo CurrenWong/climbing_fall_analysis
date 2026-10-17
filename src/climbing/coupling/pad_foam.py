@@ -727,7 +727,7 @@ def run_uniaxial_verify(
     """
     from climbing.coupling.febio_run import run_febio as _run_febio
 
-    workdir = Path(workdir) if workdir is not None else Path("temp/opensim_fe/s5_t1b")
+    workdir = Path(workdir) if workdir is not None else Path("temp/fe_out/s5_t1b")
     if not workdir.is_absolute():
         # `workdir` 会被当作 cwd 传给 FEBio；若 feb_path 也相对（同一目录），
         # 相对路径会在错误的基准下解析 → FEBio 报 "file not found"、退出码 1。

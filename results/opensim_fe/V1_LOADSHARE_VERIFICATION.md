@@ -263,7 +263,7 @@ FEBio 收敛判据退化为零残差」）；该记录同时给了线索：接�
 | 项 | 位置 |
 |---|---|
 | 载荷链实测（本件新增） | `temp/v1_loadshare_p1.py` / `_p1b.py` / `_p1c.py`（只读） |
-| **帽柔度扫描（本件补测，未跑通）** | `temp/v1_cap_compliance.py`；读数诊断 `temp/v1_inspect.py`；产物 `temp/opensim_fe/v1_cap/e200000/` |
+| **帽柔度扫描（本件补测，未跑通）** | `temp/v1_cap_compliance.py`；读数诊断 `temp/v1_inspect.py`；产物 `temp/fe_out/v1_cap/e200000/` |
 | **刚帽定义（为什么它≠完整脚踝）** | `src/climbing/coupling/joint_contact.py:47`（`DEFAULT_CAP_E_MPA = 200_000.0`）、`:14-17`（薄 hex8 板） |
 | 帽模量接线（本件新加，opt-in） | `scripts/opensim_fe/thums_feb.py`（`joint_cap_e_mpa`，默认 `None` ⇒ 原路径不变） |
 | 多骨踝+后足模型（另一条线） | `scripts/ankle_fe/ankle_lig_feb.py:13-17`（tibia/fibula/talus/calcaneus/navicular + 软骨 + 韧带） |

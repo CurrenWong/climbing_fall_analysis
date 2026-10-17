@@ -16,8 +16,8 @@ the `+30.6 %` ratio drift seen in `docs\S5_g7_verify_mesh.md`:
 
 **Units:** mm–N–MPa–s. FEBio `D:\Program\FEBioStudio\bin\febio4.exe` (4.13.0).
 **Recipe source (do not re-derive):** `docs\S5_contact_udg.md` §7 (NEW recipe).
-**Run dir:** `temp\opensim_fe\s5_t9\fixb\` (new; collides with nobody).
-**Harness:** `temp\opensim_fe\s5_t9\fixb\run.py` (one mesh+one sink per invocation; appends to
+**Run dir:** `temp/fe_out\s5_t9\fixb\` (new; collides with nobody).
+**Harness:** `temp/fe_out\s5_t9\fixb\run.py` (one mesh+one sink per invocation; appends to
 this doc **and** `fixb\ledger.txt` after **each** run).
 
 ---
@@ -338,7 +338,7 @@ compressible Ogden; symmetry BCs; PARDISO.
 
 ### 5.1 Artifacts
 
-* Harness `temp\opensim_fe\s5_t9\fixb\run.py`; ledger `fixb\ledger.txt`; per-run `*.summary.json`,
+* Harness `temp/fe_out\s5_t9\fixb\run.py`; ledger `fixb\ledger.txt`; per-run `*.summary.json`,
   `*.feb`, `*.log`. Large `*.xplt`/`*.hdf5` deleted after their outcomes were transcribed.
 * **Read-only, untouched:** `docs\S5_contact_udg.md`, `docs\S5_contact_convergence.md`,
   `docs\S5_contact_contract.md`, `docs\S5_g7_verify_mesh.md`, `docs\S5_g7_verify_element.md` (and all

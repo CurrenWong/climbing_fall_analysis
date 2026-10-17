@@ -10,7 +10,7 @@ Also reads the ``$HMNAME COMPS <cid> <name>`` comment immediately preceding a
 
 Usage (from repo root, PYTHONPATH=src)::
 
-    python scripts/opensim_fe/scout_parts.py --out temp/opensim_fe/parts/parts_index.json
+    python scripts/opensim_fe/scout_parts.py --out temp/fe_out/parts/parts_index.json
     python scripts/opensim_fe/scout_parts.py --filter "TIBIA|FIBULA|FEMUR|SKULL|..."
 
 Output: JSON list of {cid, cid_name, pid, title, raw_pid_line}, plus a printed

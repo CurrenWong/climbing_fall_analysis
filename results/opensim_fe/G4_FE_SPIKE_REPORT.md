@@ -14,7 +14,7 @@ _生成时间：2026-10-11 21:27:48；FEBio `D:\Program\FEBioStudio\bin\febio4.e
 
 ## 1. 最小解析测试（先跑，决定性）
 
-- 文件：`D:\Project\climbing_fall_analysis\temp\opensim_fe\g4_fe_spike\_parse_test.feb`（1 个 hex8，8 节点，单物料 `elastic damage`，底固定 + 顶节点力 -9.5 N/节点，10 载荷步）。
+- 文件：`D:\Project\climbing_fall_analysis\temp/fe_out\g4_fe_spike\_parse_test.feb`（1 个 hex8，8 节点，单物料 `elastic damage`，底固定 + 顶节点力 -9.5 N/节点，10 载荷步）。
 - 结论：**ACCEPT**。物料摘要 出现于 FEBio 日志（解析器接受 neo-Hookean + CDF Simo + DC Drucker shear stress）
 
 FEBio 日志中的物料摘要（节选，证明解析成功）：
@@ -33,7 +33,7 @@ FEBio 日志中的物料摘要（节选，证明解析成功）：
 	  c ............................................... : 0
 ```
 
-完整日志：`D:\Project\climbing_fall_analysis\temp\opensim_fe\g4_fe_spike\_parse_test.log`。
+完整日志：`D:\Project\climbing_fall_analysis\temp/fe_out\g4_fe_spike\_parse_test.log`。
 
 ## 2. 注入的 `<material>` XML（原文）
 
@@ -146,7 +146,7 @@ $env:PYTHONPATH="src"
 产物：
 
 - `results/opensim_fe/G4_FE_SPIKE_REPORT.md`（本文件）
-- `temp/opensim_fe/g4_fe_spike/`（`_parse_test.feb/.log`、`*_elastic.feb`、`*_damage_*.feb`、`injected_material.xml`、`.xplt/.hdf5/.log`、`g4_fe_spike.json`）
+- `temp/fe_out/g4_fe_spike/`（`_parse_test.feb/.log`、`*_elastic.feb`、`*_damage_*.feb`、`injected_material.xml`、`.xplt/.hdf5/.log`、`g4_fe_spike.json`）
 
 **未修改任何既有模块**：本 spike 只新增 `scripts/opensim_fe/g4_fe_spike.py`，其余均以 import + 调用复用。
 

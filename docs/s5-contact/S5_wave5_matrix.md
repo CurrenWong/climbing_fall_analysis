@@ -30,7 +30,7 @@ CONVERGED 且 CARRIES LOAD。
 
 ## 2. 已落盘的前置证据（波5 开工前的免费证据）
 
-`temp/opensim_fe/s5_contact/proof_h2.0_contact_rigid_mu0.6_pad_pen*.log`（real THUMS 网格，
+`temp/fe_out/s5_contact/proof_h2.0_contact_rigid_mu0.6_pad_pen*.log`（real THUMS 网格，
 pad 场景，G7 + hold k=1 + quad4）：
 
 | penalty | end_t | negJac 警告 | invalid facets |
@@ -121,7 +121,7 @@ penetration）；hard_surface（硬面）→ `100`（proof 证硬面 0.1 太软�
 - [T5] **门禁全绿**：S5 `test_pad_*` **93 passed**；G0 `test_opensim_fe+test_febio_run`
   **19 passed / 1 skipped**；`test_nonvertical_s4.py` **11**；`test_plantar_contact.py` **11**；
   `test_nonvertical_s5_contact.py` **13**；`test_s5_contact_facet_fix.py` **15**。
-- [T6] 清理：删除 `temp/opensim_fe/s5_contact/` 下 21 个 >50 MB 的 `.xplt`/`.hdf5`
+- [T6] 清理：删除 `temp/fe_out/s5_contact/` 下 21 个 >50 MB 的 `.xplt`/`.hdf5`
   （可再生；`.feb` + `.log` 证据保留），目录 8.0 GB → 0.20 GB。
 
 ## 6. 结论（per case）

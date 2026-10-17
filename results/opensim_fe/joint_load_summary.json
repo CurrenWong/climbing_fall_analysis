@@ -1,7 +1,7 @@
 {
   "meta": {
     "study": "subtalar joint-load representation x analysis type -> cortical gauge",
-    "mesh": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\thums_calcaneus\\calcaneus_r_anatframe.npz",
+    "mesh": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\thums_calcaneus\\calcaneus_r_anatframe.npz",
     "mesh_kind": "anat (direction C)",
     "gauge_radius_mm": 4.0,
     "threshold_mpa": 150.0,
@@ -70,9 +70,9 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_baseline_pressure_static.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_baseline_pressure_static.xplt",
-      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_baseline_pressure_static.hdf5"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_baseline_pressure_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_baseline_pressure_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_baseline_pressure_static.hdf5"
     },
     {
       "tag": "gradient_c030_static",
@@ -121,9 +121,9 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c030_static.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c030_static.xplt",
-      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c030_static.hdf5"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c030_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c030_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c030_static.hdf5"
     },
     {
       "tag": "gradient_c040_static",
@@ -172,9 +172,9 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_static.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_static.xplt",
-      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_static.hdf5"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c040_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c040_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c040_static.hdf5"
     },
     {
       "tag": "gradient_c060_static",
@@ -223,9 +223,9 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c060_static.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c060_static.xplt",
-      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c060_static.hdf5"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c060_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c060_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c060_static.hdf5"
     },
     {
       "tag": "gradient_c040_dirZ_static",
@@ -274,9 +274,9 @@
       "dist_any_named_node_mm": 3.529794971288574,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dirZ_static.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dirZ_static.xplt",
-      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dirZ_static.hdf5"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c040_dirZ_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c040_dirZ_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c040_dirZ_static.hdf5"
     },
     {
       "tag": "nodal_static",
@@ -321,9 +321,9 @@
       "dist_any_named_node_mm": 2.5356256318197032,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_nodal_static.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_nodal_static.xplt",
-      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_nodal_static.hdf5"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_nodal_static.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_nodal_static.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_nodal_static.hdf5"
     },
     {
       "tag": "pressure_dynamic",
@@ -368,9 +368,9 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_pressure_dynamic.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_pressure_dynamic.xplt",
-      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_pressure_dynamic.hdf5"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_pressure_dynamic.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_pressure_dynamic.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_pressure_dynamic.hdf5"
     },
     {
       "tag": "gradient_c040_dynamic",
@@ -419,9 +419,9 @@
       "dist_any_named_node_mm": 2.992665020188931,
       "location_class": "跖面边缘 (plantar rim)",
       "at_boundary": true,
-      "feb": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dynamic.feb",
-      "xplt": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dynamic.xplt",
-      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\joint_load\\joint_gradient_c040_dynamic.hdf5"
+      "feb": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c040_dynamic.feb",
+      "xplt": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c040_dynamic.xplt",
+      "hdf5": "D:\\Project\\climbing_fall_analysis\\temp/fe_out\\joint_load\\joint_gradient_c040_dynamic.hdf5"
     }
   ],
   "t8_invariant": {

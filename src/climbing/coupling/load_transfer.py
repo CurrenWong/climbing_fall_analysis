@@ -14,7 +14,7 @@ S3.2b 先用**参数化锚定**：
 
 ``a`` = 三头肌激活水平（a=0 无跟腱、a=1 最大等长）。F_max 取 Rajagopal2015
 ``soleus_r + gasmed_r + gaslat_r`` 的 ``getMaxIsometricForce()`` 之和 = **10885 N**
-（实测，见 ``temp/opensim_fe/probe_achilles.py``）。这是唯一有**生理上界**、
+（实测，见 ``temp/fe_out/probe_achilles.py``）。这是唯一有**生理上界**、
 可复现、不依赖具体激活时程的口径 —— 用于检验「补上跟腱能否把首次骨折高度
 从 ~26.5 m 拉回 [Y25] 的 7–9 m」这个假设。
 """

@@ -2,7 +2,7 @@
 
 > 日期：2026-10-09。执行：主会话接管（两个接力子代理均因 LLM 流超时中断，见 `B1_LOG.md`）。
 > 设计依据：`B1_KICKOFF.md` §B.3(a)/§C + `ALIGN_B_TODO.md` B1.1 决策①–⑤。
-> 所有数字实测；原始日志 `temp/opensim_fe/b1/logs/`；判定 JSON 同目录。
+> 所有数字实测；原始日志 `temp/fe_out/b1/logs/`；判定 JSON 同目录。
 
 ## 0. 一句话结论
 
@@ -18,12 +18,12 @@
 | `scripts/opensim_fe/bc_patch_test.py` | 新 | 30° 斜置棱柱双工况 P1–P5 |
 | `scripts/opensim_fe/bc_calcaneus_ab.py` | 新 | calcaneus 新旧 BC 回归锚 |
 
-红线遵守：除上述外零文件改动；不改任何默认值；不改现有测试；未覆盖 `temp/opensim_fe/fracture_matrix/` 旧产物。
+红线遵守：除上述外零文件改动；不改任何默认值；不改现有测试；未覆盖 `temp/fe_out/fracture_matrix/` 旧产物。
 
 ## 2. 默认等价性（红线①）
 
 `align_pca=False` 重建 calcaneus `.feb` vs 磁盘旧文件：归一化后 **5595 行全同**
-（唯一差异=输出文件名，属测试路径差异）。JSON：`temp/opensim_fe/b1/calcaneus_r.equiv.feb`。
+（唯一差异=输出文件名，属测试路径差异）。JSON：`temp/fe_out/b1/calcaneus_r.equiv.feb`。
 
 ## 3. Patch test（已知解正对照 + 阴性对照）
 
@@ -65,7 +65,7 @@
 
 `.venv\Scripts\python.exe -m pytest -n auto --dist load --timeout=900`
 ⇒ **628 passed, 8 skipped**（1071.99 s），与基线 **628/8** 一致。日志：
-`temp/opensim_fe/b1/logs/pytest_bc_impl.log`。
+`temp/fe_out/b1/logs/pytest_bc_impl.log`。
 
 ## 6. 遗留与边界
 
@@ -76,5 +76,5 @@
 
 ## 7. 下一步
 
-**B1.3**：9×50 矩阵重跑（新 BC）——独立根 `temp/opensim_fe/fracture_matrix_bc2/`
+**B1.3**：9×50 矩阵重跑（新 BC）——独立根 `temp/fe_out/fracture_matrix_bc2/`
 + 手工拷贝 `load_chain.npz`（免 21 min）+ `--stat median` + 与旧矩阵 diff。

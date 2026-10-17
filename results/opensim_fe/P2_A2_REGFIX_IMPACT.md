@@ -1,7 +1,7 @@
 # P2 · 注册修正对 A2/A1 的官方判定影响 —— **A2 4/5 → 5/5，胸椎遗留解除**
 
 > **日期**：2026-10-15 ｜ **性质**：零 FE 的官方管线重判（**改矩阵列 → 走官方 `route_yi`/`a2_verdict`**）
-> **脚本**：`temp/opensim_fe/p2_t6_official.py`、`p2_a2_combo.py`、`p2_t6_threshold.py`
+> **脚本**：`temp/fe_out/p2_t6_official.py`、`p2_a2_combo.py`、`p2_t6_threshold.py`
 > **产物**：`P2_T6_FIXEDBC_OFFICIAL_VERDICT.json`、`P2_A2_COMBO_T6REGFIX.json`、`P2_T6_THRESHOLD_FIXEDBC.json`
 > **前置**：`P2_T6_ROOTCAUSE.md`（根因）、`P2_V1_REGFIX_REPORT.md`（能力门 0/4 → 3/4）
 
@@ -174,7 +174,7 @@ A1 要求    16 m 以下不折 ⇒ load_T6(16)=25 998 N，需 13 930 N
 
 ```powershell
 cd D:\Project\climbing_fall_analysis
-& .venv\Scripts\python.exe temp\opensim_fe\p2_t6_threshold.py     # 首折高度 + A1 边界
-& .venv\Scripts\python.exe temp\opensim_fe\p2_t6_official.py      # T6 列修正 → 官方判定
-& .venv\Scripts\python.exe temp\opensim_fe\p2_a2_combo.py         # 四口径组合对照
+& .venv\Scripts\python.exe temp/fe_out\p2_t6_threshold.py     # 首折高度 + A1 边界
+& .venv\Scripts\python.exe temp/fe_out\p2_t6_official.py      # T6 列修正 → 官方判定
+& .venv\Scripts\python.exe temp/fe_out\p2_a2_combo.py         # 四口径组合对照
 ```

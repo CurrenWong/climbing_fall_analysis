@@ -2,7 +2,7 @@
 
 > **触发**：用户问「v1 失败的地方在根骨还是跖面」（2026-10-16）。
 > **方法**：读**已算产物**（当前链 anat）做**换 BC 的热点搬家检验** + **按离跖面距离分层**。
-> **零新求解**，数据 = `temp/opensim_fe/thums_sweep_anat_refixed_now/`（`fixed`）
+> **零新求解**，数据 = `temp/fe_out/thums_sweep_anat_refixed_now/`（`fixed`）
 > 与 `thums_sweep_anat_contact_hold100/`（跖面改接触）。
 > 脚本：`temp/v1_hotspot_gauge.py`、`temp/v1_hotspot_move.py`、`temp/v1_where.py`。
 
@@ -129,8 +129,8 @@
 | 项 | 位置 |
 |---|---|
 | 本件脚本 | `temp/v1_hotspot_gauge.py`（判据口径）、`temp/v1_hotspot_move.py`（裸 max）、`temp/v1_where.py`（位置分类） |
-| 数据（`fixed`，当前链） | `temp/opensim_fe/thums_sweep_anat_refixed_now/s2_thums_h{1..6}_a0.{hdf5,xplt}` |
-| 数据（`contact+hold`） | `temp/opensim_fe/thums_sweep_anat_contact_hold100/s2_thums_h{1..8}_a0.*` |
+| 数据（`fixed`，当前链） | `temp/fe_out/thums_sweep_anat_refixed_now/s2_thums_h{1..6}_a0.{hdf5,xplt}` |
+| 数据（`contact+hold`） | `temp/fe_out/thums_sweep_anat_contact_hold100/s2_thums_h{1..8}_a0.*` |
 | gauge 定义 | `thums_feb.gauge_von_mises_mixed`（体积平均 ℓ=4 mm） |
 | 已落账的 −18.1~−19.3% | `V1_FIXABILITY_ASSESSMENT.md` §3.1 |
 | 界面消融 ×0.179（识别用） | `V1_LOAD_INTRO_SINGULARITY.md` §7（S9b）；**S10 网格验证已于 2026-10-16 完成（原 BLOCKED 解除）** ⇒ `S10_MESH_CONVERGENCE.md`（`gauge_max` 收敛 ±5%／裸 `max` 发散 +74%／热点恒贴界面） |

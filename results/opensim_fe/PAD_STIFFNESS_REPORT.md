@@ -23,7 +23,7 @@
 | GRF 生成 | `src/climbing/coupling/opensim_grf.py::ground_reaction` | `on_pad` 默认 False；把 1D 接触力翻译成左右脚的 `(t, F)` | **刚性地面** |
 | 多体注射 | `src/climbing/coupling/opensim_fall.py::run_dead_drop` | `PrescribedForce` 把 GRF 施加到 `calcn`，腿关节锁死、肌肉关闭；**模型内没有地面接触单元** | 载荷边界（刚性） |
 | FE 跖面 BC | `src/climbing/coupling/plantar_bc.py::apply_plantar_bc` | `fixed`/`roller`/`spring`(Winkler k)；`spring` 是可参数化的柔性支承 | **可柔性**（仅 FE 探针用） |
-| 载荷链数据 | `temp/opensim_fe/fracture_matrix/load_chain.npz` | 50 高度的 `grf_peak_n` + 逐关节 `vert/abs` 峰值；全部由**刚性地面**链产生 | **刚性** |
+| 载荷链数据 | `temp/fe_out/fracture_matrix/load_chain.npz` | 50 高度的 `grf_peak_n` + 逐关节 `vert/abs` 峰值；全部由**刚性地面**链产生 | **刚性** |
 
 **结论**：冻结基线（`risk_1d_loadshare` / `AXIAL_SUBREGION_REPORT` / `load_chain.npz`）是**刚性地面**口径，没有垫子刚度这一维。唯一已有的柔性地面证据是**独立的 FE 跖面 BC 探针**（`plantar_bc.py` + `plantar_bc_summary.json`），它给出 `k -> gauge 折减比`，正好可用作把刚性基线迁移到柔性地面的**实测转移函数**。
 

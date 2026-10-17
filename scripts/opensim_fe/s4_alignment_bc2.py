@@ -12,7 +12,7 @@ Routes
 乙-BC2 : sub-region remap (REGIONS / weak sigma_c from [Y25] Table 1) on the
         BC2 products:
           * long bones (tibia/fibula/femur): ends/shaft partition read from
-            temp/opensim_fe/fracture_matrix_bc2/<b>/<b>.hdf5, sub-region
+            temp/fe_out/fracture_matrix_bc2/<b>/<b>.hdf5, sub-region
             statistic = SUB_STAT (primary median -- B1.1 decision 3; p95 run
             as sensitivity), sigma(h) = stat * load(h)/fe_solve_n;
           * other parts: whole-domain sigma_vm_mpa[SUB_STAT][bone] from the

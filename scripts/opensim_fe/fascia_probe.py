@@ -25,7 +25,7 @@
 
 产物
 ----
-``temp/opensim_fe/fascia/``                             每次运行的 .feb/.xplt/.hdf5/.log
+``temp/fe_out/fascia/``                             每次运行的 .feb/.xplt/.hdf5/.log
 ``results/opensim_fe/fascia_summary.{json,csv}``
 ``results/opensim_fe/fascia_gauge_n.png``
 ``results/opensim_fe/FASCIA_REPORT.md``
@@ -478,7 +478,7 @@ def _write_report(
         "",
         "## 产物",
         "",
-        "- `temp/opensim_fe/fascia/`（.feb/.xplt/.hdf5/.log）",
+        "- `temp/fe_out/fascia/`（.feb/.xplt/.hdf5/.log）",
         "- `results/opensim_fe/fascia_summary.json` / `.csv`",
         "- `results/opensim_fe/fascia_gauge_n.png`",
         "- `results/opensim_fe/FASCIA_REPORT.md`（本文件）",

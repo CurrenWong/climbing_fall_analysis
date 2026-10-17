@@ -18,8 +18,8 @@ docs/s5-contact                        16   ⚠️ **S5 阶段遗留**（16 个�
 docs/archive                            6   已归档文档
 results                               443   产物（报告 + json）
 results/opensim_fe                    391   ⚠️ **最大杂堆**（FE 产物 300+）
-temp                                14492   ⚠️ **草稿区**，但 `temp/opensim_fe` 有 **12,593** 个 FE 产物
-temp/opensim_fe                     12583   
+temp                                14492   ⚠️ **草稿区**，但 `temp/fe_out` 有 **12,593** 个 FE 产物
+temp/fe_out                     12583   
 model                                 100   FE 模型输入
 paper                                  29   论文源（LaTeX/图表）
 video                                  33   短视频线（独立）

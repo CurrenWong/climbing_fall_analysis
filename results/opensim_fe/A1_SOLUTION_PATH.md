@@ -1,7 +1,7 @@
 # A1 求解路径 —— 锚定诊断 + 外部锚点 + 量化缺口
 
 > **日期**：2026-10-15 ｜ **性质**：只读诊断（**零 FE、零改冻结输入、零改判据**）
-> **脚本**：`temp/opensim_fe/a1_anchor_diag.py`、`a1_margin.py`、`a1_calcaneus_stat.py`（只读）
+> **脚本**：`temp/fe_out/a1_anchor_diag.py`、`a1_margin.py`、`a1_calcaneus_stat.py`（只读）
 > **前置**：`A1_BOUNDARY_CONVENTION_REPORT.md`（10-13）、`A1_BOUNDARY_WINDOW_REPORT.md`（10-15）
 
 ---
@@ -276,4 +276,4 @@ R = 0.936, R² = 0.877, SE = 4.577 m
 | 伪影实测（T6） | `results/opensim_fe/P2_V2_PEN_SIGMA_ROOTCAUSE.md` §2.2（1421 → 482 MPa） |
 | 修法① 试跑 FAIL | 同上 §3.5；`scripts/opensim_fe/p2_pressure_load.py` |
 | 外部锚点 | 《基于颅骨及四肢骨骨折程度推测坠落高度》（中山大学学报·医学版，n=66） |
-| 本件脚本 | `temp/opensim_fe/a1_anchor_diag.py`、`a1_margin.py`、`a1_calcaneus_stat.py`（只读，未提交） |
+| 本件脚本 | `temp/fe_out/a1_anchor_diag.py`、`a1_margin.py`、`a1_calcaneus_stat.py`（只读，未提交） |

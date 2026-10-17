@@ -116,6 +116,6 @@ M = Σᵢ (pᵢ − p_J)×(mᵢ aᵢ) − Σᵢ (pᵢ − p_J)×(mᵢ g) − Σ 
 
 - `results/opensim_fe/JOINT_REACTIONS_REPORT.md`（本文件）
 - `results/opensim_fe/joint_reactions_summary.json` / `.csv`
-- `temp/opensim_fe/joint_reactions/joint_reactions_timeseries.npz`（逐帧 F/M）
-- `temp/opensim_fe/joint_reactions/subtree_mass_table.csv` / `t2_residuals.csv` / `run.log`
+- `temp/fe_out/joint_reactions/joint_reactions_timeseries.npz`（逐帧 F/M）
+- `temp/fe_out/joint_reactions/subtree_mass_table.csv` / `t2_residuals.csv` / `run.log`
 

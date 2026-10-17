@@ -38,7 +38,7 @@ DOCS_KEEP = ('*结论*', 'README.md', 'FE_BC_GOTCHAS.md', 'FE_PRESOLVE_GATES.md'
 SELF = {'scripts/tools/cleanup_parallel.py', 'scripts/tools/archive_cleanup.py',
         'scripts/tools/archive_doc_clusters.py', 'scripts/tools/scan_stale_refs.py'}
 #: ⛔ 绝不纳入：FE 产物目录（AGENTS.md：temp 子目录产物不动）
-NEVER = {'temp/opensim_fe', 'temp/thums', 'temp/parts_gmsh'}
+NEVER = {'temp/fe_out', 'temp/thums', 'temp/parts_gmsh'}
 INVALID_FILES = {
     'results_invalid': [
         'results/UNLOAD_PROCESS_REPORT.md',

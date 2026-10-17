@@ -4,13 +4,13 @@
 [2026-10-09 12:47] B1.0 kickoff: A节素材齐（旧矩阵=THUMS甲骨直读网格+bbox最长轴+顶/底30%%带+底带三向固定+顶带等分NodalForce；首折p95: 8/9在1m、骨盆8m；BC_ROBUST判排序不可信rho=0.22、MATRIX_SCALING_FIX只修折算不救排序）
 [2026-10-09 13:00] B1.0 kickoff续跑: B节 — BC入口钉死 build_bone_feb（bone_feb.py:709；底带BCZeroDisplacement三向:887-894、顶带等分NodalForce:895-905、方向=bbox最长轴:655-691）；PCA旋转开关只在temp脚本 run_remesh_fe.py:44/81，scripts内无；给出候选(a)opt-in参数/(b)新builder两方案
 [2026-10-09 13:00] B1.0 kickoff续跑: C节 — 正对照方案定为30°斜置棱柱patch test（10×10×40mm/σ_nom=10MPa，正对照=新BC命中解析解P1-P5、阴性对照=旧BC，脚本建议 scripts/opensim_fe/bc_patch_test.py，≤10min）+ calcaneus新旧BC回归锚
-[2026-10-09 13:00] B1.0 kickoff续跑: D节 — B1.1~B1.5执行序展开（谁做/预估/日志=temp/opensim_fe/b1/logs/*.log）；S4输入路线甲(1D risk(h)，9骨×50高度已实测齐全) vs 乙(新BC矩阵)建议「甲跑通管线、正式判定用乙」，待主会话/用户拍板
+[2026-10-09 13:00] B1.0 kickoff续跑: D节 — B1.1~B1.5执行序展开（谁做/预估/日志=temp/fe_out/b1/logs/*.log）；S4输入路线甲(1D risk(h)，9骨×50高度已实测齐全) vs 乙(新BC矩阵)建议「甲跑通管线、正式判定用乙」，待主会话/用户拍板
 [2026-10-09 13:00] B1.0 kickoff续跑: E节 — 甲网格9骨全≤5万实测(femur 25909最大)；load_chain.npz存在且1..50精确可免重跑(省~21min)；OUT_TEMP常量碰撞风险已标；S3.1体素批量仅兜底；fibula/统计量切换p95→median下游耦合等11条风险列全
 [2026-10-09 13:01] B1.0 kickoff: 报告已产出 results/opensim_fe/B1_KICKOFF.md
 [2026-10-09 13:47] B1.2: 开工。必读已读（KICKOFF §B.3/§C.1/§C.2/§E.5/§E.6 + B1.1 决策①-⑤）；确认 LRN-20261008-006 测试铁律（.venv + -n auto --dist load --timeout=900）；开始实现 bone_feb.py opt-in align_pca
 [2026-10-09 14:15] B1.2: ⚠️ 前一子代理因 LLM 流超时中断（model stream timeout，非逻辑错误）；实现段已完成（bone_feb.py +47 行 opt-in align_pca，AST_OK，diff 已核）；续任务接手剩余：默认等价 diff → bc_patch_test.py → patch P1-P5 → calcaneus A/B → pytest 回归 → 补日志
 [2026-10-09 14:29] B1.2: 步骤2 默认等价性 PASS — align_pca=False 重建 calcaneus .feb 与旧文件归一化 diff 全同（5595 行，唯一差异=输出文件名，已归一化）；red line ①满足
-[2026-10-09 14:33] B1.2: ✅ 正对照 PASS — 30°斜置棱柱双工况：新BC(align_pca) P1-P5 全过（P1 |sigma_zz|误差0.55%、P2 CV 3.68%、P3 中段median 0.986x、P4 p95 1.013x、P5 载荷和0）；阴性对照=旧BC CV 290.6%、mid median 2.55x、p95 4.95x、vm_max 82.2MPa=8.2x名义 ⇒ 检查器可分辨坏BC。判据两处口径修正已写进 docstring：P1取压缩量级、P3限中段(端带60%体积，全域median仅作诊断)。JSON=temp/opensim_fe/b1/patch_test.json
+[2026-10-09 14:33] B1.2: ✅ 正对照 PASS — 30°斜置棱柱双工况：新BC(align_pca) P1-P5 全过（P1 |sigma_zz|误差0.55%、P2 CV 3.68%、P3 中段median 0.986x、P4 p95 1.013x、P5 载荷和0）；阴性对照=旧BC CV 290.6%、mid median 2.55x、p95 4.95x、vm_max 82.2MPa=8.2x名义 ⇒ 检查器可分辨坏BC。判据两处口径修正已写进 docstring：P1取压缩量级、P3限中段(端带60%体积，全域median仅作诊断)。JSON=temp/fe_out/b1/patch_test.json
 [2026-10-09 14:38] B1.2: ✅ calcaneus A/B PASS — R1 新BC median/nom=0.666x∈[0.3,1.0]、R2 新旧median差19.4%≤30%、R3p 新/旧p95=0.938x≤1.1（新BC降p95 6.2%）；原R3绝对阈2.0跨口径FAIL已披露（出处=remesh+E18000口径，旧BC也2.19x同样FAIL）⇒改同模型回归门R3p，spec_correction已写入JSON；载荷=load_chain subtalar@5m实测25354.4N、sigma_nom=117.38MPa(A_cort 216.0)
 [2026-10-09 14:56] B1.2: ✅✅ 全部完成 — 全量回归 628 passed / 8 skipped（1071.99s，与基线一致）；报告 results/opensim_fe/B12_PATCH_TEST_REPORT.md；结论=新BC过全部正对照门（patch P1-P5 全PASS、calcaneus R1/R2/R3p PASS、默认等价5595行全同、628绿）⇒ 准入 B1.3
 [2026-10-09 15:20] B1.3: --init 完成 — 独立根 fracture_matrix_bc2 已建、load_chain.npz 拷贝并校验（heights×joints 全覆盖）、BC=align_pca=True (B1.2 opt-in; patch test P1-P5 PASS)、stat=median

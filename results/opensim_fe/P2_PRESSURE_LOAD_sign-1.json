@@ -20,7 +20,7 @@
    "P_mpa": -259.5633748639137,
    "sign": -1.0,
    "converged": false,
-   "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\p2_pressure\\T6\\h10\\T6.feb",
+   "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp/fe_out\\p2_pressure\\T6\\h10\\T6.feb",
    "seconds": 0.8
   },
   {
@@ -29,7 +29,7 @@
    "P_mpa": -504.68796845676746,
    "sign": -1.0,
    "converged": false,
-   "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp\\opensim_fe\\p2_pressure\\T6\\h30\\T6.feb",
+   "error": "BoneFebError: FEBio 失败\nFEBio 运行失败（非 0 退出码）。\n命令: D:\\Program\\FEBioStudio\\bin\\febio4.exe -i D:\\Project\\climbing_fall_analysis\\temp/fe_out\\p2_pressure\\T6\\h30\\T6.feb",
    "seconds": 0.6
   }
  ]
