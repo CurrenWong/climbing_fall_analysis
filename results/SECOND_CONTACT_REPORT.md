@@ -1,7 +1,7 @@
 # SECOND_CONTACT 判定件 —— 「二次接触（臀/背）」：可达性 / 能量-行程账 / 姿态对比
 
 > **状态**：**已跑 · 判定部分作废（发现观测量缺陷）**（2026-10-16）
-> 预注册 `docs/methods/SECOND_CONTACT_预注册.md`｜脚本 `scripts/second_contact_probe.py`
+> 预注册 `docs/methods/SECOND_CONTACT_预注册.md`｜脚本 `scripts/1d/second_contact_probe.py`
 > 产物 `results/second_contact_probe.json`（⚠️ **其 `h*` 已作废** ⇒ 现行见 `CANONICAL.md` §1 / `results/hstar_canonical.json`）
 
 ---
@@ -53,11 +53,11 @@
 
 ### 真因（两个 bug 叠加）
 
-1. **废表 bug（主）**：`scripts/unload_process_probe.py:62` 传的是 `_TAB`（`[[t,m],…]` **对的列表**），
+1. **废表 bug（主）**：`scripts/1d/unload_process_probe.py:62` 传的是 `_TAB`（`[[t,m],…]` **对的列表**），
    而 `pad.py` 期望 `(x_rad_array, y_array)`。后果：`np.interp` 把「第一对」当 xp、「第二对」当 fp
    ⇒ 实测 **`interp(1.0 rad) = 3.54 N·m`（正确值 254.7 N·m）** ⇒ 弹性力矩被压到 **~1/70**
    ⇒ **D1 路径上「力-长 `M(θ)`」从未真正生效**，该文件全部 D1 结果无效。
-   （`scripts/second_contact_probe.py:46` 格式正确 ✓；`temp/v1_*` 多为正确。）
+   （`scripts/1d/second_contact_probe.py:46` 格式正确 ✓；`temp/v1_*` 多为正确。）
 2. **后处理口径 bug**：`meta["f_flex_peak_n"]` 旧实现用线性 `k_flex·xf`（不含 `M(θ)`）
    ⇒ 已在 `e19e758` 修为调用 `rhs` 同一个 `flex_force`（单一真相源）✓。
 3. **采样敏感（次要，已测）**：`f_flex` 随 `dt_sample` 变 **1e-3→1e-4 为 5124→5198 N（+1.4%）**
@@ -225,6 +225,6 @@ f_flex = np.where(xf > 0.0,
    ⇒ **旧「1.34–3.66 m」与「与流行病学 1.1–4 m 一致」两条陈述【作废】**。
    4. **下一步**：① 用 0.05–0.5 m 细网格定界 `h*`；② 定率依赖强度（骨动态强化）与 `M_ecc`/`v_ref` 两候选；③ 跑回归测试（用户要求延后）。
 
-**锚点**：`results/second_contact_probe.json`、`scripts/second_contact_probe.py`、
+**锚点**：`results/second_contact_probe.json`、`scripts/1d/second_contact_probe.py`、
 `src/climbing/pad.py:828-833`（缺陷处）、`pad.py:628`（`k_stop=3.0e5` 硬编码，**与 `k_flex` 无关**）、
 `docs/methods/SECOND_CONTACT_预注册.md`

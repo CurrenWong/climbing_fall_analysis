@@ -2,7 +2,7 @@
 
 > 生成 2026-10-11；仓库 `D:\Project\climbing_fall_analysis`。
 > 预注册设计：`docs/methods/G1_多段链设计.md`（已冻结，§7 六决策跑前锁定）。本件为 **G1 判定补录 + DoD 逐条**。
-> **纯增量**：只新增 `src/climbing/chain2d.py`、`scripts/chain_vtarget_probe.py`、`tests/test_chain2d.py`、`results/chain_vtarget_probe.json`、本件；**不改任何既有文件**（`git status --porcelain` 只见 `??` 新件）。
+> **纯增量**：只新增 `src/climbing/chain2d.py`、`scripts/paper/chain_vtarget_probe.py`、`tests/test_chain2d.py`、`results/chain_vtarget_probe.json`、本件；**不改任何既有文件**（`git status --porcelain` 只见 `??` 新件）。
 > 口径纪律：下文禁用数字/比值（设计 §6 所列）**不作为结果出现**；只说"绝对偏移量"。
 
 ---
@@ -127,7 +127,7 @@ $env:PYTHONPATH="src"
 
 产物（纯增量）：
 - `src/climbing/chain2d.py`
-- `scripts/chain_vtarget_probe.py`
+- `scripts/paper/chain_vtarget_probe.py`
 - `tests/test_chain2d.py`
 - `results/chain_vtarget_probe.json`
 - `results/G1_CHAIN2D_REPORT.md`（本件）

@@ -11,7 +11,7 @@
 
 ## 0. 发现的混淆因素
 
-`scripts/rigid_vtarget_probe.py` 的口径：
+`scripts/paper/rigid_vtarget_probe.py` 的口径：
 
 ```python
 CALIB_K = {"rigid": 2500.0, "pad": 200.0}   # 【刚】用 2500，【垫】用 200

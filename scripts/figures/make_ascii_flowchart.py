@@ -28,7 +28,7 @@ from __future__ import annotations
 import pathlib
 import unicodedata
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 DOC = ROOT / "docs" / "methods" / "方案更新_v2.md"
 BEGIN = "<!-- ASCII-FLOWCHART:BEGIN -->"
 END = "<!-- ASCII-FLOWCHART:END -->"

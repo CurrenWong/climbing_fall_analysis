@@ -157,7 +157,7 @@ E₁ 调软 **10.8×**（2 MPa→185 kPa）后，20 m 上 σ_胫骨（631→**10
 ## 溯源
 
 - 实现 `src/climbing/chain2d_tissue.py`（纯新增，既有模块一字未改）
-- 探针 `scripts/chain_tissue_probe.py`；正对照 `temp/g5_control.py`
+- 探针 `scripts/1d/chain_tissue_probe.py`；正对照 `temp/g5_control.py`
 - 预注册 `docs/methods/G5_跟垫柔顺层纠错_预注册.md`（§3.0 冻结后更正表）
 - 根因件 `docs/methods/V8b_重定级.md`
 - 锚点：**Gabler et al. 2016 J Biomech（PMC5161234）QLV: Yeoh C10=0.1/C30=7 MPa/K=2 GPa

@@ -27,7 +27,7 @@
 
 用法
 ----
-    python scripts/validate_vs_fem.py
+    python scripts/paper/validate_vs_fem.py
 输出：
     results/vs_fem_thresholds.txt   —— 临界高度表
     results/figures/vs_fem_curves.png
@@ -40,13 +40,13 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 
 from climbing.bone import BONE_SITES, MATERIAL_STRENGTH_MPA, knockdown_report
 from climbing.pad import simulate_boulder_fall
 from climbing.bone import assess_sites
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 RES = ROOT / "results"
 FIG = RES / "figures"
 

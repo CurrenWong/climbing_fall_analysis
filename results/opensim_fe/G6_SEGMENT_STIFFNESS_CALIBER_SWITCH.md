@@ -136,6 +136,6 @@
 | 清单与纪律执行（三次自我纠错 E1–E3） | `docs/methods/G6_载荷段软组织串联柔顺_清单.md` |
 | V8b 重定级 | `docs/methods/V8b_重定级.md` |
 | 实现 | `src/climbing/chain2d_soft.py`、`chain2d_tissue.py`（旁路） |
-| 探针 / 测试 | `scripts/chain_soft_probe.py`、`tests/test_chain2d_soft.py` |
+| 探针 / 测试 | `scripts/1d/chain_soft_probe.py`、`tests/test_chain2d_soft.py` |
 | `ALPHA_ST` 锚点 | Rantalainen et al. 2013, J Musculoskelet Neuronal Interact（181 名男性 50–79 岁 CT） |
 | 关节级锚点线索 | BMC Musculoskelet Disord 2014（牛膝，股骨髁损失刚度 106 ± 28 N/mm） |

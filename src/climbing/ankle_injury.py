@@ -25,7 +25,7 @@
 * **本模块**：仅读属性，不导入 ``pad2d``。若 ``result`` 上没有
   ``peak_ligament_strain``（1D ``BoulderFallResult``），抛 ``ValueError``，
   行为与 ``bone.py:301-307``（缺 ``impact_window_s``）同源。
-* **下游**（``scripts/phase_p1_montecarlo.py``）：把踝列加入
+* **下游**（``scripts/paper/phase_p1_montecarlo.py``）：把踝列加入
   ``trial_rows`` / ``site_rows``，重新计算 ``site_distribution``，
   写入 ``results/p1_montecarlo.{txt,csv}`` 与 ``results/figures/p1_coverage.png``。
 

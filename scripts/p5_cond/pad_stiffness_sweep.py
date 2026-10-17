@@ -41,7 +41,7 @@ from climbing.head_branch import (  # noqa: E402
 )
 from climbing.pad import CrashPad, simulate_boulder_fall  # noqa: E402
 
-# ---- 与 scripts/rigid_vtarget_probe.py 逐字同口径 ------------------------
+# ---- 与 scripts/paper/rigid_vtarget_probe.py 逐字同口径 ------------------------
 SOLVER_PAD = dict(max_ode_step=1e-4, rtol=1e-8, atol=1e-11)   # 【垫】紧容差
 HEAD_POSTURE = "feet-first-stiff"
 HEAD_MASS_KG = 80.0

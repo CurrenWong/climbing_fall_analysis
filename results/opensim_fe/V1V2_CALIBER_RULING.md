@@ -102,7 +102,7 @@ S2 `gauge_max` 的峰值单元 **h=1..5 恒为同一单元 #378**，质心 (33.3
 | **`median`（A2 现行口径）** | **3/8**（fibula 1 m、T6 1 m、parietal 6 m） |
 | **1D 截面 × 组 A**（V2 现用依据） | **1/3**（股骨颈 16 m 低 [Y25] 下沿 1 m、confidence=low） |
 
-### 2.2 组 A / 组 B 的分组（`scripts/validate_vs_fem.py:206-215`，脚本自述）
+### 2.2 组 A / 组 B 的分组（`scripts/paper/validate_vs_fem.py:206-215`，脚本自述）
 
 > **组 A（载荷路径接近均匀柱体）= 胫骨骨干 + 胫骨远端 + 股骨颈 ⇒ 2/3 命中**
 > **组 B（非均匀 / 整体结构失效）= 跟骨 · 腓骨两端 · 骨盆 · 腰椎 ⇒ 系统性偏晚**
@@ -158,7 +158,7 @@ S2 `gauge_max` 的峰值单元 **h=1..5 恒为同一单元 #378**，质心 (33.3
 | 机读口径表 / 生成器 | `V1V2_CALIBER_TABLE.json` / `scripts/opensim_fe/v1v2_caliber_table.py` |
 | [Y25] 判据口径 | `docs/reports/对齐_Y25_假设与结论.md` §1 ③ |
 | 失效模式 ↔ 口径 | `A2_AGGREGATION_RULING.md` §2.1 |
-| V2 现用依据 | `scripts/validate_vs_fem.py:206-215`、`results/vs_fem_thresholds.txt` |
+| V2 现用依据 | `scripts/paper/validate_vs_fem.py:206-215`、`results/vs_fem_thresholds.txt` |
 | V1 实跑 / 热点 | `results/opensim_fe/V1_RERUN_20261015.md` |
 | 冻结矩阵 | `results/opensim_fe/fracture_matrix_bc2.json` |
 

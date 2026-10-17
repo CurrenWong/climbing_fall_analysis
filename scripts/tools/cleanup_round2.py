@@ -15,10 +15,10 @@ SKIP = {'.git', '.venv', '__pycache__', '.pytest_cache', '.ruff_cache', 'node_mo
 TEXT_EXT = ('.py', '.md', '.json', '.txt', '.csv', '.toml', '.cfg', '.yml', '.yaml', '.ini')
 LISTERS = {'results/AUDIT_2026-10-17.md', 'results/SWEEP2_2026-10-17.md',
            'results/STALE_REFS.md', 'CANONICAL.md',
-           'scripts/audit_2026_10_17.py', 'scripts/sweep2_2026_10_17.py',
-           'scripts/scan_stale_refs.py', 'scripts/cleanup_parallel.py',
-           'scripts/archive_cleanup.py', 'scripts/archive_doc_clusters.py',
-           'scripts/cleanup_round2.py'}
+           'scripts/tools/audit_2026_10_17.py', 'scripts/tools/sweep2_2026_10_17.py',
+           'scripts/tools/scan_stale_refs.py', 'scripts/tools/cleanup_parallel.py',
+           'scripts/tools/archive_cleanup.py', 'scripts/tools/archive_doc_clusters.py',
+           'scripts/tools/cleanup_round2.py'}
 GROUPS = ('g4', 'make', 'nonvertical', 'verify', 'fe', 'a1', 'm1', 'p2', 'pad', 'thums')
 SCAN = ('src', 'scripts', 'tests', 'docs', 'results', 'paper')
 round2 = {}

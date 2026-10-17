@@ -6,7 +6,7 @@
 >
 > - 日期：2026-10-13
 > - 实现：`src/climbing/chain2d_crush.py`（新增，纯增量）
-> - 探针：`scripts/chain_crush_probe.py` → `results/chain_crush_probe.json`
+> - 探针：`scripts/1d/chain_crush_probe.py` → `results/chain_crush_probe.json`
 > - 测试：`tests/test_chain2d_crush.py`（14 passed）
 
 ---
@@ -39,7 +39,7 @@
    `crush_dissipated_energy_j`/`rebound_metrics`）；对照基线走既有 `chain2d.py`。
 3. **本构验证**：滞回面积精确 = σ_pl·(ξ_peak−ξ_y)（测试标定 18750 Pa·m ✓）；卸载沿 E 回残应变 ✓；
    压实段斜率 E_d ✓；C⁰ 连续 ✓。
-4. **探针**（口径跑前冻结，同 `scripts/chain_vtarget_probe.py`）：
+4. **探针**（口径跑前冻结，同 `scripts/paper/chain_vtarget_probe.py`）：
    观测量 = 胫骨段（索引 1）首显著局部峰，窗口 = `meta["impact_window_s"]`，
    5 高度 × 基线/crush。
 5. **如实判定**（本文档）：**V8a FAIL、V8b FAIL**。

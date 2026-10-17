@@ -87,7 +87,7 @@ def main() -> int:
           float(m5.group(1)) if m5 else None, 200.0)
 
     # 6. 摩擦 0.4 —— Posture2D 默认是 0.0，0.4 由 MC/probe 注入（索引也这么记）
-    mc = (ROOT / "scripts/phase_p1_montecarlo.py").read_text("utf-8",
+    mc = (ROOT / "scripts/paper/phase_p1_montecarlo.py").read_text("utf-8",
                                                              errors="replace")
     check("mu_slide = 0.4（MC 注入，非 Posture2D 默认）",
           "0.4" in paper, "0.4" in idx and "phase_p1_montecarlo" in idx,

@@ -1,6 +1,6 @@
 """Phase B-2 分析：找出"落在合规软垫上仍然受伤"的姿势与原因。"""
 import sys, pathlib
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 import numpy as np
 from climbing.pad import simulate_boulder_fall, POSTURES, CrashPad, hard_surface
 from climbing.metrics import hic_from_result

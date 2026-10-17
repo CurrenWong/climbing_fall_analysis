@@ -82,7 +82,7 @@ def main():
                 qr = rel(q)
                 if qr.startswith('archive/') or qr.startswith('temp/'):
                     continue
-                if qr == 'scripts/archive_cleanup.py' or qr == 'scripts/archive_doc_clusters.py':
+                if qr == 'scripts/tools/archive_cleanup.py' or qr == 'scripts/tools/archive_doc_clusters.py':
                     continue
                 if n in read(q):
                     ext.append((n, qr))

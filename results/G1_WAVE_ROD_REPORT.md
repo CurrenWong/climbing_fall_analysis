@@ -3,7 +3,7 @@
 > 生成 2026-10-11；仓库 `D:\Project\climbing_fall_analysis`。
 > 预注册设计：`docs/methods/G1_多段链设计.md`（已冻结，§7 决策 6 = 本备选）。
 > 触发条件：`results/G1_CHAIN2D_REPORT.md` 记录 6 段链 **V8b FAIL**（20 m 局部胫骨峰 5.8 ms > 5.0 ms）——本件即该决策 6 的**触发执行**。
-> **纯增量**：只新增 `src/climbing/wave_rod.py`、`scripts/wave_rod_probe.py`、`tests/test_wave_rod.py`、`results/wave_rod_probe.json`、本件；**不改任何既有文件**。
+> **纯增量**：只新增 `src/climbing/wave_rod.py`、`scripts/paper/wave_rod_probe.py`、`tests/test_wave_rod.py`、`results/wave_rod_probe.json`、本件；**不改任何既有文件**。
 > 口径纪律：下文禁用数字/比值（设计 §6 所列）**不作为结果出现**；只看绝对时刻 (ms)。
 
 ---
@@ -115,7 +115,7 @@ $env:PYTHONPATH="src"
 
 产物（纯增量）：
 - `src/climbing/wave_rod.py`
-- `scripts/wave_rod_probe.py`
+- `scripts/paper/wave_rod_probe.py`
 - `tests/test_wave_rod.py`
 - `results/wave_rod_probe.json`
 - `results/G1_WAVE_ROD_REPORT.md`（本件）

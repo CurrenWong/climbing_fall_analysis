@@ -13,7 +13,7 @@ v2 的三处改动：
      ⇒ 昂贵的比较只在极少数文件上发生；
   3. **整目录 `shutil.move`（同盘即一次 rename）**，不是 1,966 次。
 
-用法：`python scripts/cleanup_parallel.py [--jobs N] [--dry-run]`
+用法：`python scripts/tools/cleanup_parallel.py [--jobs N] [--dry-run]`
 """
 from __future__ import annotations
 
@@ -35,8 +35,8 @@ TODO_CUTOFF = time.mktime(time.strptime('2026-10-10', '%Y-%m-%d'))
 DOCS_CUTOFF = time.mktime(time.strptime('2026-10-08', '%Y-%m-%d'))
 DOCS_KEEP = ('*结论*', 'README.md', 'FE_BC_GOTCHAS.md', 'FE_PRESOLVE_GATES.md',
              'PAD_GOTCHAS.md', 'FEBIO_GOTCHAS.md', '阶段总结.md')
-SELF = {'scripts/cleanup_parallel.py', 'scripts/archive_cleanup.py',
-        'scripts/archive_doc_clusters.py', 'scripts/scan_stale_refs.py'}
+SELF = {'scripts/tools/cleanup_parallel.py', 'scripts/tools/archive_cleanup.py',
+        'scripts/tools/archive_doc_clusters.py', 'scripts/tools/scan_stale_refs.py'}
 #: ⛔ 绝不纳入：FE 产物目录（AGENTS.md：temp 子目录产物不动）
 NEVER = {'temp/opensim_fe', 'temp/thums', 'temp/parts_gmsh'}
 INVALID_FILES = {
@@ -176,7 +176,7 @@ def main(argv=None):
     print(f"移动耗时 {time.perf_counter() - t2:.2f}s（总 {time.perf_counter() - T:.2f}s）")
 
     lines = [f"# 并行整理清单 v2（{STAMP}）", "",
-             f"> `scripts/cleanup_parallel.py`（jobs={a.jobs}，单元级候选）；"
+             f"> `scripts/tools/cleanup_parallel.py`（jobs={a.jobs}，单元级候选）；"
              f"**只 move，不删**。", "",
              f"## 已移动（{len(moved)}）", ""]
     lines += [f"- `{x}` → `{y}`" for x, y in moved]

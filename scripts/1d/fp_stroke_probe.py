@@ -28,7 +28,7 @@
 
 用法::
 
-    .venv\\Scripts\\python.exe scripts/fp_stroke_probe.py
+    .venv\\Scripts\\python.exe scripts/1d/fp_stroke_probe.py
 """
 from __future__ import annotations
 
@@ -38,7 +38,7 @@ import sys
 
 import numpy as np
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
 from climbing.pad import POSTURES, RIGID_CONTACT, STROKE_ANCHOR, simulate_boulder_fall  # noqa: E402

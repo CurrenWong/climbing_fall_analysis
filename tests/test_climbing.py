@@ -246,7 +246,7 @@ class TestRigidContactGate:
 
 
 # ==========================================================================
-# 能量守恒审计（scripts/pad_energy_check.py）
+# 能量守恒审计（scripts/1d/pad_energy_check.py）
 # ==========================================================================
 class TestEnergyAudit:
     """`pad.py` 结果的有效性判据：沿轨迹 `E_mech` 非增。
@@ -1087,7 +1087,7 @@ class TestFastSolverPreset:
 # ASCII 流程图与文档同步（防漂移）
 # ==========================================================================
 # docs/methods/方案更新_v2.md 里的 ASCII 流程图是**生成**的
-# （scripts/make_ascii_flowchart.py），注入在标记块之间。
+# （scripts/figures/make_ascii_flowchart.py），注入在标记块之间。
 # 这类"生成物 + 手工文档"的组合最容易漂移：改了生成器忘了重新注入，
 # 文档就永远停在旧版本，而且**没人会发现**。
 class TestAsciiFlowchart:
@@ -1115,7 +1115,7 @@ class TestAsciiFlowchart:
         got = doc.split(m.BEGIN, 1)[1].split(m.END, 1)[0].strip()
         assert got == m.render().strip(), (
             "docs/methods/方案更新_v2.md 的 ASCII 流程图与生成器不一致 —— "
-            "跑 `python scripts/make_ascii_flowchart.py` 重新注入")
+            "跑 `python scripts/figures/make_ascii_flowchart.py` 重新注入")
 
     def test_display_width_cjk_is_two(self):
         m = self._mod()

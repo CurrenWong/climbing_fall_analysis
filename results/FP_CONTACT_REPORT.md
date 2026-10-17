@@ -6,7 +6,7 @@
 > 1. 首判（`95c2bc7`）：A-J1 FAIL / A-J2 PASS / A-J3 如实。
 > 2. 曾以「能量不守恒」撤回（`0fd4b8d`，依据 `absorbed_fraction` = 1.376–1.568 > 1）。
 > 3. 证明**该依据不成立**（`067e8b9`）：`>1` 是**账的口径**（分子含阻尼耗散、分母只含首次接触的 `mgh`）。
-> 4. **本件（第四次）**：用**独立有效性判据**（沿轨迹 `E_mech` 非增，`scripts/pad_energy_check.py`）
+> 4. **本件（第四次）**：用**独立有效性判据**（沿轨迹 `E_mech` 非增，`scripts/1d/pad_energy_check.py`）
 >    审计 ⇒ **全部 12 个格 `violation_j = 0.00 J`、`E_mech` 单调** ⇒ **数值物理有效** ⇒ **判定成立**。
 >
 > | 接触设定 | soft | self | stiff | 审计 |
@@ -34,7 +34,7 @@
 
 > **状态**：**已跑 · 判定成立（有效性经独立审计证明）**（2026-10-16）
 > **预注册**：`docs/methods/P3_足部接触柔度_预注册.md`（判据/锚点/网格跑前冻结）
-> **脚本**：`scripts/fp_contact_probe.py` ｜ **产物**：`results/fp_contact_probe.json`
+> **脚本**：`scripts/1d/fp_contact_probe.py` ｜ **产物**：`results/fp_contact_probe.json`
 > **上游**：`results/FP_ANCHOR_REPORT.md`（`J1b` 三档全 FAIL：`F_pad`/BW 超实测靶 105–225%）
 > **红线遵守**：⛔ 未以「使判据变 PASS」为选择标准（`k_n` 未越出锚带）。
 
@@ -130,5 +130,5 @@
 4. 单高度（@0.42 m），未做高度网格。
 
 **锚点**：`results/fp_contact_probe.json`、`docs/methods/P3_足部接触柔度_预注册.md`、
-`scripts/fp_contact_probe.py`、`src/climbing/pad.py`（`hard_surface` / `RIGID_CONTACT`）、
+`scripts/1d/fp_contact_probe.py`、`src/climbing/pad.py`（`hard_surface` / `RIGID_CONTACT`）、
 `docs/notes/PAD_GOTCHAS.md`、`results/FP_ANCHOR_REPORT.md`、`Bennett & Ker 1990` / `Ker 1996`

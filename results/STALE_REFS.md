@@ -113,22 +113,22 @@
 ## `second_contact_probe.json`  （8 条）
 归档位置：`（原位，内容旧后处理口径产出）`
 
-- `docs/methods/SECOND_CONTACT_预注册.md:4` — > 脚本 `scripts/second_contact_probe.py`｜产物 `results/second_contact_probe.json`
+- `docs/methods/SECOND_CONTACT_预注册.md:4` — > 脚本 `scripts/1d/second_contact_probe.py`｜产物 `results/second_contact_probe.json`
 - `results/SECOND_CONTACT_REPORT.md:5` — > 产物 `results/second_contact_probe.json`
-- `results/SECOND_CONTACT_REPORT.md:228` — **锚点**：`results/second_contact_probe.json`、`scripts/second_contact_probe.py`、
-- `scripts/archive_cleanup.py:23` — 'results/second_contact_probe.json',     # 旧后处理口径产出
-- `scripts/scan_stale_refs.py:20` — 'second_contact_probe.json': '旧后处理口径产出',
-- `scripts/second_contact_probe.py:5` — 产物：`results/second_contact_probe.json`
-- `scripts/second_contact_probe.py:150` — (ROOT / "results" / "second_contact_probe.json").write_text(
-- `scripts/second_contact_probe.py:152` — print("\nOUT = results/second_contact_probe.json  （门已恢复）")
+- `results/SECOND_CONTACT_REPORT.md:228` — **锚点**：`results/second_contact_probe.json`、`scripts/1d/second_contact_probe.py`、
+- `scripts/tools/archive_cleanup.py:23` — 'results/second_contact_probe.json',     # 旧后处理口径产出
+- `scripts/tools/scan_stale_refs.py:20` — 'second_contact_probe.json': '旧后处理口径产出',
+- `scripts/1d/second_contact_probe.py:5` — 产物：`results/second_contact_probe.json`
+- `scripts/1d/second_contact_probe.py:150` — (ROOT / "results" / "second_contact_probe.json").write_text(
+- `scripts/1d/second_contact_probe.py:152` — print("\nOUT = results/second_contact_probe.json  （门已恢复）")
 
 ## `MANIFEST.md`  （5 条）
 归档位置：`archive/2026-10-17_cleanup/MANIFEST.md`
 
 - `CANONICAL.md:50` — - 每次归档必须生成 `MANIFEST.md`（原路径 → 新路径 + 事由 + 被替代者）。
 - `memory/2026-10-17.md:45` — - `MANIFEST.md` 记录：原路径 → 新路径 + **99 条拒移理由（含引用方）**
-- `scripts/archive_cleanup.py:140` — io.open(os.path.join(DEST, 'MANIFEST.md'), 'w', encoding='utf-8').write('\n'.join(lines) + '\n')
-- `scripts/archive_cleanup.py:142` — print(f"MANIFEST = {rel(os.path.join(DEST, 'MANIFEST.md'))}")
+- `scripts/tools/archive_cleanup.py:140` — io.open(os.path.join(DEST, 'MANIFEST.md'), 'w', encoding='utf-8').write('\n'.join(lines) + '\n')
+- `scripts/tools/archive_cleanup.py:142` — print(f"MANIFEST = {rel(os.path.join(DEST, 'MANIFEST.md'))}")
 - `scripts/opensim_fe/frozen_bc2_manifest.py:166` — outm = RES / "FROZEN_BC2_MANIFEST.md"
 
 ## `ANKLE_LOCAL_TODO.md`  （5 条）
@@ -145,21 +145,21 @@
 
 - `docs/methods/P3_卸力过程最小物理化_预注册.md:113` — 5. `results/UNLOAD_PROCESS_REPORT.md` 如实 PASS/FAIL；6. 文档同步 + `git diff` 确认默认路径不变。
 - `memory/2026-10-17.md:40` — 5. 作废标记：`UNLOAD_PROCESS_REPORT.md` ⛔ 作废头 + `SECOND_CONTACT_REPORT.md` §0d 更正。
-- `scripts/archive_cleanup.py:22` — 'results/UNLOAD_PROCESS_REPORT.md',      # 数字经 §0b/§0c/§0d 全部作废
-- `scripts/scan_stale_refs.py:19` — 'UNLOAD_PROCESS_REPORT.md': '数字全部作废（见 CANONICAL.md §2）',
+- `scripts/tools/archive_cleanup.py:22` — 'results/UNLOAD_PROCESS_REPORT.md',      # 数字经 §0b/§0c/§0d 全部作废
+- `scripts/tools/scan_stale_refs.py:19` — 'UNLOAD_PROCESS_REPORT.md': '数字全部作废（见 CANONICAL.md §2）',
 
 ## `verify_flex_observable.py`  （3 条）
 归档位置：`archive/2026-10-17_cleanup/scripts_invalid/verify_flex_observable.py`
 
 - `memory/2026-10-17.md:44` — `results_invalid/` 4｜`scripts_invalid/` 1（事故件 `verify_flex_observable.py`）｜`docs_old/` 1
-- `scripts/archive_cleanup.py:29` — 'scripts/verify_flex_observable.py',     # ★ 表格式违反契约（事故件）
-- `scripts/scan_stale_refs.py:21` — 'verify_flex_observable.py': '表格式违反契约（事故件）',
+- `scripts/tools/archive_cleanup.py:29` — 'scripts/verify_flex_observable.py',     # ★ 表格式违反契约（事故件）
+- `scripts/tools/scan_stale_refs.py:21` — 'verify_flex_observable.py': '表格式违反契约（事故件）',
 
 ## `SECOND_CONTACT_TODO.md`  （2 条）
 归档位置：`archive/2026-10-17_cleanup/docs_stale/SECOND_CONTACT_TODO.md`
 
 - `memory/2026-10-17.md:43` — - `temp_drafts/` 60｜`docs_stale/` 15（含根目录 `SECOND_CONTACT_TODO.md`）｜
-- `scripts/archive_cleanup.py:32` — 'SECOND_CONTACT_TODO.md',                # 根目录会话草稿（应 gitignore）
+- `scripts/tools/archive_cleanup.py:32` — 'SECOND_CONTACT_TODO.md',                # 根目录会话草稿（应 gitignore）
 
 ## `THUMS_EXTRACT_TODO.md`  （2 条）
 归档位置：`archive/2026-10-17_cleanup/docs_stale/THUMS_EXTRACT_TODO.md`
@@ -170,22 +170,22 @@
 ## `b2_report.txt`  （1 条）
 归档位置：`archive/2026-10-17_cleanup/results_invalid/b2_report.txt`
 
-- `scripts/archive_cleanup.py:24` — 'results/b2_report.txt', 'results/smoke.txt',
+- `scripts/tools/archive_cleanup.py:24` — 'results/b2_report.txt', 'results/smoke.txt',
 
 ## `smoke.txt`  （1 条）
 归档位置：`archive/2026-10-17_cleanup/results_invalid/smoke.txt`
 
-- `scripts/archive_cleanup.py:24` — 'results/b2_report.txt', 'results/smoke.txt',
+- `scripts/tools/archive_cleanup.py:24` — 'results/b2_report.txt', 'results/smoke.txt',
 
 ## `calibration_report.txt`  （1 条）
 归档位置：`archive/2026-10-17_cleanup/results_invalid/calibration_report.txt`
 
-- `scripts/archive_cleanup.py:25` — 'results/calibration_ff_scan.csv', 'results/calibration_report.txt',
+- `scripts/tools/archive_cleanup.py:25` — 'results/calibration_ff_scan.csv', 'results/calibration_report.txt',
 
 ## `rope_report.txt`  （1 条）
 归档位置：`archive/2026-10-17_cleanup/results_invalid/rope_report.txt`
 
-- `scripts/archive_cleanup.py:26` — 'results/calibration_rope.csv', 'results/rope_report.txt',
+- `scripts/tools/archive_cleanup.py:26` — 'results/calibration_rope.csv', 'results/rope_report.txt',
 
 ## `v1_combo.py`  （1 条）
 归档位置：`archive/2026-10-17_cleanup/temp_drafts/v1_combo.py`

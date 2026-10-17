@@ -23,7 +23,7 @@ J2 `h*` ≤ 1.52 m（弱外部判据）；J3 单调 `k↑ ⇒ h*↓`。
 
 用法::
 
-    .venv\\Scripts\\python.exe scripts/fp_anchor_probe.py
+    .venv\\Scripts\\python.exe scripts/1d/fp_anchor_probe.py
 """
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ import pathlib
 import sys
 from dataclasses import replace
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
 from climbing.pad import POSTURES, simulate_boulder_fall  # noqa: E402

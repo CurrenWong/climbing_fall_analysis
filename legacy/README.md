@@ -18,7 +18,7 @@ Phase B-1 初稿的**"质点 + 双线性软垫弹簧"**模型，对应
 | `output/` | 该模型生成的 5 张图 + 1 个 JSON + 1 个 CSV |
 
 替代者：`src/climbing/pad.py` + `src/climbing/injury.py`
-（分析入口见 `scripts/phase_b2_analysis.py`）
+（分析入口见 `scripts/paper/phase_b2_analysis.py`）
 
 ---
 
@@ -71,7 +71,7 @@ Phase B-1 初稿的**"质点 + 双线性软垫弹簧"**模型，对应
 想看当前有效的结果，去：
 
 ```bash
-python scripts/phase_b2_analysis.py     # 抱石 B-2 全套分析
-python scripts/verify_rope.py            # 绳索验证
-python scripts/visualize_b2.py           # 新模型图表
+python scripts/paper/phase_b2_analysis.py     # 抱石 B-2 全套分析
+python scripts/paper/verify_rope.py            # 绳索验证
+python scripts/figures/visualize_b2.py           # 新模型图表
 ```

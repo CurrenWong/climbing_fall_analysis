@@ -11,7 +11,7 @@ from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 plt.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "DejaVu Sans"]
 plt.rcParams["axes.unicode_minus"] = False
 
-OUT = pathlib.Path(__file__).resolve().parents[1] / "results" / "figures"
+OUT = pathlib.Path(__file__).resolve().parents[2] / "results" / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 
 C_IN = "#e3f2fd"; C_BOX = "#fff8e1"; C_POST = "#e8f5e9"

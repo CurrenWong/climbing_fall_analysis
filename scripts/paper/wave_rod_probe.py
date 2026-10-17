@@ -26,12 +26,12 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 
 from climbing.head_branch import V8_THRESHOLD_AT_20M_S  # noqa: E402
 from climbing.wave_rod import WaveRod, simulate_tibia_wave  # noqa: E402
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "wave_rod_probe.json"
 
 MASS_KG = 80.0

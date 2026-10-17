@@ -6,7 +6,7 @@
   C. 损伤判读在低落差下应能出现"低"档（B-2 全部顶"极高"）
 """
 import sys, pathlib
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 import numpy as np
 import time
 

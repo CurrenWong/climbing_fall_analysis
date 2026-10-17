@@ -25,7 +25,7 @@ from __future__ import annotations
 import pathlib
 import sys
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 
 import numpy as np
 import pandas as pd
@@ -76,7 +76,7 @@ def probe(t_ref: float, exponent: float, eps_ref: float = 0.30, c: float = 100.0
 
 
 def main() -> None:
-    out_dir = pathlib.Path(__file__).resolve().parents[1] / "results"
+    out_dir = pathlib.Path(__file__).resolve().parents[2] / "results"
     out_dir.mkdir(exist_ok=True)
 
     # 网格搜索。范围覆盖最终写入默认值的那一带

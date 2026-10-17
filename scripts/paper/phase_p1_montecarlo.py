@@ -2,10 +2,10 @@
 
 用法
 ----
-    python scripts/phase_p1_montecarlo.py                # 1000 次，快速预设
-    python scripts/phase_p1_montecarlo.py --n 200        # 小样本试跑
-    python scripts/phase_p1_montecarlo.py --strict-tol   # 用严格容差（慢 ~18x）
-    python scripts/phase_p1_montecarlo.py --workers 1    # 串行（等价对照/调试基线）
+    python scripts/paper/phase_p1_montecarlo.py                # 1000 次，快速预设
+    python scripts/paper/phase_p1_montecarlo.py --n 200        # 小样本试跑
+    python scripts/paper/phase_p1_montecarlo.py --strict-tol   # 用严格容差（慢 ~18x）
+    python scripts/paper/phase_p1_montecarlo.py --workers 1    # 串行（等价对照/调试基线）
 
 并行（PERF-3）
 ------------
@@ -52,7 +52,7 @@ import time
 
 import numpy as np
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 
 from climbing.ankle_injury import assess_ankle              # noqa: E402
 from climbing.batch import parallel_map                         # noqa: E402
@@ -71,7 +71,7 @@ from climbing.scenarios import (                            # noqa: E402
 
 import dataclasses as _dataclasses
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results"
 FIG = OUT / "figures"
 

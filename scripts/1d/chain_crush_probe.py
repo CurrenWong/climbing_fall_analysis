@@ -2,7 +2,7 @@
 
 对 {2,3,5,10,20} m 刚性地面工况同时跑 G1 基线（``chain2d.py``）与 G4 压溃
 （``chain2d_crush.py``），取**胫骨段**局部组织峰（``segment_local_peak`` 同
-口径 = ``scripts/chain_vtarget_probe.py``），判定：
+口径 = ``scripts/paper/chain_vtarget_probe.py``），判定：
 
 * **V8a**：峰时随高度单调不增（crush 路径）。
 * **V8b**：20 m 时 ≤ 5.0 ms（``head_branch.V8_THRESHOLD_AT_20M_S``）。
@@ -14,7 +14,7 @@
 
 口径（跑前冻结，禁止回解凑靶）
 * 姿势 ``feet-first-stiff``、质量 80 kg、``on_pad=False``（刚地面）——
-  与既有 ``scripts/chain_vtarget_probe.py`` 口径一致。
+  与既有 ``scripts/paper/chain_vtarget_probe.py`` 口径一致。
 * 观测量先验冻结为**胫骨段**（索引 1）；逐段峰全报（分布）但不改主判据。
 
 产物：``results/chain_crush_probe.json``（纯增量，新文件）。
@@ -32,7 +32,7 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 
 from climbing.chain2d import (  # noqa: E402
     SEGMENTS_6,
@@ -68,7 +68,7 @@ def _extended_rebound(result: "PlanarChainResult", horizon: float = REBOUND_HORI
     foot_lift = max(0.0, float(-z_foot.min())) * 1e3
     return {"head_rise_m": head_rise, "foot_lift_mm": foot_lift}
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "chain_crush_probe.json"
 
 POSTURE = "feet-first-stiff"

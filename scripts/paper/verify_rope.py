@@ -1,6 +1,6 @@
 """绳索模型验证：FF 单调性 / UIAA 12 kN 判据 / 保护器对比。"""
 import sys, pathlib
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 import numpy as np
 from climbing.rope import simulate_rope_fall, default_rope
 from climbing.belay import get_device, DEVICES, belayer_side_force

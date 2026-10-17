@@ -3,7 +3,7 @@
 `f_ecc_max = M_ecc/(l·sin(θ/2))`（M_ecc = 270 N·m，Ruas 实测）。
 
 正对照 C1-J0：门关 ⇒ 逐位复现 fp_anchor_probe.json。
-用法: .venv\\Scripts\\python.exe scripts/ecc_muscle_probe.py
+用法: .venv\\Scripts\\python.exe scripts/1d/ecc_muscle_probe.py
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from math import acos, degrees, sin
 
 import numpy as np
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 from climbing.pad import RIGID_CONTACT, TWO_SEG_LEG, simulate_boulder_fall  # noqa: E402
 

@@ -10,7 +10,7 @@
 
 口径（跑前冻结，禁止回解凑靶）
 * 姿势 ``feet-first-stiff``、质量 80 kg、``on_pad=False``（刚地面）——
-  与既有 ``scripts/rigid_vtarget_probe.py`` 的 V8 口径一致。
+  与既有 ``scripts/paper/rigid_vtarget_probe.py`` 的 V8 口径一致。
 * 观测量先验冻结为**胫骨段**（索引 1）；逐段峰全报（分布）但不改主判据。
 
 产物：``results/chain_vtarget_probe.json``（纯增量，新文件）。
@@ -28,7 +28,7 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 
 from climbing.chain2d import (  # noqa: E402
     SEGMENTS_6,
@@ -38,7 +38,7 @@ from climbing.chain2d import (  # noqa: E402
 )
 from climbing.head_branch import V8_THRESHOLD_AT_20M_S  # noqa: E402
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "chain_vtarget_probe.json"
 
 POSTURE = "feet-first-stiff"

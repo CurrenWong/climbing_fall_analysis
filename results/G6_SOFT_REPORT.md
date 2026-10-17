@@ -215,7 +215,7 @@ k_eff,i  = 1/(1/k_bone,i + 1/k_soft,i)
 
 - 实现 `src/climbing/chain2d_soft.py`（纯新增；`SEGMENTS_6` 一字未改）
 - 旁路注入点 `src/climbing/chain2d_tissue.py`（加 `segments` 可选参数，默认 `SEGMENTS_6`）
-- 探针 `scripts/chain_soft_probe.py`；诊断 `temp/g6_div.py`、`temp/g6_vbar.py`
+- 探针 `scripts/1d/chain_soft_probe.py`；诊断 `temp/g6_div.py`、`temp/g6_vbar.py`
 - 预注册 `docs/methods/G6_载荷段软组织串联柔顺_预注册.md`（§3 含 `足` 行算术更正）
 - 锚点：PMC8553457（vertical/leg stiffness 综述：Arampatzis 30.8–93、Paradisis 73.8–105、
   Kuitunen 103–171 kN/m）；Xu JBE 2016 / Burr 1996 / Milgrom 2000（in-vivo 胫骨骨应变

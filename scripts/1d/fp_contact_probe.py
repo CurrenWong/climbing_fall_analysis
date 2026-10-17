@@ -22,7 +22,7 @@ A-J3 `F_flex` 如实报告（无阈值）；A-J5 ⛔ 禁把 `k_n` 调到锚带**
 
 用法::
 
-    .venv\\Scripts\\python.exe scripts/fp_contact_probe.py
+    .venv\\Scripts\\python.exe scripts/1d/fp_contact_probe.py
 """
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ import json
 import pathlib
 import sys
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
 from climbing.pad import RIGID_CONTACT, simulate_boulder_fall  # noqa: E402

@@ -154,7 +154,7 @@ class BoneSite:
 #:
 #: 截面面积取自人体测量学/生物力学文献的**量级**（皮质骨为主的骨干取较小值，
 #: 含松质骨的骨端取较大值）。**置信度整体偏低** —— 这是本模块最大的不确定源，
-#: 也是 ``scripts/validate_vs_fem.py`` 要量化的对象。
+#: 也是 ``scripts/paper/validate_vs_fem.py`` 要量化的对象。
 BONE_SITES: dict[str, BoneSite] = {
     "calcaneus": BoneSite(
         key="calcaneus", name_cn="跟骨（足部）",

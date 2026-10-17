@@ -59,7 +59,7 @@
 | 2D 平面（2 质量 + 1 转动） | `src/climbing/pad2d.py` | **P3 首切**（4 不变量） |
 | 2D 多刚体链 | `src/climbing/chain2d*.py` | **P3 二切**（G1 6 段链，DOF=12） |
 | 1D 骨强度/截面 | `src/climbing/bone.py` + `scripts/opensim_fe/risk_1d_bending.py` / `risk_1d_loadshare.py` / `axial_subregion.py` / `paper_alignment.py` | **V1 的 1D 支（足 8 m/腓 7 m）**、V4、V7 |
-| 1D 截面 vs FE 对照 | **`scripts/validate_vs_fem.py`** | **V2 的 ✅ 唯一依据**（组 A 2/3） |
+| 1D 截面 vs FE 对照 | **`scripts/paper/validate_vs_fem.py`** | **V2 的 ✅ 唯一依据**（组 A 2/3） |
 | 踝解析式 | `src/climbing/coupling/ankle_ligament.py` / `ankle_rotation.py` / `ankle_supination.py` | V6、V9、R1（旋后）、S6（外旋） |
 | 损伤/统计 | `src/climbing/injury.py` / `ankle_injury.py` / `metrics.py` / `scenarios.py` | V5、踝骨折率 22.8% |
 | 头颈分支 | `src/climbing/head_branch.py` | V3 相关 |
@@ -103,7 +103,7 @@
 | 项 | 位置 |
 |---|---|
 | 验证靶表（V1–V9） | `docs/paper/论文v2_数学建模版.md` 表 5 |
-| V2 的 1D 依据 | `scripts/validate_vs_fem.py`（组 A/组 B 定义在 `:206-215`）、`results/vs_fem_thresholds.txt` |
+| V2 的 1D 依据 | `scripts/paper/validate_vs_fem.py`（组 A/组 B 定义在 `:206-215`）、`results/vs_fem_thresholds.txt` |
 | V1/V2 口径裁定 | `results/opensim_fe/V1V2_CALIBER_RULING.md` |
 | 载荷链审计 | `src/climbing/coupling/loadchain.py`、`scripts/opensim_fe/loadchain_audit.py`、`results/opensim_fe/LOADCHAIN_RESIDUAL_CLOSURE.md` |
 | FE 基础设施 | `src/climbing/coupling/{febio_model,febio_run,fe_post,xplt_shim,meshing,plantar_bc,joint_contact}.py` |

@@ -107,7 +107,7 @@ def main():
                 pr = rel(p)
                 if pr == c or pr.startswith('temp/') or pr.startswith('archive/'):
                     continue
-                if pr == 'scripts/archive_cleanup.py':
+                if pr == 'scripts/tools/archive_cleanup.py':
                     continue                     # 本脚本自身含有候选名单 ⇒ 不是真引用
                 if pr in all_cand:          # 同批候选（会一起移动）
                     continue

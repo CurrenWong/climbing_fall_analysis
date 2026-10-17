@@ -154,7 +154,7 @@
 | 失效模式 ↔ 口径 | `results/opensim_fe/A2_AGGREGATION_RULING.md` §2.1 |
 | A2 口径裁定（**仅 A2**） | `results/opensim_fe/A2_AGGREGATION_RULING.md` §0、`A2_CONVENTION_RULING.md` |
 | V1 实跑与热点 | `results/opensim_fe/V1_RERUN_20261015.md` |
-| V2 现用依据 | `scripts/validate_vs_fem.py:206-215`、`results/vs_fem_thresholds.txt` |
+| V2 现用依据 | `scripts/paper/validate_vs_fem.py:206-215`、`results/vs_fem_thresholds.txt` |
 | 冻结矩阵 | `results/opensim_fe/fracture_matrix_bc2.json` |
 
 ## 7. 诚实边界

@@ -17,7 +17,7 @@ run_phase_b1.py — 抱石坠落摔伤分析 第一阶段 主入口
 import argparse
 import csv
 import json
-"""⚠️ 已废弃（2026-10-02）—— 请改用 ``scripts/phase_b2_analysis.py``
+"""⚠️ 已废弃（2026-10-02）—— 请改用 ``scripts/paper/phase_b2_analysis.py``
 
 这是最初的"质点 + 双线性软垫弹簧"模型（Phase B-1 初稿），已被
 ``src/climbing/pad.py`` 完全取代。当前实现加入了原方案初稿漏掉的三件事：

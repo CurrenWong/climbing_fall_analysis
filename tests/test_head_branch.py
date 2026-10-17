@@ -189,7 +189,7 @@ class TestV8PeakTimeMonotoneWithHeight:
 
     **2026-10-08 口径注**：V8 判据的观测量已对齐 [T22] Table 3 原文——
     该表报的是**胫骨远端应变 / 韧带应变**的局部峰值时刻，不是头峰。
-    现行 V8 实现 = 踝内翻力矩峰 ``t_moment``（``scripts/rigid_vtarget_probe.py``
+    现行 V8 实现 = 踝内翻力矩峰 ``t_moment``（``scripts/paper/rigid_vtarget_probe.py``
     的 V8a 单调 / V8b @20≤5 ms；守卫测试见
     ``tests/test_pad2d.py::TestV8MomentObservable``；判据行
     ``docs/methods/方案更新_v2.md:866``）。头峰归 V3（[Y25] §2.3 头部

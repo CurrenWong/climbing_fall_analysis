@@ -736,7 +736,7 @@ class TestNonzero2DParametersActuallyAnimate:
 # **后处理派生量**，默认（β0=0 且 beta_from_theta=0）逐位归零、不改 1D 轨迹。
 #
 # 标定常量（见 ``src/climbing/pad2d.py``，另一 agent 的
-# ``scripts/phase_p1_montecarlo.py`` 与之一致）：
+# ``scripts/paper/phase_p1_montecarlo.py`` 与之一致）：
 #   mu_slide      = 0.4    —— |sinβ|>0.4（≈β>23.6°）⇒ 滑动
 #   d_lateral     = 0.030 m （内翻，β≥0 的力矩臂）
 #   d_medial      = 0.045 m （外翻，β<0）—— > lateral ⇒ V9「内翻轻于外翻」
@@ -956,7 +956,7 @@ class TestV8MomentObservable:
     ``t_moment``（驱动 = F_pad × sin β，与 GRF 首峰同步）。
 
     判据本体（V8a 单调 / V8b @20 ≤ 5 ms）由
-    ``scripts/rigid_vtarget_probe.py`` 出结论（未标定期间 FAIL 不进 CI）。
+    ``scripts/paper/rigid_vtarget_probe.py`` 出结论（未标定期间 FAIL 不进 CI）。
     本类只锁定**观测量的测量口径**：
     峰值必须在冲击窗口内取 —— 刚性地面无接触阻尼 ⇒ settle 事件不触发、
     轨迹跑满 t_max，全程 argmax 会被窗后振铃污染（2026-10-08 实测踩过

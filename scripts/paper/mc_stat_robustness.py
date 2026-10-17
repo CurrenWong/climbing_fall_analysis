@@ -31,8 +31,8 @@ patch ``phase_p1_montecarlo.FAST_KW`` 加 ``pad=CrashPad(×α)`` 即可跨进程
 
 用法::
 
-    .venv\\Scripts\\python.exe scripts/mc_stat_robustness.py --offline
-    .venv\\Scripts\\python.exe scripts/mc_stat_robustness.py --runs
+    .venv\\Scripts\\python.exe scripts/paper/mc_stat_robustness.py --offline
+    .venv\\Scripts\\python.exe scripts/paper/mc_stat_robustness.py --runs
 """
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ import math
 import pathlib
 import sys
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 

@@ -19,7 +19,7 @@ from __future__ import annotations
 import pathlib
 import sys
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 
 import numpy as np
 import matplotlib
@@ -34,7 +34,7 @@ from climbing.pad import (
 )
 from climbing.metrics import hic_from_result
 
-OUT = pathlib.Path(__file__).resolve().parents[1] / "results" / "figures"
+OUT = pathlib.Path(__file__).resolve().parents[2] / "results" / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 
 # 中文字体（Windows 常见）

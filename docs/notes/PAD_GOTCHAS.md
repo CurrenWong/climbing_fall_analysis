@@ -22,7 +22,7 @@
 - ✅ **腿刚度的观测量 = `result.meta["f_flex_peak_n"]`**（对 k 敏感：2.27→2.78，+22%）。
 - ⛔ 用 `peak_force_n` 做的「模型 vs 力台 GRF」对比**会得到无意义的结论**
   （2026-10-16 曾据此误判「模型 @0.42 m 高 3.3×、缺屈服吸能」——已作废）。
-- 复现：`scripts/fp_anchor_probe.py`、`tests/test_climbing.py::TestAnchoredPostures::
+- 复现：`scripts/1d/fp_anchor_probe.py`、`tests/test_climbing.py::TestAnchoredPostures::
   test_f_pad_insensitive_to_k_flex`。
 
 ---
@@ -203,7 +203,7 @@ STROKE_ANCHOR = {"x_flex_max_m": None, "k_stop_n_per_m": None}
 那会**跨过**无效格：实测因此把 `anchored-self` 报成 **3.506 m 的假首折**
 （真正的跨越段是 1 m → 5 m，中间夹着被污染的 2 m 格）。
 **正确做法**：只在**原网格上相邻、且两端都未触发止段**的格之间内插
-（`scripts/fp_stroke_probe.py::_hstar`）。
+（`scripts/1d/fp_stroke_probe.py::_hstar`）。
 
 ---
 
@@ -283,5 +283,5 @@ TWO_SEG_LEG = {"k_theta_nm_per_rad": None, "segment_l_m": None, "theta_max_rad":
 
 **最近更新**：2026-10-16（`LEG_K_ANCHOR` → `FP_CONTACT` → 账的口径 → 审计 → B1 → B2a → C1 → **C2 全 PASS** → **纪律 §6g**）。
 **锚点**：`src/climbing/pad.py`（四个门 + `flex_force` + 能力账 `:733-741`）、
-`scripts/pad_energy_check.py`、`scripts/fp_stroke_probe.py`、`scripts/leg2seg_probe.py`、
-`scripts/ecc_muscle_probe.py`、`results/{FP_STROKE,LEG2SEG,ECC_MUSCLE}_REPORT.md`
+`scripts/1d/pad_energy_check.py`、`scripts/1d/fp_stroke_probe.py`、`scripts/1d/leg2seg_probe.py`、
+`scripts/1d/ecc_muscle_probe.py`、`results/{FP_STROKE,LEG2SEG,ECC_MUSCLE}_REPORT.md`

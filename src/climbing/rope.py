@@ -25,7 +25,7 @@
     T(ε) = T_ref · (ε / ε_ref)^n ,  ε = e / L
 
 参数标定在 UIAA 101 坠落试验条件（80 kg, FF = 1.77）下完成，
-见 ``scripts/calibrate_rope.py``。
+见 ``scripts/paper/calibrate_rope.py``。
 
 已知简化
 --------
@@ -74,7 +74,7 @@ class RopeModel:
     ---------------------
     UIAA 101 条件（80 kg, FF=1.77, L0=2 m）下本默认值给出
     **峰值 8.17 kN / 9.4 g / 伸长率 28.8%**，对比公开实测的
-    8-9 kN / 30-40%。由 ``scripts/calibrate_rope.py`` 用加权 RSS
+    8-9 kN / 30-40%。由 ``scripts/paper/calibrate_rope.py`` 用加权 RSS
     目标函数（峰值 0.7 / 伸长 0.3）标定。
 
     ⚠️ **峰值力和伸长率没法同时对上，这是幂律本构的结构性局限**，

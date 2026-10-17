@@ -113,7 +113,7 @@ add("④ 已知坑类的复发检测（模式扫描）")
 add("=" * 94)
 PATS = [
     (r'np\.gradient\(', '对采样轨迹做数值微分（采样依赖）'),
-    (r'parents\[2\]', '三层目录脚本（与 tests 的 parents[1] 不同，易混）'),
+    (r'parents\[2\]', '三层目录脚本（与 tests 的 parents[2] 不同，易混）'),
     (r'sys\.path\.insert', '脚本自注入 sys.path（须与本文件层级匹配）'),
     (r'_mt\[:, 0\]|m_theta_table', 'M(θ) 表接口（契约见 CANONICAL.md §0）'),
     (r'f_flex_peak_n', '腿力观测量（须与 rhs 同源）'),

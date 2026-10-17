@@ -1,7 +1,7 @@
 # 【刚】V 靶补测 + 时序标定首版（2026-10-08）
 
 > 状态：**Step 1 补测 + L0–L5 标定闭环全部完成**。
-> 工具：`scripts/rigid_vtarget_probe.py` → `results/rigid_vtarget_probe.json`
+> 工具：`scripts/paper/rigid_vtarget_probe.py` → `results/rigid_vtarget_probe.json`
 > （单池并行 + 刚格放松容差；`--part all` 36 cells ≈ 107 s，标定前串行 ≈ 6 min）。
 > 本报告 = 补测发现 + 标定决策日志 + 标定后最终判定。
 

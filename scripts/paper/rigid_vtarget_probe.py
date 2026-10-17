@@ -31,10 +31,10 @@
 
 用法::
 
-    python scripts/rigid_vtarget_probe.py --part head   # V3/V8
-    python scripts/rigid_vtarget_probe.py --part v6     # V6 网格 ×2 工况
-    python scripts/rigid_vtarget_probe.py --part v9     # V9 内翻/外翻 ×2 工况
-    python scripts/rigid_vtarget_probe.py --part all
+    python scripts/paper/rigid_vtarget_probe.py --part head   # V3/V8
+    python scripts/paper/rigid_vtarget_probe.py --part v6     # V6 网格 ×2 工况
+    python scripts/paper/rigid_vtarget_probe.py --part v9     # V9 内翻/外翻 ×2 工况
+    python scripts/paper/rigid_vtarget_probe.py --part all
 """
 
 from __future__ import annotations
@@ -46,7 +46,7 @@ import sys
 
 import numpy as np
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "src"))
 
 from climbing.batch import parallel_map  # noqa: E402
 from climbing.head_branch import (  # noqa: E402
@@ -58,7 +58,7 @@ from climbing.head_branch import (  # noqa: E402
 from climbing.pad import simulate_boulder_fall  # noqa: E402
 from climbing.pad2d import Posture2D, simulate_boulder_fall_2d  # noqa: E402
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
+ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "rigid_vtarget_probe.json"
 
 # ---- 求解器口径 ----------------------------------------------------------

@@ -265,7 +265,7 @@ class TestAnkleVerdictShape:
 
 
 # ==========================================================================
-# 4. ROTATION_TO_POSTURE2D —— 来自 scripts/phase_p1_montecarlo.py 的工厂
+# 4. ROTATION_TO_POSTURE2D —— 来自 scripts/paper/phase_p1_montecarlo.py 的工厂
 # ==========================================================================
 # 延迟导入：避免在并行 agent 还在写 pad2d.py 时就强行 import。
 # 这里的测试**期望**工厂存在；如果工厂不存在 ⇒ 这一路测试失败
@@ -441,7 +441,7 @@ class TestRotationToPosture2D:
 # ==========================================================================
 # 5. site_distribution —— 踝列的聚合
 # ==========================================================================
-# site_distribution 在 scripts/phase_p1_montecarlo.py 内定义。
+# site_distribution 在 scripts/paper/phase_p1_montecarlo.py 内定义。
 def _load_site_distribution():
     mod = _load_p1_module()
     if not hasattr(mod, "site_distribution"):
