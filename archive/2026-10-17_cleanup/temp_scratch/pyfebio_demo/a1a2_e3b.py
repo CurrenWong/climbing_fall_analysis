@@ -1,0 +1,92 @@
+"""决定性对照：A2 单独 + BFGS 开（MAX_UPS=10 默认）。
+若 E3b 收敛 ⇒ BFGS 的病态只在「有距下接触」时触发；
+若也停滞 ⇒ A2 本身与求解器无关地难收敛。
+同时看 E1 在 t≈0.46 失控前的残差轨迹（判定是发散还是震荡）。"""
+import glob
+import io
+import os
+import re
+import shutil
+import subprocess
+from pathlib import Path
+
+import numpy as np
+
+ROOT = Path(r"D:\Project\climbing_fall_analysis")
+WORK = ROOT / "temp/thums/febio_lig"
+OUT = ROOT / "temp/pyfebio_demo/a1a2"
+PY = ROOT / ".venv/Scripts/python.exe"
+SCRIPT = ROOT / "scripts/ankle_fe/ankle_lig_feb.py"
+BASE = dict(DRIVER="dispx", DISP_MM="+1.6", DET_MIN="0.0", TRUNC_MM="60",
+            AXIS_SRC="full", ALIGN_AXIS="1", FIX_TALUS="transverse",
+            CART_NEW="1", TIE="1", CART_DIR="temp/thums/cart_m1",
+            POSE_IE="0", LOG_DATA="1")
+
+
+def sum_top(p):
+    if not p.exists():
+        return 0.0
+    cur_t, buf, last = None, [], {}
+    for l in p.read_text(encoding="utf-8", errors="replace").split("\n"):
+        if l.startswith("*Time"):
+            if buf:
+                last[cur_t] = np.array(buf, float)[:, 1:4].sum(0)
+            cur_t = float(l.split("=")[1]); buf = []
+        elif l.strip() and not l.startswith("*") and not l.startswith("*Step"):
+            try:
+                buf.append([float(x) for x in l.split(",")])
+            except ValueError:
+                pass
+    if buf:
+        last[cur_t] = np.array(buf, float)[:, 1:4].sum(0)
+    if not last:
+        return 0.0
+    return float(last[max(last)][2])
+
+
+def run(tag, extra):
+    env = os.environ.copy()
+    env.update(BASE); env.update(extra); env["PYTHONIOENCODING"] = "utf-8"
+    r = subprocess.run([str(PY), "-u", str(SCRIPT)], cwd=str(ROOT), env=env,
+                       capture_output=True, text=True, encoding="utf-8",
+                       errors="replace", timeout=1800)
+    out = (r.stdout or "") + (r.stderr or "")
+    (OUT / f"{tag}.stdout.txt").write_text(out, encoding="utf-8")
+    m = re.search(r"FEBio rc=(-?\d+)", out)
+    rc = int(m.group(1)) if m else None
+    lg = WORK / "log_WK.txt"
+    normal = lg.exists() and "N O R M A L   T E R M I N A T I O N" in \
+        lg.read_text(encoding="utf-8", errors="replace")
+    for src, dst in ((WORK / "febio_WK.log", f"{tag}.febio.log"),
+                     (WORK / "ankle_lig_WK.feb", f"{tag}.feb")):
+        if src.exists():
+            shutil.copy(src, OUT / dst)
+    F = None
+    if normal:
+        F = (sum_top(WORK / "reac_tibia_WK.txt")
+             + sum_top(WORK / "reac_fibula_WK.txt"))
+    tf = re.findall(r"failed to converge at time : ([\d.]+)", out)
+    print(f"[{tag}] rc={rc} NORMAL={normal} 失收敛t={tf[:1] or '—'} F={F}")
+    return rc, normal, F
+
+
+# E3b: 仅 A2 + BFGS 开
+run("E3b_a2_bfgs_on", {"SUBTALAR": "0", "TALUS_SUPPORT": "spring",
+                       "TALUS_K": "500"})
+
+# 残差轨迹：E1 在 t≈0.463 前后
+print("\n=== E1_ts40 残差轨迹（失收敛前）===")
+p = OUT / "E1_ts40.febio.log"
+if p.exists():
+    t = p.read_text(encoding="utf-8", errors="replace")
+    # 抓每个 Nonlinear solution status 块的 residual
+    blocks = re.split(r"Nonlinear solution status: time=", t)
+    rows = []
+    for b in blocks[1:]:
+        tt = b.split("\n")[0].strip()
+        m = re.search(r"residual\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)", b)
+        if m:
+            rows.append((tt, float(m.group(2))))
+    # 打印最后 14 行
+    for tt, cur in rows[-14:]:
+        print(f"  t={tt:<16} CURRENT residual={cur:.4e}")

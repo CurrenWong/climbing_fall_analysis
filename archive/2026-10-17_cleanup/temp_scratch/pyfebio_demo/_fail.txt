@@ -1,0 +1,57 @@
+==============================================================================
+=== IE_500   日志 4376 字符
+==============================================================================
+     34: === Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===
+     35: OK  tibia_cort             tet4   保留      6 剔除    0  det(J) min=2.2151e+00
+     36: OK  tibia_cort             hex8   保留    231 剔除    0  det(J) min=2.2084e+00
+     37: OK  tibia_spon             tet4   保留    605 剔除    0  det(J) min=2.8144e+01
+     38: OK  tibia_marrow           tet4   保留    518 剔除    0  det(J) min=5.3135e+01
+     39: OK  fibula_cort            hex8   保留    146 剔除    0  det(J) min=1.5097e+00
+     40: OK  fibula_spon            tet4   保留    264 剔除    0  det(J) min=2.3857e+01
+     41: OK  talus_cort             hex8   保留    394 剔除    0  det(J) min=8.6799e-01
+     42: OK  talus_spon             tet4   保留  1,766 剔除    0  det(J) min=2.3567e+01
+     43: OK  calcaneus_cort         hex8   保留    634 剔除    0  det(J) min=1.1119e+00
+     44: OK  calcaneus_spon         tet4   保留  3,323 剔除    0  det(J) min=1.7034e+01
+     45: OK  navicular_spon         hex8   保留    148 剔除    0  det(J) min=2.1132e+00
+     46: !!  tibiotalar_tibia       penta6 保留    145 剔除    9  det(J) min=1.9085e-01
+     47: !!  tibiotalar_talus       penta6 保留    182 剔除   22  det(J) min=2.3914e-03
+     49: 韧带壳退化剔除 0 个
+  ·  Number of time steps completed .................... : 20
+==============================================================================
+=== IE_-500   日志 4509 字符
+==============================================================================
+     34: === Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===
+     35: OK  tibia_cort             tet4   保留      6 剔除    0  det(J) min=2.2151e+00
+     36: OK  tibia_cort             hex8   保留    231 剔除    0  det(J) min=2.2084e+00
+     37: OK  tibia_spon             tet4   保留    605 剔除    0  det(J) min=2.8144e+01
+     38: OK  tibia_marrow           tet4   保留    518 剔除    0  det(J) min=5.3135e+01
+     39: OK  fibula_cort            hex8   保留    146 剔除    0  det(J) min=1.5097e+00
+     40: OK  fibula_spon            tet4   保留    264 剔除    0  det(J) min=2.3857e+01
+     41: OK  talus_cort             hex8   保留    394 剔除    0  det(J) min=8.6799e-01
+     42: OK  talus_spon             tet4   保留  1,766 剔除    0  det(J) min=2.3567e+01
+     43: OK  calcaneus_cort         hex8   保留    634 剔除    0  det(J) min=1.1119e+00
+     44: OK  calcaneus_spon         tet4   保留  3,323 剔除    0  det(J) min=1.7034e+01
+     45: OK  navicular_spon         hex8   保留    148 剔除    0  det(J) min=2.1132e+00
+     46: !!  tibiotalar_tibia       penta6 保留    145 剔除    9  det(J) min=1.9085e-01
+     47: !!  tibiotalar_talus       penta6 保留    182 剔除   22  det(J) min=2.3914e-03
+     49: 韧带壳退化剔除 0 个
+     69: * 3 negative jacobians detected.                                        *
+
+  --- negative jacobian 上下文 ---
+    4.133461e-01 
+    	   displacement        1.180268e+01    2.749294e+00    2.062984e-03 
+     3
+    
+     *************************************************************************
+     *                                ERROR                                  *
+     * 3 negative jacobians detected.                                        *
+     *************************************************************************
+    
+    
+    ------- failed to converge at time : 0.00454545
+    
+    Max. nr of 
+  ·  convergence norms :     INITIAL         CURRENT         REQUIRED
+  ·  *                                ERROR                                  *
+  ·  ------- failed to converge at time : 0.00454545
+  ·  Number of time steps completed .................... : 0

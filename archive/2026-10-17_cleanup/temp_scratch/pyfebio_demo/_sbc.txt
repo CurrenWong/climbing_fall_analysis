@@ -1,0 +1,33 @@
+Prescribed Shell Displacement
+The prescribed shell displacement boundary condition can be used to prescribe the value of the
+nodalback-displacementdegreesoffreedomofashell. Thisboundaryconditiontakesthefollow-
+ing parameters.
+parameter description default
+dof The displacement dof to prescribe, sx, sy, or sz -
+value The prescribed value 0
+relative Flag that defines whether the value is absolute or relative (1) 0 (off)
+Comments:
+1. If the relative flag is set to 1, then the value is relative with respect to the current position
+of the node at the time the boundary condition becomes active. This only has an effect in
+multi-step analyses.
+<bc type="prescribed shell displacement" node_set="set1">
+<dof>sx</dof>
+<value lc="1">1.0</value>
+<relative>0</relative>
+<bc>
+Although the prescribe shell displacement element with a value of zero can also be used to fix a
+certain nodal degree of freedom, the user should use the zero shell displacement boundary con-
+dition whenever possible, since this option causes the equation corresponding to the constrained
+degree of freedom to be removed from the linear system of equations. This results in fewer equa-
+tions that need to be solved for and thus reduces the run time of the FE analysis.
+3.11. BOUNDARY SECTION 93
+3.11.8 Prescribed Fluid Pressure
+Theprescribedfluidpressureboundaryconditioncanbeusedtoprescribetheeffectivefluidpres-
+sure p˜on the boundary of a biphasic or multiphasic material. This boundary condition takes the
+following parameters.
+parameter description default
+value The prescribed value 0
+relative Flag that defines whether the value is absolute or relative (1) 0 (off)
+Comments:
+1. If the relative flag is set to 1, then the value is relative with respect to the current position
+of the node at the time the boundary condition b

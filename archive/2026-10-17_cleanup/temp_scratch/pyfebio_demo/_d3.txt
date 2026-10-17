@@ -1,0 +1,66 @@
+[mode] MATSET=WK LIG_MODE=shell TIME_STEPS=5 FIX_TALUS=transverse FORCE=600.0N
+[mode] BONES=all
+[mode] NO_CONTACT=False LIG_SUB=all
+[mode] FIX_NAVICULAR=True
+[mode] DRIVER=disp DISP_MM=0.05
+骨+软骨：单元 32,497，节点 11,666
+韧带：10 条，单元 135，并入节点后总计 11,803
+其中 offset（软骨外表面）节点 160
+合并后节点 11,963
+加载轴（胫骨->距骨）= [0.6766 0.1363 0.7237]
+韧带专属节点（转动自由度原本自由）: 137
+
+=== Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===
+  OK  tibia_cort             tet4   保留      6 剔除    0  det(J) min=2.2151e+00
+  OK  tibia_cort             hex8   保留  2,415 剔除    0  det(J) min=1.4405e+00
+  OK  tibia_spon             tet4   保留  6,651 剔除    0  det(J) min=8.1429e+00
+  OK  tibia_marrow           tet4   保留 14,482 剔除    0  det(J) min=1.6333e+00
+  OK  fibula_cort            hex8   保留    842 剔除    0  det(J) min=1.1394e+00
+  OK  fibula_spon            tet4   保留    762 剔除    0  det(J) min=7.1988e+00
+  OK  talus_cort             hex8   保留    394 剔除    0  det(J) min=8.6799e-01
+  OK  talus_spon             tet4   保留  1,766 剔除    0  det(J) min=2.3567e+01
+  OK  calcaneus_cort         hex8   保留    634 剔除    0  det(J) min=1.1119e+00
+  OK  calcaneus_spon         tet4   保留  3,323 剔除    0  det(J) min=1.7034e+01
+  OK  navicular_spon         hex8   保留    148 剔除    0  det(J) min=2.1132e+00
+  !!  tibiotalar_tibia       tet4   保留    458 剔除    4  det(J) min=7.6195e-02
+  !!  tibiotalar_talus       tet4   保留    607 剔除    5  det(J) min=1.0451e-02
+  翻转修正 304 个；仍无法修正而剔除 9 个
+  韧带壳退化剔除 0 个
+  接触面 tibiotalar_tibia: 150 面
+  接触面 tibiotalar_talus: 197 面
+外表面顶/底：胫骨顶 421 / 腓骨顶 94 / 跟骨底 147
+顶面投影面积：胫骨 465.1 mm²，腓骨 96.7 mm² => 腓骨分担 17.2% 载荷
+读数数据 -> D:\Project\climbing_fall_analysis\temp\thums\febio_lig\lig_read_WK.npz
+
+写出 D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb（2538 KB）  单元：骨+软骨 32488，韧带 135，共 32623
+
+FEBio rc=1  用时 0.1s
+  ===========================================================================
+           ________    _________   _______       __     _________            
+          |        |\ |        |\ |       \\    |  |\  /         \\          
+          |    ____|| |    ____|| |    __  ||   |__|| |    ___    ||         
+          |   |\___\| |   |\___\| |   |\_| ||    \_\| |   //  \   ||         
+          |   ||__    |   ||__    |   ||_| ||   |  |\ |  ||    |  ||         
+          |       |\  |       |\  |         \\  |  || |  ||    |  ||         
+          |    ___||  |    ___||  |    ___   || |  || |  ||    |  ||         
+          |   |\__\|  |   |\__\|  |   |\__|  || |  || |  ||    |  ||         
+          |   ||      |   ||___   |   ||__|  || |  || |   \\__/   ||         
+          |   ||      |        |\ |          || |  || |           ||         
+          |___||      |________|| |_________//  |__||  \_________//          
+                                                                             
+        F I N I T E   E L E M E N T S   F O R   B I O M E C H A N I C S      
+                                                                             
+    version 4.13.0
+    FEBio is a registered trademark.                                         
+    copyright (c) 2006-2026 - All rights reserved                            
+                                                                             
+  ===========================================================================
+  
+  Starting without configuration file
+  Default linear solver: pardiso
+  Reading file D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb ...FAILED!
+  
+   *************************************************************************
+   *                                ERROR                                  *
+   * tag "dof" (line 45688) : unrecognized tag                             *
+   *************************************************************************

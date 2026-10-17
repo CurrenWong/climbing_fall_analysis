@@ -1,0 +1,51 @@
+feat(pad): B2a 两段腿「等效单关节」（`TWO_SEG_LEG`）—— 修好单调性与 `self` 档；`stiff` 仍不可定
+
+按用户「继续」推进 B2a（预注册 → 实现 → 跑 → 判定，同 A/B1 流程）。
+
+## 设计定理（零新增自由度）
+两段腿 `L(θ)=2l·cos(θ/2)` ⇒ `θ(s)=2·arccos(1−s/(2l))`；`M=k_θ·θ`
+⇒ **等效轴向力 `F(s) = k_θ·θ/(l·sin(θ/2))`** ⇒ 准静态关节下与单自由度框架**完全等价**。
+自检（temp/v1_b2a_smoke.py）：`dF/ds` 随 s 上升 **649 → 1015 N/m**（硬化）✓。
+
+## 冻结值（外部锚，非调值）
+  l = 0.425 m（2l = 0.85 = leg_ext0）
+  k_θ = 350 N·m/rad（0.08 N·m/kg/deg × 76 kg；Shamaei 2013 膝 ~400 量级）
+  θ_max 由实测 COM 深度反解 ⇒ soft 120.8° / self 111.2° / stiff 86.3°
+门 TWO_SEG_LEG 默认 None ⇒ 既有路径逐位不变。
+
+## 判定（预注册 §5）
+  B2a-J0 门关逐位复现 fp_anchor_probe.json        **PASS（逐位）**
+  B2a-J1 软接触下 F_flex(h) 严格单调              **PASS（三档全单调）**
+  B2a-J2 软接触下三档皆可定 h*                    **FAIL**（stiff 不可定）
+  B2a-J3 @0.42 m 只报不判                         soft 0.804 / self 0.762 / stiff 0.636
+  B2a-J5 禁凑靶                                  遵守（k_θ 未动）
+
+## ★ 与 B1 的对比
+  | 档 | B1（线性） | B2a（两段腿） |
+  |---|---|---|
+  | soft | 3.657 m | **3.707 m** |
+  | **self** | **不可定** | **3.302 m** ✅ |
+  | stiff | 不可定 | 不可定（θ_max=86.3° @1 m 用尽）|
+  ⇒ B2a 修好了**单调性**（线性模型在软接触下非单调，因 k_stop 假台阶；θ≤θ_max 是**几何约束**）
+     并让 **self 档可定**；**stiff 仍不可定** ⇒ 与 B1 的 k_stop 瓶颈是**同一缺口的两种语言表达**
+     ⇒ 缺的是「**行程耗尽之后**」的物理机制（肌肉离心吸能 / 骨性-软组织接触），**不是再加几何自由度**。
+
+## ⚠️ 两个必须记住的读数
+  1. `F(θ→0) → 2k_θ/l ≈ 1.65 kN` **有限** —— 线性力矩律的产物 ⇒ 小角段偏「恒力弹簧」，
+     与真实直腿的无穷抗屈曲刚度**极限不符**（量级对、极限不对）；
+  2. 两段腿的**弹性**力量级偏低：全程仅 1.65–1.99 kN（stiff 档线性弹簧在 0.42 m 是 7.77 kN）
+     ⇒ 软接触口径下输出的 `F_flex` **由阻尼项主导**。
+  ⚠️ 算力：h=0.20 m + 实测跟垫 **~186 s/格**（软化非线性律 ⇒ 长时振铃、settled 不触发）
+     ⇒ 探针网格**跑前**缩为 {0.50…9.00}（跑前选择，非事后裁剪）。
+
+## 改动
+  M src/climbing/pad.py        门 `TWO_SEG_LEG` + `flex_force` 分支 + 求解段接线（默认关闭）
+  + scripts/leg2seg_probe.py   探针（含逐位正对照 + B1 内插纪律）
+  + results/leg2seg_probe.json + results/LEG2SEG_REPORT.md
+  + docs/methods/P3_两段腿等效关节_预注册.md
+  M tests/test_climbing.py     TestTwoSegmentLeg 3 条（默认 None / 解析律硬化 / 门开往返）
+  M docs/notes/PAD_GOTCHAS.md  §6e 新增
+  M docs/reports/总体进度.md   §九之四 新增
+
+回归：**777 passed / 8 skipped / 0 failed**（-n auto --dist load；+3 条）。
+⛔ 不改变 V1 判定；不主张 6–9 m 可达。

@@ -1,0 +1,15 @@
+状态 22 个，取末态 states/21
+末帧 |u|max = 1.0639 mm
+支反力沿加载轴 = 352.477 N
+R 各分量和: x 283.24  y 17.49  z 211.67
+
+软骨 von Mises p99 / max (MPa)：
+  tibiotalar_talus__penta6         n= 1766  p99   0.595  max   1.724
+
+其它域的最大 von Mises（前 5）：
+  tibia_cort__hex8                   max     6.966
+  navicular_spon__hex8               max     6.604
+  14                                 max     4.804
+  calcaneus_cort__hex8               max     4.754
+  set22                              max     4.562
+  fibula_cort__hex8                  max     4.253

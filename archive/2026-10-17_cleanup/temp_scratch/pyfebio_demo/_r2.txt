@@ -1,0 +1,82 @@
+[PDF 共 507 页]
+
+==========================================================================
+### 第 72 页
+==========================================================================
+72 CHAPTER 3. FREE FORMAT INPUT
+hex8 Description
+HEX8G8* Gaussian integration using 2x2x2 integration points.
+HEX8G6 Alternative integration rule for bricks using 6 integration point
+• For the hex20 element, the following values are defined.
+hex20 Description
+HEX20G8* Gaussian integration using 2x2x2 integration points.
+• For the tet4 element, the following values are allowed.
+tet4 Description
+TET4G1* Gaussian integration rule using one integration point.
+TET4G4 Gaussian integration rule using 4 integration points.
+• For the tet10 element, the following integration rules are supported.
+tet10 description
+TET10G4 Gaussian integration rule using 4 integration points
+TET10G8* Gaussian integration rule using 8 integration points
+TET10GL11 Gauss-Lobatto integration rule using 11 integration points
+TheLobattointegrationrulediffersfromaregularGaussintegrationruleinthatitincludesthe
+vertices of the tetrahedral element. The Lobatto11 integration rule uses the 10 tetrahedral
+nodes, plus one integration rule located at the center of the element.
+• For the tet15 element, the following integration rules are defined.
+tet15 description
+TET15G8 Gaussian integration rule using 8 integration points
+TET15G11 Gaussian integration rule using 11 integration points
+TET15G15* Gaussian integration rule using 15 integration points
+• For the penta15 element, the following values are defined.
+penta15 Description
+PENTA15G8* Gaussian integration using 2x2x2 integration points.
+2. The “solid-elastic” defines the parameters secant_stress and secant_tangent. When, speci-
+fied, the formulation will use a secant approximation of the corresponding variable. When setting
+secant_stress is set to 1, the stress is calculated from a secant approximation that uses the ma-
+terial’s strain-energy density. Similarly, when secant_tangent is specified, the material tangent is
+approximated using the PK2 stress.
+3.The ut4-solid is a special formulation for tetrahedral elements that uses a nodally-averaged
+integration rule, as proposed by Gee et al [40]. This formulation requires additional parameters.
+To override the default values, use the following alternative syntax:
+
+==========================================================================
+### 第 71 页
+==========================================================================
+3.7. MESHDOMAINS SECTION 71
+3.7 MeshDomains Section
+The MeshDomains section assigns various physical attributes to the element sets of the mesh.
+For each of the Elements sections in the Mesh section, define a SolidDomain, ShellDomain, or
+BeamDomainsection,dependingonwhethertheelementsaresolid,shells,orbeams(ortrusses).
+Each domain also requires a material name that defines the material properties of the domain.
+3.7.1 SolidDomain Section
+UsetheSolidDomainsectiontodefineasoliddomain. Thissectiontakesthefollowingparameters:
+name Thenameoftheelementset(definedviaanElementssection). Thiselementsetmustonly
+contain solid elements.
+mat The name of the material that will be assigned to this domain
+type (optional) the specific formulation used for this domain.
+The optional type attribute can be added to specify a specific solid formulation. If omitted, FEBio
+will determine the proper domain type by inspecting the material and element types used. How-
+ever,userscanexplicitlysetthetypeattribute. Thefollowingsoliddomaintypesaredefined. Ifthe
+domaintypeisspecifiedexplicitly,theusermustmakesurethattheassignedmaterialiscompati-
+blewiththedomaintype. (Forinstance,youcannotassignabiphasicmaterialtoanelastic-solid.)
+type Description
+elastic-solid standard solid formulation (default for most materials) (1,2)
+three-field-solid A three-field formulation used for modeling (nearly) incompressible materials. (default for uncoupled materials)
+rigid-solid Rigid solid domain. (default for rigid materials.)
+udg-hex uniform deformation gradient hex formulation
+sri-solid Formulation that uses a selective reduced integration rule
+remodeling-solid Formulation used for elastic remodeling problems.
+elastic-mm-solid Formulation used for multi-scale domains. (requires the “micro-material”)
+ut4-solid Uniform nodal strain tetrahedron. (3)
+biphasic-solid The standard formulation for biphasic domains.
+biphasic-solute-solid The standard formulation for biphasic-solute domains.
+multiphasic-solid The standard formulation for multiphasic domains.
+triphasic-solid The standard formulation for triphasic domains (deprecated, use multiphasic-solid instead).
+fluid-3D The standard formulation for fluid domains.
+fluid-FSI-3D The standard formulation for fluid-FSI domains.
+Comments:
+1. For the elastic-solid domain, the elem_type attribute can be specified to further specialize
+thequadraturerule. Thevaluesoftheruledependonthespecificelementtype. Thetablesbelow
+show the available integration rules for the different element types. The values marked with an
+asterisk (*) are the default.
+• For the hex8 element, the following values are defined.

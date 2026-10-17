@@ -1,0 +1,135 @@
+[PDF 共 507 页]
+
+==========================================================================
+### 第 415 页
+==========================================================================
+5.6. EXAMPLE 415
+5.6 Example
+5.6.1 Example 1
+The following example defines a restart input file. No parameters are redefined. Only the manda-
+tory Archive element is defined. In this case the analysis will simply continue where it left off:
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<febio_restart version="1.0">
+<Archive>out.dmp</Archive>
+</febio_restart>
+5.6.2 Example 2
+In the following example an additional step is defined, which defines a new boundary condition
+and a new loadcurve.
+<?xml version="1.0" encoding="utf-8"?>
+<febio_restart version="2.0">
+<Archive>out.dmp</Archive>
+<Step type="solid">
+<Control>
+<time_steps>10</time_steps>
+<step_size>0.1</step_size>
+</Control>
+<Boundary>
+<prescribe bc="x" node_set="set1">
+<scale lc="2">1.0</scale>
+</prescribe>
+</Boundary>
+</Step>
+<LoadData>
+<loadcurve id="2" type="linear">
+<point>1, 0</point>
+<point>2, 1</point>
+</loadcurve>
+</LoadData>
+</febio_restart>
+Noticethe“type”attributeintheStepsection. ThisservesasimilarpurposeastheModulesection
+intheFEBioinputfileanddefinesthesolverthatFEBiowillusetosolvethisstep. Thisattributeis
+requiredwhendefiningstepsintherestartfile. (TheModulesectionisnotsupportedintherestart
+input file.)
+The prescribed boundary condition references a node set named “set1”. This node set must
+be defined in the parent input file. No new node sets (or surfaces, etc.) can be defined in the
+restart input file.
+
+==========================================================================
+### 第 417 页
+==========================================================================
+Chapter 6
+Multi-Step Analysis
+A multi-step analysis is defined using multiple steps, where in each step the user can redefine
+control parameters, boundary conditions, loads, contact interfaces, and other model components.
+This is useful, for instance, for defining time-dependent boundary conditions or for switching be-
+tween different analysis types during the simulation.
+Multi-step models require a slightly different file organization compared to single-step models.
+More specifically, the Control section is not specified at the top of the input file. Instead, a Steps
+section is added at the bottom of the file, which contains a list of step sub-sections for each step.
+Each step then defines its own Control section, boundary conditions, loads, etc.
+6.1 The Step Section
+The multi-step analysis feature organizes the input file in a slightly different way: the Control
+sectionisnolongerdefinedatthetopofthefile,andinstead,anewSteps sectionisaddedtothe
+bottom of the file, which will contain a list of analysis steps. Each analysis step requires its own
+step sub-section. Inthisstepsection,theusercanredefinethecontrolsection,boundarysection,
+loads, contact, and other model components. The following format is suggested when defining a
+multi-step analysis:
+<febio_spec version="4.0">
+<Module type="solid"/>
+<Material>
+<!-- materials go here -->
+</Material>
+<Mesh>
+<!-- mesh definition goes here -->
+</Mesh>
+<MeshDomains>
+<!-- mesh domains goes here -->
+</MeshDomains>
+<Boundary>
+<!-- global boundary conditions -->
+</Boundary>
+<LoadData>
+<!-- load curve data goes here -->
+417
+
+==========================================================================
+### 第 420 页
+==========================================================================
+420 CHAPTER 6. MULTI-STEP ANALYSIS
+<node id="7"/>
+</NodeSet>
+<NodeSet name="set4">
+<node id="5"/>
+<node id="6"/>
+<node id="7"/>
+<node id="8"/>
+</NodeSet>
+</Mesh>
+<MeshDomains>
+<SolidDomain name="Part1" mat="Material 1"/>
+</MeshDomains>
+<Boundary>
+<bc type="zero displacement" node_set="set1">
+<dofs>x,y,z</dofs>
+</bc>
+</Boundary>
+<LoadData>
+<load_controller id="1" type="loadcurve">
+<points>
+<point>0,0</point>
+<point>1,0.1</point>
+</points>
+</load_controller>
+</LoadData>
+<Step>
+<step id="1">
+<Control>
+<time_steps>10</time_steps>
+<step_size>0.1</step_size>
+</Control>
+<Boundary>
+<bc type="prescribed displacement" node_set="set4">
+<dof>x</dof>
+<scale lc="1">1.0</scale>
+</bc>
+</Boundary>
+</step>
+<step id="2">
+<Control>
+<time_steps>50</time_steps>
+<step_size>0.5</step_size>
+<analysis>DYNAMIC</analysis>
+</Control>
+</step>
+</Step>
+</febio_spec>

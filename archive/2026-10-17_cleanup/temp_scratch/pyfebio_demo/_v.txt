@@ -1,0 +1,43 @@
+补指针后 disk = 10,446 / 10240   余量 -206
+  再裁 -> 10,433   余量 -193
+
+==========================================================================
+① 文档清单
+  [OK ]    33,828  docs/Anderson双论文_关键信息.md
+  [OK ]     8,574  docs/吴恺论文_重解析关键信息.md
+  [OK ]    46,456  docs/踝关节FE建模交接.md
+  [OK ]     7,144  ANKLE_FIX_TODO.md
+  [OK ]     9,686  CONV_TODO.md
+  [OK ]     3,515  ANKLE_600N_TODO.md
+  [OK ]    12,867  ANKLE_LIG_TODO.md
+  [OK ]    28,662  FE_PIPELINE_TODO.md
+  [OK ]    87,512  .learnings/LEARNINGS.md
+  [OK ]    21,667  .learnings/ERRORS.md
+  [OK ]    43,797  scripts/ankle_fe/ankle_lig_feb.py
+  [OK ]    32,472  scripts/ankle_fe/build_feb.py
+  [OK ]    23,920  scripts/ankle_fe/cartilage.py
+  [OK ] 7,687,090  temp/thums/thums_lowerlimb_r1.npz
+  [OK ]     3,295  temp/thums/r1/cartilage.json
+
+② 本轮 LRN 全在档
+  [OK] LRN-20261004-039
+  [OK] LRN-20261004-040
+  [OK] LRN-20261004-041
+  [OK] LRN-20261004-042
+  [OK] LRN-20261004-043
+  [OK] LRN-20261004-044
+  [OK] LRN-20261004-045
+
+③ MEMORY.md 死链
+  23 引用 / 0 死链  []
+
+④ 关键结论是否在 MEMORY 里
+  [OK] 刚度 2 倍
+  [OK] 根因=接触区欠分辨
+  [OK] Anderson 真值
+  [OK] 韧带线降级
+  [OK] CONV 指针
+  [OK] 修正计划
+
+ALL = PASS
+MEMORY.md = 10,433 / 10240

@@ -1,0 +1,131 @@
+[PDF 共 507 页]
+
+==========================================================================
+### 第 97 页
+==========================================================================
+3.11. BOUNDARY SECTION 97
+3.11.16 Rigid
+A node set can be attached to a rigid body using the rigid boundary condition. Rigid nodes are
+not assigned degrees of freedom.
+<bc type="rigid" node_set="set1">
+<rb>2</rb>
+</bc>
+The rb parameter defines the material (which must be a “rigid body” material) that in turn defines
+the rigid body. The node set must be defined in the Mesh section.
+3.11.17 Multiphasic Fluid Pressure
+In a multiphasic mixture the nodal degree of freedom for fluid pressure represents the effective
+fluid pressure p˜, which is related to the actual fluid pressure p according to eq.(4.16.7). One may
+assignthevalueofpdirectlyonaboundary,byusingtheactualfluidpressureboundarycondition.
+<bc surface="FluidPressure1" type="actual fluid pressure">
+<pressure>0</pressure>
+<shell_bottom>0</shell_bottom>
+</bc>
+Thissurfaceloadevaluatespfromnodalvaluesofp˜onthesurface,andusingtheaveragevalues
+of Φ and cα at the integration points of the underlying element. This surface load is particularly
+useful when the effective solute concentrations c˜α are not prescribed as boundary conditions on
+that surface, but evolve with the analysis solution. the shell_bottom boolean flag (0=false, 1=true)
+should be set to true when prescribing this pressure on the bottom of a multiphasic shell domain.
+3.11.18 Fluid Pressure
+Tosettheactualfluidpressurepinafluid,fluid-FSI,orfluid-solutesanalysis,usethefluidpressure
+boundary condition.
+<bc type="fluid pressure" surface="FluidPressure1">
+<pressure lc="1">100</pressure>
+</bc>
+The optional lc parameter associates a load curve (a user-defined scale factor that evolves with
+time) which multiplies the value of <pressure>. The surface must be defined in the Mesh section.
+For a biphasic analysis the actual fluid pressure is equal to the effective fluid pressure (p = p˜), in
+which case use prescribed fluid pressure (Section 3.11.8).
+3.11.19 Fluid Resistance
+Inafluid,fluid-FSIorfluid-solutesanalysis,thisboundaryconditionprescribesanelasticpressure
+p = Rq+p on a surface, where R is the flow resistance and q is the volumetric flow rate across
+d
+the surface (calculated internally); p is an optional offset pressure. The pressure p is converted
+d
+to a dilatation and prescribed as an essential boundary condition at the nodes of the facets.
+
+==========================================================================
+### 第 100 页
+==========================================================================
+100 CHAPTER 3. FREE FORMAT INPUT
+3.12 Rigid Section
+The Rigid section is used to define all rigid constraints, rigid body initial kinematics, and rigid
+connectors. The motion of a point x connected to a rigid body is given by
+x = r(t)+R(t)·Z = r(t)+z(t) (3.12.1)
+where r(t) is the position of the rigid body center of mass and R(t) is the body’s (proper orthog-
+onal) rotation tensor, which satisfies R(t ) = I at the initial time t ; here, z(t) = R(t)·Z is the
+0 0
+position vector of the point relative to the body’s center of mass, and X = r(t )+Z is the initial
+0
+position. In FEBio, the rotation is evaluated as R(t) = exp[ξ(t)], where ξ(t) is the material rota-
+tion of the rigid body from its reference configuration. In practice, ξ is stored as a quaternion to
+facilitate the multiplication of rotation tensors. The exponential map exp[ξ(t)] is given in full form
+as
+R(t) = exp[ξ(t)] = cosξI−sinξE ·n+(1−cosξ)n⊗n (3.12.2)
+where E is the third-order permutation pseudo-tensor with rectangular components ε (permu-
+ijk
+tation symbol). Here, n is the unit vector along the axis of rotation and ξ is the angle of rotation
+about n, such that ξ = ξn. Both ξ and n may evolve over time. Either none or all the components
+of ξ(t) must be prescribed (or fixed) for a rigid body.
+The Rigid section can contain the following subsections.
+rigid_bc Define a rigid constraint.
+rigid_ic Define a rigid initial condition.
+rigid_load Define a load on a rigid body.
+rigid_connector Define a connection or joint between two rigid bodies.
+3.12.1 Rigid Constraints
+Therigidconstraintssectionallowsuserstoprescribethekinematicsappliedtoasinglerigidbody.
+A rigid constraint is added using the rigid_bc tag in the Rigid parent tag. The particular constraint
+is defined via the type attribute. An optional name attribute can be added to uniquely name the
+constraint.
+3.12.1.1 Rigid_fixed Constraint
+The rigid_fixed constraint fixes one or multiple rigid degrees of freedom. It requires the following
+parameters.
+parameters Description
+rb The rigid material name (1)
+Rx_dof fix x-displacement degree of freedom
+Ry_dof fix y-displacement degree of freedom
+Rz_dof fix z-displacement degree of freedom
+Ru_dof fix x-rotational degree of freedom
+Rv_dof fix y-rotational degree of freedom
+Rw_dof fix z-rotational degree of freedom
+
+==========================================================================
+### 第 101 页
+==========================================================================
+3.12. RIGID SECTION 101
+Comments:
+1. The name of the rigid material is defined in the Material section. The referenced material
+must be a “rigid body” material.
+The following example fixes the displacement degrees of freedom.
+<rigid_bc type="rigid_fixed">
+<rb>RigidMaterial1</rb>
+<Rx_dof>1</Rx_dof>
+<Ry_dof>1</Ry_dof>
+<Rz_dof>1</Rz_dof>
+</rigid_bc>
+3.12.1.2 Rigid_displacement Constraint
+Therigid_displacement constraintprescribesthevalueofarigiddisplacementdegreeoffreedom.
+It requires the following parameters.
+parameters Description
+rb The rigid body’s material name (1)
+dof The rigid degree of freedom to prescribe. (2)
+value The prescribed value
+relative Defines the value as relative or absolute. (3)
+Comments:
+1. This is the name attribute assigned to the corresponding rigid body material as defined in
+the Material section.
+2. The values allowed for the dof parameter are: x, y, or z.
+3. If the relative flag is set, the value is taken relative to the dof value at the start of the step.
+The following example prescribes the x-displacement degree of freedom.
+<rigid_bc type="rigid_displacement">
+<rb>rigid</rb>
+<dof>x</dof>
+<value lc="1">3.14</value>
+</rigid_bc>
+3.12.1.3 Rigid_rotation Constraint
+Therigid_rotationconstraintprescribesthevalueofarigidrotationaldegreeoffreedom. Itrequires
+the following parameters.
+parameters Description
+rb The rigid body’s material name (1)
+dof The rigid degree of freedom to prescribe. (2)
+value The prescribed value
+relative Defines the value as relative or absolute. (3)

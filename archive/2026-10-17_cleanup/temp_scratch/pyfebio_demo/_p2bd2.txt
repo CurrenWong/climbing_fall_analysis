@@ -1,0 +1,46 @@
+============================================================================================================
+逐域：z 跨度 / dz 跨度 / 隐含轴向应变 / |u|max
+============================================================================================================
+域                                      类型     节点      z跨度      dz跨度      dz均值     εz(‰)    |u|max
+calcaneus_cort__hex8                 hex8   1272    67.13    0.0388   -0.0025      0.58    0.0396
+calcaneus_spon__tet4                 tet4    908    64.27    0.0352   -0.0020      0.55    0.0357
+fibula_cort__hex8                    hex8    304    70.69    0.0984   -1.5787      1.39    1.6192
+fibula_spon__tet4                    tet4    112    43.83    0.0805   -1.5709      1.84    1.6106
+lig_ATFL_talofibular_anterior       quad4     28    27.27    0.8504   -1.2137     31.18    1.5796
+lig_CFL_calcaneofibular             quad4     21    28.66    1.5290   -0.6233     53.35    1.9927
+lig_MD1_tibiotalar_post             quad4     15    27.80    1.0461   -1.3312     37.64    1.9853
+lig_MD2_tibiocalcaneal              quad4     22    36.47    1.6480   -0.6497     45.19    1.7665
+lig_MD3_tibionavicular              quad4     26    33.46    0.3001   -1.4544      8.97    1.5830
+lig_MD4_tibiotalar_ant              quad4     15    22.41    0.8587   -1.2277     38.31    1.5881
+lig_PTCL_talocalcaneal_posterior    quad4     39    20.23    0.9538   -0.4368     47.16    1.0021
+lig_PTFL_talofibular_posterior      quad4     12    16.68    0.8502   -1.1701     50.97    1.5798
+lig_SPRING_calcaneonavicular        quad4     29     4.96    1.2661   -0.5259    255.19    1.3073
+lig_SYND_tibiofibular               quad4     35    30.36    0.0473   -1.5926      1.56    1.6056
+navicular_spon__hex8                 hex8    237    34.77    0.8703   -1.0254     25.03    1.5236
+talus_cort__hex8                     hex8    792    43.18    0.0100   -0.7273      0.23    0.7300
+talus_spon__tet4                     tet4    520    40.60    0.0074   -0.7274      0.18    0.7294
+tibia_cort__hex8                     hex8    490    51.42    0.0206   -1.5989      0.40    1.6007
+tibia_cort__tet4                     tet4      8     5.21    0.0091   -1.5844      1.76    1.5894
+tibia_marrow__tet4                   tet4    174    28.53    0.0005   -1.6000      0.02    1.6000
+tibia_spon__tet4                     tet4    204    30.67    0.0165   -1.5988      0.54    1.6006
+tibiotalar_talus__penta6           penta6    166    13.89    0.7167   -0.8225     51.60    1.3589
+tibiotalar_tibia__penta6           penta6    134    15.02    1.1123   -1.4901     74.07    1.8543
+
+============================================================================================================
+按 dz 跨度排序（= 该域贡献的变形量）
+============================================================================================================
+  lig_MD2_tibiocalcaneal             dz跨度   1.6480 mm  (z跨度   36.47 mm, εz   45.19‰)
+  lig_CFL_calcaneofibular            dz跨度   1.5290 mm  (z跨度   28.66 mm, εz   53.35‰)
+  lig_SPRING_calcaneonavicular       dz跨度   1.2661 mm  (z跨度    4.96 mm, εz  255.19‰)
+  tibiotalar_tibia__penta6           dz跨度   1.1123 mm  (z跨度   15.02 mm, εz   74.07‰)
+  lig_MD1_tibiotalar_post            dz跨度   1.0461 mm  (z跨度   27.80 mm, εz   37.64‰)
+  lig_PTCL_talocalcaneal_posterior   dz跨度   0.9538 mm  (z跨度   20.23 mm, εz   47.16‰)
+  navicular_spon__hex8               dz跨度   0.8703 mm  (z跨度   34.77 mm, εz   25.03‰)
+  lig_MD4_tibiotalar_ant             dz跨度   0.8587 mm  (z跨度   22.41 mm, εz   38.31‰)
+
+============================================================================================================
+👉 柔度在哪
+============================================================================================================
+  总指定位移 1.6000 mm；关节（tibiotalar_*）只闭 0.0142 mm
+  dz 跨度最大的域：lig_MD2_tibiocalcaneal = 1.6480 mm
+  第二：lig_CFL_calcaneofibular = 1.5290 mm

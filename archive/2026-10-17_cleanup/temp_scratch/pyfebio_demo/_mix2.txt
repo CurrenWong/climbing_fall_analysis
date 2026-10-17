@@ -1,0 +1,8 @@
+
+=== A_shared_both rc=0 OK ===
+
+=== B_one_free rc=0 OK ===
+
+=== C_solid_only rc=0 OK ===
+
+=== D_2trusses rc=0 OK ===

@@ -1,0 +1,48 @@
+feat(pad): FP_CONTACT（A 件）—— 足部接触柔度换成实测跟垫；`pad.py` 零改动
+
+上游：LEG_K_ANCHOR 判定 J1b 三档全 FAIL（F_pad/BW 超实测靶 105–225%），
+诊断 =「刚性接触尖峰伪影」。本件检验该诊断。
+
+★★ 关键语义发现（新 gotcha）：
+  CrashPad.force_n = stress_pa(xi) * area，而 hard_surface 把 k_n_per_m 喂给
+  linear_modulus_pa（Pa）⇒ **有效刚度 k_eff = k_n * A(κ)**，不是 k_n。
+  实测 k_n=1.0e7 ⇒ F_pad 8.625 kN、x 15.728 mm ⇒ **k_eff = 548.4 kN/m**
+  （其 docstring 声称的「1.0e7 N/m 动态人体等效刚度」比实际硬 ~18×）。
+  ⇒ 引用接触硬度必须报实测 k_eff，不得引用 k_n。
+
+外部锚（Bennett & Ker 1990 / Ker 1996，in-vivo 跟垫）：
+  **100–175 N/mm** ⇒ k_eff 带 100–175 kN/m；冻结 k_n ∈ {3.0e6, 2.1e6, 1.6e6}
+  ⇒ 实测 k_eff ≈ {177, 128, 100} kN/m。
+
+实现：**pad.py 零改动** —— 只用既有门 RIGID_CONTACT["k_n_per_m"]（默认 None）。
+
+判定（预注册 docs/methods/P3_足部接触柔度_预注册.md，判据跑前冻结）：
+  A-J0 门关逐位复现上游产物 **PASS**（逐位）
+  A-J1 锚带内 F_pad/BW ∈[0.70,1.30] **FAIL** —— soft 1.691❌ / self 1.547❌ / stiff 1.077✅
+  A-J2 F_pad/F_flex 单调 + 锚带上端 ≤2.50 **PASS**（3.79/3.67/3.10 → 2.30/2.19/1.49）
+  A-J3 F_flex 如实报告：soft 2.89→2.83、self 2.99→3.11、**stiff 3.54→4.31（J1a 0.661→0.805✅）**
+  A-J4 默认路径不变 + 全套回归 **PASS**（768 passed / 8 skipped / 0 failed；+3 条）
+
+⇒ 结论：
+  ① **诊断成立（stiff 档）**：换成实测跟垫后 stiff 档 J1b 2.051→1.077✅、J1a 0.661→0.805✅、
+     F_pad/F_flex 3.10→1.49 ⇒ 「F_pad 超 105–225% ＝ 刚性接触律伪影」被证实。
+  ② **但 soft/self 仍偏高 1.55–1.69×** ⇒ 剩余缺口**不是接触层**：我们三档只差 k_flex，
+     而真人 soft/self 的差别是**行程/运动学**（实测 COM 深度 0.43/0.37/0.23 m）
+     ⇒ **模型类别不足 ⇒ 下一件 B（运动学自由度）的必要性坐实**。
+  ③ ⛔ 反面读数（不可采纳）：k_n 降到 1.0e6（k_eff=66，**锚带外**）三档全 PASS
+     ⇒ 那是调参凑靶（A-J5）；**锚带内三档全 PASS 不可达**。
+  ④ 不改变 V1 判定，不改变 LEG_K_ANCHOR 判定（后者是门关口径）。
+
+改动：
+  + docs/methods/P3_足部接触柔度_预注册.md（预注册）
+  + scripts/fp_contact_probe.py（探针，含 A-J0 正对照，不过则整份作废）
+  + results/fp_contact_probe.json + results/FP_CONTACT_REPORT.md
+  + tests/test_climbing.py  TestRigidContactGate 3 条（门默认 None / k_eff=k_n×A(κ) 特征化 /
+                             门开 F_pad 单调）
+  M docs/notes/PAD_GOTCHAS.md   §5 新增（hard_surface 语义）
+  M docs/reports/总体进度.md    §九之二 新增
+  （src/climbing/pad.py **未改** —— 本件的核心设计约束）
+
+回归：**768 passed / 8 skipped / 0 failed**（-n auto --dist load）。
+
+下一步：B · 运动学自由度（两段腿 + 膝扭簧，膝 quasi-stiffness ≈350 Nm/rad），须另行预注册。

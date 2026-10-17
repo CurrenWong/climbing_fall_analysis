@@ -1,0 +1,16 @@
+warning: in the working copy of 'scripts/ankle_fe/ankle_lig_feb.py', LF will be replaced by CRLF the next time Git touches it
+diff --git a/scripts/ankle_fe/ankle_lig_feb.py b/scripts/ankle_fe/ankle_lig_feb.py
+index b922d76..9a6d2c6 100644
+--- a/scripts/ankle_fe/ankle_lig_feb.py
++++ b/scripts/ankle_fe/ankle_lig_feb.py
+@@ -251,6 +251,10 @@ if SUBTALAR == "0":
+     pass
+ elif SUBTALAR in ("1", "auto", "true", "on") and _HAS_SUB:
+     CARTS += ["subtalar_talus", "subtalar_calcaneus"]
++elif SUBTALAR in ("talus", "calcaneus") and _HAS_SUB:
++    # 诊断用：只接单侧（对侧缺失 ⇒ 自动不建接触对），用于二分定位失败源
++    CARTS += [f"subtalar_{SUBTALAR}"]
++    print(f"[subtalar] ⚠ 诊断模式：只接 {f'subtalar_{SUBTALAR}'}（不建接触对）")
+ elif SUBTALAR in ("1", "true", "on"):
+     raise SystemExit("[subtalar] SUBTALAR=1 但 npz 缺 subtalar_*_nodes（新格式）键")
+ print(f"[subtalar] 开关={SUBTALAR} 新格式键={_HAS_SUB} "

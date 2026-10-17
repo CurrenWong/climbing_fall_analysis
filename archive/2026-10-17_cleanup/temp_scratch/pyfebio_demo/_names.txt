@@ -1,0 +1,274 @@
+==========================================================================================
+=== parts\_all_names.txt   62082
+==========================================================================================
+  （1834 行）
+     7124000  M_RectusFemoris_R
+     7124100  Patellar_tendon_R_1
+     7124120  Patellar_tendon_R_2
+     7124140  Patellar_tendon_R_3
+     7124160  Patellar_tendon_R_4
+     7124180  Patellar_tendon_R_5
+     7124200  Patellar_tendon_R_6
+     7124220  Patellar_tendon_R_7
+     7124240  Patellar_tendon_R_8
+     7124260  Patellar_tendon_R_9
+     7124280  Patellar_tendon_R_10
+     7124300  Patellar_tendon_R_11
+     7124320  Patellar_tendon_R_12
+     7124340  Patellar_tendon_R_13
+     7124360  Patellar_tendon_R_14
+     7124380  Patellar_tendon_R_15
+     7124400  Patellar_tendon_R_16
+     7124420  Patellar_tendon_R_17
+     7124440  Patellar_tendon_R_18
+     7124460  Patellar_tendon_R_19
+     7124480  Patellar_tendon_R_20
+     7124500  Patellar_tendon_R_21
+     7124520  Patellar_tendon_R_22
+     7124540  Patellar_tendon_R_23
+     7124560  Patellar_tendon_R_24
+     7124580  Patellar_tendon_R_25
+     7124600  Patellar_tendon_R_26
+     7126000  M_Piriformis_R
+     7129000  M_ObturatorExternus_R
+     7131000  M_QuadratusFemoris_R
+     7132000  M_Gluteus_Min_1_R
+     7132100  M_Gluteus_Min_2_R
+     7132200  M_Gluteus_Min_3_R
+     7133000  M_Gluteus_Med_1_R
+     7133100  M_Gluteus_Med_2_R
+     7133200  M_Gluteus_Med_3_R
+     7139000  M_AdductorBrevis_R
+     7140000  M_AdductorLongus_R
+     7141000  M_AdductorMagnus_1_R
+     7141100  M_AdductorMagnus_2_R
+     7141200  M_AdductorMagnus_3_R
+     7142000  M_Pectineus_R
+     7144000  M_VastusLateralis_R
+     7145000  M_VastusIntermedius_R
+     7146000  M_VastusMedialis_R
+     7148100  achilles_tendon_R_1
+     7148120  achilles_tendon_R_2
+     7148140  achilles_tendon_R_3
+     7148160  achilles_tendon_R_4
+     7148180  achilles_tendon_R_5
+     7148200  achilles_tendon_R_6
+     7148220  achilles_tendon_R_7
+     7148240  achilles_tendon_R_8
+     7148260  achilles_tendon_R_9
+     7148280  achilles_tendon_R_10
+     7148300  achilles_tendon_R_11
+     7148320  achilles_tendon_R_12
+     7148340  achilles_tendon_R_13
+     7148360  achilles_tendon_R_14
+     7148380  achilles_tendon_R_15
+     7148390  achilles_tendon_R_16
+     7148400  achilles_tendon_R_17
+     7148410  achilles_tendon_R_18
+     7148420  achilles_tendon_R_19
+     7148430  achilles_tendon_R_20
+     7148440  achilles_tendon_R_21
+     7148450  achilles_tendon_R_22
+     7148460  achilles_tendon_R_23
+     7148470  achilles_tendon_R_24
+     7148480  achilles_tendon_R_25
+==========================================================================================
+=== parts\parts_index.json   404909
+==========================================================================================
+  {"cid": "7124000", "cid_name": "M_RectusFemoris_R", "pid": 7124000, "title": "M_RectusFemoris_R", "pid_line": "7124000   7124000  
+  {"cid": "7124100", "cid_name": "Patellar_tendon_R_1", "pid": 7124100, "title": "Patellar_tendon_R_1", "pid_line": "7124100   71240
+  {"cid": "7124120", "cid_name": "Patellar_tendon_R_2", "pid": 7124120, "title": "Patellar_tendon_R_2", "pid_line": "7124120   71240
+  {"cid": "7124140", "cid_name": "Patellar_tendon_R_3", "pid": 7124140, "title": "Patellar_tendon_R_3", "pid_line": "7124140   71240
+  {"cid": "7124160", "cid_name": "Patellar_tendon_R_4", "pid": 7124160, "title": "Patellar_tendon_R_4", "pid_line": "7124160   71240
+  {"cid": "7124180", "cid_name": "Patellar_tendon_R_5", "pid": 7124180, "title": "Patellar_tendon_R_5", "pid_line": "7124180   71240
+  {"cid": "7124200", "cid_name": "Patellar_tendon_R_6", "pid": 7124200, "title": "Patellar_tendon_R_6", "pid_line": "7124200   71240
+  {"cid": "7124220", "cid_name": "Patellar_tendon_R_7", "pid": 7124220, "title": "Patellar_tendon_R_7", "pid_line": "7124220   71240
+  {"cid": "7124240", "cid_name": "Patellar_tendon_R_8", "pid": 7124240, "title": "Patellar_tendon_R_8", "pid_line": "7124240   71240
+  {"cid": "7124260", "cid_name": "Patellar_tendon_R_9", "pid": 7124260, "title": "Patellar_tendon_R_9", "pid_line": "7124260   71240
+  {"cid": "7124280", "cid_name": "Patellar_tendon_R_10", "pid": 7124280, "title": "Patellar_tendon_R_10", "pid_line": "7124280   712
+  {"cid": "7124300", "cid_name": "Patellar_tendon_R_11", "pid": 7124300, "title": "Patellar_tendon_R_11", "pid_line": "7124300   712
+  {"cid": "7124320", "cid_name": "Patellar_tendon_R_12", "pid": 7124320, "title": "Patellar_tendon_R_12", "pid_line": "7124320   712
+  {"cid": "7124340", "cid_name": "Patellar_tendon_R_13", "pid": 7124340, "title": "Patellar_tendon_R_13", "pid_line": "7124340   712
+  {"cid": "7124360", "cid_name": "Patellar_tendon_R_14", "pid": 7124360, "title": "Patellar_tendon_R_14", "pid_line": "7124360   712
+  {"cid": "7124380", "cid_name": "Patellar_tendon_R_15", "pid": 7124380, "title": "Patellar_tendon_R_15", "pid_line": "7124380   712
+  {"cid": "7124400", "cid_name": "Patellar_tendon_R_16", "pid": 7124400, "title": "Patellar_tendon_R_16", "pid_line": "7124400   712
+  {"cid": "7124420", "cid_name": "Patellar_tendon_R_17", "pid": 7124420, "title": "Patellar_tendon_R_17", "pid_line": "7124420   712
+  {"cid": "7124440", "cid_name": "Patellar_tendon_R_18", "pid": 7124440, "title": "Patellar_tendon_R_18", "pid_line": "7124440   712
+  {"cid": "7124460", "cid_name": "Patellar_tendon_R_19", "pid": 7124460, "title": "Patellar_tendon_R_19", "pid_line": "7124460   712
+  {"cid": "7124480", "cid_name": "Patellar_tendon_R_20", "pid": 7124480, "title": "Patellar_tendon_R_20", "pid_line": "7124480   712
+  {"cid": "7124500", "cid_name": "Patellar_tendon_R_21", "pid": 7124500, "title": "Patellar_tendon_R_21", "pid_line": "7124500   712
+  {"cid": "7124520", "cid_name": "Patellar_tendon_R_22", "pid": 7124520, "title": "Patellar_tendon_R_22", "pid_line": "7124520   712
+  {"cid": "7124540", "cid_name": "Patellar_tendon_R_23", "pid": 7124540, "title": "Patellar_tendon_R_23", "pid_line": "7124540   712
+  {"cid": "7124560", "cid_name": "Patellar_tendon_R_24", "pid": 7124560, "title": "Patellar_tendon_R_24", "pid_line": "7124560   712
+  {"cid": "7124580", "cid_name": "Patellar_tendon_R_25", "pid": 7124580, "title": "Patellar_tendon_R_25", "pid_line": "7124580   712
+  {"cid": "7124600", "cid_name": "Patellar_tendon_R_26", "pid": 7124600, "title": "Patellar_tendon_R_26", "pid_line": "7124600   712
+  {"cid": "7126000", "cid_name": "M_Piriformis_R", "pid": 7126000, "title": "M_Piriformis_R", "pid_line": "7126000   7126000   71260
+  {"cid": "7129000", "cid_name": "M_ObturatorExternus_R", "pid": 7129000, "title": "M_ObturatorExternus_R", "pid_line": "7129000   7
+  {"cid": "7131000", "cid_name": "M_QuadratusFemoris_R", "pid": 7131000, "title": "M_QuadratusFemoris_R", "pid_line": "7131000   713
+  {"cid": "7132000", "cid_name": "M_Gluteus_Min_1_R", "pid": 7132000, "title": "M_Gluteus_Min_1_R", "pid_line": "7132000   7132000  
+  {"cid": "7132100", "cid_name": "M_Gluteus_Min_2_R", "pid": 7132100, "title": "M_Gluteus_Min_2_R", "pid_line": "7132100   7132100  
+  {"cid": "7132200", "cid_name": "M_Gluteus_Min_3_R", "pid": 7132200, "title": "M_Gluteus_Min_3_R", "pid_line": "7132200   7132200  
+  {"cid": "7133000", "cid_name": "M_Gluteus_Med_1_R", "pid": 7133000, "title": "M_Gluteus_Med_1_R", "pid_line": "7133000   7133000  
+  {"cid": "7133100", "cid_name": "M_Gluteus_Med_2_R", "pid": 7133100, "title": "M_Gluteus_Med_2_R", "pid_line": "7133100   7133100  
+  {"cid": "7133200", "cid_name": "M_Gluteus_Med_3_R", "pid": 7133200, "title": "M_Gluteus_Med_3_R", "pid_line": "7133200   7133200  
+  {"cid": "7139000", "cid_name": "M_AdductorBrevis_R", "pid": 7139000, "title": "M_AdductorBrevis_R", "pid_line": "7139000   7139000
+  {"cid": "7140000", "cid_name": "M_AdductorLongus_R", "pid": 7140000, "title": "M_AdductorLongus_R", "pid_line": "7140000   7140000
+  {"cid": "7141000", "cid_name": "M_AdductorMagnus_1_R", "pid": 7141000, "title": "M_AdductorMagnus_1_R", "pid_line": "7141000   714
+  {"cid": "7141100", "cid_name": "M_AdductorMagnus_2_R", "pid": 7141100, "title": "M_AdductorMagnus_2_R", "pid_line": "7141100   714
+  {"cid": "7141200", "cid_name": "M_AdductorMagnus_3_R", "pid": 7141200, "title": "M_AdductorMagnus_3_R", "pid_line": "7141200   714
+  {"cid": "7142000", "cid_name": "M_Pectineus_R", "pid": 7142000, "title": "M_Pectineus_R", "pid_line": "7142000   7142000   7142000
+  {"cid": "7144000", "cid_name": "M_VastusLateralis_R", "pid": 7144000, "title": "M_VastusLateralis_R", "pid_line": "7144000   71440
+  {"cid": "7145000", "cid_name": "M_VastusIntermedius_R", "pid": 7145000, "title": "M_VastusIntermedius_R", "pid_line": "7145000   7
+  {"cid": "7146000", "cid_name": "M_VastusMedialis_R", "pid": 7146000, "title": "M_VastusMedialis_R", "pid_line": "7146000   7146000
+  {"cid": "7148100", "cid_name": "achilles_tendon_R_1", "pid": 7148100, "title": "achilles_tendon_R_1", "pid_line": "7148100   71480
+  {"cid": "7148120", "cid_name": "achilles_tendon_R_2", "pid": 7148120, "title": "achilles_tendon_R_2", "pid_line": "7148120   71480
+  {"cid": "7148140", "cid_name": "achilles_tendon_R_3", "pid": 7148140, "title": "achilles_tendon_R_3", "pid_line": "7148140   71480
+  {"cid": "7148160", "cid_name": "achilles_tendon_R_4", "pid": 7148160, "title": "achilles_tendon_R_4", "pid_line": "7148160   71480
+  {"cid": "7148180", "cid_name": "achilles_tendon_R_5", "pid": 7148180, "title": "achilles_tendon_R_5", "pid_line": "7148180   71480
+  {"cid": "7148200", "cid_name": "achilles_tendon_R_6", "pid": 7148200, "title": "achilles_tendon_R_6", "pid_line": "7148200   71480
+  {"cid": "7148220", "cid_name": "achilles_tendon_R_7", "pid": 7148220, "title": "achilles_tendon_R_7", "pid_line": "7148220   71480
+  {"cid": "7148240", "cid_name": "achilles_tendon_R_8", "pid": 7148240, "title": "achilles_tendon_R_8", "pid_line": "7148240   71480
+  {"cid": "7148260", "cid_name": "achilles_tendon_R_9", "pid": 7148260, "title": "achilles_tendon_R_9", "pid_line": "7148260   71480
+  {"cid": "7148280", "cid_name": "achilles_tendon_R_10", "pid": 7148280, "title": "achilles_tendon_R_10", "pid_line": "7148280   714
+  {"cid": "7148300", "cid_name": "achilles_tendon_R_11", "pid": 7148300, "title": "achilles_tendon_R_11", "pid_line": "7148300   714
+  {"cid": "7148320", "cid_name": "achilles_tendon_R_12", "pid": 7148320, "title": "achilles_tendon_R_12", "pid_line": "7148320   714
+  {"cid": "7148340", "cid_name": "achilles_tendon_R_13", "pid": 7148340, "title": "achilles_tendon_R_13", "pid_line": "7148340   714
+  {"cid": "7148360", "cid_name": "achilles_tendon_R_14", "pid": 7148360, "title": "achilles_tendon_R_14", "pid_line": "7148360   714
+  {"cid": "7148380", "cid_name": "achilles_tendon_R_15", "pid": 7148380, "title": "achilles_tendon_R_15", "pid_line": "7148380   714
+==========================================================================================
+=== shells\shell_pid_stats.csv   65685
+==========================================================================================
+  （666 行）
+  pid,name,base,region,n_shell,n_shell3,n_shell4,n_other,n_nodes,thic_min,thic_median,thic_max,thic_mode,thic_distinct_n,thic_so
+  87000101,L_C1_CORT,L_C1,cervical,324,4,320,0,330,1.0,1.0,1.0,1.0,1,section,2388.18
+  87000201,L_C2_CORT,L_C2,cervical,369,3,366,0,391,1.0,1.0,1.0,1.0,1,section,2755.02
+  87000301,L_C3_CORT,L_C3,cervical,221,5,216,0,233,1.0,1.0,1.0,1.0,1,section,2026.1
+  87000401,L_C4_CORT,L_C4,cervical,215,9,206,0,224,1.0,1.0,1.0,1.0,1,section,2223.05
+  87000501,L_C5_CORT,L_C5,cervical,233,5,228,0,244,1.0,1.0,1.0,1.0,1,section,2197.64
+  87000601,L_C6_CORT,L_C6,cervical,282,7,275,0,296,1.0,1.0,1.0,1.0,1,section,2287.71
+  87000701,L_C7_CORT,L_C7,cervical,267,9,258,0,284,1.0,1.0,1.0,1.0,1,section,2359.45
+  87500101,R_C1_CORT,R_C1,cervical,324,4,320,0,330,1.0,1.0,1.0,1.0,1,section,2389.12
+  87500201,R_C2_CORT,R_C2,cervical,369,3,366,0,391,1.0,1.0,1.0,1.0,1,section,2755.36
+  87500301,R_C3_CORT,R_C3,cervical,221,5,216,0,233,1.0,1.0,1.0,1.0,1,section,2026.1
+  87500401,R_C4_CORT,R_C4,cervical,215,9,206,0,224,1.0,1.0,1.0,1.0,1,section,2223.05
+  87500501,R_C5_CORT,R_C5,cervical,233,5,228,0,244,1.0,1.0,1.0,1.0,1,section,2197.62
+  87500601,R_C6_CORT,R_C6,cervical,282,7,275,0,296,1.0,1.0,1.0,1.0,1,section,2287.93
+  87500701,R_C7_CORT,R_C7,cervical,267,9,258,0,284,1.0,1.0,1.0,1.0,1,section,2359.57
+  89001301,L_L1_CORT,L_L1,lumbar,551,3,548,0,583,0.6926,0.7027,1.0,0.7,11,element,4839.4
+  89001401,L_L2_CORT,L_L2,lumbar,589,6,583,0,620,0.6978,0.706,1.0103,0.707,10,element,5371.6
+  89001501,L_L3_CORT,L_L3,lumbar,670,5,665,0,703,0.7246,0.7355499999999999,1.05,0.735,10,element,5694.66
+  89001601,L_L4_CORT,L_L4,lumbar,693,8,685,0,726,0.7876,0.7997000000000001,1.14,0.798,14,element,5515.25
+  89001701,L_L5_CORT,L_L5,lumbar,667,5,662,0,701,0.8756,0.89295,1.27,0.889,11,element,5738.69
+  89501301,R_L1_CORT,R_L1,lumbar,551,3,548,0,583,0.6926,0.7027,1.0,0.7,11,element,4839.4
+  89501401,R_L2_CORT,R_L2,lumbar,589,6,583,0,620,0.6978,0.706,1.0103,0.707,10,element,5371.46
+  89501501,R_L3_CORT,R_L3,lumbar,670,5,665,0,703,0.7246,0.7355499999999999,1.05,0.735,10,element,5694.66
+  89501601,R_L4_CORT,R_L4,lumbar,693,8,685,0,726,0.7876,0.7997000000000001,1.14,0.798,14,element,5514.16
+  89501701,R_L5_CORT,R_L5,lumbar,667,5,662,0,701,0.8756,0.89295,1.27,0.889,11,element,5739.0
+  83000204,L_HIPBONE_CORT_0.75,L_HIPBONE,pelvis,85,0,85,0,119,0.75,0.75,0.75,0.75,1,section,1786.96
+  83000209,L_HIPBONE_CORT_1,L_HIPBONE,pelvis,421,0,421,0,529,1.0,1.0,1.0,1.0,1,section,11646.29
+  83000201,L_HIPBONE_CORT_1.5,L_HIPBONE,pelvis,938,0,938,0,1083,1.5,1.5,1.5,1.5,1,section,25019.01
+  83000208,L_HIPBONE_CORT_1.8,L_HIPBONE,pelvis,32,0,32,0,56,1.8,1.8,1.8,1.8,1,section,732.62
+  83000205,L_HIPBONE_CORT_2,L_HIPBONE,pelvis,557,0,557,0,663,2.0,2.0,2.0,2.0,1,section,16169.6
+  83000207,L_HIPBONE_CORT_2.2,L_HIPBONE,pelvis,50,0,50,0,69,2.2,2.2,2.2,2.2,1,section,1071.31
+  83000206,L_HIPBONE_CORT_3,L_HIPBONE,pelvis,8,0,8,0,18,3.0,3.0,3.0,3.0,1,section,179.17
+  83000203,L_HIPBONE_CORT_ACETABLUM1.0,L_HIPBONE,pelvis,8,0,8,0,16,1.0,1.0,1.0,1.0,1,section,162.93
+  83000202,L_HIPBONE_CORT_ACETABLUM1.5,L_HIPBONE,pelvis,133,0,133,0,152,1.5,1.5,1.5,1.5,1,section,2367.0
+  83100500,L_PUBIC_LIGAMENT_AP,L_PUBIC_LIGAMENT_AP,pelvis,18,0,18,0,36,2.0,2.0,2.0,2.0,1,section,388.66
+  83000101,L_SACRUM_CORT,L_SACRUM,pelvis,747,4,743,0,784,2.0,2.0,2.0,2.0,1,section,15570.82
+  83500204,R_HIPBONE_CORT_0.75,R_HIPBONE,pelvis,85,0,85,0,119,0.75,0.75,0.75,0.75,1,section,1786.96
+  83500209,R_HIPBONE_CORT_1,R_HIPBONE,pelvis,421,0,421,0,529,1.0,1.0,1.0,1.0,1,section,11646.29
+  83500201,R_HIPBONE_CORT_1.5,R_HIPBONE,pelvis,938,0,938,0,1083,1.5,1.5,1.5,1.5,1,section,25019.01
+  83500208,R_HIPBONE_CORT_1.8,R_HIPBONE,pelvis,32,0,32,0,56,1.8,1.8,1.8,1.8,1,section,732.62
+  83500205,R_HIPBONE_CORT_2,R_HIPBONE,pelvis,557,0,557,0,663,2.0,2.0,2.0,2.0,1,section,16169.6
+  83500207,R_HIPBONE_CORT_2.2,R_HIPBONE,pelvis,50,0,50,0,69,2.2,2.2,2.2,2.2,1,section,1071.31
+  83500206,R_HIPBONE_CORT_3,R_HIPBONE,pelvis,8,0,8,0,18,3.0,3.0,3.0,3.0,1,section,179.17
+  83500203,R_HIPBONE_CORT_ACETABLUM1.0,R_HIPBONE,pelvis,8,0,8,0,16,1.0,1.0,1.0,1.0,1,section,162.93
+  83500202,R_HIPBONE_CORT_ACETABLUM1.5,R_HIPBONE,pelvis,133,0,133,0,152,1.5,1.5,1.5,1.5,1,section,2367.0
+  83600500,R_PUBIC_LIGAMENT_AP,R_PUBIC_LIGAMENT_AP,pelvis,18,0,18,0,36,2.0,2.0,2.0,2.0,1,section,386.32
+  83500101,R_SACRUM_CORT,R_SACRUM,pelvis,747,4,743,0,784,2.0,2.0,2.0,2.0,1,section,15563.54
+  87100200,L_ANTERIOR_ATLANTOOCCIPITAL_MEMBRANE,L_ANTERIOR_ATLANTOOCCIPITAL_MEMBRANE,skull,47,1,46,0,67,1.0,1.0,1.0,1.0,1,sectio
+  87100600,L_POSTERIOR_ATLANTOOCCIPITAL_MEMBRANE,L_POSTERIOR_ATLANTOOCCIPITAL_MEMBRANE,skull,23,0,23,0,34,1.0,1.0,1.0,1.0,1,sect
+  87600200,R_ANTERIOR_ATLANTOOCCIPITAL_MEMBRANE,R_ANTERIOR_ATLANTOOCCIPITAL_MEMBRANE,skull,47,1,46,0,67,1.0,1.0,1.0,1.0,1,sectio
+  87600600,R_POSTERIOR_ATLANTOOCCIPITAL_MEMBRANE,R_POSTERIOR_ATLANTOOCCIPITAL_MEMBRANE,skull,23,0,23,0,34,1.0,1.0,1.0,1.0,1,sect
+  88000258,Str_Shell_External_L,STR_L,skull,322,87,235,0,536,,,,,0,none,2671.11
+  88000257,Str_Shell_External_R,STR_R,skull,322,87,235,0,536,0.1,0.1,0.1,0.1,1,section,2671.11
+  88000260,Str_Shell_Internal_L,STR_L,skull,267,70,197,0,451,,,,,0,none,1684.86
+  88000259,Str_Shell_Internal_R,STR_R,skull,267,70,197,0,451,0.1,0.1,0.1,0.1,1,section,1684.86
+  88000069,ethmoid_external_l,ETHMOID_L,skull,18,6,12,0,26,1.5,1.5,1.5,1.5,1,section,212.38
+  88000019,ethmoid_external_r,ETHMOID_R,skull,18,6,12,0,26,1.5,1.5,1.5,1.5,1,section,212.38
+  88000070,ethmoid_internal_l,ETHMOID_L,skull,72,27,45,0,87,1.5,1.5,1.5,1.5,1,section,623.14
+  88000020,ethmoid_internal_r,ETHMOID_R,skull,72,27,45,0,87,1.5,1.5,1.5,1.5,1,section,623.14
+  88000018,ethmoid_shell,ETHMOID,skull,5,2,3,0,10,1.5,1.5,1.5,1.5,1,section,52.24
+  88000053,frontal_external_l,FRONTAL_L,skull,786,63,723,0,815,1.5,1.5,1.5,1.5,1,section,8811.04
+  88000002,frontal_external_r,FRONTAL_R,skull,786,63,723,0,815,1.5,1.5,1.5,1.5,1,section,8811.04
+  88000054,frontal_internal_l,FRONTAL_L,skull,753,21,732,0,795,1.5,1.5,1.5,1.5,1,section,5690.98
+  88000003,frontal_internal_r,FRONTAL_R,skull,753,21,732,0,795,1.5,1.5,1.5,1.5,1,section,5690.98
+  88000072,lacrimal_external_l,LACRIMAL_L,skull,4,0,4,0,9,1.5,1.5,1.5,1.5,1,section,120.43
+  88000022,lacrimal_external_r,LACRIMAL_R,skull,4,0,4,0,9,1.5,1.5,1.5,1.5,1,section,120.43
+  88000073,lacrimal_internal_l,LACRIMAL_L,skull,4,0,4,0,9,1.5,1.5,1.5,1.5,1,section,99.53
+  88000023,lacrimal_internal_r,LACRIMAL_R,skull,4,0,4,0,9,1.5,1.5,1.5,1.5,1,section,99.53
+  88000083,mandible_external_l,MANDIBLE_L,skull,173,8,165,0,201,1.5,1.5,1.5,1.5,1,section,5717.27
+  88000034,mandible_external_r,MANDIBLE_R,skull,173,8,165,0,201,1.5,1.5,1.5,1.5,1,section,5717.27
+==========================================================================================
+=== shells\shell_sections.json   140258
+==========================================================================================
+  7547090: {"elform": 16, "shrf": 0.0, "nip": 3, "propt": 1.0, "raw": "7547090 16 0.0 3 1.0 0.0 0 0", "thickness": [1.0, 
+  7647090: {"elform": 16, "shrf": 0.0, "nip": 3, "propt": 1.0, "raw": "7647090 16 0.0 3 1.0 0.0 0 0", "thickness": [1.0, 
+  8710710: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "8710710 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0, 
+  81000101: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81000101 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81000102: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81000102 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81000301: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81000301 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81000401: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81000401 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81000501: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81000501 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81000701: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81000701 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81000702: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81000702 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81000901: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81000901 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81000902: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81000902 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81001101: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81001101 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81001301: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81001301 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81001401: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81001401 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81001501: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81001501 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81001601: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81001601 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81001701: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81001701 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81001801: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81001801 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81001901: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81001901 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002001: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002001 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002101: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002101 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002201: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002201 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002301: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002301 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002401: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002401 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002501: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002501 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002601: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002601 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002701: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002701 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002801: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002801 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81002901: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81002901 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81003001: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81003001 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81003101: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81003101 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81003201: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81003201 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81003301: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81003301 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81003401: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81003401 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81003501: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81003501 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81003601: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81003601 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81003701: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81003701 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81100001: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81100001 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81100101: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81100101 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81100201: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81100201 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81100301: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81100301 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81100401: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81100401 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81100501: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81100501 16 0.0 0 0.0 0.0 0 0", "thickness": [1.0,
+  81100601: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81100601 16 0.0 2 0.0 0.0 0 0", "thickness": [1.0,
+  81100701: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81100701 16 0.0 2 0.0 0.0 1 0", "thickness": [0.0,
+  81100801: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81100801 16 0.0 2 0.0 0.0 1 0", "thickness": [0.0,
+  81100901: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81100901 16 0.0 2 0.0 0.0 1 0", "thickness": [0.0,
+  81101001: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101001 16 0.0 2 0.0 0.0 1 0", "thickness": [0.0,
+  81101101: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101101 16 0.0 2 0.0 0.0 1 0", "thickness": [0.0,
+  81101201: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101201 16 0.0 2 0.0 0.0 1 0", "thickness": [0.0,
+  81101202: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101202 16 0.0 2 0.0 0.0 1 0", "thickness": [0.0,
+  81101203: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101203 16 0.0 2 0.0 0.0 1 0", "thickness": [0.0,
+  81101204: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101204 16 0.0 2 0.0 0.0 1 0", "thickness": [0.0,
+  81101301: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101301 16 0.0 2 0.0 0.0 0 0", "thickness": [3.0,
+  81101302: {"elform": 16, "shrf": 0.0, "nip": 0, "propt": 0.0, "raw": "81101302 16 0.0 0 0.0 0.0 0 0", "thickness": [2.0,
+  81101303: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101303 16 0.0 2 0.0 0.0 0 0", "thickness": [3.0,
+  81101304: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101304 16 0.0 2 0.0 0.0 0 0", "thickness": [3.0,
+  81101305: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101305 16 0.0 2 0.0 0.0 0 0", "thickness": [3.0,
+  81101306: {"elform": 16, "shrf": 0.0, "nip": 2, "propt": 0.0, "raw": "81101306 16 0.0 2 0.0 0.0 0 0", "thickness": [3.0,

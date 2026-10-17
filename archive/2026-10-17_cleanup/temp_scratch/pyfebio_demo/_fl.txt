@@ -1,0 +1,21 @@
+未找到 line2 元素段；列出所有 Elements 段的 type 与行数：
+  type="tet4" name="tibia_cort__tet4"                                                          6 行
+  type="hex8" name="tibia_cort__hex8"                                                          231 行
+  type="tet4" name="tibia_spon__tet4"                                                          605 行
+  type="tet4" name="tibia_marrow__tet4"                                                        518 行
+  type="hex8" name="fibula_cort__hex8"                                                         146 行
+  type="tet4" name="fibula_spon__tet4"                                                         264 行
+  type="hex8" name="talus_cort__hex8"                                                          394 行
+  type="tet4" name="talus_spon__tet4"                                                          1766 行
+  type="hex8" name="calcaneus_cort__hex8"                                                      634 行
+  type="tet4" name="calcaneus_spon__tet4"                                                      3323 行
+  type="hex8" name="navicular_spon__hex8"                                                      148 行
+  type="penta6" name="tibiotalar_tibia__penta6"                                                145 行
+  type="penta6" name="tibiotalar_talus__penta6"                                                182 行
+
+ATFL（npz）n_truss=4:
+    81000444 <-> 81001972
+    81000505 <-> 81001973
+    81000445 <-> 81002017
+    81000068 <-> 81002015
+  不同 B 端点数 = 4 （=1 则是退化扇形）

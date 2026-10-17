@@ -1,0 +1,173 @@
+[PDF 共 507 页]
+
+==========================================================================
+### 第 41 页
+==========================================================================
+3.1. FREE FORMAT OVERVIEW 41
+Rigid This sections defines rigid components, such as rigid constraints, rigid loads, and rigid
+connectors.
+Discrete This section defines all the discrete elements (i.e. springs).
+LoadData Definestheloadcontrollers,whichcancontrolmodelparametersasafunctionoftime.
+Step Defines different analysis steps, where in each analysis the boundary, loads, contact and
+initial conditions can be redefined.
+Output Defines additional data that needs to be stored to file.
+Although there is some flexibility in the order in which these sections can be listed, it is recom-
+mended to list them in the same order as given above. Not all sections are required. Empty
+sections can be omitted. A minimal file must contain at least the Module, Control, Material, Mesh,
+and MeshDomains sections. The rest of this chapter describes each of these sections in more
+detail.
+3.1.1 Format Specification Versions
+Thisdocumentdescribesversion4.0oftheFEBioinputspecification. Thisformatdiffersinseveral
+aspects from the previous versions of the input specification. This section describes the major
+changes between the different versions.
+• Version4.0: ThelatestandrecommendedversionoftheFEBioinputspecificationdescribed
+in this document. The main motivation for this format was to improve consistency between
+thefebfilestructureandthewaytheFEBiomodelisconstructedinFEBioStudio. Thisformat
+isverysimilartoversion3.0andonlydiffersinafewsections: Somesolverparametershave
+moved. The Rigid section was restructured. Node and element sets can be specified more
+concisely.
+• Version 3.0: The major focus of this revision was adding support for FEBio 3.0’s features
+for modeling heterogeneous parameters. Heterogeneous parameters can be created via
+mathematicalexpressionsorviatheMeshDatasection. Italsointroducesamoreconsistent
+way for referencing model parameters. The Geometry section was replaced with the Mesh
+and MeshDomains sections in order to further separate the definition of the mesh and its
+physicalattributes(e.g. materialassignments). Thisformatisstillsupportedbutconsidered
+obsolete.
+• Version 2.5: This format differs from its predecessor in some important aspects: all node-
+sets, surfaces, etc., that are used by boundary conditions, loads, contact, etc., must be
+defined in the Geometry section. Boundary conditions, loads, contact, etc., are now defined
+by referencing the sets in the Geometry section. This format also adds the MeshData sec-
+tion and re-formats the Discrete section. Rigid node sets and prescribed rigid degrees of
+freedom are moved to the Boundary section. This format is still supported but considered
+obsolete.
+• Version 2.0: This is the first major revision of the input file format and redefines many of
+the file sections: The Elements section uses a different organization. Elements are now
+grouped by material and element type. Multiple Elements sections can now be defined to
+create multiple parts. Surfaces can now be defined in the Geometry section and referenced
+
+==========================================================================
+### 第 42 页
+==========================================================================
+42 CHAPTER 3. FREE FORMAT INPUT
+by boundary conditions and contact definitions. A new Contact section contains all the
+contact definitions. A new Discrete section was defined that contains all the materials and
+definitionsofthediscreteelements(e.g. springs). TheBoundary sectionisalsoredesigned.
+This format is still supported but considered obsolete.
+• Version1.3: ThiswasanexperimentalversionthatredefinedtheGeometry section,butwas
+later abandoned in favor of version 2.0. This version is no longer supported.
+• Version 1.2: A Loads section was added and all surface and body loads are now defined in
+this section instead of the Boundary section. This version is mostly supported but consid-
+ered obsolete.
+• Version 1.1: Rigid body constraints are no longer defined in the rigid material definition but
+instead placed in a new Constraints section. This version is no longer supported.
+• Version 1.0: The original input format specification. This version is no longer supported.
+As of FEBio 4.0, only versions 1.2, 2.0, 2.5, and 3.0 are supported. Versions 1.2 and 2.0 are
+consideredobsoleteanditishighlyrecommendedtoconvertolderfilestothenewestspecification
+for use with newer versions of FEBio. This can be done for instance using FEBioStudio.
+3.1.2 Notes on backward compatibility
+Some features that were available in versions prior to 4.0 are no longer supported or require a
+different syntax.
+1. The Parameters section is no longer supported. This section allowed users to define file
+parameters that could be used as parameter values. This section was removed since it was
+difficult to support in FEBio Studio and a better mechanism was implemented for defining
+model-level parameters. (See the 3.4.4 section.)
+2. Some fiber materials defined the theta and phi parameters for setting the fiber orientation.
+These parameters are no longer supported. Instead, the fiber direction should be specified
+via the fiber property, or if the fiber property is not available, the mat_axis property.
+<fiber type="angles">
+<theta>90</theta>
+<phi>0</phi>
+</fiber>
+3.1.3 Multiple Input Files
+FEBio supports distributing the model definition across multiple input files. This can greatly facili-
+tate defining large, complex models and allows the re-use of model input files without the need to
+create the entire model input file from scratch. When using multiple input files to define a model,
+you must create a control input file that may reference other input files. This control file will be
+used to run the model in FEBio. There are two ways of including a file into the control file: The
+Include section, and the from attribute.
+Note that all input files must start with the febio_spec tag and use the same format specifica-
+tion.
+
+==========================================================================
+### 第 156 页
+==========================================================================
+156 CHAPTER 3. FREE FORMAT INPUT
+3.16 Discrete Section
+This section defines the materials used by the discrete elements and assigns these materials to
+the discrete elements sets defined in the Mesh section. The materials are defined via the dis-
+crete_material elementandthematerialsareassignedtodiscreteelementsetsusingthediscrete
+element.
+<Discrete>
+<discrete_material id="1" type="linear spring">
+<E>1.0</E>
+</discrete_material>
+<discrete_material id="2" type="linear spring">
+<E>2.0</E>
+</discrete_material>
+<discrete dmat="1" discrete_set="springs1"/>
+<discrete dmat="2" discrete_set="springs2">
+</Discrete>
+The discrete_material and the discrete elements are defined in more detail below.
+3.16.1 Discrete Materials
+The discrete_material section defines a material that can be assigned to a discrete element set.
+The id attribute defines the material ID and the type attribute defines the material type.
+3.16.1.1 Linear Spring
+Thelinearspringhasalinearforce-displacementrelation. ItrequirestheEparameterthatdefines
+the spring constant.
+For example,
+<discrete_material id="1" type="linear spring">
+<E>3.0</E>
+</discrete_material>
+3.16.1.2 Nonlinear spring
+The nonlinear spring allows users to define a custom relation between a measure of stretch and
+the spring force. The following parameters can be defined.
+parameter Description
+scale Force scale factor.
+measure Measure of stretch. (1)
+force 1D function that defines the stretch-force relationship
+Comments:
+1. The measure parameter can be set to one of the following values:
+
+==========================================================================
+### 第 157 页
+==========================================================================
+3.16. DISCRETE SECTION 157
+(a) elongation: Use the spring elongation, the difference between current and original
+length, as the measure of stretch.
+(b) strain: Use the strain, i.e. the ratio of elongation over original length, as the measure
+of stretch
+(c) stretch: Use the ratio of current length over original length as measure of stretch.
+Example:
+<discrete_material id="1" name="set1" type="nonlinear spring">
+<scale>1</scale>
+<measure>elongation</measure>
+<force type="math">
+<math>x</math>
+</force>
+</discrete_material>
+3.16.1.3 Hill
+The Hill discrete material defines the following parameters.
+parameter Description
+Vmax maximum shortening velocity
+ac activation level
+Fmax maximum force
+Lmax strain (i.e. stretch - 1) at which Fmax occurs.
+L0 initial reference length
+Sv max velocity scale
+Ftl normalized tension-length curve
+Ftv normalized tension-velocity curve
+TheforceintheHilldiscreteelementisthesumofthepassiveelementandtheactiveelement.
+F = F +F
+p a
+The passive force is given by,
+(cid:40)
+Fmax(exp(Ksh(l−1)/Lmax−1)/exp(Ksh−1)) ,l > 1
+F =
+p 0 ,l ⩽ 1
+where l is the relative stretch defined by, l = lm/l0 and lmis the discrete element length and
+l0is either the L0 parameter, or the initial discrete element length (if L0 is set to zero).
+The active force is given by,
+Fa = ac∗Fmax∗Ftl(l)∗Ftv(v)
+Here, v, a measure of the relative discrete element’s growth speed, is defined by,
+v = vm/(Vmax∗Sv(ac))
+where vmis the actual discrete element’s growth speed.

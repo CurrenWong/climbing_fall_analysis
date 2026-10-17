@@ -1,0 +1,34 @@
+3.11.2 Zero Shell Displacement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 90
+3.11.3 Zero Fluid Pressure . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91
+3.11.4 Zero Concentration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91
+3.11.5 Zero Fluid Dilatation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91
+3.11.6 Prescribed Displacement . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91
+3.11.7 Prescribed Shell Displacement . . . . . . . . . . . . . . . . . . . . . . . . . 92
+3.11.8 Prescribed Fluid Pressure . . . . . . . . . . . . . . . . . . . . . . . . . . . . 93
+3.11.9 Prescribed Concentration . . . . . . . . . . . . . . . . . . . . . . . . . . . . 93
+3.11.10Prescribed Deformation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 94
+3.11.11Prescribed Fluid Dilatation . . . . . . . . . . . . . . . . . . . . . . . . . . . 94
+3.11.12Prescribed Fluid Velocity . . . . . . . . . . . . . . . . . . . . . . . . . . . . 95
+3.11.13Prescribed Shell Fluid Pressure . . . . . . . . . . . . . . . . . . . . . . . . 95
+3.11.14Normal Displacement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 96
+3.11.15Rigid Deformation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 96
+3.11.16Rigid . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 97
+3.11.17Multiphasic Fluid Pressure . . . . . . . . . . . . . . . . . . . . . . . . . . . 97
+3.11.18Fluid Pressure . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 97
+3.11.19Fluid Resistance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 97
+3.11.20Fluid RC . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 98
+3.11.21Fluid RCR . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 98
+3.11.22Linear Constraints . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 99
+3.11.23Matching OSM Coefficient . . . . . . . . . . . . . . . . . . . . . . . . . . . . 99
+3.12 Rigid Section . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 100
+3.12.1 Rigid Constraints . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 100
+3.12.1.1 Rigid_fixed Constraint . . . . . . . . . . . . . . . . . . . . . . . . . 100
+3.12.1.2 Rigid_displacement Constraint . . . . . . . . . . . . . . . . . . . 101
+3.12.1.3 Rigid_rotation Constraint . . . . . . . . . . . . . . . . . . . . . . . 101
+6 CONTENTS
+3.12.1.4 Rigid_rotation_vector Constraint . . . . . . . . . . . . . . . . . . 102
+3.12.1.5 Rigid_euler_angles Constraint . . . . . . . . . . . . . . . . . . . . 102
+3.12.2 Rigid Initial Conditions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 103
+3.12.2.1 Initial Rigid Velocity . . . . . . . . . . . . . . . . . . . . . . . . . . 103
+3.12.2.2 Initial Rigid Angular Velocity . . . . . . . . . . . . . . . . . . . . . 104
+3.12.3 Rigid Loads . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .

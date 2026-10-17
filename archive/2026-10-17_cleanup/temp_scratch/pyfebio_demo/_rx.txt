@@ -1,0 +1,21 @@
+[ok] 14.6 MB
+state 14（共 15 个）
+  node_data 变量: ['displacement', 'reaction forces']
+    displacement: (8321, 3)
+    reaction forces: (8321, 3)
+      -> |R| 中位 0.3062  max 269.3668
+      -> 沿加载轴分量之和 = 436.817  （N；负=与轴反向，即受压）
+
+  element_data 变量: ['stress']
+
+域                               单元        中位       p99       max  (von Mises, MPa)
+tibiotalar_tibia(软骨)           458    0.0413    2.5799   22.1164
+__set8                         607    0.2202    4.2662   23.2221
+tibia_cort(hex8)             2,415    1.4513    7.7189   17.6496
+tibia_marrow(骨髓)            14,482    0.0017    0.0060    0.0073
+tibia_cort(tet4)                 6    1.7886    2.7312    2.7341
+tibia_end_spon(松质)           6,651    0.0534    0.1433    0.2687
+talus_cort(hex8)               394    6.2129   31.4835   38.2449
+talus_spon(松质)               1,766    0.1368    0.3313    0.3921
+
+位移: |u| max 1.2553 mm；沿加载轴 -0.4738 .. 0.0571 mm

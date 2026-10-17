@@ -1,0 +1,309 @@
+============================== 全部 12 处 'truss' 上下文 ==============================
+
+-- #0 @160149 --
+ain’.
+When shell domains intersect such that three or more shell elements share the same edge,
+as in a T-connection, users should set shell_normal_nodal to 0 in the ShellDomain section. This
+setting ensures that the bottom face of a shell element is calculated using the top face normal,
+instead of nodal normals, since the latter would be ill-defined for nodes belonging to such an
+edge.
+Finally, please note that shell elements cannot be stacked in FEBio.
+3.6.2.3 Beam Elements
+FEBio supports some truss and beam element formulations. Currently, only linear trusses and
+linear and quadratic beam elements are supported.
+line2 2-node linear truss or beam element
+line3 3-node quadratic beam element
+Whetheratrussorbeamformulationisused,isdeterminedinthecorrespondingBeamDomain
+section.
+3.6.3 NodeSet Section
+The NodeSet section allows users to define node sets. These node sets can then later be used
+in the definition of boundary conditions and loads. A node set is defined by the NodeSet tag.
+This tag takes one required attribute, name, which defines the name of the node set. A node set
+definition is followed by a list of node IDs. For example,
+<NodeSet name="nodeset1">1, 2, 101, 102</NodeSet>
+
+-- #1 @160209 --
+hell elements share the same edge,
+as in a T-connection, users should set shell_normal_nodal to 0 in the ShellDomain section. This
+setting ensures that the bottom face of a shell element is calculated using the top face normal,
+instead of nodal normals, since the latter would be ill-defined for nodes belonging to such an
+edge.
+Finally, please note that shell elements cannot be stacked in FEBio.
+3.6.2.3 Beam Elements
+FEBio supports some truss and beam element formulations. Currently, only linear trusses and
+linear and quadratic beam elements are supported.
+line2 2-node linear truss or beam element
+line3 3-node quadratic beam element
+Whetheratrussorbeamformulationisused,isdeterminedinthecorrespondingBeamDomain
+section.
+3.6.3 NodeSet Section
+The NodeSet section allows users to define node sets. These node sets can then later be used
+in the definition of boundary conditions and loads. A node set is defined by the NodeSet tag.
+This tag takes one required attribute, name, which defines the name of the node set. A node set
+definition is followed by a list of node IDs. For example,
+<NodeSet name="nodeset1">1, 2, 101, 102</NodeSet>
+For larger nodesets, it is recommended to split the list ac
+
+-- #2 @160291 --
+rmal_nodal to 0 in the ShellDomain section. This
+setting ensures that the bottom face of a shell element is calculated using the top face normal,
+instead of nodal normals, since the latter would be ill-defined for nodes belonging to such an
+edge.
+Finally, please note that shell elements cannot be stacked in FEBio.
+3.6.2.3 Beam Elements
+FEBio supports some truss and beam element formulations. Currently, only linear trusses and
+linear and quadratic beam elements are supported.
+line2 2-node linear truss or beam element
+line3 3-node quadratic beam element
+Whetheratrussorbeamformulationisused,isdeterminedinthecorrespondingBeamDomain
+section.
+3.6.3 NodeSet Section
+The NodeSet section allows users to define node sets. These node sets can then later be used
+in the definition of boundary conditions and loads. A node set is defined by the NodeSet tag.
+This tag takes one required attribute, name, which defines the name of the node set. A node set
+definition is followed by a list of node IDs. For example,
+<NodeSet name="nodeset1">1, 2, 101, 102</NodeSet>
+For larger nodesets, it is recommended to split the list across several lines.
+<NodeSet name="nodeset1">
+1, 2, 3, 4,
+5, 6, 7, 8,
+9, 10, 11, 1
+
+-- #3 @160357 --
+hat the bottom face of a shell element is calculated using the top face normal,
+instead of nodal normals, since the latter would be ill-defined for nodes belonging to such an
+edge.
+Finally, please note that shell elements cannot be stacked in FEBio.
+3.6.2.3 Beam Elements
+FEBio supports some truss and beam element formulations. Currently, only linear trusses and
+linear and quadratic beam elements are supported.
+line2 2-node linear truss or beam element
+line3 3-node quadratic beam element
+Whetheratrussorbeamformulationisused,isdeterminedinthecorrespondingBeamDomain
+section.
+3.6.3 NodeSet Section
+The NodeSet section allows users to define node sets. These node sets can then later be used
+in the definition of boundary conditions and loads. A node set is defined by the NodeSet tag.
+This tag takes one required attribute, name, which defines the name of the node set. A node set
+definition is followed by a list of node IDs. For example,
+<NodeSet name="nodeset1">1, 2, 101, 102</NodeSet>
+For larger nodesets, it is recommended to split the list across several lines.
+<NodeSet name="nodeset1">
+1, 2, 3, 4,
+5, 6, 7, 8,
+9, 10, 11, 12
+</NodeSet>
+68 CHAPTER 3. FREE FORMAT INPUT
+3.6.4 Edge Section
+Th
+
+-- #4 @166421 --
+ier that can be used to assign a part list to a surface.
+This can be useful for defining contact surfaces where the surface might have a complex shape
+and is difficult to extract manually.
+3.7. MESHDOMAINS SECTION 71
+3.7 MeshDomains Section
+The MeshDomains section assigns various physical attributes to the element sets of the mesh.
+For each of the Elements sections in the Mesh section, define a SolidDomain, ShellDomain, or
+BeamDomainsection,dependingonwhethertheelementsaresolid,shells,orbeams(ortrusses).
+Each domain also requires a material name that defines the material properties of the domain.
+3.7.1 SolidDomain Section
+UsetheSolidDomainsectiontodefineasoliddomain. Thissectiontakesthefollowingparameters:
+name Thenameoftheelementset(definedviaanElementssection). Thiselementsetmustonly
+contain solid elements.
+mat The name of the material that will be assigned to this domain
+type (optional) the specific formulation used for this domain.
+The optional type attribute can be added to specify a specific solid formulation. If omitted, FEBio
+will determine the proper domain type by inspecting the material and element types used. How-
+ever,userscanexplicitlysetthetypeattribute. Thefollowing
+
+-- #5 @173560 --
+omains.
+multiphasic-shell The standard formulation for multiphasic shell domains.
+The default shell thickness can be specified as a parameter of the ShellDomain section.
+<ShellDomain name="skin">
+<shell_thickness>0.01</shell_thickness>
+</ShellDomain>
+If the shell thickness parameter is not specified, the initial shell thickness is set to zero, and it is
+assumed that the actual shell thickness is specified in the MeshData section.
+74 CHAPTER 3. FREE FORMAT INPUT
+3.7.3 BeamDomain Section
+Beam and trusses can be defined with the BeamDomain section. This tag takes the following
+attributes.
+name This is the name of the part to which this domain will be assigned. The part is defined via
+a named Elements section.
+mat The name of the material that will be assigned to this domain.
+type The specific formulation that will be used.
+The particular beam formulation that can be assigned is listed below.
+type Description
+linear-truss A linear truss formulation.
+elastic-truss An extension of the linear-truss formulation that allows the use of standard FEBio materials (EXPERIMENTAL!)
+linear-beam A linear beam formulation.
+3.8. MESHDATA SECTION 75
+3.8 MeshData Section
+The MeshData section is where da
+
+-- #6 @173986 --
+ection.
+74 CHAPTER 3. FREE FORMAT INPUT
+3.7.3 BeamDomain Section
+Beam and trusses can be defined with the BeamDomain section. This tag takes the following
+attributes.
+name This is the name of the part to which this domain will be assigned. The part is defined via
+a named Elements section.
+mat The name of the material that will be assigned to this domain.
+type The specific formulation that will be used.
+The particular beam formulation that can be assigned is listed below.
+type Description
+linear-truss A linear truss formulation.
+elastic-truss An extension of the linear-truss formulation that allows the use of standard FEBio materials (EXPERIMENTAL!)
+linear-beam A linear beam formulation.
+3.8. MESHDATA SECTION 75
+3.8 MeshData Section
+The MeshData section is where data is specified that can be mapped to the mesh. The data can
+then be applied to a parameter of the model, e.g. a material parameter, or a pressure load.
+To define a mesh data section add one of the following tags.
+NodeData Define data on a node set
+SurfaceData Define data on a surface
+ElementData Define data on an element set
+The following attributes can be added.
+name All mesh data sections require a name, which can be sp
+
+-- #7 @174001 --
+TER 3. FREE FORMAT INPUT
+3.7.3 BeamDomain Section
+Beam and trusses can be defined with the BeamDomain section. This tag takes the following
+attributes.
+name This is the name of the part to which this domain will be assigned. The part is defined via
+a named Elements section.
+mat The name of the material that will be assigned to this domain.
+type The specific formulation that will be used.
+The particular beam formulation that can be assigned is listed below.
+type Description
+linear-truss A linear truss formulation.
+elastic-truss An extension of the linear-truss formulation that allows the use of standard FEBio materials (EXPERIMENTAL!)
+linear-beam A linear beam formulation.
+3.8. MESHDATA SECTION 75
+3.8 MeshData Section
+The MeshData section is where data is specified that can be mapped to the mesh. The data can
+then be applied to a parameter of the model, e.g. a material parameter, or a pressure load.
+To define a mesh data section add one of the following tags.
+NodeData Define data on a node set
+SurfaceData Define data on a surface
+ElementData Define data on an element set
+The following attributes can be added.
+name All mesh data sections require a name, which can be specified with th
+
+-- #8 @174028 --
+7.3 BeamDomain Section
+Beam and trusses can be defined with the BeamDomain section. This tag takes the following
+attributes.
+name This is the name of the part to which this domain will be assigned. The part is defined via
+a named Elements section.
+mat The name of the material that will be assigned to this domain.
+type The specific formulation that will be used.
+The particular beam formulation that can be assigned is listed below.
+type Description
+linear-truss A linear truss formulation.
+elastic-truss An extension of the linear-truss formulation that allows the use of standard FEBio materials (EXPERIMENTAL!)
+linear-beam A linear beam formulation.
+3.8. MESHDATA SECTION 75
+3.8 MeshData Section
+The MeshData section is where data is specified that can be mapped to the mesh. The data can
+then be applied to a parameter of the model, e.g. a material parameter, or a pressure load.
+To define a mesh data section add one of the following tags.
+NodeData Define data on a node set
+SurfaceData Define data on a surface
+ElementData Define data on an element set
+The following attributes can be added.
+name All mesh data sections require a name, which can be specified with the name attribute.
+This name
+
+-- #9 @174061 --
+russes can be defined with the BeamDomain section. This tag takes the following
+attributes.
+name This is the name of the part to which this domain will be assigned. The part is defined via
+a named Elements section.
+mat The name of the material that will be assigned to this domain.
+type The specific formulation that will be used.
+The particular beam formulation that can be assigned is listed below.
+type Description
+linear-truss A linear truss formulation.
+elastic-truss An extension of the linear-truss formulation that allows the use of standard FEBio materials (EXPERIMENTAL!)
+linear-beam A linear beam formulation.
+3.8. MESHDATA SECTION 75
+3.8 MeshData Section
+The MeshData section is where data is specified that can be mapped to the mesh. The data can
+then be applied to a parameter of the model, e.g. a material parameter, or a pressure load.
+To define a mesh data section add one of the following tags.
+NodeData Define data on a node set
+SurfaceData Define data on a surface
+ElementData Define data on an element set
+The following attributes can be added.
+name All mesh data sections require a name, which can be specified with the name attribute.
+This name will be used by model parameters
+
+-- #10 @851252 --
+er section and an element list.
+Tag ID description size
+ELEM_TYPE 0x01042102 element type DWORD
+PART_ID 0x01042103 part ID DWORD
+ELEMENTS 0x01032104 number of elements DWORD
+NAME 0x01032105 an optional name for this domain CHAR64
+Table D.15: The domain header section.
+ELEM_TYPE VALUE description
+HEX8 0 8-node hexahedron solid element
+PENTA6 1 6-node pentahedron solid element
+TET4 2 4-node tetrahedron solid element
+QUAD4 3 4-node quadrilateral shell element
+TRI3 4 3-node triangular shell element
+TRUSS2 5 2-node linear truss element
+HEX20 6 20-node quadratic hexahedral element
+TET10 7 10-node quadratic tetrahedral element
+TET15 8 15-node quadratic tetrahedral element
+HEX27 9 27-node quadratic hexahedral element
+Table D.16: The supported element types.
+Tag ID description size
+ELEMENT 0x01042201 Element ID and connectivity DWORD*(NE+1)
+Table D.17: Each element is defined by an ID and a list of nodes that defines the connectivity.
+D.4. MESH SECTION 475
+Tag ID description
+SURFACE 0x01043100 beginning of a surface section
+Table D.18: The Surface section consists of a list of surface definitions.
+Tag ID description
+SURFACE_HEADER 0x01043101 beginning of surface header
+FACET_LIST 0x01043200
+
+-- #11 @851275 --
+nt list.
+Tag ID description size
+ELEM_TYPE 0x01042102 element type DWORD
+PART_ID 0x01042103 part ID DWORD
+ELEMENTS 0x01032104 number of elements DWORD
+NAME 0x01032105 an optional name for this domain CHAR64
+Table D.15: The domain header section.
+ELEM_TYPE VALUE description
+HEX8 0 8-node hexahedron solid element
+PENTA6 1 6-node pentahedron solid element
+TET4 2 4-node tetrahedron solid element
+QUAD4 3 4-node quadrilateral shell element
+TRI3 4 3-node triangular shell element
+TRUSS2 5 2-node linear truss element
+HEX20 6 20-node quadratic hexahedral element
+TET10 7 10-node quadratic tetrahedral element
+TET15 8 15-node quadratic tetrahedral element
+HEX27 9 27-node quadratic hexahedral element
+Table D.16: The supported element types.
+Tag ID description size
+ELEMENT 0x01042201 Element ID and connectivity DWORD*(NE+1)
+Table D.17: Each element is defined by an ID and a list of nodes that defines the connectivity.
+D.4. MESH SECTION 475
+Tag ID description
+SURFACE 0x01043100 beginning of a surface section
+Table D.18: The Surface section consists of a list of surface definitions.
+Tag ID description
+SURFACE_HEADER 0x01043101 beginning of surface header
+FACET_LIST 0x01043200 facet connectivity lis
+
+
+============================== 搜 'nonlinear elastic' 材料段 ==============================

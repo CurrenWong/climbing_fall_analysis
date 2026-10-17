@@ -1,0 +1,4 @@
+改前 10440 B
+⚠ 未命中，打印含「坑」的行：
+    - 🧨 **坑**：`lc`→`<scale>`｜`sym_stiffness` 在 `<solver>`｜删旧 `.feb`+查 rc｜**patch test 须用畸变单元**｜**h5 nodesets ≠ `.feb` NodeSet**（差 46/35/80/59）
+改后 10440 B  ❌ 超 200

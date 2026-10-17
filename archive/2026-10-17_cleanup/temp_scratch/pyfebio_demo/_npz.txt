@@ -1,0 +1,107 @@
+=== keys ===
+  node_ids                     shape=        (22960,) dtype=int64
+  node_xyz                     shape=      (22960, 3) dtype=float64
+  81001401_shell               shape=        (148, 4) dtype=int64
+  81001501_shell               shape=        (162, 4) dtype=int64
+  81001601_shell               shape=        (128, 4) dtype=int64
+  81001701_shell               shape=         (86, 4) dtype=int64
+  81001801_shell               shape=        (146, 4) dtype=int64
+  81100801_shell               shape=         (12, 4) dtype=int64
+  81101201_shell               shape=          (8, 4) dtype=int64
+  81101202_shell               shape=         (13, 4) dtype=int64
+  81101203_shell               shape=         (16, 4) dtype=int64
+  81101204_shell               shape=          (8, 4) dtype=int64
+  81101301_shell               shape=         (34, 4) dtype=int64
+  81101302_shell               shape=         (51, 4) dtype=int64
+  81101303_shell               shape=         (26, 4) dtype=int64
+  81101304_shell               shape=         (13, 4) dtype=int64
+  81101305_shell               shape=          (8, 4) dtype=int64
+  81101306_shell               shape=          (8, 4) dtype=int64
+  81101307_shell               shape=         (46, 4) dtype=int64
+  81101308_shell               shape=         (72, 4) dtype=int64
+  81101101_shell               shape=         (20, 4) dtype=int64
+  81101401_shell               shape=         (60, 4) dtype=int64
+  81101001_shell               shape=         (18, 4) dtype=int64
+  81101409_shell               shape=         (16, 4) dtype=int64
+  81101408_shell               shape=         (10, 4) dtype=int64
+  81101410_shell               shape=         (12, 4) dtype=int64
+  81100701_shell               shape=          (6, 4) dtype=int64
+  81100901_shell               shape=         (18, 4) dtype=int64
+  81000001_solid               shape=       (8819, 8) dtype=int64
+  81000000_solid               shape=      (14030, 8) dtype=int64
+  81000100_solid               shape=       (3060, 8) dtype=int64
+  81000200_solid               shape=       (2737, 8) dtype=int64
+  81000300_solid               shape=        (365, 8) dtype=int64
+  81000601_solid               shape=      (14482, 8) dtype=int64
+  81000600_solid               shape=       (6651, 8) dtype=int64
+  81000700_solid               shape=       (2417, 8) dtype=int64
+  81000800_solid               shape=        (762, 8) dtype=int64
+  81000801_solid               shape=       (2216, 8) dtype=int64
+  81000900_solid               shape=        (842, 8) dtype=int64
+  81001000_solid               shape=       (1766, 8) dtype=int64
+  81001100_solid               shape=        (394, 8) dtype=int64
+  81001200_solid               shape=       (3323, 8) dtype=int64
+  81001300_solid               shape=        (634, 8) dtype=int64
+  81001400_solid               shape=        (148, 8) dtype=int64
+  81001500_solid               shape=        (146, 8) dtype=int64
+  81001600_solid               shape=         (96, 8) dtype=int64
+  81001700_solid               shape=         (60, 8) dtype=int64
+  81001800_solid               shape=        (114, 8) dtype=int64
+  81100100_solid               shape=         (30, 8) dtype=int64
+  81100200_solid               shape=         (95, 8) dtype=int64
+
+=== 单元连接度统计（按 part）===
+  81001401_shell           n=   148 cols=4  unique节点数分布 {4: 148} 
+  81001501_shell           n=   162 cols=4  unique节点数分布 {4: 162} 
+  81001601_shell           n=   128 cols=4  unique节点数分布 {4: 128} 
+  81001701_shell           n=    86 cols=4  unique节点数分布 {4: 86} 
+  81001801_shell           n=   146 cols=4  unique节点数分布 {4: 146} 
+  81100801_shell           n=    12 cols=4  unique节点数分布 {4: 12} 
+  81101201_shell           n=     8 cols=4  unique节点数分布 {4: 8} 
+  81101202_shell           n=    13 cols=4  unique节点数分布 {3: 1, 4: 12} 
+  81101203_shell           n=    16 cols=4  unique节点数分布 {3: 1, 4: 15} 
+  81101204_shell           n=     8 cols=4  unique节点数分布 {4: 8} 
+  81101301_shell           n=    34 cols=4  unique节点数分布 {3: 11, 4: 23} 
+  81101302_shell           n=    51 cols=4  unique节点数分布 {3: 10, 4: 41} 
+  81101303_shell           n=    26 cols=4  unique节点数分布 {3: 10, 4: 16} 
+  81101304_shell           n=    13 cols=4  unique节点数分布 {3: 4, 4: 9} 
+  81101305_shell           n=     8 cols=4  unique节点数分布 {4: 8} 
+  81101306_shell           n=     8 cols=4  unique节点数分布 {3: 1, 4: 7} 
+  81101307_shell           n=    46 cols=4  unique节点数分布 {3: 10, 4: 36} 
+  81101308_shell           n=    72 cols=4  unique节点数分布 {4: 72} 
+  81101101_shell           n=    20 cols=4  unique节点数分布 {4: 20} 
+  81101401_shell           n=    60 cols=4  unique节点数分布 {3: 3, 4: 57} 
+  81101001_shell           n=    18 cols=4  unique节点数分布 {4: 18} 
+  81101409_shell           n=    16 cols=4  unique节点数分布 {4: 16} 
+  81101408_shell           n=    10 cols=4  unique节点数分布 {4: 10} 
+  81101410_shell           n=    12 cols=4  unique节点数分布 {4: 12} 
+  81100701_shell           n=     6 cols=4  unique节点数分布 {4: 6} 
+  81100901_shell           n=    18 cols=4  unique节点数分布 {4: 18} 
+  81000001_solid           n= 8,819 cols=8  unique节点数分布 {4: 8819} 
+  81000000_solid           n=14,030 cols=8  unique节点数分布 {4: 14030} 
+  81000100_solid           n= 3,060 cols=8  unique节点数分布 {8: 3060} 
+  81000200_solid           n= 2,737 cols=8  unique节点数分布 {4: 2737} 
+  81000300_solid           n=   365 cols=8  unique节点数分布 {8: 365} 
+  81000601_solid           n=14,482 cols=8  unique节点数分布 {4: 14482} ★踝
+  81000600_solid           n= 6,651 cols=8  unique节点数分布 {4: 6651} ★踝
+  81000700_solid           n= 2,417 cols=8  unique节点数分布 {6: 2, 8: 2415} ★踝
+  81000800_solid           n=   762 cols=8  unique节点数分布 {4: 762} ★踝
+  81000801_solid           n= 2,216 cols=8  unique节点数分布 {4: 2216} ★踝
+  81000900_solid           n=   842 cols=8  unique节点数分布 {8: 842} ★踝
+  81001000_solid           n= 1,766 cols=8  unique节点数分布 {4: 1766} ★踝
+  81001100_solid           n=   394 cols=8  unique节点数分布 {8: 394} ★踝
+  81001200_solid           n= 3,323 cols=8  unique节点数分布 {4: 3323} ★踝
+  81001300_solid           n=   634 cols=8  unique节点数分布 {8: 634} ★踝
+  81001400_solid           n=   148 cols=8  unique节点数分布 {8: 148} ★踝
+  81001500_solid           n=   146 cols=8  unique节点数分布 {8: 146} ★踝
+  81001600_solid           n=    96 cols=8  unique节点数分布 {8: 96} 
+  81001700_solid           n=    60 cols=8  unique节点数分布 {8: 60} 
+  81001800_solid           n=   114 cols=8  unique节点数分布 {8: 114} 
+  81100100_solid           n=    30 cols=8  unique节点数分布 {6: 4, 8: 26} 
+  81100200_solid           n=    95 cols=8  unique节点数分布 {6: 8, 8: 87} 
+
+踝部单元合计 33,781
+
+=== 全局 ===
+  node_ids (22960,), node_xyz (22960, 3)
+  node_ids min/max = 81000001/83500128

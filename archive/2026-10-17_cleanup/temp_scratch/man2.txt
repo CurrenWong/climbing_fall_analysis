@@ -1,0 +1,108 @@
+===== lines 15830-15935 8.3.1.5刚体模态~8.3.2.3强制收敛 =====
+ 15830| element. In this case, it may be necessary to adjust the mesh in the area where the elements are
+ 15831| inverting.
+ 15832| 8.3.1.4 Shells are too thick
+ 15833| A shell is an element where it is assumed that one dimension is much smaller compared to the
+ 15834| other two directions. When the mesh is really fine, this assumption may no longer be valid and it
+ 15835| could happen that the shell becomes too thick. When a shell gets too thick it can create negative
+ 15836| Jacobiansintheout-of-planeintegrationpoints,especiallyinareasofhighcurvature. Toovercome
+ 15837| this, you may need to remesh the affected area, adjust the shell thickness or even replace the
+ 15838| shells with solid elements.
+ 15839| 8.3.1.5 Rigid body modes
+ 15840| A rigid body mode is a mode of deformation that does not alter the stress in the body. Uniform
+ 15841| translation or rotation of the entire model are two possible rigid body modes. In the presence of
+ 15842| a rigid body mode, the solution is not uniquely defined and FEBio will most likely throw negative
+ 15843| Jacobians. Thesolutionistoidentifytherigidbodymodeandtoeliminateitbyapplyingadditional
+ 15844| constraints to the model.
+ 15845| 8.3.2 Failure to converge
+ 15846| FEBio uses an iterative method to solve the nonlinear finite element equations. This means that
+ 15847| for each time step the solution for that step is obtained by a succession of iterations, where each
+ 15848| iteration brings the model (hopefully) closer to the solution for that step. An iterative method
+ 15849| 8.3. COMMON ISSUES 433
+ 15850| requires a convergence criterion to decide when to stop iterating and FEBio uses no less than
+ 15851| three criteria. (In biphasic and multiphasic problems additional convergence criteria are used for
+ 15852| the pressure and concentration degrees of freedom.) The convergence norm for each of these
+ 15853| criteria is defined by the user in the control section of the input file.
+ 15854| Sometimes it happens that FEBio cannot converge on a time step. We’ll take a look at some
+ 15855| of the most common causes in the next following sections. Also take a look at possible causes
+ 15856| of element inversions above. Sometimes, the issues that cause an element inversion may also
+ 15857| manifest themselves in convergence problems before the element actually inverts.
+ 15858| 8.3.2.1 No loads applied
+ 15859| Perhaps surprisingly, when no loads are applied, FEBio will often struggle to find a solution. The
+ 15860| reason (and solution!) is simple. Although no loads are applied, FEBio still performs many calcu-
+ 15861| lations and due to round-off errors, the result of these calculations may render the convergence
+ 15862| norms not exactly zero. FEBio then tries to apply the convergence criteria to these really small
+ 15863| norms and again due to round-off error will not be able to satisfy the convergence criteria.
+ 15864| FEBio can actually detect this situation. It looks at the residual norm and when this is smaller
+ 15865| thanauser-definedlimititassumesthatnoloadsarepresentandmovesontothenexttimestep.
+ 15866| However,thislimitisactuallyproblemdependentanditcanhappenthatforyourparticularproblem
+ 15867| the limit is set too small. In that case, the solution is to increase the limit. This can be done by
+ 15868| setting the min_residual parameter in the Control section of the input file. For example,
+ 15869| <min_residual>1e-15</min_residual>
+ 15870| If the residual norm now drops below this value, FEBio will consider the time step converged and
+ 15871| move on to the next time step.
+ 15872| 8.3.2.2 Convergence Tolerance Too Tight
+ 15873| In some cases, the default convergence tolerances are too tight and FEBio will not be able to
+ 15874| converge. In that case, adjusting the affected convergence norms is a possible solution. This is
+ 15875| done by editing the corresponding norms in the Control section of the input file. However, this
+ 15876| should only be done when no other cause can be identified for the convergence problems.
+ 15877| 8.3.2.3 Forcing convergence
+ 15878| It is possible to force a time step to converge. This can be done by interrupting the run (using
+ 15879| ctrl+c) and then enter the conv command at the FEBio prompt. This will force the time step to
+ 15880| converge and FEBio will continue with the next time step. This is not a recommended practice
+ 15881| as the solution may become unstable and in fact it is unlikely that FEBio will be able to converge
+ 15882| any of the following time steps. However, it can be useful in some scenarios. For example, if
+ 15883| there is no load applied in the initial time step and FEBio has trouble getting past this initial step
+ 15884| (see Section 8.3.2.1) or when you want to store the current state to the plot file without having to
+ 15885| reruntheproblemindebugmode(althoughtheplot commandordebug commandmightbebetter
+ 15886| alternatives).
+ 15887| 434 CHAPTER 8. TROUBLESHOOTING
+ 15888| 8.3.2.4 Problems due to Contact
+ 15889| Whencontactinterfacesaredefined,convergenceproblemscanoftenbetracedbacktoproblems
+ 15890| with the contact interfaces. See Section 8.5 for more details on how to properly use contact
+ 15891| interfaces in FEBio.
+ 15892| 8.4 Guidelines for Dynamic Analyses
+ 15893| Adynamicanalysisdiffersfromaquasi-staticanalysisinthatthemassinertiaofthemodelistaken
+ 15894| intoaccount. Thisaddsanexplicittime-dependencytothemodel(throughthenodalvelocitiesand
+ 15895| accelerations) and therefore the solver needs to integrate the equations of motion in time. There
+ 15896| are several integration schemes available in FEBio.
+ 15897| 8.4.1 Implicit Dynamics Solver
+ 15898| Theimplicitsolidsolverimplementsthegeneralizedalphaintegrationrule,whichcanbecontrolled
+ 15899| via several parameters. Although the default settings will usually suffice, there might be instances
+ 15900| where the parameters should be modified. (For example, see 8.4.2).
+ 15901| Themainparameterthatcontrolsthetimeintegrationofthesolidsolveristherhoiparameter.
+ 15902| The following rules apply:
+ 15903| 1. ρ = −1, All other integration parameters are set to one.
+ 15904| ∞
+ 15905| 2. 0 ≦ ρ ≦ 1, Newmark integration parameters are set to defaults, based on the value of ρ .
+ 15906| ∞ ∞
+ 15907| 3. Any other value for ρ , default/user-specified values for Newmark integration parameters
+ 15908| ∞
+ 15909| are not modified.
+ 15910| 8.4.2 False Transient Analysis
+ 15911| Quasi-staticmodelsmaysometimesexhibitinstabilitiesthatmaypreventthedefaultNewton-based
+ 15912| solver from converging. In such situations, a dynamic analysis can be tried instead, with the
+ 15913| anticipationthattheinertiaofthemodelprovidessufficientstabilitytosolvethemodelsuccessfully.
+ 15914| Sinceinthesesituations,onlythelong-termquasi-staticsolutionissought,itisimportanttodamp
+ 15915| the oscillations introduced by the dynamics of the system. Such damping can be accomplished
+ 15916| several ways.
+ 15917| The generalized-alpha time integration scheme of the implicit solver uses several parameters
+ 15918| thatcontroltheoverallenergy-conservationofthemodel. Bychoosingtheseparameterssuchthat
+ 15919| the system looses energy over time, artificial damping can be introduced.
+ 15920| The rhoi control parameter controls the amount of artificial damping. This parameters takes
+ 15921| a value between 0 (more numerical damping) and 1 (least numerical damping). Thus, by setting
+ 15922| this value to 0, the most numerical damping can be introduced.
+ 15923| Therhoicontrolparametersetstheactualalpha,beta,gammaparametersofthegeneralized-
+ 15924| alpha rule. Instead of using rhoi, users can set these actual parameters directly. To introduce the
+ 15925| most numerical damping, set the values as follows.
+ 15926| <rhoi>-2</rhoi>
+ 15927| <gamma>1.5</gamma>
+ 15928| <beta>1</beta>
+ 15929| 8.5. GUIDELINES FOR CONTACT PROBLEMS 435
+ 15930| Notethatrhoineedstobesetto-2sothatFEBiousestheactualalpha,beta,gammaparameters.
+ 15931| 8.5 Guidelines for Contact Problems
+ 15932| FEBiooffersmanycontactinterfaceswhichallowtheusertomodelcomplexboundaryinteractions.
+ 15933| However, this capability comes at a price and the use of contact interfaces may create several
+ 15934| problems in the solution process. It is hoped that the guidelines presented in this section may
+ 15935| prevent many of the most common problems with contact.
+

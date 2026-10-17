@@ -1,0 +1,190 @@
+E0 log = D:\Project\climbing_fall_analysis\temp\pyfebio_demo\a1a2\E0_base.febio.log
+含 NORMAL TERMINATION: True
+总求解块数=97
+  t=0.05         res CUR=7.611394e-01 REQ=0.000000e+00 | E CUR=2.767930e-05 REQ=3.487104e+01 | D CUR=1.082306e-03 REQ=1.161459e-03
+  t=0.1          res CUR=4.011629e-02 REQ=0.000000e+00 | E CUR=2.496823e-03 REQ=3.484238e+01 | D CUR=4.150082e-02 REQ=8.369762e-04
+  t=0.1          res CUR=2.013591e-01 REQ=0.000000e+00 | E CUR=3.475235e-04 REQ=3.484238e+01 | D CUR=4.135802e-03 REQ=8.323422e-04
+  t=0.1          res CUR=1.455548e-01 REQ=0.000000e+00 | E CUR=6.876287e-06 REQ=3.484238e+01 | D CUR=4.560065e-05 REQ=8.321364e-04
+  t=0.15         res CUR=7.117871e-02 REQ=0.000000e+00 | E CUR=3.371885e-05 REQ=3.484224e+01 | D CUR=1.654291e-03 REQ=8.423911e-04
+  t=0.15         res CUR=6.792201e-03 REQ=0.000000e+00 | E CUR=1.499152e-06 REQ=3.484224e+01 | D CUR=5.071199e-04 REQ=8.409637e-04
+  t=0.2          res CUR=3.780663e-01 REQ=0.000000e+00 | E CUR=6.980525e-04 REQ=3.484209e+01 | D CUR=1.381039e-02 REQ=8.447056e-04
+  t=0.2          res CUR=1.656309e-02 REQ=0.000000e+00 | E CUR=1.054870e-04 REQ=3.484209e+01 | D CUR=1.184959e-04 REQ=8.450393e-04
+  t=0.25         res CUR=2.962123e-01 REQ=0.000000e+00 | E CUR=1.310284e-02 REQ=3.484195e+01 | D CUR=5.968876e-03 REQ=8.690464e-04
+  t=0.25         res CUR=1.441239e-01 REQ=0.000000e+00 | E CUR=9.776913e-04 REQ=3.484195e+01 | D CUR=4.619048e-04 REQ=8.670415e-04
+  t=0.3          res CUR=5.946356e-01 REQ=0.000000e+00 | E CUR=3.700183e-04 REQ=3.484186e+01 | D CUR=3.384810e-03 REQ=8.723065e-04
+  t=0.3          res CUR=2.743317e-04 REQ=0.000000e+00 | E CUR=6.739831e-06 REQ=3.484186e+01 | D CUR=1.574677e-03 REQ=8.693875e-04
+  t=0.3          res CUR=2.507485e-03 REQ=0.000000e+00 | E CUR=9.485130e-08 REQ=3.484186e+01 | D CUR=6.547861e-05 REQ=8.688845e-04
+  t=0.35         res CUR=8.517131e-01 REQ=0.000000e+00 | E CUR=5.660187e-05 REQ=3.484166e+01 | D CUR=5.520554e-03 REQ=8.751127e-04
+  t=0.35         res CUR=2.661665e-01 REQ=0.000000e+00 | E CUR=2.419561e-05 REQ=3.484166e+01 | D CUR=5.584221e-03 REQ=8.699312e-04
+  t=0.35         res CUR=1.180719e-02 REQ=0.000000e+00 | E CUR=1.721713e-05 REQ=3.484166e+01 | D CUR=3.625450e-04 REQ=8.710422e-04
+  t=0.4          res CUR=7.082519e-01 REQ=0.000000e+00 | E CUR=7.407912e-03 REQ=3.484154e+01 | D CUR=2.032769e-02 REQ=8.608112e-04
+  t=0.4          res CUR=2.161492e-02 REQ=0.000000e+00 | E CUR=5.117912e-05 REQ=3.484154e+01 | D CUR=4.076617e-04 REQ=8.624561e-04
+  t=0.45         res CUR=2.152921e-01 REQ=0.000000e+00 | E CUR=4.962290e-03 REQ=3.484143e+01 | D CUR=4.546095e-04 REQ=8.741022e-04
+  t=0.5          res CUR=8.177766e-01 REQ=0.000000e+00 | E CUR=1.767365e-03 REQ=3.484137e+01 | D CUR=1.984088e-02 REQ=8.669815e-04
+  t=0.5          res CUR=2.757828e-02 REQ=0.000000e+00 | E CUR=4.947790e-05 REQ=3.484137e+01 | D CUR=2.901064e-04 REQ=8.683682e-04
+  t=0.55         res CUR=7.476266e-01 REQ=0.000000e+00 | E CUR=2.519876e-03 REQ=3.484119e+01 | D CUR=1.709176e-02 REQ=8.716625e-04
+  t=0.55         res CUR=2.162278e-02 REQ=0.000000e+00 | E CUR=1.003886e-05 REQ=3.484119e+01 | D CUR=3.546929e-04 REQ=8.731931e-04
+  t=0.6          res CUR=8.589208e-01 REQ=0.000000e+00 | E CUR=2.394482e-03 REQ=3.484110e+01 | D CUR=2.480812e-02 REQ=8.744893e-04
+  t=0.6          res CUR=3.103449e-02 REQ=0.000000e+00 | E CUR=1.197170e-05 REQ=3.484110e+01 | D CUR=4.871264e-04 REQ=8.761978e-04
+  t=0.65         res CUR=7.268447e-01 REQ=0.000000e+00 | E CUR=4.780594e-03 REQ=3.484102e+01 | D CUR=2.374366e-02 REQ=8.803466e-04
+  t=0.65         res CUR=5.759131e-01 REQ=0.000000e+00 | E CUR=4.379725e-04 REQ=3.484102e+01 | D CUR=3.479805e-06 REQ=8.804175e-04
+  t=0.7          res CUR=4.566502e-01 REQ=0.000000e+00 | E CUR=1.196018e-05 REQ=3.484095e+01 | D CUR=8.954366e-03 REQ=8.848635e-04
+  t=0.7          res CUR=3.291624e-02 REQ=0.000000e+00 | E CUR=1.823152e-04 REQ=3.484095e+01 | D CUR=1.306290e-04 REQ=8.856344e-04
+  t=0.75         res CUR=6.595303e-01 REQ=0.000000e+00 | E CUR=1.816816e-03 REQ=3.484088e+01 | D CUR=7.305472e-03 REQ=9.170489e-04
+  t=0.75         res CUR=6.404621e-01 REQ=0.000000e+00 | E CUR=6.321684e-05 REQ=3.484088e+01 | D CUR=5.945136e-03 REQ=9.124008e-04
+  t=0.75         res CUR=2.650995e-01 REQ=0.000000e+00 | E CUR=4.194151e-05 REQ=3.484088e+01 | D CUR=2.137248e-03 REQ=9.153470e-04
+  t=0.75         res CUR=4.094709e-03 REQ=0.000000e+00 | E CUR=7.479051e-08 REQ=3.484088e+01 | D CUR=7.738603e-04 REQ=9.135289e-04
+  t=0.8          res CUR=3.636255e-01 REQ=0.000000e+00 | E CUR=2.241735e-03 REQ=3.484081e+01 | D CUR=1.167037e-02 REQ=8.905568e-04
+  t=0.8          res CUR=1.062993e-02 REQ=0.000000e+00 | E CUR=1.037776e-05 REQ=3.484081e+01 | D CUR=5.690845e-05 REQ=8.914201e-04
+  t=0.85         res CUR=1.338798e-01 REQ=0.000000e+00 | E CUR=2.048954e-05 REQ=3.484075e+01 | D CUR=1.716168e-03 REQ=8.932666e-04
+  t=0.85         res CUR=1.739221e-01 REQ=0.000000e+00 | E CUR=1.990114e-05 REQ=3.484075e+01 | D CUR=2.183232e-03 REQ=8.901809e-04
+  t=0.85         res CUR=4.848846e-03 REQ=0.000000e+00 | E CUR=3.781107e-08 REQ=3.484075e+01 | D CUR=1.257475e-04 REQ=8.908290e-04
+  t=0.9          res CUR=1.950400e-01 REQ=0.000000e+00 | E CUR=3.229776e-05 REQ=3.484069e+01 | D CUR=2.432546e-03 REQ=9.020830e-04
+  t=0.9          res CUR=1.438424e-01 REQ=0.000000e+00 | E CUR=1.813410e-05 REQ=3.484069e+01 | D CUR=2.157810e-03 REQ=8.988739e-04
+  t=0.9          res CUR=3.897589e-03 REQ=0.000000e+00 | E CUR=8.769441e-08 REQ=3.484069e+01 | D CUR=9.600769e-05 REQ=8.994977e-04
+  t=0.95         res CUR=2.525038e-01 REQ=0.000000e+00 | E CUR=4.375347e-05 REQ=3.484063e+01 | D CUR=2.786040e-03 REQ=8.982973e-04
+  t=0.95         res CUR=5.299189e-02 REQ=0.000000e+00 | E CUR=8.193234e-06 REQ=3.484063e+01 | D CUR=1.749801e-03 REQ=8.953121e-04
+  t=0.95         res CUR=5.577455e-03 REQ=0.000000e+00 | E CUR=6.260003e-08 REQ=3.484063e+01 | D CUR=3.191785e-06 REQ=8.953775e-04
+  t=1            res CUR=6.998646e-01 REQ=0.000000e+00 | E CUR=1.496165e-03 REQ=3.484058e+01 | D CUR=1.745155e-02 REQ=8.976867e-04
+  t=1            res CUR=6.388507e-02 REQ=0.000000e+00 | E CUR=1.598990e-04 REQ=3.484058e+01 | D CUR=4.217150e-04 REQ=8.986282e-04
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 5
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 5
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 5
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 7
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 6
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 7
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 6
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 6
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 6
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    number of iterations   : 4
+    Total number of equilibrium iterations ............ : 97
+    Average number of equilibrium iterations .......... : 4.85
+    Avg iterations per solve ............ : 1
+    N O R M A L   T E R M I N A T I O N

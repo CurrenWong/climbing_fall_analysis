@@ -1,0 +1,1018 @@
+===========================================================================
+         ________    _________   _______       __     _________            
+        |        |\ |        |\ |       \\    |  |\  /         \\          
+        |    ____|| |    ____|| |    __  ||   |__|| |    ___    ||         
+        |   |\___\| |   |\___\| |   |\_| ||    \_\| |   //  \   ||         
+        |   ||__    |   ||__    |   ||_| ||   |  |\ |  ||    |  ||         
+        |       |\  |       |\  |         \\  |  || |  ||    |  ||         
+        |    ___||  |    ___||  |    ___   || |  || |  ||    |  ||         
+        |   |\__\|  |   |\__\|  |   |\__|  || |  || |  ||    |  ||         
+        |   ||      |   ||___   |   ||__|  || |  || |   \\__/   ||         
+        |   ||      |        |\ |          || |  || |           ||         
+        |___||      |________|| |_________//  |__||  \_________//          
+                                                                           
+      F I N I T E   E L E M E N T S   F O R   B I O M E C H A N I C S      
+                                                                           
+  version 4.13.0
+  FEBio is a registered trademark.                                         
+  copyright (c) 2006-2026 - All rights reserved                            
+                                                                           
+===========================================================================
+
+
+
+
+
+ FILES USED
+===========================================================================
+	Input file : spring_min_200.0.feb
+	Plot file  : spring_min_200.0.xplt
+	Log file   : log_springtest.txt
+
+
+ MESH INFO
+===========================================================================
+	Number of materials ............................ : 2
+	Number of domains .............................. : 2
+	Number of nodes ................................ : 9
+	Number of solid elements ....................... : 1
+
+
+ MODULE
+===========================================================================
+	Module type ....................................... : solid
+
+
+ CONTROL DATA
+===========================================================================
+	analysis .......................................... : STATIC (0)
+	time_steps ........................................ : 1
+	step_size ......................................... : 1
+	plot_zero_state ................................... : no (0)
+	plot_range ........................................ : 0,-1
+	plot_level ........................................ : PLOT_MAJOR_ITRS (1)
+	output_level ...................................... : OUTPUT_MAJOR_ITRS (1)
+	plot_stride ....................................... : 1
+	output_stride ..................................... : 1
+	adaptor_re_solve .................................. : yes (1)
+	Auto time stepper activated ....................... : yes
+	  max_retries ..................................... : 10
+	  opt_iter ........................................ : 10
+	  dtmin ........................................... : 0.0001
+	  dtmax ........................................... : 0.05
+	  aggressiveness .................................. : 0
+	  cutback ......................................... : 0.5
+	  dtforce ......................................... : no (0)
+ SOLVER PARAMETERS
+===========================================================================
+	symmetric_stiffness ............................... : symmetric (1)
+	equation_scheme ................................... : staggered (0)
+	equation_order .................................... : default (0)
+	optimize_bw ....................................... : no (0)
+	lstol ............................................. : 0.9
+	lsmin ............................................. : 0.01
+	lsiter ............................................ : 5
+	ls_check_jacobians ................................ : no (0)
+	max_refs .......................................... : 50
+	check_zero_diagonal ............................... : no (0)
+	zero_diagonal_tol ................................. : 0
+	force_partition ................................... : 0
+	reform_each_time_step ............................. : yes (1)
+	reform_augment .................................... : no (0)
+	diverge_reform .................................... : yes (1)
+	min_residual ...................................... : 1e-20
+	max_residual ...................................... : 0
+	dtol .............................................. : 0.01
+	etol .............................................. : 0.001
+	rtol .............................................. : 0
+	rhoi .............................................. : -2
+	alpha ............................................. : 1
+	beta .............................................. : 0.25
+	gamma ............................................. : 0.5
+	logSolve .......................................... : no (0)
+	arc_length ........................................ : 0
+	arc_length_scale .................................. : 0
+
+
+
+
+
+
+ MATERIAL DATA
+===========================================================================
+  1 - m1 (type: isotropic elastic)
+	density ........................................... : 1e-09
+	E ................................................. : 1000
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  2 - unknown (type: linear spring)
+	E ................................................. : 200
+
+
+ BOUNDARY CONDITION DATA
+===========================================================================
+  1 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : yes (1)
+---------------------------------------------------------------------------
+  2 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : yes (1)
+---------------------------------------------------------------------------
+  3 -  Type: prescribed displacement
+	dof ............................................... : 2
+	value ............................................. : -0.1
+	relative .......................................... : no (0)
+
+
+ LOAD CONTROLLER DATA
+===========================================================================
+load controller   1 - lc1 (type: loadcurve)
+	interpolate ....................................... : LINEAR (0)
+	extend ............................................ : CONSTANT (0)
+	points ............................................ : (can't display value)
+
+
+ OUTPUT DATA
+===========================================================================
+ LINEAR SOLVER DATA
+===========================================================================
+	Default linear solver ............................. : pardiso
+
+
+Data Record #1
+===========================================================================
+Step = 0
+Time = 0
+Data = reac
+File = reac_springtest.txt
+
+ *************************************************************************
+ * Selecting linear solver pardiso                                       *
+ *************************************************************************
+
+AUTO STEPPER: decreasing time step, dt = 0.05
+
+
+===== beginning time step 1 : 0.05 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12
+	Nr of nonzeroes in stiffness matrix ....... : 78
+ 1
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.160503e+00    4.684039e-05    0.000000e+00 
+	   energy              6.181319e-03    2.035935e-05    6.181319e-06 
+	   displacement        9.183673e-06    9.183673e-06    9.183673e-10 
+ 2
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.160503e+00    9.862912e-11    0.000000e+00 
+	   energy              6.181319e-03    7.930832e-12    6.181319e-06 
+	   displacement        9.183673e-06    1.804569e-10    9.123588e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.05
+
+
+Data Record #1
+===========================================================================
+Step = 1
+Time = 0.05
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 2 : 0.1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.134575e+00    4.649677e-05    0.000000e+00 
+	   energy              6.121667e-03    2.014770e-05    6.121667e-06 
+	   displacement        9.064031e-06    9.064031e-06    9.064031e-10 
+ 2
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.134575e+00    9.429988e-11    0.000000e+00 
+	   energy              6.121667e-03    1.516655e-12    6.121667e-06 
+	   displacement        9.064031e-06    1.768938e-10    9.005065e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.1
+
+
+Data Record #1
+===========================================================================
+Step = 2
+Time = 0.1
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 3 : 0.15 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.108525e+00    4.616968e-05    0.000000e+00 
+	   energy              6.062422e-03    1.994116e-05    6.062422e-06 
+	   displacement        8.946599e-06    8.946599e-06    8.946599e-10 
+ 2
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.108525e+00    9.053906e-11    0.000000e+00 
+	   energy              6.062422e-03    4.630795e-12    6.062422e-06 
+	   displacement        8.946599e-06    1.736232e-10    8.888719e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.15
+
+
+Data Record #1
+===========================================================================
+Step = 3
+Time = 0.15
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 4 : 0.2 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.082360e+00    4.585841e-05    0.000000e+00 
+	   energy              6.003584e-03    1.973948e-05    6.003584e-06 
+	   displacement        8.831325e-06    8.831325e-06    8.831325e-10 
+ 2
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.082360e+00    8.732737e-11    0.000000e+00 
+	   energy              6.003584e-03    1.054834e-11    6.003584e-06 
+	   displacement        8.831325e-06    1.706387e-10    8.774503e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.2
+
+
+Data Record #1
+===========================================================================
+Step = 4
+Time = 0.2
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 5 : 0.25 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.056081e+00    4.556211e-05    0.000000e+00 
+	   energy              5.945141e-03    1.954236e-05    5.945141e-06 
+	   displacement        8.718154e-06    8.718154e-06    8.718154e-10 
+ 2
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.056081e+00    8.463210e-11    0.000000e+00 
+	   energy              5.945141e-03    1.626216e-11    5.945141e-06 
+	   displacement        8.718154e-06    1.679239e-10    8.662361e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.25
+
+
+Data Record #1
+===========================================================================
+Step = 5
+Time = 0.25
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 6 : 0.3 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.029690e+00    4.527997e-05    0.000000e+00 
+	   energy              5.887086e-03    1.934954e-05    5.887086e-06 
+	   displacement        8.607032e-06    8.607032e-06    8.607032e-10 
+ 2
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.029690e+00    8.242428e-11    0.000000e+00 
+	   energy              5.887086e-03    2.179649e-11    5.887086e-06 
+	   displacement        8.607032e-06    1.654643e-10    8.552245e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.3
+
+
+Data Record #1
+===========================================================================
+Step = 6
+Time = 0.3
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 7 : 0.35 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.003187e+00    4.501126e-05    0.000000e+00 
+	   energy              5.829409e-03    1.916079e-05    5.829409e-06 
+	   displacement        8.497912e-06    8.497912e-06    8.497912e-10 
+ 2
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.003187e+00    8.067840e-11    0.000000e+00 
+	   energy              5.829409e-03    2.717376e-11    5.829409e-06 
+	   displacement        8.497912e-06    1.632466e-10    8.444108e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.35
+
+
+Data Record #1
+===========================================================================
+Step = 7
+Time = 0.35
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 8 : 0.4 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.976574e+00    4.475526e-05    0.000000e+00 
+	   energy              5.772104e-03    1.897588e-05    5.772104e-06 
+	   displacement        8.390750e-06    8.390750e-06    8.390750e-10 
+ 2
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.976574e+00    7.937210e-11    0.000000e+00 
+	   energy              5.772104e-03    3.241488e-11    5.772104e-06 
+	   displacement        8.390750e-06    1.612590e-10    8.337909e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.4
+
+
+Data Record #1
+===========================================================================
+Step = 8
+Time = 0.4
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 9 : 0.45 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.949853e+00    4.451134e-05    0.000000e+00 
+	   energy              5.715163e-03    1.879458e-05    5.715163e-06 
+	   displacement        8.285507e-06    8.285507e-06    8.285507e-10 
+ 2
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.949853e+00    7.848594e-11    0.000000e+00 
+	   energy              5.715163e-03    3.753931e-11    5.715163e-06 
+	   displacement        8.285507e-06    1.594911e-10    8.233611e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.45
+
+
+Data Record #1
+===========================================================================
+Step = 9
+Time = 0.45
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 10 : 0.5 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.923025e+00    4.427886e-05    0.000000e+00 
+	   energy              5.658580e-03    1.861669e-05    5.658580e-06 
+	   displacement        8.182149e-06    8.182149e-06    8.182149e-10 
+ 2
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.923025e+00    7.800314e-11    0.000000e+00 
+	   energy              5.658580e-03    4.256528e-11    5.658580e-06 
+	   displacement        8.182149e-06    1.579334e-10    8.131182e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.5
+
+
+Data Record #1
+===========================================================================
+Step = 10
+Time = 0.5
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 11 : 0.55 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.896091e+00    4.405726e-05    0.000000e+00 
+	   energy              5.602349e-03    1.844203e-05    5.602349e-06 
+	   displacement        8.080645e-06    8.080645e-06    8.080645e-10 
+ 2
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.896091e+00    7.790941e-11    0.000000e+00 
+	   energy              5.602349e-03    4.750989e-11    5.602349e-06 
+	   displacement        8.080645e-06    1.565778e-10    8.030593e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.55
+
+
+Data Record #1
+===========================================================================
+Step = 11
+Time = 0.55
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 12 : 0.6 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.869055e+00    4.384600e-05    0.000000e+00 
+	   energy              5.546465e-03    1.827042e-05    5.546465e-06 
+	   displacement        7.980966e-06    7.980966e-06    7.980966e-10 
+ 2
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.869055e+00    7.819279e-11    0.000000e+00 
+	   energy              5.546465e-03    5.238926e-11    5.546465e-06 
+	   displacement        7.980966e-06    1.554171e-10    7.931817e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.6
+
+
+Data Record #1
+===========================================================================
+Step = 12
+Time = 0.6
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 13 : 0.65 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.841918e+00    4.364458e-05    0.000000e+00 
+	   energy              5.490921e-03    1.810167e-05    5.490921e-06 
+	   displacement        7.883091e-06    7.883091e-06    7.883091e-10 
+ 2
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.841918e+00    7.884347e-11    0.000000e+00 
+	   energy              5.490921e-03    5.721864e-11    5.490921e-06 
+	   displacement        7.883091e-06    1.544449e-10    7.834833e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.65
+
+
+Data Record #1
+===========================================================================
+Step = 13
+Time = 0.65
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 14 : 0.7 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.814681e+00    4.345253e-05    0.000000e+00 
+	   energy              5.435715e-03    1.793564e-05    5.435715e-06 
+	   displacement        7.786998e-06    7.786998e-06    7.786998e-10 
+ 2
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.814681e+00    7.985366e-11    0.000000e+00 
+	   energy              5.435715e-03    6.201252e-11    5.435715e-06 
+	   displacement        7.786998e-06    1.536560e-10    7.739622e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.7
+
+
+Data Record #1
+===========================================================================
+Step = 14
+Time = 0.7
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 15 : 0.75 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.787347e+00    4.326940e-05    0.000000e+00 
+	   energy              5.380841e-03    1.777217e-05    5.380841e-06 
+	   displacement        7.692669e-06    7.692669e-06    7.692669e-10 
+ 2
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.787347e+00    8.121753e-11    0.000000e+00 
+	   energy              5.380841e-03    6.678472e-11    5.380841e-06 
+	   displacement        7.692669e-06    1.530460e-10    7.646169e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.75
+
+
+Data Record #1
+===========================================================================
+Step = 15
+Time = 0.75
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 16 : 0.8 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.759919e+00    4.309479e-05    0.000000e+00 
+	   energy              5.326295e-03    1.761112e-05    5.326295e-06 
+	   displacement        7.600092e-06    7.600092e-06    7.600092e-10 
+ 2
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.759919e+00    8.293103e-11    0.000000e+00 
+	   energy              5.326295e-03    7.154850e-11    5.326295e-06 
+	   displacement        7.600092e-06    1.526111e-10    7.554461e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.8
+
+
+Data Record #1
+===========================================================================
+Step = 16
+Time = 0.8
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 17 : 0.85 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.732397e+00    4.292830e-05    0.000000e+00 
+	   energy              5.272076e-03    1.745235e-05    5.272076e-06 
+	   displacement        7.509256e-06    7.509256e-06    7.509256e-10 
+ 2
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.732397e+00    8.499192e-11    0.000000e+00 
+	   energy              5.272076e-03    7.631660e-11    5.272076e-06 
+	   displacement        7.509256e-06    1.523486e-10    7.464490e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.85
+
+
+Data Record #1
+===========================================================================
+Step = 17
+Time = 0.85
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 18 : 0.9 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.704785e+00    4.276959e-05    0.000000e+00 
+	   energy              5.218178e-03    1.729573e-05    5.218178e-06 
+	   displacement        7.420153e-06    7.420153e-06    7.420153e-10 
+ 2
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.704785e+00    8.739960e-11    0.000000e+00 
+	   energy              5.218178e-03    8.110137e-11    5.218178e-06 
+	   displacement        7.420153e-06    1.522564e-10    7.376248e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.9
+
+
+Data Record #1
+===========================================================================
+Step = 18
+Time = 0.9
+Data = reac
+File = reac_springtest.txt
+
+===== beginning time step 19 : 0.95 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.677086e+00    4.261830e-05    0.000000e+00 
+	   energy              5.164600e-03    1.714115e-05    5.164600e-06 
+	   displacement        7.332778e-06    7.332778e-06    7.332778e-10 
+ 2
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.677086e+00    9.015514e-11    0.000000e+00 
+	   energy              5.164600e-03    8.591484e-11    5.164600e-06 
+	   displacement        7.332778e-06    1.523331e-10    7.289734e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 0.95
+
+
+Data Record #1
+===========================================================================
+Step = 19
+Time = 0.95
+Data = reac
+File = reac_springtest.txt
+MUST POINT CONTROLLER: adjusting time step. dt = 0.05
+
+
+===== beginning time step 20 : 1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+ 1
+ Nonlinear solution status: time= 1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.649300e+00    4.247413e-05    0.000000e+00 
+	   energy              5.111339e-03    1.698848e-05    5.111339e-06 
+	   displacement        7.247130e-06    7.247130e-06    7.247130e-10 
+ 2
+ Nonlinear solution status: time= 1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.649300e+00    9.326124e-11    0.000000e+00 
+	   energy              5.111339e-03    9.076872e-11    5.111339e-06 
+	   displacement        7.247130e-06    1.525781e-10    7.204946e-10 
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 1
+
+------- converged at time : 1
+
+
+Data Record #1
+===========================================================================
+Step = 20
+Time = 1
+Data = reac
+File = reac_springtest.txt
+
+
+ N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+
+	Number of time steps completed .................... : 20
+
+	Total number of equilibrium iterations ............ : 40
+
+	Average number of equilibrium iterations .......... : 2
+
+	Total number of right hand evaluations ............ : 60
+
+	Total number of stiffness reformations ............ : 20
+
+
+ L I N E A R   S O L V E R   S T A T S
+
+	Total calls to linear solver ........ : 40
+
+	Avg iterations per solve ............ : 1
+
+	Time in linear solver: 0:00:00
+
+ Peak memory  : 19.4 MB
+
+ Elapsed time : 0:00:00
+
+ T I M I N G   I N F O R M A T I O N
+
+	Input time ...................... : 0:00:00 (0.0024833 sec)
+
+	Initialization time ............. : 0:00:00 (0.000652 sec)
+
+	Solve time ...................... : 0:00:00 (0.158067 sec)
+
+	   IO-time (plot, dmp, data) .... : 0:00:00 (0.0074073 sec)
+
+	   serialization ................ : 0:00:00 (0.0002964 sec)
+
+	   reforming stiffness .......... : 0:00:00 (0.0001091 sec)
+
+	   evaluating stiffness ......... : 0:00:00 (0.0008929 sec)
+
+	   evaluating residual .......... : 0:00:00 (0.0014006 sec)
+
+	   model update ................. : 0:00:00 (0.0045376 sec)
+
+	   QN updates ................... : 0:00:00 (1.15e-05 sec)
+
+	   time in linear solver ........ : 0:00:00 (0.139344 sec)
+
+	Total elapsed time .............. : 0:00:00 (0.168081 sec)
+
+
+ N O R M A L   T E R M I N A T I O N
+

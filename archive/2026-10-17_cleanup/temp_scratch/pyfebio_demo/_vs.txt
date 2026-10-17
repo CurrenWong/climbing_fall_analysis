@@ -1,0 +1,27 @@
+=== 材料 ===
+  id=1   mat_tibia_cort         E=7300.0     ν=0.3
+  id=2   mat_fibula_cort        E=7300.0     ν=0.3
+  id=3   mat_tarsal_cort        E=7300.0     ν=0.3
+  id=4   mat_tarsal_cort_shell  E=7300.0     ν=0.3
+  id=5   mat_long_spon          E=7300.0     ν=0.3
+  id=6   mat_tarsal_spon        E=7300.0     ν=0.3
+  id=7   mat_marrow             E=7300.0     ν=0.3
+  id=8   mat_cartilage          E=10.0       ν=0.4
+  id=9   mat_ligament           E=260.0      ν=0.4
+  id=10  mat_lig_PTFL_talofibular_posterior E=260.0      ν=0.4
+  id=11  mat_lig_CFL_calcaneofibular E=260.0      ν=0.4
+  id=12  mat_lig_ATFL_talofibular_anterior E=260.0      ν=0.4
+  id=13  mat_lig_PTCL_talocalcaneal_posterior E=260.0      ν=0.4
+  id=14  mat_lig_SYND_tibiofibular E=260.0      ν=0.4
+  id=15  mat_lig_MD1_tibiotalar_post E=260.0      ν=0.4
+  id=16  mat_lig_MD2_tibiocalcaneal E=260.0      ν=0.4
+  id=17  mat_lig_MD3_tibionavicular E=260.0      ν=0.4
+  id=18  mat_lig_MD4_tibiotalar_ant E=260.0      ν=0.4
+  id=19  mat_lig_SPRING_calcaneonavicular E=260.0      ν=0.4
+
+域数 0
+
+====================================================================================================
+逐域：h5 存储应力 vs 从位移重构（本构 σ = λtr(ε)I + 2μ ε）
+====================================================================================================
+域                                   单元    存储 vm_max    重构 vm_max      比值      相关系数

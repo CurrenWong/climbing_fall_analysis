@@ -1,0 +1,14 @@
+部件                 唯一节点数直方图                                   hex8  minDetJ<0
+------------------------------------------------------------------------------------------------
+tibia_cort         {6: 2, 8: 2415}                            2415          0
+tibia_spon         {4: 6651}                                     0          0
+tibia_marrow       {4: 14482}                                    0          0
+fibula_cort        {8: 842}                                    842          0
+fibula_spon        {4: 762}                                      0          0
+talus_cort         {8: 394}                                    394          0
+talus_spon         {4: 1766}                                     0          0
+calcaneus_cort     {8: 634}                                    634          0
+calcaneus_spon     {4: 3323}                                     0          0
+navicular_spon     {8: 148}                                    148          0
+
+=== 负 detJ 的 hex8 明细 ===

@@ -1,0 +1,224 @@
+① fixed 族（正对照：k→∞ 的应有极限）
+
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 19.796875 s
+[info]  - real time elapsed: 20.843686 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5226
+[info]  - number of steps taken / attempted: 1045 / 1045
+[info]  - number of projections: 0
+[info]  - number of iterations: 1045
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=7.2252 MPa（F=18029.4 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'kind': 'fixed', 'n_plantar_nodes': 175}
+  h=1    → 129.529 MPa
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 21.343750 s
+[info]  - real time elapsed: 22.906739 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5151
+[info]  - number of steps taken / attempted: 1030 / 1030
+[info]  - number of projections: 0
+[info]  - number of iterations: 1030
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.1064 MPa（F=22723.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'kind': 'fixed', 'n_plantar_nodes': 175}
+  h=2    → 161.402 MPa
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 22.562500 s
+[info]  - real time elapsed: 23.920816 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5341
+[info]  - number of steps taken / attempted: 1068 / 1068
+[info]  - number of projections: 0
+[info]  - number of iterations: 1068
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.7327 MPa（F=24286.3 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'kind': 'fixed', 'n_plantar_nodes': 175}
+  h=3    → 172.167 MPa
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 24.093750 s
+[info]  - real time elapsed: 25.442030 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5716
+[info]  - number of steps taken / attempted: 1143 / 1143
+[info]  - number of projections: 0
+[info]  - number of iterations: 1143
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'kind': 'fixed', 'n_plantar_nodes': 175}
+  h=5    → 201.476 MPa
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 24.984375 s
+[info]  - real time elapsed: 26.327417 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 6026
+[info]  - number of steps taken / attempted: 1205 / 1205
+[info]  - number of projections: 0
+[info]  - number of iterations: 1205
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=14.1231 MPa（F=35241.8 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'kind': 'fixed', 'n_plantar_nodes': 175}
+  h=8    → 247.524 MPa
+
+② spring 族（同结构：节点弹簧到固定锚）h=5
+
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 10.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=10         → 168.582 MPa
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 100.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=100        → 163.543 MPa
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 1000.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=1000       → 153.772 MPa
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 3000.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=3000       → 171.933 MPa
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 10000.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=10000      → 187.121 MPa
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 100000.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=100000     → 198.983 MPa
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 1000000.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=1e+06      → 201.191 MPa
+
+③ 对照表（h=5）
+  contact+hold k=1e6 → 201.190
+  fixed              → 201.476
+
+-> D:\Project\climbing_fall_analysis\results\opensim_fe\v1_ucurve_controls_scan.json

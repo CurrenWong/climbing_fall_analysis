@@ -1,0 +1,26 @@
+验证原生 flip_* 与文本反转等价（h=5 m, hold_k=100, gap=+0.5）
+
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=0, flip_secondary=0, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+    [orig] deck flip 标签: [('primary', '0'), ('secondary', '0')]
+  orig     max=151.896519 中位=65.185651
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=0, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+    [fp1] deck flip 标签: [('primary', '1'), ('secondary', '0')]
+  fp1      max=151.896519 中位=65.185651
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=0, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+    [fs1] deck flip 标签: [('primary', '0'), ('secondary', '1')]
+  fs1      max=151.896519 中位=65.185651
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+    [fp1fs1] deck flip 标签: [('primary', '1'), ('secondary', '1')]
+  fp1fs1   max=152.491512 中位=65.890842
+
+  orig  == 151.896519（文本原绕向）？ True
+  fp1fs1 == 152.491512（文本两反转）？ True
+  fp1fs1 与 orig 逐位相同？ False   （应为 False ⇒ 接触生效）

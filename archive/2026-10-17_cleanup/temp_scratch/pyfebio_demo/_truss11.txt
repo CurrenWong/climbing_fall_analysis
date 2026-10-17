@@ -1,0 +1,15 @@
+
+=== L10_E260 rc=1 FAIL ===
+   react.txt: 不存在
+   disp.txt: 不存在
+    *                                ERROR                                  *
+
+=== L20_E260 rc=1 FAIL ===
+   react.txt: 不存在
+   disp.txt: 不存在
+    *                                ERROR                                  *
+
+=== L10_E520 rc=1 FAIL ===
+   react.txt: 不存在
+   disp.txt: 不存在
+    *                                ERROR                                  *

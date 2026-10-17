@@ -1,0 +1,21 @@
+✓ 日记已追加 +1309 字符
+
+========================================================================
+最终校验（口径：解码后字节数）
+========================================================================
+  MEMORY.md                                         10226 B ✅
+  memory\2026-10-06.md                               7709 B
+  references\ankle-fe-criteria.md                    6197 B
+  docs\踝FE可用模型使用说明.md                               15825 B
+  ANKLE_FIX_TODO.md                                 30516 B
+  .learnings\LEARNINGS.md                          195651 B
+  .learnings\ERRORS.md                              32688 B
+  scripts\ankle_fe\check_c2.py                      13108 B
+  scripts\ankle_fe\lig_strain.py                     7173 B
+  AST ✓ ×4
+  LEARNINGS.md: 91 条，重号 无 ✓
+  ERRORS.md: 20 条，重号 无 ✓
+  使用说明关键内容缺失：无 ✓
+  references 关键内容缺失：无 ✓
+
+结论： PASS ✅

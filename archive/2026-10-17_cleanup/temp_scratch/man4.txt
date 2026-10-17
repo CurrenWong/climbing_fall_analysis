@@ -1,0 +1,77 @@
+===== lines 15936-16010 8.5.1-8.5.3 接触指南 =====
+ 15936| Most of the contact algorithms implemented in FEBio offer two contact enforcement methods:
+ 15937| a penalty method and an augmented Lagrangian method. Since the strategies for these two
+ 15938| methods are slightly different, we will look at them separately. These algorithms are discussed in
+ 15939| much more detail in the FEBio Theory Manual.
+ 15940| 8.5.1 The penalty method
+ 15941| The penalty method enforces contact by “penalizing” (in an energy sense) any deviation from
+ 15942| the contact constraint. In other words, when the two contacting surfaces penetrate, a force is
+ 15943| generated proportional to the distance of penetration, which has the effect that the surfaces will
+ 15944| now repel each other. The strength of this repelling force is controlled by the user through the
+ 15945| penalty factor.
+ 15946| The obvious downside of this method is that some penetration is necessary to generate the
+ 15947| contact force. The larger the penalty factor, the smaller this penetration needs to be and thus
+ 15948| the better the contact constraint is enforced. However, choosing the penalty factor too large may
+ 15949| cause the problem to become unstable since the contact force (and corresponding stiffness) will
+ 15950| dominate the other forces in the model. Choosing a good penalty factor can thus be often difficult
+ 15951| and may require several attempts before getting it “right”. To help with choosing a penalty factor,
+ 15952| FEBio offers the auto_penalty option for many of its contact interfaces which will estimate a good
+ 15953| penalty factor based on element size and initial material stiffness. However, even then it may still
+ 15954| take a few tries before getting the penalty factor good enough.
+ 15955| 8.5.2 Augmented Lagrangian Method
+ 15956| In theory, in the presence of constraints, the corresponding Lagrange multipliers must be cal-
+ 15957| culated which, in the case of contact, correspond to the contact forces that enforce the contact
+ 15958| constraint exactly. Unfortunately, the exact evaluation of these Lagrange multipliers is numerically
+ 15959| very challenging and therefore in FEBio it was decided to evaluate these Lagrange multipliers us-
+ 15960| inganiterativemethod,namedtheAugmentedLagrangianmethod. Usingthismethod,FEBiowill
+ 15961| solve a time step several times (these iterations are termed augmentations), where each time the
+ 15962| approximate Lagrange multipliers are updated (or augmented).
+ 15963| The obvious drawback of this method is that now each time step has to be solved several
+ 15964| times. However,theadvantageofavoidingthenumericalproblemsofobtainingtheexactLagrange
+ 15965| multipliersandthefactthatinmostcontactproblemsverylittleextraworkisneededtosolvethese
+ 15966| augmentations,makesthismethodveryattractive. Inaddition,itoftengivesbetterenforcementof
+ 15967| the contact constraint compared to the penalty method.
+ 15968| So why not just use the augmented Lagrangian method? Well, often the penalty method will
+ 15969| give good results and since the penalty method is much faster, it is often the preferred choice of
+ 15970| many analysts.
+ 15971| 436 CHAPTER 8. TROUBLESHOOTING
+ 15972| In many cases, users are only interested in the final time step. For these users it may be
+ 15973| of interest that it is possible to use the augmented Lagrange method only in the final time step.
+ 15974| This can be done by defining a loadcurve for the tolerance contact parameter, which sets the
+ 15975| convergence tolerance for the augmentations. (Note that you still need to set the enforcement
+ 15976| method,i.e. thelaugonparameter,toAUGLAG(=1)). Then,definethecorrespondingloadcurveas
+ 15977| zeroeverywhereexceptforthefinaltimestep. FEBiowillnowonlyusetheaugmentedLagrangian
+ 15978| method in the final time step (and the penalty method all other steps).
+ 15979| 8.5.3 Initial Separation
+ 15980| FEBiooftenstruggleswithproblemsthathaveaninitialseparation. Thisisespeciallysowhenthe
+ 15981| problem is force-driven, meaning that the deformation of the model is driven by a force (opposed
+ 15982| to displacement-driven problems). In general, when the contact interface is necessary to define
+ 15983| a well-constrained problem it is best to avoid initial separation if possible. Another way around
+ 15984| this issue is to first use a displacement to bring the surfaces in contact and then replace the
+ 15985| displacement with a force.
+ 15986| 8.6 Cautionary Note for Steady-State Biphasic and Multiphasic Anal-
+ 15987| yses
+ 15988| Biphasic, biphasic-solute and multiphasic analyses are generally transient analyses, involving
+ 15989| mass transport (solvent and solutes) through a porous permeable domain. The default setting
+ 15990| for these analyses is the transient mode (see Section 3.2). When a steady-state analysis is re-
+ 15991| quested (<analysis type="steady-state"/>), the code simplifies the governing equations by setting
+ 15992| time derivatives of the solid displacement and solute concentrations to zero. It is important to un-
+ 15993| derstand that this simplification is only applicable to analyses where interface conditions between
+ 15994| sub-domains, and boundary conditions with the external environment, allow mass exchanges for
+ 15995| the solvent and all solutes. If a domain or sub-domain is completely sealed such that it prevents
+ 15996| solvent or solute exchanges, a steady-state analysis should not be used, as it would not capture
+ 15997| thesesealedconditionsandwouldleadtoerroneousresults. Forthosetypesofproblems,always
+ 15998| use a transient analysis to obtain the correct solution. In those cases, a steady-state response
+ 15999| may be obtained efficiently by temporarily increasing the transport properties (hydraulic perme-
+ 16000| ability and solute diffusivities) by orders of magnitude via load curves, and/or by increasing the
+ 16001| size of time steps.
+ 16002| 8.7 Guidelines for Multiphasic Analyses
+ 16003| 8.7.1 Initial State of Swelling
+ 16004| Under traction-free conditions, a multiphasic material is usually in a state of swelling due to the
+ 16005| osmotic pressure difference between the interstitial fluid and the external environment. This os-
+ 16006| motic pressure arises from the difference in interstitial versus external concentrations of cations
+ 16007| andanions,causedbythechargedsolidmatrixandtherequirementtosatisfyelectroneutrality. An
+ 16008| osmotic pressure difference arising from such electrostatic interactions is known as the Donnan
+ 16009| osmoticpressure. WhentheDonnanpressureisnon-zero,traction-freeconditionsdonotproduce
+ 16010| 8.7. GUIDELINES FOR MULTIPHASIC ANALYSES 437
+

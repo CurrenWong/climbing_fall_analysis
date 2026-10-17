@@ -1,0 +1,22 @@
+  [trunc] 截断到 60.0 mm 内：剔除 23,388 单元，剩 8,393 单元 / 3,588 节点
+  OK  tibia_cort             tet4   保留      6 剔除    0  det(J) min=2.2151e+00
+  OK  tibia_cort             hex8   保留    231 剔除    0  det(J) min=2.2084e+00
+  OK  tibia_spon             tet4   保留    605 剔除    0  det(J) min=2.8144e+01
+  OK  tibia_marrow           tet4   保留    518 剔除    0  det(J) min=5.3135e+01
+  OK  fibula_cort            hex8   保留    146 剔除    0  det(J) min=1.5097e+00
+  OK  fibula_spon            tet4   保留    264 剔除    0  det(J) min=2.3857e+01
+  OK  talus_cort             hex8   保留    394 剔除    0  det(J) min=8.6799e-01
+  OK  talus_spon             tet4   保留  1,766 剔除    0  det(J) min=2.3567e+01
+  OK  calcaneus_cort         hex8   保留    634 剔除    0  det(J) min=1.1119e+00
+  OK  calcaneus_spon         tet4   保留  3,323 剔除    0  det(J) min=1.7034e+01
+  OK  navicular_spon         hex8   保留    148 剔除    0  det(J) min=2.1132e+00
+  !!  tibiotalar_tibia       penta6 保留    142 剔除   12  det(J) min=1.8889e-01
+  !!  tibiotalar_talus       penta6 保留    174 剔除   30  det(J) min=2.3914e-03
+  翻转修正 1 个；仍无法修正而剔除 42 个
+  韧带壳退化剔除 0 个
+  外表面顶/底：胫骨顶 114 / 腓骨顶 33 / 跟骨底 147
+  [area自检] 胫骨顶：投影 555.5 / 真实 2148.3 mm² => 比 0.259 ✅
+  [area自检] 腓骨顶：投影 108.3 / 真实 745.7 mm² => 比 0.145 🚨
+  [area自检] 🚨 投影/真实 = 0.145 越界（应 0.2~1.0） ⇒ 面积不可信，禁止用于力控 traction！
+  顶面投影面积：胫骨 555.5 mm²，腓骨 108.3 mm² => 腓骨分担 16.3% 载荷
+  FEBio rc=1  用时 8.6s

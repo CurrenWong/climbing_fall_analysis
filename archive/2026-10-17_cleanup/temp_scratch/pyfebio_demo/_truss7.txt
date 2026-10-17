@@ -1,0 +1,39 @@
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\truss7_tb.py", line 14, in <module>
+    X.to_hdf5(str(W / "b_baseline.xplt"), str(W / "b_baseline.h5"))
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 869, in to_hdf5
+    parse_blocks(buffer[4:], f)
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 852, in parse_blocks
+    mesh_dicts.append(parse_mesh(child, mesh_cnt, f))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<p>", line 17, in parse_mesh
+KeyError: 'name'
+
+
+=== parse_state 里的 ['name'] 用法 ===
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\truss7_tb.py", line 14, in <module>
+    X.to_hdf5(str(W / "b_baseline.xplt"), str(W / "b_baseline.h5"))
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 869, in to_hdf5
+    parse_blocks(buffer[4:], f)
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 852, in parse_blocks
+    mesh_dicts.append(parse_mesh(child, mesh_cnt, f))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<p>", line 17, in parse_mesh
+KeyError: 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\truss7_tb.py", line 24, in <module>
+    s = textwrap.dedent(inspect.getsource(fn))
+                        ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\curre\.conda\envs\copaw\Lib\inspect.py", line 1285, in getsource
+    lines, lnum = getsourcelines(object)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\curre\.conda\envs\copaw\Lib\inspect.py", line 1267, in getsourcelines
+    lines, lnum = findsource(object)
+                  ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\curre\.conda\envs\copaw\Lib\inspect.py", line 1096, in findsource
+    raise OSError('could not get source code')
+OSError: could not get source code

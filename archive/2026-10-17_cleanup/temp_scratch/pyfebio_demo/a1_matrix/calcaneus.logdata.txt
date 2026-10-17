@@ -1,0 +1,1025 @@
+===========================================================================
+         ________    _________   _______       __     _________            
+        |        |\ |        |\ |       \\    |  |\  /         \\          
+        |    ____|| |    ____|| |    __  ||   |__|| |    ___    ||         
+        |   |\___\| |   |\___\| |   |\_| ||    \_\| |   //  \   ||         
+        |   ||__    |   ||__    |   ||_| ||   |  |\ |  ||    |  ||         
+        |       |\  |       |\  |         \\  |  || |  ||    |  ||         
+        |    ___||  |    ___||  |    ___   || |  || |  ||    |  ||         
+        |   |\__\|  |   |\__\|  |   |\__|  || |  || |  ||    |  ||         
+        |   ||      |   ||___   |   ||__|  || |  || |   \\__/   ||         
+        |   ||      |        |\ |          || |  || |           ||         
+        |___||      |________|| |_________//  |__||  \_________//          
+                                                                           
+      F I N I T E   E L E M E N T S   F O R   B I O M E C H A N I C S      
+                                                                           
+  version 4.13.0
+  FEBio is a registered trademark.                                         
+  copyright (c) 2006-2026 - All rights reserved                            
+                                                                           
+===========================================================================
+
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * 6 isolated vertices removed.                                          *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_tibia" has 9 invalid facets.          *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_talus" has 22 invalid facets.         *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_subtalar_calcaneus" has 106 invalid facets.      *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_tibia" has 9 invalid facets.          *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_talus" has 22 invalid facets.         *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_subtalar_calcaneus" has 106 invalid facets.      *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+
+
+
+ FILES USED
+===========================================================================
+	Input file : D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb
+	Plot file  : D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.xplt
+	Log file   : D:\Project\climbing_fall_analysis\temp\thums\febio_lig\log_WK.txt
+
+
+ MESH INFO
+===========================================================================
+	Number of materials ............................ : 19
+	Number of domains .............................. : 24
+	Number of nodes ................................ : 4523
+	Number of solid elements ....................... : 9064
+	Number of shell elements ....................... : 135
+
+
+ MODULE
+===========================================================================
+	Module type ....................................... : solid
+
+
+ CONTROL DATA
+===========================================================================
+	analysis .......................................... : STATIC (0)
+	time_steps ........................................ : 20
+	step_size ......................................... : 0.05
+	plot_zero_state ................................... : no (0)
+	plot_range ........................................ : 0,-1
+	plot_level ........................................ : PLOT_MAJOR_ITRS (1)
+	output_level ...................................... : OUTPUT_MAJOR_ITRS (1)
+	plot_stride ....................................... : 1
+	output_stride ..................................... : 1
+	adaptor_re_solve .................................. : yes (1)
+	Auto time stepper activated ....................... : yes
+	  max_retries ..................................... : 10
+	  opt_iter ........................................ : 10
+	  dtmin ........................................... : 0.0001
+	  dtmax ........................................... : 0.05
+	  aggressiveness .................................. : 0
+	  cutback ......................................... : 0.5
+	  dtforce ......................................... : no (0)
+ SOLVER PARAMETERS
+===========================================================================
+	symmetric_stiffness ............................... : non-symmetric (0)
+	equation_scheme ................................... : staggered (0)
+	equation_order .................................... : default (0)
+	optimize_bw ....................................... : no (0)
+	lstol ............................................. : 0.9
+	lsmin ............................................. : 0.01
+	lsiter ............................................ : 5
+	ls_check_jacobians ................................ : no (0)
+	max_refs .......................................... : 50
+	check_zero_diagonal ............................... : no (0)
+	zero_diagonal_tol ................................. : 0
+	force_partition ................................... : 0
+	reform_each_time_step ............................. : yes (1)
+	reform_augment .................................... : no (0)
+	diverge_reform .................................... : yes (1)
+	min_residual ...................................... : 1e-20
+	max_residual ...................................... : 0
+	dtol .............................................. : 0.01
+	etol .............................................. : 0.001
+	rtol .............................................. : 0
+	rhoi .............................................. : -2
+	alpha ............................................. : 1
+	beta .............................................. : 0.25
+	gamma ............................................. : 0.5
+	logSolve .......................................... : no (0)
+	arc_length ........................................ : 0
+	arc_length_scale .................................. : 0
+
+
+
+
+
+
+ MATERIAL DATA
+===========================================================================
+  1 - mat_tibia_cort (type: isotropic elastic)
+	density ........................................... : 2e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  2 - mat_fibula_cort (type: isotropic elastic)
+	density ........................................... : 2e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  3 - mat_tarsal_cort (type: isotropic elastic)
+	density ........................................... : 2e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  4 - mat_tarsal_cort_shell (type: isotropic elastic)
+	density ........................................... : 2e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  5 - mat_long_spon (type: isotropic elastic)
+	density ........................................... : 1e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  6 - mat_tarsal_spon (type: isotropic elastic)
+	density ........................................... : 1e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  7 - mat_marrow (type: isotropic elastic)
+	density ........................................... : 1e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  8 - mat_cartilage (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 10
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+  9 - mat_ligament (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 10 - mat_lig_PTFL_talofibular_posterior (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 11 - mat_lig_CFL_calcaneofibular (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 12 - mat_lig_ATFL_talofibular_anterior (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 13 - mat_lig_PTCL_talocalcaneal_posterior (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 14 - mat_lig_SYND_tibiofibular (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 15 - mat_lig_MD1_tibiotalar_post (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 16 - mat_lig_MD2_tibiocalcaneal (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 17 - mat_lig_MD3_tibionavicular (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 18 - mat_lig_MD4_tibiotalar_ant (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 19 - mat_lig_SPRING_calcaneonavicular (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+
+
+ BOUNDARY CONDITION DATA
+===========================================================================
+  1 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : yes (1)
+---------------------------------------------------------------------------
+  2 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : no (0)
+---------------------------------------------------------------------------
+  3 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : no (0)
+---------------------------------------------------------------------------
+  4 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : no (0)
+---------------------------------------------------------------------------
+  5 -  Type: prescribed displacement
+	dof ............................................... : 2
+	value ............................................. : -1.6
+	relative .......................................... : no (0)
+---------------------------------------------------------------------------
+  6 -  Type: prescribed displacement
+	dof ............................................... : 2
+	value ............................................. : -1.6
+	relative .......................................... : no (0)
+
+
+ CONTACT INTERFACE DATA
+===========================================================================
+contact interface 1 - Type: tied-elastic
+	laugon ............................................ : PENALTY (0)
+	tolerance ......................................... : 1
+	gaptol ............................................ : -1
+	penalty ........................................... : 1
+	auto_penalty ...................................... : yes (1)
+	update_penalty .................................... : no (0)
+	two_pass .......................................... : no (0)
+	knmult ............................................ : 1
+	search_tol ........................................ : 0.01
+	symmetric_stiffness ............................... : no (0)
+	search_radius ..................................... : 1
+	minaug ............................................ : 0
+	maxaug ............................................ : 10
+	flip_primary ...................................... : no (0)
+	flip_secondary .................................... : no (0)
+---------------------------------------------------------------------------
+contact interface 2 - Type: tied-elastic
+	laugon ............................................ : PENALTY (0)
+	tolerance ......................................... : 1
+	gaptol ............................................ : -1
+	penalty ........................................... : 1
+	auto_penalty ...................................... : yes (1)
+	update_penalty .................................... : no (0)
+	two_pass .......................................... : no (0)
+	knmult ............................................ : 1
+	search_tol ........................................ : 0.01
+	symmetric_stiffness ............................... : no (0)
+	search_radius ..................................... : 1
+	minaug ............................................ : 0
+	maxaug ............................................ : 10
+	flip_primary ...................................... : no (0)
+	flip_secondary .................................... : no (0)
+---------------------------------------------------------------------------
+contact interface 3 - Type: tied-elastic
+	laugon ............................................ : PENALTY (0)
+	tolerance ......................................... : 1
+	gaptol ............................................ : -1
+	penalty ........................................... : 1
+	auto_penalty ...................................... : yes (1)
+	update_penalty .................................... : no (0)
+	two_pass .......................................... : no (0)
+	knmult ............................................ : 1
+	search_tol ........................................ : 0.01
+	symmetric_stiffness ............................... : no (0)
+	search_radius ..................................... : 1
+	minaug ............................................ : 0
+	maxaug ............................................ : 10
+	flip_primary ...................................... : no (0)
+	flip_secondary .................................... : no (0)
+---------------------------------------------------------------------------
+contact interface 4 - Type: sliding-elastic
+	laugon ............................................ : PENALTY (0)
+	tolerance ......................................... : 0.02
+	gaptol ............................................ : 0
+	penalty ........................................... : 1
+	auto_penalty ...................................... : yes (1)
+	update_penalty .................................... : no (0)
+	two_pass .......................................... : no (0)
+	knmult ............................................ : 0
+	search_tol ........................................ : 0.01
+	symmetric_stiffness ............................... : no (0)
+	search_radius ..................................... : 1
+	seg_up ............................................ : 0
+	tension ........................................... : no (0)
+	minaug ............................................ : 0
+	maxaug ............................................ : 10
+	node_reloc ........................................ : no (0)
+	fric_coeff ........................................ : 0
+	smooth_aug ........................................ : no (0)
+	flip_primary ...................................... : no (0)
+	flip_secondary .................................... : no (0)
+	shell_bottom_primary .............................. : no (0)
+	shell_bottom_secondary ............................ : no (0)
+	offset ............................................ : 0
+
+
+ LOAD CONTROLLER DATA
+===========================================================================
+load controller   1 - lc1 (type: loadcurve)
+	interpolate ....................................... : LINEAR (0)
+	extend ............................................ : CONSTANT (0)
+	points ............................................ : (can't display value)
+
+
+ OUTPUT DATA
+===========================================================================
+ LINEAR SOLVER DATA
+===========================================================================
+	Default linear solver ............................. : pardiso
+
+
+Data Record #1
+===========================================================================
+Step = 0
+Time = 0
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 0
+Time = 0
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 0
+Time = 0
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 0
+Time = 0
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+ *************************************************************************
+ * Selecting linear solver pardiso                                       *
+ *************************************************************************
+
+===== beginning time step 1 : 0.05 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489648e+09    1.425032e+02    0.000000e+00 
+	   energy              3.487104e+04    4.208077e-01    3.487104e+01 
+	   displacement        1.154373e+01    1.154373e+01    1.154373e-03 
+ 2
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 1
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 0.159344
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489648e+09    7.738682e+01    0.000000e+00 
+	   energy              3.487104e+04    6.243813e-02    3.487104e+01 
+	   displacement        1.154373e+01    4.961519e-01    1.206874e-03 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.05
+
+Retrying time step. Retry attempt 1 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0454545
+
+
+===== beginning time step 1 : 0.0454545 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0454545
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231114e+09    1.340548e+02    0.000000e+00 
+	   energy              2.882416e+04    4.052708e-01    2.882416e+01 
+	   displacement        9.931668e+00    9.931668e+00    9.931668e-04 
+ 2
+ Nonlinear solution status: time= 0.0454545
+	stiffness updates             = 1
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 0.272662
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231114e+09    4.555214e+01    0.000000e+00 
+	   energy              2.882416e+04    6.150019e-02    2.882416e+01 
+	   displacement        9.931668e+00    7.666945e-01    1.073370e-03 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0454545
+
+Retrying time step. Retry attempt 2 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0409091
+
+
+===== beginning time step 1 : 0.0409091 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0409091
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.972035e+08    1.268131e+02    0.000000e+00 
+	   energy              2.335319e+04    3.898428e-01    2.335319e+01 
+	   displacement        8.456959e+00    8.456959e+00    8.456959e-04 
+ 2
+ Nonlinear solution status: time= 0.0409091
+	stiffness updates             = 1
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 0.423370
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.972035e+08    2.375123e+01    0.000000e+00 
+	   energy              2.335319e+04    2.698196e-02    2.335319e+01 
+	   displacement        8.456959e+00    9.974107e-01    9.491503e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0409091
+
+Retrying time step. Retry attempt 3 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0363636
+
+
+===== beginning time step 1 : 0.0363636 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0363636
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            7.879148e+08    1.205953e+02    0.000000e+00 
+	   energy              1.845813e+04    3.746076e-01    1.845813e+01 
+	   displacement        7.119608e+00    7.119608e+00    7.119608e-04 
+ 2
+ Nonlinear solution status: time= 0.0363636
+	stiffness updates             = 1
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 0.611345
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            7.879148e+08    1.605115e+01    0.000000e+00 
+	   energy              1.845813e+04    3.244745e-02    1.845813e+01 
+	   displacement        7.119608e+00    9.692642e-01    8.121716e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0363636
+
+Retrying time step. Retry attempt 4 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0318182
+
+
+===== beginning time step 1 : 0.0318182 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0318182
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.032482e+08    1.152307e+02    0.000000e+00 
+	   energy              1.413898e+04    3.608945e-01    1.413898e+01 
+	   displacement        5.919614e+00    5.919614e+00    5.919614e-04 
+ 2
+ Nonlinear solution status: time= 0.0318182
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.032482e+08    4.783204e+01    0.000000e+00 
+	   energy              1.413898e+04    3.180183e-01    1.413898e+01 
+	   displacement        5.919614e+00    1.086722e+00    7.043461e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0318182
+
+Retrying time step. Retry attempt 5 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0272727
+
+
+===== beginning time step 1 : 0.0272727 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0272727
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.432039e+08    1.105422e+02    0.000000e+00 
+	   energy              1.039575e+04    3.466117e-01    1.039575e+01 
+	   displacement        4.856978e+00    4.856978e+00    4.856978e-04 
+ 2
+ Nonlinear solution status: time= 0.0272727
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.432039e+08    4.192802e+01    0.000000e+00 
+	   energy              1.039575e+04    2.504320e-01    1.039575e+01 
+	   displacement        4.856978e+00    4.197624e-01    5.302268e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 2 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0272727
+
+Retrying time step. Retry attempt 6 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0227273
+
+
+===== beginning time step 1 : 0.0227273 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0227273
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.077817e+08    1.064005e+02    0.000000e+00 
+	   energy              7.228428e+03    3.317566e-01    7.228428e+00 
+	   displacement        3.931700e+00    3.931700e+00    3.931700e-04 
+ 2
+ Nonlinear solution status: time= 0.0227273
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.077817e+08    3.944835e+01    0.000000e+00 
+	   energy              7.228428e+03    2.308224e-01    7.228428e+00 
+	   displacement        3.931700e+00    1.449083e-01    4.093880e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0227273
+
+Retrying time step. Retry attempt 7 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0181818
+
+
+===== beginning time step 1 : 0.0181818 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0181818
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.969818e+08    1.027653e+02    0.000000e+00 
+	   energy              4.637017e+03    3.125308e-01    4.637017e+00 
+	   displacement        3.143780e+00    3.143780e+00    3.143780e-04 
+ 2
+ Nonlinear solution status: time= 0.0181818
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.969818e+08    3.759825e+01    0.000000e+00 
+	   energy              4.637017e+03    2.188603e-01    4.637017e+00 
+	   displacement        3.143780e+00    4.792444e-02    3.203388e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 101 negative jacobians detected.                                      *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0181818
+
+Retrying time step. Retry attempt 8 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0136364
+
+
+===== beginning time step 1 : 0.0136364 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0136364
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.108041e+08    9.947656e+01    0.000000e+00 
+	   energy              2.621518e+03    2.928271e-01    2.621518e+00 
+	   displacement        2.493217e+00    2.493217e+00    2.493217e-04 
+ 2
+ Nonlinear solution status: time= 0.0136364
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.108041e+08    3.603733e+01    0.000000e+00 
+	   energy              2.621518e+03    2.080402e-01    2.621518e+00 
+	   displacement        2.493217e+00    2.494250e-02    2.525991e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 5 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0136364
+
+Retrying time step. Retry attempt 9 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00909091
+
+
+===== beginning time step 1 : 0.00909091 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.924856e+07    9.645832e+01    0.000000e+00 
+	   energy              1.181931e+03    2.727195e-01    1.181931e+00 
+	   displacement        1.980012e+00    1.980012e+00    1.980012e-04 
+ 2
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.924856e+07    3.500285e+01    0.000000e+00 
+	   energy              1.181931e+03    1.974930e-01    1.181931e+00 
+	   displacement        1.980012e+00    2.133667e-02    2.007078e-04 
+ 3
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 2
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.500000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.924856e+07    1.306298e+29    0.000000e+00 
+	   energy              1.181931e+03    5.739478e+18    1.181931e+00 
+	   displacement        1.980012e+00    9.997293e+09    9.997296e+05 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * Problem is diverging. Stiffness matrix will now be reformed           *
+ *************************************************************************
+Reforming stiffness matrix: reformation #2
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 699900
+ 4
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 0
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.306298e+29    1.146819e+28    0.000000e+00 
+	   energy              5.739478e+18    5.668621e+17    5.739478e+15 
+	   displacement        1.980012e+00    1.110795e+09    4.443274e+05 
+ 5
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 1
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.306298e+29    2.776647e+27    0.000000e+00 
+	   energy              5.739478e+18    1.174429e+17    5.739478e+15 
+	   displacement        1.980012e+00    1.969236e+08    2.769384e+05 
+ 6
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 2
+	right hand side evaluations   = 9
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.306298e+29    4.621754e+26    0.000000e+00 
+	   energy              5.739478e+18    4.641577e+16    5.739478e+15 
+	   displacement        1.980012e+00    1.847966e+08    1.523415e+05 
+ 7
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 3
+	right hand side evaluations   = 10
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.306298e+29    8.904237e+25    0.000000e+00 
+	   energy              5.739478e+18    1.404010e+16    5.739478e+15 
+	   displacement        1.980012e+00    8.777495e+07    8.798414e+04 
+ 8
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 4
+	right hand side evaluations   = 11
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.306298e+29    1.622135e+25    0.000000e+00 
+	   energy              5.739478e+18    4.688057e+15    5.739478e+15 
+	   displacement        1.980012e+00    5.371162e+07    4.987763e+04 
+ 9
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 5
+	right hand side evaluations   = 12
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.306298e+29    3.019589e+24    0.000000e+00 
+	   energy              5.739478e+18    1.506183e+15    5.739478e+15 
+	   displacement        1.980012e+00    2.978308e+07    2.847964e+04 
+ 10
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.00909091
+
+Retrying time step. Retry attempt 10 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00454545
+
+
+===== beginning time step 1 : 0.00454545 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.00454545
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231525e+07    9.365647e+01    0.000000e+00 
+	   energy              3.182556e+02    2.520651e-01    3.182556e-01 
+	   displacement        1.604165e+00    1.604165e+00    1.604165e-04 
+ 2
+ Nonlinear solution status: time= 0.00454545
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231525e+07    3.634849e+01    0.000000e+00 
+	   energy              3.182556e+02    1.864225e-01    3.182556e-01 
+	   displacement        1.604165e+00    2.115750e-02    1.631418e-04 
+ 3
+ Nonlinear solution status: time= 0.00454545
+	stiffness updates             = 2
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.500000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231525e+07    5.209304e+04    0.000000e+00 
+	   energy              3.182556e+02    2.444561e+02    3.182556e-01 
+	   displacement        1.604165e+00    6.524356e+01    6.688231e-03 
+ 4
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 4 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.00454545
+
+Max. nr of retries reached.
+
+
+
+ N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+
+	Number of time steps completed .................... : 0
+
+	Total number of equilibrium iterations ............ : 3
+
+	Average number of equilibrium iterations .......... : 0
+
+	Total number of right hand evaluations ............ : 6
+
+	Total number of stiffness reformations ............ : 1
+
+
+ L I N E A R   S O L V E R   S T A T S
+
+	Total calls to linear solver ........ : 41
+
+	Avg iterations per solve ............ : 1
+
+	Time in linear solver: 0:00:02
+
+ Peak memory  : 154.8 MB
+
+ Elapsed time : 0:00:04
+
+ T I M I N G   I N F O R M A T I O N
+
+	Input time ...................... : 0:00:00 (0.035654 sec)
+
+	Initialization time ............. : 0:00:00 (0.0437385 sec)
+
+	Solve time ...................... : 0:00:04 (3.62422 sec)
+
+	   IO-time (plot, dmp, data) .... : 0:00:00 (0.0333113 sec)
+
+	   serialization ................ : 0:00:00 (0.216694 sec)
+
+	   reforming stiffness .......... : 0:00:00 (0.439773 sec)
+
+	   evaluating stiffness ......... : 0:00:00 (0.442395 sec)
+
+	   evaluating residual .......... : 0:00:00 (0.242317 sec)
+
+	   model update ................. : 0:00:00 (0.222144 sec)
+
+	   QN updates ................... : 0:00:00 (0.0081837 sec)
+
+	   time in linear solver ........ : 0:00:02 (2.00967 sec)
+
+	Total elapsed time .............. : 0:00:04 (3.73583 sec)
+
+
+ E R R O R   T E R M I N A T I O N
+

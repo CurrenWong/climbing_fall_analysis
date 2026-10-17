@@ -1,0 +1,23 @@
+  122| nid_all, xyz_all = db["node_ids"], db["node_xyz"]
+  123| idx_all = {int(v): i for i, v in enumerate(nid_all)}
+  183|             _tal_pts += [xyz_all[idx_all[x]] for x in _c[3]
+  189|             _tib_pts += [xyz_all[idx_all[x]] for x in _c[3]
+  199|             _pts = np.array([xyz_all[idx_all[x]] for x in _c[3]
+  262|             PA = xyz_all[[idx_all[a] for a in Aset]]
+  263|             PB = xyz_all[[idx_all[b] for b in Bset]]
+  274|                 PB = xyz_all[[idx_all[b] for b in Bset]]
+  275|                 PA = xyz_all[[idx_all[a] for a in Aset]]
+  293| node_id_of = {v: i + 1 for i, v in enumerate(bone_ids)}
+  294| coords = [tuple(xyz_all[idx_all[v]]) for v in bone_ids]
+  297|         node_id_of[f"off:{j}:{k}"] = len(coords) + 1
+  301| OFFSET_IDS = {node_id_of[f"off:{j}:{k}"]
+  310|         dom_nodes[dom].add(node_id_of[c])
+  340|     ids = [node_id_of[c] for f in faces for c in f]
+  345|            if abs(np.mean(XYZ[[node_id_of[c] - 1 for c in f]] @ axis) - lim)
+  464|     blocks[(dom, et)].append([node_id_of[c] for c in conn])
+  471|             lig_blocks[r["name"]] = [[node_id_of[int(v)] for v in q]
+  474|             lig_blocks[r["name"]] = [[node_id_of[int(v)] for v in t]
+  477|             lig_blocks[r["name"]] = [[node_id_of[int(v)] for v in t]
+  480|             lig_blocks[r["name"]] = [[node_id_of[int(v)] for v in t]
+  904| for _k, _v in node_id_of.items():
+  912|     fp = [[node_id_of[int(a)], node_id_of[int(b)]] for a, b in pairs]

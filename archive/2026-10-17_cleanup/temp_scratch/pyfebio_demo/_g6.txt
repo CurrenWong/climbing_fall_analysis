@@ -1,0 +1,23 @@
+[615, 620, 622, 623]
+  608| print("\n=== Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===")
+  609| for key in list(blocks):
+  610|     dom, et = key
+  611|     fn = FN[et]
+  612|     keep, nbad, dmins = [], 0, []
+  613|     for ids in blocks[key]:
+  614|         P = XYZ[[i - 1 for i in ids]]
+  615|         d = fn(P)
+  616|         if d > DET_MIN:
+  617|             keep.append(ids); dmins.append(d); continue
+  618|         # ★ 修正朝向必须用**奇置换**：
+  619|         #   tet4 = 交换两个节点（1 次交换）；hex8 = 交换前后两半。
+  620|         #   ✗ 整体倒序是 3 次交换（偶置换），行列式符号**不变**！
+  621|         alt = ([ids[1], ids[0]] + ids[2:]) if et == "tet4" else \
+  622|               (ids[len(ids) // 2:] + ids[:len(ids) // 2])
+  623|         d2 = fn(XYZ[[i - 1 for i in alt]])
+  624|         if d2 > DET_MIN:
+  625|             keep.append(alt); dmins.append(d2); fixed_total += 1
+  626|         else:
+  627|             nbad += 1
+  628|     blocks[key] = keep
+  629|     bad_total += nbad

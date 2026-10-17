@@ -1,0 +1,29 @@
+[mode] MATSET=WK LIG_MODE=web TIME_STEPS=20 FIX_TALUS=transverse FORCE=600.0N
+[mode] BONES=all
+[mode] NO_CONTACT=False LIG_SUB=all
+骨+软骨：单元 32,497，节点 11,666
+韧带：10 条，单元 135，并入节点后总计 11,666
+其中 offset（软骨外表面）节点 160
+合并后节点 11,826
+加载轴（胫骨->距骨）= [0.6766 0.1363 0.7237]
+
+=== Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===
+  OK  tibia_cort             tet4   保留      6 剔除    0  det(J) min=2.2151e+00
+  OK  tibia_cort             hex8   保留  2,415 剔除    0  det(J) min=1.4405e+00
+  OK  tibia_spon             tet4   保留  6,651 剔除    0  det(J) min=8.1429e+00
+  OK  tibia_marrow           tet4   保留 14,482 剔除    0  det(J) min=1.6333e+00
+  OK  fibula_cort            hex8   保留    842 剔除    0  det(J) min=1.1394e+00
+  OK  fibula_spon            tet4   保留    762 剔除    0  det(J) min=7.1988e+00
+  OK  talus_cort             hex8   保留    394 剔除    0  det(J) min=8.6799e-01
+  OK  talus_spon             tet4   保留  1,766 剔除    0  det(J) min=2.3567e+01
+  OK  calcaneus_cort         hex8   保留    634 剔除    0  det(J) min=1.1119e+00
+  OK  calcaneus_spon         tet4   保留  3,323 剔除    0  det(J) min=1.7034e+01
+  OK  navicular_spon         hex8   保留    148 剔除    0  det(J) min=2.1132e+00
+  !!  tibiotalar_tibia       tet4   保留    458 剔除    4  det(J) min=7.6195e-02
+  !!  tibiotalar_talus       tet4   保留    607 剔除    5  det(J) min=1.0451e-02
+  翻转修正 304 个；仍无法修正而剔除 9 个
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\scripts\ankle_fe\ankle_lig_feb.py", line 476, in <module>
+    d = np.cross(P[2] - P[0], P[3] - P[1])
+                              ~^^^
+IndexError: index 3 is out of bounds for axis 0 with size 3

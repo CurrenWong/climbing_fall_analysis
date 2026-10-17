@@ -1,0 +1,76 @@
+﻿fix(v1): 跖面接触不收敛 —— **穷举排除** + 两个具体缺陷（罚因子差 5 万倍 / 对偶板被完全固定）
+
+用户令「继续尝试」。本轮把接触/求解参数穷举了一遍，并查出两个表里不一的实现缺陷。
+
+## 新结论 1：接触罚因子比手册公式小约 **5 万倍**
+手册 §3.14 comment 2 逐字给出正解与量级：
+   "an algorithm has been implemented in FEBio that attempts to calculate a good initial
+    value for the penalty factor ε for a particular node/integration point i:  **ε_i = E·A/V**
+    ... When the **auto-penalty flag is on, the value of the penalty parameter serves as a
+    **scale factor** for the automatically-calculated penalty factor."
+量级核对：皮质 E=15000 MPa、单元 ~3 mm ⇒ A/V ≈ 1/h ⇒ **ε ≈ E/h ≈ 5000**
+| | 值 | vs 正解 |
+| 手册正解（auto 计算） | ≈5000 | 1x |
+| **本项目历史配方** | **0.1** | **1/50000** |
+| auto_penalty=1 + penalty=0.1 | ≈500 | 1/10 |
+按 comment 1「contact traction = gap × penalty」⇒ 接触力≈0 ⇒ 自由穿透 ⇒ 等价无支撑。
+⚠️ 但实测把 penalty 提到 5000（正解量级）**仍失败、签名一字不变** ⇒ 罚因子不是（唯一）原因。
+
+## 新结论 2：对偶薄板被「完全固定」⇒ `pad_e_mpa` 形同无效
+`plantar_bc._build_pad_floor` 改前：
+   `node_ids = sorted(top_ids.values()) + sorted(bot_ids.values())`
+=> **上、下两排全部进入 `pad_floor_fixed`**（deck 实测 = 全部 50 节点）
+=> 板是**刚体块**、不能变形 => `pad_e_mpa` 取 200000 还是 0.185（跟垫）**逐位相同**
+=> 这解释了「把刚性地面换成真实跟垫」为何在上一轮扫描里毫无影响
+处置（opt-in，默认 False => 原路径逐位不变）：`pad_fix_bottom_only`（只固定底面
+=> 板成为「可变形层 + 刚性地基」= 真正跟垫层），plumb 到 apply_plantar_bc / build_thums_feb
+实测 deck 固定节点数 **50 -> 25** ✓（但失败签名仍一字不变）
+
+## 新结论 3：★★ 穷举排除 —— 失败对**接触参数**全部免疫
+h=5 m, anat, hold_spring_k=None, STATIC
+| 变量 | 扫过范围 | 失败签名 |
+| penalty | 0.1/1/100/1000/**5000** | **全部 neg_first=8, 6 步, 末 t=0.1667** |
+| auto_penalty | 0/1 (x penalty 0.1/1/10) | 同上 |
+| gap | -0.05/-0.005/0.0/+0.001/+0.01/+0.05 | **同上** |
+| 外加载荷 | **x1e-6 (0.026 N!)**/1e-3/0.1/1 | **同上** |
+| 板模量 | 0.185/5/200000 | **同上** |
+| 板固定 | 全 50 / 只底面 25 | **同上** |
+| 分析类型 | STATIC / DYNAMIC(<solver>阻尼) | STATIC 秒退；DYNAMIC 变刚体飞走 |
+| hold 弹簧 | None vs **100** | **★ 唯一改变结果的变量** |
+=> 「载荷缩到 0.026 N 仍失败」=> 与外加载荷无关 => 不是力学问题
+=> 不是接触参数的调参问题
+
+## 已排除的其它嫌疑
+- **参考构型无倒置**：直接读 deck 参考坐标算 det J：calcaneus 634 hex8 倒置 **0**（min 1.539）；
+  pad_floor 16 hex8 倒置 **0**（min 1279）。而日志 `Total equilibrium iterations = 0`
+  => 错误在**第一次 reform 之后、迭代之前**
+- **接触法向对**：pad_top 法向 (0,+1,0) 朝骨（正向比例 100%）；plantar 法向 Y 中位 -0.796 朝板
+  => 不是 B5「接触法向」坑
+- **`subtalar_joint` 238 invalid facets**：该警告在**能收敛的 fixed deck 里同样出现** => 既有/无害
+- min_residual=1e-20（默认）、rtol=0、dtol=0.001、etol=0.01 未见异常
+
+## 状态：已被穷举到接触参数之外
+按手册 §8.12.4，性质仍是 under-constrained（force-driven contact，接触界面本应定义
+良约束却未能提供）。**唯一改变结果的是 `hold_spring_k`。**
+可选路径只剩两条：
+ (i) 接受 hold 弹簧是必要约束 —— 但它是自由旋钮（σ 随 k 单调趋 fixed），若要交付必须给 k
+     一个**物理依据**（否则违反「不调参凑靶」）
+ (ii) **换界面类型：`tied`/`sticky` 首步** —— 手册 §3.14.9 sticky：「similar to a tied
+      interface except that it allows **initial separation** ... and **breaking of the tie**
+      after a user-defined normal traction is exceeded」=> t=0 强 tie（消刚体模态）+ 超限自动
+      脱开 = **用物理界面替代旋钮**
+ (iii) 给骨一个**非旋钮**的最小约束（手册 §8.3.1.5「add additional constraints」；`<rigid>` BC）
+=> 本件未做 (ii)/(iii)，它们是下一轮第一顺位
+
+## 诚实边界
+- 全部 h=5/a=0/anat/PressureLoad/STATIC（或 DYNAMIC+阻尼）口径的**诊断跑**，无一条可交付
+- §「5 万倍」按 A/V≈1/h 量级估算，未逐积分点算 E·A/V；量级结论成立
+- `bottom_only` 改动**未产生行为差异** => 它修的是表里不一（pad_e_mpa 本该有效），不是收敛解药
+- 未尝试：tied/sticky、rigid BC、pyfebio 正规接口的 Control symmetric_stiffness、two_pass、node_reloc
+- **不动任何判定**：V1 仍为 ❌【口径不可复现】
+
+- 新增 `results/opensim_fe/V1_CONTACT_UNCONVERGED_ADDENDUM.md`
+- 产物 `v1_penalty_scan.json`、`v1_load_scale_scan.json`、`v1_gap_window_scan.json`、
+  `v1_pad_fix_bottom_only_scan.json`、`v1_pad_material_scan.json`
+- 改 `plantar_bc.py` / `thums_feb.py`（全部 opt-in，零回归 **72 passed**）
+- 脚本 `temp/v1_penalty.py`、`v1_scale.py`、`v1_gapwin.py`、`v1_padfix.py`、`v1_padjac.py`、`v1_normal.py`

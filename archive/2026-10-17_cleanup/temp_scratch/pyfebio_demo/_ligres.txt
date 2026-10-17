@@ -1,0 +1,48 @@
+读 ankle_lig_WK.xplt (25.4 MB)
+pyfebio parse_state 已打容错补丁
+pyfebio parse_mesh 已打容错补丁
+节点 (11963,)  位移 (11963, 3)  支反力 (11963, 3)
+位移矩阵形状 (11963, 3)
+
+==============================================================================
+每条韧带的位移（拉伸长度，mm）
+==============================================================================
+韧带                                   纤维      平均ΔL      最大ΔL  EA(MPa)
+------------------------------------------------------------------------------
+PTFL_talofibular_posterior            3   -0.0355   -0.0092    180.0
+CFL_calcaneofibular                   5    0.0018    0.0190    510.0
+ATFL_talofibular_anterior             4   -0.0418   -0.0270    180.0
+PTCL_talocalcaneal_posterior         13   -0.0494    0.0357     75.4
+SYND_tibiofibular                    10    0.0198    0.0474     75.4
+MD1_tibiotalar_post                   3    0.0644    0.0892    180.0
+MD2_tibiocalcaneal                    3    0.0122    0.0262    510.0
+MD3_tibionavicular                    3    0.0195    0.0219    510.0
+MD4_tibiotalar_ant                    3    0.0776    0.0809    180.0
+SPRING_calcaneonavicular              6    0.0017    0.0026     75.4
+
+==============================================================================
+排序（按平均拉伸位移，降序）
+==============================================================================
+   1. MD4_tibiotalar_ant                   0.0776 mm   (EA=180.0)
+   2. MD1_tibiotalar_post                  0.0644 mm   (EA=180.0)
+   3. SYND_tibiofibular                    0.0198 mm   (EA=75.4)
+   4. MD3_tibionavicular                   0.0195 mm   (EA=510.0)
+   5. MD2_tibiocalcaneal                   0.0122 mm   (EA=510.0)
+   6. CFL_calcaneofibular                  0.0018 mm   (EA=510.0)
+   7. SPRING_calcaneonavicular             0.0017 mm   (EA=75.4)
+   8. PTFL_talofibular_posterior          -0.0355 mm   (EA=180.0)
+   9. ATFL_talofibular_anterior           -0.0418 mm   (EA=180.0)
+  10. PTCL_talocalcaneal_posterior        -0.0494 mm   (EA=75.4)
+
+吴恺要的四条（本模型 vs 吴恺 5.24/5.04/2.05/1.92）：
+  吴恺:   胫跟 > 胫舟 > 跟腓 > 下胫腓前
+  本模型: 下胫腓前 > 胫舟 > 胫跟 > 跟腓
+    下胫腓前       0.0198 mm
+    胫舟         0.0195 mm
+    胫跟         0.0122 mm
+    跟腓         0.0018 mm
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\read_lig.py", line 160, in <module>
+    print(f"\n支反力沿加载轴分量之和 = {R[-1][:, kax].sum():.3f}")
+                                        ~~~~~^^^^^^^^
+IndexError: too many indices for array: array is 1-dimensional, but 2 were indexed

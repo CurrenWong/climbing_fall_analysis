@@ -1,0 +1,6 @@
+   86|     # ★ navicular_cort(81001401) 是**壳**(quad4)，不能当 solids 写进 SolidDomain
+  715| w('  <MeshDomains>')
+  716| _dommat = {d: m for d, (k, m) in BONE_PARTS.items()}
+  717| _dommat.update({j: "mat_cartilage" for j in CARTS})
+  719|     w(f'    <SolidDomain name="{dom}__{et}" mat="{_dommat[dom]}"/>')
+  736| w('  </MeshDomains>')

@@ -1,0 +1,133 @@
+# 并行整理清单 v2（2026-10-17_cleanup）
+
+> `scripts/cleanup_parallel.py`（jobs=16，单元级候选）；**只 move，不删**。
+
+## 已移动（78）
+
+- `docs/notes/ANKLE_600N_TODO.md` → `archive/2026-10-17_cleanup/docs_stale/ANKLE_600N_TODO.md`
+- `docs/reports/A1_距下关节_交接报告.md` → `archive/2026-10-17_cleanup/docs_old/A1_距下关节_交接报告.md`
+- `temp/pyfebio_demo` → `archive/2026-10-17_cleanup/temp_scratch/pyfebio_demo`
+- `temp/_commitmsg.txt` → `archive/2026-10-17_cleanup/temp_scratch/_commitmsg.txt`
+- `temp/_commitmsg2.txt` → `archive/2026-10-17_cleanup/temp_scratch/_commitmsg2.txt`
+- `temp/_commitmsg3.txt` → `archive/2026-10-17_cleanup/temp_scratch/_commitmsg3.txt`
+- `temp/_commitmsg4.txt` → `archive/2026-10-17_cleanup/temp_scratch/_commitmsg4.txt`
+- `temp/_commitmsg5.txt` → `archive/2026-10-17_cleanup/temp_scratch/_commitmsg5.txt`
+- `temp/_commitmsg6.txt` → `archive/2026-10-17_cleanup/temp_scratch/_commitmsg6.txt`
+- `temp/_commitmsg7.txt` → `archive/2026-10-17_cleanup/temp_scratch/_commitmsg7.txt`
+- `temp/_commitmsg8.txt` → `archive/2026-10-17_cleanup/temp_scratch/_commitmsg8.txt`
+- `temp/ach.txt` → `archive/2026-10-17_cleanup/temp_scratch/ach.txt`
+- `temp/cap_ctrl.txt` → `archive/2026-10-17_cleanup/temp_scratch/cap_ctrl.txt`
+- `temp/cmsg10.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg10.txt`
+- `temp/cmsg11.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg11.txt`
+- `temp/cmsg12.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg12.txt`
+- `temp/cmsg2.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg2.txt`
+- `temp/cmsg3.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg3.txt`
+- `temp/cmsg4.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg4.txt`
+- `temp/cmsg5.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg5.txt`
+- `temp/cmsg6.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg6.txt`
+- `temp/cmsg7.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg7.txt`
+- `temp/cmsg8.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg8.txt`
+- `temp/cmsg9.txt` → `archive/2026-10-17_cleanup/temp_scratch/cmsg9.txt`
+- `temp/commitmsg.txt` → `archive/2026-10-17_cleanup/temp_scratch/commitmsg.txt`
+- `temp/g5.txt` → `archive/2026-10-17_cleanup/temp_scratch/g5.txt`
+- `temp/g5_after.txt` → `archive/2026-10-17_cleanup/temp_scratch/g5_after.txt`
+- `temp/g5_before.txt` → `archive/2026-10-17_cleanup/temp_scratch/g5_before.txt`
+- `temp/g5_series.txt` → `archive/2026-10-17_cleanup/temp_scratch/g5_series.txt`
+- `temp/g5_visco.txt` → `archive/2026-10-17_cleanup/temp_scratch/g5_visco.txt`
+- `temp/g5_visco2.txt` → `archive/2026-10-17_cleanup/temp_scratch/g5_visco2.txt`
+- `temp/g5_where.txt` → `archive/2026-10-17_cleanup/temp_scratch/g5_where.txt`
+- `temp/g5tail.txt` → `archive/2026-10-17_cleanup/temp_scratch/g5tail.txt`
+- `temp/g6c.txt` → `archive/2026-10-17_cleanup/temp_scratch/g6c.txt`
+- `temp/man1.txt` → `archive/2026-10-17_cleanup/temp_scratch/man1.txt`
+- `temp/man2.txt` → `archive/2026-10-17_cleanup/temp_scratch/man2.txt`
+- `temp/man3.txt` → `archive/2026-10-17_cleanup/temp_scratch/man3.txt`
+- `temp/man4.txt` → `archive/2026-10-17_cleanup/temp_scratch/man4.txt`
+- `temp/mre.txt` → `archive/2026-10-17_cleanup/temp_scratch/mre.txt`
+- `temp/p1.txt` → `archive/2026-10-17_cleanup/temp_scratch/p1.txt`
+- `temp/p1c.txt` → `archive/2026-10-17_cleanup/temp_scratch/p1c.txt`
+- `temp/pg.txt` → `archive/2026-10-17_cleanup/temp_scratch/pg.txt`
+- `temp/pg2.txt` → `archive/2026-10-17_cleanup/temp_scratch/pg2.txt`
+- `temp/pytest_cap.txt` → `archive/2026-10-17_cleanup/temp_scratch/pytest_cap.txt`
+- `temp/pytest_g5.txt` → `archive/2026-10-17_cleanup/temp_scratch/pytest_g5.txt`
+- `temp/pytest_pbc.txt` → `archive/2026-10-17_cleanup/temp_scratch/pytest_pbc.txt`
+- `temp/pytest_pbc2.txt` → `archive/2026-10-17_cleanup/temp_scratch/pytest_pbc2.txt`
+- `temp/pytest_pbc3.txt` → `archive/2026-10-17_cleanup/temp_scratch/pytest_pbc3.txt`
+- `temp/pytest_w.txt` → `archive/2026-10-17_cleanup/temp_scratch/pytest_w.txt`
+- `temp/v1_cmp.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_cmp.txt`
+- `temp/v1_combo.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_combo.txt`
+- `temp/v1_combo2.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_combo2.txt`
+- `temp/v1_ctrl.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_ctrl.txt`
+- `temp/v1_dual.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_dual.txt`
+- `temp/v1_dyn.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_dyn.txt`
+- `temp/v1_dyn2.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_dyn2.txt`
+- `temp/v1_fam.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_fam.txt`
+- `temp/v1_family_full.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_family_full.txt`
+- `temp/v1_flip.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_flip.txt`
+- `temp/v1_flip2.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_flip2.txt`
+- `temp/v1_gap.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_gap.txt`
+- `temp/v1_gw.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_gw.txt`
+- `temp/v1_holdk_big.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_holdk_big.txt`
+- `temp/v1_hot.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_hot.txt`
+- `temp/v1_hotg.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_hotg.txt`
+- `temp/v1_inert.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_inert.txt`
+- `temp/v1_iso.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_iso.txt`
+- `temp/v1_jam.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_jam.txt`
+- `temp/v1_native.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_native.txt`
+- `temp/v1_newcond.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_newcond.txt`
+- `temp/v1_padk.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_padk.txt`
+- `temp/v1_padmat.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_padmat.txt`
+- `temp/v1_payoff.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_payoff.txt`
+- `temp/v1_pen.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_pen.txt`
+- `temp/v1_pf.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_pf.txt`
+- `temp/v1_sym.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_sym.txt`
+- `temp/v1_ucurve.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_ucurve.txt`
+- `temp/v1_where.txt` → `archive/2026-10-17_cleanup/temp_scratch/v1_where.txt`
+
+## 拒移（36，仍被引用）
+
+- `results/UNLOAD_PROCESS_REPORT.md` ← docs/methods/P3_卸力过程最小物理化_预注册.md
+- `results/second_contact_probe.json` ← docs/methods/SECOND_CONTACT_预注册.md, results/SECOND_CONTACT_REPORT.md, scripts/second_contact_probe.py
+- `results/calibration_ff_scan.csv` ← scripts/calibrate_rope.py
+- `results/calibration_rope.csv` ← scripts/calibrate_rope.py
+- `docs/notes/ANKLE_FE_TODO.md` ← docs/methods/OpenSim_FE复现方案.md, docs/methods/OpenSim_FE复现方案.md, scripts/ankle_fe/geom.py, scripts/ankle_fe/geom.py
+- `docs/notes/ANKLE_LIG_TODO.md` ← docs/reports/总体进度.md, docs/reports/总体进度.md
+- `docs/notes/CONV_TODO.md` ← docs/reports/总体进度.md, docs/reports/总体进度.md
+- `docs/notes/PYFEBIO_TODO.md` ← docs/methods/OpenSim_FE复现方案.md, docs/methods/OpenSim_FE复现方案.md
+- `docs/methods/论文对齐基线与场景探索计划.md` ← docs/paper/汇总报告_骨与韧带损伤建模.md, docs/reports/对齐_Y25_假设与结论.md, scripts/opensim_fe/pad_stiffness.py
+- `docs/methods/踝FE可用模型使用说明.md` ← docs/README.md
+- `docs/methods/踝关节FE建模交接.md` ← docs/notes/ANKLE_FE_TODO.md
+- `docs/methods/踝韧带判据方案.md` ← docs/paper/汇总报告_骨与韧带损伤建模.md, results/opensim_fe/ankle_ligament_criterion.json, results/opensim_fe/ANKLE_LIGAMENT_CRITERION_REPORT.md, scripts/opensim_fe/ankle_ligament_criterion.py
+- `docs/methods/非垂直落地扩展方案.md` ← docs/methods/论文对齐基线与场景探索计划.md, docs/paper/汇总报告_骨与韧带损伤建模.md, docs/reports/场景探索结论.md, docs/reports/对齐_Y25_假设与结论.md
+- `docs/notes/ANKLE_FE_TODO.md` ← docs/methods/OpenSim_FE复现方案.md, docs/methods/OpenSim_FE复现方案.md, scripts/ankle_fe/geom.py, scripts/ankle_fe/geom.py
+- `docs/notes/ANKLE_LIG_TODO.md` ← docs/reports/总体进度.md, docs/reports/总体进度.md
+- `docs/notes/CONV_TODO.md` ← docs/reports/总体进度.md, docs/reports/总体进度.md
+- `docs/notes/PYFEBIO_TODO.md` ← docs/methods/OpenSim_FE复现方案.md, docs/methods/OpenSim_FE复现方案.md
+- `docs/reports/Anderson双论文_关键信息.md` ← docs/reports/总体进度.md
+- `docs/reports/两篇临床论文启示与建议.md` ← docs/paper/汇总报告_骨与韧带损伤建模.md, results/opensim_fe/ankle_external_rotation.json, results/opensim_fe/ANKLE_EXTERNAL_ROTATION_REPORT.md, results/opensim_fe/ankle_ligament_criterion.json
+- `docs/reports/吴恺论文_重解析关键信息.md` ← docs/notes/ANKLE_LIG_TODO.md, docs/reports/总体进度.md
+- `docs/s5-contact/S5_contact_contract.md` ← docs/README.md, docs/reports/S5_QUOTABLE.md, docs/reports/总体进度.md, docs/reports/阶段二推断_输出清单.md
+- `docs/s5-contact/S5_contact_convergence.md` ← docs/reports/S5_QUOTABLE.md, docs/s5-contact/S5_g7_verify_anchors.md, docs/s5-contact/S5_g7_verify_anchors_mesh.md, docs/s5-contact/S5_g7_verify_fixedxi.md
+- `docs/s5-contact/S5_contact_facet_fix.md` ← docs/notes/FE_BC_GOTCHAS.md, docs/s5-contact/S5_wave4_impl.md, scripts/opensim_fe/proof_s5_facet_fix.py, scripts/opensim_fe/thums_feb.py
+- `docs/s5-contact/S5_contact_notes.md` ← src/climbing/coupling/pad_contact.py
+- `docs/s5-contact/S5_contact_udg.md` ← docs/reports/S5_QUOTABLE.md, docs/s5-contact/S5_contact_convergence.md, docs/s5-contact/S5_contact_facet_fix.md, docs/s5-contact/S5_g7_verify_anchors.md
+- `docs/s5-contact/S5_g7_verify_anchors.md` ← docs/reports/S5_QUOTABLE.md, docs/s5-contact/S5_contact_convergence.md, docs/s5-contact/S5_contact_udg.md, docs/s5-contact/S5_g7_verify_anchors_mesh.md
+- `docs/s5-contact/S5_g7_verify_anchors_mesh.md` ← docs/reports/S5_QUOTABLE.md, docs/s5-contact/S5_contact_udg.md, docs/s5-contact/S5_g7_verify_metric.md, results/opensim_fe/nonvertical_s5_contact.json
+- `docs/s5-contact/S5_g7_verify_element.md` ← docs/reports/S5_QUOTABLE.md, docs/s5-contact/S5_g7_verify_fixedxi.md, docs/s5-contact/S5_g7_verify_metric.md
+- `docs/s5-contact/S5_g7_verify_fixedxi.md` ← docs/reports/S5_QUOTABLE.md, docs/s5-contact/S5_contact_udg.md, docs/s5-contact/S5_g7_verify_element.md, docs/s5-contact/S5_g7_verify_metric.md
+- `docs/s5-contact/S5_g7_verify_mesh.md` ← docs/reports/S5_QUOTABLE.md, docs/s5-contact/S5_contact_convergence.md, docs/s5-contact/S5_contact_udg.md, docs/s5-contact/S5_g7_verify_anchors_mesh.md
+- `docs/s5-contact/S5_g7_verify_metric.md` ← docs/reports/S5_QUOTABLE.md, docs/s5-contact/S5_contact_convergence.md, results/opensim_fe/nonvertical_s5_contact.json, results/opensim_fe/rerun_20261008/nonvertical_s5_contact.json
+- `docs/s5-contact/S5_wave3_contact.md` ← docs/reports/总体进度.md, docs/s5-contact/S5_contact_facet_fix.md, docs/s5-contact/S5_wave4_impl.md, docs/s5-contact/S5接触方案.md
+- `docs/s5-contact/S5_wave4_design.md` ← docs/reports/总体进度.md, docs/s5-contact/S5_wave4_impl.md, results/opensim_fe/NONVERTICAL_S5_CONTACT_REPORT.md, results/opensim_fe/rerun_20261008/NONVERTICAL_S5_CONTACT_REPORT.md
+- `docs/s5-contact/S5_wave4_impl.md` ← docs/reports/总体进度.md, docs/s5-contact/S5_contact_facet_fix.md, docs/s5-contact/S5接触方案.md
+- `docs/s5-contact/S5_wave5_matrix.md` ← docs/reports/S5_QUOTABLE.md, docs/reports/总体进度.md, docs/s5-contact/S5_wave4_impl.md, docs/s5-contact/S5接触方案.md
+- `docs/s5-contact/S5接触方案.md` ← docs/methods/非垂直落地扩展方案.md, docs/paper/汇总报告_骨与韧带损伤建模.md, docs/reports/总体进度.md, results/opensim_fe/nonvertical_s5_contact.json
+
+## 已不在原位（7）
+
+- `results/b2_report.txt`
+- `results/smoke.txt`
+- `results/calibration_report.txt`
+- `results/rope_report.txt`
+- `scripts/verify_flex_observable.py`
+- `SECOND_CONTACT_TODO.md`
+- `docs/notes/ANKLE_600N_TODO.md`

@@ -1,0 +1,24 @@
+日记 +1213 字符
+
+======================================================================
+最终校验
+======================================================================
+  MEMORY.md                           10222 B ✅
+  SOUL.md                              2693 B
+  operational-gotchas.md               6268 B
+  ankle-fe-criteria.md                 8479 B
+  踝FE可用模型使用说明.md                      17131 B
+  ANKLE_FIX_TODO.md                   23339 B
+  LEARNINGS.md                       207469 B
+  ERRORS.md                           35422 B
+  LEARNINGS.md: 96 条，重号 无 ✓
+  ERRORS.md: 22 条，重号 无 ✓
+  横幅 ANKLE_GOAL_TODO.md               ⚠ old=0 new=2
+  横幅 ANKLE_600N_TODO.md               ⚠ old=0 new=2
+  横幅 TIE_PORT_TODO.md                 ⚠ old=0 new=2
+  横幅 ANKLE_FIX_TODO.md                ⚠ old=1 new=2
+  横幅 ANKLE_LIG_TODO.md                ⚠ old=0 new=2
+  横幅 FE_PIPELINE_TODO.md              ⚠ old=0 new=2
+  横幅 docs/总体进度.md                     ⚠ old=0 new=2
+
+结论： 有问题 ⚠

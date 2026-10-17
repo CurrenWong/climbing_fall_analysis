@@ -1,0 +1,14 @@
+
+=== h=0.5 m   n_t=1251  t_end=569.3 ms ===
+  e[0]      =  1113.2714   (t=319.330 ms)
+  min e     =  1100.6811 @ idx 96 (t=338.530 ms)  dev -1.131%
+  max e     =  1113.2714 @ idx 0 (t=319.330 ms)  dev +0.000%
+  e[end]    =  1102.3839  dev -0.978%
+  最大压缩 idx 96 (t=338.530 ms)
+  早于压缩相位（idx<96）: dev ∈ [-1.131%, +0.000%]
+  晚于压缩相位（idx>96）: dev ∈ [-1.131%, -0.978%]
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\g5_where.py", line 73, in <module>
+    f"diss={p['diss'][i_min]:7.4f}")
+            ~~~~~~~~~^^^^^^^
+TypeError: 'float' object is not subscriptable

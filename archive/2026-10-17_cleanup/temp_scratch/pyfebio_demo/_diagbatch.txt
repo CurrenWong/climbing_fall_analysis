@@ -1,0 +1,18 @@
+
+=== A_fixtalus_all {'LIG_MODE': 'shell', 'FIX_TALUS': 'all', 'NO_ROTLOCK': '1'} ===
+   NORMAL=False  Number of time steps completed .................... : 0
+   * 23 negative jacobians detected.                                       *
+   ------- failed to converge at time : 0.00454545
+   
+
+=== B_nocontact {'LIG_MODE': 'shell', 'NO_CONTACT': '1', 'NO_ROTLOCK': '1'} ===
+   NORMAL=False  Number of time steps completed .................... : 0
+   * Negative jacobian detected.                                           *
+   ------- failed to converge at time : 0.00454545
+   
+
+=== C_steps50 {'LIG_MODE': 'shell', 'TIME_STEPS': '50', 'NO_ROTLOCK': '1'} ===
+   NORMAL=False  Number of time steps completed .................... : 0
+   * 22 negative jacobians detected.                                       *
+   ------- failed to converge at time : 0.00181818
+   

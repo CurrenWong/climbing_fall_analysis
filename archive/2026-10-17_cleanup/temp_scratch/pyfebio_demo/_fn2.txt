@@ -1,0 +1,80 @@
+[mode] MATSET=WK LIG_MODE=shell TIME_STEPS=20 FIX_TALUS=transverse FORCE=600.0N
+[mode] BONES=all
+[mode] NO_CONTACT=False LIG_SUB=all
+[mode] FIX_NAVICULAR=True
+骨+软骨：单元 32,497，节点 11,666
+韧带：10 条，单元 135，并入节点后总计 11,803
+其中 offset（软骨外表面）节点 160
+合并后节点 11,963
+加载轴（胫骨->距骨）= [0.6766 0.1363 0.7237]
+韧带专属节点（转动自由度原本自由）: 137
+
+=== Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===
+  OK  tibia_cort             tet4   保留      6 剔除    0  det(J) min=2.2151e+00
+  OK  tibia_cort             hex8   保留  2,415 剔除    0  det(J) min=1.4405e+00
+  OK  tibia_spon             tet4   保留  6,651 剔除    0  det(J) min=8.1429e+00
+  OK  tibia_marrow           tet4   保留 14,482 剔除    0  det(J) min=1.6333e+00
+  OK  fibula_cort            hex8   保留    842 剔除    0  det(J) min=1.1394e+00
+  OK  fibula_spon            tet4   保留    762 剔除    0  det(J) min=7.1988e+00
+  OK  talus_cort             hex8   保留    394 剔除    0  det(J) min=8.6799e-01
+  OK  talus_spon             tet4   保留  1,766 剔除    0  det(J) min=2.3567e+01
+  OK  calcaneus_cort         hex8   保留    634 剔除    0  det(J) min=1.1119e+00
+  OK  calcaneus_spon         tet4   保留  3,323 剔除    0  det(J) min=1.7034e+01
+  OK  navicular_spon         hex8   保留    148 剔除    0  det(J) min=2.1132e+00
+  !!  tibiotalar_tibia       tet4   保留    458 剔除    4  det(J) min=7.6195e-02
+  !!  tibiotalar_talus       tet4   保留    607 剔除    5  det(J) min=1.0451e-02
+  翻转修正 304 个；仍无法修正而剔除 9 个
+  韧带壳退化剔除 0 个
+  接触面 tibiotalar_tibia: 150 面
+  接触面 tibiotalar_talus: 197 面
+外表面顶/底：胫骨顶 421 / 腓骨顶 94 / 跟骨底 147
+顶面投影面积：胫骨 465.1 mm²，腓骨 96.7 mm² => 腓骨分担 17.2% 载荷
+
+写出 D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb（2536 KB）  单元：骨+软骨 32488，韧带 135，共 32623
+
+FEBio rc=1  用时 9.9s
+  
+  ===== reforming stiffness matrix:
+  	Nr of equations ........................... : 34056
+  	Nr of nonzeroes in stiffness matrix ....... : 906694
+   1
+  
+   *************************************************************************
+   *                                ERROR                                  *
+   * 22 negative jacobians detected.                                       *
+   *************************************************************************
+  
+  
+  ------- failed to converge at time : 0.00454545
+  
+  Max. nr of retries reached.
+  
+  
+  
+   N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+  
+  	Number of time steps completed .................... : 0
+  
+  	Total number of equilibrium iterations ............ : 0
+  
+  	Average number of equilibrium iterations .......... : 0
+  
+  	Total number of right hand evaluations ............ : 1
+  
+  	Total number of stiffness reformations ............ : 1
+  
+  
+   L I N E A R   S O L V E R   S T A T S
+  
+  	Total calls to linear solver ........ : 11
+  
+  	Avg iterations per solve ............ : 1
+  
+  	Time in linear solver: 0:00:06
+  
+   Peak memory  : 269.9 MB
+  
+   Elapsed time : 0:00:10
+  
+  
+   E R R O R   T E R M I N A T I O N

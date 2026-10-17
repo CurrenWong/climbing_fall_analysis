@@ -1,0 +1,24 @@
+受控对比（同一份 CART_OFFSET=normal 软骨，env 与基准一致）
+ CART_ELEM  rc       用时  软骨单元(保留/剔除)
+------------------------------------------------------------------------------
+      tet4   1     9.0s  负Jacobian
+           全模型类型: ?
+           tibiotalar_tibia     tet4    保留   406  剔除    8
+           tibiotalar_talus     tet4    保留   610  剔除   20
+           接触面: [('tibiotalar_tibia', '129'), ('tibiotalar_talus', '205')]
+
+     prism   0     4.9s  
+           全模型类型: ?
+           tibiotalar_tibia     penta6  保留    88  剔除   50
+           tibiotalar_talus     penta6  保留   146  剔除   64
+           接触面: [('tibiotalar_tibia', '85'), ('tibiotalar_talus', '146')]
+
+      hex8   0     4.4s  
+           全模型类型: ?
+           tibiotalar_tibia     hex8    保留     6  剔除   47
+           tibiotalar_tibia     penta6  保留    25  剔除    7
+           tibiotalar_talus     hex8    保留    10  剔除   68
+           tibiotalar_talus     penta6  保留    50  剔除    4
+           接触面: [('tibiotalar_tibia', '31'), ('tibiotalar_talus', '60')]
+
+分日志: D:\Project\climbing_fall_analysis\temp\pyfebio_demo/_ctrl_<elem>.txt

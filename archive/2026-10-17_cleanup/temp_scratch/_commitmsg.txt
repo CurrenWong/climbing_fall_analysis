@@ -1,0 +1,52 @@
+feat(pad): ★★ 腿刚度「力台锚定」（LEG_K_ANCHOR）—— k_flex 220/1100 → 6.3/8.2/18.5 kN/m
+
+为什么：pad.py 三档落地姿势的 k_flex 一直是**未标定的自由参数**，且这条线
+立项以来**没有任何外部验证**（V1–V9 全在 1D/FE 骨线）。
+
+外部锚（PMC9465758，24 名运动员 0.42 m 落箱力台）：
+  ⚠️ 该表头写 "Stiffness, N/m"，但其口径逐字是 `Stiffness = GRFmax / Depth`，
+     且 GRFmax 以 N·kg⁻¹ 报 ⇒ 表值量纲实为 **N·kg⁻¹·m⁻¹**，不是刚度
+     （复算 77.05/98.00/228.48 vs 表值 82.36/107.71/243.28，7–10% 内吻合）。
+  ⇒ 物理刚度 = 表值 × 76 kg：soft 6.3 / self 8.2 / **stiff 18.5 kN/m**
+     （能量法 k=F_peak²/2E 独立反推对 stiff 给 17.4–25.5 ✓）。
+  ⇒ 模型 controlled-drop 过刚 12×、feet-first-stiff 过刚 59×。
+
+判定（预注册 docs/methods/P3_腿刚度力台锚定_预注册.md，判据跑前冻结）：
+  J0 双正对照 PASS（逐位）｜J1a soft 0.856✅ self 0.808✅ stiff 0.661❌｜
+  J1b 三档全❌(2.05–3.25×)｜J1 FAIL｜J2 FAIL(h*=2.244/3.216/3.418 m > 1.52)｜
+  J3 PASS(k↑⇒h*↓)｜J4 PASS。**与预注册预判逐位一致。**
+
+⇒ 结论：k 锚定成功（方向+量级），但**没让力的绝对值对齐力台** ——
+  F_flex(腿-躯干界面力) 低 14–34%、F_pad(地面力) 高 105–225%，
+  **两个候选观测量骑跨实测 ⇒ 缺口在「地面-足部接触层」，不在腿刚度。**
+★ 正面：锚定 k 把力判据首折从旧 k 的 ~0.25 m 移到 2.24–3.42 m ⇒
+  **落进流行病学 1.1–4 m 带**（PMC5717375）—— 首次。
+  对靶 6–9 m 仍差 ~2–3×；⛔ 本件不主张 6–9 m 可达，V1 判定不变。
+
+★★★★ 执行中挖出的最重要一条（新 gotcha）：
+  `pad.py` 的 L2 刚性门（RIGID_STANDING_CHAIN: kf_mult=2.0, x_max=0.015）
+  **按姿势的「键」判定**（posture_key = posture if isinstance(posture, str) else None）
+  ⇒ **传 Posture 对象（replace(...) 造的）会静默绕门**。实测同姿势两种调用差 13.4%：
+  feet-first-stiff @1 m：传键 F_pad/F_flex = 37.46/31.10 kN；传对象 = 33.65/27.43 kN。
+  ⇒ ① V1_WHY_20KN_AND_GAP_LOCUS.md §3 里标「1.1e6（模型 feet-first-stiff）」的
+       27.43 是**无门**值（真实 feet-first-stiff 刚性口径是 2.2e6/15 mm）；
+     ② 这是先前 dry-run 与项目记录不一致的根因；
+     ③ 锚定档键 anchored-* ⇒ 门不生效（= 想要的口径，预注册 §4-O5）。
+
+改动（纯增量，默认路径逐位不变）：
+  + src/climbing/pad.py        _anchored_posture + POSTURES[anchored-soft/self/stiff]
+  + tests/test_climbing.py     TestAnchoredPostures 5 条（冻结 k / 字段不搭车 /
+                               门不生效 / 门语义特征化 / F_pad 不敏感）
+  + scripts/fp_anchor_probe.py 探针（双正对照，不过则整份作废）
+  + results/fp_anchor_probe.json + results/FP_ANCHOR_REPORT.md
+  + docs/methods/P3_腿刚度力台锚定_预注册.md（v2）
+  + docs/notes/PAD_GOTCHAS.md（新建；4 条 pad.py/链模型 gotcha）
+  M docs/reports/总体进度.md   §九 新增
+
+回归：**765 passed / 8 skipped / 0 failed**（-n auto --dist load；本件 +5 条；
+据此变动前基线为 760，记录里的 759 略陈旧）。
+
+未做/待办：MEMORY.md 原始字节 10238/上限 10240（仅剩 2 B）⇒ 未硬塞，待压缩；
+  verify_index_linehits 既有 FAIL（索引代码行号漂移 13 mismatch/7 matched，涉及
+  pad.py/pad2d.py；不属项目认证的四条 links/chain/numbers/crossloc）⇒ 未擅自修。
+  下一步（预注册 §9 触发已成立）：A 足部接触柔度（跟垫，复用 G5）≻ B 膝扭簧，另须预注册。

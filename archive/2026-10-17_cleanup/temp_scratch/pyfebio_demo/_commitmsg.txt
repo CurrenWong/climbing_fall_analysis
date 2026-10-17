@@ -1,0 +1,28 @@
+﻿踝关节 FE 子线脚本入库（scripts/ankle_fe/，16 个文件）
+
+此前整个子线代码目录未进 git —— 无版本控制、改坏无法回滚。
+本次把 16 个纯 Python 脚本（约 315 KB，无二进制/日志/中间 .feb）纳入版本管理：
+
+求解链
+- ankle_lig_feb.py    模型生成器（环境变量驱动；含 FIX_TALUS / TAL_ROTLOCK /
+                      TALUS_SPRING_K 等 Anderson 路线 A 参数）
+- acceptance.py       驱动+验收（跑 FEBio 并出报告）
+- build_feb.py        软骨/接触对装配（含 CP_DIAG=02 等骨面三角对角约束）
+
+软骨与网格
+- cart_patch.py       关节面重心网格重分（2D 参数平面 + 精确抬回）
+- cartilage.py / cart_hex.py / cart_refine.py   软骨生成与加密
+- joint_surface.py / geom.py                    关节面与几何工具
+
+韧带与判据
+- ligaments.py        韧带生成（纤维轴、1:1 配对、足迹覆盖）
+- lig_strain.py       韧带应变读数（C3 三口径）
+- check_c2.py         C2 姿势语义校验（纯几何，NO_RUN 开关）
+
+THUMS 数据
+- thums_extract.py / thums_materials.py / thums_verify.py / msh_info.py
+  解剖提取、材料、校验与网格诊断
+
+已知状态（入库时点）：参考工况 DISP_MM=+1.6 => 592.6020 N（零回归基准）；
+压实方向为 DISP_MM>0（见 ANKLE_FIX_TODO.md 顶部接手入口）。
+后续改动请走 git diff 审阅。

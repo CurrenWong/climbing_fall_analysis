@@ -1,0 +1,33 @@
+operational-gotchas.md +449 字符
+
+==========================================================================
+压缩前最终校验
+==========================================================================
+  MEMORY.md                           10222 B ✅
+  SOUL.md                              2693 B
+  operational-gotchas.md               7118 B
+  ankle-fe-criteria.md                 8479 B
+  2026-10-06.md                       17608 B
+  踝FE可用模型使用说明.md                      17318 B
+  ANKLE_FIX_TODO.md                   27243 B
+  FE_PIPELINE_TODO.md                 31410 B
+  总体进度.md                             14650 B
+  LEARNINGS.md                       207469 B
+  ERRORS.md                           35422 B
+  AST ✓ ×5
+  LEARNINGS.md: 96 条，重号 无 ✓
+  ERRORS.md: 22 条，重号 无 ✓
+  ANKLE_FIX_TODO.md                缺失 无 ✓
+  FE_PIPELINE_TODO.md              缺失 无 ✓
+  总体进度.md                          缺失 无 ✓
+  MEMORY.md                        缺失 无 ✓
+  旧错句 ANKLE_FIX_TODO.md                  0 ✓
+  旧错句 ANKLE_GOAL_TODO.md                 0 ✓
+  旧错句 ANKLE_600N_TODO.md                 0 ✓
+  旧错句 TIE_PORT_TODO.md                   0 ✓
+  旧错句 ANKLE_LIG_TODO.md                  0 ✓
+  旧错句 FE_PIPELINE_TODO.md                0 ✓
+  旧错句 docs/总体进度.md                       0 ✓
+  旧错句 docs/踝FE可用模型使用说明.md                0 ✓
+
+结论： PASS ✅

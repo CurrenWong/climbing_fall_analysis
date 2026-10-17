@@ -1,0 +1,26 @@
+[E0_base] rc=0 NORMAL=True F=592.6020366536219
+        [subtalar] 开关=0 新格式键=True ⇒ 不接（CARTS=['tibiotalar_tibia', 'tibiotalar_talus']）
+[E1_a1_only] rc=1 NORMAL=False F=None
+        [subtalar] 开关=1 新格式键=True ⇒ 接入（CARTS=['tibiotalar_tibia', 'tibiotalar_talus', 'subtalar_talus', 'subtalar_calcaneus']）
+        接触面 subtalar_talus: 587 面
+        接触面 subtalar_calcaneus: 683 面
+[E2_A1A2] rc=1 NORMAL=False F=None
+        [subtalar] 开关=1 新格式键=True ⇒ 接入（CARTS=['tibiotalar_tibia', 'tibiotalar_talus', 'subtalar_talus', 'subtalar_calcaneus']）
+        接触面 subtalar_talus: 587 面
+        接触面 subtalar_calcaneus: 683 面
+        [talus-spring] 323 个距骨节点 × 方向 xy ⇒ 646 根弹簧；单根 k=1.5480 N/mm（合计 500.0 N/mm/方向）；臂长 5.0 mm ⇒ 哑节点 4940..5585
+        [talus-spring] ⚠ 横向硬约束已**移除**（改为弹簧）⇒ 内外翻/内旋自由度已释放
+        [talus-spring] 距骨横向硬约束**已跳过**；改为固定 646 个哑节点
+[E3_a2_only] rc=1 NORMAL=False F=None
+        [subtalar] 开关=0 新格式键=True ⇒ 不接（CARTS=['tibiotalar_tibia', 'tibiotalar_talus']）
+        [talus-spring] 323 个距骨节点 × 方向 xy ⇒ 646 根弹簧；单根 k=1.5480 N/mm（合计 500.0 N/mm/方向）；臂长 5.0 mm ⇒ 哑节点 4030..4675
+        [talus-spring] ⚠ 横向硬约束已**移除**（改为弹簧）⇒ 内外翻/内旋自由度已释放
+        [talus-spring] 距骨横向硬约束**已跳过**；改为固定 646 个哑节点
+
+==========================================================================
+A1+A2 合并矩阵
+==========================================================================
+  E0_base        rc=0  NORMAL=True   F=592.6020366536219
+  E1_a1_only     rc=1  NORMAL=False  F=None
+  E2_A1A2        rc=1  NORMAL=False  F=None
+  E3_a2_only     rc=1  NORMAL=False  F=None

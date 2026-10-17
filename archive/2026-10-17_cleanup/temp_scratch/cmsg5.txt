@@ -1,0 +1,65 @@
+﻿fix(v1): 🔴 **重大口径发现 —— V1 的「跖面接触」是惰性的，逐位等于 `spring` BC**
+
+用户令「继续」。做控制实验时意外发现本项目的「跖面接触」从未真正生效。
+
+## 决定性证据：逐位相同（bit-for-bit）
+h=5 m, F_sub=26383.1 N, anat 网格
+| 配置 | deck 内有 `<Contact>` | max (MPa) | 中位 (MPa) |
+| `plantar_bc=contact` + `contact_hold_spring_k=100` | **是** | **151.896519** | **65.185651** |
+| `plantar_bc=spring` + `spring_k=100` | **否** | **151.896519** | **65.185651** |
+=> `np.allclose(a, b, rtol=0, atol=0)` = **True**
+=> **同一 k 下，有没有那个 `<Contact>` 块，结果一模一样 => 该块贡献恰好 0**
+
+## 接触参数全部无效（若接触在起作用必须有效）
+h=5, hold=None, STATIC
+| 变量 | 范围 | 结果 |
+| penalty | 0.1 -> **1e8** | 失败签名一字不变（neg_first=8, 6 步, 末 t=0.1667）|
+| gap | **-0.5（深过盈）** -> +0.05 | 一字不变 |
+| auto_penalty | 0/1 | 一字不变 |
+| 板模量 pad_e_mpa | 0.185 -> 200000 | **逐位相同** |
+| 板固定（全 50 / 只底面 25） | — | **逐位相同** |
+| **外加载荷** | **x1e-6 (0.026 N)** -> x1 | **一字不变** |
+=> 最硬一条：**深过盈 0.5mm + penalty=1e8 仍与 penalty=0.1 同款失败** => 接触根本没参与
+
+## 已排除的其它嫌疑
+- **参考构型无倒置**（读 deck 参考坐标算 det J）：calcaneus 634 hex8 倒置 **0**（min 1.539）；
+  pad_floor 16 hex8 倒置 **0**（min 1279）
+- **接触法向正确**：pad_top (0,+1,0) 朝骨（正向比例 100%）；plantar 法向 Y 中位 -0.796 朝板
+  => 不是 B5「接触法向」坑
+- **subtalar_joint 238 invalid facets**：该警告在**能收敛的 fixed deck 里同样出现** => 既有/无害
+- **FEBio 认出了接口**：日志有 `CONTACT INTERFACE DATA / contact interface 1 - Type: sliding-elastic`
+  及全部参数 => **认了但没用**
+- `laugon=PENALTY` 有效（日志回显 `laugon : PENALTY (0)`）
+- **控制实验**：`contact+hold100` 仍收敛（151.8965）=> 本轮代码改动**零破坏**
+
+## 🔴 对下游的扩散影响（必须一并更正）
+| 受影响处 | 现写法 | 应改为 |
+| V1_FIXABILITY_ASSESSMENT §1.1 数据列「contact+hold100」 | 当作接触口径 | **它是 spring k=100 的数**（逐位相同）|
+| V1_PLANTAR_LOAD_BEARING_FEASIBILITY §1「第1层 已实现」| 认为 contact/spring 两条路都实现承载 | **contact 路不存在**；承载只由 spring/hold 弹簧提供 |
+| 同件「contact + hold_k 的 hold_k 是自由旋钮」| 当作接触路径参数 | **它就是 spring 的 k**；所谓「接触路径」=「弹簧路径 + 一个空块」|
+| PLANTAR_CONTACT_FIX_20261015.md 全篇 | 分析「跖面接触为何不收敛」| 实际分析的是 **spring BC 在 k 小/无支撑时不收敛** + 一个惰性块 |
+| 本轮前件 ATTACH §1（罚因子差 5 万倍）| 归因到接触罚因子 | **该归因不成立** —— 接触惰性 => 罚因子怎么写都无所谓 |
+| 本轮前件 ATTACH §3「穷举排除」| 结论「不是接触参数问题」| **✅ 该结论被坐实，并给出原因**（接触惰性）|
+
+=> **「跖面接触不收敛」的正确表述**：
+   **`spring` BC（含 hold 弹簧）在 k 偏小/无支撑时不收敛（欠约束）；
+   而 `contact` BC 从未真正生效，因此从未被检验过。**
+
+## 仍未回答：为什么惰性（机制未定位）
+候选（未验证，按怀疑度）：① `<SurfacePair>`/`<Contact>` 的放置或引用方式 ② 对偶面整体被固定
+（试过 bottom_only 仍惰性 => 证据偏弱）③ FEBio 4.13 对 sliding-elastic 的某个前置条件
+④ `<Contact>` 写在 `<Loads>` 之后的顺序影响
+=> 定位手段（下一轮第一顺位）：做**最小可复现算例**（两 cube 的 sliding-elastic 接触），
+   再逐项加回（SurfacePair 位置 / 固定面 / 板厚 / 分格），找出哪一项让接触失效
+
+## 诚实边界
+- 「逐位相同」是本机同 FEBio 4.13、同 deck 生成器下的结果（rtol=0,atol=0）；跨机器可能末位差异
+- **未证明** `<Contact>` 在所有情形下都惰性 —— 只说**在本模型/本配置下**贡献为 0
+- 归因是否证式的（接触参数全无效 => 接触未参与）；**机制未定位**
+- 全部 h=5/a=0/anat/PressureLoad 口径的**诊断跑**，无一条可交付
+- **不动任何判定**：V1 仍为 ❌【口径不可复现】
+
+- 新增 `results/opensim_fe/V1_PLANTAR_CONTACT_IS_INERT.md`
+- 产物 `v1_dual_contact_scan.json`
+- 脚本 `temp/v1_cmp.py`（逐位对照）、`temp/v1_ctrl.py`（控制）、`temp/v1_jam.py`（深过盈探针）、
+  `temp/v1_dual.py`（双接触）

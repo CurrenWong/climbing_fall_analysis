@@ -1,0 +1,68 @@
+  846| 
+  847| w('  <Boundary>')
+  848| if bot_calc:
+  849|     w('    <bc name="fix_calcaneus" type="zero displacement" '
+  850|       'node_set="calcaneus_bottom_ns">')
+  851|     w('      <x_dof>1</x_dof><y_dof>1</y_dof><z_dof>1</z_dof>')
+  852|     w('    </bc>')
+  853| # 距骨约束：transverse = 只约束横向；all = 全约束
+  854| tal_dofs = ("xyz" if FIX_TALUS == "all" else
+  855|             "".join(d for d, v in zip("xyz", np.abs(axis))
+  856|                     if v < np.abs(axis).max() - 1e-6))
+  857| if not tal_dofs:
+  858|     tal_dofs = "xz"
+  859| w(f'    <bc name="fix_talus" type="zero displacement" node_set="talus_low_ns">')
+  860| for d in tal_dofs:
+  861|     w(f'      <{d}_dof>1</{d}_dof>')
+  862| w('    </bc>')
+  863| # 胫骨/腓骨顶面：约束横向，轴向自由（载荷驱动）
+  864| kax = int(np.argmax(np.abs(axis)))
+  865| for ns, nm, _faces in (("tibia_top_ns", "tibia", top_tibia),
+  866|                        ("fibula_top_ns", "fibula", top_fibula)):
+  867|     if not _faces:      # 空 NodeSet 不能写 BC（FEBio: invalid value for node_set）
+  868|         continue
+  869|     if DRIVER == "force" and TOPFIX == "none":
+  870|         continue        # ★ 顶面完全不约束：靠接触 + 韧带定运动学（允许外翻/内旋）
+  871|     w(f'    <bc name="{nm}_lateral" type="zero displacement" node_set="{ns}">')
+  872|     for di, dn in enumerate("xyz"):
+  873|         if di != kax:
+  874|             w(f'      <{dn}_dof>1</{dn}_dof>')
+  875|     w('    </bc>')
+  876| if LIG_ONLY_NS:
+  877|     # ★ FEBio 壳的附加自由度叫 back-displacement，dof 名是 sx/sy/sz，
+  878|     #   不是 <x_rotation> / <u_rotation>（那两个标签 FEBio 不认）。
+  879|     w('    <bc name="lig_back_lock" type="zero shell displacement" '
+  880|       f'node_set="lig_only_ns">')
+  881|     for _d in ("sx", "sy", "sz"):
+  882|         w(f'      <dof>{_d}</dof><value lc="1">0</value><relative>0</relative>')
+  883|     w('    </bc>')
+  884|     w('    <bc name="fix_navicular" type="zero displacement" '
+  885|       'node_set="navicular_all_ns">')
+  886|     w('      <x_dof>1</x_dof><y_dof>1</y_dof><z_dof>1</z_dof>')
+  887|     w('    </bc>')
+  888| if DRIVER in ("disp", "dispx"):
+  889|     # ★ 顶面三个自由度**全部**指定位移（= 夹持端）：刚体模态消失，
+  890|     #   不依赖接触/韧带稳定（LRN-017 的核心修法）。
+  891|     _kax = int(np.argmax(np.abs(LAX)))
+  892|     for _ns, _nm, _faces in (("tibia_top_ns", "tibia", top_tibia),
+  893|                              ("fibula_top_ns", "fibula", top_fibula)):
+  894|         if not _faces:
+  895|             continue
+  896|         _dofs = "xyz" if DRIVER == "disp" else "xyz"[_kax]
+  897|         for _di, _dn in enumerate("xyz"):
+  898|             if DRIVER == "dispx" and _di != _kax:
+  899|                 continue     # 横向自由：交给韧带 + 接触约束
+  900|             _v = (-DISP_MM if LAX[_di] > 0 else DISP_MM) if _di == _kax else 0.0
+  901|             w(f'    <bc name="{_nm}_top_{_dn}" type="prescribed displacement" '
+  902|               f'node_set="{_ns}">')
+  903|             w(f'      <dof>{_dn}</dof><value lc="1">{_v:.6f}</value>'
+  904|               '<relative>0</relative>')
+  905|             w('    </bc>')
+  906| w('  </Boundary>')
+  907| 
+  908| if not NO_CONTACT:
+  909|   w('  <Contact>')
+  910|   w('    <contact name="tibiotalar" surface_pair="tibiotalar_pair" '
+  911|     'type="sliding-elastic">')
+  912|   w('      <laugon>PENALTY</laugon>')
+  913|   w('      <penalty>1</penalty>')

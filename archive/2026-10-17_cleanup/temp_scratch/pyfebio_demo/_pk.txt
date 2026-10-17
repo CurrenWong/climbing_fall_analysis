@@ -1,0 +1,37 @@
+总长 756847
+  <Nodes> 1 次
+  <node> 3885 次
+  <Surface> 4 次
+  <tri3> 347 次
+  <quad4> 127 次
+  <MeshDomains> 1 次
+  <Solid> 0 次
+  <Material> 1 次
+
+--- Nodes 开头 300 字符 ---
+
+
+--- 第一个 Surface 开头 300 字符 ---
+<Surface name="tibia_top">
+      <quad4 id="1">1396,1281,1303,1475</quad4>
+      <quad4 id="2">1475,1303,1238,1301</quad4>
+      <quad4 id="3">1364,1284,1401,1471</quad4>
+      <quad4 id="4">1471,1401,1283,1366</quad4>
+      <quad4 id="5">1266,1364,1471,1363</quad4>
+      <quad4 id="6">1362,1285,140
+
+--- MeshDomains 开头 400 字符 ---
+<MeshDomains>
+    <SolidDomain name="tibia_cort__tet4" mat="mat_tibia_cort"/>
+    <SolidDomain name="tibia_cort__hex8" mat="mat_tibia_cort"/>
+    <SolidDomain name="tibia_spon__tet4" mat="mat_long_spon"/>
+    <SolidDomain name="tibia_marrow__tet4" mat="mat_marrow"/>
+    <SolidDomain name="fibula_cort__hex8" mat="mat_fibula_cort"/>
+    <SolidDomain name="fibula_spon__tet4" mat="mat_long_spon"/>
+   
+
+--- 所有 Surface name ---
+    tibia_top
+    fibula_top
+    surf_tibiotalar_tibia
+    surf_tibiotalar_talus

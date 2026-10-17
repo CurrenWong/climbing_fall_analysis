@@ -2,6 +2,7 @@
 
 > 落盘：2026-10-16｜状态：**跑前冻结**（本文件在跑之前写完，判据与预测不得事后修改）
 > 脚本 `scripts/second_contact_probe.py`｜产物 `results/second_contact_probe.json`
+> ⚠️ **该产物的 `h*` 数字已作废**（旧后处理口径）⇒ **现行口径见 `CANONICAL.md` §1 / `results/hstar_canonical.json`**。
 
 ---
 

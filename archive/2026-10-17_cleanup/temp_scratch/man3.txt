@@ -1,0 +1,38 @@
+===== lines 16590-16625 8.12.4 Force-driven Problems =====
+ 16590| 8.12.3 Remeshing
+ 16591| FEBio is designed to solve problems that can undergo large deformations. However, when the
+ 16592| deformationsbecometoolargeitcanhappenthatthefiniteelementmeshcannotbedistortedany
+ 16593| furtherwithoutinvertingelements. Inthatcase,FEBiowillnotbeabletocontinuethesolutionand
+ 16594| will most likely terminate with a negative jacobian error message.
+ 16595| One possible solution to this problem is to remesh the model at the point at which the defor-
+ 16596| mationbecometoolarge,butcurrentlyFEBiodoesnothaveanyremeshingcapabilities. Theonly
+ 16597| remedy at this point is to plan ahead and design your mesh in such a way that the elements will
+ 16598| not invert in the range of deformation that you are interested in (e.g. place a butterfly mesh in
+ 16599| sharp corners or make the mesh finer in areas of larger deformation).
+ 16600| 8.12.4 Force-driven Problems
+ 16601| When the primary method of deforming the model is a force, the problem is said to be force-
+ 16602| driven. (Opposed to a displacement-driven model where the deformation is caused by displace-
+ 16603| ment boundary conditions.) Force-driven forces are inherently unstable and FEBio has limited
+ 16604| capabilitiesofhandlingsuchproblems1. Thecauseofthisinstabilitycaneasilybeexplainedusing
+ 16605| a simple example. Imagine a box that is constrained in all directions except one. In the uncon-
+ 16606| strained direction, apply two equal but opposite forces on opposite faces. In order to prevent the
+ 16607| box from flying away, the box must generate stresses which balance the applied forces exactly.
+ 16608| Unfortunately,thenumericalsolutionwillonlybeapproximateduetonumericalround-offerrorsin-
+ 16609| herent in the calculation. Even the slightest deviation from balancing the forces exactly will create
+ 16610| anet-forcewhichinturncausesthemodeltoflyoffintheunconstraineddirection(inwhicharigid
+ 16611| body mode now exists).
+ 16612| Usually, these problems are circumvented by adjusting the boundary conditions so that rigid
+ 16613| body modes cannot exist. In the previous example this can be done by only modeling half of the
+ 16614| box and enforcing a symmetry boundary condition. However, in some cases this is not possible.
+ 16615| 1AsofFEBio2.0,somefeaturesareavailablethatmayhelpwiththisissue,buttheyarestillexperimental.
+ 16616| 450 CHAPTER 8. TROUBLESHOOTING
+ 16617| This is often the case in force-driven contact problems, where the contact interface is necessary
+ 16618| todefineawell-constrainedmodel. Whenthereisaninitialseparation(orevenwhenthesurfaces
+ 16619| havenoinitialoverlap)theinitialcontactforceiszero,whichisequivalenttohavingnocontacten-
+ 16620| forcement, and thus the model is under-constrained. Therefore, for force-driven contact problems
+ 16621| it is important to have some initial contact before starting the analysis.
+ 16622| 8.12.5 Solutions obtained on Multi-processor Machines
+ 16623| Although technically not a limitation of FEBio it is important that users are aware that in some
+ 16624| cases you may get a different convergence history or sometimes even a slightly different answer
+ 16625| whenyourunthesamemodeltwiceonamulti-processormachine. Thisiscausedbythefactthat
+

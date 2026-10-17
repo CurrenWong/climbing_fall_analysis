@@ -1,0 +1,16 @@
+加密网格 vs 原始网格（DISP=0.1472 / TRUNC=60 / FIX_TALUS=all）
+============================================================================================
+      原始   tet4 rc=0     5.1s  F=    259.3 N  |u|max=0.24152987910269352  
+           软骨 [('tibia', 'tet4', '456', '6'), ('talus', 'tet4', '596', '16')]
+           接触面 [('tibiotalar_tibia', '148'), ('tibiotalar_talus', '191')]
+      原始  prism rc=0     4.2s  F=    116.9 N  |u|max=0.24379515263974869  
+           软骨 [('tibia', 'penta6', '140', '14'), ('talus', 'penta6', '175', '29')]
+           接触面 [('tibiotalar_tibia', '138'), ('tibiotalar_talus', '171')]
+
+    加密R1   tet4 rc=1     0.1s  F=        - N  |u|max=-  
+           软骨 []
+           接触面 [('tibiotalar_tibia', '1226'), ('tibiotalar_talus', '1432')]
+    加密R1  prism rc=1     0.1s  F=        - N  |u|max=-  
+           软骨 []
+           接触面 [('tibiotalar_tibia', '1018'), ('tibiotalar_talus', '1160')]
+

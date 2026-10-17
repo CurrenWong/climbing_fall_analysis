@@ -1,0 +1,29 @@
+  188: # ── 读数据 ──（★ THUMS_NPZ / CART_DIR 可指向加密后的网格；默认与原行为一致）
+  189: _NPZ = os.environ.get("THUMS_NPZ", "").strip()
+  191: _NPZ_PATH = Path(_NPZ) if _NPZ else (OUT / "thums_lowerlimb.npz")
+  193: print(f"[data] npz   = {_NPZ_PATH}")
+  195: db = np.load(_NPZ_PATH, allow_pickle=True)
+  198: cg = np.load(_CART_PATH / os.environ.get("CART_MESH", "cartilage_mesh.npz"))
+  199: lg = np.load(OUT / "ligaments.npz", allow_pickle=True)
+
+--- 含 LIG_DEF / BONES_OF / truss 的行 ---
+  406: if LIG_MODE in ("shell", "truss", "strip", "web"):
+  425:         trusses = [[int(x) for x in t] for t in lg["truss"][i]
+  430:                              "E": (ea * a_cross) if LIG_MODE == "truss" else (
+  435:                              a_cross=a_cross, trusses=trusses))
+  439:             used.update({int(v) for t in trusses for v in t})
+  440:         # strip：把 truss 束两两连成 quad（只用已有节点，零新增）
+  442:         for k in range(len(trusses) - 1):
+  443:             a0, b0 = trusses[k]
+  444:             a1, b1 = trusses[k + 1]
+  449:         Aset = sorted({t[0] for t in trusses})
+  450:         Bset = sorted({t[1] for t in trusses})
+  886: LIG_ETYPE = {"truss": "line2", "web": "tri3"}.get(LIG_MODE, "quad4")
+  887: if LIG_MODE in ("shell", "truss", "strip", "web"):
+  892:         elif LIG_MODE == "truss":
+  894:                                      for t in r["trusses"]]
+ 1309: if LIG_MODE in ("shell", "truss", "strip", "web"):
+ 1427:         # ★ 实测：BeamDomain type 只认 linear-truss / elastic-truss / linear-beam；
+ 1428:         #   elastic-truss + "isotropic elastic" 可跑通（linear-truss 不收标准材料，
+ 1432:               f'mat="{r["mat"]}" type="elastic-truss"/>')
+ 1807:     pairs = r.get("trusses") or []

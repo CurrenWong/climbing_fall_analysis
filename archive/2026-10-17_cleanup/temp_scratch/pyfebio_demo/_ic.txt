@@ -1,0 +1,79 @@
+================================================================================================
+cart_patch.py  29368 B / 636 行
+================================================================================================
+--- 顶部 docstring（前 30 行）---
+  """关节底面补丁重新分网 v2：**2D 参数平面重心网格** + 精确抬回。
+  
+  ── 为什么是 v2 ─────────────────────────────────────────────────────────
+  v1（提边界环 → 多边形裁剪）**失败**：补丁边界**不是干净闭环**
+  （tibiotalar_tibia 89 条边界边但只有 69 个节点 ⇒ 有掐点），
+  多边形追踪碎成 5~23 个环 ⇒ 面积覆盖仅 6~31%。
+  
+  ── v2 的两个关键设计 ───────────────────────────────────────────────────
+  **① 不做边界裁剪，不做点定位**：直接在**每个原三角内部**打重心网格
+     `(i,j,k), i+j+k=m`。新点必然落在原三角内 ⇒ **域 = 原补丁，覆盖率天然 100%**。
+  **② 用同一组重心坐标精确抬回** ⇒ 新点**精确落在原（分片线性）曲面上**
+     ⇒ **底面翘曲恒为 0**（`[LRN-052]` 测出负单元翘曲/对角 0.087~0.123 是根因）。
+  
+  对比 `cart_hex.py`（v1 细分）失败的原因：它对**扭曲的 quad** 做双线性插值，
+  中间点飞离两三角形曲面 ⇒ 扭转。这里改成「原 quad 拆 2 三角 + 三角内重心网格 +
+  精确抬回」，从根上消掉该机制。
+  
+  **③ 位移场同样用重心坐标插值**（逐角保留原 toward 位移）——
+     这是 `[LRN-052]` 里验证过「K=1 逐格复现基线」的正确做法。
+  
+  ── 边的共享 ────────────────────────────────────────────────────────────
+  三角形 (a,b,c) 的重心网格：
+    棱 AB (k=0) 的键 = canonical(a,b,i)    棱 BC (i=0) = (b,c,j)
+    棱 CA (j=0) = (c,a,k)                  内部 = (a,b,c,i,j)
+  同一物理棱两侧算出的**重心坐标相同** ⇒ 位置天然一致；键只用于**共享同一个节点号**。
+  
+  ── v3（2026-10-06）：偏置场解缠，消掉「顶点附近 Jacobian 翻转」───────────
+  v2 的抬回机制本身没错（底面翘曲恒 0），但**顶面 = 底面 + 逐节点偏置 d 的重心插值**，
+  当 d 场在单元尺度上变化过大时，楔形被"剪扭"⇒ `det(J)` 在**楔形顶点**上穿零
+  （完整采样 `detJ_penta6_full`：tibiotalar 两域实测 **42 个 ≤0**）。
+
+--- 所有 def / class ---
+    102: def wedge_dets(P6):
+    107: def guard_of(jname, bpos, newell):
+    144: def _tri_closest(p, a, b, c):
+    189: def untangle_disp(disp, tris, pos, guard=None, geps=0.01, grad_rad=2.0):
+    223: def _guard_dist(Dv):
+    243: def _guard_project(Dv):
+    266: def _guard_project(Dv):
+    336: def tet_vol(P):
+    340: def min_angle_tri(P):
+    350: def newell(p):
+    407: def _ma(P):
+    449: def _ar2(q):
+    454: def in_domain(pts):
+    493: def add(p, is_off):
+    500: def node_at(a, b, c, i, kk):
+    536: def _vert(r):
+    559: def P_of(r):
+    616: def _ix(x):
+
+--- 输出路径 / env 开关（关键：会不会覆盖 cart_m1）---
+     51: CP_OUT      输出文件名，默认 cartilage_mesh.npz
+     52: CP_OUTDIR   输出目录（相对 temp/thums），默认 cart_m1_fix
+     53: ⚠️ 硬保护：不允许写到 cart_m1（当前基线），除非 CP_FORCE=1
+     69: M = int(os.environ.get("CP_M", "4") or 4)
+     70: OUTNPZ = os.environ.get("CP_OUT", "cartilage_mesh.npz")
+     71: OUTDIR = THUMS / (os.environ.get("CP_OUTDIR", "cart_m1_fix").strip() or "cart_m1_fix")
+     72: CP_FORCE = os.environ.get("CP_FORCE", "").strip() == "1"
+     73: if OUTDIR.resolve() == (THUMS / "cart_m1").resolve() and not CP_FORCE:
+     74: raise SystemExit("⛔ 拒写 temp/thums/cart_m1（当前基线）。"
+     75: "改 CP_OUTDIR，或确实要覆盖时设 CP_FORCE=1。")
+     77: CP_UNT = os.environ.get("CP_UNTANGLE", "1").strip() != "0"
+     78: CP_UNT_TAU = float(os.environ.get("CP_UNT_TAU", "0.6") or 0.6)
+     79: CP_UNT_IT = int(os.environ.get("CP_UNT_IT", "3000") or 1600)
+     80: CP_UNT_LR = float(os.environ.get("CP_UNT_LR", "0.010") or 0.010)
+     81: CP_UNT_SM = float(os.environ.get("CP_UNT_SM", "0.001") or 0.001)
+     82: CP_UNT_LO = float(os.environ.get("CP_UNT_LO", "0.35") or 0.35)   # 逐节点厚度下界 (mm)
+     83: CP_UNT_HI = float(os.environ.get("CP_UNT_HI", "1.58") or 1.58)   # 逐节点厚度上界 (mm)
+     84: CP_UNT_TMAX = float(os.environ.get("CP_UNT_TMAX", "300") or 180)  # 单关节秒预算
+    404: DOMAIN = os.environ.get("CP_DOMAIN", "bary").strip().lower()
+    405: DIAG = os.environ.get("CP_DIAG", "best").strip().lower()   # best | 02
+    603: OUTDIR.mkdir(parents=True, exist_ok=True)
+    604: np.savez_compressed(OUTDIR / OUTNPZ, **out)
+    605: print(f"\n写出 {OUTDIR / OUTNPZ}  m={M}  ({(OUTDIR / OUTNPZ).stat().st_size/1e6:.2f} MB)")

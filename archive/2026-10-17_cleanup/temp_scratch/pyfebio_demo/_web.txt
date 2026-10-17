@@ -1,0 +1,9 @@
+[mode] MATSET=WK LIG_MODE=web TIME_STEPS=20 FIX_TALUS=transverse FORCE=600.0N
+[mode] BONES=all
+[mode] NO_CONTACT=False LIG_SUB=all
+骨+软骨：单元 32,497，节点 11,666
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\scripts\ankle_fe\ankle_lig_feb.py", line 198, in <module>
+    Bset[int(np.argsort(D[i])[1])]]
+             ~~~~~~~~~~~~~~~~^^^
+IndexError: index 1 is out of bounds for axis 0 with size 1

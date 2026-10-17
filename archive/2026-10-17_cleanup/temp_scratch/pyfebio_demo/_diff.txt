@@ -1,0 +1,31 @@
+新文件: ['ankle_lig_WK_tibia_cort_tibia_spon_tibia_marrow_talus_cort_talus_spon.feb']
+
+=== 原模型 ankle_tibiotalar.feb ===
+  总行数 35,635
+  Elements 块 8: [(('tet4', 'tibia_cort__tet4'), 1), (('hex8', 'tibia_cort__hex8'), 1), (('tet4', 'tibia_end_spon__tet4'), 1), (('tet4', 'tibia_marrow__tet4'), 1), (('hex8', 'talus_cort__hex8'), 1), (('tet4', 'talus_spon__tet4'), 1)]
+  类型分布: {'tet4': 6, 'hex8': 2}
+  各块元素数 top6: [(14482, 'tibia_marrow__tet4'), (6651, 'tibia_end_spon__tet4'), (2415, 'tibia_cort__hex8'), (1766, 'talus_spon__tet4'), (607, 'tibiotalar_talus__tet4'), (458, 'tibiotalar_tibia__tet4')]
+  elem 总数 26,779
+  node 总数 8,321
+  SolidDomain 8
+  Surface 4
+  NodeSet 2
+  Contact 1
+  bc 数 4
+  surface_load 0
+  域: [('tibia_cort__tet4', 'mat_cort_tibia'), ('tibia_cort__hex8', 'mat_cort_tibia'), ('tibia_end_spon__tet4', 'mat_spon_long'), ('tibia_marrow__tet4', 'mat_marrow'), ('talus_cort__hex8', 'mat_cort_tarsal'), ('talus_spon__tet4', 'mat_spon_tarsal'), ('tibiotalar_tibia__tet4', 'mat_cartilage'), ('tibiotalar_talus__tet4', 'mat_cartilage')]
+
+=== 新脚本 ankle_lig_WK_tibia_cort_tibia_spon_tibia_marrow_talus_cort_talus_spon.feb ===
+  总行数 36,789
+  Elements 块 8: [(('tet4', 'tibia_cort__tet4'), 1), (('hex8', 'tibia_cort__hex8'), 1), (('tet4', 'tibia_spon__tet4'), 1), (('tet4', 'tibia_marrow__tet4'), 1), (('hex8', 'talus_cort__hex8'), 1), (('tet4', 'talus_spon__tet4'), 1)]
+  类型分布: {'tet4': 6, 'hex8': 2}
+  各块元素数 top6: [(14482, 'tibia_marrow__tet4'), (6651, 'tibia_spon__tet4'), (2415, 'tibia_cort__hex8'), (1766, 'talus_spon__tet4'), (612, 'tibiotalar_talus__tet4'), (462, 'tibiotalar_tibia__tet4')]
+  elem 总数 26,788
+  node 总数 8,321
+  SolidDomain 8
+  Surface 2
+  NodeSet 4
+  Contact 0
+  bc 数 4
+  surface_load 2
+  域: [('tibia_cort__tet4', 'mat_tibia_cort'), ('tibia_cort__hex8', 'mat_tibia_cort'), ('tibia_spon__tet4', 'mat_long_spon'), ('tibia_marrow__tet4', 'mat_marrow'), ('talus_cort__hex8', 'mat_tarsal_cort'), ('talus_spon__tet4', 'mat_tarsal_spon'), ('tibiotalar_tibia__tet4', 'mat_cartilage'), ('tibiotalar_talus__tet4', 'mat_cartilage')]

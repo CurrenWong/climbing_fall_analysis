@@ -1,0 +1,10 @@
+====================================================================================================
+排序后分布对比（与单元顺序无关）—— 骨域
+====================================================================================================
+域                             n    存储 p50    重构 p50    存储 p99    重构 p99    存储 max    重构 max
+calcaneus_cort__hex8        634     0.292     1.740     3.864    39.652     6.208    52.269
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\verify_stress2.py", line 91, in <module>
+    J = P0.T @ dN
+        ~~~~~^~~~
+ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 6 is different from 4)

@@ -1,0 +1,8 @@
+[E1_ts40] rc=1 NORMAL=False 失收敛t=['0.463417'] F=None
+[E1_ts40r150] rc=1 NORMAL=False 失收敛t=['0.463417'] F=None
+[E3_ts40] rc=1 NORMAL=False 失收敛t=['0.942485'] F=None
+
+=== 汇总 ===
+  E1_ts40        rc=1 NORMAL=False F=None
+  E1_ts40r150    rc=1 NORMAL=False F=None
+  E3_ts40        rc=1 NORMAL=False F=None

@@ -1,0 +1,37 @@
+'D:\Project\climbing_fall_analysis' is not recognized as an internal or external command,
+operable program or batch file.
+'A)' is not recognized as an internal or external command,
+operable program or batch file.
+'G_MODE' is not recognized as an internal or external command,
+operable program or batch file.
+'IVER' is not recognized as an internal or external command,
+operable program or batch file.
+'PFIX' is not recognized as an internal or external command,
+operable program or batch file.
+'UNC_MM' is not recognized as an internal or external command,
+operable program or batch file.
+'X_TALUS' is not recognized as an internal or external command,
+operable program or batch file.
+'RT_ELEM' is not recognized as an internal or external command,
+operable program or batch file.
+'ME_STEPS' is not recognized as an internal or external command,
+operable program or batch file.
+'SP_MM' is not recognized as an internal or external command,
+operable program or batch file.
+'r' is not recognized as an internal or external command,
+operable program or batch file.
+状态 23 个，取末态 states/22
+末帧 |u|max = 1.9371 mm
+支反力沿加载轴 = 645.677 N
+R 各分量和: x 510.81  y 50.06  z 395.06
+
+软骨 von Mises p99 / max (MPa)：
+  tibiotalar_talus__penta6         n= 1766  p99   0.971  max   2.962
+
+其它域的最大 von Mises（前 5）：
+  tibia_cort__hex8                   max    12.757
+  navicular_spon__hex8               max    10.827
+  14                                 max     8.231
+  set22                              max     7.453
+  calcaneus_cort__hex8               max     7.119
+  fibula_spon__tet4                  max     7.017

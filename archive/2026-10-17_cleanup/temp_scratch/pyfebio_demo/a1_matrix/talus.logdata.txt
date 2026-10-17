@@ -1,0 +1,2306 @@
+===========================================================================
+         ________    _________   _______       __     _________            
+        |        |\ |        |\ |       \\    |  |\  /         \\          
+        |    ____|| |    ____|| |    __  ||   |__|| |    ___    ||         
+        |   |\___\| |   |\___\| |   |\_| ||    \_\| |   //  \   ||         
+        |   ||__    |   ||__    |   ||_| ||   |  |\ |  ||    |  ||         
+        |       |\  |       |\  |         \\  |  || |  ||    |  ||         
+        |    ___||  |    ___||  |    ___   || |  || |  ||    |  ||         
+        |   |\__\|  |   |\__\|  |   |\__|  || |  || |  ||    |  ||         
+        |   ||      |   ||___   |   ||__|  || |  || |   \\__/   ||         
+        |   ||      |        |\ |          || |  || |           ||         
+        |___||      |________|| |_________//  |__||  \_________//          
+                                                                           
+      F I N I T E   E L E M E N T S   F O R   B I O M E C H A N I C S      
+                                                                           
+  version 4.13.0
+  FEBio is a registered trademark.                                         
+  copyright (c) 2006-2026 - All rights reserved                            
+                                                                           
+===========================================================================
+
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * 6 isolated vertices removed.                                          *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_tibia" has 9 invalid facets.          *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_talus" has 22 invalid facets.         *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_subtalar_talus" has 46 invalid facets.           *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_tibia" has 9 invalid facets.          *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_talus" has 22 invalid facets.         *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_subtalar_talus" has 46 invalid facets.           *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+
+
+
+ FILES USED
+===========================================================================
+	Input file : D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb
+	Plot file  : D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.xplt
+	Log file   : D:\Project\climbing_fall_analysis\temp\thums\febio_lig\log_WK.txt
+
+
+ MESH INFO
+===========================================================================
+	Number of materials ............................ : 19
+	Number of domains .............................. : 24
+	Number of nodes ................................ : 4445
+	Number of solid elements ....................... : 8957
+	Number of shell elements ....................... : 135
+
+
+ MODULE
+===========================================================================
+	Module type ....................................... : solid
+
+
+ CONTROL DATA
+===========================================================================
+	analysis .......................................... : STATIC (0)
+	time_steps ........................................ : 20
+	step_size ......................................... : 0.05
+	plot_zero_state ................................... : no (0)
+	plot_range ........................................ : 0,-1
+	plot_level ........................................ : PLOT_MAJOR_ITRS (1)
+	output_level ...................................... : OUTPUT_MAJOR_ITRS (1)
+	plot_stride ....................................... : 1
+	output_stride ..................................... : 1
+	adaptor_re_solve .................................. : yes (1)
+	Auto time stepper activated ....................... : yes
+	  max_retries ..................................... : 10
+	  opt_iter ........................................ : 10
+	  dtmin ........................................... : 0.0001
+	  dtmax ........................................... : 0.05
+	  aggressiveness .................................. : 0
+	  cutback ......................................... : 0.5
+	  dtforce ......................................... : no (0)
+ SOLVER PARAMETERS
+===========================================================================
+	symmetric_stiffness ............................... : non-symmetric (0)
+	equation_scheme ................................... : staggered (0)
+	equation_order .................................... : default (0)
+	optimize_bw ....................................... : no (0)
+	lstol ............................................. : 0.9
+	lsmin ............................................. : 0.01
+	lsiter ............................................ : 5
+	ls_check_jacobians ................................ : no (0)
+	max_refs .......................................... : 50
+	check_zero_diagonal ............................... : no (0)
+	zero_diagonal_tol ................................. : 0
+	force_partition ................................... : 0
+	reform_each_time_step ............................. : yes (1)
+	reform_augment .................................... : no (0)
+	diverge_reform .................................... : yes (1)
+	min_residual ...................................... : 1e-20
+	max_residual ...................................... : 0
+	dtol .............................................. : 0.01
+	etol .............................................. : 0.001
+	rtol .............................................. : 0
+	rhoi .............................................. : -2
+	alpha ............................................. : 1
+	beta .............................................. : 0.25
+	gamma ............................................. : 0.5
+	logSolve .......................................... : no (0)
+	arc_length ........................................ : 0
+	arc_length_scale .................................. : 0
+
+
+
+
+
+
+ MATERIAL DATA
+===========================================================================
+  1 - mat_tibia_cort (type: isotropic elastic)
+	density ........................................... : 2e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  2 - mat_fibula_cort (type: isotropic elastic)
+	density ........................................... : 2e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  3 - mat_tarsal_cort (type: isotropic elastic)
+	density ........................................... : 2e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  4 - mat_tarsal_cort_shell (type: isotropic elastic)
+	density ........................................... : 2e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  5 - mat_long_spon (type: isotropic elastic)
+	density ........................................... : 1e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  6 - mat_tarsal_spon (type: isotropic elastic)
+	density ........................................... : 1e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  7 - mat_marrow (type: isotropic elastic)
+	density ........................................... : 1e-09
+	E ................................................. : 7300
+	v ................................................. : 0.3
+---------------------------------------------------------------------------
+  8 - mat_cartilage (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 10
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+  9 - mat_ligament (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 10 - mat_lig_PTFL_talofibular_posterior (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 11 - mat_lig_CFL_calcaneofibular (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 12 - mat_lig_ATFL_talofibular_anterior (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 13 - mat_lig_PTCL_talocalcaneal_posterior (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 14 - mat_lig_SYND_tibiofibular (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 15 - mat_lig_MD1_tibiotalar_post (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 16 - mat_lig_MD2_tibiocalcaneal (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 17 - mat_lig_MD3_tibionavicular (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 18 - mat_lig_MD4_tibiotalar_ant (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+---------------------------------------------------------------------------
+ 19 - mat_lig_SPRING_calcaneonavicular (type: isotropic elastic)
+	density ........................................... : 1.1e-09
+	E ................................................. : 260
+	v ................................................. : 0.4
+
+
+ BOUNDARY CONDITION DATA
+===========================================================================
+  1 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : yes (1)
+---------------------------------------------------------------------------
+  2 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : no (0)
+---------------------------------------------------------------------------
+  3 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : no (0)
+---------------------------------------------------------------------------
+  4 -  Type: zero displacement
+	x_dof ............................................. : yes (1)
+	y_dof ............................................. : yes (1)
+	z_dof ............................................. : no (0)
+---------------------------------------------------------------------------
+  5 -  Type: prescribed displacement
+	dof ............................................... : 2
+	value ............................................. : -1.6
+	relative .......................................... : no (0)
+---------------------------------------------------------------------------
+  6 -  Type: prescribed displacement
+	dof ............................................... : 2
+	value ............................................. : -1.6
+	relative .......................................... : no (0)
+
+
+ CONTACT INTERFACE DATA
+===========================================================================
+contact interface 1 - Type: tied-elastic
+	laugon ............................................ : PENALTY (0)
+	tolerance ......................................... : 1
+	gaptol ............................................ : -1
+	penalty ........................................... : 1
+	auto_penalty ...................................... : yes (1)
+	update_penalty .................................... : no (0)
+	two_pass .......................................... : no (0)
+	knmult ............................................ : 1
+	search_tol ........................................ : 0.01
+	symmetric_stiffness ............................... : no (0)
+	search_radius ..................................... : 1
+	minaug ............................................ : 0
+	maxaug ............................................ : 10
+	flip_primary ...................................... : no (0)
+	flip_secondary .................................... : no (0)
+---------------------------------------------------------------------------
+contact interface 2 - Type: tied-elastic
+	laugon ............................................ : PENALTY (0)
+	tolerance ......................................... : 1
+	gaptol ............................................ : -1
+	penalty ........................................... : 1
+	auto_penalty ...................................... : yes (1)
+	update_penalty .................................... : no (0)
+	two_pass .......................................... : no (0)
+	knmult ............................................ : 1
+	search_tol ........................................ : 0.01
+	symmetric_stiffness ............................... : no (0)
+	search_radius ..................................... : 1
+	minaug ............................................ : 0
+	maxaug ............................................ : 10
+	flip_primary ...................................... : no (0)
+	flip_secondary .................................... : no (0)
+---------------------------------------------------------------------------
+contact interface 3 - Type: tied-elastic
+	laugon ............................................ : PENALTY (0)
+	tolerance ......................................... : 1
+	gaptol ............................................ : -1
+	penalty ........................................... : 1
+	auto_penalty ...................................... : yes (1)
+	update_penalty .................................... : no (0)
+	two_pass .......................................... : no (0)
+	knmult ............................................ : 1
+	search_tol ........................................ : 0.01
+	symmetric_stiffness ............................... : no (0)
+	search_radius ..................................... : 1
+	minaug ............................................ : 0
+	maxaug ............................................ : 10
+	flip_primary ...................................... : no (0)
+	flip_secondary .................................... : no (0)
+---------------------------------------------------------------------------
+contact interface 4 - Type: sliding-elastic
+	laugon ............................................ : PENALTY (0)
+	tolerance ......................................... : 0.02
+	gaptol ............................................ : 0
+	penalty ........................................... : 1
+	auto_penalty ...................................... : yes (1)
+	update_penalty .................................... : no (0)
+	two_pass .......................................... : no (0)
+	knmult ............................................ : 0
+	search_tol ........................................ : 0.01
+	symmetric_stiffness ............................... : no (0)
+	search_radius ..................................... : 1
+	seg_up ............................................ : 0
+	tension ........................................... : no (0)
+	minaug ............................................ : 0
+	maxaug ............................................ : 10
+	node_reloc ........................................ : no (0)
+	fric_coeff ........................................ : 0
+	smooth_aug ........................................ : no (0)
+	flip_primary ...................................... : no (0)
+	flip_secondary .................................... : no (0)
+	shell_bottom_primary .............................. : no (0)
+	shell_bottom_secondary ............................ : no (0)
+	offset ............................................ : 0
+
+
+ LOAD CONTROLLER DATA
+===========================================================================
+load controller   1 - lc1 (type: loadcurve)
+	interpolate ....................................... : LINEAR (0)
+	extend ............................................ : CONSTANT (0)
+	points ............................................ : (can't display value)
+
+
+ OUTPUT DATA
+===========================================================================
+ LINEAR SOLVER DATA
+===========================================================================
+	Default linear solver ............................. : pardiso
+
+
+Data Record #1
+===========================================================================
+Step = 0
+Time = 0
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 0
+Time = 0
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 0
+Time = 0
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 0
+Time = 0
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+ *************************************************************************
+ * Selecting linear solver pardiso                                       *
+ *************************************************************************
+
+===== beginning time step 1 : 0.05 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674082
+ 1
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489648e+09    1.425037e+02    0.000000e+00 
+	   energy              3.487104e+04    4.208076e-01    3.487104e+01 
+	   displacement        1.287546e+01    1.287546e+01    1.287546e-03 
+ 2
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489648e+09    5.728355e+01    0.000000e+00 
+	   energy              3.487104e+04    3.127714e-01    3.487104e+01 
+	   displacement        1.287546e+01    5.781740e-02    1.314537e-03 
+ 3
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489648e+09    1.799573e+00    0.000000e+00 
+	   energy              3.487104e+04    3.030334e-02    3.487104e+01 
+	   displacement        1.287546e+01    2.767411e-02    1.290500e-03 
+ 4
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489648e+09    7.611378e-01    0.000000e+00 
+	   energy              3.487104e+04    2.768190e-05    3.487104e+01 
+	   displacement        1.287546e+01    1.082683e-03    1.294303e-03 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.05
+
+
+Data Record #1
+===========================================================================
+Step = 1
+Time = 0.05
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 1
+Time = 0.05
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 1
+Time = 0.05
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 1
+Time = 0.05
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 2 : 0.1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 673956
+ 1
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489618e+09    2.268340e+01    0.000000e+00 
+	   energy              3.484238e+04    2.473822e-03    3.484238e+01 
+	   displacement        8.705143e+00    8.705143e+00    8.705143e-04 
+ 2
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489618e+09    1.409621e+01    0.000000e+00 
+	   energy              3.484238e+04    2.557866e-02    3.484238e+01 
+	   displacement        8.705143e+00    1.099100e-01    9.046725e-04 
+ 3
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489618e+09    4.011648e-02    0.000000e+00 
+	   energy              3.484238e+04    2.496833e-03    3.484238e+01 
+	   displacement        8.705143e+00    4.155018e-02    8.823246e-04 
+ 4
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489618e+09    2.013558e-01    0.000000e+00 
+	   energy              3.484238e+04    3.475246e-04    3.484238e+01 
+	   displacement        8.705143e+00    4.138358e-03    8.774738e-04 
+ 5
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489618e+09    1.455561e-01    0.000000e+00 
+	   energy              3.484238e+04    6.876447e-06    3.484238e+01 
+	   displacement        8.705143e+00    4.568941e-05    8.773073e-04 
+
+convergence summary
+    number of iterations   : 5
+    number of reformations : 1
+
+------- converged at time : 0.1
+
+
+Data Record #1
+===========================================================================
+Step = 2
+Time = 0.1
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 2
+Time = 0.1
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 2
+Time = 0.1
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 2
+Time = 0.1
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 3 : 0.15 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674046
+ 1
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489604e+09    1.225954e+01    0.000000e+00 
+	   energy              3.484224e+04    1.588588e-02    3.484224e+01 
+	   displacement        8.856738e+00    8.856738e+00    8.856738e-04 
+ 2
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489604e+09    1.337120e+00    0.000000e+00 
+	   energy              3.484224e+04    1.427037e-03    3.484224e+01 
+	   displacement        8.856738e+00    1.035610e-02    8.960312e-04 
+ 3
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489604e+09    1.330597e+00    0.000000e+00 
+	   energy              3.484224e+04    9.924019e-05    3.484224e+01 
+	   displacement        8.856738e+00    1.496260e-02    8.866102e-04 
+ 4
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489604e+09    7.117913e-02    0.000000e+00 
+	   energy              3.484224e+04    3.371878e-05    3.484224e+01 
+	   displacement        8.856738e+00    1.654372e-03    8.891195e-04 
+ 5
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489604e+09    6.792182e-03    0.000000e+00 
+	   energy              3.484224e+04    1.499151e-06    3.484224e+01 
+	   displacement        8.856738e+00    5.071606e-04    8.877197e-04 
+
+convergence summary
+    number of iterations   : 5
+    number of reformations : 1
+
+------- converged at time : 0.15
+
+
+Data Record #1
+===========================================================================
+Step = 3
+Time = 0.15
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 3
+Time = 0.15
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 3
+Time = 0.15
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 3
+Time = 0.15
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 4 : 0.2 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674064
+ 1
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489588e+09    1.446261e+01    0.000000e+00 
+	   energy              3.484209e+04    1.031079e-02    3.484209e+01 
+	   displacement        8.878006e+00    8.878006e+00    8.878006e-04 
+ 2
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489588e+09    2.399142e+00    0.000000e+00 
+	   energy              3.484209e+04    7.083943e-03    3.484209e+01 
+	   displacement        8.878006e+00    1.988857e-02    9.024964e-04 
+ 3
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489588e+09    3.780617e-01    0.000000e+00 
+	   energy              3.484209e+04    6.980713e-04    3.484209e+01 
+	   displacement        8.878006e+00    1.381863e-02    8.921113e-04 
+ 4
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.438129
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489588e+09    1.656238e-02    0.000000e+00 
+	   energy              3.484209e+04    1.054901e-04    3.484209e+01 
+	   displacement        8.878006e+00    1.187983e-04    8.923694e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.2
+
+
+Data Record #1
+===========================================================================
+Step = 4
+Time = 0.2
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 4
+Time = 0.2
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 4
+Time = 0.2
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 4
+Time = 0.2
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 5 : 0.25 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674190
+ 1
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489572e+09    7.855758e+01    0.000000e+00 
+	   energy              3.484195e+04    1.358873e-01    3.484195e+01 
+	   displacement        8.902911e+00    8.902911e+00    8.902911e-04 
+ 2
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489572e+09    4.556633e+01    0.000000e+00 
+	   energy              3.484195e+04    1.526261e+00    3.484195e+01 
+	   displacement        8.902911e+00    3.164271e-01    9.756184e-04 
+ 3
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489572e+09    1.743710e+00    0.000000e+00 
+	   energy              3.484195e+04    1.338021e-01    3.484195e+01 
+	   displacement        8.902911e+00    7.501534e-02    9.266351e-04 
+ 4
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.539394
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489572e+09    2.962142e-01    0.000000e+00 
+	   energy              3.484195e+04    1.310290e-02    3.484195e+01 
+	   displacement        8.902911e+00    5.982899e-03    9.218914e-04 
+ 5
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 4
+	right hand side evaluations   = 9
+	stiffness matrix reformations = 1
+	step from line search         = 0.266759
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489572e+09    1.441247e-01    0.000000e+00 
+	   energy              3.484195e+04    9.776981e-04    3.484195e+01 
+	   displacement        8.902911e+00    4.647464e-04    9.196417e-04 
+
+convergence summary
+    number of iterations   : 5
+    number of reformations : 1
+
+------- converged at time : 0.25
+
+
+Data Record #1
+===========================================================================
+Step = 5
+Time = 0.25
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 5
+Time = 0.25
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 5
+Time = 0.25
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 5
+Time = 0.25
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 6 : 0.3 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674550
+ 1
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489560e+09    9.443490e+01    0.000000e+00 
+	   energy              3.484186e+04    1.019082e-01    3.484186e+01 
+	   displacement        8.972327e+00    8.972327e+00    8.972327e-04 
+ 2
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489560e+09    2.006001e+01    0.000000e+00 
+	   energy              3.484186e+04    4.685250e-01    3.484186e+01 
+	   displacement        8.972327e+00    9.567777e-02    9.425598e-04 
+ 3
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489560e+09    1.539327e+00    0.000000e+00 
+	   energy              3.484186e+04    4.686793e-03    3.484186e+01 
+	   displacement        8.972327e+00    2.379166e-02    9.226756e-04 
+ 4
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489560e+09    5.946316e-01    0.000000e+00 
+	   energy              3.484186e+04    3.700210e-04    3.484186e+01 
+	   displacement        8.972327e+00    3.385315e-03    9.254237e-04 
+ 5
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489560e+09    1.243271e+00    0.000000e+00 
+	   energy              3.484186e+04    9.393376e-05    3.484186e+01 
+	   displacement        8.972327e+00    7.507738e-03    9.202546e-04 
+ 6
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 5
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489560e+09    2.743524e-04    0.000000e+00 
+	   energy              3.484186e+04    6.739849e-06    3.484186e+01 
+	   displacement        8.972327e+00    1.574670e-03    9.225557e-04 
+ 7
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 6
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489560e+09    2.507476e-03    0.000000e+00 
+	   energy              3.484186e+04    9.486258e-08    3.484186e+01 
+	   displacement        8.972327e+00    6.547936e-05    9.220495e-04 
+
+convergence summary
+    number of iterations   : 7
+    number of reformations : 1
+
+------- converged at time : 0.3
+
+
+Data Record #1
+===========================================================================
+Step = 6
+Time = 0.3
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 6
+Time = 0.3
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 6
+Time = 0.3
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 6
+Time = 0.3
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 7 : 0.35 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674514
+ 1
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489542e+09    6.863675e+01    0.000000e+00 
+	   energy              3.484166e+04    3.647374e-02    3.484166e+01 
+	   displacement        9.000703e+00    9.000703e+00    9.000703e-04 
+ 2
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489542e+09    7.543260e+00    0.000000e+00 
+	   energy              3.484166e+04    2.275633e-01    3.484166e+01 
+	   displacement        9.000703e+00    7.056188e-02    9.367877e-04 
+ 3
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489542e+09    1.656617e+00    0.000000e+00 
+	   energy              3.484166e+04    7.671462e-05    3.484166e+01 
+	   displacement        9.000703e+00    2.167431e-02    9.227169e-04 
+ 4
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489542e+09    8.517087e-01    0.000000e+00 
+	   energy              3.484166e+04    5.660242e-05    3.484166e+01 
+	   displacement        9.000703e+00    5.520588e-03    9.278719e-04 
+ 5
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489542e+09    2.661615e-01    0.000000e+00 
+	   energy              3.484166e+04    2.419488e-05    3.484166e+01 
+	   displacement        9.000703e+00    5.584177e-03    9.226966e-04 
+ 6
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 5
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489542e+09    1.180703e-02    0.000000e+00 
+	   energy              3.484166e+04    1.721716e-05    3.484166e+01 
+	   displacement        9.000703e+00    3.625445e-04    9.237935e-04 
+
+convergence summary
+    number of iterations   : 6
+    number of reformations : 1
+
+------- converged at time : 0.35
+
+
+Data Record #1
+===========================================================================
+Step = 7
+Time = 0.35
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 7
+Time = 0.35
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 7
+Time = 0.35
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 7
+Time = 0.35
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 8 : 0.4 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674442
+ 1
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489527e+09    4.466342e+01    0.000000e+00 
+	   energy              3.484154e+04    1.127552e-03    3.484154e+01 
+	   displacement        9.013507e+00    9.013507e+00    9.013507e-04 
+ 2
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489527e+09    1.081112e+01    0.000000e+00 
+	   energy              3.484154e+04    2.537749e-01    3.484154e+01 
+	   displacement        9.013507e+00    5.371007e-02    9.259546e-04 
+ 3
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489527e+09    7.082458e-01    0.000000e+00 
+	   energy              3.484154e+04    7.407952e-03    3.484154e+01 
+	   displacement        9.013507e+00    2.038464e-02    9.102231e-04 
+ 4
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489527e+09    2.161385e-02    0.000000e+00 
+	   energy              3.484154e+04    5.118518e-05    3.484154e+01 
+	   displacement        9.013507e+00    4.076543e-04    9.118785e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.4
+
+
+Data Record #1
+===========================================================================
+Step = 8
+Time = 0.4
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 8
+Time = 0.4
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 8
+Time = 0.4
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 8
+Time = 0.4
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 9 : 0.45 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674550
+ 1
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489512e+09    7.844353e+01    0.000000e+00 
+	   energy              3.484143e+04    1.060742e-01    3.484143e+01 
+	   displacement        9.019738e+00    9.019738e+00    9.019738e-04 
+ 2
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489512e+09    2.772335e+01    0.000000e+00 
+	   energy              3.484143e+04    5.810899e-01    3.484143e+01 
+	   displacement        9.019738e+00    1.073985e-01    9.570830e-04 
+ 3
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489512e+09    1.032522e+00    0.000000e+00 
+	   energy              3.484143e+04    1.425109e-02    3.484143e+01 
+	   displacement        9.019738e+00    3.221280e-02    9.282402e-04 
+ 4
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489512e+09    2.152931e-01    0.000000e+00 
+	   energy              3.484143e+04    4.962308e-03    3.484143e+01 
+	   displacement        9.019738e+00    4.558274e-04    9.282536e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.45
+
+
+Data Record #1
+===========================================================================
+Step = 9
+Time = 0.45
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 9
+Time = 0.45
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 9
+Time = 0.45
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 9
+Time = 0.45
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 10 : 0.5 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674784
+ 1
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489501e+09    3.691921e+01    0.000000e+00 
+	   energy              3.484137e+04    2.932841e-02    3.484137e+01 
+	   displacement        9.091990e+00    9.091990e+00    9.091990e-04 
+ 2
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489501e+09    6.074483e+00    0.000000e+00 
+	   energy              3.484137e+04    1.174085e-01    3.484137e+01 
+	   displacement        9.091990e+00    3.927026e-02    9.331026e-04 
+ 3
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489501e+09    8.177707e-01    0.000000e+00 
+	   energy              3.484137e+04    1.767365e-03    3.484137e+01 
+	   displacement        9.091990e+00    1.994288e-02    9.175953e-04 
+ 4
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.632040
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489501e+09    2.757873e-02    0.000000e+00 
+	   energy              3.484137e+04    4.947881e-05    3.484137e+01 
+	   displacement        9.091990e+00    2.906561e-04    9.190880e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.5
+
+
+Data Record #1
+===========================================================================
+Step = 10
+Time = 0.5
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 10
+Time = 0.5
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 10
+Time = 0.5
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 10
+Time = 0.5
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 11 : 0.55 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 675018
+ 1
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489484e+09    3.677977e+01    0.000000e+00 
+	   energy              3.484119e+04    1.285030e-02    3.484119e+01 
+	   displacement        9.166957e+00    9.166957e+00    9.166957e-04 
+ 2
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489484e+09    5.379020e+00    0.000000e+00 
+	   energy              3.484119e+04    9.095508e-02    3.484119e+01 
+	   displacement        9.166957e+00    3.112533e-02    9.348621e-04 
+ 3
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489484e+09    7.476231e-01    0.000000e+00 
+	   energy              3.484119e+04    2.519876e-03    3.484119e+01 
+	   displacement        9.166957e+00    1.710823e-02    9.227881e-04 
+ 4
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489484e+09    2.162242e-02    0.000000e+00 
+	   energy              3.484119e+04    1.003880e-05    3.484119e+01 
+	   displacement        9.166957e+00    3.546946e-04    9.243296e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.55
+
+
+Data Record #1
+===========================================================================
+Step = 11
+Time = 0.55
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 11
+Time = 0.55
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 11
+Time = 0.55
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 11
+Time = 0.55
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 12 : 0.6 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 675018
+ 1
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489471e+09    4.111477e+01    0.000000e+00 
+	   energy              3.484110e+04    8.074301e-03    3.484110e+01 
+	   displacement        9.177967e+00    9.177967e+00    9.177967e-04 
+ 2
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489471e+09    7.033594e+00    0.000000e+00 
+	   energy              3.484110e+04    8.626688e-02    3.484110e+01 
+	   displacement        9.177967e+00    4.439872e-02    9.401975e-04 
+ 3
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489471e+09    8.589176e-01    0.000000e+00 
+	   energy              3.484110e+04    2.394481e-03    3.484110e+01 
+	   displacement        9.177967e+00    2.482850e-02    9.255140e-04 
+ 4
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489471e+09    3.103419e-02    0.000000e+00 
+	   energy              3.484110e+04    1.197168e-05    3.484110e+01 
+	   displacement        9.177967e+00    4.871377e-04    9.272051e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.6
+
+
+Data Record #1
+===========================================================================
+Step = 12
+Time = 0.6
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 12
+Time = 0.6
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 12
+Time = 0.6
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 12
+Time = 0.6
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 13 : 0.65 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 675036
+ 1
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489459e+09    4.595669e+01    0.000000e+00 
+	   energy              3.484102e+04    2.192064e-03    3.484102e+01 
+	   displacement        9.217829e+00    9.217829e+00    9.217829e-04 
+ 2
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489459e+09    8.141926e+00    0.000000e+00 
+	   energy              3.484102e+04    1.022028e-01    3.484102e+01 
+	   displacement        9.217829e+00    4.739802e-02    9.469559e-04 
+ 3
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489459e+09    7.268433e-01    0.000000e+00 
+	   energy              3.484102e+04    4.780595e-03    3.484102e+01 
+	   displacement        9.217829e+00    2.377725e-02    9.320756e-04 
+ 4
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 3
+	right hand side evaluations   = 9
+	stiffness matrix reformations = 1
+	step from line search         = 0.097325
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489459e+09    5.759120e-01    0.000000e+00 
+	   energy              3.484102e+04    4.379726e-04    3.484102e+01 
+	   displacement        9.217829e+00    3.485953e-06    9.321352e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.65
+
+
+Data Record #1
+===========================================================================
+Step = 13
+Time = 0.65
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 13
+Time = 0.65
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 13
+Time = 0.65
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 13
+Time = 0.65
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 14 : 0.7 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 675198
+ 1
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489446e+09    4.701413e+01    0.000000e+00 
+	   energy              3.484095e+04    1.042436e-02    3.484095e+01 
+	   displacement        9.297268e+00    9.297268e+00    9.297268e-04 
+ 2
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489446e+09    3.276096e+00    0.000000e+00 
+	   energy              3.484095e+04    6.970541e-02    3.484095e+01 
+	   displacement        9.297268e+00    1.812811e-02    9.463120e-04 
+ 3
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489446e+09    4.566497e-01    0.000000e+00 
+	   energy              3.484095e+04    1.197102e-05    3.484095e+01 
+	   displacement        9.297268e+00    8.989782e-03    9.366664e-04 
+ 4
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489446e+09    3.291619e-02    0.000000e+00 
+	   energy              3.484095e+04    1.823111e-04    3.484095e+01 
+	   displacement        9.297268e+00    1.313367e-04    9.373163e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.7
+
+
+Data Record #1
+===========================================================================
+Step = 14
+Time = 0.7
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 14
+Time = 0.7
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 14
+Time = 0.7
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 14
+Time = 0.7
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 15 : 0.75 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 675162
+ 1
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489434e+09    1.353300e+02    0.000000e+00 
+	   energy              3.484088e+04    1.185463e-01    3.484088e+01 
+	   displacement        9.304041e+00    9.304041e+00    9.304041e-04 
+ 2
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489434e+09    1.349838e+01    0.000000e+00 
+	   energy              3.484088e+04    2.533689e-01    3.484088e+01 
+	   displacement        9.304041e+00    9.651643e-02    9.958307e-04 
+ 3
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489434e+09    3.286726e+00    0.000000e+00 
+	   energy              3.484088e+04    1.311991e-02    3.484088e+01 
+	   displacement        9.304041e+00    3.556524e-02    9.731331e-04 
+ 4
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489434e+09    6.595300e-01    0.000000e+00 
+	   energy              3.484088e+04    1.816817e-03    3.484088e+01 
+	   displacement        9.304041e+00    7.315053e-03    9.769842e-04 
+ 5
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489434e+09    6.404613e-01    0.000000e+00 
+	   energy              3.484088e+04    6.321669e-05    3.484088e+01 
+	   displacement        9.304041e+00    5.946061e-03    9.724855e-04 
+ 6
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 5
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489434e+09    2.650995e-01    0.000000e+00 
+	   energy              3.484088e+04    4.194149e-05    3.484088e+01 
+	   displacement        9.304041e+00    2.137261e-03    9.754508e-04 
+ 7
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 6
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489434e+09    4.094703e-03    0.000000e+00 
+	   energy              3.484088e+04    7.478825e-08    3.484088e+01 
+	   displacement        9.304041e+00    7.738643e-04    9.736226e-04 
+
+convergence summary
+    number of iterations   : 7
+    number of reformations : 1
+
+------- converged at time : 0.75
+
+
+Data Record #1
+===========================================================================
+Step = 15
+Time = 0.75
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 15
+Time = 0.75
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 15
+Time = 0.75
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 15
+Time = 0.75
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 16 : 0.8 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 674982
+ 1
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489422e+09    5.729918e+01    0.000000e+00 
+	   energy              3.484081e+04    1.768567e-03    3.484081e+01 
+	   displacement        9.358511e+00    9.358511e+00    9.358511e-04 
+ 2
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489422e+09    4.001296e+00    0.000000e+00 
+	   energy              3.484081e+04    6.975822e-02    3.484081e+01 
+	   displacement        9.358511e+00    2.357177e-02    9.527485e-04 
+ 3
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489422e+09    3.636250e-01    0.000000e+00 
+	   energy              3.484081e+04    2.241739e-03    3.484081e+01 
+	   displacement        9.358511e+00    1.170615e-02    9.419452e-04 
+ 4
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489422e+09    1.062996e-02    0.000000e+00 
+	   energy              3.484081e+04    1.037803e-05    3.484081e+01 
+	   displacement        9.358511e+00    5.695413e-05    9.427778e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 0.8
+
+
+Data Record #1
+===========================================================================
+Step = 16
+Time = 0.8
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 16
+Time = 0.8
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 16
+Time = 0.8
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 16
+Time = 0.8
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 17 : 0.85 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 675090
+ 1
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489412e+09    5.964039e+01    0.000000e+00 
+	   energy              3.484075e+04    9.526319e-03    3.484075e+01 
+	   displacement        9.377331e+00    9.377331e+00    9.377331e-04 
+ 2
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489412e+09    2.737372e+00    0.000000e+00 
+	   energy              3.484075e+04    2.565285e-02    3.484075e+01 
+	   displacement        9.377331e+00    2.496177e-02    9.525943e-04 
+ 3
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489412e+09    1.134463e+00    0.000000e+00 
+	   energy              3.484075e+04    1.044081e-03    3.484075e+01 
+	   displacement        9.377331e+00    1.916995e-02    9.413331e-04 
+ 4
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489412e+09    1.338794e-01    0.000000e+00 
+	   energy              3.484075e+04    2.048952e-05    3.484075e+01 
+	   displacement        9.377331e+00    1.716204e-03    9.445006e-04 
+ 5
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489412e+09    1.739221e-01    0.000000e+00 
+	   energy              3.484075e+04    1.990110e-05    3.484075e+01 
+	   displacement        9.377331e+00    2.183230e-03    9.414217e-04 
+ 6
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 5
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489412e+09    4.848830e-03    0.000000e+00 
+	   energy              3.484075e+04    3.780907e-08    3.484075e+01 
+	   displacement        9.377331e+00    1.257478e-04    9.420716e-04 
+
+convergence summary
+    number of iterations   : 6
+    number of reformations : 1
+
+------- converged at time : 0.85
+
+
+Data Record #1
+===========================================================================
+Step = 17
+Time = 0.85
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 17
+Time = 0.85
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 17
+Time = 0.85
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 17
+Time = 0.85
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 18 : 0.9 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 675324
+ 1
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489402e+09    6.298853e+01    0.000000e+00 
+	   energy              3.484069e+04    1.638081e-02    3.484069e+01 
+	   displacement        9.423393e+00    9.423393e+00    9.423393e-04 
+ 2
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489402e+09    1.951393e+00    0.000000e+00 
+	   energy              3.484069e+04    2.213707e-02    3.484069e+01 
+	   displacement        9.423393e+00    2.140683e-02    9.625270e-04 
+ 3
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489402e+09    1.219967e+00    0.000000e+00 
+	   energy              3.484069e+04    9.161112e-04    3.484069e+01 
+	   displacement        9.423393e+00    1.657589e-02    9.519850e-04 
+ 4
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489402e+09    1.950399e-01    0.000000e+00 
+	   energy              3.484069e+04    3.229779e-05    3.484069e+01 
+	   displacement        9.423393e+00    2.432718e-03    9.555668e-04 
+ 5
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489402e+09    1.438424e-01    0.000000e+00 
+	   energy              3.484069e+04    1.813407e-05    3.484069e+01 
+	   displacement        9.423393e+00    2.157821e-03    9.523743e-04 
+ 6
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 5
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489402e+09    3.897582e-03    0.000000e+00 
+	   energy              3.484069e+04    8.769565e-08    3.484069e+01 
+	   displacement        9.423393e+00    9.600968e-05    9.530047e-04 
+
+convergence summary
+    number of iterations   : 6
+    number of reformations : 1
+
+------- converged at time : 0.9
+
+
+Data Record #1
+===========================================================================
+Step = 18
+Time = 0.9
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 18
+Time = 0.9
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 18
+Time = 0.9
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 18
+Time = 0.9
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+===== beginning time step 19 : 0.95 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 675486
+ 1
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489392e+09    6.338769e+01    0.000000e+00 
+	   energy              3.484063e+04    6.013797e-03    3.484063e+01 
+	   displacement        9.449528e+00    9.449528e+00    9.449528e-04 
+ 2
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489392e+09    1.964740e+00    0.000000e+00 
+	   energy              3.484063e+04    1.666580e-02    3.484063e+01 
+	   displacement        9.449528e+00    1.920271e-02    9.562588e-04 
+ 3
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489392e+09    1.235995e+00    0.000000e+00 
+	   energy              3.484063e+04    6.173585e-04    3.484063e+01 
+	   displacement        9.449528e+00    1.709234e-02    9.463035e-04 
+ 4
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489392e+09    2.525035e-01    0.000000e+00 
+	   energy              3.484063e+04    4.375343e-05    3.484063e+01 
+	   displacement        9.449528e+00    2.786100e-03    9.502355e-04 
+ 5
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489392e+09    5.299196e-02    0.000000e+00 
+	   energy              3.484063e+04    8.193243e-06    3.484063e+01 
+	   displacement        9.449528e+00    1.749801e-03    9.472527e-04 
+ 6
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 5
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489392e+09    5.577446e-03    0.000000e+00 
+	   energy              3.484063e+04    6.259972e-08    3.484063e+01 
+	   displacement        9.449528e+00    3.192197e-06    9.473207e-04 
+
+convergence summary
+    number of iterations   : 6
+    number of reformations : 1
+
+------- converged at time : 0.95
+
+
+Data Record #1
+===========================================================================
+Step = 19
+Time = 0.95
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 19
+Time = 0.95
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 19
+Time = 0.95
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 19
+Time = 0.95
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+MUST POINT CONTROLLER: adjusting time step. dt = 0.05
+
+
+===== beginning time step 20 : 1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12354
+	Nr of nonzeroes in stiffness matrix ....... : 675774
+ 1
+ Nonlinear solution status: time= 1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489383e+09    6.277067e+01    0.000000e+00 
+	   energy              3.484058e+04    8.922129e-03    3.484058e+01 
+	   displacement        9.454556e+00    9.454556e+00    9.454556e-04 
+ 2
+ Nonlinear solution status: time= 1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489383e+09    1.990161e+00    0.000000e+00 
+	   energy              3.484058e+04    2.344615e-02    3.484058e+01 
+	   displacement        9.454556e+00    2.666633e-02    9.621847e-04 
+ 3
+ Nonlinear solution status: time= 1
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489383e+09    6.998427e-01    0.000000e+00 
+	   energy              3.484058e+04    1.496333e-03    3.484058e+01 
+	   displacement        9.454556e+00    1.746787e-02    9.505523e-04 
+ 4
+ Nonlinear solution status: time= 1
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.385882
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489383e+09    6.387964e-02    0.000000e+00 
+	   energy              3.484058e+04    1.599169e-04    3.484058e+01 
+	   displacement        9.454556e+00    4.222014e-04    9.513938e-04 
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 1
+
+------- converged at time : 1
+
+
+Data Record #1
+===========================================================================
+Step = 20
+Time = 1
+Data = disp
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 20
+Time = 1
+Data = reac_tibia
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 20
+Time = 1
+Data = reac_fibula
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 20
+Time = 1
+Data = reac_talus
+File = D:\Project\climbing_fall_analysis\temp\thums\febio_lig\reac_talus_WK.txt
+
+
+ N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+
+	Number of time steps completed .................... : 20
+
+	Total number of equilibrium iterations ............ : 97
+
+	Average number of equilibrium iterations .......... : 4.85
+
+	Total number of right hand evaluations ............ : 127
+
+	Total number of stiffness reformations ............ : 20
+
+
+ L I N E A R   S O L V E R   S T A T S
+
+	Total calls to linear solver ........ : 97
+
+	Avg iterations per solve ............ : 1
+
+	Time in linear solver: 0:00:05
+
+ Peak memory  : 152.7 MB
+
+ Elapsed time : 0:00:10
+
+ T I M I N G   I N F O R M A T I O N
+
+	Input time ...................... : 0:00:00 (0.0298347 sec)
+
+	Initialization time ............. : 0:00:00 (0.0279062 sec)
+
+	Solve time ...................... : 0:00:10 (10.3759 sec)
+
+	   IO-time (plot, dmp, data) .... : 0:00:01 (1.17254 sec)
+
+	   serialization ................ : 0:00:00 (0.240669 sec)
+
+	   reforming stiffness .......... : 0:00:01 (1.04885 sec)
+
+	   evaluating stiffness ......... : 0:00:01 (1.02046 sec)
+
+	   evaluating residual .......... : 0:00:01 (0.936021 sec)
+
+	   model update ................. : 0:00:01 (0.938891 sec)
+
+	   QN updates ................... : 0:00:00 (0.0291895 sec)
+
+	   time in linear solver ........ : 0:00:05 (4.90877 sec)
+
+	Total elapsed time .............. : 0:00:10 (10.4556 sec)
+
+
+ N O R M A L   T E R M I N A T I O N
+

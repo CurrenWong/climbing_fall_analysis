@@ -1,0 +1,23 @@
+=== 骨节点集合 ===
+  calcaneus     1,544
+  fibula        1,724
+  navicular       237
+  talus           916
+  tibia         7,245
+
+      pid 名称                             节点   A侧   B侧   杆数      膜面积     长度      截面     每杆A
+----------------------------------------------------------------------------------------------------
+ 81100701 PTFL_talofibular_posterior     12    3    3    3    130.0   17.5   14.84   4.948     骨-骨    13.2  覆盖A 3/3 B 3/3
+ 81100801 CFL_calcaneofibular            21    5    3    5    294.1   34.4   17.10   3.421     骨-骨    29.7  覆盖A 5/5 B 3/3
+ 81100901 ATFL_talofibular_anterior      28    4    4    4    530.3   36.5   29.05   7.263     骨-骨    34.1  覆盖A 4/4 B 4/4
+ 81101001 PTCL_talocalcaneal_posterior   39   13   13   13    559.0   18.0   62.04   4.773     骨-骨    10.6  覆盖A 13/13 B 13/13
+ 81101101 SYND_tibiofibular              35   10   10   10    709.9   32.4   43.81   4.381     骨-骨    15.3  覆盖A 10/10 B 10/10
+ 81101201 MD1_tibiotalar_post            15    3    3    3    316.1   26.6   23.75   7.916     骨-骨    24.7  覆盖A 3/3 B 3/3
+ 81101202 MD2_tibiocalcaneal             22    3    4    4    299.3   37.4   15.98   3.996     骨-骨    30.1  覆盖A 3/3 B 4/4
+ 81101203 MD3_tibionavicular             26    3    4    4    442.8   37.9   23.36   5.841     骨-骨    37.5  覆盖A 3/3 B 4/4
+ 81101204 MD4_tibiotalar_ant             15    3    3    3    244.3   28.6   17.07   5.689     骨-骨    27.4  覆盖A 3/3 B 3/3
+ 81101409 SPRING_calcaneonavicular       29    6    5    6    335.4   25.9   25.92   4.319     骨-骨    20.1  覆盖A 6/6 B 5/5
+
+写出 D:\Project\climbing_fall_analysis\temp\thums\ligaments.npz
+  韧带 10 条，韧带节点 235 个，杆 55 根
+  元数据 -> ligaments.json

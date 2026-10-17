@@ -1,0 +1,7 @@
+找到：
+  C:\Users\curre\.copaw\workspaces\default\SOUL.md  2067 B
+  C:\Users\curre\.copaw\workspaces\default\AGENTS.md  8379 B
+LEARNINGS.md 118515 -> 120056
+operational-gotchas.md +587 字符
+  ⚠ MEMORY 未命中：- **`taskkill /IM` 会杀 agent 自己** —— 用 PID | `r
+MEMORY.md 10231 -> 10484 B  ❌ 超 244

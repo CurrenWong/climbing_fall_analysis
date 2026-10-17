@@ -1,0 +1,81 @@
+[PDF 共 507 页]
+
+==========================================================================
+### 第 104 页
+==========================================================================
+104 CHAPTER 3. FREE FORMAT INPUT
+3.12.2.2 Initial Rigid Angular Velocity
+Indynamicanalysis,theinitialangularvelocityofarigidbodycanbesetviatheinitial_rigid_angular_velocity
+rigid constraint. It requires the following parameters.
+parameters Description
+rb The rigid body’s material name. (1)
+value The initial angular velocity vector
+Comments:
+1. This is the “name” attribute assigned to the corresponding rigid body material as defined in
+the Material section.
+The following example defines an initial angular velocity for a rigid body.
+<rigid_ic type="initial_rigid_angular_velocity">
+<rb>rigid</rb>
+<value>1,0,0</value>
+</rigid_ic>
+3.12.3 Rigid Loads
+The rigid_load section can be used to applied loads to a rigid body.
+3.12.3.1 Rigid_force Load
+Therigid_force loadappliesaloaddirectlytotherigiddegreeoffreedom. Itrequiresthefollowing
+parameters.
+parameters Description
+rb The rigid body’s material name (1)
+dof The rigid degree of freedom to prescribe. (2)
+value The prescribed force value
+load_type Defines the type of load. (3)
+Comments:
+1. This is the “name” attribute assigned to the corresponding rigid body material as defined in
+the Material section.
+2. The values allowed for the dof parameter are: Rx, Ry, Rz.
+3. The load_type allows the following values:
+(a) 0 = a load (force/moment) is applied directly to the degree of freedom.
+(b) 1 = a follower load applied is applied to the rigid body. The load is applied in the rigid
+body’s coordinate system, so it rotates with the rigid body. This only works for Rx, Ry,
+Rz.
+
+==========================================================================
+### 第 105 页
+==========================================================================
+3.12. RIGID SECTION 105
+(c) 2 = target load. The load’s value is ramped up from its initial value at the start of the
+step, and ramped up linearly to the value specified in the value parameter.
+The following example applies a force in the x-direction.
+<rigid_load type="rigid_force">
+<rb>1</rb>
+<dof>Rx</dofs>
+<value lc="1">3.14</value>
+</rigid_load>
+3.12.3.2 Rigid_moment Load
+The rigid_moment load applies a moment about a particular coordinate axis. It requires the fol-
+lowing parameters.
+parameters Description
+rb The rigid body’s material name (1)
+dof The rigid degree of freedom to prescribe. (2)
+value The prescribed moment value
+relative Defines the type of load. (3)
+Comments:
+1. This is the “name” attribute assigned to the corresponding rigid body material as defined in
+the Material section.
+2. The values allowed for the dof parameter are: Ru, Rv, Rw.
+3. The relative flag indicates whether the applied value should be absolute or relative to the
+value at the end of the previous analysis step.
+The following example applies a moment about the x-axis.
+<rigid_load type="rigid_moment">
+<rb>rigid</rb>
+<dof>Ru</dofs>
+<value lc="1">3.14</value>
+</rigid_load>
+3.12.3.3 Rigid_follower_force Load
+The rigid_follower_force load applies a force in the local rigid body coordinate system. The direc-
+tionoftheforceinglobalcoordinatesthereforedependsonorientationoftherigidbody. Itrequires
+the following parameters.
+parameters Description
+rb The rigid body’s material name (1)
+insertion Location where the force is applied. (2)
+force The vector force value
+relative Relative flag (3)

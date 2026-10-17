@@ -1,0 +1,7 @@
+已打补丁 parse_mesh
+
+=== baseline rc=0 OK ===
+   to_hdf5 仍失败: KeyError 'name'
+
+=== elemdata rc=1 FAIL ===
+    *                                ERROR                                  *

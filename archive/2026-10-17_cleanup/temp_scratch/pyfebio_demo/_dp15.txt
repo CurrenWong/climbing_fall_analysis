@@ -1,0 +1,23 @@
+--- 关键行 ---
+   [prism15] 新增边中点 1,302 个；软骨改 penta15；节点总数 5,187
+   !!  tibiotalar_tibia       penta15 保留    104 剔除   50  det(J) min=1.2701e+00
+   !!  tibiotalar_talus       penta15 保留    128 剔除   76  det(J) min=9.3569e-01
+   接触面 tibiotalar_tibia: 0 面
+   接触面 tibiotalar_talus: 0 面
+   FEBio rc=1  用时 0.1s
+   Reading file D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb ...FAILED!
+   *                                ERROR                                  *
+
+--- 尾部 600 字符 ---
+=======================================
+  
+  Starting without configuration file
+  Default linear solver: pardiso
+  Reading file D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb ...FAILED!
+  
+   *************************************************************************
+   *                                ERROR                                  *
+   * Missing contact primary surface (line 13983)                          *
+   *                                                                       *
+   *************************************************************************
+

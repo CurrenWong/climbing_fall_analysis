@@ -1,0 +1,59 @@
+读 ankle_lig_WK.xplt (7.5 MB)
+pyfebio parse_state 已打容错补丁
+pyfebio parse_mesh 已打容错补丁
+节点 (3885,)  位移 (3885, 3)  支反力 (3885, 3)
+位移矩阵形状 (3885, 3)
+
+==============================================================================
+每条韧带的位移（拉伸长度，mm）
+==============================================================================
+韧带                                   纤维      平均ΔL      最大ΔL      EA      |u|均    |u|max
+------------------------------------------------------------------------------------------------
+PTFL_talofibular_posterior            3    0.0093    0.0148    180.0    0.0222    0.0876
+CFL_calcaneofibular                   5   -0.0225   -0.0059    510.0    0.0144    0.0861
+ATFL_talofibular_anterior             4   -0.0269   -0.0233    180.0    0.0174    0.0872
+PTCL_talocalcaneal_posterior         13    0.0001    0.0005     75.4    0.0001    0.0006
+SYND_tibiofibular                    10    0.0019    0.0050     75.4    0.0897    0.0904
+MD1_tibiotalar_post                   3   -0.0286   -0.0057    180.0    0.0655    0.0893
+MD2_tibiocalcaneal                    3   -0.0380   -0.0208    510.0    0.0643    0.0874
+MD3_tibionavicular                    3   -0.0212   -0.0146    510.0    0.0801    0.0866
+MD4_tibiotalar_ant                    3   -0.0794   -0.0769    180.0    0.0633    0.0854
+SPRING_calcaneonavicular              6   -0.0009    0.0017     75.4    0.0062    0.0409
+
+==============================================================================
+排序（按平均拉伸位移，降序）
+==============================================================================
+
+【口径一 ΔL = 拉伸长度变化】
+   1. PTFL_talofibular_posterior           0.0093 mm   (EA=180.0)
+   2. SYND_tibiofibular                    0.0019 mm   (EA=75.4)
+   3. PTCL_talocalcaneal_posterior         0.0001 mm   (EA=75.4)
+   4. SPRING_calcaneonavicular            -0.0009 mm   (EA=75.4)
+   5. MD3_tibionavicular                  -0.0212 mm   (EA=510.0)
+   6. CFL_calcaneofibular                 -0.0225 mm   (EA=510.0)
+   7. ATFL_talofibular_anterior           -0.0269 mm   (EA=180.0)
+   8. MD1_tibiotalar_post                 -0.0286 mm   (EA=180.0)
+   9. MD2_tibiocalcaneal                  -0.0380 mm   (EA=510.0)
+  10. MD4_tibiotalar_ant                  -0.0794 mm   (EA=180.0)
+
+【口径二 |u| = 韧带节点绝对位移均值】
+   1. SYND_tibiofibular                    0.0897 mm   (EA=75.4)
+   2. MD3_tibionavicular                   0.0801 mm   (EA=510.0)
+   3. MD1_tibiotalar_post                  0.0655 mm   (EA=180.0)
+   4. MD2_tibiocalcaneal                   0.0643 mm   (EA=510.0)
+   5. MD4_tibiotalar_ant                   0.0633 mm   (EA=180.0)
+   6. PTFL_talofibular_posterior           0.0222 mm   (EA=180.0)
+   7. ATFL_talofibular_anterior            0.0174 mm   (EA=180.0)
+   8. CFL_calcaneofibular                  0.0144 mm   (EA=510.0)
+   9. SPRING_calcaneonavicular             0.0062 mm   (EA=75.4)
+  10. PTCL_talocalcaneal_posterior         0.0001 mm   (EA=75.4)
+
+吴恺要的四条（吴恺: 胫跟 5.24 > 胫舟 5.04 > 跟腓 2.05 > 下胫腓前 1.92）
+  口径一 ΔL    : 下胫腓前 > 胫舟 > 跟腓 > 胫跟
+  口径二 |u|   : 下胫腓前 > 胫舟 > 胫跟 > 跟腓
+    下胫腓前     ΔL=  0.0019 mm
+    胫舟       ΔL= -0.0212 mm
+    跟腓       ΔL= -0.0225 mm
+    胫跟       ΔL= -0.0380 mm
+
+支反力沿加载轴分量之和 = 140.059

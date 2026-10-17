@@ -1,0 +1,17 @@
+[E3b_a2_bfgs_on] rc=1 NORMAL=False 失收敛t=['0.941887'] F=None
+
+=== E1_ts40 残差轨迹（失收敛前）===
+  t=0.461987         CURRENT residual=2.8028e+00
+  t=0.461987         CURRENT residual=1.5238e+00
+  t=0.461987         CURRENT residual=1.0511e+00
+  t=0.461987         CURRENT residual=4.3482e-01
+  t=0.461987         CURRENT residual=1.3079e-01
+  t=0.461987         CURRENT residual=8.6575e-02
+  t=0.461987         CURRENT residual=9.4559e-01
+  t=0.461987         CURRENT residual=3.6032e-01
+  t=0.461987         CURRENT residual=1.1259e-01
+  t=0.461987         CURRENT residual=9.2087e-02
+  t=0.461987         CURRENT residual=7.8953e-01
+  t=0.461987         CURRENT residual=4.0455e-01
+  t=0.461987         CURRENT residual=1.2307e-01
+  t=0.461987         CURRENT residual=1.0968e-01

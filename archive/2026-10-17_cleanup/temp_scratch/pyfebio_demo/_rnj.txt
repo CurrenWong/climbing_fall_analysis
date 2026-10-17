@@ -1,0 +1,41 @@
+原始输出 4107 字符
+========================================================================================
+  === Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===
+  * Negative jacobian detected.                                           *
+========================================================================================
+失败上下文：
+_talus: primary(软骨底面) 178 面 / secondary(骨关节面, 坐标匹配≤0.05) 118 面
+  接触面 tibiotalar_tibia: 143 面
+  接触面 tibiotalar_talus: 178 面
+外表面顶/底：胫骨顶 114 / 腓骨顶 33 / 跟骨底 147
+顶面投影面积：胫骨 47.8 mm²，腓骨 12.7 mm² => 腓骨分担 21.0% 载荷
+读数数据 -> D:\Project\climbing_fall_analysis\temp\thums\febio_lig\lig_read_WK.npz
+
+写出 D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb（759 KB）  单元：骨+软骨 8362，韧带 135，共 8497
+
+FEBio rc=1  用时 10.9s
+  
+  ===== reforming stiffness matrix:
+  	Nr of equations ........................... : 11112
+  	Nr of nonzeroes in stiffness matrix ....... : 578706
+   1
+  
+   *************************************************************************
+   *                                ERROR                                  *
+   * Negative jacobian detected.                                           *
+   *************************************************************************
+  
+  
+  ------- failed to converge at time : 0.849669
+  
+  Max. nr of retries reached.
+  
+  
+  
+   N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+  
+  	Number of time steps completed .................... : 17
+  
+  	Total number of equilibrium iterations ............ : 92
+  
+  	Average number of equil

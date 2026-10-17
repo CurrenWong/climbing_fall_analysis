@@ -1,0 +1,12 @@
+
+=== A_shared_both rc=1 FAIL ===
+    *                                ERROR                                  *
+    * syntax error (line 15)                                                *
+
+=== B_one_free rc=1 FAIL ===
+    *                                ERROR                                  *
+    * syntax error (line 15)                                                *
+
+=== C_solid_only rc=1 FAIL ===
+    *                                ERROR                                  *
+    * syntax error (line 15)                                                *

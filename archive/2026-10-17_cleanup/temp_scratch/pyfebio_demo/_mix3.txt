@@ -1,0 +1,6 @@
+
+=== T1_tet_plus_truss rc=0 OK ===
+
+=== T2_tet_only rc=0 OK ===
+
+=== T3_tet_truss_nocontact rc=0 OK ===

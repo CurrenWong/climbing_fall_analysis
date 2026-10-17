@@ -1,0 +1,6 @@
+参考坐标 (4029, 3)  节点 id 1..4029
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\p2_end2.py", line 21, in <module>
+    keys = sorted(g.keys(), key=int)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'all'

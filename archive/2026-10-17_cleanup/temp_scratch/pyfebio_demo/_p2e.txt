@@ -1,0 +1,11 @@
+顶层: ['meshes', 'states']
+末 state=20 子项: ['element_data', 'mesh', 'node_data']
+   element_data: ['stress']
+   mesh: ['element_state']
+   node_data: ['displacement', 'reaction forces']
+meshes/0: ['domains', 'elementsets', 'nodes', 'nodesets', 'surfaces']
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\p2_endstate.py", line 28, in <module>
+    print("  nodes:", list(f["meshes/0/nodes"].keys()))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Dataset' object has no attribute 'keys'

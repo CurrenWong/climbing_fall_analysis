@@ -1,0 +1,47 @@
+feat(pad): B1 屈曲行程锚定（`STROKE_ANCHOR`）—— 首折 2.24–3.66 m；`self`/`stiff` 在实测跟垫口径下不可定
+
+按用户「告诉我加完这个条件高度是多少，然后按你的建议推进」。
+
+## 锚（外部，非调值）
+`PMC9465758`「Drop jump depth」列 = **实测 COM 深度**，与三档 `k_flex`（LEG_K_ANCHOR）**同源一一对应**：
+  soft 0.43 ｜ self-selected 0.37 ｜ stiff 0.23 m
+
+## 实现（`pad.py` 无默认值改动）
+新增门 `STROKE_ANCHOR = {"x_flex_max_m": None, "k_stop_n_per_m": None}`
+（`Posture.x_flex_max` 继承 controlled-drop 0.40 m；`k_stop = 3.0e5` 为硬编码 —— 两者都**未标定**）。
+默认 None ⇒ 既有路径逐位不变（正对照即证据）。⚠️ L2 门排在 L4 门之后 ⇒ `feet-first-stiff` 由 L2 覆盖、
+`anchored-*` 不受影响。
+
+## 判定（预注册级判据，跑前写死在探针 docstring）
+  B1-J0 正对照（门全关逐位复现 fp_anchor_probe.json）          **PASS（逐位）**
+  B1-J1 刚性口径 h* 与 LEG_K_ANCHOR 一致（±1e-3）              **PASS（3.417741/3.216156/2.244290 逐位）**
+  B1-J2 实测跟垫口径：只采信相邻且未触发止段的格                soft 3.657 m；self/stiff **不可定**
+  B1-J3/J4 止段格标出并判无效 / 默认路径不变                    **PASS**
+
+## ★ 用户问的「高度」
+  | 口径 | soft | self | stiff |
+  |---|---|---|---|
+  | **刚性（= LEG_K_ANCHOR）** | **3.418 m** | **3.216 m** | **2.244 m**（**逐位一致 ⇒ B1 零影响**） |
+  | **实测跟垫（k_n=2.1e6）** | **3.657 m** | **不可定** | **不可定** |
+  ⇒ **现在可引用的首折 = 2.24–3.66 m**；对 [Y25] 靶 7~9 m 仍差 ~2–3×；落流行病学 1.1–4 m 内。
+
+## 结论
+  B1 对**现行口径零影响**（刚性下止段从不触发）；其价值 = **把止段污染格识别出来**：
+  `stiff`@1 m 3.64 → **6.51 kN** 是假台阶（= 3.3 + 3e5×0.0191）、`self`@2 m 同理
+  ⇒ **`k_stop`（未标定）已是软接触区的主控瓶颈**；`self`/`stiff` 在有效范围内跨不过 6.2 kN。
+
+## ★ 新 gotcha（我踩了一次）
+  算 `h*` 内插时**不能**「先滤掉止段污染格、再在剩下的格之间内插」—— 会**跨过**无效格：
+  实测因此把 `anchored-self` 报成 **3.506 m 的假首折**（真正的跨越段是 1 m→5 m，中间夹着被污染的 2 m 格）。
+  正确做法：只在**原网格上相邻、且两端都未触发止段**的格之间内插（`fp_stroke_probe.py::_hstar`）。
+
+## 改动
+  M src/climbing/pad.py           门 `STROKE_ANCHOR` + 求解段接线（默认 None）
+  + scripts/fp_stroke_probe.py    探针（含 B1-J0 逐位正对照）
+  + results/fp_stroke_probe.json + results/FP_STROKE_REPORT.md
+  M tests/test_climbing.py        TestStrokeAnchor 3 条（默认 None / 覆盖生效且改变峰值 / k_stop 覆盖）
+  M docs/notes/PAD_GOTCHAS.md     §6d 新增（门 + 跨无效格陷阱）
+  M docs/reports/总体进度.md      §九之三 新增
+
+回归：**774 passed / 8 skipped / 0 failed**（-n auto --dist load；+3 条）。
+下一件：B2 膝扭簧（两段腿），须另行预注册。

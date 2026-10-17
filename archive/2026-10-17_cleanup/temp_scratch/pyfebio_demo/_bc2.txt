@@ -1,0 +1,17 @@
+全部关掉韧带（LIG_MODE=off），只比实体网格；接触开/关各一轮
+      单元     接触  rc       F(N)    |u|max
+----------------------------------------------
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\bisect_contact.py", line 57, in <module>
+    rc, F, um, o = run(elem, nc)
+                   ^^^^^^^^^^^^^
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\bisect_contact.py", line 38, in run
+    X.to_hdf5(str(xp), str(W / "_nc.h5"))
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 869, in to_hdf5
+    parse_blocks(buffer[4:], f)
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 856, in parse_blocks
+    parse_state(child, state_cnt, xdictionary, mesh_dicts[mesh_cnt - 1], f)
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 825, in parse_state
+    set_name = mesh_dict[set_lut[key]][set_id]
+               ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: np.int32(4)

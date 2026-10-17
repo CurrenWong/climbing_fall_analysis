@@ -1,0 +1,32 @@
+fix(pad): 🔴 撤回 FP_CONTACT（A 件）判定 —— 自检发现软接触下 `pad.py` 能量不守恒
+
+同日自检（temp/v1_contactA_selfcheck.py）发现：A 的判定档 k_n=2.1e6 @0.42 m
+三档 absorbed_fraction = 1.568 / 1.513 / 1.376 > 1 ⇒ 违反能量守恒 ⇒ 该设定的
+F_pad/F_flex 数值不物理。同设定 F_flex(h) 亦非单调（anchored-self：2 m 给 9.31 kN
+而 5 m 给 7.78 kN）⇒ h* 不可引用。
+
+absorbed_fraction = (energy_into_pad + energy_into_flex) / impact_energy_j
+（pad.py:479-482），物理上不可能 >1。实测越界面（@0.42 m，anchored-*）：
+  None(=1e7, 548 kN/m) soft 0.276 / self 0.289 / stiff 0.329   ← 全部 ≤1 ✅
+  3.0e6 (177 kN/m)     soft 0.584 / self 0.624 / stiff 1.358   ← stiff 越界
+  2.1e6 (128 kN/m)     soft 1.568 / self 1.513 / stiff 1.376   ← 三档全越界
+  1.6e6 (100 kN/m)     soft 1.583 / self 1.526 / stiff 1.391   ← 三档全越界
+⇒ 接触层越软越易越界，且同设定下随 k_flex 变。
+
+撤回范围：
+  results/FP_CONTACT_REPORT.md 的 A-J1 / A-J2 / A-J3 与 §4 全部结论；
+  docs/reports/总体进度.md §九之二 的对应判定。
+未受影响：
+  ① LEG_K_ANCHOR（FP_ANCHOR_REPORT.md，门关）：absorbed 0.276–0.329 且
+     energy_residual_j 238.5/234.3/221.3 J > 0 ⇒ 判定全部有效；
+  ② hard_surface 语义发现（k_eff = k_n × A(κ)，实测 548 kN/m）—— 与能量账无关。
+⛔ 在该缺陷修复前，「接触层软化」的一切后果（含 stiff 档「两判据修好」）不得引用。
+
+改动：
+  M results/FP_CONTACT_REPORT.md  顶部加撤回 banner（替换式，不删除原文）
+  M docs/reports/总体进度.md       §九之二 加撤回 banner
+  M docs/notes/PAD_GOTCHAS.md      §6 新增（软接触能量不守恒 + 症状二 + 用法纪律 +
+                                   嫌疑机制未定案：A(κ) 渐进面积 / k_stop 止挡 /
+                                   初始速度与落高双重计入 / energy_into_flex_j 口径）
+
+下一步（优先级已改变）：**先定位并修复能量不守恒**，之后才重跑 A 与再谈 B。

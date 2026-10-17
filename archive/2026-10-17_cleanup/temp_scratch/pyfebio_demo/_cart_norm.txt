@@ -1,0 +1,57 @@
+=== 提取带定向的外表面 ===
+  tibia      外表面 19,022 面 (tri  4,832/quad 14,190)
+  fibula     外表面  6,392 面 (tri  1,684/quad  4,708)
+  talus      外表面  3,152 面 (tri    788/quad  2,364)
+  calcaneus  外表面  5,008 面 (tri  1,268/quad  3,740)
+
+=== 逐关节生成软骨 ===
+    法向对齐过滤 (cos>+0.50): 73 -> 33 个关节面节点
+    偏移方向 = 顶点法向（CART_OFFSET=normal）
+
+  【tibiotalar_tibia】tibia -> talus
+    tibia 面节点 4,836；关节面节点（距 talus < 6.0 mm）= 33  其中法向对齐(>cos60°)仅 33 个  <- 边缘脊线法向不良定义，故不过滤
+    厚度 t: min 0.703 / 中位 1.500 / max 1.500 mm（上限 1.5 mm）
+    软骨单元 18（退化丢弃 9，含薄片整格丢弃 0） | 体积 263.4 mm³ = 0.263 cm³
+    四面体 |V| 分布: min 0.42937 / p1 0.5549 / 中位 5.5936 mm³   (MIN_TET_V=1e-09, 需 build_feb 翻正的 16)
+    法向对齐过滤 (cos>+0.50): 89 -> 36 个关节面节点
+    偏移方向 = 顶点法向（CART_OFFSET=normal）
+
+  【tibiotalar_talus】talus -> tibia
+    talus 面节点 792；关节面节点（距 tibia < 6.0 mm）= 36  其中法向对齐(>cos60°)仅 36 个  <- 边缘脊线法向不良定义，故不过滤
+    对侧(tibiotalar_tibia)面限制: 0/36 节点被压薄 (到对侧 offset 面最近 3.117 mm)
+    厚度 t: min 1.120 / 中位 1.500 / max 1.500 mm（上限 1.5 mm）
+    软骨单元 27（退化丢弃 13，含薄片整格丢弃 0） | 体积 486.0 mm³ = 0.486 cm³
+    四面体 |V| 分布: min 1.46602 / p1 2.6087 / 中位 5.5727 mm³   (MIN_TET_V=1e-09, 需 build_feb 翻正的 3)
+    法向对齐过滤 (cos>+0.50): 212 -> 92 个关节面节点
+    偏移方向 = 顶点法向（CART_OFFSET=normal）
+
+  【subtalar_talus】talus -> calcaneus
+    talus 面节点 792；关节面节点（距 calcaneus < 6.0 mm）= 92  其中法向对齐(>cos60°)仅 92 个  <- 边缘脊线法向不良定义，故不过滤
+    厚度 t: min 0.609 / 中位 1.500 / max 1.500 mm（上限 1.5 mm）
+    软骨单元 95（退化丢弃 40，含薄片整格丢弃 0） | 体积 1,131.7 mm³ = 1.132 cm³
+    四面体 |V| 分布: min 0.00176 / p1 0.0127 / 中位 4.1247 mm³   (MIN_TET_V=1e-09, 需 build_feb 翻正的 36)
+    法向对齐过滤 (cos>+0.50): 253 -> 119 个关节面节点
+    偏移方向 = 顶点法向（CART_OFFSET=normal）
+
+  【subtalar_calcaneus】calcaneus -> talus
+    calcaneus 面节点 1,272；关节面节点（距 talus < 6.0 mm）= 119  其中法向对齐(>cos60°)仅 119 个  <- 边缘脊线法向不良定义，故不过滤
+    对侧(subtalar_talus)面限制: 0/119 节点被压薄 (到对侧 offset 面最近 0.998 mm)
+    厚度 t: min 0.610 / 中位 1.500 / max 1.500 mm（上限 1.5 mm）
+    软骨单元 149（退化丢弃 51，含薄片整格丢弃 0） | 体积 1,285.5 mm³ = 1.285 cm³
+    四面体 |V| 分布: min 0.00159 / p1 0.0309 / 中位 2.8658 mm³   (MIN_TET_V=1e-09, 需 build_feb 翻正的 58)
+
+=== 校验汇总 ===
+joint           elem   vol(cm³)   t_min   t_med   t_max  offset↔B min     穿透过
+tibiotalar_tibia      18      0.263   0.703   1.500   1.500         1.133       0
+tibiotalar_talus      27      0.486   1.120   1.500   1.500         1.665       0
+subtalar_talus      95      1.132   0.609   1.500   1.500         0.734       0
+subtalar_calcaneus     149      1.285   0.610   1.500   1.500         1.051       0
+
+写出 D:\Project\climbing_fall_analysis\temp\thums\cartilage.json 与 D:\Project\climbing_fall_analysis\temp\thums\cartilage_mesh.npz
+
+=== GAP_MAX 敏感性（关节面规模 vs 阈值）===
+joint        bone             <3mm       <4mm       <6mm       <8mm      <10mm      <15mm      <20mm
+tibiotalar_tibia tibia              16         31         72        103        135        199        268
+tibiotalar_talus talus              18         38         87        126        165        269        376
+subtalar_talus talus              95        160        212        265        317        431        540
+subtalar_calcaneus calcaneus          98        179        251        305        364        476        572

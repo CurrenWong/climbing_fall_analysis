@@ -1,0 +1,93 @@
+=== <Contact> 段 ===
+<contact name="tie_tibiotalar_tibia" surface_pair="tiepair_tibiotalar_tibia" type="tied-elastic">
+      <penalty>1.0</penalty>
+      <auto_penalty>1</auto_penalty>
+      <two_pass>0</two_pass>
+      <laugon>PENALTY</laugon>
+      <tolerance>1.0</tolerance>
+      <symmetric_stiffness>0</symmetric_stiffness>
+      <search_tol>0.01</search_tol>
+      <search_radius>1.0</search_radius>
+    </contact>
+------------------------------------------------------------
+<contact name="tie_tibiotalar_talus" surface_pair="tiepair_tibiotalar_talus" type="tied-elastic">
+      <penalty>1.0</penalty>
+      <auto_penalty>1</auto_penalty>
+      <two_pass>0</two_pass>
+      <laugon>PENALTY</laugon>
+      <tolerance>1.0</tolerance>
+      <symmetric_stiffness>0</symmetric_stiffness>
+      <search_tol>0.01</search_tol>
+      <search_radius>1.0</search_radius>
+    </contact>
+------------------------------------------------------------
+<contact name="tie_subtalar_talus" surface_pair="tiepair_subtalar_talus" type="tied-elastic">
+      <penalty>1.0</penalty>
+      <auto_penalty>1</auto_penalty>
+      <two_pass>0</two_pass>
+      <laugon>PENALTY</laugon>
+      <tolerance>1.0</tolerance>
+      <symmetric_stiffness>0</symmetric_stiffness>
+      <search_tol>0.01</search_tol>
+      <search_radius>1.0</search_radius>
+    </contact>
+------------------------------------------------------------
+<contact name="tie_subtalar_calcaneus" surface_pair="tiepair_subtalar_calcaneus" type="tied-elastic">
+      <penalty>1.0</penalty>
+      <auto_penalty>1</auto_penalty>
+      <two_pass>0</two_pass>
+      <laugon>PENALTY</laugon>
+      <tolerance>1.0</tolerance>
+      <symmetric_stiffness>0</symmetric_stiffness>
+      <search_tol>0.01</search_tol>
+      <search_radius>1.0</search_radius>
+    </contact>
+------------------------------------------------------------
+<contact name="tibiotalar" surface_pair="tibiotalar_pair" type="sliding-elastic">
+      <laugon>PENALTY</laugon>
+      <penalty>1</penalty>
+      <auto_penalty>1</auto_penalty>
+      <two_pass>0</two_pass>
+      <node_reloc>0</node_reloc>
+      <symmetric_stiffness>0</symmetric_stiffness>
+      <tolerance>0.02</tolerance>
+    </contact>
+------------------------------------------------------------
+<contact name="subtalar" surface_pair="subtalar_pair" type="sliding-elastic">
+      <laugon>AUGLAG</laugon>
+      <penalty>1</penalty>
+      <auto_penalty>0</auto_penalty>
+      <two_pass>0</two_pass>
+      <node_reloc>0</node_reloc>
+      <symmetric_stiffness>0</symmetric_stiffness>
+      <tolerance>0.02</tolerance>
+    </contact>
+------------------------------------------------------------
+
+=== 收敛/求解器相关参数（在任意段里搜）===
+   <rtol>0</rtol>
+   <etol>0.001</etol>
+   <dtol>0.01</dtol>
+   <max_refs>100</max_refs>
+   <max_ups>0</max_ups>
+   <lstol>0.9</lstol>
+
+=== <Control> 段 ===
+<Control>
+    <analysis>STATIC</analysis><time_steps>40</time_steps><step_size>0.025000</step_size>
+    <solver type="solid">
+      <symmetric_stiffness>0</symmetric_stiffness>
+      <linear_solver type="pardiso"/>
+      <max_refs>100</max_refs>
+      <diverge_reform>1</diverge_reform>
+      <reform_each_time_step>1</reform_each_time_step>
+      <dtol>0.01</dtol>
+      <etol>0.001</etol>
+      <rtol>0</rtol>
+      <lstol>0.9</lstol>
+      <min_residual>1e-20</min_residual>
+      <rhoi>-2</rhoi>
+      <qn_method type="BFGS"><max_ups>0</max_ups></qn_method>
+    </solver>
+    <time_stepper>
+     

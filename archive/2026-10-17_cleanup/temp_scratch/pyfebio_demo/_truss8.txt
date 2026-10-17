@@ -1,0 +1,63 @@
+  1| def parse_mesh(buffer: bytes, mesh_cnt: int, f):
+  2|     i = 0
+  3|     mesh_dict = {"surfaces": {}, "domains": {}, "node_sets": {}}
+  4|     while i < len(buffer) - 8:
+  5|         tag, offset = parse_prefix(buffer[i : i + 8])
+  6|         child = buffer[i + 8 : i + 8 + offset]
+  7|         match TAG_LUT[tag].name:
+  8|             case "PLT_NODE_SECTION":
+  9|                 nodes = _parse_node_section(child)
+ 10|                 dset_path = f"/meshes/{mesh_cnt}/nodes"
+ 11|                 f.create_dataset(dset_path, data=nodes["data"], dtype=_DTYPES["node"])
+ 12|                 i += 8 + offset
+ 13|             case "PLT_DOMAIN_SECTION":
+ 14|                 domains = _parse_domain_section(child)
+ 15|                 for domain in domains:
+ 16|                     mesh_dict["domains"][domain["id"][0]] = domain.get("name", str(domain["id"][0]))  <<<<
+ 17|                     dset_path = f"/meshes/{mesh_cnt}/domains/{domain['name']}"  <<<<
+ 18|                     f.create_dataset(dset_path, data=domain["elements"], dtype=_DTYPES["int32"])
+ 19|                     for key, value in domain.items():
+ 20|                         if key != "elements":
+ 21|                             f[dset_path].attrs[key] = value
+ 22|                 i += 8 + offset
+ 23|             case "PLT_SURFACE_SECTION":
+ 24|                 surfaces = _parse_surface_section(child)
+ 25|                 for surface in surfaces:
+ 26|                     mesh_dict["surfaces"][surface["id"][0]] = surface.get("name", str(surface["id"][0]))  <<<<
+ 27|                     dset_path = f"/meshes/{mesh_cnt}/surfaces/{surface['name']}"  <<<<
+ 28|                     f.create_dataset(dset_path, data=surface["faces"], dtype=_DTYPES["int32"])
+ 29|                     for key, value in surface.items():
+ 30|                         if key != "surfaces":
+ 31|                             f[dset_path].attrs[key] = value
+ 32|                 i += 8 + offset
+ 33|             case "PLT_NODESET_SECTION":
+ 34|                 nodesets = parse_nodeset_section(child)
+ 35|                 for nodeset in nodesets:
+ 36|                     if nodeset["name"] == "":  <<<<
+ 37|                         nodeset["name"] = nodeset["id"][0]  <<<<
+ 38|                     mesh_dict["node_sets"][nodeset["id"][0]] = nodeset["name"]  <<<<
+ 39|                     dset_path = f"/meshes/{mesh_cnt}/nodesets/{nodeset['name']}"  <<<<
+ 40|                     f.create_dataset(dset_path, data=nodeset["nodes"], dtype=_DTYPES["int32"])
+ 41|                     for key, value in nodeset.items():
+ 42|                         if key != "nodes":
+ 43|                             f[dset_path].attrs[key] = value
+ 44|                 i += 8 + offset
+ 45|             case "PLT_ELEMENTSET_SECTION":
+ 46|                 elementsets = parse_elementset_section(child)
+ 47|                 for elementset in elementsets:
+ 48|                     dset_path = f"/meshes/{mesh_cnt}/elementsets/{elementset['name']}"  <<<<
+ 49|                     f.create_dataset(dset_path, data=elementset["elements"], dtype=_DTYPES["int32"])
+ 50|                     for key, value in elementset.items():
+ 51|                         if key != "elements":
+ 52|                             f[dset_path].attrs[key] = value
+ 53|                 i += 8 + offset
+ 54|             case "PLT_PARTS_SECTION":
+ 55|                 parse_parts_section(child)
+ 56|                 i += 8 + offset
+ 57|             case "PLT_OBJECTS_SECTION":
+ 58|                 parse_objects_section(child)
+ 59|                 i += 8 + offset
+ 60|             case _:
+ 61|                 i += 8 + offset
+ 62|     return mesh_dict
+ 63| 

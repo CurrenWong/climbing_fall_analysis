@@ -1,0 +1,14 @@
+
+=== baseline rc=0 OK ===
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\truss4_area.py", line 45, in <module>
+    X.to_hdf5(str(xp), str(dst))
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 869, in to_hdf5
+    parse_blocks(buffer[4:], f)
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 852, in parse_blocks
+    mesh_dicts.append(parse_mesh(child, mesh_cnt, f))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\pyfebio\xplt.py", line 675, in parse_mesh
+    mesh_dict["domains"][domain["id"][0]] = domain["name"]
+                                            ~~~~~~^^^^^^^^
+KeyError: 'name'

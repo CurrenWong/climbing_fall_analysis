@@ -1,0 +1,36 @@
+fix(docs): 更正上一次撤回 —— 不是能量不守恒，是 `pad.py` 能量账的**口径混乱**；A 状态改【未定】
+
+上一提交 0fd4b8d 以「软接触下 pad.py 能量不守恒」为由撤回了 FP_CONTACT 的判定。
+本提交证明**该理由不成立**，并给出真机制（读码 + 三项独立检验）。
+
+真机制（读码 pad.py:733-741 定案）：
+  absorbed_fraction 的**分子** = cumtrapz(f_flex · d(xf)/dt, t)，而
+  f_flex = k·xf（+ k_stop 段）+ c_flex·rate（c_flex = 400 N·s/m）
+  ⇒ 分子**含不可恢复的阻尼耗散**，随身体**继续下沉**累积，**不受 mgh 约束**；
+  **分母** impact_energy_j = m·g·h 只对应**首次接触那一刻**。
+  ⇒ 不同物理量 + 不同时间基准 ⇒ absorbed_fraction > 1（实测 1.376–1.583）**是预期行为**。
+  （pad.py 注释自承历史上有过「吸能超过输入能量」的自相矛盾读法；实现改了，口径问题仍在。）
+⇒ ⛔ 不得用 absorbed_fraction > 1 判「数值不物理」；
+⇒ ⛔ energy_residual_j 同源污染，不得当「必须由组织损伤承担的能量」（越界区被夹到 0）。
+
+三项独立检验（均为 temp/ 只读脚本）：
+  ① temp/v1_energy_verdict.py  —— 用同时刻能量平衡重算，峰值 xf 时刻可用能量 595.8 J ≥ 弹性 519 J
+     ⇒ 不越界（推翻 0fd4b8d 的依据）。
+  ② temp/v1_emechan.py       —— 沿轨迹 E_mech(t)；**该版检验因速度偏移无效**
+     （result.t_s 只覆盖冲击窗，窗起点速度是 v_impact=√(2gh) 而非 0 ⇒ 必须先偏移，否则漏检）
+     ⇒ 已把这条陷阱写进 gotcha。
+  ③ temp/v1_conv_check.py    —— 非单调格的收敛检验：三段解算器设置
+     （1e-8/1e-11/1e-4、1e-9/1e-12/3e-5、1e-10/1e-13/1e-5）**逐位一致**
+     （anchored-self@2.1e6：2 m 9.309 / 5 m 7.781 / 9 m 25.979 kN）
+     ⇒ **F_flex(h) 的非单调是收敛的模型行为，不是积分精度问题**。
+
+状态更新：
+  FP_CONTACT 判定：【撤回】→ **【未定 · 判据口径待立】**
+  （数值未被证明不物理，但也未被正面验证；重判前须先立不依赖 absorbed_fraction 的有效性判据）
+  未受影响：LEG_K_ANCHOR（门关）全部有效 ⇒ 首折 2.244 / 3.216 / 3.418 m 仍可引用；
+            hard_surface 语义发现（k_eff = k_n × A(κ) = 548 kN/m）仍有效。
+
+改动（替换式，不叠加）：
+  M docs/notes/PAD_GOTCHAS.md   §6 重写（口径混乱 + 用法纪律）；新增 §6b（收敛的非单调）
+  M results/FP_CONTACT_REPORT.md 顶部 banner 重写为【未定】+ 两次翻转的如实经过
+  M docs/reports/总体进度.md     §九之二 banner 同步

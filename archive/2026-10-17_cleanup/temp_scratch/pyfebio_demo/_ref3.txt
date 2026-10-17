@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\refine3.py", line 147, in <module>
+    P = np.array([src.get(x, _new[x - int(nid.max()) - 1]) for x in uq])
+                             ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: list index out of range

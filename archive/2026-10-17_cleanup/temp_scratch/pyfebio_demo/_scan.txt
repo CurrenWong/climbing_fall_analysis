@@ -1,0 +1,18 @@
+   IE  rc  NORMAL   负J      |Fz|    外侧(c)%    内侧(c)%      外-内  外侧韧带明细                            
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ -5.0   0   ERROR    1       nan       nan       nan      nan                                    
+ -4.0   0   ERROR    1       nan       nan       nan      nan                                    
+ -3.5   0   ERROR    1       nan       nan       nan      nan                                    
+ -3.0   0  NORMAL    0       nan    -2.783     3.975   -6.758  PTFL:-2.95 CFL:-2.37 ATFL:-3.03   
+ -2.0   0  NORMAL    0       nan    -1.612     3.213   -4.825  PTFL:-2.10 CFL:-0.67 ATFL:-2.07   
+ -1.0   0  NORMAL    0       nan    -0.425     2.453   -2.878  PTFL:-1.23 CFL:+1.05 ATFL:-1.09   
+ +1.0   0  NORMAL    0       nan     1.804     0.606    1.197  PTFL:+0.39 CFL:+4.15 ATFL:+0.87   
+ +2.0   0  NORMAL    0       nan     3.247     0.217    3.030  PTFL:+1.48 CFL:+6.33 ATFL:+1.93   
+ +3.0   0  NORMAL    0       nan     4.512    -0.519    5.031  PTFL:+2.43 CFL:+8.14 ATFL:+2.96   
+ +4.0   0  NORMAL    0       nan     5.795    -1.250    7.045  PTFL:+3.41 CFL:+9.96 ATFL:+4.01   
+ +5.0   0  NORMAL    0       nan     7.098    -1.970    9.068  PTFL:+4.42 CFL:+11.79 ATFL:+5.08  
+ +6.0   0   ERROR    1       nan       nan       nan      nan                                    
+ +8.0   0   ERROR    1       nan       nan       nan      nan                                    
+
+★ 判据（③）：内翻侧 (外−内) 应显著为正；外翻侧应显著为负。
+★ 阈值（C3 待定）：用 (c) 总应变，结合解剖失效应变（ATFL 11~15%、CFL 9~13%）。

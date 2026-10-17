@@ -1,0 +1,35 @@
+partitioning, you can assign a surface or an element set.
+Consider the following example.
+<bc type="zero displacement" node_set="set1"/>
+FEBio expects a node set with the name set1 defined in the Mesh section. However, if set1 is a
+surface, then this surface can be assigned to the boundary condition using the following syntax.
+<bc type="zero displacement" node_set="@surface:set1"/>
+The presence of the specifier @surface informs FEBio that set1 is a surface and the node set
+needs to be extracted from the surface definition.
+Mesh partitions can only be assigned this way if the target partition is a subset of the source
+partition. For instance, it is not possible to assign a node set to a surface partition.
+The following specifiers are available.
+specifier description Target partition
+@surface References a surface nodeset
+@edge References an edge nodeset
+@elem_set References an element set (either via Elements or ElementSet) nodeset
+@part_list References a part list nodeset, surface
+Note that the @part_list is the only specifier that can be used to assign a part list to a surface.
+This can be useful for defining contact surfaces where the surface might have a complex shape
+and is difficult to extract manually.
+3.7. MESHDOMAINS SECTION 71
+3.7 MeshDomains Section
+The MeshDomains section assigns various physical attributes to the element sets of the mesh.
+For each of the Elements sections in the Mesh section, define a SolidDomain, ShellDomain, or
+BeamDomainsection,dependingonwhethertheelementsaresolid,shells,orbeams(ortrusses).
+Each domain also requires a material name that defines the material properties of the domain.
+3.7.1 SolidDomain Section
+UsetheSolidDomainsectiontodefineasoliddomain. Thissectiontakesthefollowingparameters:
+name Thenameoftheelementset(definedviaanElementssection). Thiselementsetmustonly
+contain solid elements.
+mat The name of the material that will be assigned to this domain
+type (optional) the specific formulation used for this domain.
+The optional type attribute can be added to specify a specific solid formulation. If omitted, FEBio
+will determine the proper domain type by inspecting the material and element types used. How-
+ever,userscanexplicitlysetthetypeattribute. Thefollowingsoliddomaintypesaredefined. Ifthe
+domaintypeisspecifiedexplici

@@ -1,0 +1,78 @@
+========================================================================================
+=== DISP_MM=+1.6
+========================================================================================
+[run] {'DRIVER': 'dispx', 'DISP_MM': '+1.6', 'DET_MIN': '0.0', 'TRUNC_MM': '60', 'AXIS_SRC': 'full', 'ALIGN_AXIS': '1', 'FIX_TALUS': 'transverse', 'CART_NEW': '1', 'TIE': '1', 'CART_DIR': 'temp/thums/cart_m1', 'POSE_IE': '0'}
+[rc] python=0  febio=0  febio用时=8.0s  总18.5s
+
+==========================================================================
+验收报告  tag=WK
+==========================================================================
+  求解     : NORMAL TERMINATION ✓   负 Jacobian 0 处
+  末态     : step=20  t=1.0   记录数 disp=21  ✓ t=1.0
+  Loads 段 : 0 行  (✓)
+  接触     : {'laugon': 'PENALTY', 'penalty': '1.0', 'auto_penalty': '1', 'tolerance': '1.0'}
+  运行参数 : （以下为脚本自身 stdout 回显，含默认值）
+     [mode] MATSET=WK LIG_MODE=shell TIME_STEPS=20 FIX_TALUS=transverse FORCE=600.0N
+     [mode] BONES=all
+     [mode] NO_CONTACT=False LIG_SUB=all
+     [mode] FIX_NAVICULAR=True
+     [mode] DRIVER=dispx DISP_MM=1.6
+     [mode] TRUNC_MM=60.0
+     [data] npz   = D:\Project\climbing_fall_analysis\temp\thums\thums_lowerlimb.npz
+     [data] carts = temp\thums\cart_m1
+     [trunc] 截断到 60.0 mm 内：剔除 23,388 单元，剩 8,393 单元 / 3,588 节点
+     [axis] 截断后轴=[0.8153 0.135  0.5631] 全网格轴=[0.6765 0.1363 0.7237] 夹角=12.18deg ⇒ 采用 **全网格轴**（AXIS_SRC=full）
+     [axis] argmax(|axis|) = 2 ⇒ DRIVER=dispx 将 prescribe 'xyz'[2] = z（力控制则沿该轴加载）
+     [align] ALIGN_AXIS=1：模型已旋转，加载轴 -> +z（旋转角 43.64deg）；输出坐标/位移均在旋转后坐标系
+
+  ▪ [t=1.0] 胫骨顶面反力合力 = [  0.       0.     417.3901] N  |F|=417.3901
+  ▪ [t=1.0] 距骨约束反力合力 = [0.     0.     0.0035] N  |F|=0.0035   ← fix_talus 约束 y,z，z 分量是载荷旁路
+  ▪ [t=1.0] 腓骨顶面反力合力 = [  0.       0.     175.2119] N  |F|=175.2119
+  ▪ 两顶面合力 = [  0.      0.    592.602] N  |F|=592.6020
+  ▪ 投影到加载轴 = 592.6020 N   (轴=[0. 0. 1.])
+  ▪ |u|max = 1.99272 mm
+  ▪ 全体刚体拟合转动 = 0.2432°  轴=[ 0.133 -0.867  0.48 ]  残差/原始=0.015
+  ▪ 距骨低端刚体转动 = 0.0042° 轴=[ 0.562 -0.827  0.006] 残差/原始=0.000
+
+  C1 force收敛      : —
+  C2 非零内外翻角    : 待定（需判据阈值）
+  C3/C4/C5          : 需多次运行成对比较（姿势扫描 / 罚因子扫描）
+========================================================================================
+=== DISP_MM=+1.0
+========================================================================================
+[run] {'DRIVER': 'dispx', 'DISP_MM': '+1.0', 'DET_MIN': '0.0', 'TRUNC_MM': '60', 'AXIS_SRC': 'full', 'ALIGN_AXIS': '1', 'FIX_TALUS': 'transverse', 'CART_NEW': '1', 'TIE': '1', 'CART_DIR': 'temp/thums/cart_m1', 'POSE_IE': '0'}
+[rc] python=0  febio=0  febio用时=8.1s  总18.3s
+
+==========================================================================
+验收报告  tag=WK
+==========================================================================
+  求解     : NORMAL TERMINATION ✓   负 Jacobian 0 处
+  末态     : step=20  t=1.0   记录数 disp=21  ✓ t=1.0
+  Loads 段 : 0 行  (✓)
+  接触     : {'laugon': 'PENALTY', 'penalty': '1.0', 'auto_penalty': '1', 'tolerance': '1.0'}
+  运行参数 : （以下为脚本自身 stdout 回显，含默认值）
+     [mode] MATSET=WK LIG_MODE=shell TIME_STEPS=20 FIX_TALUS=transverse FORCE=600.0N
+     [mode] BONES=all
+     [mode] NO_CONTACT=False LIG_SUB=all
+     [mode] FIX_NAVICULAR=True
+     [mode] DRIVER=dispx DISP_MM=1.0
+     [mode] TRUNC_MM=60.0
+     [data] npz   = D:\Project\climbing_fall_analysis\temp\thums\thums_lowerlimb.npz
+     [data] carts = temp\thums\cart_m1
+     [trunc] 截断到 60.0 mm 内：剔除 23,388 单元，剩 8,393 单元 / 3,588 节点
+     [axis] 截断后轴=[0.8153 0.135  0.5631] 全网格轴=[0.6765 0.1363 0.7237] 夹角=12.18deg ⇒ 采用 **全网格轴**（AXIS_SRC=full）
+     [axis] argmax(|axis|) = 2 ⇒ DRIVER=dispx 将 prescribe 'xyz'[2] = z（力控制则沿该轴加载）
+     [align] ALIGN_AXIS=1：模型已旋转，加载轴 -> +z（旋转角 43.64deg）；输出坐标/位移均在旋转后坐标系
+
+  ▪ [t=1.0] 胫骨顶面反力合力 = [  0.       0.     294.4971] N  |F|=294.4971
+  ▪ [t=1.0] 距骨约束反力合力 = [ 0.  0. -0.] N  |F|=0.0000   ← fix_talus 约束 y,z，z 分量是载荷旁路
+  ▪ [t=1.0] 腓骨顶面反力合力 = [  0.    0.  123.6] N  |F|=123.6000
+  ▪ 两顶面合力 = [  0.       0.     418.0971] N  |F|=418.0971
+  ▪ 投影到加载轴 = 418.0971 N   (轴=[0. 0. 1.])
+  ▪ |u|max = 1.18283 mm
+  ▪ 全体刚体拟合转动 = 0.1515°  轴=[ 0.137 -0.863  0.486]  残差/原始=0.010
+  ▪ 距骨低端刚体转动 = 0.0029° 轴=[ 0.606 -0.795  0.009] 残差/原始=0.000
+
+  C1 force收敛      : —
+  C2 非零内外翻角    : 待定（需判据阈值）
+  C3/C4/C5          : 需多次运行成对比较（姿势扫描 / 罚因子扫描）

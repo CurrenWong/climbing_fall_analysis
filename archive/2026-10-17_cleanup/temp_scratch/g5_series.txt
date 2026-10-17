@@ -1,0 +1,15 @@
+
+=== h=0.5 m   n_t=1251 ===
+  KE+PEg+PEj+PEc      (现测试量): dev∈[-1.1331%, +0.0000%]  max|dev|=1.1331%
+  KE+PEg+PEj+W_into   (真闭合量): dev∈[-0.0633%, +0.1709%]  max|dev|=0.1709%
+  W_into[end]=  10.1841 J   PEc[end]=   0.0000 J   diss(标量,新)=   2.1140 J
+
+=== h=1.5 m   n_t=1251 ===
+  KE+PEg+PEj+PEc      (现测试量): dev∈[-2.0642%, +0.0000%]  max|dev|=2.0642%
+  KE+PEg+PEj+W_into   (真闭合量): dev∈[+0.0000%, +0.2140%]  max|dev|=0.2140%
+  W_into[end]=  35.6614 J   PEc[end]=   0.0000 J   diss(标量,新)=   5.0040 J
+
+=== h=2.0 m   n_t=1251 ===
+  KE+PEg+PEj+PEc      (现测试量): dev∈[-2.4336%, +0.0000%]  max|dev|=2.4336%
+  KE+PEg+PEj+W_into   (真闭合量): dev∈[-0.2726%, +0.5062%]  max|dev|=0.5062%
+  W_into[end]=  42.5863 J   PEc[end]=   0.0000 J   diss(标量,新)=   8.1629 J

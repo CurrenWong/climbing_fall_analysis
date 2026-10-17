@@ -1,0 +1,13 @@
+  362|     for ids in blocks[(dom, etype)]:
+  445| blocks = defaultdict(list)
+  447|     blocks[(dom, et)].append([node_id_of[c] for c in conn])
+  449| lig_blocks = {}
+  454|             lig_blocks[r["name"]] = [[node_id_of[int(v)] for v in q]
+  457|             lig_blocks[r["name"]] = [[node_id_of[int(v)] for v in t]
+  460|             lig_blocks[r["name"]] = [[node_id_of[int(v)] for v in t]
+  463|             lig_blocks[r["name"]] = [[node_id_of[int(v)] for v in t]
+  521|     for ids in blocks[key]:
+  536|     blocks[key] = keep
+  548|         for ids in lig_blocks[nm]:
+  558|         lig_blocks[nm] = keep
+  567|     for ids in blocks[(j, "tet4")]:

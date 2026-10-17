@@ -1,0 +1,12 @@
+节点 0
+tibiotalar_tibia: 0 三角面
+tibiotalar_talus: 0 三角面
+npz keys: ['n_node', 'fe_to_thums', 'axis', 'lig_names', 'lig_ea', 'lig_pairs', 'lig_npair']
+!! 找不到位移数组；keys/shapes：
+    n_node ()
+    fe_to_thums (3886,)
+    axis (3,)
+    lig_names (10,)
+    lig_ea (10,)
+    lig_pairs (10, 13, 2)
+    lig_npair (10,)

@@ -1,0 +1,20 @@
+用例                                  rc  NORMAL       两顶面合力(N)    |u|max
+────────────────────────────────────────────────────────────────────────────────────
+FIX=transverse SIGN=+1 DISP= -1.0    0   ERROR         0.0000   1.00000
+                                     ↳ .feb 写入 tibia_top_z 值 = 1.000000
+FIX=transverse SIGN=+1 DISP= +1.0    0   ERROR         0.0068   0.80139
+                                     ↳ .feb 写入 tibia_top_z 值 = -1.000000
+FIX=transverse SIGN=-1 DISP= -1.0    0   ERROR         0.0000   1.00000
+                                     ↳ .feb 写入 tibia_top_z 值 = 1.000000
+FIX=transverse SIGN=-1 DISP= +1.0    0   ERROR         0.0068   0.80139
+                                     ↳ .feb 写入 tibia_top_z 值 = -1.000000
+FIX=all        SIGN=+1 DISP= -1.0    0   ERROR         0.0000   1.00000
+                                     ↳ .feb 写入 tibia_top_z 值 = 1.000000
+FIX=all        SIGN=+1 DISP= +1.0    0   ERROR       149.5928   1.19767
+                                     ↳ .feb 写入 tibia_top_z 值 = -1.000000
+FIX=all        SIGN=-1 DISP= -1.0    0   ERROR         0.0000   1.00000
+                                     ↳ .feb 写入 tibia_top_z 值 = 1.000000
+FIX=all        SIGN=-1 DISP= +1.0    0   ERROR       149.5928   1.19767
+                                     ↳ .feb 写入 tibia_top_z 值 = -1.000000
+
+★ 判读：给出**大阻力**的那个方向才是压实；≈0 的是拉开。

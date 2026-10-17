@@ -1,0 +1,3 @@
+[cal_noupd] rc=0 NORMAL=True 两顶面合力 z=592.569711506973
+[both_noupd] rc=0 NORMAL=True 两顶面合力 z=592.5697115087826
+[cal_noupd_r2] rc=0 NORMAL=True 两顶面合力 z=592.5697115369733

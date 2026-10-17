@@ -1,0 +1,8 @@
+   14: DRIVER=dispx DISP_MM=-1.0 LOAD_SIGN=+1 FIX_TALUS=transverse TRUNC_MM=60 ^
+   18: - **先跑这条** ⇒ 应看到 `NORMAL TERMINATION`、`[load] LOAD_SIGN=+1 ⇒ …压缩…`、
+   23: > 🚨 **`DISP_MM` 必须为负、`LOAD_SIGN` 必须为 `+1`** —— 见 §2 与 §5 的符号说明。
+   30: | ~~`LOAD_SIGN`~~ | **对 `dispx` 无效，不用设** | 实测写入的 z 只由 `DISP_MM` 的符号决定。**压实 = `DISP_MM > 0`**（见 §2 符号说明与 `[ERR-20261006-003]`）|
+   32: | `ALIGN_AXIS=1` | 必开 | 把模型转到「加载轴 = +z」，使 `dispx` 的"全局单轴"**恰好等于真轴向**。不开会有 **3.2×** 的方向误差 |
+   33: | `AXIS_SRC=full` | 必开 | 加载轴取**全网格**质心差。默认 `trunc` 会被 `TRUNC_MM` 顺带**转掉 12.18°** |
+   46: > **⚠️ `LOAD_SIGN` 对 `dispx` 分支无效，不要靠它"纠符号"。**
+  191: | `LOAD_SIGN=-1`（默认）/ `DISP_MM>0` | **把关节拉开** ❌ | `+0.25 → +187.77 N`（**拉伸**，韧带在撑）|

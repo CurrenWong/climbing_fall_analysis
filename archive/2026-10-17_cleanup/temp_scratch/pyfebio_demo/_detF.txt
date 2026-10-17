@@ -1,0 +1,3 @@
+节点 3885
+!! 找不到 <Elements>
+['<Globals>', '<Constants>', '<T>', '<R>', '<Fc>', '<Material>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>', '<E>', '<v>', '<density>']

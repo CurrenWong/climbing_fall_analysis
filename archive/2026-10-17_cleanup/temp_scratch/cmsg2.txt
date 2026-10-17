@@ -1,0 +1,66 @@
+﻿docs(v1): **跖面接触不收敛 —— 手册+网络方法检索与实测**（执行铁律「先查手册+网络再下不可修结论」）
+
+用户令：「查网络和手册，找办法」（针对 V1_PLANTAR_LOAD_BEARING_FEASIBILITY 的「第2层不可行」）
+
+## 检索到的五条处方（逐字依据见件 §1）
+- **A** §8.12.4/§8.5.3 + 官方 webinar：「**for force-driven contact problems it is important to
+  have some initial contact**」「it is best to **avoid initial separation**」
+  webinar：「if there's **initial gap**… this problem is **ill-posed**」
+- **B** §8.5.3 两步法（先位移接触、再换力）
+- **C** §8.4.2 False Transient：准静态不收敛 => 改**动力** + 数值阻尼 `rhoi=-2/gamma=1.5/beta=1`
+- **D** FEBio 主动 WARNING + 手册 note 6：`symmetric_stiffness` 0/1/2/3(preferred)，默认 **1=对称**
+- **E** §8.5.1 auto_penalty（未试）
+
+## ★ 本轮最实在的收获：**我们自己的护栏挡掉了手册的 #1 处方**
+`plantar_bc.py:436`（改前）硬性要求 `gap_mm > 0`（**= 强制初始分离**，正是手册/webinar 点名的
+ill-posed 条件），而墙位 `wall_y = min(plantar_y) - gap_mm`，项目一直跑 gap=0.5
+=> **已放宽**（只要求有限 + 拒绝过盈超过板厚一半）；**默认 DEFAULT_CONTACT_GAP_MM=0.5 不动
+=> 原路径逐位不变**；**零回归 `pytest -k "plantar or contact or thums or bone_feb"` => 72 passed**
+
+## 实测矩阵（h=5 m, F_sub=26383.1 N, hold_spring_k=None = 无旋钮）
+### A 初始接触（STATIC）
+| gap(mm) | +0.5 | 0.0 | -0.05 | -0.2 | -0.5 |
+| 结果 | ✗ | ✗ | ✗ | ✗ | ✗ |
+失败模式：`8 negative jacobians` 在**第一次增量 time=1 就发生**，dt 降到 0.333 仍同款
+=> **不是载荷步长问题，是结构性的** => 单靠消除初始分离不足
+
+### D symmetric_stiffness
+- `<solver><symmetric_stiffness>0`：**解析通过、仍失败**
+- `<Control><symmetric_stiffness>3`：**解析失败**（文本插入破坏结构）=> 未定论
+- 注：`<Contact>` 块内部本来就有 `symmetric_stiffness=0`
+
+### C False Transient（**行为质变**）
+- `DYNAMIC` 无阻尼：✗ ERR（5-6 s）
+- `rhoi` 放 `<Control>`：**解析失败** `tag "rhoi" : unrecognized`
+- **`DYNAMIC + rhoi/gamma/beta 放 `<solver>`**：✗ ERR，**但跑了 120-125 s，积分到 t≈0.443-0.446**
+  才失败，失败模式变成 **460~520 negative jacobians**
+
+=> **最重要读数**：失败模式从「秒退 + 8 negJ（刚体模态）」变成
+   「**真积分到 44% 载荷 + ~500 单元倒置（大变形）**」
+=> **瓶颈已从「欠约束」转移到「大变形下单元倒置」**
+
+### 两条确定的语法知识
+1. `rhoi`/`gamma`/`beta` 属 **`<solver>`（固体求解器）**，放 `<Control>` 被 FEBio 拒绝
+   （手册 §8.4.1「solid solver」措辞准确）
+2. pyfebio 把 `symmetric_stiffness` 定在**求解器类**（`control.py:67` 默认 `"preferred"`），
+   **不是 `<Control>`** => 直接插 `<Control>` 会破坏解析
+
+## 下一步（按优先级）
+1. 把 DYNAMIC + `<solver>` 阻尼配方接进 builder（opt-in），按 §8.4.2 分步推完载荷
+2. `auto_penalty=1`（我们一直 penalty=0.1/auto=0）
+3. **把 ~500 个倒置单元定位**（骨还是板）—— 本件未查
+4. 两步法在 DYNAMIC 下重试（既有 Step 2 失败是 STATIC 下测的）
+5. `<Control>` 级 symmetric_stiffness 用 pyfebio 正确接口重试
+
+## 诚实边界
+- 全部是 h=5/a=0/anat/PressureLoad/gauge_max 口径下的**诊断跑**，**无一条构成可交付口径**
+- **~500 个倒置单元未定位** => 不能说「是网格问题」或「是大变形问题」
+- `gap<=0` 的初始过盈**合理性未论证**（真实跟垫是软的），只是执行手册处方的手段
+- `hold_spring_k` 仍是最易收敛的路（既有 contact_hold100 全高度收敛），但是**自由旋钮**
+- **不动任何判定**：V1 仍为 ❌【口径不可复现】
+
+- 新增 `results/opensim_fe/V1_UNDERCONSTRAINT_METHODS_SURVEY.md`
+- 改 `src/climbing/coupling/plantar_bc.py`（放宽 gap 护栏，**默认路径不变**）
+- 脚本 `temp/v1_gap_scan.py`、`temp/v1_sym_scan.py`、`temp/v1_dyn_scan.py`、`temp/v1_dyn2.py`
+- 产物 `results/opensim_fe/v1_plantar_gap_scan.json`、`v1_symmetric_stiffness_scan.json`、
+  `v1_dynamic_scan.json`、`v1_dyn_damp_scan.json`

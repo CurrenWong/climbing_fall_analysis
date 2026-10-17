@@ -1,0 +1,10 @@
+同网格、同位移 0.1472 mm 的 p 收敛对比
+      软骨单元  rc      F(N)   |u|max    状态数          备注
+--------------------------------------------------------------------
+      tet4   0     259.3    0.242     21        (基准)
+           [('tibiotalar_tibia', 'tet4', '456', '6'), ('tibiotalar_talus', 'tet4', '596', '16')] []
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\pconv.py", line 112, in <module>
+    print(f"{elem:>10} {rc:>3} {'-':>9} {'-':>8} {'-':>6}  "
+                       ^^^^^^^
+TypeError: unsupported format string passed to NoneType.__format__

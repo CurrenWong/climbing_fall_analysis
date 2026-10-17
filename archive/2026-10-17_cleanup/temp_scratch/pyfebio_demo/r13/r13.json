@@ -1,0 +1,145 @@
+{
+  "disp_mm": "+1.0",
+  "rows": [
+    {
+      "tag": "base_pen_auto1",
+      "env": {
+        "SUBTALAR_LAUGON": "PENALTY",
+        "PENALTY": "1"
+      },
+      "rc": 0,
+      "wall_s": 93.4,
+      "F_top_z": 449.63124148452675,
+      "contacts": {
+        "tie_tibiotalar_tibia": {
+          "laugon": "PENALTY",
+          "penalty": "1.0",
+          "auto_penalty": "1"
+        },
+        "tie_tibiotalar_talus": {
+          "laugon": "PENALTY",
+          "penalty": "1.0",
+          "auto_penalty": "1"
+        },
+        "tie_subtalar_talus": {
+          "laugon": "PENALTY",
+          "penalty": "1.0",
+          "auto_penalty": "1"
+        },
+        "tie_subtalar_calcaneus": {
+          "laugon": "PENALTY",
+          "penalty": "1.0",
+          "auto_penalty": "1"
+        },
+        "tibiotalar": {
+          "laugon": "PENALTY",
+          "penalty": "1",
+          "auto_penalty": "1"
+        },
+        "subtalar": {
+          "laugon": "PENALTY",
+          "penalty": "1",
+          "auto_penalty": "1"
+        }
+      },
+      "steps_done": null,
+      "normal_log": true
+    },
+    {
+      "tag": "auglag_template",
+      "env": {
+        "SUBTALAR_LAUGON": "AUGLAG",
+        "PENALTY": "1"
+      },
+      "rc": 1,
+      "wall_s": 341.7,
+      "F_top_z": 423.16098916714355,
+      "contacts": {
+        "tie_tibiotalar_tibia": {
+          "laugon": "PENALTY",
+          "penalty": "1.0",
+          "auto_penalty": "1"
+        },
+        "tie_tibiotalar_talus": {
+          "laugon": "PENALTY",
+          "penalty": "1.0",
+          "auto_penalty": "1"
+        },
+        "tie_subtalar_talus": {
+          "laugon": "PENALTY",
+          "penalty": "1.0",
+          "auto_penalty": "1"
+        },
+        "tie_subtalar_calcaneus": {
+          "laugon": "PENALTY",
+          "penalty": "1.0",
+          "auto_penalty": "1"
+        },
+        "tibiotalar": {
+          "laugon": "PENALTY",
+          "penalty": "1",
+          "auto_penalty": "1"
+        },
+        "subtalar": {
+          "laugon": "AUGLAG",
+          "penalty": "1",
+          "auto_penalty": "0"
+        }
+      },
+      "steps_done": null,
+      "normal_log": false
+    },
+    {
+      "tag": "aug_p2",
+      "patched_penalty": 2.0,
+      "subtalar_contact": {
+        "laugon": "AUGLAG",
+        "penalty": "2",
+        "auto_penalty": "0"
+      },
+      "wall_s": 290.6,
+      "F_top_z": 390.47917932003605,
+      "normal": false,
+      "steps_done": null,
+      "fail_t": 0.828571,
+      "neg_jac": 0,
+      "elapsed": "0:04:50",
+      "diverged": 0
+    },
+    {
+      "tag": "aug_p8",
+      "patched_penalty": 8.0,
+      "subtalar_contact": {
+        "laugon": "AUGLAG",
+        "penalty": "8",
+        "auto_penalty": "0"
+      },
+      "wall_s": 233.2,
+      "F_top_z": 377.55805071042414,
+      "normal": false,
+      "steps_done": null,
+      "fail_t": 0.773264,
+      "neg_jac": 0,
+      "elapsed": "0:03:53",
+      "diverged": 0
+    },
+    {
+      "tag": "aug_p16",
+      "patched_penalty": 16.0,
+      "subtalar_contact": {
+        "laugon": "AUGLAG",
+        "penalty": "16",
+        "auto_penalty": "0"
+      },
+      "wall_s": 344.5,
+      "F_top_z": 372.7379328620674,
+      "normal": false,
+      "steps_done": null,
+      "fail_t": 0.757597,
+      "neg_jac": 0,
+      "elapsed": "0:05:44",
+      "diverged": 0
+    }
+  ],
+  "generated": "2026-10-10 08:39:24"
+}

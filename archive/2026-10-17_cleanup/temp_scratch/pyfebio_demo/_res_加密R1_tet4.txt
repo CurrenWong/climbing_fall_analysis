@@ -1,0 +1,70 @@
+[mode] MATSET=WK LIG_MODE=shell TIME_STEPS=20 FIX_TALUS=all FORCE=600.0N
+[mode] BONES=all
+[mode] NO_CONTACT=False LIG_SUB=all
+[mode] FIX_NAVICULAR=True
+[mode] DRIVER=disp DISP_MM=0.1472
+[mode] TRUNC_MM=60.0
+[data] npz   = D:\Project\climbing_fall_analysis\temp\thums\thums_lowerlimb_r1.npz
+[data] carts = D:\Project\climbing_fall_analysis\temp\thums\r1
+[trunc] 截断到 60.0 mm 内：剔除 187,059 单元，剩 75,860 单元 / 35,663 节点
+骨+软骨：单元 75,860，节点 35,663
+韧带：10 条，单元 540，并入节点后总计 36,236
+其中 offset（软骨外表面）节点 1,545
+合并后节点 37,781
+加载轴（胫骨->距骨）= [0.8157 0.1383 0.5616]
+韧带专属节点（转动自由度原本自由）: 573
+
+=== Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===
+  OK  tibia_cort             tet4   保留      6 剔除    0  det(J) min=1.9461e+01
+  !!  tibia_cort             hex8   保留     18 剔除 1,834  det(J) min=5.1682e-01
+  OK  tibia_spon             tet4   保留  4,840 剔除    0  det(J) min=3.5180e+00
+  OK  tibia_marrow           tet4   保留  4,176 剔除    0  det(J) min=6.6419e+00
+  !!  fibula_cort            hex8   保留     54 剔除 1,123  det(J) min=5.0109e-01
+  OK  fibula_spon            tet4   保留  2,112 剔除    0  det(J) min=2.9821e+00
+  !!  talus_cort             hex8   保留      0 剔除 3,152  det(J) min=nan
+  OK  talus_spon             tet4   保留 14,128 剔除    0  det(J) min=2.9458e+00
+  !!  calcaneus_cort         hex8   保留      6 剔除 5,066  det(J) min=5.0344e-01
+  OK  calcaneus_spon         tet4   保留 26,584 剔除    0  det(J) min=2.1293e+00
+  !!  navicular_spon         hex8   保留     64 剔除 1,120  det(J) min=5.0035e-01
+  !!  tibiotalar_tibia       tet4   保留  3,854 剔除 1,030  det(J) min=5.0013e-01
+  !!  tibiotalar_talus       tet4   保留  4,558 剔除 2,135  det(J) min=5.0062e-01
+  翻转修正 27475 个；仍无法修正而剔除 15460 个
+  韧带壳退化剔除 0 个
+  接触面 tibiotalar_tibia: 1226 面
+  接触面 tibiotalar_talus: 1432 面
+外表面顶/底：胫骨顶 42 / 腓骨顶 11 / 跟骨底 13
+顶面投影面积：胫骨 18.0 mm²，腓骨 0.5 mm² => 腓骨分担 2.8% 载荷
+读数数据 -> D:\Project\climbing_fall_analysis\temp\thums\febio_lig\lig_read_WK.npz
+
+写出 D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb（5740 KB）  单元：骨+软骨 60400，韧带 540，共 60940
+
+FEBio rc=1  用时 0.1s
+  ===========================================================================
+           ________    _________   _______       __     _________            
+          |        |\ |        |\ |       \\    |  |\  /         \\          
+          |    ____|| |    ____|| |    __  ||   |__|| |    ___    ||         
+          |   |\___\| |   |\___\| |   |\_| ||    \_\| |   //  \   ||         
+          |   ||__    |   ||__    |   ||_| ||   |  |\ |  ||    |  ||         
+          |       |\  |       |\  |         \\  |  || |  ||    |  ||         
+          |    ___||  |    ___||  |    ___   || |  || |  ||    |  ||         
+          |   |\__\|  |   |\__\|  |   |\__|  || |  || |  ||    |  ||         
+          |   ||      |   ||___   |   ||__|  || |  || |   \\__/   ||         
+          |   ||      |        |\ |          || |  || |           ||         
+          |___||      |________|| |_________//  |__||  \_________//          
+                                                                             
+        F I N I T E   E L E M E N T S   F O R   B I O M E C H A N I C S      
+                                                                             
+    version 4.13.0
+    FEBio is a registered trademark.                                         
+    copyright (c) 2006-2026 - All rights reserved                            
+                                                                             
+  ===========================================================================
+  
+  Starting without configuration file
+  Default linear solver: pardiso
+  Reading file D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb ...FAILED!
+  
+   *************************************************************************
+   *                                ERROR                                  *
+   * tag "Elements" (line 49106) : missing attribute "id"                  *
+   *************************************************************************

@@ -1,0 +1,120 @@
+=== ankle_lig_WK.feb  742 KB  行数 13535
+
+----- <MeshDomains>  13 行
+   <SolidDomain name="tibia_cort__tet4" mat="mat_tibia_cort"/>
+   <SolidDomain name="tibia_cort__hex8" mat="mat_tibia_cort"/>
+   <SolidDomain name="tibia_spon__tet4" mat="mat_long_spon"/>
+   <SolidDomain name="tibia_marrow__tet4" mat="mat_marrow"/>
+   <SolidDomain name="fibula_cort__hex8" mat="mat_fibula_cort"/>
+   <SolidDomain name="fibula_spon__tet4" mat="mat_long_spon"/>
+   <SolidDomain name="talus_cort__hex8" mat="mat_tarsal_cort"/>
+   <SolidDomain name="talus_spon__tet4" mat="mat_tarsal_spon"/>
+   <SolidDomain name="calcaneus_cort__hex8" mat="mat_tarsal_cort"/>
+   <SolidDomain name="calcaneus_spon__tet4" mat="mat_tarsal_spon"/>
+   <SolidDomain name="navicular_spon__hex8" mat="mat_tarsal_spon"/>
+   <SolidDomain name="tibiotalar_tibia__penta6" mat="mat_cartilage"/>
+   <SolidDomain name="tibiotalar_talus__penta6" mat="mat_cartilage"/>
+
+----- <Boundary>  22 行
+   <bc name="fix_calcaneus" type="zero displacement" node_set="calcaneus_bottom_ns">
+   <x_dof>1</x_dof><y_dof>1</y_dof><z_dof>1</z_dof>
+   </bc>
+   <bc name="fix_talus" type="zero displacement" node_set="talus_low_ns">
+   <x_dof>1</x_dof>
+   <y_dof>1</y_dof>
+   <z_dof>1</z_dof>
+   </bc>
+   <bc name="tibia_lateral" type="zero displacement" node_set="tibia_top_ns">
+   <x_dof>1</x_dof>
+   <y_dof>1</y_dof>
+   </bc>
+   <bc name="fibula_lateral" type="zero displacement" node_set="fibula_top_ns">
+   <x_dof>1</x_dof>
+   <y_dof>1</y_dof>
+   </bc>
+   <bc name="tibia_top_z" type="prescribed displacement" node_set="tibia_top_ns">
+   <dof>z</dof><value lc="1">1.000000</value><relative>0</relative>
+   </bc>
+   <bc name="fibula_top_z" type="prescribed displacement" node_set="fibula_top_ns">
+   <dof>z</dof><value lc="1">1.000000</value><relative>0</relative>
+   </bc>
+
+----- <Contact>  29 行
+   <contact name="tie_tibiotalar_tibia" surface_pair="tiepair_tibiotalar_tibia" type="tied-elastic">
+   <penalty>1.0</penalty>
+   <auto_penalty>1</auto_penalty>
+   <two_pass>0</two_pass>
+   <laugon>PENALTY</laugon>
+   <tolerance>1.0</tolerance>
+   <symmetric_stiffness>0</symmetric_stiffness>
+   <search_tol>0.01</search_tol>
+   <search_radius>1.0</search_radius>
+   </contact>
+   <contact name="tie_tibiotalar_talus" surface_pair="tiepair_tibiotalar_talus" type="tied-elastic">
+   <penalty>1.0</penalty>
+   <auto_penalty>1</auto_penalty>
+   <two_pass>0</two_pass>
+   <laugon>PENALTY</laugon>
+   <tolerance>1.0</tolerance>
+   <symmetric_stiffness>0</symmetric_stiffness>
+   <search_tol>0.01</search_tol>
+   <search_radius>1.0</search_radius>
+   </contact>
+   <contact name="tibiotalar" surface_pair="tibiotalar_pair" type="sliding-elastic">
+   <laugon>PENALTY</laugon>
+   <penalty>1</penalty>
+   <auto_penalty>1</auto_penalty>
+   <two_pass>0</two_pass>
+   <node_reloc>0</node_reloc>
+   <symmetric_stiffness>0</symmetric_stiffness>
+   <tolerance>0.02</tolerance>
+   </contact>
+
+----- <Loads>  0 行
+
+----- <Material>  45 行
+   <material id="1" name="mat_tibia_cort" type="isotropic elastic">
+   <density>2e-09</density>
+   <E>7300.0</E>
+   <v>0.3</v>
+   </material>
+   <material id="2" name="mat_fibula_cort" type="isotropic elastic">
+   <density>2e-09</density>
+   <E>7300.0</E>
+   <v>0.3</v>
+   </material>
+   <material id="3" name="mat_tarsal_cort" type="isotropic elastic">
+   <density>2e-09</density>
+   <E>7300.0</E>
+   <v>0.3</v>
+   </material>
+   <material id="4" name="mat_tarsal_cort_shell" type="isotropic elastic">
+   <density>2e-09</density>
+   <E>7300.0</E>
+   <v>0.3</v>
+   </material>
+   <material id="5" name="mat_long_spon" type="isotropic elastic">
+   <density>1e-09</density>
+   <E>7300.0</E>
+   <v>0.3</v>
+   </material>
+   <material id="6" name="mat_tarsal_spon" type="isotropic elastic">
+   <density>1e-09</density>
+   <E>7300.0</E>
+   <v>0.3</v>
+   </material>
+   <material id="7" name="mat_marrow" type="isotropic elastic">
+   <density>1e-09</density>
+   <E>7300.0</E>
+   <v>0.3</v>
+   </material>
+   <material id="8" name="mat_cartilage" type="isotropic elastic">
+   <density>1.1e-09</density>
+   <E>10.0</E>
+   <v>0.4</v>
+   </material>
+   <material id="9" name="mat_ligament" type="isotropic elastic">
+   <density>1.1e-09</density>
+   <E>260.0</E>
+   <v>0.4</v>
+   </material>

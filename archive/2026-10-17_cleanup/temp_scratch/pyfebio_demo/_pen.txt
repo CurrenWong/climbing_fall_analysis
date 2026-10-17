@@ -1,0 +1,8 @@
+[E1p] rc=1 NORMAL=False 失收敛t=['0.644789'] F=None
+[E1p_bfgs] rc=1 NORMAL=False 失收敛t=['0.00454545'] F=None
+[E2p] rc=1 NORMAL=False 失收敛t=['0.761375'] F=None
+
+=== 汇总 ===
+  E1p        rc=1 NORMAL=False F=None
+  E1p_bfgs   rc=1 NORMAL=False F=None
+  E2p        rc=1 NORMAL=False F=None

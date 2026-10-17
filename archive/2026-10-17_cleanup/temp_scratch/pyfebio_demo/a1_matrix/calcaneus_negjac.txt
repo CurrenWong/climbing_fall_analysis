@@ -1,0 +1,1575 @@
+Starting without configuration file
+Default linear solver: pardiso
+Reading file ankle_lig_WK.feb ...SUCCESS!
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * 6 isolated vertices removed.                                          *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_tibia" has 9 invalid facets.          *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_talus" has 22 invalid facets.         *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_subtalar_calcaneus" has 106 invalid facets.      *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_tibia" has 9 invalid facets.          *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_talus" has 22 invalid facets.         *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_subtalar_calcaneus" has 106 invalid facets.      *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+
+
+Data Record #1
+===========================================================================
+Step = 0
+Time = 0
+Data = disp
+File = disp_WK.txt
+
+Data Record #2
+===========================================================================
+Step = 0
+Time = 0
+Data = reac_tibia
+File = reac_tibia_WK.txt
+
+Data Record #3
+===========================================================================
+Step = 0
+Time = 0
+Data = reac_fibula
+File = reac_fibula_WK.txt
+
+Data Record #4
+===========================================================================
+Step = 0
+Time = 0
+Data = reac_talus
+File = reac_talus_WK.txt
+
+ *************************************************************************
+ * Selecting linear solver pardiso                                       *
+ *************************************************************************
+
+===== beginning time step 1 : 0.05 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489648e+09    1.425032e+02    0.000000e+00 
+	   energy              3.487104e+04    4.208077e-01    3.487104e+01 
+	   displacement        1.154373e+01    1.154373e+01    1.154373e-03 
+ 2
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 1
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 0.163239
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.489648e+09    7.615476e+01    0.000000e+00 
+	   energy              3.487104e+04    6.296863e-02    3.487104e+01 
+	   displacement        1.154373e+01    5.069411e-01    1.208023e-03 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 5 at gauss point 1          *
+ * jacobian = -1.67165e+12                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 3 at gauss point 1          *
+ * jacobian = -3.55921e+12                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 4 at gauss point 1          *
+ * jacobian = -2.32773e+13                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.05
+
+Retrying time step. Retry attempt 1 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0454545
+
+
+===== beginning time step 1 : 0.0454545 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0454545
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231114e+09    1.340548e+02    0.000000e+00 
+	   energy              2.882416e+04    4.052708e-01    2.882416e+01 
+	   displacement        9.931668e+00    9.931668e+00    9.931668e-04 
+ 2
+ Nonlinear solution status: time= 0.0454545
+	stiffness updates             = 1
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 0.264601
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231114e+09    4.715780e+01    0.000000e+00 
+	   energy              2.882416e+04    6.240937e-02    2.882416e+01 
+	   displacement        9.931668e+00    7.492744e-01    1.071525e-03 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 4 at gauss point 1          *
+ * jacobian = -6.05797e+13                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 3 at gauss point 1          *
+ * jacobian = -9.86227e+12                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 5 at gauss point 1          *
+ * jacobian = -3.68139e+12                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0454545
+
+Retrying time step. Retry attempt 2 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0409091
+
+
+===== beginning time step 1 : 0.0409091 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0409091
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.972035e+08    1.268131e+02    0.000000e+00 
+	   energy              2.335319e+04    3.898428e-01    2.335319e+01 
+	   displacement        8.456959e+00    8.456959e+00    8.456959e-04 
+ 2
+ Nonlinear solution status: time= 0.0409091
+	stiffness updates             = 1
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 0.424906
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.972035e+08    2.362239e+01    0.000000e+00 
+	   energy              2.335319e+04    2.650282e-02    2.335319e+01 
+	   displacement        8.456959e+00    9.989391e-01    9.493163e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 4 at gauss point 1          *
+ * jacobian = -8.87551e+13                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 3 at gauss point 1          *
+ * jacobian = -1.57369e+13                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 5 at gauss point 1          *
+ * jacobian = -4.15718e+12                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0409091
+
+Retrying time step. Retry attempt 3 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0363636
+
+
+===== beginning time step 1 : 0.0363636 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0363636
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            7.879148e+08    1.205953e+02    0.000000e+00 
+	   energy              1.845813e+04    3.746076e-01    1.845813e+01 
+	   displacement        7.119608e+00    7.119608e+00    7.119608e-04 
+ 2
+ Nonlinear solution status: time= 0.0363636
+	stiffness updates             = 1
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 0.612276
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            7.879148e+08    1.605034e+01    0.000000e+00 
+	   energy              1.845813e+04    3.272577e-02    1.845813e+01 
+	   displacement        7.119608e+00    9.677653e-01    8.120265e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 4 at gauss point 1          *
+ * jacobian = -1.87432e+13                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 5 at gauss point 1          *
+ * jacobian = -5.46448e+11                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 3 at gauss point 1          *
+ * jacobian = -3.71963e+12                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0363636
+
+Retrying time step. Retry attempt 4 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0318182
+
+
+===== beginning time step 1 : 0.0318182 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0318182
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.032482e+08    1.152307e+02    0.000000e+00 
+	   energy              1.413898e+04    3.608945e-01    1.413898e+01 
+	   displacement        5.919614e+00    5.919614e+00    5.919614e-04 
+ 2
+ Nonlinear solution status: time= 0.0318182
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            6.032482e+08    4.803438e+01    0.000000e+00 
+	   energy              1.413898e+04    3.209882e-01    1.413898e+01 
+	   displacement        5.919614e+00    1.110787e+00    7.067534e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 5 at gauss point 1          *
+ * jacobian = -4.79085e+10                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 3 at gauss point 1          *
+ * jacobian = -1.23087e+12                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 4 at gauss point 1          *
+ * jacobian = -7.18927e+12                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 3 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0318182
+
+Retrying time step. Retry attempt 5 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0272727
+
+
+===== beginning time step 1 : 0.0272727 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0272727
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.432039e+08    1.105422e+02    0.000000e+00 
+	   energy              1.039575e+04    3.466117e-01    1.039575e+01 
+	   displacement        4.856978e+00    4.856978e+00    4.856978e-04 
+ 2
+ Nonlinear solution status: time= 0.0272727
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.432039e+08    4.190546e+01    0.000000e+00 
+	   energy              1.039575e+04    2.500892e-01    1.039575e+01 
+	   displacement        4.856978e+00    4.121754e-01    5.294677e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 4 at gauss point 1          *
+ * jacobian = -1.05755e+09                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 3 at gauss point 1          *
+ * jacobian = -1.38683e+08                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 2 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0272727
+
+Retrying time step. Retry attempt 6 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0227273
+
+
+===== beginning time step 1 : 0.0227273 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0227273
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.077817e+08    1.064005e+02    0.000000e+00 
+	   energy              7.228428e+03    3.317566e-01    7.228428e+00 
+	   displacement        3.931700e+00    3.931700e+00    3.931700e-04 
+ 2
+ Nonlinear solution status: time= 0.0227273
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            3.077817e+08    3.944637e+01    0.000000e+00 
+	   energy              7.228428e+03    2.307920e-01    7.228428e+00 
+	   displacement        3.931700e+00    1.427390e-01    4.091709e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 4 at gauss point 1          *
+ * jacobian = -21122.2                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0227273
+
+Retrying time step. Retry attempt 7 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0181818
+
+
+===== beginning time step 1 : 0.0181818 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0181818
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.969818e+08    1.027653e+02    0.000000e+00 
+	   energy              4.637017e+03    3.125308e-01    4.637017e+00 
+	   displacement        3.143780e+00    3.143780e+00    3.143780e-04 
+ 2
+ Nonlinear solution status: time= 0.0181818
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.969818e+08    3.759842e+01    0.000000e+00 
+	   energy              4.637017e+03    2.188629e-01    4.637017e+00 
+	   displacement        3.143780e+00    4.877200e-02    3.204237e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8036 at gauss point 1       *
+ * jacobian = -20309                                                     *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8163 at gauss point 1       *
+ * jacobian = -2387.85                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8145 at gauss point 1       *
+ * jacobian = -8830.74                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8064 at gauss point 1       *
+ * jacobian = -1605.68                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8146 at gauss point 3       *
+ * jacobian = -1096.85                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8073 at gauss point 1       *
+ * jacobian = -4.80957e+06                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8122 at gauss point 1       *
+ * jacobian = -8412.74                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8137 at gauss point 1       *
+ * jacobian = -521.281                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8154 at gauss point 3       *
+ * jacobian = -6515.61                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8127 at gauss point 1       *
+ * jacobian = -21501.6                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8100 at gauss point 2       *
+ * jacobian = -196911                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8109 at gauss point 3       *
+ * jacobian = -16132.6                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8172 at gauss point 1       *
+ * jacobian = -71003.6                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8046 at gauss point 1       *
+ * jacobian = -2433.06                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8093 at gauss point 1       *
+ * jacobian = -152146                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8086 at gauss point 1       *
+ * jacobian = -54698.8                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8055 at gauss point 5       *
+ * jacobian = -25989.1                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8087 at gauss point 1       *
+ * jacobian = -151046                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8165 at gauss point 1       *
+ * jacobian = -13452.8                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8090 at gauss point 1       *
+ * jacobian = -109410                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8065 at gauss point 1       *
+ * jacobian = -161.037                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8147 at gauss point 2       *
+ * jacobian = -1151.76                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8067 at gauss point 1       *
+ * jacobian = -1.358e+06                                                 *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8074 at gauss point 3       *
+ * jacobian = -4.85163e+07                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8068 at gauss point 4       *
+ * jacobian = -94982.8                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8075 at gauss point 1       *
+ * jacobian = -2.71585e+06                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8069 at gauss point 1       *
+ * jacobian = -191711                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8076 at gauss point 1       *
+ * jacobian = -3.61552e+07                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8070 at gauss point 1       *
+ * jacobian = -1.96226e+06                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8078 at gauss point 1       *
+ * jacobian = -1.98449e+07                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8071 at gauss point 1       *
+ * jacobian = -2.56049e+07                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8079 at gauss point 3       *
+ * jacobian = -3.50993e+06                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8072 at gauss point 2       *
+ * jacobian = -1.52469e+06                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8101 at gauss point 2       *
+ * jacobian = -7583.95                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8124 at gauss point 1       *
+ * jacobian = -5647.79                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8125 at gauss point 1       *
+ * jacobian = -13702.3                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8126 at gauss point 1       *
+ * jacobian = -2752.18                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8047 at gauss point 1       *
+ * jacobian = -35.3887                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8094 at gauss point 1       *
+ * jacobian = -41369.9                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8037 at gauss point 1       *
+ * jacobian = -428.001                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8056 at gauss point 3       *
+ * jacobian = -120376                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8038 at gauss point 1       *
+ * jacobian = -6992.08                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8058 at gauss point 1       *
+ * jacobian = -865522                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8040 at gauss point 1       *
+ * jacobian = -203343                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8149 at gauss point 5       *
+ * jacobian = -234.522                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8166 at gauss point 1       *
+ * jacobian = -445612                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8095 at gauss point 5       *
+ * jacobian = -329802                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8169 at gauss point 1       *
+ * jacobian = -63.2452                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8041 at gauss point 1       *
+ * jacobian = -17731.9                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8170 at gauss point 1       *
+ * jacobian = -4.17998e+06                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8043 at gauss point 1       *
+ * jacobian = -72307                                                     *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8081 at gauss point 2       *
+ * jacobian = -4.1339e+06                                                *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8045 at gauss point 2       *
+ * jacobian = -1081.1                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8173 at gauss point 4       *
+ * jacobian = -427.437                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8141 at gauss point 1       *
+ * jacobian = -133136                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8174 at gauss point 1       *
+ * jacobian = -1005.19                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8110 at gauss point 1       *
+ * jacobian = -55542.5                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8102 at gauss point 1       *
+ * jacobian = -510208                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8103 at gauss point 1       *
+ * jacobian = -80016.2                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8115 at gauss point 1       *
+ * jacobian = -5.15823e+06                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8150 at gauss point 1       *
+ * jacobian = -1595.05                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8096 at gauss point 1       *
+ * jacobian = -3.79649e+06                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8048 at gauss point 4       *
+ * jacobian = -899.472                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8097 at gauss point 1       *
+ * jacobian = -1.51057e+07                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8059 at gauss point 1       *
+ * jacobian = -1.40509e+07                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8098 at gauss point 1       *
+ * jacobian = -1.73104e+06                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8060 at gauss point 3       *
+ * jacobian = -1.0982e+06                                                *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8175 at gauss point 1       *
+ * jacobian = -139661                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8155 at gauss point 1       *
+ * jacobian = -16148.3                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8176 at gauss point 1       *
+ * jacobian = -346.496                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8104 at gauss point 2       *
+ * jacobian = -1717.83                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8105 at gauss point 1       *
+ * jacobian = -466.779                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8106 at gauss point 2       *
+ * jacobian = -88.0076                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8171 at gauss point 1       *
+ * jacobian = -2138.53                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8107 at gauss point 2       *
+ * jacobian = -112789                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8152 at gauss point 6       *
+ * jacobian = -3205.55                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8156 at gauss point 5       *
+ * jacobian = -192.133                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8177 at gauss point 1       *
+ * jacobian = -90.744                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8128 at gauss point 1       *
+ * jacobian = -202198                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8061 at gauss point 1       *
+ * jacobian = -1.04658e+08                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8062 at gauss point 1       *
+ * jacobian = -1.18919e+08                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8142 at gauss point 1       *
+ * jacobian = -446.845                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8049 at gauss point 1       *
+ * jacobian = -20927.8                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8143 at gauss point 1       *
+ * jacobian = -22143.1                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8157 at gauss point 1       *
+ * jacobian = -7236.28                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8144 at gauss point 1       *
+ * jacobian = -51057.6                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8099 at gauss point 1       *
+ * jacobian = -337586                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8129 at gauss point 1       *
+ * jacobian = -8951.16                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8063 at gauss point 1       *
+ * jacobian = -795.503                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8108 at gauss point 2       *
+ * jacobian = -560312                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8051 at gauss point 3       *
+ * jacobian = -6029.02                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8178 at gauss point 2       *
+ * jacobian = -16132.6                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8052 at gauss point 3       *
+ * jacobian = -1453.57                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8130 at gauss point 1       *
+ * jacobian = -3371.34                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8053 at gauss point 1       *
+ * jacobian = -10378.1                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8179 at gauss point 1       *
+ * jacobian = -3039.59                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8132 at gauss point 1       *
+ * jacobian = -1593.17                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8180 at gauss point 2       *
+ * jacobian = -774.977                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8134 at gauss point 1       *
+ * jacobian = -8055.8                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8054 at gauss point 3       *
+ * jacobian = -9229.5                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 101 negative jacobians detected.                                      *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0181818
+
+Retrying time step. Retry attempt 8 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0136364
+
+
+===== beginning time step 1 : 0.0136364 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.0136364
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.108041e+08    9.947656e+01    0.000000e+00 
+	   energy              2.621518e+03    2.928271e-01    2.621518e+00 
+	   displacement        2.493217e+00    2.493217e+00    2.493217e-04 
+ 2
+ Nonlinear solution status: time= 0.0136364
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.108041e+08    3.603733e+01    0.000000e+00 
+	   energy              2.621518e+03    2.080402e-01    2.621518e+00 
+	   displacement        2.493217e+00    2.490490e-02    2.525953e-04 
+ 3
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8074 at gauss point 3       *
+ * jacobian = -0.20633                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8122 at gauss point 5       *
+ * jacobian = -1.6748                                                    *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8075 at gauss point 4       *
+ * jacobian = -0.185617                                                  *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8062 at gauss point 4       *
+ * jacobian = -0.238032                                                  *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8076 at gauss point 4       *
+ * jacobian = -0.0224304                                                 *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 5 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.0136364
+
+Retrying time step. Retry attempt 9 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00909091
+
+
+===== beginning time step 1 : 0.00909091 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.924856e+07    9.645832e+01    0.000000e+00 
+	   energy              1.181931e+03    2.727195e-01    1.181931e+00 
+	   displacement        1.980012e+00    1.980012e+00    1.980012e-04 
+ 2
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.924856e+07    3.500285e+01    0.000000e+00 
+	   energy              1.181931e+03    1.974930e-01    1.181931e+00 
+	   displacement        1.980012e+00    2.133182e-02    2.007073e-04 
+ 3
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 2
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.500000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            4.924856e+07    1.027359e+29    0.000000e+00 
+	   energy              1.181931e+03    4.890190e+18    1.181931e+00 
+	   displacement        1.980012e+00    9.228032e+09    9.228034e+05 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * Problem is diverging. Stiffness matrix will now be reformed           *
+ *************************************************************************
+Reforming stiffness matrix: reformation #2
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 699900
+ 4
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 0
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.027359e+29    9.019339e+27    0.000000e+00 
+	   energy              4.890190e+18    4.829818e+17    4.890190e+15 
+	   displacement        1.980012e+00    1.025372e+09    4.101279e+05 
+ 5
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 1
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.027359e+29    2.183739e+27    0.000000e+00 
+	   energy              4.890190e+18    1.000645e+17    4.890190e+15 
+	   displacement        1.980012e+00    1.817491e+08    2.556293e+05 
+ 6
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 2
+	right hand side evaluations   = 9
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.027359e+29    3.634853e+26    0.000000e+00 
+	   energy              4.890190e+18    3.954748e+16    4.890190e+15 
+	   displacement        1.980012e+00    1.706037e+08    1.406120e+05 
+ 7
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 3
+	right hand side evaluations   = 10
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.027359e+29    7.002880e+25    0.000000e+00 
+	   energy              4.890190e+18    1.196254e+16    4.890190e+15 
+	   displacement        1.980012e+00    8.099162e+07    8.121776e+04 
+ 8
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 4
+	right hand side evaluations   = 11
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.027359e+29    1.275754e+25    0.000000e+00 
+	   energy              4.890190e+18    3.994351e+15    4.890190e+15 
+	   displacement        1.980012e+00    4.958953e+07    4.603920e+04 
+ 9
+ Nonlinear solution status: time= 0.00909091
+	stiffness updates             = 5
+	right hand side evaluations   = 12
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.027359e+29    2.374804e+24    0.000000e+00 
+	   energy              4.890190e+18    1.283308e+15    4.890190e+15 
+	   displacement        1.980012e+00    2.749027e+07    2.628818e+04 
+ 10
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 8993 at gauss point 1       *
+ * jacobian = -4.99362                                                   *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.00909091
+
+Retrying time step. Retry attempt 10 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00454545
+
+
+===== beginning time step 1 : 0.00454545 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 12588
+	Nr of nonzeroes in stiffness matrix ....... : 700332
+ 1
+ Nonlinear solution status: time= 0.00454545
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231525e+07    9.365647e+01    0.000000e+00 
+	   energy              3.182556e+02    2.520651e-01    3.182556e-01 
+	   displacement        1.604165e+00    1.604165e+00    1.604165e-04 
+ 2
+ Nonlinear solution status: time= 0.00454545
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231525e+07    3.634849e+01    0.000000e+00 
+	   energy              3.182556e+02    1.864225e-01    3.182556e-01 
+	   displacement        1.604165e+00    2.115749e-02    1.631418e-04 
+ 3
+ Nonlinear solution status: time= 0.00454545
+	stiffness updates             = 2
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.500000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.231525e+07    5.041117e+04    0.000000e+00 
+	   energy              3.182556e+02    2.385744e+02    3.182556e-01 
+	   displacement        1.604165e+00    6.445400e+01    6.609267e-03 
+ 4
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 4 at gauss point 1          *
+ * jacobian = -1.75413e+08                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 3 at gauss point 1          *
+ * jacobian = -5.86458e+08                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 5 at gauss point 1          *
+ * jacobian = -2.35797e+08                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian was detected at element 2 at gauss point 1          *
+ * jacobian = -1.65788e+08                                               *
+ *                                                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * 4 negative jacobians detected.                                        *
+ *************************************************************************
+
+
+------- failed to converge at time : 0.00454545
+
+Max. nr of retries reached.
+
+
+
+ N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+
+	Number of time steps completed .................... : 0
+
+	Total number of equilibrium iterations ............ : 3
+
+	Average number of equilibrium iterations .......... : 0
+
+	Total number of right hand evaluations ............ : 6
+
+	Total number of stiffness reformations ............ : 1
+
+
+ L I N E A R   S O L V E R   S T A T S
+
+	Total calls to linear solver ........ : 41
+
+	Avg iterations per solve ............ : 1
+
+	Time in linear solver: 0:00:02
+
+ Peak memory  : 155.0 MB
+
+ Elapsed time : 0:00:04
+
+
+ E R R O R   T E R M I N A T I O N
+

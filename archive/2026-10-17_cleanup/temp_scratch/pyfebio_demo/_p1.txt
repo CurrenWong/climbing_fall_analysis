@@ -1,0 +1,200 @@
+========================================================================================
+① 踝模型的 <Output> 段（写什么）
+========================================================================================
+<Output>）。
+_RIGID_LINES: list = []
+if TALUS_RIGID:
+    _R = _RIGID_LINES.append
+    _ax = int(np.argmax(np.abs(axis)))          # 轴向（ALIGN_AXIS 后应为 2=z）
+    # (a) 地面：全约束
+    _R('  <Rigid>')
+    _R('    <rigid_bc type="rigid_fixed">')
+    _R(f'      <rb>{RIGID_GROUND_MAT}</rb>')
+    _R('      <Rx_dof>1</Rx_dof><Ry_dof>1</Ry_dof><Rz_dof>1</Rz_dof>')
+    _R('      <Ru_dof>1</Ru_dof><Rv_dof>1</Rv_dof><Rw_dof>1</Rw_dof>')
+    _R('    </rigid_bc>')
+    # (b) 距骨：沿轴(垂直于地面)平动约束；横向平动由弹簧提供 ⇒ 不硬约束
+    #     ★ 转动 Ru/Rv/Rw 由 TAL_ROTLOCK 控制：1=固定（落位期），0=解除（duty cycle）
+    _R('    <rigid_bc type="rigid_fixed">')
+    _R(f'      <rb>{RIGID_TALUS_MAT}</rb>')
+    for _di, _dn in enumerate("xyz"):
+        if _di == _ax:
+            _R(f'      <R{_dn}_dof>1</R{_dn}_dof>')     # 垂直地面位移 = 约束
+    _R(f'      <Ru_dof>{1 if TAL_ROTLOCK else 0}</Ru_dof>')
+    _R(f'      <Rv_dof>{1 if TAL_ROTLOCK else 0}</Rv_dof>')
+  
+
+--- 提到 logfile/xplt/plotfile/stress 的行 ---
+     66: LOG_DATA = os.environ.get("LOG_DATA", "0") == "1"
+   1269: #      <plotfile> 没有 rigid displacement/rotation 变量 ⇒ 读节点位移。
+   1656: w('    <plotfile type="febio"><var type="displacement"/>'
+   1657: '<var type="stress"/><var type="reaction forces"/></plotfile>')
+   1658: if LOG_DATA:
+   1660: w(f'    <logfile file="log_{_TAG_EARLY}.txt">')
+   1673: w('    </logfile>')
+
+========================================================================================
+② 宏观线 bond_feb.py 怎么读应力
+========================================================================================
+     13: * ``_xplt_to_hdf5_patched`` (FEBio 4.13 omits ``PLT_DOM_NAME`` on shell
+     37: * :func:`post_process`   -- ``.xplt`` -> ``.hdf5`` -> per-domain σ_vm stats
+    915: file=out_feb.stem + ".xplt",
+    916: all_vars=[fout.Var(type="displacement"), fout.Var(type="stress")],
+    986: # xplt -> hdf5 patch (FEBio 4.13 omits PLT_DOM_NAME for shell domains)
+    988: def _xplt_to_hdf5_patched(xplt: Path, hdf5: Path) -> None:
+    989: """Patch pyfebio.xplt for nameless shell domains, then run to_hdf5.
+    997: ``/meshes/0/domains/`` → h5py raises
+   1003: both consult ``mesh_dict['domains'][id]``, so mesh and stress datasets agree.
+   1008: import pyfebio.xplt as xp_mod
+   1010: # Two FEBio-4.13 xplt quirks make multi-domain shells fail pyfebio:
+   1017: #    share material "bone_cort").  But ``parse_state`` looks up stress by
+   1023: # parse_state consult ``mesh_dict['domains']``, so mesh and stress datasets
+   1041: xp_mod.to_hdf5(str(xplt), str(hdf5))
+   1046: def _von_mises_from_voigt(s: np.ndarray) -> np.ndarray:
+   1057: def _last_stress_group(h5):
+   1058: sids = sorted(h5["states"].keys(), key=int)
+   1061: last = h5["states"][sids[-1]]
+   1062: stress_grp = last.get("element_data", {}).get("stress")
+   1063: if stress_grp is None:
+   1064: raise RuntimeError("HDF5 末 state 无 element_data/stress")
+   1065: return stress_grp
+   1068: def _mesh_domain_order(h5) -> list[str]:
+   1073: order.  h5py does not guarantee insertion order, so we sort the unnamed
+   1076: names = list(h5["meshes/0/domains"].keys())
+   1086: vm = _von_mises_from_voigt(s)
+   1098: xplt: Path,
+   1105: """Read per-domain σ_vm stats from `xplt`.
+   1109: xplt, hdf5:
+   1113: xplt, so they are matched by name).
+   1122: _xplt_to_hdf5_patched(xplt, hdf5)
+   1125: import h5py
+   1126: with h5py.File(hdf5, "r") as h5:
+   1127: stress_grp = _last_stress_group(h5)
+   1128: keys = list(stress_grp.keys())
+   1129: order = _mesh_domain_order(h5)
+   1131: dom_grp = h5["meshes/0/domains"]
+   1133: out["stress_keys"] = keys
+   1142: raise RuntimeError(f"solid 名 {name!r} 不在 stress keys {keys!r}")
+   1143: with h5py.File(hdf5, "r") as h5:
+   1144: s = np.asarray(_last_stress_group(h5)[name][:], dtype=np.float64)
+   1146: stats["stress_key"] = repr(name)
+   1171: with h5py.File(hdf5, "r") as h5:
+   1172: s = np.asarray(_last_stress_group(h5)[dom][:], dtype=np.float64)
+   1174: stats["stress_key"] = repr(dom)
+
+========================================================================================
+③ 骨强度判据 src/climbing/bone.py
+========================================================================================
+      9: 腓骨两端 30/70 MPa vs 腓骨骨干 90/160 MPa；股骨颈 40/80 vs 股骨骨干 140/220。
+     10: 骨折恰恰最爱发生在两端（踝、膝、髋）。
+     11: 2. **骨折是可定位的**：不同部位有各自的阈值与主导失效模式（压缩/拉伸）。
+     35: [Y25] Table 1 给的是**材料强度（MPa）**，用于和有限元 von Mises 应力对比。
+     40: * 保留 [Y25] 的**材料强度**作为 ``MATERIAL_STRENGTH_MPA`` 参考表
+     44: 独立佐证：跟骨骨折的**力判据**已被验证可用 —— Barnes 等（IRCOBI 2019）
+     45: 比较全身 PMHS 与足-腿构件试验，确认"足跟接触力"是严重跟骨骨折的有效
+     58: "MATERIAL_STRENGTH_MPA",
+     67: # [Y25] Table 1 —— 材料强度参考（MPa）
+     69: def _mpa(sigma_t: float, sigma_c: float) -> tuple[float, float]:
+     73: #: [Y25] 表 1 原始值：材料级拉伸/压缩强度 (MPa)。
+     74: #: **这是材料强度，不是整体骨失效载荷。** 见模块 docstring。
+     75: MATERIAL_STRENGTH_MPA: dict[str, tuple[float, float]] = {
+     76: "calcaneus": _mpa(100, 150),      # 足部
+     77: "tibia_shaft": _mpa(120, 200),    # 胫骨骨干
+     78: "tibia_ends": _mpa(30, 70),       # 胫骨两端
+     79: "fibula_shaft": _mpa(90, 160),    # 腓骨骨干
+     80: "fibula_ends": _mpa(30, 70),      # 腓骨两端
+     81: "femur_shaft": _mpa(140, 220),    # 股骨骨干
+     82: "femoral_neck": _mpa(40, 80),     # 股骨颈
+     83: "pelvis": _mpa(100, 180),         # 骨盆
+     84: "spine": _mpa(70, 150),           # 脊柱椎体
+     85: "skull": _mpa(80, 160),           # 颅骨（本模块不评估，见 docstring）
+     93: class BoneSite:
+     99: ``MATERIAL_STRENGTH_MPA`` 的键（材料强度参考）。
+    103: **承载截面面积**（mm²），用于把材料强度换算成力阈值。
+    126: def sigma_mpa(self) -> float:
+    127: """该部位按主导失效模式选取的材料强度 (MPa)。"""
+    128: st, sc = MATERIAL_STRENGTH_MPA[self.key]
+    142: """材料强度 × 承载截面 → 名义失效载荷 (N)。
+    144: ``1 MPa = 1 N/mm²``，故 ``MPa × mm² = N``。
+    146: return self.sigma_mpa * self.area_mm2
+    164: note="荷载集中在跟骨、非均布；材料强度×截面积会显著高估。"
+    165: "独立佐证：足跟接触力已是经验证的跟骨骨折预测量（Voo HIPC）。",
+    172: note="胫骨远端骨折是足先落地的经典损伤。",
+    185: note="[Y25] 中骨折风险随高度上升最快（OR=1.682）—— 相对脆弱的非主承重骨。"
+    188: "腓骨会被严重高估（实测 1 m 落垫就误判腓骨骨折 2.25×）。",
+    195: note="强度低（40/80 MPa）+ 弯曲/剪切复合受力，实际失效载荷远低于纯压缩估算。",
+    218: class SiteLoad:
+    254: class SiteVerdict:
+    285: def assess_sites(result, posture: str = "") -> SiteVerdict:
+    291: ``pad.simulate_boulder_fall`` 的返回值。需要 ``impact_window`` 切片内的
+    302: win = meta.get("impact_window_s")
+    305: "result.meta['impact_window_s'] 缺失：分部位评估必须在冲击窗口内取峰值，"
+    349: def knockdown_report(f_pad_peak_n: float) -> str:
+    350: """给出"材料强度换算"相对"已知整体骨失效载荷"的偏差诊断。
+    353: 把本模块算出的名义阈值与文献中跟骨骨折的量级（约 4–8 kN）对比，
+    356: 这个系数**不是**要拿去硬乘，而是用来量化"材料强度路线"的偏差幅度。
+    364: f"名义阈值 = σ_c × A = {site.sigma_mpa:.0f} MPa × {site.area_mm2:.0f} mm² "
+    366: f"文献跟骨骨折量级 = {lo/1e3:.0f}–{hi/1e3:.0f} kN",
+    369: f"结论：材料强度 × 承载截面 对跟骨**高估约 {k_hi:.0f}–{k_lo:.0f} 倍**。",
+
+========================================================================================
+④ 踝模型刚跑完的 npz 里有哪些键
+========================================================================================
+  lig_read_WK.npz: 7 键 / 37386 B
+    axis                     (3,) float64
+    fe_to_thums              (4030,) int64
+    lig_ea                   (10,) float64
+    lig_names                (10,) <U28
+    lig_npair                (10,) int64
+    lig_pairs                (10, 13, 2) int64
+    n_node                   () int64
+
+--- temp/thums/febio_lig 目录下的产物 ---
+  _b_prism_0.147.h5                           7658984 B
+  _b_prism_1.20.h5                            8353832 B
+  _b_prism_dm0.02.h5                          7664892 B
+  _b_prism_dm0.05.h5                          7664892 B
+  _b_prism_dm0.1.h5                           7662920 B
+  _b_prism_dm0.2.h5                           7662260 B
+  _b_prism_dm0.5.h5                           7658984 B
+  _b_tet4_0.147.h5                            8109628 B
+  _b_tet4_dm0.5.h5                            8109628 B
+  _bc2.h5                                     7422676 B
+  _ca.h5                                      5909264 B
+  _ca_result.h5                               5909264 B
+  _cc_prism.h5                                7658984 B
+  _cc_tet4.h5                                 8109628 B
+  _cmp.h5                                     7658984 B
+  _dg.h5                                      5909264 B
+  _dg2.h5                                     5909264 B
+  _dg3.h5                                     8353832 B
+  _fin.h5                                     8353832 B
+  _lit.h5                                     7658984 B
+  _nc.h5                                       529884 B
+  _pc.h5                                      8295308 B
+  _r2.h5                                      8353832 B
+  _rr.h5                                      8006524 B
+  _sw.h5                                      7658984 B
+  _tb.h5                                      8353832 B
+  ankle_lig_WK.feb                             779952 B
+  ankle_lig_WK.log                              79704 B
+  ankle_lig_WK.xplt                           7516573 B
+  ankle_lig_WK_tibia_cort_tibia_spon_tibia_marrow_talus_cort_talus_spon.feb    1976319 B
+  ankle_lig_WK_tibia_cort_tibia_spon_tibia_marrow_talus_cort_talus_spon.log       2095 B
+  ankle_lig_WK_tibia_cort_tibia_spon_tibia_marrow_talus_cort_talus_spon_calcaneus_cort_calcaneus_spon.feb    2292986 B
+  ankle_lig_WK_tibia_cort_tibia_spon_tibia_marrow_talus_cort_talus_spon_calcaneus_cort_calcaneus_spon.log    6873173 B
+  ankle_lig_WK_tibia_cort_tibia_spon_tibia_marrow_talus_cort_talus_spon_calcaneus_cort_calcaneus_spon.xplt   16676928 B
+  c2                                            16384 B
+  disp_WK.txt                                 4183583 B
+  febio_WK.log                                  67704 B
+  febio_WK_tibia_cort_tibia_spon_tibia_marrow_talus_cort_talus_spon.log       2356 B
+  febio_WK_tibia_cort_tibia_spon_tibia_marrow_talus_cort_talus_spon_calcaneus_cort_calcaneus_spon.log    6862659 B
+  lig_read_WK.npz                               37386 B
+  lig_result.h5                               8006524 B
+  log_WK.txt                                    84310 B
+  ms.xplt                                      132566 B
+  reac_fibula_WK.txt                            30203 B
+  reac_talus_WK.txt                            184968 B
+  reac_tibia_WK.txt                             87228 B
+  run_ta.log                                  1030551 B
+  s.xplt                                        33729 B

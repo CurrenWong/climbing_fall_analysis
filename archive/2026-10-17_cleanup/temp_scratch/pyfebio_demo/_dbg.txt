@@ -1,0 +1,7 @@
+23 个 Elements 标签
+    type="tet4" name="tibia_cort__tet4"
+    type="hex8" name="tibia_cort__hex8"
+    type="tet4" name="tibia_spon__tet4"
+    type="tet4" name="tibia_marrow__tet4"
+    type="hex8" name="fibula_cort__hex8"
+    type="tet4" name="fibula_spon__tet4"

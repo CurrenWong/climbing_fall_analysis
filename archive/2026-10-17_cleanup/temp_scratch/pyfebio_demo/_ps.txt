@@ -1,0 +1,31 @@
+基准（共形模型，无 tie）: 436.817 N
+
+  penalty=50     rc=1   35.8s  None
+  penalty=100    rc=1   29.7s  None
+  penalty=300    rc=1   28.8s  None
+[ok] ankle_tibiotalar.xplt -> 15.6 MB
+state 15（共 16 个）
+  node_data 变量: ['displacement', 'reaction forces']
+    displacement: (8473, 3)
+    reaction forces: (8473, 3)
+      -> |R| 中位 0.8242  max 247.6213
+      -> 沿加载轴分量之和 = 365.954  （N；负=与轴反向，即受压）
+
+  element_data 变量: ['stress']
+
+域                               单元        中位       p99       max  (von Mises, MPa)
+tibiotalar_tibia(软骨)           458    0.1255    2.3199   19.0502
+__set8                         607    0.2239    3.3087   23.4135
+tibia_cort(hex8)             2,415    1.4175    6.7928   16.1946
+tibia_marrow(骨髓)            14,482    0.0015    0.0057    0.0068
+tibia_cort(tet4)                 6    3.9482    6.6395    6.7707
+tibia_end_spon(松质)           6,651    0.0500    0.1312    0.2466
+talus_cort(hex8)               394    4.3983   23.3100   27.9390
+talus_spon(松质)               1,766    0.0973    0.2404    0.2818
+
+位移: |u| max 1.2094 mm；沿加载轴 -0.3413 .. 0.1069 mm
+  penalty=1000   rc=0   19.1s  R= 709.357 N  状态18  uz_min=-0.2070  软骨 p99=4.924
+  penalty=3000   rc=1  315.6s  None
+  penalty=10000  rc=0   38.5s  R= 826.287 N  状态36  uz_min=-0.1506  软骨 p99=5.534
+
+目标 436.817 N；已扫 [50, 100, 300, 1000, 3000, 10000]

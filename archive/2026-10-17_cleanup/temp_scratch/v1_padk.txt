@@ -1,0 +1,40 @@
+网格 calcaneus_r_anatframe.npz  CORT 634
+h=5.0 m, F_sub=26383.1 N；k 档 = [0.05, 0.2028, 0.5, 2.0, 10.0, 1000.0]
+
+参照（既有）：fixed gauge=186.756 / spring k=10: 156.509 / k=100: 151.897 / k=1000: 142.729 / k=1e4: 173.440 / k=1e5: 184.404 / k=1e6: 186.443
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 0.05, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=0.05     → 失败 FebioRunError: FEBio 运行失败（非 0 退出码）。
+命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\plantar_bc\plantar_padk0.05_h5.feb
+工作目录: D:\Project\climbing_fal
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 0.2028, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=0.2028   → 失败 FebioRunError: FEBio 运行失败（非 0 退出码）。
+命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\plantar_bc\plantar_padk0.2028_h5.feb
+工作目录: D:\Project\climbing_f
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 0.5, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=0.5      → 失败 FebioRunError: FEBio 运行失败（非 0 退出码）。
+命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\plantar_bc\plantar_padk0.5_h5.feb
+工作目录: D:\Project\climbing_fall
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 2.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=2        → 失败 FebioRunError: FEBio 运行失败（非 0 退出码）。
+命令: D:\Program\FEBioStudio\bin\febio4.exe -i D:\Project\climbing_fall_analysis\temp\opensim_fe\plantar_bc\plantar_padk2_h5.feb
+工作目录: D:\Project\climbing_fall_a
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 10.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=10       rc=0  gauge_max=156.5090 MPa  (vs fixed 83.8%)
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5730 MPa（F=26383.1 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'spring_k_n_per_mm': 1000.0, 'directions': ['normal', 'x', 'z'], 'n_springs': 525, 'n_anchors': 525, 'anchor_offset_mm': 1.0, 'kind': 'spring', 'n_plantar_nodes': 175}
+  k=1000     rc=0  gauge_max=142.7285 MPa  (vs fixed 76.4%)
+
+小结：
+  最软 gauge = 142.7285 MPa @ k=1000 N/mm （vs fixed 186.756 ⇒ 76.4%）
+  物理跟垫 k=0.2028 ⇒ gauge = nan MPa

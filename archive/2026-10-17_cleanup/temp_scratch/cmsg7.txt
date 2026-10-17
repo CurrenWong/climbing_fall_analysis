@@ -1,0 +1,48 @@
+﻿feat(v1): **绕向修正正式接进代码**（原生 flip_primary/flip_secondary）+ 修正后跖面族与首折
+
+用户令「继续」。承接 `0e3a6c4`（机制=面片绕向），本轮把它正式接入并在修正下重跑。
+
+## 1. 正式接线（opt-in，默认 0 => 原路径逐位不变）
+- `plantar_bc.py`：`_apply_contact` / `apply_plantar_bc` 新增 `flip_primary` / `flip_secondary`
+  （`contact_flip_primary` / `contact_flip_secondary`），透传给
+  `fcontact.SlidingElastic(flip_primary=..., flip_secondary=...)`（pyfebio 原生参数，默认 0）
+- `thums_feb.build_thums_feb`：新增同名 kwargs
+
+## 2. 原生 flip 与上一轮的**文本反转节点序等价性已验**（h=5 m, hold_k=100, gap=+0.5）
+| 配置 | 原生 max (MPa) | 判定 |
+| orig (0/0) | **151.896519** | = 151.896519（文本原绕向）✓ 惰性 |
+| fp1 (1/0) | 151.896519 | 仍惰性 |
+| fs1 (0/1) | 151.896519 | 仍惰性 |
+| **fp1fs1 (1/1)** | **152.491512** | = 152.491512（文本两反转）✓ **接触生效** |
+=> deck 里 `<flip_primary>/<flip_secondary>` 标签已确认写入（自检）
+=> **两种施加方式完全一致**（<1e-4）=> 修正可用原生选项生产化
+
+## 3. 修正绕向后重跑跖面族（anat, a=0, PressureLoad, gauge_max l=4mm, 阈值 150 MPa）
+| hold_k | h=1 | h=2 | h=3 | h=5 | **首折** |
+| **1** | ✗ | ✗ | ✗ | ✗ | — |
+| **10** | 109.03 | 136.09 | 145.10 | 169.12 | **3.351 m** |
+| **100** | 106.07 | 132.39 | 140.99 | 164.07 | **3.696 m** |
+=> **修正前（anat contact_hold100）**：h=2 131.79 / h=3 140.42 / h=5 163.54 => 首折 ≈ 3.74 m
+=> **修正后 k=100：3.696 m（−1%）**；k=10：**3.351 m**
+=> **修正确实让接触生效（k 可降到 10 仍收敛），但首折仍 ~3.4–3.7 m，远低于 6–9 m 目标带**
+
+## 4. 结论
+- **绕向修正是真缺陷修复**（接触从「被认出却零贡献」变成「真的在出力」）
+- 但它**没有**改变 V1 的失败结论：**首折仍 ≈3.4–3.7 m**
+- `hold_k` 仍是**自由旋钮**（k=10 vs 100 差 ~10% 首折）；`k=1` 全高度不收敛
+  => **「零旋钮」仍未达成**（手册 §8.12.4 的啮合前刚体模态问题未解）
+- ⚠️ 上一轮 `v1_payoff` 里「flip_both + hold=1 + h=5 收敛（266.27）」与本轮 h=5/k=1 ✗
+  **不一致** => 两种施加方式**在 k 很小时不保证等价**（k=100 时已验证等价）=> 如实记，
+  下一轮需在 k=1 重做等价性核对
+
+## 诚实边界
+- 未改动任何判定：**V1 仍为 ❌【口径不可复现】**
+- 首折由**两点内插**（h=3/5）得到，非多点拟合；`k=10` 与 `k=100` 的指数 p 分别 0.2999/0.2968
+- `hold_k` 仍无物理依据 => 该族仅作**诊断口径**，不构成可交付
+- 全部 h=1..5 / a=0 / anat / `PressureLoad` 口径
+- 零回归：`pytest -k "plantar or contact or thums or bone_feb"` => **72 passed**
+
+- 改 `src/climbing/coupling/plantar_bc.py`、`scripts/opensim_fe/thums_feb.py`（opt-in）
+- 新增 `results/opensim_fe/v1_flipped_family_scan.json`
+- 脚本 `temp/v1_native.py`（等价性核对）、`temp/v1_fixed_family.py`（修正后族）
+- 前件 `results/opensim_fe/V1_PLANTAR_CONTACT_WINDING_FIX.md`（`0e3a6c4`）

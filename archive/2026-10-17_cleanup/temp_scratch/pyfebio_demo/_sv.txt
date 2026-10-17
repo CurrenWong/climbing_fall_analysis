@@ -1,0 +1,9 @@
+1000 行
+  539| def detJ_hex8(P):
+  558| def detJ_tet4(P):
+  563| def detJ_penta6(P):
+  596| def detJ_penta15(P):
+  601| FN = {"hex8": detJ_hex8, "tet4": detJ_tet4, "penta6": detJ_penta6, "penta15": detJ_penta15}
+  619|                 if sv_penta6(PP[:6]) <= 0:
+  632|         elif et == "penta6":
+  676|     "penta6": [(0, 1, 2), (3, 4, 5), (0, 1, 4, 3), (1, 2, 5, 4), (2, 0, 3, 5)],

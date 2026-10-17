@@ -1,0 +1,31 @@
+G5 report bytes 12421
+---tail---
+Prony 谱恢复粘弹性（1D）** —— **已预注册、未实现**
+（`docs/methods/G5_QLV粘弹性_预注册.md`，2026-10-15）。
+**动因已量化**：加载窗 14.2–19.0 ms ⇒ 斜坡口径 `G_eff/G₀`=0.518–0.585（**低 42–49%**）
+⇒ **不是二阶小量**；§3 推论 2 的旧佐证（MDPI「fast impact」）**已被实测推翻**（替换式）。
+⚠️ **开跑停线 S-0**：`E₁=185 kPa` 是准静态口径还是已含率效应**未定**，
+未裁定不得开跑。状态 = **【已预注册，未实现】**
+~~(b) 补致密化段能量账目项；~~ → **✅ 已完成（2026-10-15，§7），但以**正确机制**完成：
+原判「补致密化段项」被实测**证伪**；真因是「耗散以标量进入逐时刻账目」⇒
+已交付**时间序列** `tissue_pad_work_t_j` / `tissue_dissipated_energy_t_j`，
+闭合 2.06% → **0.21%**（h=1.5 m）。
+⚠️ 新挂账：`tissue_dissipated_energy_j` 是**部分量**（终态 1.87 J vs 序列端点 10.18 J，差 5.5×）
+—— 「永久压实是唯一耗散机制」在致密化区不成立，**引用该标量前须先裁定口径**；**
+(c) **载荷段软组织串联柔顺**（V8b 重定级件 §4 的单独立项，真正的根因）。
+
+---
+
+## 溯源
+
+- 实现 `src/climbing/chain2d_tissue.py`（纯新增，既有模块一字未改）
+- 探针 `scripts/chain_tissue_probe.py`；正对照 `temp/g5_control.py`
+- 预注册 `docs/methods/G5_跟垫柔顺层纠错_预注册.md`（§3.0 冻结后更正表）
+- 根因件 `docs/methods/V8b_重定级.md`
+- 锚点：**Gabler et al. 2016 J Biomech（PMC5161234）QLV: Yeoh C10=0.1/C30=7 MPa/K=2 GPa
+  + Prony A=0.06/0.77/0.02 @ τ=1 ms/10 ms/10 s**；PMC8925218（in-vivo E=185 kPa、
+  t=15.4 mm、**peak strain 0.70**、η=43.9 kPa·s）；Gefen 2007（175 kPa）；
+  Bennett & Ker 1990（in-vivo 变形 8.5–11.3 mm、吸能 73–99%）；
+  Miller-Young 2002；MDPI 2025 综述（快速冲击下粘弹性次要）
+
+

@@ -1,0 +1,50 @@
+feat(pad): 独立能量审计（`scripts/pad_energy_check.py`）⇒ FP_CONTACT 判定成立；非单调机制定案
+
+按用户「按你的建议」执行第 1 步（立有效性判据并重判 A）与第 2 步（定性非单调）。
+
+## 第 1 步：独立有效性判据（不依赖 absorbed_fraction）
+新增 `scripts/pad_energy_check.py::audit_energy`：沿轨迹算
+  E_mech(t) = KE(t) + PE_grav(t) + E_elastic(t)      必须非增（阻尼只耗散）
+- `KE = ½m_low·vzf² + ½m_up·vzt²`，加速度符号 `az_down = −g·accel_*_g`；
+- `PE_grav = −[m_low·g·z_foot + m_up·g·(z_torso + 0.85)]`，参考点 t=0（E=0）；
+- `E_elastic = ∫F_pad·d(comp) + 分段弹簧能（含 k_stop 止段）`。
+
+★ 审计器口径坑（踩过并钉死，见 `docs/notes/PAD_GOTCHAS.md` §6c）：
+  ① `result.t_s` 从 **t=0（释放）** 起，**不是**接触时刻；
+  ② 窗首速度是 **0**，**不是** `impact_speed_ms`（拿它当偏移 ⇒ 系统性 ≈2·mgh 的假 FAIL，实测
+     violation 恰好 = 2×329.5 = 659.6 J）；
+  ③ 接触压缩量 = `z_foot − result.height_m`，**不是** `z_foot − z_foot[0]`
+     （后者把整个下落量当压缩 ⇒ 报 435.7 mm 而真值 15.7 mm）。
+  `temp/v1_arrdump.py` 把数组口径逐项打印后钉死。
+
+结果：**A 的 12 个格全部 `violation_j = 0.00 J`、`E_mech` 非增**（容差 1%·mgh = 3.30 J）
+⇒ **数值物理有效 ⇒ FP_CONTACT 判定恢复成立**（撤回 → 未定 → **成立**）。
+`pad.py` 的动力学**能量守恒，无缺陷**。
+
+## 第 2 步：软接触 `F_flex(h)` 非单调 —— 机制定案
+**进 `k_stop` 止段**（`anchored-self`、`k_n=2.1e6`、`x_flex_max=0.40 m`、`k_stop=3.0e5`）：
+
+| h | 冲击窗 | F_flex峰 | 弹簧峰 | 阻尼峰 | xf@峰 | >x_flex_max? |
+|---|---:|---:|---:|---:|---:|---|
+| 1 m | 143 ms | 3.548 | 2.710 | 2.613 | 0.1298 | 否 |
+| **2 m** | **252 ms** | **9.309** | **9.165** | 3.711 | **0.4191** | **是** |
+| 3 m | 43 ms | 6.051 | 2.463 | 4.568 | 0.2052 | 否 |
+| 5 m | 40 ms | 7.781 | 2.966 | 5.949 | 0.2532 | 否 |
+
+机制：软接触让腿压得更深 ⇒ 恰在 h=2 m 跨过 `x_flex_max` 进止段 ⇒ 峰值被顶起
+（`3.3 kN + 3e5×0.0191 = 9.03 kN` ≈ 实测弹簧峰 9.165 ✓）。同档 `k_n=None` 窗口仅 17–18 ms、
+`xf ≤ 0.140` ⇒ 永不进止段 ⇒ 单调 ✓。
+⇒ **是未标定字段（`x_flex_max`/`k_stop`，继承自 `controlled-drop`）的产物，非数值误差、非能量缺陷；
+软接触区 `h*` 仍不可引用，须先标定/冻结这两个字段。**
+
+## 改动
+  + scripts/pad_energy_check.py            独立审计工具（含口径注释）
+  + tests/test_climbing.py                 TestEnergyAudit 3 条（守恒 / 压缩量口径锁死 / 软接触深行程）
+  M results/FP_CONTACT_REPORT.md           状态 → ✅ 判定成立（+ 非单调限制 + 三次翻转如实经过）
+  M docs/notes/PAD_GOTCHAS.md               §6b 重写（机制定案）；新增 §6c（结果数组口径）
+  M docs/reports/总体进度.md                §九之二 同步
+
+回归：**771 passed / 8 skipped / 0 failed**（-n auto --dist load；+3 条）。
+
+下一步：**B · 运动学自由度**（两段腿 + 膝扭簧，膝 quasi-stiffness ≈350 Nm/rad）——
+但软接触区要可用，还须先标定/冻结 `x_flex_max` 与 `k_stop`。

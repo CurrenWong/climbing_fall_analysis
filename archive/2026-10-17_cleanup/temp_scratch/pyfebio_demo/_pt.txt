@@ -1,0 +1,36 @@
+=== 解析（真值）===
+  应变 tr=5.000000e-03  σ_vm = 31.9904 MPa
+
+=== A) 原写法 solve(J,M).T ===
+  gauss(np.float64(-0.577), np.float64(-0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(0.577), np.float64(-0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(0.577), np.float64(0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(-0.577), np.float64(0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(-0.577), np.float64(-0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(0.577), np.float64(-0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.0658e-14)
+  gauss(np.float64(0.577), np.float64(0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.0658e-14)
+  gauss(np.float64(-0.577), np.float64(0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.0658e-14)
+
+=== B) 正解 M @ inv(J) ===
+  gauss(np.float64(-0.577), np.float64(-0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(0.577), np.float64(-0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(0.577), np.float64(0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(-0.577), np.float64(0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(-0.577), np.float64(-0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(0.577), np.float64(-0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.0658e-14)
+  gauss(np.float64(0.577), np.float64(0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.0658e-14)
+  gauss(np.float64(-0.577), np.float64(0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.0658e-14)
+
+=== C) solve(J.T, M.T).T ===
+  gauss(np.float64(-0.577), np.float64(-0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(0.577), np.float64(-0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(0.577), np.float64(0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(-0.577), np.float64(0.577), np.float64(-0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(-0.577), np.float64(-0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.4211e-14)
+  gauss(np.float64(0.577), np.float64(-0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.0658e-14)
+  gauss(np.float64(0.577), np.float64(0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.0658e-14)
+  gauss(np.float64(-0.577), np.float64(0.577), np.float64(0.577)): σ_vm = 31.9904 MPa   (dev from true 1.0658e-14)
+
+==============================================================================
+⇒ 只有还原到 31.9904 MPa 的那个写法才可信
+==============================================================================

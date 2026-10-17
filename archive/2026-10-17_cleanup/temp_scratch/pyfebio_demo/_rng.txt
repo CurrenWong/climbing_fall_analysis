@@ -1,0 +1,9 @@
+=== A1+A2 (SUBTALAR=1 + spring + MAX_UPS=0 + PENALTY) 量程 ===
+[range_A1A2_+1.6] NORMAL=False 负J=30   失收敛t=['0.761375'] F=None
+[range_A1A2_+1.0] NORMAL=True  负J=0    失收敛t=— F=449.631241521403
+[range_A1A2_+0.5] NORMAL=True  负J=0    失收敛t=— F=248.9477533191529
+[range_A1A2_+0.25] NORMAL=True  负J=0    失收敛t=— F=139.97895614709063
+
+=== 对照：同载荷下基线 ===
+[range_base_+1.6] NORMAL=True  负J=0    失收敛t=— F=592.6020366346477
+[range_base_+0.5] NORMAL=True  负J=0    失收敛t=— F=230.70799642976272

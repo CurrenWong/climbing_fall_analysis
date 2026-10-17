@@ -2,7 +2,7 @@
 
 > **状态**：**已跑 · 判定部分作废（发现观测量缺陷）**（2026-10-16）
 > 预注册 `docs/methods/SECOND_CONTACT_预注册.md`｜脚本 `scripts/second_contact_probe.py`
-> 产物 `results/second_contact_probe.json`
+> 产物 `results/second_contact_probe.json`（⚠️ **其 `h*` 已作废** ⇒ 现行见 `CANONICAL.md` §1 / `results/hstar_canonical.json`）
 
 ---
 

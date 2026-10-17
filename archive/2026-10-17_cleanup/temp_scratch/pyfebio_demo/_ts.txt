@@ -1,0 +1,9 @@
+最长 6 行：
+   288 B 行  30: | 21 | **FE 四铁律** + **"某驱动不行先验产物再看报错"** | `references/fe-modeling-gotchas.md`（接触面须与真实网格面重合且 2-流形／tet4 翻转须奇置换／"
+   252 B 行  32: | 23 | 🧭 **方向/符号类结论必须先有「不可被约定翻转」的证据**（结构/几何/物理/解剖）＋**判据要有已知正对照**；**更正要替换不要叠加** | `references/operational-gotch
+   199 B 行 129: - **`uv pip install gmsh` ≠ 官方 SDK**（occ 残缺 ⇒ STL→实体不通）；官方在 `D:\Program\gmsh-sdk\`（DLL 在 `lib/`）。**同版本号可能是两份二进
+   196 B 行  38: | 改了代码线上没变 | 云函数须重 `updateFunctionCode` **+二次 invoke 验证**（冷启缓存）；小程序走 `ci-tools/compile.js upload`，**裸调 minipro
+   161 B 行  88: - **状态**：v1（1D 纯压缩，97 测试全绿）+ **P0、P1 已完成**；下一步 **P3 二维运动学**（必要项）或 **P5 抱石标定**（待选）
+   154 B 行  41: | 模型返 `{amount:null}` 冒充"识别不出" | fileID 误用云函数资源 ID 当 bucket；`getTempFileURL` 对错 ID **不抛异常**只返空 URL |
+MEMORY.md 10484 -> 10454 B  ❌ 超 214
+✓ SOUL.md 已加入方法准则 -> 2693 B

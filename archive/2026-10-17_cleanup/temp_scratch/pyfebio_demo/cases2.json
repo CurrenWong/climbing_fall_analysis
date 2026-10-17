@@ -1,0 +1,12 @@
+[
+ ["p1",           {"penalty": 1}],
+ ["p2",           {"penalty": 2}],
+ ["p4",           {"penalty": 4}],
+ ["p1_sym",       {"penalty": 1, "symmetric_stiffness": 1}],
+ ["p1_2pass",     {"penalty": 1, "two_pass": 1}],
+ ["p2_sym",       {"penalty": 2, "symmetric_stiffness": 1}],
+ ["p1_stol0.05",  {"penalty": 1, "search_tol": 0.05}],
+ ["p1_gap0.5",    {"penalty": 1, "gaptol": 0.5}],
+ ["p1_lau1",      {"penalty": 1, "laugon": 1}],
+ ["p1_tol0.05",   {"penalty": 1, "tolerance": 0.05}]
+]

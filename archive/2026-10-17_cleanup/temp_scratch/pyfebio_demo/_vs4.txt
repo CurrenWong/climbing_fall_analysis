@@ -1,0 +1,4 @@
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\verify_stress2.py", line 111
+    print("  若 p50/p99 接近 ⇒ 之前"3~11×"是**顺序错位**造成的假象（用 max 比较会放大）")
+                                   ^
+SyntaxError: invalid character '×' (U+00D7)

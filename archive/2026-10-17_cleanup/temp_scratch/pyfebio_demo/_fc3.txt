@@ -1,0 +1,64 @@
+==============================================================================
+A. 文档清单与大小
+==============================================================================
+  [OK ]    27,400  FE_PIPELINE_TODO.md (接手入口)
+  [OK ]     8,579  ANKLE_LIG_TODO.md (韧带全部)
+  [OK ]    46,456  docs/踝关节FE建模交接.md
+  [OK ]    64,198  .learnings/LEARNINGS.md
+  [OK ]    21,667  .learnings/ERRORS.md
+  [OK ]    10,371  MEMORY.md
+  [OK ]    55,641  memory/2026-10-03/ankle-fe-modeling.md
+  [OK ]    16,711  memory/2026-10-04/ankle-fe-solve-and-handover.md
+  [OK ]     3,556  temp/thums/ligament_results.txt
+  [OK ]     7,369  scripts/ankle_fe/ligaments.py
+  [OK ]    37,227  scripts/ankle_fe/ankle_lig_feb.py
+  [OK ]     6,984  temp/pyfebio_demo/read_lig.py
+
+==============================================================================
+B. 关键内容锚点
+==============================================================================
+  [OK] MEMORY.md <= 10KB
+  [OK] MEMORY 有韧带轮条目
+  [OK] MEMORY 记负结果
+  [OK] 接手入口 存在
+  [OK] 入口 已更新韧带状态
+  [OK] 入口 记 5.4 s
+  [OK] ANKLE_LIG 有 4 韧带表
+  [OK] ANKLE_LIG 有 4 条件表
+  [OK] ANKLE_LIG 有负结果节
+  [OK] ANKLE_LIG 有下一步（图4）
+  [OK] LRN-021 (补舟骨) 在档
+  [OK] LRN-027 (截断提速) 在档
+  [OK] LRN-028 (读迭代日志) 在档
+  [OK] LRN-029 (指标定义) 在档
+  [OK] ERR-004 (求解器配置) 在档
+  [OK] ERR-005 (pyfebio 补丁) 在档
+  [OK] 当日记忆含韧带节
+  [OK] 当日记忆含 TRUNC_MM
+
+==============================================================================
+C. MEMORY.md 本地路径死链检查
+==============================================================================
+  [OK ] ANKLE_LIG_TODO.md
+  [OK ] FE_PIPELINE_TODO.md
+  [OK ] digest/procedure/git-history-secret-purge.md
+  [OK ] docs/方案更新_v2.md
+  [OK ] docs/踝关节FE建模交接.md
+  [OK ] memory/2026-10-03/ankle-fe-modeling.md
+  [OK ] references/accounts.md
+  [OK ] references/cloudbase-ai.md
+  [OK ] references/docling.md
+  [OK ] references/fe-modeling-gotchas.md
+  [OK ] references/mcp-bypass.md
+  [OK ] references/miniprogram-ci.md
+  [OK ] references/neon-mcp.md
+  [OK ] references/ocr-cleanup.md
+  [OK ] references/operational-gotchas.md
+  [OK ] references/seclog-miniprogram-gotchas.md
+  [OK ] references/tools-cheatsheet.md
+  [OK ] references/wechat-publish.md
+  [OK ] 阶段总结.md
+  -> 19 个引用，0 个可疑
+
+ALL PASS = True
+MEMORY.md = 10,229 / 10240 bytes

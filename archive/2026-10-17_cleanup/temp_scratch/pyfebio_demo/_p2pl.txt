@@ -1,0 +1,239 @@
+============================================================================================
+① lig_read_WK.npz 里的韧带参数（模型自己算的）
+============================================================================================
+韧带                                        EA (N)     配对数
+PTFL_talofibular_posterior                180.00       3
+CFL_calcaneofibular                       510.00       5
+ATFL_talofibular_anterior                 180.00       4
+PTCL_talocalcaneal_posterior               75.40      13
+SYND_tibiofibular                          75.40      10
+MD1_tibiotalar_post                       180.00       3
+MD2_tibiocalcaneal                        510.00       4
+MD3_tibionavicular                        510.00       4
+MD4_tibiotalar_ant                        180.00       3
+SPRING_calcaneonavicular                   75.40       6
+
+  EA 合计 = 2476.2 N
+
+============================================================================================
+② 模型里 shell 韧带的材料/截面参数
+============================================================================================
+  [ankle_lig_feb.py:4] · 材料：骨 7300 MPa/0.3，软骨 10 MPa/0.4，韧带 260 MPa/0.4
+  [ankle_lig_feb.py:40] LIG_MODE = os.environ.get("LIG_MODE", "shell").strip()  # shell | none
+  [ankle_lig_feb.py:73] #   prescribe z。**根治 `dispx` 只按全局单轴（argmax）近似轴向的语义缺陷**。
+  [ankle_lig_feb.py:119] TIE_STOL = float(os.environ.get("TIE_SEARCH_TOL", "0.01"))
+  [ankle_lig_feb.py:120] TIE_SRAD = float(os.environ.get("TIE_SEARCH_RADIUS", "1.0"))
+  [ankle_lig_feb.py:138] print(f"[mode] MATSET={MATSET} LIG_MODE={LIG_MODE} TIME_STEPS={TIME_STEPS} "
+  [ankle_lig_feb.py:167] "mat_tarsal_cort_shell": ("isotropic elastic", {"density": 2.0e-9, "E": 7300.0, "v": 0.30}),
+  [ankle_lig_feb.py:172] "mat_ligament": ("isotropic elastic", {"density": 1.1e-9, "E": 260.0, "v": 0.40}),
+  [ankle_lig_feb.py:174] LIG_E_UNIFORM = True
+  [ankle_lig_feb.py:180] "mat_tarsal_cort_shell": ("isotropic elastic", {"density": 2.0e-9, "E": 15000.0, "v": 0.30}),
+  [ankle_lig_feb.py:186] LIG_E_UNIFORM = False
+  [ankle_lig_feb.py:317] break
+  [ankle_lig_feb.py:375] _ref = np.mean(_tal_pts, axis=0) if _tal_pts else np.zeros(3)
+  [ankle_lig_feb.py:381] _axis = np.mean(_tib_pts, axis=0) - _ref if _tib_pts else np.array(
+  [ankle_lig_feb.py:392] if float((_pts.mean(0) - _ref) @ _axis) > TRUNC_MM:
+  [ankle_lig_feb.py:406] if LIG_MODE in ("shell", "truss", "strip", "web"):
+  [ankle_lig_feb.py:413] ea = float(lg["ea"][i])
+  [ankle_lig_feb.py:415] key = f"{pid:08d}_shell"
+  [ankle_lig_feb.py:418] if LIG_E_UNIFORM:
+  [ankle_lig_feb.py:420] {"density": 1.1e-9, "E": 260.0, "v": 0.40})
+  [ankle_lig_feb.py:423] {"density": 1.1e-9, "E": ea, "v": 0.40})
+  [ankle_lig_feb.py:424] a_cross = float(lg["area_cross"][i])
+  [ankle_lig_feb.py:425] trusses = [[int(x) for x in t] for t in lg["truss"][i]
+  [ankle_lig_feb.py:427] # 杆单元：截面积折进 E（E_eff = EA · A_cross），详见文件头注释
+  [ankle_lig_feb.py:430] "E": (ea * a_cross) if LIG_MODE == "truss" else (
+  [ankle_lig_feb.py:431] 260.0 if LIG_E_UNIFORM else ea),
+  [ankle_lig_feb.py:434] mat=mname, thick=th, ea=ea,
+  [ankle_lig_feb.py:435] a_cross=a_cross, trusses=trusses))
+  [ankle_lig_feb.py:436] if LIG_MODE == "shell":
+  [ankle_lig_feb.py:439] used.update({int(v) for t in trusses for v in t})
+  [ankle_lig_feb.py:440] # strip：把 truss 束两两连成 quad（只用已有节点，零新增）
+  [ankle_lig_feb.py:442] for k in range(len(trusses) - 1):
+  [ankle_lig_feb.py:443] a0, b0 = trusses[k]
+  [ankle_lig_feb.py:444] a1, b1 = trusses[k + 1]
+  [ankle_lig_feb.py:449] Aset = sorted({t[0] for t in trusses})
+  [ankle_lig_feb.py:450] Bset = sorted({t[1] for t in trusses})
+  [ankle_lig_feb.py:559] axis = tib_pts.mean(0) - tal_pts.mean(0)
+  [ankle_lig_feb.py:575] print(f"[axis] argmax(|axis|) = {_kax_show} ⇒ DRIVER=dispx 将 prescribe 'xyz'[{_kax_show}]"
+  [ankle_lig_feb.py:611] _ctr = _cart_pt.mean(0) if len(_cart_pt) else XYZ[[i - 1 for i in _foot_ids]].mean(0)
+  [ankle_lig_feb.py:612] _heel = XYZ[[i - 1 for i in sorted(dom_nodes.get("calcaneus_cort", _foot_ids))]].mean(0)
+  [ankle_lig_feb.py:613] _mid = XYZ[[i - 1 for i in sorted(dom_nodes.get("navicular_spon", _foot_ids))]].mean(0)
+  [ankle_lig_feb.py:690] _LIM = float(os.environ.get("POSE_SEAT_LIM", "0.6"))
+  [ankle_lig_feb.py:749] if abs(np.mean(XYZ[[node_id_of[c] - 1 for c in f]] @ axis) - lim)
+  [ankle_lig_feb.py:761] MIN_FACET_AREA = 1e-8
+  [ankle_lig_feb.py:771] return np.linalg.norm(n) / 2.0 >= MIN_FACET_AREA
+  [ankle_lig_feb.py:785] cen = P.mean(0)
+  [ankle_lig_feb.py:792] if np.dot(n, pts.mean(0) - cen) < 0:
+  [ankle_lig_feb.py:837] def area_proj(faces):
+  [ankle_lig_feb.py:886] LIG_ETYPE = {"truss": "line2", "web": "tri3"}.get(LIG_MODE, "quad4")
+  [ankle_lig_feb.py:887] if LIG_MODE in ("shell", "truss", "strip", "web"):
+  [ankle_lig_feb.py:889] if LIG_MODE == "shell":
+  [ankle_lig_feb.py:892] elif LIG_MODE == "truss":
+  [ankle_lig_feb.py:894] for t in r["trusses"]]
+  [ankle_lig_feb.py:895] elif LIG_MODE == "strip":
+  [ankle_lig_feb.py:902] # 韧带专属节点（仅被壳用、不被任何实体用）—— shell 模式下它们的**转动
+  [ankle_lig_feb.py:905] if LIG_MODE == "shell":
+  [ankle_lig_feb.py:1050] if LIG_MODE in ("shell", "strip", "web"):
+  [ankle_lig_feb.py:1051] nbad_shell = 0
+  [ankle_lig_feb.py:1063] nbad_shell += 1
+  [ankle_lig_feb.py:1065] print(f"  韧带壳退化剔除 {nbad_shell} 个")
+  [ankle_lig_feb.py:1098] cen = XYZ[[i - 1 for i in rest]].mean(0)
+  [ankle_lig_feb.py:1103] if np.dot(n, pts.mean(0) - cen) < 0:
+  [ankle_lig_feb.py:1145] _cen = XYZ[[i - 1 for i in _rest]].mean(0)
+  [ankle_lig_feb.py:1150] if np.dot(_n, _pts.mean(0) - _cen) < 0:
+  [ankle_lig_feb.py:1188] A_tib, A_fib = area_proj(top_tibia), area_proj(top_fibula)
+  [ankle_lig_feb.py:1203] #  语法已**实测**（User Manual §3.6.7 `DiscreteSet` + §3.16.1.1 `linear spring`）：
+  [ankle_lig_feb.py:1205] #    <Discrete><discrete_material id="1" type="linear spring"><E>k</E></...>
+  [ankle_lig_feb.py:1209] #  `<zero displacement>` 用 `<x_dof>1</x_dof>`，`<prescribed displacement>` 用
+  [ankle_lig_feb.py:1252] SEAT_MM = float(os.environ.get("SEAT_MM", "0.50"))          # step1 落位位移（轴向 mm）
+  [ankle_lig_feb.py:1253] TIME_STEPS_SEAT = int(os.environ.get("TIME_STEPS_SEAT", "10"))
+  [ankle_lig_feb.py:1254] # ★ SEAT_HOLD=1：step2 里**继续保持**落位位移（不撤约束）
+  [ankle_lig_feb.py:1256] SEAT_HOLD = os.environ.get("SEAT_HOLD", "0") == "1"
+  [ankle_lig_feb.py:1280] _c = np.asarray([coords[i - 1] for i in TAL_RIGID_NS], float).mean(0)
+  [ankle_lig_feb.py:1308] LIG_EID0 = eid
+  [ankle_lig_feb.py:1309] if LIG_MODE in ("shell", "truss", "strip", "web"):
+  [ankle_lig_feb.py:1313] w(f'    <Elements type="{LIG_ETYPE}" name="lig_{nm}">')
+  [ankle_lig_feb.py:1318] LIG_EID1 = eid
+  [ankle_lig_feb.py:1417] if LIG_MODE == "shell":
+  [ankle_lig_feb.py:1418] if LIG_MODE in ("shell", "strip", "web"):
+  [ankle_lig_feb.py:1422] w(f'    <ShellDomain name="lig_{r["name"]}" '
+  [ankle_lig_feb.py:1424] w(f'      <shell_thickness>{r["thick"]}</shell_thickness>')
+  [ankle_lig_feb.py:1425] w('    </ShellDomain>')
+  [ankle_lig_feb.py:1427] # ★ 实测：BeamDomain type 只认 linear-truss / elastic-truss / linear-beam；
+  [ankle_lig_feb.py:1428] #   elastic-truss + "isotropic elastic" 可跑通（linear-truss 不收标准材料，
+  [ankle_lig_feb.py:1429] #   linear-beam 直接崩溃）。截面积折进 E，见文件头。
+  [ankle_lig_feb.py:1431] w(f'    <BeamDomain name="lig_{r["name"]}" '
+  [ankle_lig_feb.py:1432] f'mat="{r["mat"]}" type="elastic-truss"/>')
+  [ankle_lig_feb.py:1435] #    FEBio 初始化时报 `Nonlinear constraint 1 (<unnamed>) failed to initialize`；
+  [ankle_lig_feb.py:1462] #     `Nonlinear constraint 1 (<unnamed>) failed to initialize`（实测踩过）。
+  [ankle_lig_feb.py:1463] _tc = np.asarray([coords[i - 1] for i in TAL_RIGID_NS], float).mean(0)
+  [ankle_lig_feb.py:1480] w(f'    <discrete_material id="{_n}" type="linear spring">')
+  [ankle_lig_feb.py:1489] w('      <interpolate>LINEAR</interpolate><extend>CONSTANT</extend>')
+  [ankle_lig_feb.py:1497] w('      <interpolate>LINEAR</interpolate><extend>CONSTANT</extend>')
+  [ankle_lig_feb.py:1513] a = area_proj(top_tibia if surf == "tibia_top" else top_fibula)
+  [ankle_lig_feb.py:1574] w('    <bc name="lig_back_lock" type="zero shell displacement" '
+  [ankle_lig_feb.py:1600] w(f'    <bc name="{_nm}_top_{_dn}" type="prescribed displacement" '
+  [ankle_lig_feb.py:1616] w(f'    <bc name="{_nm}_top_{_dn}" type="prescribed displacement" '
+  [ankle_lig_feb.py:1639] w(f'      <search_tol>{TIE_STOL}</search_tol>')
+  [ankle_lig_feb.py:1640] w(f'      <search_radius>{TIE_SRAD}</search_radius>')
+  [ankle_lig_feb.py:1654] _TAG_EARLY = MATSET + ("_" + "_".join(ONLY) if ONLY else "")
+  [ankle_lig_feb.py:1657] '<var type="stress"/><var type="reaction forces"/></plotfile>')
+  [ankle_lig_feb.py:1660] w(f'    <logfile file="log_{_TAG_EARLY}.txt">')
+  [ankle_lig_feb.py:1662] f'file="disp_{_TAG_EARLY}.txt" delim=","/>')
+  [ankle_lig_feb.py:1668] w(f'      <node_data data="Rx;Ry;Rz" name="reac_{_nm}" '
+  [ankle_lig_feb.py:1669] f'file="reac_{_nm}_{_TAG_EARLY}.txt" delim=",">{_ids}</node_data>')
+  [ankle_lig_feb.py:1670] w(f'      <node_data data="Rx;Ry;Rz" name="reac_talus" '
+  [ankle_lig_feb.py:1671] f'file="reac_talus_{_TAG_EARLY}.txt" delim=",">'
+  [ankle_lig_feb.py:1686] w('      <linear_solver type="pardiso"/>')
+  [ankle_lig_feb.py:1689] w('      <reform_each_time_step>1</reform_each_time_step>')
+  [ankle_lig_feb.py:1714] w('          <linear_solver type="pardiso"/>')
+  [ankle_lig_feb.py:1717] w('          <reform_each_time_step>1</reform_each_time_step>')
+  [ankle_lig_feb.py:1731] """step1 的落位位移：**只 prescribe 轴向那一个 dof**（压向距骨）。
+  [ankle_lig_feb.py:1743] #   ⇒ 压缩方向 = +LAX（当 LAX[kax] > 0）。原实现用 -SEAT_MM ⇒ **落位在拉关节**。
+  [ankle_lig_feb.py:1745] _v = (SEAT_MM if LAX[kax] > 0 else -SEAT_MM)
+  [ankle_lig_feb.py:1746] w(f'      <bc name="seat_{_nm}" '
+  [ankle_lig_feb.py:1747] f'type="prescribed displacement" node_set="{_nm}">')
+  [ankle_lig_feb.py:1759] _a = area_proj(top_tibia if _surf == "tibia_top" else top_fibula)
+  [ankle_lig_feb.py:1773] print(f"[multistep] step1 位移落位 SEAT_MM={SEAT_MM}（{TIME_STEPS_SEAT} 步）"
+  [ankle_lig_feb.py:1777] _ctl(TIME_STEPS_SEAT)
+  [ankle_lig_feb.py:1784] if SEAT_HOLD:
+  [ankle_lig_feb.py:1796] # ── 导出读数所需数据（供 read_lig.py 用）──
+  [ankle_lig_feb.py:1805] _names, _eas, _pairs, _npair = [], [], [], []
+  [ankle_lig_feb.py:1807] pairs = r.get("trusses") or []
+  [ankle_lig_feb.py:1810] _eas.append(r["ea"])
+  [ankle_lig_feb.py:1819] _dump["lig_ea"] = np.array(_eas)
+  [ankle_lig_feb.py:1822] np.savez(WORK / f"lig_read_{_tag}.npz", **_dump)
+  [ankle_lig_feb.py:1823] print(f"读数数据 -> {WORK / f'lig_read_{_tag}.npz'}")
+  [ankle_lig_feb.py:1828] f"  单元：骨+软骨 {LIG_EID0}，韧带 {LIG_EID1-LIG_EID0}，共 {LIG_EID1}")
+  [ligaments.py:7] - 材料 EA / 壳厚
+  [ligaments.py:11] 不是垂直于纤维的截面。真实截面 = 宽 × 厚 = (膜面积/长度) × 厚度。
+  [ligaments.py:36] # pid, 名称, EA(MPa), 厚度(mm)
+  [ligaments.py:40] (81101001, "PTCL_talocalcaneal_posterior", 75.4, 2.0),
+  [ligaments.py:43] (81101202, "MD2_tibiocalcaneal", 510.0, 2.0),
+  [ligaments.py:63] # 骨 -> 该骨的 THUMS 节点集合（仅用 solid+shell 的单元节点）
+  [ligaments.py:67] for kind in ("solid", "shell"):
+  [ligaments.py:81] for pid, nm, ea, th in LIG_DEF:
+  [ligaments.py:82] key = f"{pid:08d}_shell"
+  [ligaments.py:96] area = 0.0
+  [ligaments.py:99] area += 0.5 * np.linalg.norm(np.cross(p[1] - p[0], p[2] - p[0]))
+  [ligaments.py:100] area += 0.5 * np.linalg.norm(np.cross(p[2] - p[0], p[3] - p[0]))
+  [ligaments.py:105] #   于是 L 从真值 18.0/32.4 被抬到 50.7/44.5 ⇒ `A_cross = 面积/L×厚` 偏小
+  [ligaments.py:112] ca = Pa.mean(0) if len(Pa) else np.zeros(3)
+  [ligaments.py:113] cb = Pb.mean(0) if len(Pb) else np.zeros(3)
+  [ligaments.py:114] c = P - P.mean(0)
+  [ligaments.py:127] A_cross = area / L * th if L > 0 else 0.0
+  [ligaments.py:135] trusses = []
+  [ligaments.py:146] trusses.append((A[i], B[j]))
+  [ligaments.py:152] trusses.append((A[i], B[j]))
+  [ligaments.py:158] trusses.append((A[i], B[j]))
+  [ligaments.py:159] ntr = len(trusses)
+  [ligaments.py:160] A_each = A_cross / ntr if ntr else 0.0
+  [ligaments.py:162] for a, b in trusses]) if trusses else np.zeros(0)
+  [ligaments.py:164] #   `L` = 膜沿**纤维轴**的延伸 = 面积公式 `A_cross = 面积/L×厚` 的正确分母（膜可能弯曲，
+  [ligaments.py:168] nA_cov = len({a for a, _ in trusses})
+  [ligaments.py:169] nB_cov = len({b for _, b in trusses})
+  [ligaments.py:172] f"{ntr:>4} {area:>8.1f} {L:>6.1f} {A_cross:>7.2f} {A_each:>7.3f} "
+  [ligaments.py:175] records.append(dict(pid=pid, name=nm, ea=ea, thick=th,
+  [ligaments.py:178] A=A, B=B, trusses=trusses,
+  [ligaments.py:179] area=area, L=L, A_cross=A_cross, A_each=A_each))
+  [ligaments.py:186] save["ea"] = np.array([r["ea"] for r in records])
+  [ligaments.py:188] save["area_membrane"] = np.array([r["area"] for r in records])
+  [ligaments.py:190] save["area_cross"] = np.array([r["A_cross"] for r in records])
+  [ligaments.py:194] mx = max(len(r["trusses"]) for r in records)
+  [ligaments.py:199] NTR[i] = len(r["trusses"])
+  [ligaments.py:200] NP_[i] = r["A_each"]
+  [ligaments.py:201] for j, (a, b) in enumerate(r["trusses"]):
+  [ligaments.py:203] save["truss"] = TR
+  [ligaments.py:204] save["truss_area"] = NP_
+  [ligaments.py:205] save["n_truss"] = NTR
+  [ligaments.py:227] meta = [{k: r[k] for k in ("pid", "name", "ea", "thick", "a_bone", "b_bone",
+  [ligaments.py:228] "area", "L", "A_cross", "A_each")}
+  [ligaments.py:229] | {"n_truss": len(r["trusses"]), "n_nodes": len(r["nodes"])}
+  [build_feb.py:4] 材料：皮质/松质/骨髓取自 THUMS 材料卡；**软骨 THUMS 没有** -> 用吴恺 2012 的 E=260, ν=0.4
+  [build_feb.py:87] {"density": 1.1e-9, "E": 260.0, "v": 0.40}),
+  [build_feb.py:97] MIN_FACET_AREA = 1e-8   # mm^2: facets smaller than this are degenerate
+  [build_feb.py:101] """Facet must have 3 distinct nodes and non-zero area.
+  [build_feb.py:108] > MIN_FACET_AREA
+  [build_feb.py:250] axis = tib.mean(0) - tal.mean(0)
+  [build_feb.py:261] cen = P.mean(0)
+  [build_feb.py:268] if np.dot(n, pts.mean(0) - cen) < 0:
+  [build_feb.py:325] if np.dot(n, pts.mean(0) - XYZ[opp - 1]) < 0:
+  [build_feb.py:355] def _real_facets(doms):
+  [build_feb.py:368] bone_fac = _real_facets(bone_doms)
+  [build_feb.py:392] if np.dot(n, pts.mean(0) - XYZ[opp - 1]) < 0:
+  [build_feb.py:398] #   ⇒ 漏掉的 primary 节点被 search_radius 拉到远处锁死 ⇒ 虚假刚度。
+  [build_feb.py:415] fc = XYZ[[i - 1 for i in f]].mean(0)
+  [build_feb.py:538] def area_of(faces):
+  [build_feb.py:550] top_area = area_of(top_sel)
+  [build_feb.py:552] traction = FORCE_N / top_area
+  [build_feb.py:553] print(f"加载面面积 {top_area:.1f} mm² -> 600 N 对应 traction {traction:.4f} MPa")
+  [build_feb.py:624] w('      <interpolate>LINEAR</interpolate><extend>CONSTANT</extend>')
+  [build_feb.py:647] w(f'    <bc name="top_{dn}" type="prescribed displacement" '
+  [build_feb.py:656] # tolerance=1.0 / gaptol=0(off) / search_tol=0.01 / search_radius=1.0
+  [build_feb.py:659] TIE_STOL = float(os.environ.get("TIE_SEARCH_TOL", "0.01"))
+  [build_feb.py:660] TIE_SRAD = float(os.environ.get("TIE_SEARCH_RADIUS", "1.0"))
+  [build_feb.py:671] w(f'      <search_tol>{TIE_STOL}</search_tol>')
+  [build_feb.py:672] w(f'      <search_radius>{TIE_SRAD}</search_radius>')
+  [build_feb.py:692] '<var type="stress"/><var type="reaction forces"/></plotfile>')
+  [build_feb.py:701] w('    <solver type="solid"><linear_solver type="pardiso"/>'
+  [build_feb.py:702] '<max_refs>25</max_refs><reform_each_time_step>1</reform_each_time_step></solver>')
+
+============================================================================================
+③ 解剖对照（文献量级）
+============================================================================================
+  ATFL   A 5-12 mm²  L 15-20 mm  E 100-300 MPa ⇒ EA ≈ 500-3600 N   (最弱、最先断)
+  CFL    A 10-30 mm²  L 20-30 mm  E 100-300 MPa ⇒ EA ≈ 1000-9000 N   (内翻时主要抵抗)
+  PTFL   A 10-25 mm²  L 15-25 mm  E 100-300 MPa ⇒ EA ≈ 1000-7500 N   (最强)
+  MD     A 10-40 mm²  L 20-40 mm  E 100-300 MPa ⇒ EA ≈ 1000-12000 N   (三角韧带)
+
+============================================================================================
+④ 逻辑自查：两个测量互不相容
+============================================================================================
+  (a) 由「关节只闭 0.0142 mm」反推  k_joint ≈ 41,733 N/mm
+  (b) 由软骨材料反推 E·A/t = 12 MPa × 300 mm² / 2.6 mm = 1,385 N/mm
+  (c) 由「总刚度差 2.2×」反推：k_lig + k_joint(tet4) = 1,762，k_lig + k_joint(penta6) = 794
+      ⇒ Δk_joint = 967 N/mm
+
+  ⇒ (a) 与 (c) 不可能同时成立：(a) 说关节极刚，则改单元类型不该有 2.2× 差异。
+  ⇒ 必须用**无符号的间隙法**重测关节闭合（不靠轴向投影，避免符号约定风险）。

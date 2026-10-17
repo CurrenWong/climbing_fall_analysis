@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\vol_check.py", line 62, in <module>
+    b, cb = total(ROOT / "temp/thums/thums_lowerlimb_r1.npz")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\vol_check.py", line 51, in total
+    P = np.array([X[ids[x]] for x in uq])
+                    ~~~^^^
+KeyError: 83506048

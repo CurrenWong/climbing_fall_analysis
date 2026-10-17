@@ -1,0 +1,1501 @@
+===========================================================================
+         ________    _________   _______       __     _________            
+        |        |\ |        |\ |       \\    |  |\  /         \\          
+        |    ____|| |    ____|| |    __  ||   |__|| |    ___    ||         
+        |   |\___\| |   |\___\| |   |\_| ||    \_\| |   //  \   ||         
+        |   ||__    |   ||__    |   ||_| ||   |  |\ |  ||    |  ||         
+        |       |\  |       |\  |         \\  |  || |  ||    |  ||         
+        |    ___||  |    ___||  |    ___   || |  || |  ||    |  ||         
+        |   |\__\|  |   |\__\|  |   |\__|  || |  || |  ||    |  ||         
+        |   ||      |   ||___   |   ||__|  || |  || |   \\__/   ||         
+        |   ||      |        |\ |          || |  || |           ||         
+        |___||      |________|| |_________//  |__||  \_________//          
+                                                                           
+      F I N I T E   E L E M E N T S   F O R   B I O M E C H A N I C S      
+                                                                           
+  version 4.13.0
+  FEBio is a registered trademark.                                         
+  copyright (c) 2006-2026 - All rights reserved                            
+                                                                           
+===========================================================================
+
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * 1 isolated vertex removed.                                            *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * Zero mass for rigid body "bodyG."                                     *
+ *************************************************************************
+
+
+
+
+ FILES USED
+===========================================================================
+	Input file : rigid_min_free_rot.feb
+	Plot file  : rigid_min_free_rot.xplt
+	Log file   : log_rigid.txt
+
+
+ MESH INFO
+===========================================================================
+	Number of materials ............................ : 2
+	Number of domains .............................. : 1
+	Number of nodes ................................ : 9
+	Number of solid elements ....................... : 1
+
+
+ MODULE
+===========================================================================
+	Module type ....................................... : solid
+
+
+ CONTROL DATA
+===========================================================================
+	analysis .......................................... : STATIC (0)
+	time_steps ........................................ : 1
+	step_size ......................................... : 1
+	plot_zero_state ................................... : no (0)
+	plot_range ........................................ : 0,-1
+	plot_level ........................................ : PLOT_MAJOR_ITRS (1)
+	output_level ...................................... : OUTPUT_MAJOR_ITRS (1)
+	plot_stride ....................................... : 1
+	output_stride ..................................... : 1
+	adaptor_re_solve .................................. : yes (1)
+	Auto time stepper activated ....................... : yes
+	  max_retries ..................................... : 10
+	  opt_iter ........................................ : 10
+	  dtmin ........................................... : 0.0001
+	  dtmax ........................................... : 0.05
+	  aggressiveness .................................. : 0
+	  cutback ......................................... : 0.5
+	  dtforce ......................................... : no (0)
+ SOLVER PARAMETERS
+===========================================================================
+	symmetric_stiffness ............................... : symmetric (1)
+	equation_scheme ................................... : staggered (0)
+	equation_order .................................... : default (0)
+	optimize_bw ....................................... : no (0)
+	lstol ............................................. : 0.9
+	lsmin ............................................. : 0.01
+	lsiter ............................................ : 5
+	ls_check_jacobians ................................ : no (0)
+	max_refs .......................................... : 50
+	check_zero_diagonal ............................... : no (0)
+	zero_diagonal_tol ................................. : 0
+	force_partition ................................... : 0
+	reform_each_time_step ............................. : yes (1)
+	reform_augment .................................... : no (0)
+	diverge_reform .................................... : yes (1)
+	min_residual ...................................... : 1e-20
+	max_residual ...................................... : 0
+	dtol .............................................. : 0.01
+	etol .............................................. : 0.001
+	rtol .............................................. : 0
+	rhoi .............................................. : -2
+	alpha ............................................. : 1
+	beta .............................................. : 0.25
+	gamma ............................................. : 0.5
+	logSolve .......................................... : no (0)
+	arc_length ........................................ : 0
+	arc_length_scale .................................. : 0
+
+
+
+
+
+
+ MATERIAL DATA
+===========================================================================
+  1 - bodyA (type: rigid body)
+	density ........................................... : 1e-09
+	E ................................................. : 12000
+	v ................................................. : 0.3
+	override_com ...................................... : no (0)
+	center_of_mass .................................... : 0,0,0
+---------------------------------------------------------------------------
+  2 - bodyG (type: rigid body)
+	density ........................................... : 1e-09
+	E ................................................. : 12000
+	v ................................................. : 0.3
+	override_com ...................................... : no (0)
+	center_of_mass .................................... : 0,0,0
+
+
+ RIGID BODY DATA
+===========================================================================
+Rigid Body 1:
+	material id    : 1
+	name           : bodyA
+	center of mass : 0.5, 0.5, 0.5
+	mass           : 1e-09
+	Ixx Ixy Ixz    : 1.66667e-10, -5.16988e-25, -3.10193e-25
+	Ixy Iyy Iyz    : -5.16988e-25, 1.66667e-10, -2.06795e-25
+	Ixz Iyz Izz    : -3.10193e-25, -2.06795e-25, 1.66667e-10
+---------------------------------------------------------------------------
+Rigid Body 2:
+	material id    : 2
+	name           : bodyG
+	center of mass : 0, 0, 0
+	mass           : 0
+	Ixx Ixy Ixz    : 0, 0, 0
+	Ixy Iyy Iyz    : 0, 0, 0
+	Ixz Iyz Izz    : 0, 0, 0
+
+
+ BOUNDARY CONDITION DATA
+===========================================================================
+  1 -  Type: rigid
+	rb ................................................ : 1
+---------------------------------------------------------------------------
+  2 -  Type: rigid
+	rb ................................................ : 2
+
+
+ MODEL LOAD DATA
+===========================================================================
+  1 -  Type: rigid_force
+	rb ................................................ : 1
+	dof ............................................... : Rz (2)
+	value ............................................. : 0
+	load_type ......................................... : LOAD (0)
+	relative .......................................... : no (0)
+
+
+ NONLINEAR CONSTRAINT DATA
+===========================================================================
+
+nonlinear constraint 1 - Type: rigid spring
+	body_a ............................................ : 0
+	body_b ............................................ : 1
+	k ................................................. : 500
+	insertion_a ....................................... : 0.5,0.5,0.5
+	insertion_b ....................................... : 0,0,-1
+	free_length ....................................... : 1.65831
+
+
+ LOAD CONTROLLER DATA
+===========================================================================
+load controller   1 - lc1 (type: loadcurve)
+	interpolate ....................................... : LINEAR (0)
+	extend ............................................ : CONSTANT (0)
+	points ............................................ : (can't display value)
+
+
+ OUTPUT DATA
+===========================================================================
+ LINEAR SOLVER DATA
+===========================================================================
+	Default linear solver ............................. : pardiso
+
+
+Data Record #1
+===========================================================================
+Step = 0
+Time = 0
+Data = dispA
+File = disp_rigid.txt
+
+ *************************************************************************
+ * Selecting linear solver pardiso                                       *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * Rigid connectors require non-symmetric stiffness matrix.              *
+ * Set symmetric_stiffness flag to 0 in Control section.                 *
+ *************************************************************************
+
+AUTO STEPPER: decreasing time step, dt = 0.05
+
+
+===== beginning time step 1 : 0.05 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.214077e-04    0.000000e+00 
+	   energy              6.111111e-02    1.346707e-04    6.111111e-05 
+	   displacement        3.619999e-01    3.619999e-01    3.619999e-05 
+ 2
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.747350e-10    0.000000e+00 
+	   energy              6.111111e-02    6.442876e-10    6.111111e-05 
+	   displacement        3.619999e-01    1.369915e+00    4.605191e-04 
+ 3
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    3.391303e-20    0.000000e+00 
+	   energy              6.111111e-02    1.225428e-16    6.111111e-05 
+	   displacement        3.619999e-01    1.539683e+00    1.024294e-02 
+ 4
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 3
+	right hand side evaluations   = 10
+	stiffness matrix reformations = 1
+	step from line search         = 0.053329
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    7.190439e-22    0.000000e+00 
+	   energy              6.111111e-02    1.170437e-17    6.111111e-05 
+	   displacement        3.619999e-01    5.087639e-04    9.975703e-03 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.05
+
+
+Data Record #1
+===========================================================================
+Step = 1
+Time = 0.05
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 2 : 0.1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.134842e-04    0.000000e+00 
+	   energy              6.084464e-02    1.296343e-04    6.084464e-05 
+	   displacement        9.091358e-01    9.091358e-01    9.091358e-05 
+ 2
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.023824e-10    0.000000e+00 
+	   energy              6.084464e-02    5.798870e-10    6.084464e-05 
+	   displacement        9.091358e-01    1.933600e+00    3.699823e-04 
+ 3
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.036348e-21    0.000000e+00 
+	   energy              6.084464e-02    5.766488e-16    6.084464e-05 
+	   displacement        9.091358e-01    7.311704e-01    1.338095e-03 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.1
+
+
+Data Record #1
+===========================================================================
+Step = 2
+Time = 0.1
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 3 : 0.15 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.061838e-04    0.000000e+00 
+	   energy              6.058807e-02    1.248666e-04    6.058807e-05 
+	   displacement        4.442525e+00    4.442525e+00    4.442525e-04 
+ 2
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    4.400090e-10    0.000000e+00 
+	   energy              6.058807e-02    5.227762e-10    6.058807e-05 
+	   displacement        4.442525e+00    1.105188e+00    1.136390e-04 
+ 3
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    9.633419e-20    0.000000e+00 
+	   energy              6.058807e-02    6.405196e-15    6.058807e-05 
+	   displacement        4.442525e+00    2.485226e+00    1.830654e-03 
+ 4
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.557429
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    3.242872e-15    0.000000e+00 
+	   energy              6.058807e-02    2.143555e-15    6.058807e-05 
+	   displacement        4.442525e+00    9.341558e-01    4.074567e-04 
+ 5
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 4
+	right hand side evaluations   = 10
+	stiffness matrix reformations = 1
+	step from line search         = 0.203203
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.844391e-15    0.000000e+00 
+	   energy              6.058807e-02    5.010158e-17    6.058807e-05 
+	   displacement        4.442525e+00    9.385008e-03    4.915636e-04 
+ 6
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 5
+	right hand side evaluations   = 16
+	stiffness matrix reformations = 1
+	step from line search         = 0.072356
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.713640e-15    0.000000e+00 
+	   energy              6.058807e-02    8.610010e-18    6.058807e-05 
+	   displacement        4.442525e+00    1.028470e-04    4.958873e-04 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 6
+    number of reformations : 0
+
+------- converged at time : 0.15
+
+
+Data Record #1
+===========================================================================
+Step = 3
+Time = 0.15
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 4 : 0.2 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    9.944873e-05    0.000000e+00 
+	   energy              6.034088e-02    1.203487e-04    6.034088e-05 
+	   displacement        2.099483e+00    2.099483e+00    2.099483e-04 
+ 2
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    3.861154e-10    0.000000e+00 
+	   energy              6.034088e-02    4.720235e-10    6.034088e-05 
+	   displacement        2.099483e+00    1.594010e+00    1.706649e-03 
+ 3
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    7.532373e-21    0.000000e+00 
+	   energy              6.034088e-02    1.060560e-15    6.034088e-05 
+	   displacement        2.099483e+00    7.158469e-01    1.387212e-01 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.2
+
+
+Data Record #1
+===========================================================================
+Step = 4
+Time = 0.2
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 5 : 0.25 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    9.322717e-05    0.000000e+00 
+	   energy              6.010258e-02    1.160631e-04    6.010258e-05 
+	   displacement        5.311051e-01    5.311051e-01    5.311051e-05 
+ 2
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    3.394461e-10    0.000000e+00 
+	   energy              6.010258e-02    4.268473e-10    6.010258e-05 
+	   displacement        5.311051e-01    2.525170e-01    1.089683e-04 
+ 3
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    2.467863e-21    0.000000e+00 
+	   energy              6.010258e-02    5.924915e-16    6.010258e-05 
+	   displacement        5.311051e-01    4.864323e-01    4.339882e-04 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.25
+
+
+Data Record #1
+===========================================================================
+Step = 5
+Time = 0.25
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 6 : 0.3 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    8.747293e-05    0.000000e+00 
+	   energy              5.987271e-02    1.119943e-04    5.987271e-05 
+	   displacement        3.608016e+00    3.608016e+00    3.608016e-04 
+ 2
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    2.989470e-10    0.000000e+00 
+	   energy              5.987271e-02    3.865538e-10    5.987271e-05 
+	   displacement        3.608016e+00    1.858146e+00    5.915642e-03 
+ 3
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.179807e-21    0.000000e+00 
+	   energy              5.987271e-02    1.063160e-15    5.987271e-05 
+	   displacement        3.608016e+00    6.275604e-01    2.701264e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.3
+
+
+Data Record #1
+===========================================================================
+Step = 6
+Time = 0.3
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 7 : 0.35 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    8.214464e-05    0.000000e+00 
+	   energy              5.965085e-02    1.081275e-04    5.965085e-05 
+	   displacement        2.922282e-01    2.922282e-01    2.922282e-05 
+ 2
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    2.637304e-10    0.000000e+00 
+	   energy              5.965085e-02    3.505585e-10    5.965085e-05 
+	   displacement        2.922282e-01    1.794642e-01    6.407914e-05 
+ 3
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.099037e-22    0.000000e+00 
+	   energy              5.965085e-02    7.788321e-16    5.965085e-05 
+	   displacement        2.922282e-01    5.438675e-01    3.004422e-04 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.35
+
+
+Data Record #1
+===========================================================================
+Step = 7
+Time = 0.35
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 8 : 0.4 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    7.720514e-05    0.000000e+00 
+	   energy              5.943661e-02    1.044497e-04    5.943661e-05 
+	   displacement        3.326958e+00    3.326958e+00    3.326958e-04 
+ 2
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    2.330471e-10    0.000000e+00 
+	   energy              5.943661e-02    3.183424e-10    5.943661e-05 
+	   displacement        3.326958e+00    2.417432e+00    1.107891e-02 
+ 3
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    7.685461e-21    0.000000e+00 
+	   energy              5.943661e-02    1.144951e-15    5.943661e-05 
+	   displacement        3.326958e+00    6.686848e-01    1.030123e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.4
+
+
+Data Record #1
+===========================================================================
+Step = 8
+Time = 0.4
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 9 : 0.45 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    7.262103e-05    0.000000e+00 
+	   energy              5.922962e-02    1.009486e-04    5.922962e-05 
+	   displacement        2.804427e-01    2.804427e-01    2.804427e-05 
+ 2
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    2.062625e-10    0.000000e+00 
+	   energy              5.922962e-02    2.894692e-10    5.922962e-05 
+	   displacement        2.804427e-01    5.569637e-01    1.722515e-04 
+ 3
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.918252e-21    0.000000e+00 
+	   energy              5.922962e-02    1.441806e-15    5.922962e-05 
+	   displacement        2.804427e-01    1.955474e+00    2.437526e-03 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.45
+
+
+Data Record #1
+===========================================================================
+Step = 9
+Time = 0.45
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 10 : 0.5 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    6.836224e-05    0.000000e+00 
+	   energy              5.902953e-02    9.761296e-05    5.902953e-05 
+	   displacement        1.121342e+00    1.121342e+00    1.121342e-04 
+ 2
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.828383e-10    0.000000e+00 
+	   energy              5.902953e-02    2.635441e-10    5.902953e-05 
+	   displacement        1.121342e+00    1.023649e+00    7.994861e-04 
+ 3
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.234063e-21    0.000000e+00 
+	   energy              5.902953e-02    6.641818e-18    5.902953e-05 
+	   displacement        1.121342e+00    9.873951e-01    1.648148e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.5
+
+
+Data Record #1
+===========================================================================
+Step = 10
+Time = 0.5
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 11 : 0.55 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    6.440164e-05    0.000000e+00 
+	   energy              5.883601e-02    9.443255e-05    5.883601e-05 
+	   displacement        1.171374e+00    1.171374e+00    1.171374e-04 
+ 2
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.623166e-10    0.000000e+00 
+	   energy              5.883601e-02    2.402351e-10    5.883601e-05 
+	   displacement        1.171374e+00    1.097720e+00    8.832129e-04 
+ 3
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.149210e-21    0.000000e+00 
+	   energy              5.883601e-02    5.727593e-17    5.883601e-05 
+	   displacement        1.171374e+00    1.046272e+00    2.769582e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.55
+
+
+Data Record #1
+===========================================================================
+Step = 11
+Time = 0.55
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 12 : 0.6 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    6.071471e-05    0.000000e+00 
+	   energy              5.864877e-02    9.139783e-05    5.864877e-05 
+	   displacement        1.157613e+00    1.157613e+00    1.157613e-04 
+ 2
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.443068e-10    0.000000e+00 
+	   energy              5.864877e-02    2.192466e-10    5.864877e-05 
+	   displacement        1.157613e+00    1.123792e+00    8.927154e-04 
+ 3
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    8.215845e-22    0.000000e+00 
+	   energy              5.864877e-02    1.022190e-17    5.864877e-05 
+	   displacement        1.157613e+00    1.109043e+00    3.586459e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.6
+
+
+Data Record #1
+===========================================================================
+Step = 12
+Time = 0.6
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 13 : 0.65 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.727925e-05    0.000000e+00 
+	   energy              5.846752e-02    8.850001e-05    5.846752e-05 
+	   displacement        1.156481e+00    1.156481e+00    1.156481e-04 
+ 2
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.284752e-10    0.000000e+00 
+	   energy              5.846752e-02    2.003208e-10    5.846752e-05 
+	   displacement        1.156481e+00    1.134959e+00    8.998915e-04 
+ 3
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    6.733517e-22    0.000000e+00 
+	   energy              5.846752e-02    1.477083e-17    5.846752e-05 
+	   displacement        1.156481e+00    1.122324e+00    3.901516e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.65
+
+
+Data Record #1
+===========================================================================
+Step = 13
+Time = 0.65
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 14 : 0.7 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.407516e-05    0.000000e+00 
+	   energy              5.829198e-02    8.573096e-05    5.829198e-05 
+	   displacement        1.143193e+00    1.143193e+00    1.143193e-04 
+ 2
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.145360e-10    0.000000e+00 
+	   energy              5.829198e-02    1.832316e-10    5.829198e-05 
+	   displacement        1.143193e+00    1.132805e+00    8.890693e-04 
+ 3
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.208726e-22    0.000000e+00 
+	   energy              5.829198e-02    4.282440e-18    5.829198e-05 
+	   displacement        1.143193e+00    1.129034e+00    3.782701e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.7
+
+
+Data Record #1
+===========================================================================
+Step = 14
+Time = 0.7
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 15 : 0.75 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.108418e-05    0.000000e+00 
+	   energy              5.812191e-02    8.308317e-05    5.812191e-05 
+	   displacement        1.132905e+00    1.132905e+00    1.132905e-04 
+ 2
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.022438e-10    0.000000e+00 
+	   energy              5.812191e-02    1.677804e-10    5.812191e-05 
+	   displacement        1.132905e+00    1.126101e+00    8.772243e-04 
+ 3
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    4.106573e-22    0.000000e+00 
+	   energy              5.812191e-02    2.881466e-18    5.812191e-05 
+	   displacement        1.132905e+00    1.124183e+00    3.501999e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.75
+
+
+Data Record #1
+===========================================================================
+Step = 15
+Time = 0.75
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 16 : 0.8 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    4.828972e-05    0.000000e+00 
+	   energy              5.795707e-02    8.054966e-05    5.795707e-05 
+	   displacement        1.123082e+00    1.123082e+00    1.123082e-04 
+ 2
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    9.138764e-11    0.000000e+00 
+	   energy              5.795707e-02    1.537922e-10    5.795707e-05 
+	   displacement        1.123082e+00    1.118099e+00    8.649261e-04 
+ 3
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    3.277777e-22    0.000000e+00 
+	   energy              5.795707e-02    1.232997e-18    5.795707e-05 
+	   displacement        1.123082e+00    1.117468e+00    3.220628e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.8
+
+
+Data Record #1
+===========================================================================
+Step = 16
+Time = 0.8
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 17 : 0.85 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    4.567666e-05    0.000000e+00 
+	   energy              5.779723e-02    7.812395e-05    5.779723e-05 
+	   displacement        1.114515e+00    1.114515e+00    1.114515e-04 
+ 2
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    8.178572e-11    0.000000e+00 
+	   energy              5.779723e-02    1.411128e-10    5.779723e-05 
+	   displacement        1.114515e+00    1.110265e+00    8.537282e-04 
+ 3
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    2.606137e-22    0.000000e+00 
+	   energy              5.779723e-02    7.096646e-19    5.779723e-05 
+	   displacement        1.114515e+00    1.110031e+00    2.977106e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.85
+
+
+Data Record #1
+===========================================================================
+Step = 17
+Time = 0.85
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 18 : 0.9 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    4.323125e-05    0.000000e+00 
+	   energy              5.764218e-02    7.580001e-05    5.764218e-05 
+	   displacement        1.106924e+00    1.106924e+00    1.106924e-04 
+ 2
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    7.328104e-11    0.000000e+00 
+	   energy              5.764218e-02    1.296058e-10    5.764218e-05 
+	   displacement        1.106924e+00    1.103052e+00    8.437173e-04 
+ 3
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    2.121721e-22    0.000000e+00 
+	   energy              5.764218e-02    4.238400e-19    5.764218e-05 
+	   displacement        1.106924e+00    1.102992e+00    2.776295e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.9
+
+
+Data Record #1
+===========================================================================
+Step = 18
+Time = 0.9
+Data = dispA
+File = disp_rigid.txt
+
+===== beginning time step 19 : 0.95 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    4.094092e-05    0.000000e+00 
+	   energy              5.749173e-02    7.357226e-05    5.749173e-05 
+	   displacement        1.100199e+00    1.100199e+00    1.100199e-04 
+ 2
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    6.573782e-11    0.000000e+00 
+	   energy              5.749173e-02    1.191506e-10    5.749173e-05 
+	   displacement        1.100199e+00    1.096552e+00    8.348505e-04 
+ 3
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.701869e-22    0.000000e+00 
+	   energy              5.749173e-02    2.958508e-19    5.749173e-05 
+	   displacement        1.100199e+00    1.096550e+00    2.611519e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.95
+
+
+Data Record #1
+===========================================================================
+Step = 19
+Time = 0.95
+Data = dispA
+File = disp_rigid.txt
+MUST POINT CONTROLLER: adjusting time step. dt = 0.05
+
+
+===== beginning time step 20 : 1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 3
+	Nr of nonzeroes in stiffness matrix ....... : 6
+ 1
+ Nonlinear solution status: time= 1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    3.879418e-05    0.000000e+00 
+	   energy              5.734567e-02    7.143548e-05    5.734567e-05 
+	   displacement        1.094205e+00    1.094205e+00    1.094205e-04 
+ 2
+ Nonlinear solution status: time= 1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    5.903840e-11    0.000000e+00 
+	   energy              5.734567e-02    1.096404e-10    5.734567e-05 
+	   displacement        1.094205e+00    1.090721e+00    8.269834e-04 
+ 3
+ Nonlinear solution status: time= 1
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.500000e+01    1.367856e-22    0.000000e+00 
+	   energy              5.734567e-02    2.249036e-19    5.734567e-05 
+	   displacement        1.094205e+00    1.090741e+00    2.475292e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * No force acting on the system.                                        *
+ *************************************************************************
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 1
+
+
+Data Record #1
+===========================================================================
+Step = 20
+Time = 1
+Data = dispA
+File = disp_rigid.txt
+
+
+ N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+
+	Number of time steps completed .................... : 20
+
+	Total number of equilibrium iterations ............ : 64
+
+	Average number of equilibrium iterations .......... : 3.2
+
+	Total number of right hand evaluations ............ : 98
+
+	Total number of stiffness reformations ............ : 20
+
+
+ L I N E A R   S O L V E R   S T A T S
+
+	Total calls to linear solver ........ : 64
+
+	Avg iterations per solve ............ : 1
+
+	Time in linear solver: 0:00:00
+
+ Peak memory  : 19.4 MB
+
+ Elapsed time : 0:00:00
+
+ T I M I N G   I N F O R M A T I O N
+
+	Input time ...................... : 0:00:00 (0.0029649 sec)
+
+	Initialization time ............. : 0:00:00 (0.0005926 sec)
+
+	Solve time ...................... : 0:00:00 (0.123027 sec)
+
+	   IO-time (plot, dmp, data) .... : 0:00:00 (0.0072867 sec)
+
+	   serialization ................ : 0:00:00 (0.000228 sec)
+
+	   reforming stiffness .......... : 0:00:00 (0.0010575 sec)
+
+	   evaluating stiffness ......... : 0:00:00 (0.0001326 sec)
+
+	   evaluating residual .......... : 0:00:00 (0.0004118 sec)
+
+	   model update ................. : 0:00:00 (0.002536 sec)
+
+	   QN updates ................... : 0:00:00 (1.49e-05 sec)
+
+	   time in linear solver ........ : 0:00:00 (0.10842 sec)
+
+	Total elapsed time .............. : 0:00:00 (0.132743 sec)
+
+
+ N O R M A L   T E R M I N A T I O N
+

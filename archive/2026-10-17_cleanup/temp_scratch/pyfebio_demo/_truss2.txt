@@ -1,0 +1,40 @@
+
+--- et_iso (BeamDomain type=elastic-truss) rc=0 FAILED ---
+    Total calls to linear solver ........ : 2
+    Avg iterations per solve ............ : 1
+    Time in linear solver: 0:00:00
+    Peak memory  : 18.9 MB
+    Elapsed time : 0:00:00
+    N O R M A L   T E R M I N A T I O N
+
+--- et_iso_area (BeamDomain type=elastic-truss) rc=1 FAILED ---
+    Default linear solver: pardiso
+    Reading file D:\Project\climbing_fall_analysis\temp\pyfebio_demo\truss_probe\et_iso_area.feb ...FAILED!
+    *************************************************************************
+    *                                ERROR                                  *
+    * tag "area" (line 8) : unrecognized tag                                *
+    *************************************************************************
+
+--- lt_le (BeamDomain type=linear-truss) rc=1 FAILED ---
+    Default linear solver: pardiso
+    Reading file D:\Project\climbing_fall_analysis\temp\pyfebio_demo\truss_probe\lt_le.feb ...FAILED!
+    *************************************************************************
+    *                                ERROR                                  *
+    * tag "material" (line 6) : invalid value for attribute "type"          *
+    *************************************************************************
+
+--- lt_rigid (BeamDomain type=linear-truss) rc=1 FAILED ---
+    Default linear solver: pardiso
+    Reading file D:\Project\climbing_fall_analysis\temp\pyfebio_demo\truss_probe\lt_rigid.feb ...FAILED!
+    *************************************************************************
+    *                                ERROR                                  *
+    * tag "material" (line 6) : invalid value for attribute "type"          *
+    *************************************************************************
+
+--- lb_iso (BeamDomain type=linear-beam) rc=3221225477 FAILED ---
+    FEBio is a registered trademark.
+    copyright (c) 2006-2026 - All rights reserved
+    ===========================================================================
+    Starting without configuration file
+    Default linear solver: pardiso
+    Reading file D:\Project\climbing_fall_analysis\temp\pyfebio_demo\truss_probe\lb_iso.feb ...SUCCESS!

@@ -1,0 +1,15 @@
+06-2026 - All rights reserved                            
+                                                                           
+===========================================================================
+
+Starting without configuration file
+Default linear solver: pardiso
+Reading file t.feb ...FAILED!
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * tag "x_dof" (line 32) : unrecognized tag                              *
+ *************************************************************************
+
+=== files ===
+   t.feb

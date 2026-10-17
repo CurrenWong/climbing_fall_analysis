@@ -1,0 +1,44 @@
+================================================================================================
+cart_m1  键 22
+================================================================================================
+  bone_node_ids                      shape=(22960,)         dtype=int64
+  bone_xyz                           shape=(22960, 3)       dtype=float64
+  subtalar_calcaneus_bone_faces      shape=(0, 4)           dtype=int64
+  subtalar_calcaneus_elems           shape=(809, 6)         dtype=int64
+  subtalar_calcaneus_is_offset       shape=(494,)           dtype=bool
+  subtalar_calcaneus_nodes           shape=(494, 3)         dtype=float64
+  subtalar_calcaneus_tie_faces       shape=(809, 3)         dtype=int64
+  subtalar_talus_bone_faces          shape=(0, 4)           dtype=int64
+  subtalar_talus_elems               shape=(641, 6)         dtype=int64
+  subtalar_talus_is_offset           shape=(416,)           dtype=bool
+  subtalar_talus_nodes               shape=(416, 3)         dtype=float64
+  subtalar_talus_tie_faces           shape=(641, 3)         dtype=int64
+  tibiotalar_talus_bone_faces        shape=(0, 4)           dtype=int64
+  tibiotalar_talus_elems             shape=(204, 6)         dtype=int64
+  tibiotalar_talus_is_offset         shape=(166,)           dtype=bool
+  tibiotalar_talus_nodes             shape=(166, 3)         dtype=float64
+  tibiotalar_talus_tie_faces         shape=(204, 3)         dtype=int64
+  tibiotalar_tibia_bone_faces        shape=(0, 4)           dtype=int64
+  tibiotalar_tibia_elems             shape=(154, 6)         dtype=int64
+  tibiotalar_tibia_is_offset         shape=(138,)           dtype=bool
+  tibiotalar_tibia_nodes             shape=(138, 3)         dtype=float64
+  tibiotalar_tibia_tie_faces         shape=(154, 3)         dtype=int64
+
+--- tibiotalar_talus ---
+  nodes (166, 3)  x[-815.6,-792.5] y[74.2,112.9] z[-225.4,-205.1]
+  elems (204, 6)  min=-166 max=-1
+  ⇒ 索引基准：min=-166 ⇒ 0-based
+  前 3 行元素：
+[[ -5  -3  -1  -6  -4  -2]
+ [ -5  -3  -7  -6  -4  -8]
+ [-13 -11  -9 -14 -12 -10]]
+  base=0: 越界，不可行
+  base=1: 越界，不可行
+  [subtalar_calcaneus_is_offset] shape (494,) 前几个 [False  True False  True False  True False  True]
+  [subtalar_calcaneus_tie_faces] shape (809, 3) 前几个 [-5 -3 -1 -5 -3 -7 -9 -3]
+  [subtalar_talus_is_offset] shape (416,) 前几个 [False  True False  True False  True False  True]
+  [subtalar_talus_tie_faces] shape (641, 3) 前几个 [ -5  -3  -1  -7  -3  -5  -5 -11]
+  [tibiotalar_talus_is_offset] shape (166,) 前几个 [False  True False  True False  True False  True]
+  [tibiotalar_talus_tie_faces] shape (204, 3) 前几个 [ -5  -3  -1  -5  -3  -7 -13 -11]
+  [tibiotalar_tibia_is_offset] shape (138,) 前几个 [False  True False  True False  True False  True]
+  [tibiotalar_tibia_tie_faces] shape (154, 3) 前几个 [-5 -3 -1 -7 -3 -5 -3 -1]

@@ -1,0 +1,11 @@
+网格：calcaneus_r_anatframe.npz  cort hex8=634 spon tet4=3323
+载荷：F_sub = 22723.586 N（h=2 m, a=0），p_avg = 9.1064 MPa
+
+[e200000] 帽 E = 200000 MPa
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：**刚性距骨帽 + 接触**：cap 296 节点 / 119 hex8，A_cap=2557.6 mm²，p_cap=8.8847 MPa（F=22723.6 N），gap=0.5 mm，μ=0.5，hold_k=0.01，pair=talus_cap_bottom→subtalar_joint_q4
+[thums_feb] 跖面 BC：{'kind': 'fixed', 'n_plantar_nodes': 175}
+  [gate3] cap_e=200000 → deck E=?  <Contact>×1
+  → σ_max = 0.0000 MPa  SC = 0.00  (0s)
+
+(单档控制跑，不落盘)

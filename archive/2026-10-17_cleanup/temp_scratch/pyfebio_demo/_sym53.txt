@@ -1,0 +1,48 @@
+[PDF 共 507 页]
+
+==========================================================================
+### 第 53 页
+==========================================================================
+3.3. CONTROL SECTION 53
+To disable a specific convergence criterion, set the corresponding tolerance to zero. For
+example, by default, the residual tolerance is zero, so that this convergence criterion is not
+used.
+2. Thelstol parametercontrolsthescalingofthevectordirectionobtainedfromthelinesearch.
+A line search method is used to improve the convergence of the nonlinear (quasi-) Newton
+solutionalgorithm. Aftereachquasi-Newtoniteration,thisalgorithmsearchesinthedirection
+of the displacement increment for a solution that has less energy (that is, residual multiplied
+with the displacement increment) than the previous iteration. In many problems this will
+automaticallybethecase. However,insomeproblemsthatareverynonlinear(e.g. contact),
+the line search can improve convergence significantly. The line search can be disabled by
+setting the lstol parameter to zero, although this is not recommended.
+3. The qn_method property determines the quasi-Newton update method. The particular
+method is set via the type attribute. Additional parameters are then specified as child el-
+ements of this tag. See section 3.3.4 for more details.
+4. The optimize_bw parameter enables bandwidth minimization for the global stiffness matrix.
+This can drastically decrease the memory requirements and running times when using the
+skyline solver. It is highly recommended when using the skyline solver.
+<optimize_bw>1</optimize_bw>
+When using a different linear solver (e.g., pardiso or SuperLU), the bandwidth optimization
+can still be performed if so desired. However, for these solvers there will be little or no effect
+since these solvers are not as sensitive to the bandwidth as the skyline solver.
+5. If no force is acting on the model, then convergence might be problematic due to numerical
+noise in the calculations. For example, this can happen in a displacement driven contact
+problem where one of the contacting bodies is moved before initial contact is made. When
+this happens, the residual norm will be very small. When it drops below the tolerance set by
+min_residual,FEBiowillassumethatthereisnoforceactingonthesystemandwillconverge
+the time step.
+6. Thesymmetric_stiffness flagisusedtosetthesymmetryoftheglobalstiffnessmatrix. Only
+specify this flag if you want to override the default symmetry, which depends somewhat on
+theanalysistype. Forcingasymmetricmatrixwhentheproblemisnon-symmetricmayhave
+negative impact on convergence. The values for this parameter are:
+- 0 = unsymmetic
+- 1 = symmetric
+- 2 = structurally symmetric
+- 3 = preferred
+If the option is set to 3 (preferred), then one of the other formats will be chosen depending
+onthemodelcomponentsinthemodel. Forinstance,ifanon-symmetriccontactformulation
+is used, then a non-symmetric stiffness matrix will be used.
+7. The default linear solver used by FEBio is usually configured in the FEBio configuration file.
+However, it can also be specified directly in the FEBio input file as part of the solver param-
+eters using the linear_solver tag. See 9.2 for more details on configuring linear solvers.
+<linear_solver type="pardiso"/>

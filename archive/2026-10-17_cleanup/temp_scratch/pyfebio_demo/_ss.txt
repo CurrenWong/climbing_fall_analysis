@@ -1,0 +1,4 @@
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\see_subagent.py", line 40
+    print("  ✗ 未创建 ⇒ subagent 还没走到"写新网格"这步")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?

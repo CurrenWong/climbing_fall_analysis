@@ -1,0 +1,75 @@
+[mode] tibiotalar-only; pairs=['tibiotalar_pair']; fixed on talus_cort
+[mode] full(含软骨+接触)
+单元总数 26,788；用到的骨节点 8,161
+按域统计: {'tibia_cort': 2421, 'tibia_end_spon': 6651, 'tibia_marrow': 14482, 'talus_cort': 394, 'talus_spon': 1766, 'tibiotalar_tibia': 462, 'tibiotalar_talus': 612}
+按类型统计: {'tet4': 23979, 'hex8': 2809}
+合并后节点 8,465
+其中 offset（软骨外表面）节点 152
+写出了 8 个单元块
+加载轴（距骨→胫骨）= [0.6766 0.1363 0.7237]
+胫骨外表面 4,850 面；近端加载面 38 面 (>95% 高度 -3mm)
+talus_cort 外表面 788 面；远端固定面 23 面
+  tibiotalar_tibia 外层接触面 152 个
+  tibiotalar_talus 外层接触面 200 个
+  [tie] tibiotalar_tibia: primary(软骨底面 tri) 152 面 / secondary(骨关节面, 坐标匹配) 117 面
+  [tie] tibiotalar_talus: primary(软骨底面 tri) 200 面 / secondary(骨关节面, 坐标匹配) 118 面
+
+=== Jacobian 自检 + 自动修正朝向（det(J) 必须 > 0）===
+  ✅ tibia_cort             tet4    保留      6 剔除    0  det(J) min=2.2151e+00
+  ✅ tibia_cort             hex8    保留  2,415 剔除    0  det(J) min=1.4405e+00
+  ✅ tibia_end_spon         tet4    保留  6,651 剔除    0  det(J) min=8.1429e+00
+  ✅ tibia_marrow           tet4    保留 14,482 剔除    0  det(J) min=1.6333e+00
+  ✅ talus_cort             hex8    保留    394 剔除    0  det(J) min=8.6799e-01
+  ✅ talus_spon             tet4    保留  1,766 剔除    0  det(J) min=2.3567e+01
+  ✅ tibiotalar_tibia       tet4    保留    462 剔除    0  det(J) min=1.4259e-01
+  ✅ tibiotalar_talus       tet4    保留    612 剔除    0  det(J) min=1.1432e-02
+
+  翻转修正 43 个；仍无法修正而剔除 0 个；保留的「小但正」(≤DET_MIN=0.5) 12 个
+加载面面积 720.3 mm² -> 600 N 对应 traction 0.8329 MPa
+
+写出 D:\Project\climbing_fall_analysis\temp\thums\febio\ankle_tibiotalar.feb（1946 KB）
+
+FEBio rc=0  用时 25.7s
+--- 输出尾部 40 行 ---
+  	convergence norms :     INITIAL         CURRENT         REQUIRED
+  	   residual            6.512956e+07    3.551798e-05    0.000000e+00 
+  	   energy              4.938446e+02    1.406679e-08    4.938446e+00 
+  	   displacement        7.502107e-01    8.719523e-08    8.052698e-07 
+  
+  convergence summary
+      number of iterations   : 12
+      number of reformations : 2
+  
+  ------- converged at time : 1
+  
+  
+  
+   N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+  
+  	Number of time steps completed .................... : 14
+  
+  	Total number of equilibrium iterations ............ : 171
+  
+  	Average number of equilibrium iterations .......... : 12.2143
+  
+  	Total number of right hand evaluations ............ : 190
+  
+  	Total number of stiffness reformations ............ : 28
+  
+  
+   L I N E A R   S O L V E R   S T A T S
+  
+  	Total calls to linear solver ........ : 171
+  
+  	Avg iterations per solve ............ : 1
+  
+  	Time in linear solver: 0:00:16
+  
+   Peak memory  : 224.9 MB
+  
+   Elapsed time : 0:00:25
+  
+  
+   N O R M A L   T E R M I N A T I O N
+
+完整日志: D:\Project\climbing_fall_analysis\temp\thums\febio\febio.log

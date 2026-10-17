@@ -1,0 +1,26 @@
+✓ FE_PIPELINE 迁移指针已更新 -> 31409 B
+
+==========================================================================
+压缩前收口校验
+==========================================================================
+  MEMORY.md                          10,175 B ✅
+  operational-gotchas.md              8,460 B
+  ankle-fe-criteria.md                8,479 B
+  2026-10-06.md                      31,800 B
+  ANKLE_FIX_TODO.md                  62,109 B
+  FE_PIPELINE_TODO.md                31,409 B
+  总体进度.md                            14,856 B
+  踝FE可用模型使用说明.md                     17,318 B
+  LEARNINGS.md                      217,603 B
+  ERRORS.md                          37,387 B
+  LEARNINGS.md: 102 条，标题级重号 无 ✓
+  ERRORS.md: 23 条，标题级重号 无 ✓
+
+  --- 关键内容 ---
+  ANKLE_FIX_TODO.md                缺失 无 ✓
+  MEMORY.md                        缺失 无 ✓
+  FE_PIPELINE_TODO.md              缺失 无 ✓
+  过时句 韧带 77% / 接触 28%（最新）                已清 ✓
+  过时句 刚度 ~2× 未归因                         已清 ✓
+
+结论： PASS ✅

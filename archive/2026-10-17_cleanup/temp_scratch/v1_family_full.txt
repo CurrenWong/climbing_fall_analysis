@@ -1,0 +1,400 @@
+修正绕向后的跖面族全网格：h × hold_k → gauge_max（阈值 150 MPa）
+
+  k\h              1         2         3         4         5         6         8   首折(m)
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 20.343750 s
+[info]  - real time elapsed: 22.018722 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5226
+[info]  - number of steps taken / attempted: 1045 / 1045
+[info]  - number of projections: 0
+[info]  - number of iterations: 1045
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=7.2252 MPa（F=18029.4 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 21.359375 s
+[info]  - real time elapsed: 22.720888 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5151
+[info]  - number of steps taken / attempted: 1030 / 1030
+[info]  - number of projections: 0
+[info]  - number of iterations: 1030
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.1064 MPa（F=22723.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 22.156250 s
+[info]  - real time elapsed: 23.184711 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5341
+[info]  - number of steps taken / attempted: 1068 / 1068
+[info]  - number of projections: 0
+[info]  - number of iterations: 1068
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.7327 MPa（F=24286.3 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 22.843750 s
+[info]  - real time elapsed: 24.364384 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5526
+[info]  - number of steps taken / attempted: 1105 / 1105
+[info]  - number of projections: 0
+[info]  - number of iterations: 1105
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5327 MPa（F=26282.7 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 24.000000 s
+[info]  - real time elapsed: 25.813841 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5716
+[info]  - number of steps taken / attempted: 1143 / 1143
+[info]  - number of projections: 0
+[info]  - number of iterations: 1143
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 25.062500 s
+[info]  - real time elapsed: 26.537830 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 5866
+[info]  - number of steps taken / attempted: 1173 / 1173
+[info]  - number of projections: 0
+[info]  - number of iterations: 1173
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=12.3447 MPa（F=30804.2 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[info] Updating Model file from 30000 to latest format...
+[info] Loaded model FullBodyModel_MuscleActuatedLowerLimb_TorqueActuatedUpperBody from file D:\Project\climbing_fall_analysis\model\opensim\FullBodyModel-4.0\Rajagopal2015.osim
+[info] -------
+[info] Manager
+[info] -------
+[info] Starting integration at initial time 0.00 s...
+[info] Integration complete at final time 0.02 s.
+[info]  - CPU time elapsed: 24.984375 s
+[info]  - real time elapsed: 26.653057 s
+[info]  - ratio sim-to-real time: 0.001
+[info]  - integrator method: RungeKuttaMerson
+[info]  - number of realizations: 6026
+[info]  - number of steps taken / attempted: 1205 / 1205
+[info]  - number of projections: 0
+[info]  - number of iterations: 1205
+[warning] Coordinate.setValue:  coordinate hip_flexion_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_flexion_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_adduction_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate hip_rotation_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate knee_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate ankle_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate subtalar_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate mtp_angle_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_r is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_flex_l is locked. Unable to change its value.
+[warning] Coordinate.setValue:  coordinate wrist_dev_l is locked. Unable to change its value.
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=14.1231 MPa（F=35241.8 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+  k=1              ✗         ✗         ✗         ✗         ✗         ✗         ✗       未跨
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=7.2252 MPa（F=18029.4 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 3.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.1064 MPa（F=22723.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 3.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.7327 MPa（F=24286.3 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 3.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5327 MPa（F=26282.7 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 3.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 3.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=12.3447 MPa（F=30804.2 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 3.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=14.1231 MPa（F=35241.8 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 3.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+  k=3         120.95    173.32         ✗         ✗         ✗    362.45         ✗    1.514
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=7.2252 MPa（F=18029.4 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 10.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.1064 MPa（F=22723.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 10.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.7327 MPa（F=24286.3 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 10.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5327 MPa（F=26282.7 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 10.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 10.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=12.3447 MPa（F=30804.2 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 10.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=14.1231 MPa（F=35241.8 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 10.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+  k=10        109.03    136.09    145.10    156.44    169.12    182.10    206.93    3.406
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=7.2252 MPa（F=18029.4 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 30.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.1064 MPa（F=22723.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 30.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.7327 MPa（F=24286.3 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 30.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5327 MPa（F=26282.7 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 30.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 30.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=12.3447 MPa（F=30804.2 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 30.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=14.1231 MPa（F=35241.8 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 30.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+  k=30        107.33         ✗    143.11    154.23    166.68    179.20    202.77    3.595
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=7.2252 MPa（F=18029.4 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.1064 MPa（F=22723.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.7327 MPa（F=24286.3 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5327 MPa（F=26282.7 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=12.3447 MPa（F=30804.2 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=14.1231 MPa（F=35241.8 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 100.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+  k=100       106.07    132.39    140.99    151.94    164.07    176.32    199.97    3.807
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=7.2252 MPa（F=18029.4 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 300.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.1064 MPa（F=22723.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 300.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.7327 MPa（F=24286.3 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 300.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5327 MPa（F=26282.7 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 300.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 300.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=12.3447 MPa（F=30804.2 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 300.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=14.1231 MPa（F=35241.8 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 300.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+  k=300       102.93    128.64    137.13    147.89    159.87    172.06    195.40    4.166
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=7.2252 MPa（F=18029.4 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1000.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.1064 MPa（F=22723.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1000.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=9.7327 MPa（F=24286.3 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1000.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=10.5327 MPa（F=26282.7 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1000.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=11.4296 MPa（F=28520.6 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1000.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=12.3447 MPa（F=30804.2 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1000.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+[thums_feb] FEBio 4.13 适配：solver 块 → <solver/>（FEBio 4.13 拒绝其 type 属性，改用默认设置）
+[thums_feb] 载荷：PressureLoad p=14.1231 MPa（F=35241.8 N / A=2495.33 mm²）
+[thums_feb] 跖面 BC：{'hold_spring_k_n_per_mm': 1000.0, 'kind': 'contact', 'contact': Contact(all_contact_interfaces=[SlidingElastic(name='plantar_pad_contact', surface_pair='plantar_pad_pair', laugon='PENALTY', two_pass=0, penalty=0.1, auto_penalty=0, update_penalty=0, tolerance=0.005, gaptol=0, minaug=0, maxaug=10, search_tol=0.01, search_radius=20.0, knmult=1.0, seg_up=0, node_reloc=0, type='sliding-elastic', symmetric_stiffness=0, smooth_aug=0, tension=0, fric_coeff=0.6, flip_primary=1, flip_secondary=1, shell_bottom_primary=0, shell_bottom_secondary=0, offset=0)]), 'n_surface_tris': 274, 'n_surface_quads': 137, 'plantar_facet_kind': 'quad4', 'n_pad_nodes': 50, 'n_pad_elems': 16, 'wall_y_mm': -40.706773755268614, 'mu': 0.6, 'penalty': 0.1, 'search_radius': 20.0, 'tolerance': 0.005, 'gap_mm': 0.5, 'laugon': 'PENALTY', 'pair_primary': 'plantar', 'pair_secondary': 'pad_top', 'n_plantar_nodes': 175}
+  k=1000       99.01    123.77    131.94    142.33    153.89    165.67    188.33    4.647
+
+首折 vs hold_k:
+  k=1        → 未跨 150
+  k=3        → 1.514 m
+  k=10       → 3.406 m
+  k=30       → 3.595 m
+  k=100      → 3.807 m
+  k=300      → 4.166 m
+  k=1000     → 4.647 m
+
+★ 最优 = k=1000 → 首折 4.647 m
+-> D:\Project\climbing_fall_analysis\results\opensim_fe\v1_flipped_family_full_scan.json

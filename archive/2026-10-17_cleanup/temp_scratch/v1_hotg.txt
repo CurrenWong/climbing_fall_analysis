@@ -1,0 +1,38 @@
+CORT 634 单元  h=4.698 mm；判据 gauge ℓ=4.0 mm（体积平均）
+
+=== h=2 m  [判据口径 gauge_max] ===
+  fixed        gauge_max=161.4020 @#378  d_pl=  5.76(1.23h)  d_sp=2.14(0.46h)
+  contact+hold gauge_max=131.7919 @#196  d_pl= 31.52(6.71h)  d_sp=2.22(0.47h)
+  Δgauge = -18.35%   同单元? 否（#378->#196）
+  前10 重合 0/10；corr(gauge) = 0.6830
+  按 d_跖面分层（gauge 中位）：
+    d_pl∈[ 0.00,   4.70) n=216  fixed   5.240  contact  41.627  Δ +694.4%
+    d_pl∈[ 4.70,   9.40) n= 84  fixed  52.912  contact  47.547  Δ  -10.1%
+    d_pl∈[ 9.40,  18.79) n=168  fixed  58.411  contact  59.906  Δ   +2.6%
+    d_pl∈[18.79,1000000000.00) n=166  fixed  80.408  contact  77.716  Δ   -3.3%
+  首折反查：fixed gauge_max(2)=161.402  contact=131.792 (阈值 150)
+
+=== h=3 m  [判据口径 gauge_max] ===
+  fixed        gauge_max=172.1671 @#407  d_pl= 14.13(3.01h)  d_sp=2.39(0.51h)
+  contact+hold gauge_max=140.4150 @#196  d_pl= 31.52(6.71h)  d_sp=2.22(0.47h)
+  Δgauge = -18.44%   同单元? 否（#407->#196）
+  前10 重合 0/10；corr(gauge) = 0.6858
+  按 d_跖面分层（gauge 中位）：
+    d_pl∈[ 0.00,   4.70) n=216  fixed   5.592  contact  44.291  Δ +692.1%
+    d_pl∈[ 4.70,   9.40) n= 84  fixed  56.528  contact  50.870  Δ  -10.0%
+    d_pl∈[ 9.40,  18.79) n=168  fixed  62.345  contact  63.800  Δ   +2.3%
+    d_pl∈[18.79,1000000000.00) n=166  fixed  85.819  contact  82.889  Δ   -3.4%
+  首折反查：fixed gauge_max(3)=172.167  contact=140.415 (阈值 150)
+
+=== h=5 m  [判据口径 gauge_max] ===
+  fixed        gauge_max=201.4763 @#407  d_pl= 14.13(3.01h)  d_sp=2.39(0.51h)
+  contact+hold gauge_max=163.5426 @#196  d_pl= 31.52(6.71h)  d_sp=2.22(0.47h)
+  Δgauge = -18.83%   同单元? 否（#407->#196）
+  前10 重合 0/10；corr(gauge) = 0.6929
+  按 d_跖面分层（gauge 中位）：
+    d_pl∈[ 0.00,   4.70) n=216  fixed   6.540  contact  51.553  Δ +688.2%
+    d_pl∈[ 4.70,   9.40) n= 84  fixed  66.310  contact  60.168  Δ   -9.3%
+    d_pl∈[ 9.40,  18.79) n=168  fixed  72.956  contact  74.827  Δ   +2.6%
+    d_pl∈[18.79,1000000000.00) n=166  fixed 100.410  contact  96.646  Δ   -3.7%
+  首折反查：fixed gauge_max(5)=201.476  contact=163.543 (阈值 150)
+

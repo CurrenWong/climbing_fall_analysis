@@ -1,0 +1,43 @@
+  old  POSE_IE= -3.0  F= 452.78 N  NORMAL=True   fibula_cort=  7.25  tibia_cort=  4.49  talus_cort=  5.53  calcaneus_cort=  5.84
+  old  POSE_IE= -1.0  F= 438.92 N  NORMAL=True   fibula_cort=  7.58  tibia_cort=  5.05  talus_cort=  4.70  calcaneus_cort=  5.45
+  old  POSE_IE= +0.0  F= 418.10 N  NORMAL=True   fibula_cort=  7.86  tibia_cort=  4.74  talus_cort=  4.33  calcaneus_cort=  4.89
+  old  POSE_IE= +1.0  F= 413.87 N  NORMAL=True   fibula_cort=  7.96  tibia_cort=  4.55  talus_cort=  4.31  calcaneus_cort=  4.39
+  old  POSE_IE= +3.0  F= 376.73 N  NORMAL=True   fibula_cort=  9.05  tibia_cort=  3.97  talus_cort=  3.88  calcaneus_cort=  3.94
+  old  POSE_IE= +5.0  F= 356.48 N  NORMAL=True   fibula_cort=  9.02  tibia_cort=  3.89  talus_cort=  3.82  calcaneus_cort=  3.50
+  fix  POSE_IE= -3.0  F= 439.40 N  NORMAL=False  fibula_cort=  6.00  tibia_cort=  3.97  talus_cort=  5.70  calcaneus_cort=  5.11
+  fix  POSE_IE= -1.0  F= 450.30 N  NORMAL=True   fibula_cort=  7.59  tibia_cort=  4.76  talus_cort=  5.10  calcaneus_cort=  5.24
+  fix  POSE_IE= +0.0  F= 476.70 N  NORMAL=True   fibula_cort=  6.97  tibia_cort=  4.63  talus_cort=  5.39  calcaneus_cort=  4.94
+  fix  POSE_IE= +1.0  F= 415.71 N  NORMAL=True   fibula_cort=  8.15  tibia_cort=  4.09  talus_cort=  4.56  calcaneus_cort=  4.15
+  fix  POSE_IE= +3.0  F= 391.37 N  NORMAL=True   fibula_cort=  8.95  tibia_cort=  3.55  talus_cort=  4.32  calcaneus_cort=  3.85
+  fix  POSE_IE= +5.0  F= 233.52 N  NORMAL=False  fibula_cort=  4.41  tibia_cort=  2.50  talus_cort=  2.71  calcaneus_cort=  2.05
+
+============================================================================================================
+对照：同一姿势下 旧 vs 新 网格
+============================================================================================================
+  POSE_IE    F_old    F_fix     F比fibula_cort_oldfibula_cort_fix     比tibia_cort_oldtibia_cort_fix     比talus_cort_oldtalus_cort_fix     比calcaneus_cort_oldcalcaneus_cort_fix     比
+     -3.0   452.78   439.40   0.97         7.25         6.00  0.83         4.49         3.97  0.89         5.53         5.70  1.03         5.84         5.11  0.88
+     -1.0   438.92   450.30   1.03         7.58         7.59  1.00         5.05         4.76  0.94         4.70         5.10  1.08         5.45         5.24  0.96
+     +0.0   418.10   476.70   1.14         7.86         6.97  0.89         4.74         4.63  0.98         4.33         5.39  1.24         4.89         4.94  1.01
+     +1.0   413.87   415.71   1.00         7.96         8.15  1.02         4.55         4.09  0.90         4.31         4.56  1.06         4.39         4.15  0.94
+     +3.0   376.73   391.37   1.04         9.05         8.95  0.99         3.97         3.55  0.90         3.88         4.32  1.11         3.94         3.85  0.98
+     +5.0   356.48   233.52   0.66         9.02         4.41  0.49         3.89         2.50  0.64         3.82         2.71  0.71         3.50         2.05  0.59
+
+============================================================================================================
+⭐ 相对结论：外翻侧(−) 与 内翻侧(+) 的跨度  σ(+5°) − σ(−3°)
+============================================================================================================
+  fibula_cort        旧    1.773   新   -1.589   **异号 🚨**   新/旧 =  -0.90
+  tibia_cort         旧   -0.597   新   -1.477   同号 ✓   新/旧 =   2.47
+  talus_cort         旧   -1.710   新   -2.993   同号 ✓   新/旧 =   1.75
+  calcaneus_cort     旧   -2.342   新   -3.056   同号 ✓   新/旧 =   1.31
+
+============================================================================================================
+⭐ 姿势风险排序（按各骨 σ 从大到小）
+============================================================================================================
+  old  fibula_cort        +3 > +5 > +1 > +0 > -1 > -3
+  old  tibia_cort         -1 > +0 > +1 > -3 > +3 > +5
+  old  talus_cort         -3 > -1 > +0 > +1 > +3 > +5
+  old  calcaneus_cort     -3 > -1 > +0 > +1 > +3 > +5
+  fix  fibula_cort        +3 > +1 > -1 > +0 > -3 > +5
+  fix  tibia_cort         -1 > +0 > +1 > -3 > +3 > +5
+  fix  talus_cort         -3 > +0 > -1 > +1 > +3 > +5
+  fix  calcaneus_cort     -1 > -3 > +0 > +1 > +3 > +5

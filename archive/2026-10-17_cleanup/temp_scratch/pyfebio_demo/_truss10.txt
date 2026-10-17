@@ -1,0 +1,11 @@
+xplt bytes: 1468
+
+@ 0: PLT_ROOT (offset 304, child 304B)
+
+@ 312: PLT_MESH (offset 556, child 556B)
+
+@ 876: PLT_STATE (offset 188, child 188B)
+
+@ 1072: PLT_STATE (offset 188, child 188B)
+
+@ 1268: PLT_STATE (offset 188, child 188B)

@@ -1,0 +1,9 @@
+npz keys: ['bone_node_ids', 'bone_xyz', 'tibiotalar_tibia_offsets', 'tibiotalar_tibia_elems', 'tibiotalar_talus_offsets', 'tibiotalar_talus_elems', 'subtalar_talus_offsets', 'subtalar_talus_elems', 'subtalar_calcaneus_offsets', 'subtalar_calcaneus_elems']
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\diag_offset.py", line 14, in <module>
+    db = np.load(W / "thums_bones.npz", allow_pickle=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Project\climbing_fall_analysis\.venv\Lib\site-packages\numpy\lib\_npyio_impl.py", line 454, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Project\\climbing_fall_analysis\\temp\\thums\\thums_bones.npz'

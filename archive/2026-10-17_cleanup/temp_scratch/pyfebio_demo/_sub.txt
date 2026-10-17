@@ -1,0 +1,20 @@
+源 .feb 2,549,849 字符
+
+=== 00_asis: rc=1 READ-OK  ===
+    * 22 negative jacobians detected.                                       *
+
+=== 01_no_loads: rc=1 READ-OK  ===
+    有解算输出
+
+=== 02_no_contact: rc=1 READ-OK  ===
+    * Negative jacobian detected.                                           *
+
+=== 03_no_loads_contact: rc=1 READ-OK  ===
+    有解算输出
+
+=== 04_no_truss: rc=1 READ-OK  ===
+    * 22 negative jacobians detected.                                       *
+
+=== 05_no_cart_surf: rc=1 read-FAIL  ===
+    *                                ERROR                                  *
+    * tag "primary" (line 45261) : invalid value: surf_tibiotalar_tibia     *

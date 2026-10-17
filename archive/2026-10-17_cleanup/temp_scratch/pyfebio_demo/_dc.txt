@@ -1,0 +1,12 @@
+  266: def _min_detJ_penta6(N, idx):
+  605: if POSE_DF or POSE_IE or POSE_TILT or POSE_TILT_ML:
+  715:     print(f"[pose] 已应用（输出坐标/位移在旋转后的姿势下）")
+  917: # ── ★ Jacobian 自检 + 朝向修正 + 剔除 ────────────────────────────────
+  949: def detJ_penta6(P):
+ 1001: DET_MIN = float(os.environ.get("DET_MIN", "0.5"))
+ 1003: #   （实测 DET_MIN=0.5 时软骨楔形被剔 14+29 个，接触面 150/198→138/171，
+ 1007: print("\n=== Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===")
+ 1023:         if d is not None and d > DET_MIN:
+ 1025:         # ★ 朝向修正必须用**奇置换**：
+ 1038:         if d2 is not None and d2 > DET_MIN:
+ 1065:     print(f"  韧带壳退化剔除 {nbad_shell} 个")

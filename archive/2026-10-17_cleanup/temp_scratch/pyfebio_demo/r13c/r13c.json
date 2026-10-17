@@ -1,0 +1,60 @@
+[
+  {
+    "tag": "W1_tol0.2",
+    "mods": {
+      "tolerance": 0.2
+    },
+    "wall_s": 97.0,
+    "F_top_z": 396.3334040784665,
+    "normal": false,
+    "steps_done": null,
+    "fail_t": 0.841288,
+    "neg_jac": 0,
+    "elapsed": "0:01:37",
+    "last_Dmult": [
+      "6.924459e-02",
+      "2.000000e-01"
+    ],
+    "last_maxgap": 0.1095493,
+    "bad_tag": null,
+    "size": 130192
+  },
+  {
+    "tag": "W2_tol1.0",
+    "mods": {
+      "tolerance": 1.0
+    },
+    "wall_s": 79.9,
+    "F_top_z": 387.04797942332306,
+    "normal": false,
+    "steps_done": null,
+    "fail_t": 0.830663,
+    "neg_jac": 0,
+    "elapsed": "0:01:20",
+    "last_Dmult": [
+      "7.305267e-02",
+      "1.000000e+00"
+    ],
+    "last_maxgap": 0.1345496,
+    "bad_tag": null,
+    "size": 108191
+  },
+  {
+    "tag": "W3_tol0.2_aug20",
+    "mods": {
+      "tolerance": 0.2,
+      "max_aug_iterations": 20
+    },
+    "wall_s": 0.1,
+    "F_top_z": 0.0,
+    "normal": false,
+    "steps_done": null,
+    "fail_t": null,
+    "neg_jac": 0,
+    "elapsed": null,
+    "last_Dmult": null,
+    "last_maxgap": null,
+    "bad_tag": "max_aug_iterations",
+    "size": 1900
+  }
+]

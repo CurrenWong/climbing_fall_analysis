@@ -1,0 +1,19 @@
+FEBio rc=0 用时 7.1s
+   !!  tibiotalar_tibia       penta6 保留    140 剔除   14  det(J) min=1.2701e+00
+   !!  tibiotalar_talus       penta6 保留    175 剔除   29  det(J) min=6.3372e-01
+   接触面 tibiotalar_tibia: 138 面
+   接触面 tibiotalar_talus: 171 面
+
+状态 23 末态 states/22
+|u|max = 1.9371 mm
+支反力(沿加载轴) = 645.7 N
+  tibiotalar_talus__penta6       p99  0.971  max  2.962 MPa
+xplt 节点 (3885, 3)  .feb 节点 3885
+
+接触面积：
+  间隙< 0.05 mm ->    2/138 面,    24.6 mm²
+  间隙< 0.10 mm ->   10/138 面,   109.8 mm²
+  间隙< 0.20 mm ->   26/138 面,   287.4 mm²
+  间隙< 0.50 mm ->   60/138 面,   722.9 mm²
+
+吴恺靶子: 最大接触应力 3.74 MPa / 接触面积 335.5 mm²

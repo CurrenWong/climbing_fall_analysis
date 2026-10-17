@@ -1,0 +1,5 @@
+=== @+1.6mm（基线零回归 = 592.6020 N）===
+[T1_a2only_1.6] NORMAL=False F=None
+[T2_a1a2_k5000] NORMAL=False F=None
+[T3_a1only_1.6] NORMAL=False F=None
+[T4_a2only_k50] NORMAL=False F=None

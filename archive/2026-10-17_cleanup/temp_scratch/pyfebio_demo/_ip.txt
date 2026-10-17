@@ -1,0 +1,4 @@
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\ins_pipe.py", line 10
+    "> ⚠️ **本节的"踝子线"部分已迁移（2026-10-06）**：完整、自包含的状态与计划见",
+    ^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?

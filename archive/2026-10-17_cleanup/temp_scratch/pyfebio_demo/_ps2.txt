@@ -1,0 +1,10 @@
+基准（共形模型，无 tie）: 436.817 N
+
+  penalty=50     rc=1   54.9s  None
+  penalty=100    rc=1   30.8s  None
+  penalty=300    rc=1  184.2s  None
+  penalty=1000   rc=1   19.8s  None
+  penalty=3000   rc=1  334.2s  None
+  penalty=10000  rc=1  248.1s  None
+
+目标 436.817 N；已扫 [50, 100, 300, 1000, 3000, 10000]

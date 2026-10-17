@@ -1,0 +1,16 @@
+配置              rc      秒     F(N)   |u|max     软骨p99     软骨max
+------------------------------------------------------------------------------
+prism_dm0.5      0    4.6    116.9    0.244     0.273     0.446
+   [('tibiotalar_tibia', '140', '14'), ('tibiotalar_talus', '175', '29')]  接触面 [('tibiotalar_tibia', '138'), ('tibiotalar_talus', '171')]
+prism_dm0.2      0    4.7    116.9    0.244     0.272     0.446
+   [('tibiotalar_tibia', '144', '10'), ('tibiotalar_talus', '176', '28')]  接触面 [('tibiotalar_tibia', '142'), ('tibiotalar_talus', '172')]
+prism_dm0.1      0    5.2    116.9    0.244     0.272     0.445
+   [('tibiotalar_tibia', '144', '10'), ('tibiotalar_talus', '177', '27')]  接触面 [('tibiotalar_tibia', '142'), ('tibiotalar_talus', '173')]
+prism_dm0.05     0    5.0    116.9    0.244     0.272     0.444
+   [('tibiotalar_tibia', '145', '9'), ('tibiotalar_talus', '179', '25')]  接触面 [('tibiotalar_tibia', '143'), ('tibiotalar_talus', '175')]
+prism_dm0.02     0    4.6    116.9    0.244     0.272     0.444
+   [('tibiotalar_tibia', '145', '9'), ('tibiotalar_talus', '179', '25')]  接触面 [('tibiotalar_tibia', '143'), ('tibiotalar_talus', '175')]
+tet4_dm0.5       0    5.2    259.3    0.242     0.765     1.411
+   [('tibiotalar_tibia', '456', '6'), ('tibiotalar_talus', '596', '16')]  接触面 [('tibiotalar_tibia', '148'), ('tibiotalar_talus', '191')]
+
+对照：吴恺 最大接触应力 3.74 MPa、接触面积 335.5 mm²

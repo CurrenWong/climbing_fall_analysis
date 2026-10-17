@@ -1,0 +1,6 @@
+==== 1) prism + NO ligaments ====
+FEBio rc=0  用时 3.5s
+==== 2) tet4 baseline (expect OK) ====
+FEBio rc=0  用时 4.8s
+==== 3) prism + ligaments ====
+FEBio rc=0  用时 5.0s

@@ -1,0 +1,13 @@
+462 行
+   93| def oriented_boundary(keys: list[str]):
+   94|     """返回 {face_key: (verts tuple 朝外, normal, area, count)}，只保留外表面。"""
+  127|                     #   下游 node_normals 用 pts 算出的法向会**反号** ——
+  150| def node_normals(faces, nodes: set[int]) -> dict[int, np.ndarray]:
+  195|     normals = node_normals(fA, nA)
+  196|     Narr = np.array([normals[int(v)] for v in idsA])
+  314|     def _tet6(a, b, c, e):
+  317|     def vol_of(cell):
+  326|     def tet_vols(cell):
+  390|         "normal_alignment_note": "边缘脊线节点法向不良定义；Newell 与三点法可能符号相反",
+  422| def pad_elems(elems):
+  447| # ── GAP_MAX 敏感性扫描：关节面大小会不会被阈值截断？ ──

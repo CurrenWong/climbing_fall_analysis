@@ -1,0 +1,87 @@
+'�只要几秒），用于核对刚度' is not recognized as an internal or external command,
+operable program or batch file.
+[mode] MATSET=WK LIG_MODE=shell TIME_STEPS=20 FIX_TALUS=all FORCE=600.0N
+[mode] BONES=all
+[mode] NO_CONTACT=False LIG_SUB=all
+[mode] FIX_NAVICULAR=True
+[mode] DRIVER=disp DISP_MM=0.6
+[mode] TRUNC_MM=60.0
+[trunc] 截断到 60.0 mm 内：剔除 23,388 单元，剩 9,109 单元 / 3,588 节点
+骨+软骨：单元 9,109，节点 3,588
+韧带：10 条，单元 135，并入节点后总计 3,725
+其中 offset（软骨外表面）节点 160
+合并后节点 3,885
+加载轴（胫骨->距骨）= [0.8153 0.135  0.5631]
+韧带专属节点（转动自由度原本自由）: 137
+
+=== Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===
+  OK  tibia_cort             tet4   保留      6 剔除    0  det(J) min=2.2151e+00
+  OK  tibia_cort             hex8   保留    231 剔除    0  det(J) min=2.2084e+00
+  OK  tibia_spon             tet4   保留    605 剔除    0  det(J) min=2.8144e+01
+  OK  tibia_marrow           tet4   保留    518 剔除    0  det(J) min=5.3135e+01
+  OK  fibula_cort            hex8   保留    146 剔除    0  det(J) min=1.5097e+00
+  OK  fibula_spon            tet4   保留    264 剔除    0  det(J) min=2.3857e+01
+  OK  talus_cort             hex8   保留    394 剔除    0  det(J) min=8.6799e-01
+  OK  talus_spon             tet4   保留  1,766 剔除    0  det(J) min=2.3567e+01
+  OK  calcaneus_cort         hex8   保留    634 剔除    0  det(J) min=1.1119e+00
+  OK  calcaneus_spon         tet4   保留  3,323 剔除    0  det(J) min=1.7034e+01
+  OK  navicular_spon         hex8   保留    148 剔除    0  det(J) min=2.1132e+00
+  !!  tibiotalar_tibia       tet4   保留    458 剔除    4  det(J) min=7.6195e-02
+  !!  tibiotalar_talus       tet4   保留    607 剔除    5  det(J) min=1.0451e-02
+  翻转修正 304 个；仍无法修正而剔除 9 个
+  韧带壳退化剔除 0 个
+  接触面 tibiotalar_tibia: 150 面
+  接触面 tibiotalar_talus: 197 面
+外表面顶/底：胫骨顶 88 / 腓骨顶 39 / 跟骨底 194
+顶面投影面积：胫骨 47.8 mm²，腓骨 14.7 mm² => 腓骨分担 23.5% 载荷
+读数数据 -> D:\Project\climbing_fall_analysis\temp\thums\febio_lig\lig_read_WK.npz
+
+写出 D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb（753 KB）  单元：骨+软骨 9100，韧带 135，共 9235
+
+FEBio rc=1  用时 13.8s
+  	convergence norms :     INITIAL         CURRENT         REQUIRED
+  	   residual            1.666215e+05    1.475384e+00    0.000000e+00 
+  	   energy              2.517358e+00    7.646126e-04    2.517358e-03 
+  	   displacement        5.793154e-04    2.553289e-06    8.797042e-08 
+   5
+  
+   *************************************************************************
+   *                                ERROR                                  *
+   * Negative jacobian detected.                                           *
+   *************************************************************************
+  
+  
+  ------- failed to converge at time : 0.629905
+  
+  Max. nr of retries reached.
+  
+  
+  
+   N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+  
+  	Number of time steps completed .................... : 14
+  
+  	Total number of equilibrium iterations ............ : 81
+  
+  	Average number of equilibrium iterations .......... : 5.78571
+  
+  	Total number of right hand evaluations ............ : 144
+  
+  	Total number of stiffness reformations ............ : 16
+  
+  
+   L I N E A R   S O L V E R   S T A T S
+  
+  	Total calls to linear solver ........ : 169
+  
+  	Avg iterations per solve ............ : 1
+  
+  	Time in linear solver: 0:00:07
+  
+   Peak memory  : 100.4 MB
+  
+   Elapsed time : 0:00:14
+  
+  
+   E R R O R   T E R M I N A T I O N
+FEBIO_EXIT=0

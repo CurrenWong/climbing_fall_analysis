@@ -1,0 +1,11 @@
+  ANKLE_FIX_TODO.md                旧错句 0  新横幅 1  ✓
+  ANKLE_GOAL_TODO.md               旧错句 0  新横幅 1  ✓
+  ANKLE_600N_TODO.md               旧错句 0  新横幅 1  ✓
+  TIE_PORT_TODO.md                 旧错句 0  新横幅 1  ✓
+  ANKLE_LIG_TODO.md                旧错句 0  新横幅 1  ✓
+  FE_PIPELINE_TODO.md              旧错句 0  新横幅 1  ✓
+  docs/总体进度.md                     旧错句 0  新横幅 1  ✓
+
+使用说明：含 '必开' = 是 ⚠；含 'DISP_MM>0 才是压实' = 是 ✓
+
+结论： 有问题 ⚠

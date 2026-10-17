@@ -1,0 +1,66 @@
+[PDF 共 507 页]
+
+==========================================================================
+### 第 61 页
+==========================================================================
+3.4. GLOBALS SECTION 61
+<E type="math">3*fem.A</E>
+<v>0.3</v>
+</material>
+</Globals>
+
+==========================================================================
+### 第 62 页
+==========================================================================
+62 CHAPTER 3. FREE FORMAT INPUT
+3.5 Material Section
+The material section is defined by the Material element. This section defines all the materials
+and material parameters that are used in the model. A material is defined by the material child
+element. This element has two attributes: id, which specifies a number that is used to reference
+the material, and type, which specifies the type of the material. The material element can also
+have a third optional attribute called name, which can be used to identify the material by a text
+description. A material definition might look like this:
+<material id="1" type="neo-Hookean">
+Or, if the optional name attribute is present:
+<material id="2" type="rigid body" name="femur">
+The material parameters that have to be entered depend on the material type. A complete list of
+available materials and their parameters is provided in Chapter 4.
+
+==========================================================================
+### 第 63 页
+==========================================================================
+3.6. MESH SECTION 63
+3.6 Mesh Section
+TheMesh sectioncontainsallthemeshdata,includingnodalcoordinatesandelementconnectiv-
+ity. It has the following sub-sections:
+Nodes defines the nodal coordinates of the mesh
+Elements defines the elements of the mesh. If the name attribute is provided, then this also
+defines an element set. Element sets defined this way are also referred to as parts.
+NodeSet defines a node set
+Edge defines an edge, i.e. a set of line elements
+Surface defines a surface, i.e. a set of facets
+DiscreteSet defines a set of discrete elements (e.g. springs)
+ElementSet defines an element set
+SurfacePair define a surface pair that can be used by a contact definition.
+PartList define a named list of parts (i.e. element sets defined via the Elements tag)
+At least one Nodes section must be defined and one Elements section. The other sections are
+optional. The NodeSet, Edge, Surface, DiscreteSet, ElementSet, SurfacePair, and PartList sec-
+tionsdefinesetsofnodes,edges,facets,discreteelements,elements,surfacepairs,andpartlists,
+respectively, and can be referenced by other sections of the model file. For instance, boundary
+conditions can be defined by referencing the sets to which the boundary condition will be applied.
+3.6.1 Nodes Section
+The Nodes section contains nodal coordinates. It has an optional attribute called name. If this
+attribute is defined, the Nodes section also defines a node set.
+<Nodes [name="<set name>"]>
+The nodes are defined using the node tag which is a child of the Nodes section. Repeat the
+following XML-element for each node:
+<node id="n">x,y,z</node>
+The id attribute is the global identifier of the node and must be a unique number within the model
+definition. Nodal ids must be defined in increasing order, but do not have to be sequential. This id
+is used as a reference in the element connectivity section.
+MultipleNodessectionscanbedefined,buteachnodecanonlybedefinedonce. Forexample:
+<Nodes name="set01">
+<node id="1">0,0,0</node>
+...
+<node id="101">1,1,1</node>
+</Nodes>

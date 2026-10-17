@@ -1,0 +1,66 @@
+节点 4,029
+  tet4     6 组，共 6,482 单元
+      tibia_cort__tet4                           6
+      tibia_spon__tet4                           605
+      tibia_marrow__tet4                         518
+      fibula_spon__tet4                          264
+      talus_spon__tet4                           1766
+      calcaneus_spon__tet4                       3323
+  hex8     5 组，共 1,553 单元
+      tibia_cort__hex8                           231
+      fibula_cort__hex8                          146
+      talus_cort__hex8                           394
+      calcaneus_cort__hex8                       634
+      navicular_spon__hex8                       148
+  penta6   2 组，共 327 单元
+      tibiotalar_tibia__penta6                   145
+      tibiotalar_talus__penta6                   182
+  quad4    10 组，共 135 单元
+      lig_PTFL_talofibular_posterior             6
+      lig_CFL_calcaneofibular                    12
+      lig_ATFL_talofibular_anterior              18
+      lig_PTCL_talocalcaneal_posterior           18
+      lig_SYND_tibiofibular                      20
+      lig_MD1_tibiotalar_post                    8
+      lig_MD2_tibiocalcaneal                     13
+      lig_MD3_tibionavicular                     16
+      lig_MD4_tibiotalar_ant                     8
+      lig_SPRING_calcaneonavicular               16
+
+================================================================================================
+逐域 det(J) 统计（penta6 取中心；hex8 取 8 Gauss 最小）
+================================================================================================
+域(id)           单元          min           p1           中位  <1e-2  <5e-2   <0.1
+hex8:tibia_cort__hex8   231   2.2084e+00   2.3980e+00   4.7754e+00      0      0      0
+hex8:fibula_cort__hex8   146   1.5097e+00   1.6918e+00   4.8319e+00      0      0      0
+hex8:talus_cort__hex8   394   8.6799e-01   1.1000e+00   3.1405e+00      0      0      0
+hex8:calcaneus_cort__hex8   634   1.1119e+00   1.2918e+00   3.0883e+00      0      0      0
+hex8:navicular_spon__hex8   148   2.1132e+00   2.2727e+00   6.8395e+00      0      0      0
+penta6:tibiotalar_tibia__penta6   145   7.7458e-01   1.2311e+00   2.2386e+01      0      0      0
+penta6:tibiotalar_talus__penta6   182   1.2245e+00   1.6621e+00   2.2525e+01      0      0      0
+
+================================================================================================
+最差的 15 个单元（全局）
+================================================================================================
+  penta6:tibiotalar_tibia__penta6 单元#86    det(J)= 7.74584e-01
+  hex8:talus_cort__hex8 单元#96    det(J)= 8.67985e-01
+  hex8:talus_cort__hex8 单元#97    det(J)= 9.18932e-01
+  penta6:tibiotalar_tibia__penta6 单元#87    det(J)= 9.83215e-01
+  hex8:talus_cort__hex8 单元#4     det(J)= 1.02235e+00
+  hex8:talus_cort__hex8 单元#5     det(J)= 1.09695e+00
+  hex8:talus_cort__hex8 单元#9     det(J)= 1.10024e+00
+  hex8:talus_cort__hex8 单元#8     det(J)= 1.10876e+00
+  hex8:calcaneus_cort__hex8 单元#427   det(J)= 1.11192e+00
+  hex8:talus_cort__hex8 单元#109   det(J)= 1.17010e+00
+  hex8:calcaneus_cort__hex8 单元#336   det(J)= 1.18238e+00
+  hex8:calcaneus_cort__hex8 单元#34    det(J)= 1.20087e+00
+  hex8:talus_cort__hex8 单元#13    det(J)= 1.20824e+00
+  penta6:tibiotalar_talus__penta6 单元#125   det(J)= 1.22452e+00
+  hex8:calcaneus_cort__hex8 单元#54    det(J)= 1.24533e+00
+
+================================================================================================
+👉 结论要点
+================================================================================================
+  全局最小 det(J) = 7.74584e-01（penta6:tibiotalar_tibia__penta6）
+  det(J) <= 0 的单元数 = 0
+  0 < det(J) < 1e-2 的单元数 = 0

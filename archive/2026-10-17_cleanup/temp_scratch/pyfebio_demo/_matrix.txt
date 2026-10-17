@@ -1,0 +1,28 @@
+
+=== M1_all_dispx {'FIX_TALUS': 'all', 'DRIVER': 'dispx'} -> FAIL ===
+    Number of time steps completed .................... : 20
+    Elapsed time : 0:00:05
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    ------- converged at time : 1
+
+=== M2_trans_dispx {'FIX_TALUS': 'transverse', 'DRIVER': 'dispx'} -> FAIL ===
+    Number of time steps completed .................... : 20
+    Elapsed time : 0:00:05
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    ------- converged at time : 1
+
+=== M3_all_disp {'FIX_TALUS': 'all', 'DRIVER': 'disp'} -> FAIL ===
+    Number of time steps completed .................... : 20
+    Elapsed time : 0:00:05
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    ------- converged at time : 1
+
+=== M4_trans_disp {'FIX_TALUS': 'transverse', 'DRIVER': 'disp'} -> FAIL ===
+    Number of time steps completed .................... : 20
+    Elapsed time : 0:00:05
+    convergence norms :     INITIAL         CURRENT         REQUIRED
+    convergence summary
+    ------- converged at time : 1

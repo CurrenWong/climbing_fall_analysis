@@ -1,0 +1,126 @@
+============================================================================================
+=== target_cmp.py   6638 B / 156 行
+============================================================================================
+  """双靶稳健性检验：让 tet4 与 penta6 各自跑到 ~600 N，比较【应力】与【接触面积】。
+  
+  要点：刚度差 2.2 倍只影响"需要多大位移"；**靶子是否也差 2 倍**才决定
+  之前的验证结论能不能用。
+  """
+  import os
+  import re
+  import sys
+  import textwrap
+  import inspect
+  import subprocess
+  import h5py
+  import numpy as np
+  from pathlib import Path
+  from scipy.spatial import cKDTree
+  
+  ROOT = Path(r"D:\Project\climbing_fall_analysis")
+  W = ROOT / "temp/thums/febio_lig"
+  PY = ROOT / ".venv/Scripts/python.exe"
+  MODEL = ROOT / "scripts/ankle_fe/ankle_lig_feb.py"
+  sys.path.insert(0, str(Path(__file__).parent))
+  from pt_tri import dist_point_to_tris
+  
+  AX = np.array([0.8153, 0.135, 0.5631])
+  
+  # ---------- pyfebio 补丁 ----------
+  ...
+        f"{'面积@0.20':>11} {'面积@0.50':>11} {'接触面':>11}")
+  print("-" * 92)
+  for elem, d in (("tet4", 0.40), ("prism", 1.20)):
+      rc, out = run(elem, d)
+      if rc != 0:
+          print(f"{elem:8s} {d:6.2f} rc={rc} 失败")
+          continue
+      m = measure(elem)
+      print(f"{elem:8s} {d:6.2f} {m['F']:8.1f} {m['umax']:8.3f} "
+            f"{m['vm_max']:11.3f} {m['area020']:11.1f} {m['area050']:11.1f} "
+            f"{str(m['nface']):>11}")
+  print("\n吴恺靶子: 最大接触应力 3.74 MPa / 接触面积 335.5 mm²")
+============================================================================================
+=== final_600.py   6353 B / 152 行
+============================================================================================
+  """跑到 600 N 档（prism），并算接触面积 + 软骨应力，完成双靶对照。
+  
+  只用 Python 驱动，不经 .bat。
+  """
+  import os
+  import re
+  import sys
+  import textwrap
+  import inspect
+  import subprocess
+  import h5py
+  import numpy as np
+  from pathlib import Path
+  from scipy.spatial import cKDTree
+  
+  ROOT = Path(r"D:\Project\climbing_fall_analysis")
+  W = ROOT / "temp/thums/febio_lig"
+  PY = ROOT / ".venv/Scripts/python.exe"
+  MODEL = ROOT / "scripts/ankle_fe/ankle_lig_feb.py"
+  sys.path.insert(0, str(Path(__file__).parent))
+  from pt_tri import dist_point_to_tris
+  
+  env = dict(os.environ)
+  env.update(dict(MATSET="WK", LIG_MODE="shell", DRIVER="disp",
+                  TOPFIX="lateral", TRUNC_MM="60", FIX_TALUS="all",
+                  CART_ELEM="prism", TIME_STEPS="30", DISP_MM="1.20"))
+  ...
+  aT = area(AT)
+  tree = cKDTree(AA.mean(axis=1))
+  _, cand = tree.query(AT.mean(axis=1), k=min(40, len(AA)))
+  dmin = np.array([dist_point_to_tris(AT.mean(axis=1)[k],
+                                      AA[cand[k]].reshape(-1, 3, 3)).min()
+                   for k in range(len(AT))])
+  print("\n接触面积：")
+  for tol in (0.05, 0.10, 0.20, 0.50):
+      mm_ = dmin < tol
+      print(f"  间隙<{tol:5.2f} mm -> {mm_.sum():4d}/{len(dmin)} 面, "
+            f"{aT[mm_].sum():7.1f} mm²")
+  print("\n吴恺靶子: 最大接触应力 3.74 MPa / 接触面积 335.5 mm²")
+============================================================================================
+=== gap_area.py   3236 B / 82 行
+============================================================================================
+  """无定向假设的间隙测量：talus 外面稠密采样 → 到 tibia 外面的**无符号**距离，按面积加权。"""
+  import re
+  from pathlib import Path
+  
+  import numpy as np
+  
+  from closest_vec import closest_vec
+  
+  W = Path(r"D:\Project\climbing_fall_analysis\temp\thums\febio")
+  
+  
+  def load(tag):
+      txt = (W / f"_{tag}.feb").read_text(encoding="latin-1")
+      XYZ = {}
+      for m in re.finditer(
+              r'<node id="(\d+)">\s*([-\d.eE+]+)\s*,\s*([-\d.eE+]+)\s*,\s*([-\d.eE+]+)', txt):
+          XYZ[int(m.group(1))] = np.array([float(m.group(2)), float(m.group(3)),
+                                           float(m.group(4))])
+      sf = {}
+      for m in re.finditer(r'<Surface name="([^"]+)"[^>]*>(.*?)</Surface>', txt, re.S):
+          sf[m.group(1)] = [tuple(int(y) for y in s.split(",")) for s in
+                            re.findall(r"<[a-z0-9]+ id=[^>]*>\s*([\d,]+)\s*</", m.group(2))]
+      return XYZ, sf
+  
+  
+  def tri_area(T):
+  ...
+      print("\n" + "=" * 76)
+      print(f"{tag} {lbl}: tibia 面 {len(Tti)} 三角 {Ati:.0f} mm² / "
+            f"talus 面 {len(Tta)} 三角 {Ata:.0f} mm²")
+      print("=" * 76)
+      print(f"  采样 {len(cen):,} 点，面积 {ar.sum():.0f} mm²")
+      print(f"  面积加权间隙（无符号）：")
+      for th in (0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1.0, 2.0):
+          A = ar[d < th].sum()
+          print(f"    gap < {th:<5.2f} mm : {A:>8.1f} mm² ({A/ar.sum()*100:5.1f}%)")
+      print(f"  统计：min {d.min():.4f}  1% {np.percentile(d,1):.4f}  "
+            f"中位 {np.median(d):.4f}  max {d.max():.4f} mm")
+      print(f"  ⇒ 参照 Anderson 生理接触面积 ≈ 300 mm²")

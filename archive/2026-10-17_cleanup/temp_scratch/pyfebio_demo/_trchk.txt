@@ -1,0 +1,19 @@
+韧带                                 杆数       最短       最长    零长    重复
+------------------------------------------------------------------------------
+PTFL_talofibular_posterior          3   12.812   14.363     0     0
+CFL_calcaneofibular                 5   22.150   32.374     0     0
+ATFL_talofibular_anterior           4   33.464   34.992     0     0
+PTCL_talocalcaneal_posterior       13    6.647   34.804     0     0
+SYND_tibiofibular                  10   16.893   37.522     0     0
+MD1_tibiotalar_post                 3   24.239   28.714     0     0
+MD2_tibiocalcaneal                  3   23.583   28.537     0     0
+MD3_tibionavicular                  3   37.679   38.772     0     0
+MD4_tibiotalar_ant                  3   26.594   28.852     0     0
+SPRING_calcaneonavicular            6   16.877   27.436     0     0
+
+零长杆合计 0
+全部杆 53
+跨韧带重复的 (a,b) 对: 0
+
+=== 检查是否有杆的两端落在同一骨 ===
+两端同骨的杆: 0

@@ -1,0 +1,54 @@
+=== nodesets ===
+  all                       4029 项  id 0..4028
+  calcaneus_bottom_ns        194 项  id 3..2739
+  fibula_top_ns               55 项  id 1483..2022
+  navicular_all_ns           237 项  id 0..2349
+  talus_low_ns               323 项  id 66..3427
+  tibia_top_ns               165 项  id 1236..1911
+
+=== .feb 的 <Surface> ===
+  tibia_top                    114 面
+  fibula_top                   33 面
+  surf_tibiotalar_tibia        143 面
+  surf_tibiotalar_talus        178 面
+  tiesurf_tibiotalar_tibia     154 面
+  bonesurf_tibiotalar_tibia    114 面
+  tiesurf_tibiotalar_talus     204 面
+  bonesurf_tibiotalar_talus    118 面
+
+=== 胫骨/腓骨 截面（z 越高越靠近截断顶）===
+
+  tibia_cort__hex8: 490 节点  z -691.70..-640.28
+     顶面下   1.0 mm：凸包面积    152.0 mm²（8 节点）
+     顶面下   3.0 mm：凸包面积    263.6 mm²（20 节点）
+     顶面下   6.0 mm：凸包面积    661.3 mm²（52 节点）
+     顶面下  12.0 mm：凸包面积    694.5 mm²（98 节点）
+
+  tibia_spon__tet4: 204 节点  z -689.03..-658.36
+     顶面下   1.0 mm：凸包面积      0.0 mm²（1 节点）
+     顶面下   3.0 mm：凸包面积     73.8 mm²（6 节点）
+     顶面下   6.0 mm：凸包面积    660.9 mm²（26 节点）
+     顶面下  12.0 mm：凸包面积    835.5 mm²（73 节点）
+
+  tibia_marrow__tet4: 174 节点  z -668.20..-639.67
+     顶面下   1.0 mm：凸包面积    142.8 mm²（5 节点）
+     顶面下   3.0 mm：凸包面积    346.3 mm²（16 节点）
+     顶面下   6.0 mm：凸包面积    484.4 mm²（40 节点）
+     顶面下  12.0 mm：凸包面积    520.6 mm²（75 节点）
+
+  fibula_cort__hex8: 304 节点  z -714.85..-644.15
+     顶面下   1.0 mm：凸包面积     70.1 mm²（11 节点）
+     顶面下   3.0 mm：凸包面积    115.3 mm²（20 节点）
+     顶面下   6.0 mm：凸包面积    115.3 mm²（20 节点）
+     顶面下  12.0 mm：凸包面积    125.7 mm²（40 节点）
+
+  fibula_spon__tet4: 112 节点  z -713.31..-669.48
+     顶面下   1.0 mm：凸包面积      2.7 mm²（3 节点）
+     顶面下   3.0 mm：凸包面积     83.0 mm²（10 节点）
+     顶面下   6.0 mm：凸包面积     90.3 mm²（11 节点）
+     顶面下  12.0 mm：凸包面积    141.0 mm²（26 节点）
+
+=== 对照：模型报的加载面 ===
+  [模型输出] 顶面投影面积：胫骨 47.8 mm²，腓骨 12.7 mm²
+  真实胫骨远端截面参考：≈ 250~450 mm²
+  ⇒ 若凸包面积 >> 47.8，说明 BC 只作用在截面一小片

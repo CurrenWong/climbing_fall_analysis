@@ -1,0 +1,7 @@
+配置                            rc     |F|(N)     间距 t=0     间距 t=1         Δ  判定
+────────────────────────────────────────────────────────────────────────────────────────────────────
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\gap_verdict.py", line 81, in <module>
+    A = np.array([cc[i] for i in dm["tibiotalar_tibia"]])
+                                 ~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'tibiotalar_tibia'

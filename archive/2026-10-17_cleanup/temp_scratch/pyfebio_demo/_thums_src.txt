@@ -1,0 +1,72 @@
+=== 大 .k / .key 文件 ===
+       0.6 MB  model\AM50_V71_Occupant\THUMS_model\Output_setting_AM50_V71_Occ_202411.k
+     230.0 MB  model\AM50_V71_Occupant\THUMS_model\THUMS_AM50_V71_Occupant_202411.k
+
+=== 含 '8110' 的文本文件（前 200 KB）===
+  ANKLE_LIG_TODO.md
+  FE_PIPELINE_TODO.md
+  docs\踝关节FE建模交接.md
+  scripts\ankle_fe\ligaments.py
+  scripts\ankle_fe\thums_extract.py
+  temp\opensim_fe\parts\parts_index.json
+  temp\opensim_fe\parts\_all_names.txt
+  temp\opensim_fe\shells\shell_pid_stats.csv
+  temp\opensim_fe\shells\shell_pid_stats.json
+  temp\opensim_fe\shells\shell_sections.json
+  temp\pyfebio_demo\diag_jac.py
+  temp\pyfebio_demo\find_thums_src.py
+  temp\pyfebio_demo\lig10_mat2.py
+  temp\pyfebio_demo\lig12_mat3.py
+  temp\pyfebio_demo\lig13_share.py
+  temp\pyfebio_demo\lig14_coincide.py
+  temp\pyfebio_demo\lig15_shared_parts.py
+  temp\pyfebio_demo\lig16_rigid.py
+  temp\pyfebio_demo\lig17_infeb.py
+  temp\pyfebio_demo\lig18_used.py
+  temp\pyfebio_demo\lig2_attach.py
+  temp\pyfebio_demo\lig6_map.py
+  temp\pyfebio_demo\lig8_mat.py
+  temp\pyfebio_demo\mem_closeout.py
+  temp\pyfebio_demo\probe_atfl.py
+  temp\pyfebio_demo\probe_liggeom.py
+
+=== temp/thums 前 40 项 ===
+      _k1.npz                                            500571
+      _pd02.npz                                          483003
+      _pm1.npz                                           482837
+      _pm4.npz                                          1266018
+      _pt15.npz                                          467389
+      _v2k1.npz                                          486545
+      bone_materials.json                                 13247
+  DIR cart_m1                                                 0
+  DIR cart_m3                                                 0
+  DIR cart_m4                                                 0
+  DIR cart_new                                                0
+  DIR cart_t3                                                 0
+      cartilage.json                                       3275
+      cartilage.json.bak-default                           3275
+      cartilage_mesh.npz                                 459208
+      cartilage_mesh.npz.bak-default                     459208
+      cartilage_mesh_hex.npz                             666748
+      cartilage_mesh_patch.npz                           571114
+      cartilage_mesh_patch_m1.npz                        483003
+      cartilage_mesh_patch_m2.npz                        645033
+      cartilage_mesh_patch_m3.npz                        916502
+      cartilage_mesh_patch_m4.npz                       1266018
+      cartilage_mesh_t0d.npz                             486770
+      cartilage_mesh_t1d.npz                             668326
+  DIR febio                                                   0
+  DIR febio_lig                                               0
+      febio_manual.txt                                   946620
+      joint_gaps.json                                      2606
+      ligament_results.txt                                 3556
+      ligaments.json                                       3288
+      ligaments.npz                                       20686
+      mat_bone_AM50_V71_Occ_fracture.k                    20105
+      mat_bone_AM50_V71_Occ_no_fracture.k                 20105
+  DIR r1                                                      0
+      summary.json                                        15648
+      thums_lowerlimb.npz                               1042242
+      thums_lowerlimb.npz.bak-preLIG                    1000900
+      thums_lowerlimb_r1.npz                            7687090
+      verify.json                                         13985

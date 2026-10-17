@@ -1,0 +1,66 @@
+[PDF 共 507 页]
+
+==========================================================================
+### 第 136 页
+==========================================================================
+136 CHAPTER 3. FREE FORMAT INPUT
+Here, A is the linear acceleration of the moving frame, W is the angular velocity of the moving
+frame, measured in the moving frame (i.e. W = RTw,where w is the angular velocity in the fixed
+frame), and v’ is the velocity of the material point, measured in the moving frame.
+The moving frame is defined via the two vectors, the angular velocity of the rotating frame w,
+and the linear acceleration of the rotating frame’s origin A. The components of both vectors may
+be defined via load curves to make them time-dependent.
+parameter Description default
+wx x-component of angular velocity 0
+wy y-component of angular velocity 0
+wz x-component of angular velocity 0
+ax x-component of linear acceleration 0
+ay y-component of linear acceleration 0
+az y-component of linear acceleration 0
+Note that if you wish to include the effect of gravity, do not add a separate body force load.
+Instead, modify the linear acceleration to include gravity: a = A−g.
+Example:
+<Loads>
+<body_load type="moving frame">
+<wx>0</wx>
+<wy>0</wy>
+<wz lc="1">1</wz>
+<ax>0</ax>
+<ay>0</ay>
+<az>0</az>
+</body_load>
+</Loads>
+3.13.3.7 Mass Damping
+The “mass damping” body load applies a body force that is proportional to the linear momentum
+density p = ρv, where ρ is the material density and v the velocity. An additional scale factor can
+be used to control the strength of the force, f = Cp.
+parameter Description default
+C damping coefficient 0
+3.13.3.8 Fluid Centrifugal Force
+A fluid centrifugal body force per mass b = ω2re may be used for bodies undergoing steady-
+r
+staterotationwithangularspeedω aboutarotationaxisdirectedalongnandpassingthroughthe
+rotation center c. Here, r represents the distance of each material point from the axis of rotation,
+ande istheradialunitvectorfromtheaxisofrotation,bothofwhicharecalculatedinternallyfrom
+r
+the knowledge of n and c.
+
+==========================================================================
+### 第 137 页
+==========================================================================
+3.13. LOADS SECTION 137
+<body_load type="fluid centrifugal force">
+<angular_speed>1.0</angular_speed>
+<rotation_axis>0.707,0.707,0</rotation_axis>
+<rotation_center>0,0,0</rotation_center>
+</body_load>
+3.13.3.9 Fluid Moving Frame
+This body load is identical to the moving frame load described in 3.13.3.6, but applied to a fluid
+domain.
+parameter Description default
+wx x-component of angular velocity 0
+wy y-component of angular velocity 0
+wz x-component of angular velocity 0
+ax x-component of linear acceleration 0
+ay y-component of linear acceleration 0
+az y-component of linear acceleration 0

@@ -1,0 +1,6 @@
+
+--- A_iso (type=isotropic elastic) rc=3221225477 FAILED ---
+
+--- B_iso_area (type=isotropic elastic) rc=3221225477 FAILED ---
+
+--- C_iso_truss (type=isotropic elastic) rc=3221225477 FAILED ---

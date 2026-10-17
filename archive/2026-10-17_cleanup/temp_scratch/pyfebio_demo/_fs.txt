@@ -1,0 +1,23 @@
+ANKLE_FIX_TODO +906 字符
+日记 +1906 字符
+
+==========================================================================
+最终校验（解码字节；⚠️ 与 getsize 的差 = 行数 CR）
+==========================================================================
+  MEMORY.md                             10231 B ✅
+  ankle-fe-criteria.md                   6197 B
+  踝FE可用模型使用说明.md                        16391 B
+  ANKLE_FIX_TODO.md                     32009 B
+  LEARNINGS.md                         197783 B
+  ERRORS.md                             35422 B
+  ligaments.py                          10317 B
+  ankle_lig_feb.py                      91869 B
+  check_c2.py                           13108 B
+  lig_strain.py                          7173 B
+  AST ✓ ×5
+  LEARNINGS.md: 93 条，重号 无 ✓
+  ERRORS.md: 22 条，重号 无 ✓
+  使用说明关键内容缺失：无 ✓
+  MEMORY 关键内容缺失：无 ✓
+
+结论： PASS ✅

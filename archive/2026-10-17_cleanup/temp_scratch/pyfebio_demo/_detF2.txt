@@ -1,0 +1,44 @@
+节点 3885
+  tibia_cort__tet4                   tet4        6
+  tibia_cort__hex8                   hex8      231
+  tibia_spon__tet4                   tet4      605
+  tibia_marrow__tet4                 tet4      518
+  fibula_cort__hex8                  hex8      146
+  fibula_spon__tet4                  tet4      264
+  talus_cort__hex8                   hex8      394
+  talus_spon__tet4                   tet4     1766
+  calcaneus_cort__hex8               hex8      634
+  calcaneus_spon__tet4               tet4     3323
+  navicular_spon__hex8               hex8      148
+  tibiotalar_tibia__tet4             tet4      458
+  tibiotalar_talus__tet4             tet4      607
+  lig_PTFL_talofibular_posterior     quad4       6
+  lig_CFL_calcaneofibular            quad4      12
+  lig_ATFL_talofibular_anterior      quad4      18
+  lig_PTCL_talocalcaneal_posterior   quad4      18
+  lig_SYND_tibiofibular              quad4      20
+  lig_MD1_tibiotalar_post            quad4       8
+  lig_MD2_tibiocalcaneal             quad4      13
+  lig_MD3_tibionavicular             quad4      16
+  lig_MD4_tibiotalar_ant             quad4       8
+  lig_SPRING_calcaneonavicular       quad4      16
+
+读 ankle_lig_WK.xplt (5.5 MB)
+末帧 |u|max = 0.4436 mm
+
+========================================================================================
+域                                    类型     单元     det min         p1         p5     负个数
+----------------------------------------------------------------------------------------
+fibula_cort__hex8                  hex8    146    -1.34099    0.35649    0.99577       2
+tibiotalar_tibia__tet4             tet4    458     0.52315    0.81916    0.93934       0
+tibiotalar_talus__tet4             tet4    607     0.72877    0.86663    0.93565       0
+tibia_cort__hex8                   hex8    231     0.89721    0.99028    0.99729       0
+calcaneus_cort__hex8               hex8    634     0.95747    0.99887    0.99972       0
+navicular_spon__hex8               hex8    148     0.97021    0.99909    0.99956       0
+talus_cort__hex8                   hex8    394     0.99344    0.99687    0.99904       0
+tibia_cort__tet4                   tet4      6     0.99960    0.99961    0.99965       0
+tibia_spon__tet4                   tet4    605     0.99981    0.99984    0.99988       0
+tibia_marrow__tet4                 tet4    518     0.99983    0.99990    0.99996       0
+talus_spon__tet4                   tet4   1766     0.99986    0.99991    0.99996       0
+fibula_spon__tet4                  tet4    264     0.99987    0.99991    0.99993       0
+calcaneus_spon__tet4               tet4   3323     0.99995    0.99998    0.99999       0

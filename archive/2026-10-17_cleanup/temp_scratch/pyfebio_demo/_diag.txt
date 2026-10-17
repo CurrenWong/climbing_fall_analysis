@@ -1,0 +1,69 @@
+==========================================================================
+### E1_ts40
+  <solver>: 无
+  失败/上限类消息（末尾 6 条）:
+    ------- failed to converge at time : 0.470563
+    ------- failed to converge at time : 0.469134
+    ------- failed to converge at time : 0.467704
+    ------- failed to converge at time : 0.466275
+    ------- failed to converge at time : 0.464846
+    ------- failed to converge at time : 0.463417
+  最后一个求解块（t=0.461987）:
+    0.461987
+    	stiffness updates             = 0
+    	right hand side evaluations   = 34
+    	stiffness matrix reformations = 4
+    	step from line search         = 0.068344
+    	convergence norms :     INITIAL         CURRENT         REQUIRED
+    	   residual            2.057646e+08    1.096797e-01    0.000000e+00 
+    	   energy              4.813109e+03    1.685164e-04    4.813109e+00 
+    	   displacement        1.150661e+00    7.303046e-07    1.082299e-04 
+    
+    ........................ augmentation # 3
+     sliding interface # 2
+==========================================================================
+### E2_A1A2
+  <solver>: 无
+  失败/上限类消息（末尾 6 条）:
+    ------- failed to converge at time : 0.570638
+    ------- failed to converge at time : 0.567764
+    ------- failed to converge at time : 0.564889
+    ------- failed to converge at time : 0.562015
+    ------- failed to converge at time : 0.559141
+    ------- failed to converge at time : 0.556266
+  最后一个求解块（t=0.553392）:
+    0.553392
+    	stiffness updates             = 0
+    	right hand side evaluations   = 12
+    	stiffness matrix reformations = 3
+    	step from line search         = 1.000000
+    	convergence norms :     INITIAL         CURRENT         REQUIRED
+    	   residual            5.566410e+08    4.643223e-04    0.000000e+00 
+    	   energy              1.302075e+04    2.934126e-05    1.302075e+01 
+    	   displacement        3.467169e+00    1.219937e-05    3.010286e-04 
+    
+    ........................ augmentation # 3
+     sliding interface # 2
+==========================================================================
+### E3_a2_only
+  <solver>: 无
+  失败/上限类消息（末尾 6 条）:
+    ------- failed to converge at time : 0.964215
+    ------- failed to converge at time : 0.960331
+    ------- failed to converge at time : 0.956446
+    ------- failed to converge at time : 0.952562
+    ------- failed to converge at time : 0.948678
+    ------- failed to converge at time : 0.944793
+  最后一个求解块（t=0.940909）:
+    0.940909
+    	stiffness updates             = 0
+    	right hand side evaluations   = 4
+    	stiffness matrix reformations = 3
+    	step from line search         = 1.000000
+    	convergence norms :     INITIAL         CURRENT         REQUIRED
+    	   residual            9.970567e+08    1.649871e-02    0.000000e+00 
+    	   energy              2.332342e+04    1.084425e-03    2.332342e+01 
+    	   displacement        7.014266e+00    3.322274e-04    7.063839e-04 
+    
+    convergence summary
+        number of iterations   : 3

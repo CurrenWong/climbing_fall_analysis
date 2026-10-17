@@ -1,0 +1,9 @@
+同网格、同位移 0.1472 mm 的 p 收敛对比
+      软骨单元  rc      F(N)   |u|max    状态数          备注
+--------------------------------------------------------------------
+      tet4   0     259.3    0.242     21        (基准)
+           [('tibiotalar_tibia', 'tet4', '456', '6'), ('tibiotalar_talus', 'tet4', '596', '16')] []
+     prism   0     116.9    0.244     21       ×0.45
+           [('tibiotalar_tibia', 'penta6', '140', '14'), ('tibiotalar_talus', 'penta6', '175', '29')] []
+   prism15   1         -        -      -          失败
+           [('tibiotalar_tibia', 'penta15', '104', '50'), ('tibiotalar_talus', 'penta15', '128', '76')] ['[prism15] 新增边中点 1,302 个；软骨改 penta15；节点总数 5,187']

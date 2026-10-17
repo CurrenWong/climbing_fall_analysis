@@ -1,0 +1,113 @@
+[mode] MATSET=WK LIG_MODE=shell TIME_STEPS=20 FIX_TALUS=transverse FORCE=600.0N
+[mode] BONES=all
+[mode] NO_CONTACT=False LIG_SUB=all
+[mode] FIX_NAVICULAR=True
+[mode] DRIVER=dispx DISP_MM=1.6
+[mode] TRUNC_MM=60.0
+[data] npz   = D:\Project\climbing_fall_analysis\temp\thums\thums_lowerlimb.npz
+[data] carts = temp\thums\cart_m1
+[subtalar] 开关=auto 新格式键=True ⇒ 接入（CARTS=['tibiotalar_tibia', 'tibiotalar_talus', 'subtalar_talus', 'subtalar_calcaneus']）
+[cart] ★ 新格式（{j}_nodes + {j}_elems + is_offset） ⇒ TIE=1
+  [cart] 索引约定：**负索引** -k ⇒ {j}_nodes 的第 k 行（0-based k-1）
+[cart] tibiotalar_tibia: 154 输入 -> 154 单元 / 138 节点（外表面 69）｜扭转修正 0
+[cart] tibiotalar_talus: 204 输入 -> 204 单元 / 166 节点（外表面 83）｜扭转修正 0
+[cart] subtalar_talus: 641 输入 -> 641 单元 / 416 节点（外表面 208）｜扭转修正 0
+[cart] subtalar_calcaneus: 809 输入 -> 809 单元 / 494 节点（外表面 247）｜扭转修正 0
+[trunc] 截断到 60.0 mm 内：剔除 23,388 单元，剩 9,843 单元 / 3,588 节点
+骨+软骨：单元 9,843，节点 3,588
+韧带：10 条，单元 135，并入节点后总计 3,725
+其中 offset（软骨外表面）节点 607
+合并后节点 4,939
+[axis] 截断后轴=[0.8153 0.135  0.5631] 全网格轴=[0.6765 0.1363 0.7237] 夹角=12.18deg ⇒ 采用 **全网格轴**（AXIS_SRC=full）
+加载轴（胫骨->距骨）= [0.6765 0.1363 0.7237]
+[axis] argmax(|axis|) = 2 ⇒ DRIVER=dispx 将 prescribe 'xyz'[2] = z（力控制则沿该轴加载）
+[align] ALIGN_AXIS=1：模型已旋转，加载轴 -> +z（旋转角 43.64deg）；输出坐标/位移均在旋转后坐标系
+加载轴（胫骨->距骨）= [0. 0. 1.]  [已对齐 +z]
+[load] LOAD_SIGN=-1 ⇒ 载荷方向 = [-0. -0. -1.]（LAX=[0. 0. 1.]）
+[load] 该方向在关节处表现为：★拉伸(把关节拉开)★
+[load] ⚠️ 警告：当前是**拉伸**方向 ⇒ 反力由韧带承担、量级虚低。要压实关节请设 LOAD_SIGN=+1（压缩侧 −1.0 mm ⇒ −608.82 N，全程 NORMAL）。
+韧带专属节点（转动自由度原本自由）: 137
+  [detJ自检·完整采样] worst-det(J) min = -1.5019e+01；≤0 的单元 220 个、0<x≤1e-2 的 2 个
+  [detJ自检·完整采样] 🚨 有 222 个楔形在顶点附近翻转 ⇒ 局部应力不可信（σ_max 尖峰来源）；**不可剔除**（在关节接触面上）⇒ 走 cart_patch.py 局部重铺
+
+=== Jacobian 自检 + 朝向修正（det(J) 必须 > 0）===
+  OK  tibia_cort             tet4   保留      6 剔除    0  det(J) min=2.2151e+00
+  OK  tibia_cort             hex8   保留    231 剔除    0  det(J) min=2.2084e+00
+  OK  tibia_spon             tet4   保留    605 剔除    0  det(J) min=2.8144e+01
+  OK  tibia_marrow           tet4   保留    518 剔除    0  det(J) min=5.3135e+01
+  OK  fibula_cort            hex8   保留    146 剔除    0  det(J) min=1.5097e+00
+  OK  fibula_spon            tet4   保留    264 剔除    0  det(J) min=2.3857e+01
+  OK  talus_cort             hex8   保留    394 剔除    0  det(J) min=8.6799e-01
+  OK  talus_spon             tet4   保留  1,766 剔除    0  det(J) min=2.3567e+01
+  OK  calcaneus_cort         hex8   保留    634 剔除    0  det(J) min=1.1119e+00
+  OK  calcaneus_spon         tet4   保留  3,323 剔除    0  det(J) min=1.7034e+01
+  OK  navicular_spon         hex8   保留    148 剔除    0  det(J) min=2.1132e+00
+  !!  tibiotalar_tibia       penta6 保留    145 剔除    9  det(J) min=1.9085e-01
+  !!  tibiotalar_talus       penta6 保留    182 剔除   22  det(J) min=2.3914e-03
+  !!  subtalar_talus         penta6 保留    595 剔除   46  det(J) min=3.0059e-03
+  !!  subtalar_calcaneus     penta6 保留    702 剔除  107  det(J) min=1.3175e-02
+  翻转修正 1 个；仍无法修正而剔除 184 个
+  韧带壳退化剔除 0 个
+  [tie] tibiotalar_tibia: primary(软骨底面) 143 面 / secondary(骨关节面, 坐标匹配≤0.05) 114 面
+  [tie] tibiotalar_talus: primary(软骨底面) 178 面 / secondary(骨关节面, 坐标匹配≤0.05) 118 面
+  [tie] subtalar_talus: primary(软骨底面) 587 面 / secondary(骨关节面, 坐标匹配≤0.05) 257 面
+  [tie] subtalar_calcaneus: primary(软骨底面) 683 面 / secondary(骨关节面, 坐标匹配≤0.05) 299 面
+  接触面 tibiotalar_tibia: 143 面
+  接触面 tibiotalar_talus: 178 面
+  接触面 subtalar_talus: 587 面
+  接触面 subtalar_calcaneus: 683 面
+外表面顶/底：胫骨顶 114 / 腓骨顶 33 / 跟骨底 147
+  [area自检] 胫骨顶：投影 555.5 / 真实 2148.3 mm² => 比 0.259 ✅
+  [area自检] 腓骨顶：投影 108.3 / 真实 745.7 mm² => 比 0.145 🚨
+  [area自检] 🚨 投影/真实 = 0.145 越界（应 0.2~1.0） ⇒ 面积不可信，禁止用于力控 traction！
+顶面投影面积：胫骨 555.5 mm²，腓骨 108.3 mm² => 腓骨分担 16.3% 载荷
+读数数据 -> D:\Project\climbing_fall_analysis\temp\thums\febio_lig\lig_read_WK.npz
+
+写出 D:\Project\climbing_fall_analysis\temp\thums\febio_lig\ankle_lig_WK.feb（1040 KB）  单元：骨+软骨 9659，韧带 135，共 9794
+
+FEBio rc=1  用时 14.5s
+  	convergence norms :     INITIAL         CURRENT         REQUIRED
+  	   residual            1.050088e+21    1.303960e+17    0.000000e+00 
+  	   energy              2.303178e+13    1.881233e+10    2.303178e+10 
+  	   displacement        1.055424e+00    1.075468e+05    9.999433e+01 
+   8
+  
+   *************************************************************************
+   *                                ERROR                                  *
+   * 2 negative jacobians detected.                                        *
+   *************************************************************************
+  
+  
+  ------- failed to converge at time : 0.00454545
+  
+  Max. nr of retries reached.
+  
+  
+  
+   N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+  
+  	Number of time steps completed .................... : 0
+  
+  	Total number of equilibrium iterations ............ : 7
+  
+  	Average number of equilibrium iterations .......... : 0
+  
+  	Total number of right hand evaluations ............ : 10
+  
+  	Total number of stiffness reformations ............ : 2
+  
+  
+   L I N E A R   S O L V E R   S T A T S
+  
+  	Total calls to linear solver ........ : 82
+  
+  	Avg iterations per solve ............ : 1
+  
+  	Time in linear solver: 0:00:07
+  
+   Peak memory  : 197.6 MB
+  
+   Elapsed time : 0:00:14
+  
+  
+   E R R O R   T E R M I N A T I O N

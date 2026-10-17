@@ -1,0 +1,8 @@
+[E2p_fix] rc=1 NORMAL=False 负J=0 失收敛t=['0.152653'] F=None
+[E1p_fix] rc=1 NORMAL=False 负J=15 失收敛t=['0.273059'] F=None
+[E0_fix] rc=0 NORMAL=True 负J=0 失收敛t=— F=656.0510941056525
+
+=== 汇总（对照：E0=592.6020 / E1p 0.645 / E2p 0.761）===
+  E2p_fix    rc=1 NORMAL=False F=None
+  E1p_fix    rc=1 NORMAL=False F=None
+  E0_fix     rc=0 NORMAL=True F=656.0510941056525

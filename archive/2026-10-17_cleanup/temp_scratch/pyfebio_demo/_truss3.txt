@@ -1,0 +1,7 @@
+
+=== baseline rc=0 OK ===
+    读 xplt 失败: AttributeError module 'pyfebio' has no attribute 'xplt'
+
+=== mdata_area5 rc=1 FAIL ===
+    *                                ERROR                                  *
+    读 xplt 失败: AttributeError module 'pyfebio' has no attribute 'xplt'

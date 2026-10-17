@@ -1,0 +1,2836 @@
+===========================================================================
+         ________    _________   _______       __     _________            
+        |        |\ |        |\ |       \\    |  |\  /         \\          
+        |    ____|| |    ____|| |    __  ||   |__|| |    ___    ||         
+        |   |\___\| |   |\___\| |   |\_| ||    \_\| |   //  \   ||         
+        |   ||__    |   ||__    |   ||_| ||   |  |\ |  ||    |  ||         
+        |       |\  |       |\  |         \\  |  || |  ||    |  ||         
+        |    ___||  |    ___||  |    ___   || |  || |  ||    |  ||         
+        |   |\__\|  |   |\__\|  |   |\__|  || |  || |  ||    |  ||         
+        |   ||      |   ||___   |   ||__|  || |  || |   \\__/   ||         
+        |   ||      |        |\ |          || |  || |           ||         
+        |___||      |________|| |_________//  |__||  \_________//          
+                                                                           
+      F I N I T E   E L E M E N T S   F O R   B I O M E C H A N I C S      
+                                                                           
+  version 4.13.0
+  FEBio is a registered trademark.                                         
+  copyright (c) 2006-2026 - All rights reserved                            
+                                                                           
+===========================================================================
+
+Starting without configuration file
+Default linear solver: pardiso
+Reading file ankle_lig_WK.feb ...SUCCESS!
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * 6 isolated vertices removed.                                          *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_tibia" has 9 invalid facets.          *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_talus" has 22 invalid facets.         *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * Zero mass for rigid body "RIGIDground."                               *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_tibia" has 9 invalid facets.          *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * The surface "tiesurf_tibiotalar_talus" has 22 invalid facets.         *
+ * The model may not run correctly.                                      *
+ *************************************************************************
+
+
+
+ *************************************************************************
+ * Selecting linear solver pardiso                                       *
+ *************************************************************************
+
+AUTO STEPPER: decreasing time step, dt = 0.05
+
+
+===== beginning time step 1 : 0.05 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 469799
+ 1
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454771e+08    1.146341e+02    0.000000e+00 
+	   energy              3.431621e+03    5.778845e-01    3.431621e+00 
+	   displacement        1.507812e+00    1.507812e+00    1.507812e-04 
+ 2
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454771e+08    4.440194e+01    0.000000e+00 
+	   energy              3.431621e+03    2.713377e-01    3.431621e+00 
+	   displacement        1.507812e+00    2.449599e-02    1.470905e-04 
+ 3
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454771e+08    1.173597e+00    0.000000e+00 
+	   energy              3.431621e+03    2.240894e-02    3.431621e+00 
+	   displacement        1.507812e+00    3.360752e-03    1.466613e-04 
+ 4
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454771e+08    2.498262e-01    0.000000e+00 
+	   energy              3.431621e+03    8.076209e-04    3.431621e+00 
+	   displacement        1.507812e+00    3.524929e-04    1.473763e-04 
+ 5
+ Nonlinear solution status: time= 0.05
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454771e+08    8.516028e-02    0.000000e+00 
+	   energy              3.431621e+03    2.131372e-04    3.431621e+00 
+	   displacement        1.507812e+00    9.871785e-05    1.477794e-04 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 5
+    number of reformations : 0
+
+------- converged at time : 0.05
+
+
+===== beginning time step 2 : 0.1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 469673
+ 1
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454702e+08    3.240429e-01    0.000000e+00 
+	   energy              3.402438e+03    3.303852e-03    3.402438e+00 
+	   displacement        6.660826e-01    6.660826e-01    6.660826e-05 
+ 2
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454702e+08    7.536101e-02    0.000000e+00 
+	   energy              3.402438e+03    2.092305e-03    3.402438e+00 
+	   displacement        6.660826e-01    2.958276e-04    6.672227e-05 
+ 3
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454702e+08    3.648907e-03    0.000000e+00 
+	   energy              3.402438e+03    2.147397e-04    3.402438e+00 
+	   displacement        6.660826e-01    6.370891e-05    6.664325e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.1
+
+
+===== beginning time step 3 : 0.15 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 469673
+ 1
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454705e+08    5.103096e-01    0.000000e+00 
+	   energy              3.402455e+03    1.058482e-02    3.402455e+00 
+	   displacement        6.664472e-01    6.664472e-01    6.664472e-05 
+ 2
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454705e+08    2.374365e-01    0.000000e+00 
+	   energy              3.402455e+03    6.906176e-03    3.402455e+00 
+	   displacement        6.664472e-01    6.189923e-04    6.679264e-05 
+ 3
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454705e+08    3.317516e-03    0.000000e+00 
+	   energy              3.402455e+03    3.517761e-04    3.402455e+00 
+	   displacement        6.664472e-01    1.415627e-04    6.669637e-05 
+ 4
+ Nonlinear solution status: time= 0.15
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454705e+08    5.707387e-05    0.000000e+00 
+	   energy              3.402455e+03    3.734444e-06    3.402455e+00 
+	   displacement        6.664472e-01    4.425000e-06    6.666546e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.15
+
+
+===== beginning time step 4 : 0.2 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 469763
+ 1
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454697e+08    2.987748e-01    0.000000e+00 
+	   energy              3.402441e+03    3.880020e-03    3.402441e+00 
+	   displacement        6.673785e-01    6.673785e-01    6.673785e-05 
+ 2
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454697e+08    8.598603e-03    0.000000e+00 
+	   energy              3.402441e+03    3.520496e-04    3.402441e+00 
+	   displacement        6.673785e-01    8.110321e-05    6.677278e-05 
+ 3
+ Nonlinear solution status: time= 0.2
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454697e+08    1.067461e-04    0.000000e+00 
+	   energy              3.402441e+03    3.363234e-06    3.402441e+00 
+	   displacement        6.673785e-01    1.124452e-05    6.672093e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 3
+    number of reformations : 0
+
+------- converged at time : 0.2
+
+
+===== beginning time step 5 : 0.25 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 469781
+ 1
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454689e+08    2.383894e-01    0.000000e+00 
+	   energy              3.402430e+03    1.219560e-03    3.402430e+00 
+	   displacement        6.673329e-01    6.673329e-01    6.673329e-05 
+ 2
+ Nonlinear solution status: time= 0.25
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454689e+08    4.196623e-04    0.000000e+00 
+	   energy              3.402430e+03    2.166715e-06    3.402430e+00 
+	   displacement        6.673329e-01    4.644780e-05    6.677157e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 0
+
+------- converged at time : 0.25
+
+
+===== beginning time step 6 : 0.3 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 469781
+ 1
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454680e+08    2.586481e-01    0.000000e+00 
+	   energy              3.402420e+03    1.775486e-03    3.402420e+00 
+	   displacement        6.663338e-01    6.663338e-01    6.663338e-05 
+ 2
+ Nonlinear solution status: time= 0.3
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454680e+08    7.567902e-04    0.000000e+00 
+	   energy              3.402420e+03    2.319799e-05    3.402420e+00 
+	   displacement        6.663338e-01    5.754124e-05    6.666715e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 2
+    number of reformations : 0
+
+------- converged at time : 0.3
+
+
+===== beginning time step 7 : 0.35 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 469907
+ 1
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454672e+08    8.606691e-01    0.000000e+00 
+	   energy              3.402410e+03    1.040717e-02    3.402410e+00 
+	   displacement        6.661777e-01    6.661777e-01    6.661777e-05 
+ 2
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454672e+08    2.631947e-01    0.000000e+00 
+	   energy              3.402410e+03    7.362681e-03    3.402410e+00 
+	   displacement        6.661777e-01    7.174360e-04    6.671728e-05 
+ 3
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454672e+08    1.362673e-02    0.000000e+00 
+	   energy              3.402410e+03    6.930275e-04    3.402410e+00 
+	   displacement        6.661777e-01    1.675993e-04    6.659859e-05 
+ 4
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454672e+08    1.117328e-03    0.000000e+00 
+	   energy              3.402410e+03    1.558509e-04    3.402410e+00 
+	   displacement        6.661777e-01    1.465180e-04    6.647945e-05 
+ 5
+ Nonlinear solution status: time= 0.35
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454672e+08    6.526904e-06    0.000000e+00 
+	   energy              3.402410e+03    1.576981e-06    3.402410e+00 
+	   displacement        6.661777e-01    5.148134e-06    6.649912e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 5
+    number of reformations : 0
+
+------- converged at time : 0.35
+
+
+===== beginning time step 8 : 0.4 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470051
+ 1
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454664e+08    2.943110e+01    0.000000e+00 
+	   energy              3.402398e+03    3.477716e-02    3.402398e+00 
+	   displacement        6.657508e-01    6.657508e-01    6.657508e-05 
+ 2
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454664e+08    2.122505e+01    0.000000e+00 
+	   energy              3.402398e+03    4.852941e-01    3.402398e+00 
+	   displacement        6.657508e-01    1.532764e-01    8.437348e-05 
+ 3
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454664e+08    4.033935e-01    0.000000e+00 
+	   energy              3.402398e+03    3.981281e-02    3.402398e+00 
+	   displacement        6.657508e-01    1.772982e-02    7.542471e-05 
+ 4
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.624454
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454664e+08    3.357722e-02    0.000000e+00 
+	   energy              3.402398e+03    6.104139e-04    3.402398e+00 
+	   displacement        6.657508e-01    1.524527e-03    7.358440e-05 
+ 5
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 4
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 0.576492
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454664e+08    1.546974e-02    0.000000e+00 
+	   energy              3.402398e+03    1.102506e-03    3.402398e+00 
+	   displacement        6.657508e-01    2.904264e-04    7.318004e-05 
+ 6
+ Nonlinear solution status: time= 0.4
+	stiffness updates             = 5
+	right hand side evaluations   = 9
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454664e+08    3.741364e-03    0.000000e+00 
+	   energy              3.402398e+03    2.303675e-04    3.402398e+00 
+	   displacement        6.657508e-01    5.468845e-05    7.330382e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 6
+    number of reformations : 0
+
+------- converged at time : 0.4
+
+
+===== beginning time step 9 : 0.45 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470321
+ 1
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454655e+08    2.293484e+01    0.000000e+00 
+	   energy              3.402387e+03    2.255608e-02    3.402387e+00 
+	   displacement        6.665277e-01    6.665277e-01    6.665277e-05 
+ 2
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454655e+08    4.526748e+00    0.000000e+00 
+	   energy              3.402387e+03    6.233817e-02    3.402387e+00 
+	   displacement        6.665277e-01    2.918191e-02    7.056025e-05 
+ 3
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454655e+08    3.577879e-02    0.000000e+00 
+	   energy              3.402387e+03    1.180505e-03    3.402387e+00 
+	   displacement        6.665277e-01    9.216637e-04    7.065322e-05 
+ 4
+ Nonlinear solution status: time= 0.45
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454655e+08    1.593066e-03    0.000000e+00 
+	   energy              3.402387e+03    3.408841e-05    3.402387e+00 
+	   displacement        6.665277e-01    5.624621e-05    7.037579e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.45
+
+
+===== beginning time step 10 : 0.5 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470267
+ 1
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454655e+08    2.026033e+01    0.000000e+00 
+	   energy              3.402399e+03    2.231784e-02    3.402399e+00 
+	   displacement        6.668217e-01    6.668217e-01    6.668217e-05 
+ 2
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454655e+08    5.201306e+00    0.000000e+00 
+	   energy              3.402399e+03    1.005823e-01    3.402399e+00 
+	   displacement        6.668217e-01    2.458940e-02    7.001015e-05 
+ 3
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454655e+08    2.282490e-02    0.000000e+00 
+	   energy              3.402399e+03    9.355824e-04    3.402399e+00 
+	   displacement        6.668217e-01    1.051465e-03    6.952702e-05 
+ 4
+ Nonlinear solution status: time= 0.5
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454655e+08    1.300019e-03    0.000000e+00 
+	   energy              3.402399e+03    5.184131e-05    3.402399e+00 
+	   displacement        6.668217e-01    2.836089e-05    6.934313e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.5
+
+
+===== beginning time step 11 : 0.55 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470267
+ 1
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454642e+08    1.855459e+01    0.000000e+00 
+	   energy              3.402379e+03    1.900998e-02    3.402379e+00 
+	   displacement        6.670480e-01    6.670480e-01    6.670480e-05 
+ 2
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454642e+08    5.894537e+00    0.000000e+00 
+	   energy              3.402379e+03    1.207830e-01    3.402379e+00 
+	   displacement        6.670480e-01    2.188111e-02    6.971984e-05 
+ 3
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454642e+08    2.192660e-02    0.000000e+00 
+	   energy              3.402379e+03    5.966318e-04    3.402379e+00 
+	   displacement        6.670480e-01    1.299953e-03    6.899398e-05 
+ 4
+ Nonlinear solution status: time= 0.55
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454642e+08    1.469793e-03    0.000000e+00 
+	   energy              3.402379e+03    7.764994e-05    3.402379e+00 
+	   displacement        6.670480e-01    2.619322e-05    6.883906e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.55
+
+
+===== beginning time step 12 : 0.6 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470231
+ 1
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454633e+08    1.759179e+01    0.000000e+00 
+	   energy              3.402369e+03    1.875975e-02    3.402369e+00 
+	   displacement        6.672913e-01    6.672913e-01    6.672913e-05 
+ 2
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454633e+08    8.167254e+00    0.000000e+00 
+	   energy              3.402369e+03    1.606916e-01    3.402369e+00 
+	   displacement        6.672913e-01    2.042286e-02    6.953837e-05 
+ 3
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454633e+08    2.061078e-02    0.000000e+00 
+	   energy              3.402369e+03    1.436619e-03    3.402369e+00 
+	   displacement        6.672913e-01    2.068262e-03    6.848856e-05 
+ 4
+ Nonlinear solution status: time= 0.6
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454633e+08    3.049311e-03    0.000000e+00 
+	   energy              3.402369e+03    6.418573e-05    3.402369e+00 
+	   displacement        6.672913e-01    1.006172e-05    6.844132e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.6
+
+
+===== beginning time step 13 : 0.65 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470339
+ 1
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454623e+08    1.293059e+01    0.000000e+00 
+	   energy              3.402356e+03    1.539449e-02    3.402356e+00 
+	   displacement        6.674152e-01    6.674152e-01    6.674152e-05 
+ 2
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454623e+08    1.866975e+00    0.000000e+00 
+	   energy              3.402356e+03    5.980031e-02    3.402356e+00 
+	   displacement        6.674152e-01    1.600286e-02    6.904972e-05 
+ 3
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454623e+08    3.954477e-02    0.000000e+00 
+	   energy              3.402356e+03    2.339338e-03    3.402356e+00 
+	   displacement        6.674152e-01    1.013493e-03    6.825855e-05 
+ 4
+ Nonlinear solution status: time= 0.65
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454623e+08    6.693202e-04    0.000000e+00 
+	   energy              3.402356e+03    5.691822e-06    3.402356e+00 
+	   displacement        6.674152e-01    4.524123e-05    6.835905e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.65
+
+
+===== beginning time step 14 : 0.7 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470303
+ 1
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454616e+08    6.595477e+00    0.000000e+00 
+	   energy              3.402349e+03    9.184829e-03    3.402349e+00 
+	   displacement        6.679480e-01    6.679480e-01    6.679480e-05 
+ 2
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454616e+08    2.722888e+00    0.000000e+00 
+	   energy              3.402349e+03    7.817546e-02    3.402349e+00 
+	   displacement        6.679480e-01    1.162660e-02    6.847698e-05 
+ 3
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454616e+08    3.870664e-02    0.000000e+00 
+	   energy              3.402349e+03    3.858792e-03    3.402349e+00 
+	   displacement        6.679480e-01    1.563777e-03    6.761937e-05 
+ 4
+ Nonlinear solution status: time= 0.7
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454616e+08    6.892906e-04    0.000000e+00 
+	   energy              3.402349e+03    6.093377e-05    3.402349e+00 
+	   displacement        6.679480e-01    2.509989e-05    6.767695e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.7
+
+
+===== beginning time step 15 : 0.75 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470393
+ 1
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454606e+08    4.155181e+00    0.000000e+00 
+	   energy              3.402335e+03    7.236553e-03    3.402335e+00 
+	   displacement        6.673568e-01    6.673568e-01    6.673568e-05 
+ 2
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454606e+08    1.822987e+00    0.000000e+00 
+	   energy              3.402335e+03    4.211586e-02    3.402335e+00 
+	   displacement        6.673568e-01    7.463565e-03    6.790872e-05 
+ 3
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454606e+08    3.547536e-01    0.000000e+00 
+	   energy              3.402335e+03    4.715369e-03    3.402335e+00 
+	   displacement        6.673568e-01    1.647610e-03    6.707444e-05 
+ 4
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454606e+08    2.957542e-01    0.000000e+00 
+	   energy              3.402335e+03    2.643326e-03    3.402335e+00 
+	   displacement        6.673568e-01    4.722360e-04    6.698116e-05 
+ 5
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 4
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454606e+08    4.366301e-02    0.000000e+00 
+	   energy              3.402335e+03    1.066749e-03    3.402335e+00 
+	   displacement        6.673568e-01    1.548325e-04    6.719458e-05 
+ 6
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 5
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454606e+08    5.346348e-04    0.000000e+00 
+	   energy              3.402335e+03    7.744454e-05    3.402335e+00 
+	   displacement        6.673568e-01    8.439417e-05    6.737370e-05 
+ 7
+ Nonlinear solution status: time= 0.75
+	stiffness updates             = 6
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454606e+08    3.541599e-05    0.000000e+00 
+	   energy              3.402335e+03    1.474667e-06    3.402335e+00 
+	   displacement        6.673568e-01    1.338158e-06    6.739660e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 7
+    number of reformations : 0
+
+------- converged at time : 0.75
+
+
+===== beginning time step 16 : 0.8 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470465
+ 1
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454598e+08    4.350276e+00    0.000000e+00 
+	   energy              3.402324e+03    1.059499e-02    3.402324e+00 
+	   displacement        6.661114e-01    6.661114e-01    6.661114e-05 
+ 2
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454598e+08    1.984020e+00    0.000000e+00 
+	   energy              3.402324e+03    5.565619e-02    3.402324e+00 
+	   displacement        6.661114e-01    6.057104e-03    6.701750e-05 
+ 3
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454598e+08    2.901566e-01    0.000000e+00 
+	   energy              3.402324e+03    6.133714e-03    3.402324e+00 
+	   displacement        6.661114e-01    8.919135e-04    6.685611e-05 
+ 4
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454598e+08    1.560453e-01    0.000000e+00 
+	   energy              3.402324e+03    1.198570e-03    3.402324e+00 
+	   displacement        6.661114e-01    4.049280e-04    6.657125e-05 
+ 5
+ Nonlinear solution status: time= 0.8
+	stiffness updates             = 4
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 0.247341
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454598e+08    9.373146e-02    0.000000e+00 
+	   energy              3.402324e+03    4.893988e-04    3.402324e+00 
+	   displacement        6.661114e-01    1.131063e-05    6.655404e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 5
+    number of reformations : 0
+
+------- converged at time : 0.8
+
+
+===== beginning time step 17 : 0.85 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470465
+ 1
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454597e+08    3.589982e+01    0.000000e+00 
+	   energy              3.402334e+03    4.734465e-02    3.402334e+00 
+	   displacement        6.655030e-01    6.655030e-01    6.655030e-05 
+ 2
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454597e+08    3.397433e+01    0.000000e+00 
+	   energy              3.402334e+03    5.072924e-01    3.402334e+00 
+	   displacement        6.655030e-01    3.739073e-02    6.851876e-05 
+ 3
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454597e+08    6.526283e+00    0.000000e+00 
+	   energy              3.402334e+03    1.091325e-01    3.402334e+00 
+	   displacement        6.655030e-01    6.537893e-03    6.683932e-05 
+ 4
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 3
+	right hand side evaluations   = 9
+	stiffness matrix reformations = 1
+	step from line search         = 0.138519
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454597e+08    4.658316e+00    0.000000e+00 
+	   energy              3.402334e+03    1.195521e-02    3.402334e+00 
+	   displacement        6.655030e-01    1.123516e-04    6.676478e-05 
+ 5
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 4
+	right hand side evaluations   = 10
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454597e+08    3.645133e+00    0.000000e+00 
+	   energy              3.402334e+03    4.071559e-03    3.402334e+00 
+	   displacement        6.655030e-01    1.908663e-04    6.663263e-05 
+ 6
+ Nonlinear solution status: time= 0.85
+	stiffness updates             = 5
+	right hand side evaluations   = 13
+	stiffness matrix reformations = 1
+	step from line search         = 0.312111
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454597e+08    2.759198e+00    0.000000e+00 
+	   energy              3.402334e+03    4.202432e-03    3.402334e+00 
+	   displacement        6.655030e-01    3.123538e-05    6.663427e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 6
+    number of reformations : 0
+
+------- converged at time : 0.85
+
+
+===== beginning time step 18 : 0.9 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470663
+ 1
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454582e+08    2.794146e+00    0.000000e+00 
+	   energy              3.402317e+03    2.551776e-03    3.402317e+00 
+	   displacement        6.649977e-01    6.649977e-01    6.649977e-05 
+ 2
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454582e+08    8.128572e-01    0.000000e+00 
+	   energy              3.402317e+03    2.765939e-02    3.402317e+00 
+	   displacement        6.649977e-01    5.102877e-03    6.728229e-05 
+ 3
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454582e+08    2.997993e-03    0.000000e+00 
+	   energy              3.402317e+03    6.212634e-04    3.402317e+00 
+	   displacement        6.649977e-01    5.552847e-04    6.690716e-05 
+ 4
+ Nonlinear solution status: time= 0.9
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454582e+08    1.920218e-05    0.000000e+00 
+	   energy              3.402317e+03    1.601749e-06    3.402317e+00 
+	   displacement        6.649977e-01    3.534480e-06    6.691205e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.9
+
+
+===== beginning time step 19 : 0.95 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470771
+ 1
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454573e+08    3.115662e+00    0.000000e+00 
+	   energy              3.402293e+03    6.524004e-03    3.402293e+00 
+	   displacement        6.656694e-01    6.656694e-01    6.656694e-05 
+ 2
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454573e+08    9.837490e-01    0.000000e+00 
+	   energy              3.402293e+03    3.214188e-02    3.402293e+00 
+	   displacement        6.656694e-01    5.708992e-03    6.742724e-05 
+ 3
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454573e+08    4.644966e-03    0.000000e+00 
+	   energy              3.402293e+03    8.385382e-04    3.402293e+00 
+	   displacement        6.656694e-01    6.573539e-04    6.698835e-05 
+ 4
+ Nonlinear solution status: time= 0.95
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454573e+08    3.950895e-05    0.000000e+00 
+	   energy              3.402293e+03    3.801429e-06    3.402293e+00 
+	   displacement        6.656694e-01    4.986446e-06    6.699932e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 0.95
+
+MUST POINT CONTROLLER: adjusting time step. dt = 0.05
+
+
+===== beginning time step 20 : 1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470735
+ 1
+ Nonlinear solution status: time= 1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454565e+08    2.912581e+00    0.000000e+00 
+	   energy              3.402285e+03    6.330155e-03    3.402285e+00 
+	   displacement        6.660339e-01    6.660339e-01    6.660339e-05 
+ 2
+ Nonlinear solution status: time= 1
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454565e+08    9.498272e-01    0.000000e+00 
+	   energy              3.402285e+03    3.053912e-02    3.402285e+00 
+	   displacement        6.660339e-01    5.391092e-03    6.741077e-05 
+ 3
+ Nonlinear solution status: time= 1
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454565e+08    4.264036e-03    0.000000e+00 
+	   energy              3.402285e+03    7.941911e-04    3.402285e+00 
+	   displacement        6.660339e-01    6.370425e-04    6.699223e-05 
+ 4
+ Nonlinear solution status: time= 1
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.454565e+08    3.327001e-05    0.000000e+00 
+	   energy              3.402285e+03    3.255040e-06    3.402285e+00 
+	   displacement        6.660339e-01    4.836089e-06    6.700098e-05 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 1
+
+
+
+ N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+
+	Number of time steps completed .................... : 20
+
+	Total number of equilibrium iterations ............ : 84
+
+	Average number of equilibrium iterations .......... : 4.2
+
+	Total number of right hand evaluations ............ : 114
+
+	Total number of stiffness reformations ............ : 20
+
+
+ L I N E A R   S O L V E R   S T A T S
+
+	Total calls to linear solver ........ : 84
+
+	Avg iterations per solve ............ : 1
+
+
+ *************************************************************************
+ * Selecting linear solver pardiso                                       *
+ *************************************************************************
+
+===== beginning time step 1 : 1.05 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470735
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.05
+
+Retrying time step. Retry attempt 1 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0454545
+
+
+===== beginning time step 1 : 1.04545 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470735
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.04545
+
+Retrying time step. Retry attempt 2 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0409091
+
+
+===== beginning time step 1 : 1.04091 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470735
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.04091
+
+Retrying time step. Retry attempt 3 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0363636
+
+
+===== beginning time step 1 : 1.03636 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470735
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.03636
+
+Retrying time step. Retry attempt 4 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0318182
+
+
+===== beginning time step 1 : 1.03182 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470735
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.03182
+
+Retrying time step. Retry attempt 5 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0272727
+
+
+===== beginning time step 1 : 1.02727 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470735
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02727
+
+Retrying time step. Retry attempt 6 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0227273
+
+
+===== beginning time step 1 : 1.02273 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470735
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02273
+
+Retrying time step. Retry attempt 7 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0181818
+
+
+===== beginning time step 1 : 1.01818 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470735
+ 1
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    3.658205e+03    0.000000e+00 
+	   energy              5.405891e+01    1.158154e+00    5.405891e-02 
+	   displacement        1.028010e+02    1.028010e+02    1.028010e-02 
+ 2
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    1.352944e+04    0.000000e+00 
+	   energy              5.405891e+01    2.855315e+00    5.405891e-02 
+	   displacement        1.028010e+02    2.030486e+01    1.582220e-02 
+ 3
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 2
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 0.034264
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    1.975880e+03    0.000000e+00 
+	   energy              5.405891e+01    1.060908e-01    5.405891e-02 
+	   displacement        1.028010e+02    9.976247e-01    1.490687e-02 
+ 4
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    3.456540e+02    0.000000e+00 
+	   energy              5.405891e+01    1.963158e-01    5.405891e-02 
+	   displacement        1.028010e+02    1.562394e+00    1.225651e-02 
+ 5
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 4
+	right hand side evaluations   = 7
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    4.156940e+01    0.000000e+00 
+	   energy              5.405891e+01    1.506013e-01    5.405891e-02 
+	   displacement        1.028010e+02    8.812821e-02    1.189734e-02 
+ 6
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 5
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    9.644634e+00    0.000000e+00 
+	   energy              5.405891e+01    2.239956e-02    5.405891e-02 
+	   displacement        1.028010e+02    2.013120e-02    1.201770e-02 
+ 7
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 6
+	right hand side evaluations   = 9
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    2.337715e+00    0.000000e+00 
+	   energy              5.405891e+01    7.770519e-03    5.405891e-02 
+	   displacement        1.028010e+02    1.543962e-02    1.195692e-02 
+ 8
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 7
+	right hand side evaluations   = 10
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    1.578389e+00    0.000000e+00 
+	   energy              5.405891e+01    1.081307e-03    5.405891e-02 
+	   displacement        1.028010e+02    2.076210e-02    1.180608e-02 
+ 9
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 8
+	right hand side evaluations   = 11
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    3.699454e+00    0.000000e+00 
+	   energy              5.405891e+01    2.530523e-03    5.405891e-02 
+	   displacement        1.028010e+02    2.842052e-02    1.167191e-02 
+ 10
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 9
+	right hand side evaluations   = 12
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    8.431885e+01    0.000000e+00 
+	   energy              5.405891e+01    1.642348e-03    5.405891e-02 
+	   displacement        1.028010e+02    2.101606e-01    1.139137e-02 
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * Max nr of iterations reached.                                         *
+ * Stiffness matrix will now be reformed.                                *
+ *************************************************************************
+Reforming stiffness matrix: reformation #2
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 11
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 0
+	right hand side evaluations   = 13
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    8.760912e+01    0.000000e+00 
+	   energy              5.405891e+01    2.711583e-03    5.405891e-02 
+	   displacement        1.028010e+02    5.387623e-01    1.106494e-02 
+ 12
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 1
+	right hand side evaluations   = 14
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    3.424156e-01    0.000000e+00 
+	   energy              5.405891e+01    1.063767e-03    5.405891e-02 
+	   displacement        1.028010e+02    2.699575e-02    1.100313e-02 
+ 13
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 2
+	right hand side evaluations   = 15
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    5.759841e+01    0.000000e+00 
+	   energy              5.405891e+01    2.217652e-03    5.405891e-02 
+	   displacement        1.028010e+02    2.824933e-01    1.081948e-02 
+ 14
+ Nonlinear solution status: time= 1.01818
+	stiffness updates             = 3
+	right hand side evaluations   = 16
+	stiffness matrix reformations = 2
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.670182e+04    3.136742e-01    0.000000e+00 
+	   energy              5.405891e+01    8.445340e-05    5.405891e-02 
+	   displacement        1.028010e+02    8.503728e-03    1.084339e-02 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 14
+    number of reformations : 0
+
+------- converged at time : 1.01818
+
+
+AUTO STEPPER: decreasing time step, dt = 0.0153819
+
+
+===== beginning time step 2 : 1.03356 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.03356
+
+Retrying time step. Retry attempt 1 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0139836
+
+
+===== beginning time step 2 : 1.03217 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.03217
+
+Retrying time step. Retry attempt 2 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0125852
+
+
+===== beginning time step 2 : 1.03077 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.03077
+
+Retrying time step. Retry attempt 3 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0111869
+
+
+===== beginning time step 2 : 1.02937 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02937
+
+Retrying time step. Retry attempt 4 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0097885
+
+
+===== beginning time step 2 : 1.02797 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02797
+
+Retrying time step. Retry attempt 5 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00839014
+
+
+===== beginning time step 2 : 1.02657 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02657
+
+Retrying time step. Retry attempt 6 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00699178
+
+
+===== beginning time step 2 : 1.02517 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02517
+
+Retrying time step. Retry attempt 7 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00559343
+
+
+===== beginning time step 2 : 1.02378 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02378
+
+Retrying time step. Retry attempt 8 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00419507
+
+
+===== beginning time step 2 : 1.02238 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02238
+
+Retrying time step. Retry attempt 9 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00279671
+
+
+===== beginning time step 2 : 1.02098 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02098
+
+Retrying time step. Retry attempt 10 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00139836
+
+
+===== beginning time step 2 : 1.01958 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 470915
+ 1
+ Nonlinear solution status: time= 1.01958
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.738101e+00    4.169616e+01    0.000000e+00 
+	   energy              2.751828e+00    5.483218e-02    2.751828e-03 
+	   displacement        5.920143e+00    5.920143e+00    5.920143e-04 
+ 2
+ Nonlinear solution status: time= 1.01958
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.738101e+00    1.230205e+01    0.000000e+00 
+	   energy              2.751828e+00    3.998127e-02    2.751828e-03 
+	   displacement        5.920143e+00    7.880753e-02    6.149075e-04 
+ 3
+ Nonlinear solution status: time= 1.01958
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.738101e+00    3.319319e+00    0.000000e+00 
+	   energy              2.751828e+00    5.315342e-03    2.751828e-03 
+	   displacement        5.920143e+00    6.689251e-02    5.813214e-04 
+ 4
+ Nonlinear solution status: time= 1.01958
+	stiffness updates             = 3
+	right hand side evaluations   = 6
+	stiffness matrix reformations = 1
+	step from line search         = 0.516470
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.738101e+00    5.922671e-01    0.000000e+00 
+	   energy              2.751828e+00    1.814921e-04    2.751828e-03 
+	   displacement        5.920143e+00    4.320929e-03    5.822080e-04 
+ 5
+ Nonlinear solution status: time= 1.01958
+	stiffness updates             = 4
+	right hand side evaluations   = 8
+	stiffness matrix reformations = 1
+	step from line search         = 0.546224
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.738101e+00    5.175347e-01    0.000000e+00 
+	   energy              2.751828e+00    5.594578e-05    2.751828e-03 
+	   displacement        5.920143e+00    5.518874e-03    5.823079e-04 
+ 6
+ Nonlinear solution status: time= 1.01958
+	stiffness updates             = 5
+	right hand side evaluations   = 9
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            9.738101e+00    4.794343e-01    0.000000e+00 
+	   energy              2.751828e+00    3.434893e-05    2.751828e-03 
+	   displacement        5.920143e+00    5.047413e-04    5.826909e-04 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 6
+    number of reformations : 0
+
+------- converged at time : 1.01958
+
+
+AUTO STEPPER: increasing time step, dt = 0.00699178
+
+
+===== beginning time step 3 : 1.02657 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02657
+
+Retrying time step. Retry attempt 1 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00635617
+
+
+===== beginning time step 3 : 1.02594 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02594
+
+Retrying time step. Retry attempt 2 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00572055
+
+
+===== beginning time step 3 : 1.0253 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.0253
+
+Retrying time step. Retry attempt 3 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00508493
+
+
+===== beginning time step 3 : 1.02467 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02467
+
+Retrying time step. Retry attempt 4 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00444932
+
+
+===== beginning time step 3 : 1.02403 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02403
+
+Retrying time step. Retry attempt 5 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0038137
+
+
+===== beginning time step 3 : 1.02339 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02339
+
+Retrying time step. Retry attempt 6 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00317808
+
+
+===== beginning time step 3 : 1.02276 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02276
+
+Retrying time step. Retry attempt 7 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00254247
+
+
+===== beginning time step 3 : 1.02212 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02212
+
+Retrying time step. Retry attempt 8 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00190685
+
+
+===== beginning time step 3 : 1.02149 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02149
+
+Retrying time step. Retry attempt 9 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00127123
+
+
+===== beginning time step 3 : 1.02085 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02085
+
+Retrying time step. Retry attempt 10 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.000635617
+
+
+===== beginning time step 3 : 1.02022 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471293
+ 1
+ Nonlinear solution status: time= 1.02022
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.423580e+00    2.026550e+00    0.000000e+00 
+	   energy              5.723220e-01    7.868096e-03    5.723220e-04 
+	   displacement        1.260650e+00    1.260650e+00    1.260650e-04 
+ 2
+ Nonlinear solution status: time= 1.02022
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.423580e+00    6.328715e-02    0.000000e+00 
+	   energy              5.723220e-01    1.191473e-03    5.723220e-04 
+	   displacement        1.260650e+00    6.672570e-04    1.266375e-04 
+ 3
+ Nonlinear solution status: time= 1.02022
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.423580e+00    1.482046e-02    0.000000e+00 
+	   energy              5.723220e-01    2.193279e-04    5.723220e-04 
+	   displacement        1.260650e+00    2.437838e-04    1.235971e-04 
+ 4
+ Nonlinear solution status: time= 1.02022
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            2.423580e+00    1.128739e-04    0.000000e+00 
+	   energy              5.723220e-01    5.023174e-07    5.723220e-04 
+	   displacement        1.260650e+00    7.235685e-06    1.231501e-04 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 1.02022
+
+
+AUTO STEPPER: increasing time step, dt = 0.00317808
+
+
+===== beginning time step 4 : 1.02339 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02339
+
+Retrying time step. Retry attempt 1 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00288917
+
+
+===== beginning time step 4 : 1.0231 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.0231
+
+Retrying time step. Retry attempt 2 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00260025
+
+
+===== beginning time step 4 : 1.02282 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02282
+
+Retrying time step. Retry attempt 3 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00231133
+
+
+===== beginning time step 4 : 1.02253 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02253
+
+Retrying time step. Retry attempt 4 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00202242
+
+
+===== beginning time step 4 : 1.02224 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02224
+
+Retrying time step. Retry attempt 5 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.0017335
+
+
+===== beginning time step 4 : 1.02195 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02195
+
+Retrying time step. Retry attempt 6 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00144458
+
+
+===== beginning time step 4 : 1.02166 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02166
+
+Retrying time step. Retry attempt 7 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00115567
+
+
+===== beginning time step 4 : 1.02137 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02137
+
+Retrying time step. Retry attempt 8 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00086675
+
+
+===== beginning time step 4 : 1.02108 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02108
+
+Retrying time step. Retry attempt 9 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.000577833
+
+
+===== beginning time step 4 : 1.02079 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471617
+ 1
+ Nonlinear solution status: time= 1.02079
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.609615e+00    1.650571e+00    0.000000e+00 
+	   energy              4.768528e-01    7.397573e-03    4.768528e-04 
+	   displacement        1.059700e+00    1.059700e+00    1.059700e-04 
+ 2
+ Nonlinear solution status: time= 1.02079
+	stiffness updates             = 1
+	right hand side evaluations   = 3
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.609615e+00    2.012449e-02    0.000000e+00 
+	   energy              4.768528e-01    8.310600e-04    4.768528e-04 
+	   displacement        1.059700e+00    5.506948e-04    1.064437e-04 
+ 3
+ Nonlinear solution status: time= 1.02079
+	stiffness updates             = 2
+	right hand side evaluations   = 4
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.609615e+00    5.170771e-03    0.000000e+00 
+	   energy              4.768528e-01    8.851031e-05    4.768528e-04 
+	   displacement        1.059700e+00    2.635981e-04    1.034440e-04 
+ 4
+ Nonlinear solution status: time= 1.02079
+	stiffness updates             = 3
+	right hand side evaluations   = 5
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            1.609615e+00    2.873393e-05    0.000000e+00 
+	   energy              4.768528e-01    7.627252e-07    4.768528e-04 
+	   displacement        1.059700e+00    2.033785e-06    1.033987e-04 
+
+........................ augmentation # 1
+
+convergence summary
+    number of iterations   : 4
+    number of reformations : 0
+
+------- converged at time : 1.02079
+
+
+AUTO STEPPER: increasing time step, dt = 0.00288917
+
+
+===== beginning time step 5 : 1.02368 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02368
+
+Retrying time step. Retry attempt 1 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00262652
+
+
+===== beginning time step 5 : 1.02342 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02342
+
+Retrying time step. Retry attempt 2 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00236386
+
+
+===== beginning time step 5 : 1.02316 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02316
+
+Retrying time step. Retry attempt 3 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00210121
+
+
+===== beginning time step 5 : 1.02289 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02289
+
+Retrying time step. Retry attempt 4 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00183856
+
+
+===== beginning time step 5 : 1.02263 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02263
+
+Retrying time step. Retry attempt 5 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00157591
+
+
+===== beginning time step 5 : 1.02237 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02237
+
+Retrying time step. Retry attempt 6 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00131326
+
+
+===== beginning time step 5 : 1.02211 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02211
+
+Retrying time step. Retry attempt 7 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.00105061
+
+
+===== beginning time step 5 : 1.02184 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02184
+
+Retrying time step. Retry attempt 8 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.000787955
+
+
+===== beginning time step 5 : 1.02158 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02158
+
+Retrying time step. Retry attempt 9 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.000525303
+
+
+===== beginning time step 5 : 1.02132 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02132
+
+Retrying time step. Retry attempt 10 of max 10
+
+
+AUTO STEPPER: retry step, dt = 0.000262652
+
+
+===== beginning time step 5 : 1.02106 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 8937
+	Nr of nonzeroes in stiffness matrix ....... : 471851
+ 1
+
+ *************************************************************************
+ *                                ERROR                                  *
+ * Negative jacobian detected.                                           *
+ *************************************************************************
+
+
+------- failed to converge at time : 1.02106
+
+Max. nr of retries reached.
+
+
+
+ N O N L I N E A R   I T E R A T I O N   I N F O R M A T I O N
+
+	Number of time steps completed .................... : 4
+
+	Total number of equilibrium iterations ............ : 28
+
+	Average number of equilibrium iterations .......... : 7
+
+	Total number of right hand evaluations ............ : 36
+
+	Total number of stiffness reformations ............ : 6
+
+
+ L I N E A R   S O L V E R   S T A T S
+
+	Total calls to linear solver ........ : 75
+
+	Avg iterations per solve ............ : 1
+
+
+
+ N O N L I N E A R   I T E R A T I O N   S U M M A R Y
+
+	Number of time steps completed .................... : 24
+
+	Total number of equilibrium iterations ............ : 112
+
+	Total number of right hand evaluations ............ : 150
+
+	Total number of stiffness reformations ............ : 26
+
+	Time in linear solver: 0:00:11
+
+ Peak memory  : 155.7 MB
+
+ Elapsed time : 0:00:21
+
+
+ E R R O R   T E R M I N A T I O N
+

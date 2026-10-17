@@ -1,0 +1,11 @@
+========================================================================================================
+坏单元 vs 全体：厚度 / 底三角面积 / 最瘦边比 / 上下三角扭角
+========================================================================================================
+域/单元                                 worst-detJ       厚度      底三角面积    边比min    扭角(°)
+
+--- tibiotalar_talus__penta6（坏 9 / 共 182）---
+Traceback (most recent call last):
+  File "D:\Project\climbing_fall_analysis\temp\pyfebio_demo\p2_cause.py", line 77, in <module>
+    f"{A:>11.4f}{ratio:>9.3f}{ang:>9.2f}")
+      ^^^^^^^^^^
+TypeError: unsupported format string passed to numpy.ndarray.__format__

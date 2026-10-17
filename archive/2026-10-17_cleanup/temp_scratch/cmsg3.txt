@@ -1,0 +1,84 @@
+﻿fix(v1): **更正「DYNAMIC 有效」的误读** —— 实为手册 §8.12.4 预言的「刚体飞走」；五条手册处方全部试过无一条收敛
+
+用户令「继续」=> 继续推进上轮的手册处方清单，并把结果如实落账。
+
+## 🔴 本轮最重要的更正：DYNAMIC 不是「真积分」，是「刚体飞走」
+上轮把 False Transient 读成「行为质变：1s 秒退 -> 真积分到 t≈0.44」。**该读数作废。**
+
+读最后收敛态的位移场（`fe_post.read_displacement`，`temp/v1_freeflight.py`）：
+| 量（g-0.05_e0.185_ap1） | 值 |
+| 骨节点位移 \|u\| **中位** | **7295.78 mm（7.3 米）** |
+| \|u\| max / min | 7314.27 / 7279.74 mm |
+| **形心位移** | **(4297.34, -3725.91, 4570.37) mm** |
+| **相对形心偏差（中位）** | **27.1 mm** |
+| **偏差 / 形心位移** | **0.0075** |
+| 板位移 | 0.000 mm（自检：板底固定 ✓） |
+=> **位移场＝平移 + 少量刚体转动（偏差仅 0.75%）=> 骨飞了 7.3 米**
+
+这正是手册 §8.12.4 逐字预言的失败模式：
+ 「the model will **fly off in the unconstrained direction** (in which a **rigid body mode** now exists)」
+
+自洽性核对：SPON 体积 77794 mm³；deck `<density>` 骨 **1e-06** / 板 **1e-09**（**差 1000×**）；
+按 tonne-mm-s 体系 m = 0.0778 tonne = 77.8 kg，F(0.44×26.4kN)=11609 N => a≈149 m/s²
+=> 自由飞行 ½at² ≈ 14 m，**与实测 7.3 m 同量级** => 自由飞行假设成立
+=> **「t≈0.44 才失败」不是「算到 44%」，是「在这之前一直在飞」**
+
+附带更正：v1 里「~500 个单元倒置」也是同一现象的副产品（与板穿插后的畸变），
+**不是独立的「大变形单元倒置」机制**。
+⚠️ 我算的 `det F` 中位 0.31 是**错的** —— xplt 节点顺序与网格顺序**未校验**
+（hdf5 只有 `meshes`/`states`，无 `node_ids`）=> 纯刚体运动应给 det F=1 => 该数值作废
+
+## 五条手册处方 —— 全部试过，无一条让 `hold_spring_k=None` 的跖面接触收敛
+| # | 处方 | 结果 |
+| A | 初始接触/过盈（gap<=0） | ❌（8 negJ @t=1，dt 降到 0.333 同款）|
+| B | 两步法 | ❌ Step 2（残差 ~1e-16，既有）|
+| C | False Transient（DYNAMIC+阻尼） | 🔴 **假象（自由飞行）** |
+| D | symmetric_stiffness | ❌ `<solver>` 仍失败；插 `<Control>` 解析失败（未定论）|
+| E | auto_penalty=1 | ❌ 无质变 |
+=> **唯一能收敛的仍是 `hold_spring_k`（自由旋钮 => 只能当诊断口径）**
+=> **「跖面接触在无额外约束下不收敛」= 未被手册处方解决的问题**
+
+## 组合尝试（DYNAMIC+阻尼 × 板模量 × gap × auto_penalty）全失败
+| 组合 | 走到 t |
+| gap=-0.05 / 刚性板 / ap=0 | 0.399 |
+| gap=-0.05 / **跟垫 0.185** / ap=0 | 0.447 |
+| gap=+0.5 / 跟垫 0.185 / ap=0 | 0.495 |
+| gap=-0.05 / 刚性板 / **ap=1** | 0.564 |
+| **gap=-0.05 / 跟垫 0.185 / ap=1** | **0.613** |
+| gap=+0.5 / 跟垫 0.185 / ap=1 | 0.443 |
+=> 数字变大但**不构成进展**（伪时间本身是自由飞行的时间刻度）
+
+## 🔑 三条可复用的工具知识
+1. **`rhoi`/`gamma`/`beta` 属 `<solver>`（固体求解器）**，放 `<Control>` 被 FEBio 拒
+   （`tag "rhoi" : unrecognized`）；手册 §8.4.1「solid solver」措辞准确
+2. **pyfebio 的 `symmetric_stiffness` 在求解器类**（`control.py:67` 默认 `"preferred"`），
+   **不在 `<Control>`** => 文本插 `<Control>` 会破坏解析
+3. **`det F` 读法陷阱**：xplt 节点顺序未必等于网格顺序 => 不校验顺序算 det F 会得到假值
+
+## 新接线（全部 opt-in，默认路径逐位不变；零回归 72 passed）
+- `plantar_bc.apply_plantar_bc`：新增 `contact_pad_thickness_mm`、`contact_auto_penalty`
+- `thums_feb.build_thums_feb`：新增 `contact_pad_e_mpa`、`contact_pad_thickness_mm`、
+  `contact_auto_penalty`
+
+## 下一步（重排，先修根因）
+0. 🔴 **先修「刚体飞走」**：DYNAMIC 下必须先有有效支撑（回到处方 A + 足够接触刚度），
+   否则任何 DYNAMIC 跑都是自由飞行
+1. `<Control>` 级 `symmetric_stiffness` 用 pyfebio 正确接口重试（未定论）
+2. 接触刚度：**未试「硬 penalty」**（0.1 是否过软未判）
+3. **`contact_type` 换 `tied`/`sticky` 首步**：t=0 把跖面 tied 住（消刚体模态），后续释放
+   => 用**物理界面**替代 `hold_spring_k` 旋钮
+4. 两步法在 DYNAMIC 下重试
+5. ⚠️ **先查 `density` 一致性**（骨 1e-06 vs 板 1e-09 差 1000×）
+6. 补 **`rigid` BC** 给骨最小约束（手册「eliminate by applying additional constraints」的非旋钮版）
+
+## 诚实边界
+- 全部 h=5/a=0/anat/PressureLoad/gauge_max 口径的**诊断跑**，**无一条构成可交付口径**
+- `det F` 数值作废（节点顺序未校验）
+- `gap<=0` 的初始过盈**合理性未论证**
+- **不动任何判定**：V1 仍为 ❌【口径不可复现】
+
+- 更正 `results/opensim_fe/V1_UNDERCONSTRAINT_METHODS_SURVEY.md`（§0 表 C 行 / §3.3 全节 / §4 下一步 / 结论）
+- 改 `src/climbing/coupling/plantar_bc.py`、`scripts/opensim_fe/thums_feb.py`（新接线，opt-in）
+- 脚本 `temp/v1_padmat.py`、`temp/v1_combo.py`、`temp/v1_combo_log.py`、
+  `temp/v1_invert_locate.py`、`temp/v1_freeflight.py`
+- 产物 `results/opensim_fe/v1_pad_material_scan.json`、`v1_dyn_pad_combo_scan.json`
