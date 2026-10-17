@@ -14,7 +14,7 @@
 
 用法::
 
-    .venv\\Scripts\\python.exe scripts/1d/leg2seg_probe.py
+    .venv\\Scripts\\python.exe scripts/leg1d/leg2seg_probe.py
 """
 from __future__ import annotations
 

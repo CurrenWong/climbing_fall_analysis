@@ -1,6 +1,6 @@
 # FP_STROKE 判定件 —— B1：`x_flex_max` 锚定到**实测 COM 深度**
 
-> **状态**：**已跑 · 如实判定**（2026-10-16）｜脚本 `scripts/1d/fp_stroke_probe.py`｜产物 `results/fp_stroke_probe.json`
+> **状态**：**已跑 · 如实判定**（2026-10-16）｜脚本 `scripts/leg1d/fp_stroke_probe.py`｜产物 `results/fp_stroke_probe.json`
 > **上游**：`results/FP_CONTACT_REPORT.md`（A 判定成立）+ `docs/notes/PAD_GOTCHAS.md` §6b（非单调 = 进止段）
 > **实现**：只用门 `pad.STROKE_ANCHOR`（默认 `None` ⇒ 既有路径逐位不变）——**`pad.py` 无默认值改动**
 > **红线**：⛔ 未以「使 `h*` 变大/进带」为选择标准；锚点来自实测 COM 深度。
@@ -91,6 +91,6 @@
    - `k_stop` **仍未标定**（本件只把它作为「有效性上界」的判据，未给物理值）；
    - 单高度网格（0.20–9.00 m，7 点）；质量 80 kg、硬地面口径。
 
-**锚点**：`results/fp_stroke_probe.json`、`scripts/1d/fp_stroke_probe.py`、
+**锚点**：`results/fp_stroke_probe.json`、`scripts/leg1d/fp_stroke_probe.py`、
 `docs/notes/PAD_GOTCHAS.md` §6b、`results/FP_CONTACT_REPORT.md`、`src/climbing/pad.py`（`STROKE_ANCHOR`）、
 `PMC9465758`（COM 深度列）

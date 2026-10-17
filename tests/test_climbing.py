@@ -246,7 +246,7 @@ class TestRigidContactGate:
 
 
 # ==========================================================================
-# 能量守恒审计（scripts/1d/pad_energy_check.py）
+# 能量守恒审计（scripts/leg1d/pad_energy_check.py）
 # ==========================================================================
 class TestEnergyAudit:
     """`pad.py` 结果的有效性判据：沿轨迹 `E_mech` 非增。
@@ -267,7 +267,7 @@ class TestEnergyAudit:
         #   不是合法包名（SyntaxError）。故按**文件路径**加载。
         import importlib.util as _ilu
         _spec = _ilu.spec_from_file_location(
-            "pad_energy_check", root / "scripts" / "1d" / "pad_energy_check.py")
+            "pad_energy_check", root / "scripts" / "leg1d" / "pad_energy_check.py")
         _mod = _ilu.module_from_spec(_spec)
         _spec.loader.exec_module(_mod)
         audit_energy = _mod.audit_energy

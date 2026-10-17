@@ -1,7 +1,7 @@
 # PASSIVE_PATH 判定件 —— C2：「行程耗尽之后」（有效上限检验）
 
 > **状态**：**已跑 · 全部 PASS**（2026-10-16）
-> 预注册 `docs/methods/P3_骨性软组织接触_预注册.md`（§2bis 更正后）｜脚本 `scripts/1d/passive_path_probe.py`
+> 预注册 `docs/methods/P3_骨性软组织接触_预注册.md`（§2bis 更正后）｜脚本 `scripts/leg1d/passive_path_probe.py`
 > 产物 `results/passive_path_probe.json`
 > **实现**：**零 `pad.py` 改动** —— 复用已有门 `TWO_SEG_LEG`（C1 配置）＋ `RIGID_CONTACT`
 
@@ -79,7 +79,7 @@
 3. **C2 原设计的「位移型约束」在实测范围内多余**（预注册 §2bis 已判）；保留作 `h >` 有效上限的兜底。
 4. **⛔ 不改变** V1 判定；**不主张** 6–9 m 可达（对靶 7–9 m 仍差 ~2.7–6×）。
 
-**锚点**：`results/passive_path_probe.json`、`scripts/1d/passive_path_probe.py`、
+**锚点**：`results/passive_path_probe.json`、`scripts/leg1d/passive_path_probe.py`、
 `docs/methods/P3_骨性软组织接触_预注册.md` §2bis、`results/ECC_MUSCLE_REPORT.md` §7、
 `docs/notes/PAD_GOTCHAS.md` §6d（内插纪律）
   ---  ## 7. 🔴 `s_hard` 的来源更正（同日，用户追问后核实）  **第一版错**：我用「深蹲 COM 下降 ≈ 0.28–0.32·H ⇒ 0.49–0.56 m」并写成外部锚 —— **本轮核实：搜不到该系数的可靠来源 ⇒ 未核实，且我没标注**（违反「数字要量出来，不能读出来」）。  **正确**：**深/全蹲膝屈曲 ROM = 110–135°**（IJSPT 2024 / `PMC10987311` / Frontiers 2024） ⇒ 代入模型几何 `s(θ)=2l(1−cos(θ/2))`、`2l=0.85` ⇒ **`s_hard` = 0.3624–0.5247 m**。  **⇒ 影响（方向是好的）**： - `s@峰`(9 m) = 0.3726/0.3726/**0.3807** ⇒ **三档都超过下沿 0.362** ⇒ **`s_hard` 确实被触及**   ⇒ **C2-J2 不再是空洞判据**（有真实触发点），§5 里的「无检验力」标注**作废**； - 而 `h*` 附近的 `s@(≤h*)` = **0.156–0.209 m ≪ 0.362** ⇒ **`h*` 仍在有效范围内**   ⇒ **核心结论不变、且更硬**。 

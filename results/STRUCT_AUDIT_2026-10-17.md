@@ -32,14 +32,14 @@ archive                              2065   本次整理归档
   main                             150 文件  例: scripts/ankle_fe/force_root.py, scripts/ankle_fe/lig_strain.py, scripts/ankle_fe/penalty_auto0_probe.py
   build                             12 文件  例: scripts/ankle_fe/check_c2.py, scripts/opensim_fe/axial_subregion.py, scripts/opensim_fe/fibula_identifiability_analysis.py
   rel                                8 文件  例: scripts/tools/archive_cleanup.py, scripts/tools/archive_doc_clusters.py, scripts/tools/audit_2026_10_17.py
-  run                                8 文件  例: scripts/1d/chain_soft_probe.py, scripts/1d/ecc_muscle_probe.py, scripts/opensim_fe/g9_fibula_fe_support.py
+  run                                8 文件  例: scripts/leg1d/chain_soft_probe.py, scripts/leg1d/ecc_muscle_probe.py, scripts/opensim_fe/g9_fibula_fe_support.py
   write_report                       8 文件  例: scripts/opensim_fe/fibula_fe_audit.py, scripts/opensim_fe/fracture_matrix.py, scripts/opensim_fe/g3_subject_variability.py
   force_n                            5 文件  例: src/climbing/bodies.py, src/climbing/chain2d.py, src/climbing/chain2d_crush.py
   settled                            5 文件  例: src/climbing/bodies.py, src/climbing/chain2d.py, src/climbing/chain2d_crush.py
   statistic                          5 文件  例: scripts/opensim_fe/fe_bc_linearity.py, scripts/opensim_fe/fe_bc_perheight.py, scripts/opensim_fe/fe_bc_probe.py
   peak_force_kn                      4 文件  例: src/climbing/bodies.py, src/climbing/bone.py, src/climbing/chain2d.py
   rhs                                4 文件  例: src/climbing/bodies.py, src/climbing/head_branch.py, src/climbing/pad.py
-  positive_control                   4 文件  例: scripts/1d/fp_anchor_probe.py, scripts/1d/fp_contact_probe.py, scripts/1d/fp_stroke_probe.py
+  positive_control                   4 文件  例: scripts/leg1d/fp_anchor_probe.py, scripts/leg1d/fp_contact_probe.py, scripts/leg1d/fp_stroke_probe.py
   scaled_pad                         4 文件  例: scripts/paper/mc_stat_robustness.py, scripts/p5_cond/pad_stiffness_h20.py, scripts/p5_cond/pad_stiffness_sweep.py
   parse_feb                          4 文件  例: scripts/ankle_fe/acceptance.py, scripts/ankle_fe/check_c2.py, scripts/ankle_fe/lig_strain.py
   load                               4 文件  例: scripts/opensim_fe/fe_bc_agg_sens.py, scripts/opensim_fe/make_model_figures.py, scripts/opensim_fe/v1_max_caliber_check.py
@@ -53,23 +53,23 @@ archive                              2065   本次整理归档
   TWO_SEG_LEG                定义于 src/climbing/pad.py
 
   谁在改它们（脚本侧 write 次数）：
-    scripts/1d/ecc_muscle_probe.py                          RIGID_CONTACT, TWO_SEG_LEG
-    scripts/1d/fp_contact_probe.py                          RIGID_CONTACT
-    scripts/1d/fp_stroke_probe.py                           RIGID_CONTACT, STROKE_ANCHOR
-    scripts/1d/leg2seg_probe.py                             RIGID_CONTACT, TWO_SEG_LEG
-    scripts/1d/passive_path_probe.py                        RIGID_CONTACT, TWO_SEG_LEG
-    scripts/1d/recompute_hstar.py                           RIGID_CONTACT, TWO_SEG_LEG
-    scripts/1d/second_contact_probe.py                      RIGID_CONTACT, TWO_SEG_LEG
-    scripts/1d/unload_process_probe.py                      RIGID_CONTACT, TWO_SEG_LEG
+    scripts/leg1d/ecc_muscle_probe.py                          RIGID_CONTACT, TWO_SEG_LEG
+    scripts/leg1d/fp_contact_probe.py                          RIGID_CONTACT
+    scripts/leg1d/fp_stroke_probe.py                           RIGID_CONTACT, STROKE_ANCHOR
+    scripts/leg1d/leg2seg_probe.py                             RIGID_CONTACT, TWO_SEG_LEG
+    scripts/leg1d/passive_path_probe.py                        RIGID_CONTACT, TWO_SEG_LEG
+    scripts/leg1d/recompute_hstar.py                           RIGID_CONTACT, TWO_SEG_LEG
+    scripts/leg1d/second_contact_probe.py                      RIGID_CONTACT, TWO_SEG_LEG
+    scripts/leg1d/unload_process_probe.py                      RIGID_CONTACT, TWO_SEG_LEG
 
 ==============================================================================================
 ④ 已知坑类的复发检测（模式扫描）
 ==============================================================================================
 
   ▸ 对采样轨迹做数值微分（采样依赖）：**25 处**
-      scripts/1d/ecc_muscle_probe.py:66
-      scripts/1d/pad_energy_check.py:102
-      scripts/1d/unload_process_probe.py:77
+      scripts/leg1d/ecc_muscle_probe.py:66
+      scripts/leg1d/pad_energy_check.py:102
+      scripts/leg1d/unload_process_probe.py:77
       src/climbing/bodies.py:337
       src/climbing/bodies.py:341
       src/climbing/bodies.py:534
@@ -87,37 +87,37 @@ archive                              2065   本次整理归档
   ▸ 脚本自注入 sys.path（须与本文件层级匹配）：**197 处**
       scripts/ankle_fe/geom.py:40
       scripts/paper/calibrate_rope.py:28
-      scripts/1d/chain_crush_probe.py:35
-      scripts/1d/chain_soft_probe.py:14
-      scripts/1d/chain_tissue_probe.py:16
+      scripts/leg1d/chain_crush_probe.py:35
+      scripts/leg1d/chain_soft_probe.py:14
+      scripts/leg1d/chain_tissue_probe.py:16
       scripts/paper/chain_vtarget_probe.py:31
       …另 191 处
 
   ▸ M(θ) 表接口（契约见 CANONICAL.md §0）：**20 处**
-      scripts/1d/recompute_hstar.py:3
-      scripts/1d/recompute_hstar.py:4
-      scripts/1d/recompute_hstar.py:31
-      scripts/1d/recompute_hstar.py:49
-      scripts/1d/second_contact_probe.py:30
-      scripts/1d/second_contact_probe.py:46
+      scripts/leg1d/recompute_hstar.py:3
+      scripts/leg1d/recompute_hstar.py:4
+      scripts/leg1d/recompute_hstar.py:31
+      scripts/leg1d/recompute_hstar.py:49
+      scripts/leg1d/second_contact_probe.py:30
+      scripts/leg1d/second_contact_probe.py:46
       …另 14 处
 
   ▸ 腿力观测量（须与 rhs 同源）：**32 处**
-      scripts/1d/ecc_muscle_probe.py:70
-      scripts/1d/fp_anchor_probe.py:68
-      scripts/1d/fp_anchor_probe.py:70
-      scripts/1d/fp_anchor_probe.py:82
-      scripts/1d/fp_anchor_probe.py:90
-      scripts/1d/fp_contact_probe.py:66
+      scripts/leg1d/ecc_muscle_probe.py:70
+      scripts/leg1d/fp_anchor_probe.py:68
+      scripts/leg1d/fp_anchor_probe.py:70
+      scripts/leg1d/fp_anchor_probe.py:82
+      scripts/leg1d/fp_anchor_probe.py:90
+      scripts/leg1d/fp_contact_probe.py:66
       …另 26 处
 
   ▸ 按「键」判定门的姿势（传对象会静默绕门）：**52 处**
-      scripts/1d/fp_anchor_probe.py:65
-      scripts/1d/fp_anchor_probe.py:88
-      scripts/1d/fp_anchor_probe.py:197
+      scripts/leg1d/fp_anchor_probe.py:65
+      scripts/leg1d/fp_anchor_probe.py:88
+      scripts/leg1d/fp_anchor_probe.py:197
       scripts/paper/phase_p1_montecarlo.py:779
       scripts/paper/phase_p1_montecarlo.py:874
-      scripts/1d/second_contact_probe.py:119
+      scripts/leg1d/second_contact_probe.py:119
       …另 46 处
 
   ▸ pyfebio 接触 .xplt 无名域缺陷：**41 处**

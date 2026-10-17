@@ -2,7 +2,7 @@
 
 > **状态**：**已跑 · 如实判定**（2026-10-16）
 > **预注册**：`docs/methods/P3_腿刚度力台锚定_预注册.md`（v2，**判据/锚点/观测量/网格跑前冻结**）
-> **脚本**：`scripts/1d/fp_anchor_probe.py` ｜ **产物**：`results/fp_anchor_probe.json`
+> **脚本**：`scripts/leg1d/fp_anchor_probe.py` ｜ **产物**：`results/fp_anchor_probe.json`
 > **红线遵守**：⛔ 未以「使 V1 进 6–9 m」为任何选择标准；k 锚点跑后未动。
 
 ---
@@ -124,7 +124,7 @@
 - 全套测试：见提交信息（`pytest -n auto --dist load`）。
 
 **锚点**：`results/fp_anchor_probe.json`、`docs/methods/P3_腿刚度力台锚定_预注册.md`、
-`scripts/1d/fp_anchor_probe.py`、`src/climbing/pad.py`（`_anchored_posture` / `RIGID_STANDING_CHAIN`）、
+`scripts/leg1d/fp_anchor_probe.py`、`src/climbing/pad.py`（`_anchored_posture` / `RIGID_STANDING_CHAIN`）、
 `PMC9465758`、`PMC5717375`、`results/opensim_fe/V1_WHY_20KN_AND_GAP_LOCUS.md` §3
 
 ---

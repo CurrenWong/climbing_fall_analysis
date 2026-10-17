@@ -2,7 +2,7 @@
 ② **多进程并行**跑；③ 网格缩到 {0.5,1,2,5}（h* 落在 1~5 之间，够用）。
 滞回 h = 0（纯弹性）。锚：Sci Rep 16:8582 + PMC8554160（等长 MVIC 膝伸肌，N·m/kg × 80 kg）。
 ⚠️ 0° 与 >90° 无锚 ⇒ 边缘取**带端点常数**（KEP 外推），显式标注。
-用法: .venv\\Scripts\\python.exe scripts/1d/unload_process_probe.py
+用法: .venv\\Scripts\\python.exe scripts/leg1d/unload_process_probe.py
 """
 from __future__ import annotations
 

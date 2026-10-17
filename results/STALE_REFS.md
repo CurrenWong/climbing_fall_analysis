@@ -113,14 +113,14 @@
 ## `second_contact_probe.json`  （8 条）
 归档位置：`（原位，内容旧后处理口径产出）`
 
-- `docs/methods/SECOND_CONTACT_预注册.md:4` — > 脚本 `scripts/1d/second_contact_probe.py`｜产物 `results/second_contact_probe.json`
+- `docs/methods/SECOND_CONTACT_预注册.md:4` — > 脚本 `scripts/leg1d/second_contact_probe.py`｜产物 `results/second_contact_probe.json`
 - `results/SECOND_CONTACT_REPORT.md:5` — > 产物 `results/second_contact_probe.json`
-- `results/SECOND_CONTACT_REPORT.md:228` — **锚点**：`results/second_contact_probe.json`、`scripts/1d/second_contact_probe.py`、
+- `results/SECOND_CONTACT_REPORT.md:228` — **锚点**：`results/second_contact_probe.json`、`scripts/leg1d/second_contact_probe.py`、
 - `scripts/tools/archive_cleanup.py:23` — 'results/second_contact_probe.json',     # 旧后处理口径产出
 - `scripts/tools/scan_stale_refs.py:20` — 'second_contact_probe.json': '旧后处理口径产出',
-- `scripts/1d/second_contact_probe.py:5` — 产物：`results/second_contact_probe.json`
-- `scripts/1d/second_contact_probe.py:150` — (ROOT / "results" / "second_contact_probe.json").write_text(
-- `scripts/1d/second_contact_probe.py:152` — print("\nOUT = results/second_contact_probe.json  （门已恢复）")
+- `scripts/leg1d/second_contact_probe.py:5` — 产物：`results/second_contact_probe.json`
+- `scripts/leg1d/second_contact_probe.py:150` — (ROOT / "results" / "second_contact_probe.json").write_text(
+- `scripts/leg1d/second_contact_probe.py:152` — print("\nOUT = results/second_contact_probe.json  （门已恢复）")
 
 ## `MANIFEST.md`  （5 条）
 归档位置：`archive/2026-10-17_cleanup/MANIFEST.md`

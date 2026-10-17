@@ -22,7 +22,7 @@ A-J3 `F_flex` 如实报告（无阈值）；A-J5 ⛔ 禁把 `k_n` 调到锚带**
 
 用法::
 
-    .venv\\Scripts\\python.exe scripts/1d/fp_contact_probe.py
+    .venv\\Scripts\\python.exe scripts/leg1d/fp_contact_probe.py
 """
 from __future__ import annotations
 

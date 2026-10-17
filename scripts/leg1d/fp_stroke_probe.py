@@ -28,7 +28,7 @@
 
 用法::
 
-    .venv\\Scripts\\python.exe scripts/1d/fp_stroke_probe.py
+    .venv\\Scripts\\python.exe scripts/leg1d/fp_stroke_probe.py
 """
 from __future__ import annotations
 

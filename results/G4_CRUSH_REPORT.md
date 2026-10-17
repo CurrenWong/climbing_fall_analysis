@@ -6,7 +6,7 @@
 >
 > - 日期：2026-10-13
 > - 实现：`src/climbing/chain2d_crush.py`（新增，纯增量）
-> - 探针：`scripts/1d/chain_crush_probe.py` → `results/chain_crush_probe.json`
+> - 探针：`scripts/leg1d/chain_crush_probe.py` → `results/chain_crush_probe.json`
 > - 测试：`tests/test_chain2d_crush.py`（14 passed）
 
 ---

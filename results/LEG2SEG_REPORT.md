@@ -1,7 +1,7 @@
 # LEG2SEG 判定件 —— B2a：两段腿「等效单关节」
 
 > **状态**：**已跑 · 如实判定**（2026-10-16）｜预注册 `docs/methods/P3_两段腿等效关节_预注册.md`
-> 脚本 `scripts/1d/leg2seg_probe.py`｜产物 `results/leg2seg_probe.json`
+> 脚本 `scripts/leg1d/leg2seg_probe.py`｜产物 `results/leg2seg_probe.json`
 > **实现**：门 `pad.TWO_SEG_LEG`（默认 `None` ⇒ 既有路径逐位不变）
 > **红线**：⛔ 未调 `k_θ` 使判据变绿；`k_θ` = 350 N·m/rad 冻结自外部锚。
 
@@ -110,6 +110,6 @@ B2a 三档**全部单调** —— 因为 `θ ≤ θ_max` 是**几何约束**，�
 5. **网格跑前缩为 {0.50…9.00}**（弃 0.20 m：该格在实测跟垫口径下需 **~186 s/格**，
    三档合计 ~9.5 min，且不在 `h*` 附近）—— 跑前选择，非事后裁剪。
 
-**锚点**：`results/leg2seg_probe.json`、`scripts/1d/leg2seg_probe.py`、
+**锚点**：`results/leg2seg_probe.json`、`scripts/leg1d/leg2seg_probe.py`、
 `docs/methods/P3_两段腿等效关节_预注册.md`、`src/climbing/pad.py`（`TWO_SEG_LEG`）、
 `results/FP_STROKE_REPORT.md`、`temp/v1_b2a_smoke.py`、`temp/v1_b2a_timing.py`

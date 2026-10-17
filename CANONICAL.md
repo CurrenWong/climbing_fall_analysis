@@ -22,11 +22,11 @@
 
 | 数字 | 现行来源 | 备注 |
 |---|---|---|
-| 力台锚定三档 `k_flex` = 6.3 / 8.2 / 18.5 kN/m | `scripts/1d/fp_anchor_probe.py` → `results/fp_anchor_probe.json` + `results/FP_ANCHOR_REPORT.md` | `PMC9465758` |
-| 跟垫柔度 / 硬地面接触 | `scripts/1d/fp_contact_probe.py` → `results/FP_CONTACT_REPORT.md` | 🟡 仅跟垫几何 |
-| 行程锚 `θ_max`（COM 深度 0.43/0.37/0.23 m） | `scripts/1d/fp_stroke_probe.py` → `results/FP_STROKE_REPORT.md` | 外部锚实测 |
-| 卸载过程 `D1`（力-长 + 率）| `scripts/1d/unload_process_probe.py` → `results/unload_process_probe.json` | **表契约已修正** |
-| **首折 `h*`** | **`0.402 m`** —— `scripts/1d/recompute_hstar.py` → `results/hstar_canonical.json`（自检①正面 `interp(1 rad)=254.7`、②反面拒错格式） | ⚠️ **soft/self/stiff 三档同值** ⇒ 门路径下「力台锚定」已失效（`k_flex` 被 `M(θ)` 取代）⇒ 三档只在 `θ > θ_max` 后分化 |
+| 力台锚定三档 `k_flex` = 6.3 / 8.2 / 18.5 kN/m | `scripts/leg1d/fp_anchor_probe.py` → `results/fp_anchor_probe.json` + `results/FP_ANCHOR_REPORT.md` | `PMC9465758` |
+| 跟垫柔度 / 硬地面接触 | `scripts/leg1d/fp_contact_probe.py` → `results/FP_CONTACT_REPORT.md` | 🟡 仅跟垫几何 |
+| 行程锚 `θ_max`（COM 深度 0.43/0.37/0.23 m） | `scripts/leg1d/fp_stroke_probe.py` → `results/FP_STROKE_REPORT.md` | 外部锚实测 |
+| 卸载过程 `D1`（力-长 + 率）| `scripts/leg1d/unload_process_probe.py` → `results/unload_process_probe.json` | **表契约已修正** |
+| **首折 `h*`** | **`0.402 m`** —— `scripts/leg1d/recompute_hstar.py` → `results/hstar_canonical.json`（自检①正面 `interp(1 rad)=254.7`、②反面拒错格式） | ⚠️ **soft/self/stiff 三档同值** ⇒ 门路径下「力台锚定」已失效（`k_flex` 被 `M(θ)` 取代）⇒ 三档只在 `θ > θ_max` 后分化 |
 | 二次接触可达性 / 能量-行程账 | `results/SECOND_CONTACT_REPORT.md` §1/§2 | J1 PASS、Q2 缺口 0.46–0.71 m |
 
 ---

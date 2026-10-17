@@ -8,7 +8,7 @@
 配置 = C1（B2a 两段腿 + 饱和离心律，M_ecc = 540 N·m 双腿口径）
 s_hard = 0.49 / 0.56 m（人体测量学：深蹲 COM 下降 0.28–0.32·H，H=1.75）
 
-用法: .venv\\Scripts\\python.exe scripts/1d/passive_path_probe.py
+用法: .venv\\Scripts\\python.exe scripts/leg1d/passive_path_probe.py
 """
 from __future__ import annotations
 

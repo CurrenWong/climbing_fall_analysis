@@ -7,7 +7,7 @@
 > 事故全链见 `results/SECOND_CONTACT_REPORT.md` §0b/§0c/§0d。
 
 > **状态**：**已跑 · 如实判定**（2026-10-16）｜预注册 `docs/methods/P3_卸力过程最小物理化_预注册.md`
-> 脚本 `scripts/1d/unload_process_probe.py`｜产物 `results/unload_process_probe.json`
+> 脚本 `scripts/leg1d/unload_process_probe.py`｜产物 `results/unload_process_probe.json`
 > **实现**：门 `TWO_SEG_LEG["m_theta_table"]`（默认 `None` ⇒ 既有路径逐位不变）
 
 ---
@@ -78,6 +78,6 @@
 2. **诊断副本必须与实现同步**：修了 `pad.py` 却忘了同步探针的 `el` 重建 ⇒ O1 报出 **673.42 kN** 的荒谬值
    ⇒ **判定作废一次**（`a319b36`）。**⇒ 纪律：诊断量与实现共用同一个公式时，必须同源或加断言比对。**
 
-**锚点**：`results/unload_process_probe.json`、`scripts/1d/unload_process_probe.py`、
+**锚点**：`results/unload_process_probe.json`、`scripts/leg1d/unload_process_probe.py`、
 `docs/methods/P3_卸力过程最小物理化_预注册.md`、`src/climbing/pad.py`（`m_theta_table`）、
 `Sci Rep` 16:8582、`PMC8554160`
