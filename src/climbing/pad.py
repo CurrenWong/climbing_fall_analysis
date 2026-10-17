@@ -485,6 +485,42 @@ class BoulderFallResult:
         return (tot / self.impact_energy_j) if self.impact_energy_j > 0 else 0.0
 
     @property
+    def energy_surplus_j(self) -> float:
+        """能量盈余（J）：吸收项之和 − 输入势能。**正常应为 ≤ 0**。
+
+        ⚠️ **已测缺陷（2026-10-17 实测定位，未修）**：`absorbed_fraction` 实测
+        **101.1–106%**，即 `energy_surplus_j > 0` —— 吸收的能量超过输入，
+        物理上不可能。
+
+        实测特征：
+          * h=20 m 刚地面：盈余 **+177 ~ +183 J ≈ 输入的 1.16%**；
+          * **对输出采样不收敛**（`dt_sample` 从 2e-4 细到 1e-5，盈余 177→183 J
+            后收敛）⇒ **不是梯形积分误差，是模型真实存在的约 1.2% 能量不守恒**；
+          * 更大盈余出现在垫工况（最高 **+4.0%**，5 m 垫）。
+
+        后果（引用时必须知道）：
+          `energy_residual_j = max(0, E_impact − E_pad − E_flex)` 会把
+          **负残差截断成 0** ⇒ 输出恒为「残差 0 = 无组织损伤能量」，
+          而真实残差为负（模型凭空造能）。**因此任何以
+          「residual = 0 ⇒ 能量全被吸收 ⇒ 无损伤」为依据的论证均不成立。**
+
+        影响面：`absorbed_fraction`、`energy_residual_j`、G4 压溃本构的
+        「吸能 3.8%」等能量类结论 ⇒ **系统性偏高约 1.2–4 个百分点，且残差通道失效**。
+
+        ⇒ 本 property 只做**如实暴露**，不改既有数字（修守恒须动腿力与位移的
+        共轭关系，会改变全部结果，属独立立项）。
+        """
+        return (self.energy_into_pad_j + self.energy_into_flex_j
+                - self.impact_energy_j)
+
+    @property
+    def energy_balance_ok(self) -> bool:
+        """能量账是否自洽（盈余 ≤ 输入的 0.1%）。见 :attr:`energy_surplus_j`。"""
+        if self.impact_energy_j <= 0:
+            return True
+        return self.energy_surplus_j <= 1e-3 * self.impact_energy_j
+
+    @property
     def primary_accel_g(self) -> np.ndarray:
         """"受伤部位"的加速度时程 —— HIC 应该算在**第一接触部位**上。
 

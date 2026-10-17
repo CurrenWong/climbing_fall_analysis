@@ -145,6 +145,32 @@ def _peak_rel_ms(r, arr) -> float:
     return round((float(t[m][i]) - t0) * 1e3, 2)
 
 
+def _first_peak_rel_ms(r, arr, rel_threshold: float = 0.5) -> float:
+    """**首个显著峰**的相对时刻（ms）—— 与 V3 同口径。
+
+    为什么需要（2026-10-17）：`_peak_rel_ms` 取**全局** ``argmax``，而 V3 走
+    ``head_branch._first_significant_peak``。两者在出现**次峰**时不一致：
+    h=20 m 时 `accel_torso_g` 的首峰 15.0 ms、次峰 27.2 ms（次峰更高）⇒
+    全局 argmax 取次峰。次峰对应**压缩触底后的二次响应**，不是「峰值应变时刻」。
+    [T22] Table 3 报的是峰值应变（onset），对应**首峰**。
+
+    ⚠️ 口径声明：本函数是**事后**引入的（在发现全局 argmax 导致 V8a 非单调之后），
+    因此 **新口径下的通过不得计为 V8a 的独立验证**；两列同时输出，供审计。
+    """
+    t = np.asarray(r.t_s, dtype=float)
+    a = np.abs(np.asarray(arr, dtype=float))
+    t0, t1 = r.meta["impact_window_s"]
+    m = (t >= t0) & (t <= t1)
+    tt, aa = t[m], a[m]
+    if aa.size < 3:
+        return float("nan")
+    gmax = aa.max()
+    for i in range(1, aa.size - 1):
+        if aa[i] >= aa[i - 1] and aa[i] >= aa[i + 1] and aa[i] >= rel_threshold * gmax:
+            return round((float(tt[i]) - t0) * 1e3, 2)
+    return _peak_rel_ms(r, arr)
+
+
 def _window_ms(r) -> float:
     w = r.meta["impact_window_s"]
     return round((w[1] - w[0]) * 1e3, 2)
@@ -179,6 +205,8 @@ def _head_cell(task: dict) -> dict:
         "window_ms": _window_ms(r),
         "tF_ms": _peak_rel_ms(r, r.pad_force_n),
         "t_torso_ms": _peak_rel_ms(r, r.accel_torso_g),
+        # 首峰口径（与 V3 一致，见 _first_peak_rel_ms 的口径声明）
+        "t_torso_first_ms": _first_peak_rel_ms(r, r.accel_torso_g),
     }
     for kn in K_NECKS:
         v = simulate_head_branch(r, HeadBranchParams(k_neck_n_per_mm=kn))
@@ -275,6 +303,10 @@ def _assemble_head(rows: list[dict]) -> dict:
         # 踝矩 t_moment = 韧带序列（第二列）副判据；头峰保留为 legacy。
         seq_t = [by_h[h]["t_torso_ms"] for h in V8_HEIGHTS if h in by_h]
         mono_t = all(seq_t[i] <= seq_t[i - 1] for i in range(1, len(seq_t)))
+        # 首峰口径（与 V3 一致；2026-10-17 新增，见 _first_peak_rel_ms 声明）
+        seq_tf = [by_h[h]["t_torso_first_ms"] for h in V8_HEIGHTS
+                  if h in by_h and "t_torso_first_ms" in by_h[h]]
+        mono_tf = all(seq_tf[i] <= seq_tf[i - 1] for i in range(1, len(seq_tf)))
         seq_mom = [by_h[h]["t_moment_ms"] for h in V8_HEIGHTS if h in by_h
                    and "t_moment_ms" in by_h[h]]
         mono_mom = all(seq_mom[i] <= seq_mom[i - 1] for i in range(1, len(seq_mom)))
@@ -293,6 +325,8 @@ def _assemble_head(rows: list[dict]) -> dict:
             "V3_pass_by_h_all_k": v3_by_k,
             "V3_pass": all(v3.values()) if v3 else None,
             "V8a_monotone_tibia_proxy": mono_t,          # 主判据（t_torso）
+            "V8a_monotone_tibia_first_peak": mono_tf,    # 首峰口径（＝V3 口径）
+            "V8a_seq_first_peak_ms": seq_tf,
             "V8a_monotone_moment_ligament": mono_mom,    # 副判据（t_moment）
             "V8a_monotone_head_legacy": mono_head,
             "V8b_ttorso_at_20m_ms": at20_t,
