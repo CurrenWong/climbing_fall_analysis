@@ -261,8 +261,17 @@ def _derive_ankle_state(
     peak_m = float(np.max(np.abs(m_nmm)))
 
     # ---- 滑动/卡住（Coulomb 锥）----
-    sliding = np.abs(sin_beta) > float(mu_slide)
-    slide_frac = float(np.mean(sliding))
+    # ⚠️ 判据形式的依据核查（2026-10-17）：本式用 `sinβ > μ`，其上文推导写作
+    #   「横向需求 F_lat = N·sinβ vs 摩擦容量 μN」—— 该写法**把 N 当成了竖向载荷**。
+    #   对**倾斜接触面**，库仑条件的正确形式是 **tanβ > μ**：
+    #       N = F_v / cosβ ⇒ F_lat = N·sinβ = F_v·tanβ，容量 = μN = μ·F_v/cosβ
+    #       ⇒ 滑移 ⟺ F_v·tanβ > μ·F_v/cosβ ⟺ **tanβ > μ**
+    #   两式的阈值：μ=0.4 ⇒ sinβ 形式 **23.6°**、tanβ 形式 **21.8°**（差 1.8°）。
+    #   **对 V6 检验的三个角度（10°/20°/30°）结论相同**（20° < 21.8° < 23.6° < 30°），
+    #   故既有的 stuck/sliding 分相不受影响；但**判据形式本身不是标准库仑式**。
+    #   ⇒ 未改公式（会改变 21.8°–23.6° 区间的分相，属模型改动，须单独立项）；
+    #   引用该机制时须注明「形式为 sinβ > μ，非标准库仑 tanβ > μ」。
+    sliding = np.abs(sin_beta) > float(mu_slide)    slide_frac = float(np.mean(sliding))
     if peak_beta == 0.0:
         mode = "none"
     elif slide_frac == 0.0:

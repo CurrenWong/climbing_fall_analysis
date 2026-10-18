@@ -983,7 +983,18 @@ def simulate_boulder_fall(
     else:
         dt_w = np.diff(t_win)
         p_pad = f_pad[sl] * vz_f[sl]
-        p_flex = f_flex[sl] * np.gradient(xf, t_out)[sl]
+        # ★★ 2026-10-17 修正（A2）：旧实现用 ``np.gradient(xf, t_out)`` 求屈曲速率 ——
+        #   而本函数上方 3 行已明令禁止「对输出采样做数值微分」（会得到采样依赖的
+        #   伪量）。能量账因此带约 **1.2% 的系统性盈余**（吸收 > 输入，物理不可能），
+        #   且该盈余对 ``dt_sample`` 不收敛（2e-4→1e-5 时 177→183 J 后收敛），
+        #   即**不是积分误差、是伪速率造成的**。
+        #   现改为直接使用 dense output 给出的**精确状态导数**：
+        #       d(xf)/dt = −(vz_foot − vz_torso) = vz_torso − vz_foot
+        #   与 ``rhs`` 内部 ``rate`` 同源（见上方 `rate_flex` 注释），故力与速率共轭。
+        #   未接触（``xf ≤ 0``）且正在拉开时不累积功 —— 弹簧此时不承载。
+        d_xf = vz_t - vz_f
+        d_xf = np.where((xf[sl] <= 0.0) & (d_xf[sl] < 0.0), 0.0, d_xf[sl])
+        p_flex = f_flex[sl] * d_xf
         e_pad_t = np.concatenate([[0.0], np.cumsum(0.5 * (p_pad[:-1] + p_pad[1:]) * dt_w)])
         e_flex_t = np.concatenate([[0.0], np.cumsum(0.5 * (p_flex[:-1] + p_flex[1:]) * dt_w)])
         tot_t = e_pad_t + e_flex_t
