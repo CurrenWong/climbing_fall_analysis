@@ -1060,7 +1060,10 @@ def simulate_boulder_fall(
         bottomed_out=bottomed,
         energy_into_pad_j=e_pad,
         energy_into_flex_j=e_flex,
-        energy_residual_j=max(0.0, e_impact - e_pad - e_flex),
+        # S1（2026-10-17）：去掉 max(0,·) 截断 —— 残差可正可负、如实反映。
+        #   分母改用同快照重力做功（e_input_at_k），与 absorbed_fraction_corrected 同基准。
+        #   实测残差为输入的 0.05–0.95%（窗口末端尚未耗尽的储存能），不再被掩盖成 0。
+        energy_residual_j=(e_input_at_k - e_pad - e_flex),
         meta={"ke_end_j": _ke_end, "e_input_at_k_j": e_input_at_k, "pad_thickness_m": pad.thickness_m, "k_flex": k_flex,
               "x_flex_max": x_flex_max, "on_pad": on_pad, "posture_obj": post,
               # L2 门配置（None=未启用；非空=刚性直立链生效参数）

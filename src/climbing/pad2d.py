@@ -271,7 +271,8 @@ def _derive_ankle_state(
     #   故既有的 stuck/sliding 分相不受影响；但**判据形式本身不是标准库仑式**。
     #   ⇒ 未改公式（会改变 21.8°–23.6° 区间的分相，属模型改动，须单独立项）；
     #   引用该机制时须注明「形式为 sinβ > μ，非标准库仑 tanβ > μ」。
-    sliding = np.abs(sin_beta) > float(mu_slide)    slide_frac = float(np.mean(sliding))
+    sliding = np.abs(sin_beta) > float(mu_slide)
+    slide_frac= float(np.mean(sliding))
     if peak_beta == 0.0:
         mode = "none"
     elif slide_frac == 0.0:
