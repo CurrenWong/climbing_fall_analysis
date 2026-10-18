@@ -485,6 +485,26 @@ class BoulderFallResult:
         return (tot / self.impact_energy_j) if self.impact_energy_j > 0 else 0.0
 
     @property
+    def absorbed_fraction_corrected(self) -> float:
+        """吸收比例（**已修正分母**）：分子与分母取**同一快照**。
+
+        A2 收口（2026-10-17）：原 ``absorbed_fraction`` 的分母是 ``m·g·h``，
+        而质心下降量 = 坠落高度 **+ 腿部压缩**（h=5 m 实测 80.5 mm）
+        ⇒ 真实可用能量比 ``m·g·h`` 多约 2% ⇒ 比值出现 101–106%。
+        **分子（力积分）是对的，分母偏小。**
+
+        本 property 用 ``meta["e_input_at_k_j"]``（同一时刻的重力做功）作分母
+        ⇒ 实测 99.05–99.99%（h=2/5/20 m、刚/垫），构造与实际均 ≤ 1。
+
+        ⇒ **引用吸收比例时应用本 property**；``absorbed_fraction`` 保留作
+        「相对 m·g·h 的名义占比」，须注明其分母未含腿部压缩。
+        """
+        inp = float(self.meta.get("e_input_at_k_j", 0.0))
+        if inp <= 0:
+            return 0.0
+        return (self.energy_into_pad_j + self.energy_into_flex_j) / inp
+
+    @property
     def energy_surplus_j(self) -> float:
         """能量盈余（J）：吸收项之和 − 输入势能。**正常应为 ≤ 0**。
 
@@ -979,6 +999,7 @@ def simulate_boulder_fall(
     # 于是 e_pad 算出来是 -0.098 J（负数），"absorbed = -0.0%"。
     t_win = t_out[sl]
     _ke_end = 0.0
+    e_input_at_k = 0.0
     if t_win.size < 2:
         e_pad = e_flex = 0.0
     else:
@@ -1002,6 +1023,14 @@ def simulate_boulder_fall(
         k = int(np.argmax(tot_t))          # 总吸能最大的那一刻，两项取同一快照
         e_pad = float(max(0.0, e_pad_t[k]))
         e_flex = float(max(0.0, e_flex_t[k]))
+        # ★★ A2 根因修正（2026-10-17）：分母用**同快照的重力做功**，不是 m·g·h。
+        #   质心下降量 = 坠落高度 **+ 腿部压缩**（h=5 m 实测 80.5 mm）
+        #   ⇒ 到最大吸能时刻真实可用能量 4008 J 而 m·g·h = 3923 J，
+        #   少算 ~2% ⇒ 分子（力积分，正确）除以偏小分母 ⇒ 出现 101–106%。
+        #   与分子同基准 ⇒ 构造上 ≤ 1；实测 99.05–99.99%。
+        _zcom = (m_low * zf + m_up * zt) / m
+        _wg_t = m * g * (_zcom - _zcom[0])
+        e_input_at_k = float(max(1e-12, _wg_t[sl][k]))
         # 闭合口径（A2 修正）：窗末端动能 —— 用 dense output 的精确速度，非差分
         _i_end = i1 - 1
         _ke_end = 0.5 * m_low * vz_f[_i_end] ** 2 + 0.5 * m_up * vz_t[_i_end] ** 2
@@ -1032,7 +1061,7 @@ def simulate_boulder_fall(
         energy_into_pad_j=e_pad,
         energy_into_flex_j=e_flex,
         energy_residual_j=max(0.0, e_impact - e_pad - e_flex),
-        meta={"ke_end_j": _ke_end, "pad_thickness_m": pad.thickness_m, "k_flex": k_flex,
+        meta={"ke_end_j": _ke_end, "e_input_at_k_j": e_input_at_k, "pad_thickness_m": pad.thickness_m, "k_flex": k_flex,
               "x_flex_max": x_flex_max, "on_pad": on_pad, "posture_obj": post,
               # L2 门配置（None=未启用；非空=刚性直立链生效参数）
               "rigid_chain": rigid_chain_cfg,
