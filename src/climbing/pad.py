@@ -978,6 +978,7 @@ def simulate_boulder_fall(
     # 回弹段 x 减小会把能量又减回来，弹性体净积分为 0，
     # 于是 e_pad 算出来是 -0.098 J（负数），"absorbed = -0.0%"。
     t_win = t_out[sl]
+    _ke_end = 0.0
     if t_win.size < 2:
         e_pad = e_flex = 0.0
     else:
@@ -1001,6 +1002,9 @@ def simulate_boulder_fall(
         k = int(np.argmax(tot_t))          # 总吸能最大的那一刻，两项取同一快照
         e_pad = float(max(0.0, e_pad_t[k]))
         e_flex = float(max(0.0, e_flex_t[k]))
+        # 闭合口径（A2 修正）：窗末端动能 —— 用 dense output 的精确速度，非差分
+        _i_end = i1 - 1
+        _ke_end = 0.5 * m_low * vz_f[_i_end] ** 2 + 0.5 * m_up * vz_t[_i_end] ** 2
     e_impact = m * g * height_m          # 释放到静止释放的总势能
 
     v_impact = float(np.sqrt(2.0 * g * height_m))
@@ -1028,7 +1032,7 @@ def simulate_boulder_fall(
         energy_into_pad_j=e_pad,
         energy_into_flex_j=e_flex,
         energy_residual_j=max(0.0, e_impact - e_pad - e_flex),
-        meta={"pad_thickness_m": pad.thickness_m, "k_flex": k_flex,
+        meta={"ke_end_j": _ke_end, "pad_thickness_m": pad.thickness_m, "k_flex": k_flex,
               "x_flex_max": x_flex_max, "on_pad": on_pad, "posture_obj": post,
               # L2 门配置（None=未启用；非空=刚性直立链生效参数）
               "rigid_chain": rigid_chain_cfg,
